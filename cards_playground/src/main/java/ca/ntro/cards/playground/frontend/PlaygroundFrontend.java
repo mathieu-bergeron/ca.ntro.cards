@@ -5,7 +5,7 @@ import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 
-public class ListFrontend implements FrontendFx {
+public class PlaygroundFrontend implements FrontendFx {
 
 	@Override
 	public void registerEvents(EventRegistrar registrar) {
