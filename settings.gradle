@@ -7,6 +7,10 @@ include 'ntro_app'
 include 'ntro_app_jdk'
 include 'ntro_app_fx'
 
+include 'cards_common'
+include 'cards_list'
+include 'cards_playground'
+
 buildscript {
     repositories {
 	    mavenCentral()
