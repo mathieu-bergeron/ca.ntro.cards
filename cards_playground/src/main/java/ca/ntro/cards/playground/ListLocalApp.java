@@ -1,4 +1,4 @@
-package ca.ntro.cards.list;
+package ca.ntro.cards.playground;
 
 import ca.ntro.app.NtroClientFx;
 import ca.ntro.app.backend.BackendRegistrar;

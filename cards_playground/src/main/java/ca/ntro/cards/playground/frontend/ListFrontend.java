@@ -1,4 +1,4 @@
-package ca.ntro.cards.list.frontend;
+package ca.ntro.cards.playground.frontend;
 
 import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
