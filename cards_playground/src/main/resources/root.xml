@@ -16,27 +16,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
 
-<?import javafx.scene.layout.VBox ?>
-<?import javafx.scene.control.Button ?>
-<?import javafx.scene.image.ImageView ?>
-<?import javafx.scene.image.Image ?>
+<?import javafx.scene.layout.StackPane ?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="pong.frontal.vues.VueFileAttente" 
-    styleClass="conteneur"
-    id="vue-file-attente">
+<StackPane xmlns:fx="http://javafx.com/fxml" 
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundRootView" 
+    styleClass="container"
+    id="root-view">
 
-    <ImageView id="logo">    
-        <image>
-            <Image url="@logo.png" />
-        </image>
-    </ImageView>
-
-    <Button 
-        fx:id="boutonOuvrirPartie" 
-        text="%ouvrirPartie"
-        styleClass="gros-bouton"
-        id="bouton-ouvrir-partie">
-    </Button>
-
-</VBox>
+</StackPane>
