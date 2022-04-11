@@ -1,0 +1,28 @@
+rootProject.name = 'ca.ntro.cards'
+
+include 'ntro_core'
+include 'ntro_core_jdk'
+
+include 'ntro_app'
+include 'ntro_app_jdk'
+include 'ntro_app_fx'
+
+buildscript {
+    repositories {
+	    mavenCentral()
+	    maven { url "http://repository.jsweet.org/artifactory/libs-release-local" }
+	    maven { url "http://repository.jsweet.org/artifactory/libs-snapshot-local" }
+	    maven { url "http://repository.jsweet.org/artifactory/plugins-release-local" }
+	    maven { url "http://repository.jsweet.org/artifactory/plugins-snapshot-local" }
+	    maven { url "http://google-diff-match-patch.googlecode.com/svn/trunk/maven" }
+	    maven {url "https://plugins.gradle.org/m2/"}
+    }
+
+    dependencies {
+	    classpath('org.jsweet:jsweet-gradle-plugin:3.1.0') { 
+		    transitive = true 
+	    }
+
+        classpath 'org.openjfx:javafx-plugin:0.0.10'
+    }
+}

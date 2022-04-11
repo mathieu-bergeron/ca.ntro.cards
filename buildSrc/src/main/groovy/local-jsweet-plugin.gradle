@@ -1,0 +1,167 @@
+plugins {
+    id 'org.jsweet.jsweet-gradle-plugin'
+    id 'maven'
+}
+
+class LocalJSweetPluginExtension implements Serializable {
+   String storageDir = null
+   List<String> localJSweetDependencies = []
+}
+
+def extension = project.extensions.create('localJSweetPlugin', LocalJSweetPluginExtension) 
+
+project.gradle.projectsEvaluated {
+    jsweet {
+	    verbose = true
+	    encoding = 'UTF-8'
+	    sourceMap = true
+	    tsOut = new File("${project.projectDir}/_jsweet/ts")
+	    dtsOut = new File("${project.projectDir}/_jsweet/jsOut/src/typings/${project.name}/${project.version}")
+	    outDir = new File("${project.projectDir}/_jsweet/jsOut/META-INF/resources/webjars/${project.name}/${project.version}")
+	    candiesJsOut = new File("${project.projectDir}/_jsweet/jsIn")
+	    targetVersion = 'ES6'
+	    includes = ['**/*.java']
+	    bundle = false
+	    declaration = true
+    }
+
+    def storageDir = extension.storageDir
+
+    if(storageDir == null){
+        storageDir = project.projectDir.toString() + "/_storage"
+    }
+
+    for(localDependency in extension.localJSweetDependencies){
+
+        def localProject = project(":$localDependency")
+        def name = localProject.name
+        def version = localProject.version
+        def projectDir = localProject.projectDir
+        def group = localProject.group
+
+        def localCandy = [group:"$group", name:"$name", version:"$version"]
+
+        def groupSegments = group.split('\\.')
+        def groupPath = "";
+        for(int i = 0; i < groupSegments.length; i++){
+            groupPath += "/" + groupSegments[i];
+        }
+
+        project.getDependencies().add('compile', localProject)
+        project.getDependencies().add('compile', localCandy)
+
+        tasks.jsweet.dependsOn ":$name:jsweet"
+        tasks.jsweet.inputs.dir("${System.getProperty('user.home')}/.m2/repository$groupPath/$name") 
+
+
+        if(storageDir != null){
+
+            def outDir = new File("$storageDir/files/_jsweet/${name}")
+            outDir.mkdirs()
+            def srcDir = new File("$projectDir/_jsweet/jsOut/META-INF/resources/webjars/$name/$version")
+            if(srcDir.exists()){
+                copyLargeDir(srcDir, outDir, true)
+            }
+        }
+    }
+}
+
+jar{
+    from ("${project.projectDir}/_jsweet/jsOut"){
+        include "**"
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+	maven { url "http://repository.jsweet.org/artifactory/libs-release-local" }
+	maven { url "http://repository.jsweet.org/artifactory/libs-snapshot-local" }
+	maven { url "http://repository.jsweet.org/artifactory/plugins-release-local" }
+	maven { url "http://repository.jsweet.org/artifactory/plugins-snapshot-local" }
+	maven { url "http://google-diff-match-patch.googlecode.com/svn/trunk/maven" }
+}
+
+dependencies {
+    implementation group: 'org.jsweet', name: 'jsweet-transpiler', version: "3.0.0"
+    implementation group: 'org.jsweet', name: 'jsweet-core', version: "6.3.0"
+}
+
+
+tasks.clean {
+    doFirst {
+        new File("${project.projectDir}/_jsweet").deleteDir()
+        new File("${project.projectDir}/.jsweet").deleteDir()
+    }
+}
+
+
+tasks.build {
+
+}
+
+tasks.jsweet {
+
+    inputs.dir("${project.projectDir}/src/main/java")
+
+    // FIXME: this causes the following error:
+    // Property 'configuration' with value 'extension 'jsweet'' cannot be serialized.
+    // outputs.dir("${project.projectDir}/_jsweet")
+    
+    // NOTE: it should still work, but will be less guarded against re-building when not necessary
+
+    finalizedBy('jar')
+}
+
+tasks.jar {
+
+    doFirst{
+
+	    def candyMetadataFile = new File("${project.projectDir}/_jsweet/jsOut/META-INF/candy-metadata.json")
+	    def candyMetadataContent ='''{
+    "transpilerVersion": "${jsweet.transpiler.version}"
+}'''
+
+        try{
+	        candyMetadataFile.write(candyMetadataContent)
+	    }catch(IOException e){}
+    }
+
+    finalizedBy('install')
+}
+
+tasks.install{
+
+}
+
+install {
+    repositories {
+        mavenInstaller {
+            pom.whenConfigured {
+                p -> p.dependencies = p.dependencies.findAll { 
+                        dep -> dep.groupId != "org.jsweet" 
+                }
+            }
+        }
+    }
+}
+
+// adapted from  https://stackoverflow.com/questions/6214703/copy-entire-directory-contents-to-another-directory
+def copyLargeDir(File dirFrom, File dirTo, boolean excludeHiddenFiles){
+    if (!dirTo.exists()){
+        dirTo.mkdir();
+    }
+
+    dirFrom.eachFile(groovy.io.FileType.FILES){File source ->
+        if(!excludeHiddenFiles || !source.getName().startsWith(".")){
+            File target = new File(dirTo,source.getName());
+            target.bytes = source.bytes;
+        }
+    }
+
+    dirFrom.eachFile(groovy.io.FileType.DIRECTORIES){File source ->
+        File target = new File(dirTo,source.getName());
+        copyLargeDir(source, target, excludeHiddenFiles)
+    }
+}

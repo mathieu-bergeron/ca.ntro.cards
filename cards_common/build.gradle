@@ -1,0 +1,37 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localJSweetPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+}
+
+def commonConfig = {
+   classpath = sourceSets.main.runtimeClasspath
+   standardInput = System.in
+   jvmArgs('-Dfile.encoding=UTF-8')
+}
+
+def clientConfig = {
+   configure commonConfig
+   main = "pong.ClientPong"
+   jvmArgs('-Dsun.java2d.opengl=true')
+}
+
+task(client, dependsOn: 'classes', type: JavaExec) {
+   configure clientConfig
+}
+
+task(clientFr, dependsOn: 'classes', type: JavaExec) {
+   configure clientConfig
+   jvmArgs('-Duser.language=fr')
+}
+
+task(clientEn, dependsOn: 'classes', type: JavaExec) {
+   configure clientConfig
+   jvmArgs('-Duser.language=en')
+}

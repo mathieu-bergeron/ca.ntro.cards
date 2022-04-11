@@ -1,0 +1,24 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+
+gradlePlugin {
+    plugins {
+        LocalJSweetPlugin {
+            id = 'localJSweetPlugin'
+            implementationClass = 'LocalJsweetPluginPlugin'
+        }
+        LocalJavaPlugin {
+            id = 'localJavaPlugin'
+            implementationClass = 'LocalJavaPluginPlugin'
+        }
+        LocalFxPlugin {
+            id = 'localFxPlugin'
+            implementationClass = 'LocalFxPluginPlugin'
+        }
+    }
+}
+
+
+
