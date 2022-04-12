@@ -27,7 +27,7 @@ cd "$root_dir"
 
 if [ -e $scripts_dir/ntro.git ]; then
 
-    git clone $(cat $scripts_dir/ntro.git) ntro || 
+    git clone $(cat $scripts_dir/ntro.git) --branch cards ntro || 
 
     if [ $? != 0 ]; then
 
