@@ -25,7 +25,7 @@ save_dir
 
 cd "$root_dir"
 
-git clone $(cat ntro.git) ntro
+git clone $(cat $scripts_dir/ntro.git) ntro
 
 restore_dir
 

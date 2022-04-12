@@ -1,6 +1,7 @@
-# Setup
+# init
 scripts/ntro.git
 ntro
+buildSrc
 
 # Java
 *.class

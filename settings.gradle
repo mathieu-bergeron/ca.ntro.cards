@@ -1,11 +1,19 @@
 rootProject.name = 'ca.ntro.cards'
 
 include 'ntro_core'
+project(':ntro_core').projectDir = file('ntro/ntro_core')
+
 include 'ntro_core_jdk'
+project(':ntro_core_jdk').projectDir = file('ntro/ntro_core_jdk')
 
 include 'ntro_app'
+project(':ntro_app').projectDir = file('ntro/ntro_app')
+
 include 'ntro_app_jdk'
+project(':ntro_app_jdk').projectDir = file('ntro/ntro_app_jdk')
+
 include 'ntro_app_fx'
+project(':ntro_app_fx').projectDir = file('ntro/ntro_app_fx')
 
 include 'cards_common'
 include 'cards_playground'
