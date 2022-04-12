@@ -25,7 +25,28 @@ save_dir
 
 cd "$root_dir"
 
-git clone $(cat $scripts_dir/ntro.git) ntro
+if [ -e $scripts_dir/ntro.git ]; then
+
+    git clone $(cat $scripts_dir/ntro.git) ntro || 
+
+    if [ $? != 0 ]; then
+
+        echo
+        echo
+        echo File $scripts_dir/ntro.git must contain the URL of a Ntro repo
+        echo
+        echo
+        exit 1
+
+    fi
+
+    cp -rf ntro/buildSrc .
+
+else
+
+    echo File $scripts_dir/ntro.git must exist 
+
+fi
 
 restore_dir
 
