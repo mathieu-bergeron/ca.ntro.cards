@@ -8,10 +8,14 @@
 
 ## Énoncés de projet
 
-### Playground
+### Common et Playground
 
 1. Affichage des cartes 
-1. Animations des cartes (p.ex. animation pour retourner la carte)
+    * afficher des figures de carte arbitraire comme 145 coeur ou 13378 pique.
+    * rassembler les cartes en paquet (si on a plusieurs cartes au même endroit, afficher un paquet)
+1. Animations des cartes 
+    * animation pour retourner la carte
+    * animation pour étaler un paquer
 
 ### List
 
