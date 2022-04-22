@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.ViewFx;
 
-public abstract class TableTopView extends ViewFx {
+public abstract class TabletopView extends ViewFx {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

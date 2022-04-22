@@ -5,28 +5,29 @@ import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.CommonRegistrar;
+import ca.ntro.cards.playground.PlaygroundRegistrar;
+import ca.ntro.cards.playground.frontend.tasks.InitialWindow;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundTableTopView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView;
 
 public class PlaygroundFrontend implements FrontendFx {
 
 	@Override
-	public void registerEvents(EventRegistrar registrar) {
-		CommonRegistrar.registerEvents(registrar);
+	public void createTasks(FrontendTasks tasks) {
+		InitialWindow.createTasks(tasks);
+	}
 
+	@Override
+	public void registerEvents(EventRegistrar registrar) {
+		PlaygroundRegistrar.registerEvents(registrar);
 	}
 
 	@Override
 	public void registerViews(ViewRegistrarFx registrar) {
-		
 		registrar.registerView(PlaygroundRootView.class, "/root.xml");
-		registrar.registerView(PlaygroundTableTopView.class, "/table_top.xml");
+		registrar.registerView(PlaygroundTabletopView.class, "/tabletop.xml");
 	}
 
-	@Override
-	public void createTasks(FrontendTasks tasks) {
-		
-	}
 
 	@Override
 	public void execute() {

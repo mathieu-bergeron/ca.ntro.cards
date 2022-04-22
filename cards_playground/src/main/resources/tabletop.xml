@@ -21,9 +21,17 @@
 <?import javafx.scene.image.ImageView ?>
 <?import javafx.scene.image.Image ?>
 
+<?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas ?>
+
 <VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundTableTopView" 
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView" 
     styleClass="container"
-    id="table-top-view">
+    id="tabletop-view">
+
+    <PlaygroundTabletopCanvas
+        fx:id="tabletopCanvas"
+        VBox.vgrow="ALWAYS">
+
+    </PlaygroundTabletopCanvas>
 
 </VBox>

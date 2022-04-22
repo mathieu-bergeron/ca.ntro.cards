@@ -18,22 +18,13 @@ def commonConfig = {
    jvmArgs('-Dfile.encoding=UTF-8')
 }
 
-def clientConfig = {
+def localConfig = {
    configure commonConfig
-   main = "pong.ClientPong"
+   main = "ca.ntro.cards.playground.PlaygroundLocalApp"
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 
-task(client, dependsOn: 'classes', type: JavaExec) {
-   configure clientConfig
-}
-
-task(clientFr, dependsOn: 'classes', type: JavaExec) {
-   configure clientConfig
+task(local, dependsOn: 'classes', type: JavaExec) {
+   configure localConfig
    jvmArgs('-Duser.language=fr')
-}
-
-task(clientEn, dependsOn: 'classes', type: JavaExec) {
-   configure clientConfig
-   jvmArgs('-Duser.language=en')
 }
