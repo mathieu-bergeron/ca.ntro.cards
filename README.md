@@ -1,5 +1,30 @@
 # Data structures examples based on card games
 
+## Installation
+
+1. Forker git@github.com:mathieu-bergeron/ntro
+    * donne git@github.com:MOI/ntro
+
+1. Définir `cards` comme la branche principale de git@github.com:MOI/ntro
+    * sur GitHub: 
+        * view all branches
+        * default branch => switch default branch
+        * switch default branch
+        * sélectionner `cards`
+        * OK, I understand, OK, OK
+
+1. Cloner git@github.com:mathieu-bergeron/ca.ntro.cards
+
+1. Créer le fichier `scripts/ntro.git` avec dedans
+    * git@github.com:MOI/ntro
+
+1. Lancer le script
+
+        $ sh scripts/init.sh
+
+            Clonage dans 'ntro'...
+
+
 ## TODO
 
 * `World2dCanvas` avec un Viewport
