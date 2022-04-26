@@ -23,8 +23,7 @@ public class PlaygroundTabletopView extends TabletopView {
 	}
 
 	private void initializeCanvas() {
-		tabletopCanvas.setWorldWidth(640);
-		tabletopCanvas.setWorldHeight(320);
+
 	}
 
 }
