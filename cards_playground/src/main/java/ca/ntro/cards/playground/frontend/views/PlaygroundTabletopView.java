@@ -23,7 +23,6 @@ public class PlaygroundTabletopView extends TabletopView {
 	}
 
 	private void initializeCanvas() {
-		tabletopCanvas.initialize();
 	}
 
 }
