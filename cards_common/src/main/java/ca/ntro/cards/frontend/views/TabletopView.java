@@ -66,7 +66,7 @@ public abstract class TabletopView extends ViewFx {
 				evtMoveViewport.setIncrementY(0);
 				evtMoveViewport.trigger();
 
-			} else if(evtFx.getCode().equals(KeyCode.S)
+			} else if(evtFx.getCode().equals(KeyCode.D)
 					|| evtFx.getCode().equals(KeyCode.RIGHT)) {
 				
 				evtMoveViewport.setIncrementX(-10);
