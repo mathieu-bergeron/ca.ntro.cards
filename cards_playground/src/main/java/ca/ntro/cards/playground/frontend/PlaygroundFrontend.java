@@ -21,7 +21,7 @@ public class PlaygroundFrontend implements FrontendFx {
 
 	@Override
 	public void registerEvents(EventRegistrar registrar) {
-		PlaygroundRegistrar.registerEvents(registrar);
+		CommonFrontendRegistrar.registerEvents(registrar);
 	}
 
 	@Override

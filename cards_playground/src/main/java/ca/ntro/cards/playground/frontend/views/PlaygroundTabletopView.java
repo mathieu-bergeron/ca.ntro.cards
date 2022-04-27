@@ -3,7 +3,7 @@ package ca.ntro.cards.playground.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.app.frontend.views.controls.canvas.World2dCanvas;
+import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.cards.frontend.views.TabletopView;
 import ca.ntro.cards.models.world2d.World2dCards;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas;
@@ -21,6 +21,8 @@ public class PlaygroundTabletopView extends TabletopView {
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
 
 		initializeCanvas();
+		
+		super.initialize(location, resources);
 	}
 
 	private void initializeCanvas() {
@@ -28,8 +30,9 @@ public class PlaygroundTabletopView extends TabletopView {
 		tabletopCanvas.setWorldHeight(World2dCards.INITIAL_WORLD_HEIGHT);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	protected World2dCanvas getCanvas() {
+	protected World2dCanvasFx getCanvas() {
 		return tabletopCanvas;
 	}
 
