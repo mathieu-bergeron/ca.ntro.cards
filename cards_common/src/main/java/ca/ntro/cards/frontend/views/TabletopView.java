@@ -27,17 +27,10 @@ public abstract class TabletopView extends ViewFx {
 			getCanvas().requestFocus();
 		});
 		
-		
 		/*
-		getMainContainer().addEventFilter(MouseEvent.ANY, evtFx -> {
-			//System.out.println("MouseEvent: " + evtFx);
+		getCanvas().addEventFilter(MouseEvent.ANY, evtFx -> {
+			System.out.println("MouseEvent: " + evtFx);
 		});*/
-		
-		
-		//getMainContainer().setFocusTraversable(true);
-		//getCanvas().setFocusTraversable(true);
-		
-		//getMainContainer().requestFocus();
 
 		installEvtMoveViewport();
 		installEvtResizeViewport();
