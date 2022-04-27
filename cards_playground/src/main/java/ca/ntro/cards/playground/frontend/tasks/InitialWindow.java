@@ -1,8 +1,6 @@
 package ca.ntro.cards.playground.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.views.RootView;
-import ca.ntro.cards.playground.PlaygroundRegistrar;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView;
 
