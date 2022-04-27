@@ -3,6 +3,7 @@ package ca.ntro.cards.playground.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ca.ntro.app.frontend.views.controls.canvas.World2dCanvas;
 import ca.ntro.cards.frontend.views.TabletopView;
 import ca.ntro.cards.models.world2d.World2dCards;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas;
@@ -28,18 +29,8 @@ public class PlaygroundTabletopView extends TabletopView {
 	}
 
 	@Override
-	public void displayWorld2d(World2dCards world2d) {
-		tabletopCanvas.displayWorld2d(world2d);
-	}
-
-	@Override
-	public void clearCanvas() {
-		tabletopCanvas.clearCanvas();
-	}
-
-	@Override
-	public void displayFps(String fps) {
-		tabletopCanvas.displayFps(fps);
+	protected World2dCanvas getCanvas() {
+		return tabletopCanvas;
 	}
 
 }
