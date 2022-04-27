@@ -24,7 +24,18 @@ public abstract class TabletopView extends ViewFx {
 	}
 
 	public void resizeViewport(double incrementX, double incrementY) {
-		getCanvas().resizeViewport(incrementX, incrementY);
+		getCanvas().resizeViewport(getCanvas().viewportWidth() + incrementX, 
+				                   getCanvas().viewportHeight() + incrementY);
 	}
+
+	public void moveViewport(double incrementX, double incrementY) {
+		getCanvas().relocateViewport(getCanvas().viewportTopLeftX() + incrementX, 
+				                     getCanvas().viewportTopLeftY() + incrementY);
+	}
+
+	public void displayViewport() {
+		getCanvas().displayViewport();
+	}
+
 
 }
