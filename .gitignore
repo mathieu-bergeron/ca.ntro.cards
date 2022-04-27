@@ -1,8 +1,8 @@
 # init
-scripts/ntro.git
-ntro
-_test
-buildSrc
+/scripts/ntro.git
+/ntro
+/_test
+/buildSrc
 
 # Java
 *.class
