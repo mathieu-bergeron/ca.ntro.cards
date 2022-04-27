@@ -16,19 +16,30 @@ public class PlaygroundTabletopView extends TabletopView {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		super.initialize(location, resources);
-		
+
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
-		
+
 		initializeCanvas();
 	}
 
 	private void initializeCanvas() {
+		tabletopCanvas.setWorldWidth(World2dCards.INITIAL_WORLD_WIDTH);
+		tabletopCanvas.setWorldHeight(World2dCards.INITIAL_WORLD_HEIGHT);
 	}
 
 	@Override
 	public void displayWorld2d(World2dCards world2d) {
 		tabletopCanvas.displayWorld2d(world2d);
+	}
+
+	@Override
+	public void clearCanvas() {
+		tabletopCanvas.clearCanvas();
+	}
+
+	@Override
+	public void displayFps(String fps) {
+		tabletopCanvas.displayFps(fps);
 	}
 
 }
