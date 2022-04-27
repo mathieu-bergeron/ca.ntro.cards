@@ -8,9 +8,12 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
+import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.models.world2d.World2dCards;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 
 public abstract class TabletopView extends ViewFx {
 	
@@ -36,11 +39,11 @@ public abstract class TabletopView extends ViewFx {
 		
 		//getMainContainer().requestFocus();
 
-		installEvtMoveCanvas();
-
+		installEvtMoveViewport();
+		installEvtResizeViewport();
 	}
 
-	private void installEvtMoveCanvas() {
+	private void installEvtMoveViewport() {
 		EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 		
 		getCanvas().setOnKeyPressed(evtFx -> {
@@ -74,6 +77,38 @@ public abstract class TabletopView extends ViewFx {
 				evtMoveViewport.trigger();
 			}
 
+		});
+	}
+
+	private void installEvtResizeViewport() {
+
+		EvtResizeViewport evtResizeViewport = NtroApp.newEvent(EvtResizeViewport.class);
+
+		getCanvas().setOnKeyTyped(evtFx -> {
+			if(evtFx.getCharacter().equals("+")) {
+				
+				evtResizeViewport.setFactor(0.9);
+				evtResizeViewport.trigger();
+				
+			}else if(evtFx.getCharacter().equals("-")) {
+
+				evtResizeViewport.setFactor(1.1);
+				evtResizeViewport.trigger();
+			}
+		});
+		
+		getCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
+			if(evtFx.getDeltaY() > 0) {
+
+				evtResizeViewport.setFactor(0.9);
+				evtResizeViewport.trigger();
+				
+			}else if(evtFx.getDeltaY() < 0) {
+
+				evtResizeViewport.setFactor(1.1);
+				evtResizeViewport.trigger();
+
+			}
 		});
 	}
 
