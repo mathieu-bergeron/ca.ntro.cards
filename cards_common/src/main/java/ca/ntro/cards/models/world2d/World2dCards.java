@@ -7,6 +7,8 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 	
 	public static final double INITIAL_WORLD_WIDTH = 6400;
 	public static final double INITIAL_WORLD_HEIGHT = 3200;
+	
+	private Card2d movingCard = null;
 
 	@Override
 	protected void initialize() {
@@ -30,7 +32,25 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 
 	@Override
 	protected void onMouseEventNotConsumed(MouseEvent evtFx, double worldX, double worldY) {
-		
+		if(movingCard != null 
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+
+			movingCard.dragTo(worldX, worldY);
+
+		}else if(movingCard != null 
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+			
+			forgetMovingCard();
+
+		}
+	}
+
+	private void forgetMovingCard() {
+		movingCard = null;
+	}
+
+	public void registerMovingCard(Card2d card2d) {
+		this.movingCard = card2d;
 	}
 
 }

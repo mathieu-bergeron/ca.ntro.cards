@@ -10,7 +10,6 @@ public class Card2d extends Object2dCards {
 	
 	private Card card;
 	
-	private boolean moving = false;
 	private double anchorX;
 	private double anchorY;
 
@@ -30,23 +29,23 @@ public class Card2d extends Object2dCards {
 
 	@Override
 	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		if(evtFx.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
 			
-			moving = true;
+			anchorX = worldX - getTopLeftX();
+			anchorY = worldY - getTopLeftY();
 			
-		} else if(evtFx.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+			getWorld().registerMovingCard(this);
+			
+			return true;
+			
+		} 
 
-			moving = false;
-			
-			
-		} else if(moving 
-				&& evtFx.getEventType().equals(MouseEvent.MOUSE_MOVED)) {
-			
-			System.out.println("MOUSE_MOVED");
-			
-		}
+		return false;
+	}
 
-		return true;
+	public void dragTo(double worldX, double worldY) {
+		setTopLeftX(worldX - anchorX);
+		setTopLeftY(worldY - anchorY);
 	}
 
 	@Override
