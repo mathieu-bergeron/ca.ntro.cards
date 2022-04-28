@@ -1,6 +1,8 @@
 package ca.ntro.cards.models.world2d;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.World2dFx;
+import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import javafx.scene.input.MouseEvent;
 
 public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
@@ -9,6 +11,9 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 	public static final double INITIAL_WORLD_HEIGHT = 3200;
 	
 	private Card2d movingCard = null;
+	private double anchorX;
+	private double anchorY;
+	private EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 
 	@Override
 	protected void initialize() {
@@ -42,6 +47,23 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 			
 			forgetMovingCard();
 
+		}else if(movingCard == null 
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
+			
+			anchorX = worldX;
+			anchorY = worldY;
+
+		}else if(movingCard == null 
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+			
+			evtMoveViewport.setIncrementX(worldX - anchorX);
+			evtMoveViewport.setIncrementY(worldY - anchorY);
+			
+			anchorX = worldX;
+			anchorY = worldY;
+			
+			evtMoveViewport.trigger();
+			
 		}
 	}
 
