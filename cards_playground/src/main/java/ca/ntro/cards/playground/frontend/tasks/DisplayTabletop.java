@@ -3,6 +3,7 @@ package ca.ntro.cards.playground.frontend.tasks;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
+import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
 import ca.ntro.cards.frontend.views.data.TabletopViewData;
 import ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView;
 import ca.ntro.core.clock.Tick;
@@ -25,10 +26,26 @@ public class DisplayTabletop {
 		    	 
 		    	 moveViewport(subTasks);
 		    	 resizeViewport(subTasks);
+		    	 mouseEvtOnMainDisplay(subTasks);
 
 		    	 displayNextImage(subTasks);
 
 		     });
+	}
+
+	private static void mouseEvtOnMainDisplay(FrontendTasks tasks) {
+		tasks.task("mouseEvtOnMainDisplay")
+		
+		      .waitsFor(event(MouseEvtOnMainDisplay.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  MouseEvtOnMainDisplay   mouseEvtOnMainDisplay = inputs.get(event(MouseEvtOnMainDisplay.class));
+		    	  TabletopViewData        tabletopData          = inputs.get(created(TabletopViewData.class));
+		    	  
+		    	  mouseEvtOnMainDisplay.applyTo(tabletopData);
+
+		      });
 	}
 
 	private static void createTabletopViewData(FrontendTasks tasks) {

@@ -6,9 +6,11 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
+import ca.ntro.app.views.controls.canvas.MouseEventHandler;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
+import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
 import ca.ntro.cards.models.world2d.World2dCards;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
@@ -27,13 +29,24 @@ public abstract class TabletopView extends ViewFx {
 			getCanvas().requestFocus();
 		});
 		
-		/*
-		getCanvas().addEventFilter(MouseEvent.ANY, evtFx -> {
-			System.out.println("MouseEvent: " + evtFx);
-		});*/
-
+		installMouseEvtOnMainDisplay();
 		installEvtMoveViewport();
 		installEvtResizeViewport();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void installMouseEvtOnMainDisplay() {
+		MouseEvtOnMainDisplay mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnMainDisplay.class);
+		
+		getCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+			
+			mouseEvtOnMainDisplay.setEvtFx(evtFx);
+			mouseEvtOnMainDisplay.setWorldX(worldX);
+			mouseEvtOnMainDisplay.setWorldY(worldY);
+			
+			mouseEvtOnMainDisplay.trigger();
+
+		});
 	}
 
 	private void installEvtMoveViewport() {
