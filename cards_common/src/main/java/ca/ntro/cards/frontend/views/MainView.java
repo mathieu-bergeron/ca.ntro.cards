@@ -140,25 +140,24 @@ public abstract class MainView extends ViewFx {
 	}
 
 	public void resizeViewport(double factor) {
-		getTabletopCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
-				                   getViewerCanvas().viewportHeight() * factor);
-
 		getViewerCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
 				                   getViewerCanvas().viewportHeight() * factor);
 		
 	}
 
 	public void moveViewport(double incrementX, double incrementY) {
-		getTabletopCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
-				                     getViewerCanvas().viewportTopLeftY() + incrementY);
-
 		getViewerCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
 				                     getViewerCanvas().viewportTopLeftY() + incrementY);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void displayViewport() {
-		getTabletopCanvas().displayViewport();
+		getTabletopCanvas().drawOnWorld(gc -> {
+			
+			gc.strokeRect(getViewerCanvas().viewportTopLeftX(),
+					      getViewerCanvas().viewportTopLeftY(),
+					      getViewerCanvas().viewportWidth(),
+					      getViewerCanvas().viewportHeight());
+		});
 	}
-
-
 }
