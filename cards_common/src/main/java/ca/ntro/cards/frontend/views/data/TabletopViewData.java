@@ -19,7 +19,7 @@ public class TabletopViewData implements ViewData {
 
 		tabletopView.clearCanvas();
 		tabletopView.displayViewport();
-		tabletopView.displayFps(String.format("%.0f", fpsCounter.currentFps()));
+		tabletopView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 		tabletopView.displayWorld2d(world2d);
 	}
 }
