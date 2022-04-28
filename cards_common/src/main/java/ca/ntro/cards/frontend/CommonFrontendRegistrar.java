@@ -4,6 +4,8 @@ import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
+import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
+import ca.ntro.cards.frontend.events.MouseEvtOnMinimap;
 import ca.ntro.cards.frontend.views.data.TabletopViewData;
 
 public class CommonFrontendRegistrar {
@@ -15,6 +17,8 @@ public class CommonFrontendRegistrar {
 	public static void registerEvents(EventRegistrar registrar) {
 		registrar.registerEvent(EvtMoveViewport.class);
 		registrar.registerEvent(EvtResizeViewport.class);
+		registrar.registerEvent(MouseEvtOnMainDisplay.class);
+		registrar.registerEvent(MouseEvtOnMinimap.class);
 	}
 
 }

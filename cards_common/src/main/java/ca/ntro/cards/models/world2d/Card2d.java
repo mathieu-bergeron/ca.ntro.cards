@@ -26,7 +26,7 @@ public class Card2d extends Object2dCards {
 
 	@Override
 	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		System.out.println("onMouseEvent");
+		System.out.println("onMouseEvent: " + evtFx);
 		return false;
 	}
 
