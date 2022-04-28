@@ -60,7 +60,7 @@ public class Card2d extends Object2dCards {
 			levelOfDetails = 4;
 
 		}
-		
+
 		return levelOfDetails;
 	}
 
