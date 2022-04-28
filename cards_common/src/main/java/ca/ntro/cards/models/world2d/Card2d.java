@@ -9,6 +9,10 @@ import javafx.scene.paint.Color;
 public class Card2d extends Object2dCards {
 	
 	private Card card;
+	
+	private boolean moving = false;
+	private double anchorX;
+	private double anchorY;
 
 	public Card getCard() {
 		return card;
@@ -26,8 +30,23 @@ public class Card2d extends Object2dCards {
 
 	@Override
 	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		System.out.println("onMouseEvent: " + evtFx);
-		return false;
+		if(evtFx.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+			
+			moving = true;
+			
+		} else if(evtFx.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+
+			moving = false;
+			
+			
+		} else if(moving 
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_MOVED)) {
+			
+			System.out.println("MOUSE_MOVED");
+			
+		}
+
+		return true;
 	}
 
 	@Override
