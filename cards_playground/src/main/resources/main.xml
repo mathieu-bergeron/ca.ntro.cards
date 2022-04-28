@@ -17,22 +17,40 @@
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
 
 <?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.control.Button ?>
 <?import javafx.scene.image.ImageView ?>
 <?import javafx.scene.image.Image ?>
 
 <?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas ?>
+<?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas ?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView" 
-    fx:id="mainContainer"
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundMainView" 
     styleClass="container"
-    id="tabletop-view">
+    id="main-view">
 
-    <PlaygroundTabletopCanvas
-        fx:id="tabletopCanvas"
-        VBox.vgrow="ALWAYS">
+    <PlaygroundViewerCanvas
+        fx:id="viewerCanvas"
+        VBox.vgrow="ALWAYS"
+        styleClass="container">
+    </PlaygroundViewerCanvas>
 
-    </PlaygroundTabletopCanvas>
+    <HBox>
+
+        <PlaygroundTabletopCanvas
+            fx:id="tabletopCanvas"
+            VBox.vgrow="ALWAYS"
+            styleClass="container">
+        </PlaygroundTabletopCanvas>
+
+        <StackPane
+            fx:id="dashboardContainer"
+            HBox.hgrow="ALWAYS"
+            styleClass="container">
+        </StackPane>
+
+    </HBox>
 
 </VBox>

@@ -6,8 +6,8 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
-import ca.ntro.app.views.controls.canvas.MouseEventHandler;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
+import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
@@ -17,17 +17,23 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 
-public abstract class TabletopView extends ViewFx {
+public abstract class MainView extends ViewFx {
 	
 	@SuppressWarnings("rawtypes")
-	protected abstract World2dCanvasFx getCanvas();
+	protected abstract World2dResizableCanvasFx getViewerCanvas();
+
+	@SuppressWarnings("rawtypes")
+	protected abstract World2dCanvasFx getTabletopCanvas();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		Platform.runLater(() -> {
-			getCanvas().requestFocus();
+			getViewerCanvas().requestFocus();
 		});
+		
+		getTabletopCanvas().setHeight(100);
+		getTabletopCanvas().setWidth(100);
 		
 		installMouseEvtOnMainDisplay();
 		installEvtMoveViewport();
@@ -38,7 +44,7 @@ public abstract class TabletopView extends ViewFx {
 	private void installMouseEvtOnMainDisplay() {
 		MouseEvtOnMainDisplay mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnMainDisplay.class);
 		
-		getCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+		getViewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
 			
 			mouseEvtOnMainDisplay.setEvtFx(evtFx);
 			mouseEvtOnMainDisplay.setWorldX(worldX);
@@ -52,7 +58,7 @@ public abstract class TabletopView extends ViewFx {
 	private void installEvtMoveViewport() {
 		EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 		
-		getCanvas().setOnKeyPressed(evtFx -> {
+		getViewerCanvas().setOnKeyPressed(evtFx -> {
 			
 			if(evtFx.getCode().equals(KeyCode.W)
 					|| evtFx.getCode().equals(KeyCode.UP)) {
@@ -90,7 +96,7 @@ public abstract class TabletopView extends ViewFx {
 
 		EvtResizeViewport evtResizeViewport = NtroApp.newEvent(EvtResizeViewport.class);
 
-		getCanvas().setOnKeyTyped(evtFx -> {
+		getViewerCanvas().setOnKeyTyped(evtFx -> {
 			if(evtFx.getCharacter().equals("+")) {
 				
 				evtResizeViewport.setFactor(0.9);
@@ -103,7 +109,7 @@ public abstract class TabletopView extends ViewFx {
 			}
 		});
 		
-		getCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
+		getViewerCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
 			if(evtFx.getDeltaY() > 0) {
 
 				evtResizeViewport.setFactor(0.9);
@@ -120,29 +126,29 @@ public abstract class TabletopView extends ViewFx {
 
 	@SuppressWarnings("unchecked")
 	public void displayWorld2d(World2dCards world2d) {
-		getCanvas().displayWorld2d(world2d);
+		getViewerCanvas().displayWorld2d(world2d);
 	}
 
 	public void clearCanvas() {
-		getCanvas().clearCanvas();
+		getViewerCanvas().clearCanvas();
 	}
 
 	public void displayFps(String fps) {
-		getCanvas().displayFps(fps);
+		getViewerCanvas().displayFps(fps);
 	}
 
 	public void resizeViewport(double factor) {
-		getCanvas().resizeViewport(getCanvas().viewportWidth() * factor, 
-				                   getCanvas().viewportHeight() * factor);
+		getViewerCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
+				                   getViewerCanvas().viewportHeight() * factor);
 	}
 
 	public void moveViewport(double incrementX, double incrementY) {
-		getCanvas().relocateViewport(getCanvas().viewportTopLeftX() + incrementX, 
-				                     getCanvas().viewportTopLeftY() + incrementY);
+		getViewerCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
+				                     getViewerCanvas().viewportTopLeftY() + incrementY);
 	}
 
 	public void displayViewport() {
-		getCanvas().displayViewport();
+		getViewerCanvas().displayViewport();
 	}
 
 

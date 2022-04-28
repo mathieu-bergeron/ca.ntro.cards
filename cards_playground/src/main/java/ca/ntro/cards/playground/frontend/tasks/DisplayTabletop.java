@@ -5,7 +5,7 @@ import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
 import ca.ntro.cards.frontend.views.data.TabletopViewData;
-import ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
 import ca.ntro.core.clock.Tick;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
@@ -66,7 +66,7 @@ public class DisplayTabletop {
 		    	  
 		    	  Tick                    tick         = inputs.get(clock().nextTick());
 		    	  TabletopViewData        tabletopData = inputs.get(created(TabletopViewData.class));
-		    	  PlaygroundTabletopView  tabletopView = inputs.get(created(PlaygroundTabletopView.class));
+		    	  PlaygroundMainView  tabletopView = inputs.get(created(PlaygroundMainView.class));
 		    	  
 		    	  tabletopData.onTimePasses(tick.elapsedTime());
 		    	  tabletopData.displayOn(tabletopView);
@@ -82,7 +82,7 @@ public class DisplayTabletop {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtMoveViewport         evtMoveViewport = inputs.get(event(EvtMoveViewport.class));
-		    	  PlaygroundTabletopView  tabletopView    = inputs.get(created(PlaygroundTabletopView.class));
+		    	  PlaygroundMainView  tabletopView    = inputs.get(created(PlaygroundMainView.class));
 		    	  
 		    	  evtMoveViewport.applyTo(tabletopView);
 
@@ -97,7 +97,7 @@ public class DisplayTabletop {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtResizeViewport       evtResizeViewport = inputs.get(event(EvtResizeViewport.class));
-		    	  PlaygroundTabletopView  tabletopView      = inputs.get(created(PlaygroundTabletopView.class));
+		    	  PlaygroundMainView  tabletopView      = inputs.get(created(PlaygroundMainView.class));
 		    	  
 		    	  evtResizeViewport.applyTo(tabletopView);
 		    	  

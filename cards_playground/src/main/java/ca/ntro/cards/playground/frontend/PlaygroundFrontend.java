@@ -5,11 +5,10 @@ import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.CommonFrontendRegistrar;
-import ca.ntro.cards.playground.PlaygroundRegistrar;
 import ca.ntro.cards.playground.frontend.tasks.DisplayTabletop;
 import ca.ntro.cards.playground.frontend.tasks.InitialWindow;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundTabletopView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
 
 public class PlaygroundFrontend implements FrontendFx {
 
@@ -26,8 +25,12 @@ public class PlaygroundFrontend implements FrontendFx {
 
 	@Override
 	public void registerViews(ViewRegistrarFx registrar) {
+
+		registrar.registerStylesheet("/dev.css");
+		//registrar.registerStylesheet("/prod.css");
+
 		registrar.registerView(PlaygroundRootView.class, "/root.xml");
-		registrar.registerView(PlaygroundTabletopView.class, "/tabletop.xml");
+		registrar.registerView(PlaygroundMainView.class, "/main.xml");
 		
 		CommonFrontendRegistrar.registerViewData(registrar);
 	}

@@ -7,10 +7,7 @@ import ca.ntro.cards.models.world2d.World2dCards;
 
 public class TabletopCanvas extends World2dCanvasFx<Object2dCards, World2dCards> {
 
-	@Override
-	protected void initialize() {
-		
-	}
+
 
 
 }
