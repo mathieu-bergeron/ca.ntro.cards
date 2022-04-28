@@ -3,7 +3,7 @@ package ca.ntro.cards.frontend.events;
 import ca.ntro.app.frontend.events.EventNtro;
 import javafx.scene.input.MouseEvent;
 
-public class MouseEvtOnMinimap extends EventNtro {
+public class MouseEvtOnTabletop extends EventNtro {
 	
 	private MouseEvent evtFx;
 	private double worldX;

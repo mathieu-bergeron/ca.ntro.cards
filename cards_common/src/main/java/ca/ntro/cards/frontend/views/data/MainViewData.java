@@ -6,7 +6,7 @@ import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.world2d.World2dCards;
 import javafx.scene.input.MouseEvent;
 
-public class TabletopViewData implements ViewData {
+public class MainViewData implements ViewData {
 
 	private World2dCards world2d = new World2dCards();
 	private FpsCounter fpsCounter = new FpsCounter();

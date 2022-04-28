@@ -10,7 +10,7 @@ import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
-import ca.ntro.cards.frontend.events.MouseEvtOnMainDisplay;
+import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.models.world2d.World2dCards;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
@@ -42,7 +42,7 @@ public abstract class MainView extends ViewFx {
 
 	@SuppressWarnings("unchecked")
 	private void installMouseEvtOnMainDisplay() {
-		MouseEvtOnMainDisplay mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnMainDisplay.class);
+		MouseEvtOnViewer mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnViewer.class);
 		
 		getViewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
 			
@@ -126,10 +126,12 @@ public abstract class MainView extends ViewFx {
 
 	@SuppressWarnings("unchecked")
 	public void displayWorld2d(World2dCards world2d) {
+		getTabletopCanvas().displayWorld2d(world2d);
 		getViewerCanvas().displayWorld2d(world2d);
 	}
 
 	public void clearCanvas() {
+		getTabletopCanvas().clearCanvas();
 		getViewerCanvas().clearCanvas();
 	}
 
@@ -138,17 +140,24 @@ public abstract class MainView extends ViewFx {
 	}
 
 	public void resizeViewport(double factor) {
+		getTabletopCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
+				                   getViewerCanvas().viewportHeight() * factor);
+
 		getViewerCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
 				                   getViewerCanvas().viewportHeight() * factor);
+		
 	}
 
 	public void moveViewport(double incrementX, double incrementY) {
+		getTabletopCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
+				                     getViewerCanvas().viewportTopLeftY() + incrementY);
+
 		getViewerCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
 				                     getViewerCanvas().viewportTopLeftY() + incrementY);
 	}
 
 	public void displayViewport() {
-		getViewerCanvas().displayViewport();
+		getTabletopCanvas().displayViewport();
 	}
 
 

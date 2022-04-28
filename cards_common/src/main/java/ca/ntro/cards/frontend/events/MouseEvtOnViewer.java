@@ -1,10 +1,10 @@
 package ca.ntro.cards.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
-import ca.ntro.cards.frontend.views.data.TabletopViewData;
+import ca.ntro.cards.frontend.views.data.MainViewData;
 import javafx.scene.input.MouseEvent;
 
-public class MouseEvtOnMainDisplay extends EventNtro {
+public class MouseEvtOnViewer extends EventNtro {
 	
 	private MouseEvent evtFx;
 	private double viewportX;
@@ -52,7 +52,7 @@ public class MouseEvtOnMainDisplay extends EventNtro {
 		this.worldY = worldY;
 	}
 
-	public void applyTo(TabletopViewData tabletopData) {
+	public void applyTo(MainViewData tabletopData) {
 		tabletopData.dispatchMouseEvent(evtFx, worldX, worldY);
 	}
 
