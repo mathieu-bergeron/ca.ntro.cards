@@ -2,6 +2,7 @@ package ca.ntro.cards.playground.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
@@ -17,10 +18,12 @@ public class InitialWindow {
 		     .contains(subTasks -> {
 		    	 
 		    	 createRootView(subTasks);
-		    	 createTabletopView(subTasks);
+		    	 createMainView(subTasks);
+		    	 createDashboardView(subTasks);
 		    	 
 		    	 installRootView(subTasks);
-		    	 installTabletopView(subTasks);
+		    	 installMainView(subTasks);
+		    	 installDashboardView(subTasks);
 		    	 
 		    	 showWindow(subTasks);
 
@@ -40,16 +43,30 @@ public class InitialWindow {
 		     });
 	}
 
-	private static void createTabletopView(FrontendTasks tasks) {
+	private static void createMainView(FrontendTasks tasks) {
 		tasks.task(create(PlaygroundMainView.class))
 		
 		     .waitsFor(viewLoader(PlaygroundMainView.class))
 		     
 		     .thenExecutesAndReturnsValue(inputs -> {
 		    	 
-		    	 ViewLoader<PlaygroundMainView> tabletopViewLoader = inputs.get(viewLoader(PlaygroundMainView.class));
+		    	 ViewLoader<PlaygroundMainView> mainViewLoader = inputs.get(viewLoader(PlaygroundMainView.class));
 		    	 
-		    	 return tabletopViewLoader.createView();
+		    	 return mainViewLoader.createView();
+		     });
+		
+	}
+
+	private static void createDashboardView(FrontendTasks tasks) {
+		tasks.task(create(PlaygroundDashboardView.class))
+		
+		     .waitsFor(viewLoader(PlaygroundDashboardView.class))
+		     
+		     .thenExecutesAndReturnsValue(inputs -> {
+		    	 
+		    	 ViewLoader<PlaygroundDashboardView> dashboardViewLoader = inputs.get(viewLoader(PlaygroundDashboardView.class));
+		    	 
+		    	 return dashboardViewLoader.createView();
 		     });
 		
 	}
@@ -70,8 +87,8 @@ public class InitialWindow {
 		     });
 	}
 
-	private static void installTabletopView(FrontendTasks tasks) {
-		tasks.task("installTabletopView")
+	private static void installMainView(FrontendTasks tasks) {
+		tasks.task("installMainView")
 		
 		     .waitsFor("installRootView")
 
@@ -79,10 +96,26 @@ public class InitialWindow {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 PlaygroundRootView     rootView     = inputs.get(created(PlaygroundRootView.class));
-		    	 PlaygroundMainView tabletopView = inputs.get(created(PlaygroundMainView.class));
+		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
+		    	 PlaygroundMainView mainView = inputs.get(created(PlaygroundMainView.class));
 		    	 
-		    	 rootView.displaySubView(tabletopView);
+		    	 rootView.displaySubView(mainView);
+		     });
+	}
+
+	private static void installDashboardView(FrontendTasks tasks) {
+		tasks.task("installDashboardView")
+		
+		     .waitsFor("installMainView")
+
+		     .waitsFor(created(PlaygroundDashboardView.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 PlaygroundMainView      mainView      = inputs.get(created(PlaygroundMainView.class));
+		    	 PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
+		    	 
+		    	 mainView.displayDashboardView(dashboardView);
 		     });
 	}
 

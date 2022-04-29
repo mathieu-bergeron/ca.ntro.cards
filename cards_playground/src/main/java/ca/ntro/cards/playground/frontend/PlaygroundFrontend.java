@@ -8,6 +8,7 @@ import ca.ntro.cards.frontend.CommonFrontendRegistrar;
 import ca.ntro.cards.playground.frontend.tasks.DisplayMainView;
 import ca.ntro.cards.playground.frontend.tasks.InitialWindow;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
 
 public class PlaygroundFrontend implements FrontendFx {
@@ -31,6 +32,8 @@ public class PlaygroundFrontend implements FrontendFx {
 
 		registrar.registerView(PlaygroundRootView.class, "/root.xml");
 		registrar.registerView(PlaygroundMainView.class, "/main.xml");
+
+		registrar.registerView(PlaygroundDashboardView.class, "/dashboard.xml");
 		
 		CommonFrontendRegistrar.registerViewData(registrar);
 	}
