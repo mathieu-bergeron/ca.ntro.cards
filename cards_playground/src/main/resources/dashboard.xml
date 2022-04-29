@@ -20,7 +20,7 @@
 <?import javafx.scene.control.Label ?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.DashboardView" 
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView" 
     styleClass="container"
     id="dashboard-view">
 

@@ -16,6 +16,7 @@ import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
+import javafx.scene.layout.Pane;
 
 public abstract class MainView extends ViewFx {
 	
@@ -24,6 +25,8 @@ public abstract class MainView extends ViewFx {
 
 	@SuppressWarnings("rawtypes")
 	protected abstract World2dCanvasFx getTabletopCanvas();
+
+	protected abstract Pane getDashboardContainer();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -135,10 +138,6 @@ public abstract class MainView extends ViewFx {
 		getViewerCanvas().clearCanvas();
 	}
 
-	public void displayFps(String fps) {
-		getViewerCanvas().displayFps(fps);
-	}
-
 	public void resizeViewport(double factor) {
 		getViewerCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
 				                   getViewerCanvas().viewportHeight() * factor);
@@ -159,5 +158,10 @@ public abstract class MainView extends ViewFx {
 					      getViewerCanvas().viewportWidth(),
 					      getViewerCanvas().viewportHeight());
 		});
+	}
+
+	public void displayDashboardView(DashboardView dashboardView) {
+		getDashboardContainer().getChildren().clear();
+		getDashboardContainer().getChildren().add(dashboardView.rootNode());
 	}
 }

@@ -5,11 +5,13 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
+import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.MainView;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class PlaygroundMainView extends MainView {
@@ -28,6 +30,7 @@ public class PlaygroundMainView extends MainView {
 
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
 		Ntro.assertNotNull("viewerCanvas", viewerCanvas);
+		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
 
 		super.initialize(location, resources);
 	}
@@ -38,9 +41,16 @@ public class PlaygroundMainView extends MainView {
 		return viewerCanvas;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected World2dCanvasFx getTabletopCanvas() {
 		return tabletopCanvas;
 	}
+
+	@Override
+	protected Pane getDashboardContainer() {
+		return dashboardContainer;
+	}
+
 
 }

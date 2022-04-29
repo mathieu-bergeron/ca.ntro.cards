@@ -122,7 +122,7 @@ public class InitialWindow {
 	private static void showWindow(FrontendTasks tasks) {
 		tasks.task("showWindow")
 		
-		     .waitsFor("installTabletopView")
+		     .waitsFor("installDashboardView")
 		     
 		     .thenExecutes(inputs -> {
 

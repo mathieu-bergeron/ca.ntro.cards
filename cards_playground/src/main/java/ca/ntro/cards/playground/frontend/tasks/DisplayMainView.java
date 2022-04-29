@@ -5,6 +5,7 @@ import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.views.data.MainViewData;
+import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
 import ca.ntro.core.clock.Tick;
 
@@ -65,12 +66,13 @@ public class DisplayMainView {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  Tick                tick         = inputs.get(clock().nextTick());
-		    	  MainViewData        mainViewData = inputs.get(created(MainViewData.class));
-		    	  PlaygroundMainView  mainView     = inputs.get(created(PlaygroundMainView.class));
+		    	  Tick                    tick          = inputs.get(clock().nextTick());
+		    	  MainViewData            mainViewData  = inputs.get(created(MainViewData.class));
+		    	  PlaygroundMainView      mainView      = inputs.get(created(PlaygroundMainView.class));
+		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	  
 		    	  mainViewData.onTimePasses(tick.elapsedTime());
-		    	  mainViewData.displayOn(mainView);
+		    	  mainViewData.displayOn(mainView, dashboardView);
 
 		      });
 	}

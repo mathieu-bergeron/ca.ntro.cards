@@ -1,6 +1,7 @@
 package ca.ntro.cards.frontend.views.data;
 
 import ca.ntro.app.frontend.ViewData;
+import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.MainView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.world2d.World2dCards;
@@ -15,16 +16,18 @@ public class MainViewData implements ViewData {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(MainView tabletopView) {
+	public void displayOn(MainView mainView, DashboardView dashboardView) {
 		fpsCounter.onNewFrame();
 
-		tabletopView.clearCanvas();
-		tabletopView.displayViewport();
-		tabletopView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
-		tabletopView.displayWorld2d(world2d);
+		mainView.clearCanvas();
+		mainView.displayViewport();
+		mainView.displayWorld2d(world2d);
+
+		dashboardView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 	}
 
 	public void dispatchMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
 		world2d.dispatchMouseEvent(evtFx, worldX, worldY);
 	}
+
 }

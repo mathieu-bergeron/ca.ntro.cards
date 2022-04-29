@@ -15,5 +15,9 @@ public abstract class DashboardView extends ViewFx {
 		
 	}
 
+	public void displayFps(String fps) {
+		getFpsLabel().setText(fps);
+	}
+
 
 }
