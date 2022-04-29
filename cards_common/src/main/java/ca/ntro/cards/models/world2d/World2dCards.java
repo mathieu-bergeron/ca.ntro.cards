@@ -45,7 +45,7 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 		}else if(movingCard != null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
 			
-			forgetMovingCard();
+			forgetDraggedCard();
 
 		}else if(movingCard == null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
@@ -67,11 +67,11 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 		}
 	}
 
-	private void forgetMovingCard() {
+	private void forgetDraggedCard() {
 		movingCard = null;
 	}
 
-	public void registerMovingCard(Card2d card2d) {
+	public void registerDraggedCard(Card2d card2d) {
 		this.movingCard = card2d;
 	}
 

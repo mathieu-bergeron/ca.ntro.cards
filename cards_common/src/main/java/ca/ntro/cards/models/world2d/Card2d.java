@@ -10,8 +10,8 @@ public class Card2d extends Object2dCards {
 	
 	private Card card;
 	
-	private double anchorX;
-	private double anchorY;
+	private double dragOffsetX;
+	private double dragOffsetY;
 
 	public Card getCard() {
 		return card;
@@ -23,18 +23,18 @@ public class Card2d extends Object2dCards {
 
 	@Override
 	public void initialize() {
-		setWidth(100);
-		setHeight(100);
+		setWidth(30);
+		setHeight(90);
 	}
 
 	@Override
 	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
 		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
 			
-			anchorX = worldX - getTopLeftX();
-			anchorY = worldY - getTopLeftY();
+			dragOffsetX = worldX - getTopLeftX();
+			dragOffsetY = worldY - getTopLeftY();
 			
-			getWorld().registerMovingCard(this);
+			getWorld().registerDraggedCard(this);
 			
 			return true;
 			
@@ -44,8 +44,8 @@ public class Card2d extends Object2dCards {
 	}
 
 	public void dragTo(double worldX, double worldY) {
-		setTopLeftX(worldX - anchorX);
-		setTopLeftY(worldY - anchorY);
+		setTopLeftX(worldX - dragOffsetX);
+		setTopLeftY(worldY - dragOffsetY);
 	}
 
 	@Override
