@@ -7,3 +7,8 @@
 #dashboard-view {
     -fx-alignment:bottom-right;
 }
+
+.translucidSpace{
+    -fx-background-color:black;
+}
+
