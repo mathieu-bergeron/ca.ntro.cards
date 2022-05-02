@@ -19,12 +19,12 @@ public abstract class GameViewData implements ViewData {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(GameView mainView, DashboardView dashboardView) {
+	public void displayOn(GameView gameView, DashboardView dashboardView) {
 		fpsCounter.onNewFrame();
 
-		mainView.clearCanvas();
-		mainView.displayViewport();
-		mainView.displayWorld2d(world2d);
+		gameView.clearCanvas();
+		gameView.displayViewport();
+		gameView.displayWorld2d(world2d);
 
 		dashboardView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 	}

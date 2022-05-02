@@ -11,6 +11,8 @@ public class CommonConstants {
 	public static final double INITIAL_WORLD_WIDTH = INITIAL_WORLD_WIDTH_IN_CARDS * INITIAL_CARD_WIDTH_MILIMETERS;
 	public static final double INITIAL_WORLD_HEIGHT = INITIAL_WORLD_HEIGHT_IN_CARDS * INITIAL_CARD_HEIGHT_MILIMETERS;   
 	
+	
+	
 	public static final double INITIAL_TABLETOP_SCREEN_HEIGHT = 200;
 	
 	

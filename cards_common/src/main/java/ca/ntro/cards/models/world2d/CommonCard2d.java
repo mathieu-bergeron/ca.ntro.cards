@@ -76,8 +76,8 @@ public abstract class CommonCard2d extends CommonObject2d {
 	private int levelOfDetails(Object2dDrawingOptions options) {
 		int levelOfDetails = 10;
 		
-		if(options.screenWidth(getWidth()) <= 10
-				|| options.screenHeight(getHeight()) <= 50) {
+		if(options.widthOnScreen(getWidth()) <= 10
+				|| options.heightOnScreen(getHeight()) <= 50) {
 			
 			levelOfDetails = 4;
 
