@@ -6,12 +6,12 @@ import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.frontend.views.data.MainViewData;
+import ca.ntro.cards.frontend.views.data.GameViewData;
 
 public class CommonFrontendRegistrar {
 	
 	public static void registerViewData(ViewRegistrarFx registrar) {
-		registrar.registerViewData(MainViewData.class);
+		registrar.registerViewData(GameViewData.class);
 	}
 
 	public static void registerEvents(EventRegistrar registrar) {

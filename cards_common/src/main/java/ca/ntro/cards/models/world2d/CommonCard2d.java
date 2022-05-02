@@ -6,7 +6,7 @@ import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
-public class Card2d extends Object2dCards {
+public abstract class CommonCard2d extends CommonObject2d {
 	
 	private Card card;
 	
@@ -20,11 +20,14 @@ public class Card2d extends Object2dCards {
 	public void setCard(Card card) {
 		this.card = card;
 	}
+	
+	protected abstract double initialWidth();
+	protected abstract double initialHeight();
 
 	@Override
 	public void initialize() {
-		setWidth(30);
-		setHeight(90);
+		setWidth(initialWidth());
+		setHeight(initialHeight());
 	}
 
 	@Override

@@ -5,34 +5,15 @@ import ca.ntro.app.world2d.World2dFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import javafx.scene.input.MouseEvent;
 
-public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
+public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorld2d> {
 	
-	public static final double INITIAL_WORLD_WIDTH = 6400;
-	public static final double INITIAL_WORLD_HEIGHT = 3200;
-	
-	private Card2d movingCard = null;
+	private CommonCard2d movingCard = null;
 	private double anchorX;
 	private double anchorY;
 	private EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 
 	@Override
 	protected void initialize() {
-		Card2d card01 = new Card2d();
-		Card2d card02 = new Card2d();
-		Card2d card03 = new Card2d();
-
-		addObject2d(card01);
-		addObject2d(card02);
-		addObject2d(card03);
-		
-		card01.setTopLeftX(50);
-		card01.setTopLeftY(50);
-
-		card02.setTopLeftX(150);
-		card02.setTopLeftY(150);
-
-		card03.setTopLeftX(250);
-		card03.setTopLeftY(250);
 	}
 
 	@Override
@@ -71,7 +52,7 @@ public class World2dCards extends World2dFx<Object2dCards, World2dCards> {
 		movingCard = null;
 	}
 
-	public void registerDraggedCard(Card2d card2d) {
+	public void registerDraggedCard(CommonCard2d card2d) {
 		this.movingCard = card2d;
 	}
 

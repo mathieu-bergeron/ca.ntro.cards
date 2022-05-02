@@ -11,43 +11,71 @@ import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.models.world2d.World2dCards;
+import ca.ntro.cards.models.world2d.CommonWorld2d;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 
-public abstract class MainView extends ViewFx {
+public abstract class GameView extends ViewFx {
 	
 	@SuppressWarnings("rawtypes")
-	protected abstract World2dResizableCanvasFx getViewerCanvas();
+	protected abstract World2dResizableCanvasFx viewerCanvas();
 
 	@SuppressWarnings("rawtypes")
-	protected abstract World2dCanvasFx getTabletopCanvas();
+	protected abstract World2dCanvasFx tabletopCanvas();
 
-	protected abstract Pane getDashboardContainer();
+	protected abstract Pane dashboardContainer();
+
+	protected abstract Pane mainContainer();
+	
+	protected abstract double initialWorldHeight();
+	protected abstract double initialWorldWidth();
+
+protected abstract double initialTabletopScreenHeight();
+	
+	protected double worldWidth() {
+		return viewerCanvas().worldWidth();
+	}
+
+	protected double worldHeight() {
+		return viewerCanvas().worldHeight();
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Platform.runLater(() -> {
-			getViewerCanvas().requestFocus();
-		});
-		
-		getTabletopCanvas().setHeight(100);
-		getTabletopCanvas().setWidth(100);
+		initializeViewerCanvas();
+		initializeTabletopCanvas();
 		
 		installMouseEvtOnMainDisplay();
 		installEvtMoveViewport();
 		installEvtResizeViewport();
 	}
 
+	private void initializeViewerCanvas() {
+		Platform.runLater(() -> {
+			viewerCanvas().requestFocus();
+		});
+	}
+
+	private void initializeTabletopCanvas() {
+		double screenHeight = 200;
+		double screenWidth = screenHeight * initialWorldWidth() / initialWorldHeight();
+		
+		System.out.println("screenHeight: " + screenHeight);
+		System.out.println("screenWidth: " + screenWidth);
+		
+		tabletopCanvas().setWidth(screenWidth);
+		tabletopCanvas().setHeight(screenHeight);
+	}
+
 	@SuppressWarnings("unchecked")
 	private void installMouseEvtOnMainDisplay() {
 		MouseEvtOnViewer mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnViewer.class);
 		
-		getViewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+		viewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
 			
 			mouseEvtOnMainDisplay.setEvtFx(evtFx);
 			mouseEvtOnMainDisplay.setWorldX(worldX);
@@ -61,7 +89,7 @@ public abstract class MainView extends ViewFx {
 	private void installEvtMoveViewport() {
 		EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 		
-		getViewerCanvas().setOnKeyPressed(evtFx -> {
+		viewerCanvas().setOnKeyPressed(evtFx -> {
 			
 			if(evtFx.getCode().equals(KeyCode.W)
 					|| evtFx.getCode().equals(KeyCode.UP)) {
@@ -99,7 +127,7 @@ public abstract class MainView extends ViewFx {
 
 		EvtResizeViewport evtResizeViewport = NtroApp.newEvent(EvtResizeViewport.class);
 
-		getViewerCanvas().setOnKeyTyped(evtFx -> {
+		viewerCanvas().setOnKeyTyped(evtFx -> {
 			if(evtFx.getCharacter().equals("+")) {
 				
 				evtResizeViewport.setFactor(0.9);
@@ -112,7 +140,7 @@ public abstract class MainView extends ViewFx {
 			}
 		});
 		
-		getViewerCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
+		viewerCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
 			if(evtFx.getDeltaY() > 0) {
 
 				evtResizeViewport.setFactor(0.9);
@@ -128,40 +156,40 @@ public abstract class MainView extends ViewFx {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void displayWorld2d(World2dCards world2d) {
-		getTabletopCanvas().displayWorld2d(world2d);
-		getViewerCanvas().displayWorld2d(world2d);
+	public void displayWorld2d(CommonWorld2d world2d) {
+		tabletopCanvas().displayWorld2d(world2d);
+		viewerCanvas().displayWorld2d(world2d);
 	}
 
 	public void clearCanvas() {
-		getTabletopCanvas().clearCanvas();
-		getViewerCanvas().clearCanvas();
+		tabletopCanvas().clearCanvas();
+		viewerCanvas().clearCanvas();
 	}
 
 	public void resizeViewport(double factor) {
-		getViewerCanvas().resizeViewport(getViewerCanvas().viewportWidth() * factor, 
-				                   getViewerCanvas().viewportHeight() * factor);
+		viewerCanvas().resizeViewport(viewerCanvas().viewportWidth() * factor, 
+				                   viewerCanvas().viewportHeight() * factor);
 		
 	}
 
 	public void moveViewport(double incrementX, double incrementY) {
-		getViewerCanvas().relocateViewport(getViewerCanvas().viewportTopLeftX() + incrementX, 
-				                     getViewerCanvas().viewportTopLeftY() + incrementY);
+		viewerCanvas().relocateViewport(viewerCanvas().viewportTopLeftX() + incrementX, 
+				                     viewerCanvas().viewportTopLeftY() + incrementY);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void displayViewport() {
-		getTabletopCanvas().drawOnWorld(gc -> {
+		tabletopCanvas().drawOnWorld(gc -> {
 			
-			gc.strokeRect(getViewerCanvas().viewportTopLeftX(),
-					      getViewerCanvas().viewportTopLeftY(),
-					      getViewerCanvas().viewportWidth(),
-					      getViewerCanvas().viewportHeight());
+			gc.strokeRect(viewerCanvas().viewportTopLeftX(),
+					      viewerCanvas().viewportTopLeftY(),
+					      viewerCanvas().viewportWidth(),
+					      viewerCanvas().viewportHeight());
 		});
 	}
 
 	public void displayDashboardView(DashboardView dashboardView) {
-		getDashboardContainer().getChildren().clear();
-		getDashboardContainer().getChildren().add(dashboardView.rootNode());
+		dashboardContainer().getChildren().clear();
+		dashboardContainer().getChildren().add(dashboardView.rootNode());
 	}
 }

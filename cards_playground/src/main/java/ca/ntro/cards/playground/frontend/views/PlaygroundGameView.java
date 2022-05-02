@@ -5,17 +5,21 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
-import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.MainView;
+import ca.ntro.cards.frontend.views.GameView;
+import ca.ntro.cards.playground.PlaygroundConstants;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas;
 import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
-public class PlaygroundMainView extends MainView {
-	
+public class PlaygroundGameView extends GameView {
+
+	@FXML
+	private VBox gameViewContainer;
+
 	@FXML
 	private PlaygroundTabletopCanvas tabletopCanvas;
 
@@ -28,6 +32,7 @@ public class PlaygroundMainView extends MainView {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		Ntro.assertNotNull("gameViewContainer", gameViewContainer);
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
 		Ntro.assertNotNull("viewerCanvas", viewerCanvas);
 		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
@@ -37,19 +42,39 @@ public class PlaygroundMainView extends MainView {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected World2dResizableCanvasFx getViewerCanvas() {
+	protected World2dResizableCanvasFx viewerCanvas() {
 		return viewerCanvas;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected World2dCanvasFx getTabletopCanvas() {
+	protected World2dCanvasFx tabletopCanvas() {
 		return tabletopCanvas;
 	}
 
 	@Override
-	protected Pane getDashboardContainer() {
+	protected Pane dashboardContainer() {
 		return dashboardContainer;
+	}
+
+	@Override
+	protected Pane mainContainer() {
+		return gameViewContainer;
+	}
+
+	@Override
+	protected double initialWorldHeight() {
+		return PlaygroundConstants.INITIAL_WORLD_HEIGHT;
+	}
+
+	@Override
+	protected double initialWorldWidth() {
+		return PlaygroundConstants.INITIAL_WORLD_WIDTH;
+	}
+
+	@Override
+	protected double initialTabletopScreenHeight() {
+		return PlaygroundConstants.INITIAL_TABLETOP_SCREEN_HEIGHT;
 	}
 
 

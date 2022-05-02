@@ -27,9 +27,10 @@
 <?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas ?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundMainView" 
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundGameView" 
+    fx:id="gameViewContainer"
     styleClass="container"
-    id="main-view">
+    id="game-view">
 
     <PlaygroundViewerCanvas
         fx:id="viewerCanvas"

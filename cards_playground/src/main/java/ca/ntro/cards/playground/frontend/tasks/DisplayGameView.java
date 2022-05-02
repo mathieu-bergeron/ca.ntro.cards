@@ -4,24 +4,25 @@ import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.frontend.views.data.MainViewData;
+import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundMainView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
+import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
 import ca.ntro.core.clock.Tick;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
-public class DisplayMainView {
+public class DisplayGameView {
 
 	public static void createTasks(FrontendTasks tasks) {
 		
 		createTabletopViewData(tasks);
 		
-		tasks.taskGroup("DisplayMainView")
+		tasks.taskGroup("DisplayGameView")
 		
 		     .waitsFor("InitialWindow")
 
-		     .waitsFor(created(MainViewData.class))
+		     .waitsFor(created(PlaygroundGameViewData.class))
 
 		     .andContains(subTasks -> {
 		    	 
@@ -43,7 +44,7 @@ public class DisplayMainView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  MouseEvtOnViewer   mouseEvtOnViwer = inputs.get(event(MouseEvtOnViewer.class));
-		    	  MainViewData       mainViewData    = inputs.get(created(MainViewData.class));
+		    	  GameViewData       mainViewData    = inputs.get(created(PlaygroundGameViewData.class));
 		    	  
 		    	  mouseEvtOnViwer.applyTo(mainViewData);
 
@@ -51,11 +52,11 @@ public class DisplayMainView {
 	}
 
 	private static void createTabletopViewData(FrontendTasks tasks) {
-		tasks.task(create(MainViewData.class))
+		tasks.task(create(PlaygroundGameViewData.class))
 		
 		     .executesAndReturnsCreatedValue(inputs -> {
 		    	 
-		    	 return new MainViewData();
+		    	 return new PlaygroundGameViewData();
 		     });
 	}
 
@@ -67,8 +68,8 @@ public class DisplayMainView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  Tick                    tick          = inputs.get(clock().nextTick());
-		    	  MainViewData            mainViewData  = inputs.get(created(MainViewData.class));
-		    	  PlaygroundMainView      mainView      = inputs.get(created(PlaygroundMainView.class));
+		    	  GameViewData            mainViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  PlaygroundGameView      mainView      = inputs.get(created(PlaygroundGameView.class));
 		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	  
 		    	  mainViewData.onTimePasses(tick.elapsedTime());
@@ -85,7 +86,7 @@ public class DisplayMainView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtMoveViewport     evtMoveViewport = inputs.get(event(EvtMoveViewport.class));
-		    	  PlaygroundMainView  mainView        = inputs.get(created(PlaygroundMainView.class));
+		    	  PlaygroundGameView  mainView        = inputs.get(created(PlaygroundGameView.class));
 		    	  
 		    	  evtMoveViewport.applyTo(mainView);
 
@@ -100,7 +101,7 @@ public class DisplayMainView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtResizeViewport   evtResizeViewport = inputs.get(event(EvtResizeViewport.class));
-		    	  PlaygroundMainView  mainView          = inputs.get(created(PlaygroundMainView.class));
+		    	  PlaygroundGameView  mainView          = inputs.get(created(PlaygroundGameView.class));
 		    	  
 		    	  evtResizeViewport.applyTo(mainView);
 		    	  

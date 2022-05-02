@@ -2,21 +2,24 @@ package ca.ntro.cards.frontend.views.data;
 
 import ca.ntro.app.frontend.ViewData;
 import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.MainView;
+import ca.ntro.cards.frontend.views.GameView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
-import ca.ntro.cards.models.world2d.World2dCards;
+import ca.ntro.cards.models.world2d.CommonWorld2d;
 import javafx.scene.input.MouseEvent;
 
-public class MainViewData implements ViewData {
+public abstract class GameViewData implements ViewData {
 
-	private World2dCards world2d = new World2dCards();
+	private CommonWorld2d world2d = newWorld2d();
 	private FpsCounter fpsCounter = new FpsCounter();
+	
+	protected abstract CommonWorld2d newWorld2d();
+	
 
 	public void onTimePasses(double secondsElapsed) {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(MainView mainView, DashboardView dashboardView) {
+	public void displayOn(GameView mainView, DashboardView dashboardView) {
 		fpsCounter.onNewFrame();
 
 		mainView.clearCanvas();
