@@ -13,8 +13,6 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
@@ -190,7 +188,7 @@ public abstract class GameView extends ViewFx {
 	@SuppressWarnings("unchecked")
 	public void displayViewport() {
 		tabletopCanvas().drawOnWorld(gc -> {
-			
+
 			gc.strokeRect(viewerCanvas().viewportTopLeftX(),
 					      viewerCanvas().viewportTopLeftY(),
 					      viewerCanvas().viewportWidth(),
