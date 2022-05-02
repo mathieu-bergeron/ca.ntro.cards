@@ -18,38 +18,53 @@
 
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.layout.HBox ?>
-<?import javafx.scene.layout.StackPane ?>
+<?import javafx.scene.layout.Pane ?>
 <?import javafx.scene.control.Button ?>
 
 <?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas ?>
 <?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas ?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundGameView" 
-    fx:id="gameViewContainer"
+<HBox xmlns:fx="http://javafx.com/fxml"
+    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundMenuView" 
     styleClass="container"
-    id="game-view">
+    id="menu-view">
 
-    <PlaygroundViewerCanvas
-        fx:id="viewerCanvas"
-        VBox.vgrow="ALWAYS"
-        styleClass="container">
-    </PlaygroundViewerCanvas>
+    <VBox 
+        fx:id="leftSpace"
+        HBox.hgrow="ALWAYS"
+        styleClass="translucidSpace">
+    </VBox>
 
-    <HBox>
+    <VBox HBox.hgrow="ALWAYS">
 
-        <PlaygroundTabletopCanvas
-            fx:id="tabletopCanvas"
+        <Pane 
+            fx:id="topSpace"
             VBox.vgrow="ALWAYS"
-            styleClass="container">
-        </PlaygroundTabletopCanvas>
+            styleClass="translucidSpace"/>
 
-        <StackPane
-            fx:id="dashboardContainer"
-            HBox.hgrow="ALWAYS"
-            styleClass="container">
-        </StackPane>
+        <VBox
+            fx:id="menuContainer"
+            styleClass="container"
+            VBox.vgrow="ALWAYS">
 
-    </HBox>
+            <Button
+                fx:id="quitButton"
+                text="%quit">
+            </Button>
 
-</VBox>
+        </VBox>
+
+        <Pane 
+            fx:id="bottomSpace"
+            VBox.vgrow="ALWAYS"
+            styleClass="translucidSpace"/>
+
+    </VBox>
+
+    <VBox 
+        fx:id="rightSpace"
+        HBox.hgrow="ALWAYS"
+        styleClass="translucidSpace">
+    </VBox>
+
+</HBox>

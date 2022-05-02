@@ -25,10 +25,10 @@
     styleClass="container"
     id="dashboard-view">
 
-<Button
-    text="☰"
-    fx:id="settingsButton">
-</Button>
+    <Button
+        text="☰"
+        fx:id="menuButton">
+    </Button>
 
     <Label
         fx:id="fpsLabel">

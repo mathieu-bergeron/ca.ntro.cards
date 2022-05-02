@@ -3,7 +3,9 @@ package ca.ntro.cards.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
+import ca.ntro.cards.frontend.events.EvtShowMenu;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -11,12 +13,18 @@ public abstract class DashboardView extends ViewFx {
 	
 	protected abstract Label fpsLabel();
 
-	protected abstract Button settingsButton();
+	protected abstract Button menuButton();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		settingsButton().setFocusTraversable(false);
+		menuButton().setFocusTraversable(false);
+		
+		EvtShowMenu evtShowMenu = NtroApp.newEvent(EvtShowMenu.class);
+
+		menuButton().setOnAction(evtFx -> {
+			evtShowMenu.trigger();
+		});
 
 	}
 

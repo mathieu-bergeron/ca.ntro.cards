@@ -15,13 +15,13 @@ public class PlaygroundDashboardView extends DashboardView {
 	private Label fpsLabel;
 
 	@FXML
-	private Button settingsButton;
+	private Button menuButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
-		Ntro.assertNotNull("settingsButton", settingsButton);
+		Ntro.assertNotNull("menuButton", menuButton);
 		
 		super.initialize(location, resources);
 	}
@@ -32,8 +32,8 @@ public class PlaygroundDashboardView extends DashboardView {
 	}
 
 	@Override
-	protected Button settingsButton() {
-		return settingsButton;
+	protected Button menuButton() {
+		return menuButton;
 	}
 
 }

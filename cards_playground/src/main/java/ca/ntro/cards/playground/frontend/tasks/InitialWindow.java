@@ -4,6 +4,7 @@ import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundMenuView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -20,9 +21,14 @@ public class InitialWindow {
 		    	 createRootView(subTasks);
 		    	 createGameView(subTasks);
 		    	 createDashboardView(subTasks);
+		    	 createMenuView(subTasks);
 		    	 
 		    	 installRootView(subTasks);
-		    	 installGameView(subTasks);
+		    	 registerGameView(subTasks);
+		    	 registerMenuView(subTasks);
+		    	 
+		    	 installSubViews(subTasks);
+		    	 
 		    	 installDashboardView(subTasks);
 		    	 
 		    	 showWindow(subTasks);
@@ -50,9 +56,23 @@ public class InitialWindow {
 		     
 		     .thenExecutesAndReturnsValue(inputs -> {
 		    	 
-		    	 ViewLoader<PlaygroundGameView> mainViewLoader = inputs.get(viewLoader(PlaygroundGameView.class));
+		    	 ViewLoader<PlaygroundGameView> gameViewLoader = inputs.get(viewLoader(PlaygroundGameView.class));
 		    	 
-		    	 return mainViewLoader.createView();
+		    	 return gameViewLoader.createView();
+		     });
+		
+	}
+
+	private static void createMenuView(FrontendTasks tasks) {
+		tasks.task(create(PlaygroundMenuView.class))
+		
+		     .waitsFor(viewLoader(PlaygroundMenuView.class))
+		     
+		     .thenExecutesAndReturnsValue(inputs -> {
+		    	 
+		    	 ViewLoader<PlaygroundMenuView> menuViewLoader = inputs.get(viewLoader(PlaygroundMenuView.class));
+		    	 
+		    	 return menuViewLoader.createView();
 		     });
 		
 	}
@@ -87,8 +107,8 @@ public class InitialWindow {
 		     });
 	}
 
-	private static void installGameView(FrontendTasks tasks) {
-		tasks.task("installGameView")
+	private static void registerGameView(FrontendTasks tasks) {
+		tasks.task("registerGameView")
 		
 		     .waitsFor("installRootView")
 
@@ -97,31 +117,64 @@ public class InitialWindow {
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
-		    	 PlaygroundGameView mainView = inputs.get(created(PlaygroundGameView.class));
+		    	 PlaygroundGameView gameView = inputs.get(created(PlaygroundGameView.class));
 		    	 
-		    	 rootView.displaySubView(mainView);
+		    	 rootView.registerGameView(gameView);
+		     });
+	}
+
+	private static void registerMenuView(FrontendTasks tasks) {
+		tasks.task("registerMenuView")
+		
+		     .waitsFor("installRootView")
+
+		     .waitsFor(created(PlaygroundMenuView.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
+		    	 PlaygroundMenuView menuView = inputs.get(created(PlaygroundMenuView.class));
+		    	 
+		    	 rootView.registerMenuView(menuView);
+		     });
+	}
+
+	private static void installSubViews(FrontendTasks tasks) {
+		tasks.task("installSubViews")
+
+		     .waitsFor("registerGameView")
+		
+		     .waitsFor("registerMenuView")
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
+
+		    	 rootView.installSubViews();
 		     });
 	}
 
 	private static void installDashboardView(FrontendTasks tasks) {
 		tasks.task("installDashboardView")
 		
-		     .waitsFor("installGameView")
+		     .waitsFor("registerGameView")
 
 		     .waitsFor(created(PlaygroundDashboardView.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 PlaygroundGameView      mainView      = inputs.get(created(PlaygroundGameView.class));
+		    	 PlaygroundGameView      gameView      = inputs.get(created(PlaygroundGameView.class));
 		    	 PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	 
-		    	 mainView.displayDashboardView(dashboardView);
+		    	 gameView.displayDashboardView(dashboardView);
 		     });
 	}
 
 	private static void showWindow(FrontendTasks tasks) {
 		tasks.task("showWindow")
 		
+		     .waitsFor("installSubViews")
+
 		     .waitsFor("installDashboardView")
 		     
 		     .thenExecutes(inputs -> {
