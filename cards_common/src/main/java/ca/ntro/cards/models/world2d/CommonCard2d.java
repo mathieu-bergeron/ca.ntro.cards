@@ -54,21 +54,22 @@ public abstract class CommonCard2d extends CommonObject2d {
 	@Override
 	public void draw(GraphicsContextFx gc, Object2dDrawingOptions options) {
 		
-		// TODO: do something meaningful here ;-)
 		if(levelOfDetails(options) <= 5) {
-
-			gc.strokeRect(getTopLeftX(), 
-						  getTopLeftY(),
-						  getWidth(), 
-						  getHeight());
-			
-		}else {
 
 			gc.getRawGraphicsContext().setFill(Color.CORAL);
 			gc.fillRect(getTopLeftX(), 
 						getTopLeftY(),
 						getWidth(), 
 						getHeight());
+
+			
+		}else {
+
+			gc.strokeRect(getTopLeftX(), 
+						  getTopLeftY(),
+						  getWidth(), 
+						  getHeight());
+
 		}
 
 	}
@@ -77,7 +78,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 		int levelOfDetails = 10;
 		
 		if(options.widthOnScreen(getWidth()) <= 10
-				|| options.heightOnScreen(getHeight()) <= 50) {
+				|| options.heightOnScreen(getHeight()) <= 30) {
 			
 			levelOfDetails = 4;
 
