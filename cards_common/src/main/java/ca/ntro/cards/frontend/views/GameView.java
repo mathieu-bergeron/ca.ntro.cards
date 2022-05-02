@@ -33,7 +33,7 @@ public abstract class GameView extends ViewFx {
 	protected abstract double initialWorldHeight();
 	protected abstract double initialWorldWidth();
 
-protected abstract double initialTabletopScreenHeight();
+	protected abstract double initialTabletopScreenHeight();
 	
 	protected double worldWidth() {
 		return viewerCanvas().worldWidth();
@@ -61,14 +61,16 @@ protected abstract double initialTabletopScreenHeight();
 	}
 
 	private void initializeTabletopCanvas() {
-		double screenHeight = 200;
+		double screenHeight = initialTabletopScreenHeight();
 		double screenWidth = screenHeight * initialWorldWidth() / initialWorldHeight();
-		
-		System.out.println("screenHeight: " + screenHeight);
-		System.out.println("screenWidth: " + screenWidth);
-		
+
 		tabletopCanvas().setWidth(screenWidth);
 		tabletopCanvas().setHeight(screenHeight);
+
+		tabletopCanvas().setWorldWidth(initialWorldWidth());
+		tabletopCanvas().setWorldHeight(initialWorldHeight());
+
+		tabletopCanvas().relocateResizeViewport(0, 0, initialWorldWidth(), initialWorldHeight());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -95,27 +97,27 @@ protected abstract double initialTabletopScreenHeight();
 					|| evtFx.getCode().equals(KeyCode.UP)) {
 				
 				evtMoveViewport.setIncrementX(0);
-				evtMoveViewport.setIncrementY(+10);
+				evtMoveViewport.setIncrementY(-10);
 				evtMoveViewport.trigger();
 
 			} else if(evtFx.getCode().equals(KeyCode.S)
 					|| evtFx.getCode().equals(KeyCode.DOWN)) {
 				
 				evtMoveViewport.setIncrementX(0);
-				evtMoveViewport.setIncrementY(-10);
+				evtMoveViewport.setIncrementY(+10);
 				evtMoveViewport.trigger();
 
 			} else if(evtFx.getCode().equals(KeyCode.A)
 					|| evtFx.getCode().equals(KeyCode.LEFT)) {
 				
-				evtMoveViewport.setIncrementX(+10);
+				evtMoveViewport.setIncrementX(-10);
 				evtMoveViewport.setIncrementY(0);
 				evtMoveViewport.trigger();
 
 			} else if(evtFx.getCode().equals(KeyCode.D)
 					|| evtFx.getCode().equals(KeyCode.RIGHT)) {
 				
-				evtMoveViewport.setIncrementX(-10);
+				evtMoveViewport.setIncrementX(+10);
 				evtMoveViewport.setIncrementY(0);
 				evtMoveViewport.trigger();
 			}
