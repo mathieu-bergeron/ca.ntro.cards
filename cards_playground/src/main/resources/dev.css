@@ -10,5 +10,11 @@
 
 .translucidSpace{
     -fx-background-color:black;
+    -fx-opacity:0.75;
+}
+
+#menu-container{
+    -fx-background-color:gray;
+    -fx-alignment:center;
 }
 

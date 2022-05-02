@@ -44,7 +44,7 @@
 
         <VBox
             fx:id="menuContainer"
-            styleClass="container"
+            id="menu-container"
             VBox.vgrow="ALWAYS">
 
             <Button
