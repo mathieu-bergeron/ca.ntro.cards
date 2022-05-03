@@ -20,7 +20,7 @@ public class GameView {
 		
 		tasks.taskGroup("GameView")
 		
-		     .waitsFor("InitialWindow")
+		     .waitsFor("Initialization")
 
 		     .waitsFor(created(PlaygroundGameViewData.class))
 

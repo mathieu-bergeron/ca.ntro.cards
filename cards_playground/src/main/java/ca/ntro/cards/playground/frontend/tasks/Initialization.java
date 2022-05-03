@@ -11,10 +11,10 @@ import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 import ca.ntro.app.frontend.ViewLoader;
 import ca.ntro.app.services.Window;
 
-public class InitialWindow {
+public class Initialization {
 
 	public static void createTasks(FrontendTasks tasks) {
-		tasks.taskGroup("InitialWindow")
+		tasks.taskGroup("Initialization")
 
 		     .contains(subTasks -> {
 		    	 

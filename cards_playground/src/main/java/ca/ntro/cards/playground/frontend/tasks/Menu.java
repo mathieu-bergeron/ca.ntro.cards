@@ -15,7 +15,7 @@ public class Menu {
 	public static void createTasks(FrontendTasks tasks) {
 		tasks.taskGroup("Menu")
 		
-		     .waitsFor("InitialWindow")
+		     .waitsFor("Initialization")
 
 		     .andContains(subTasks -> {
 		    	 

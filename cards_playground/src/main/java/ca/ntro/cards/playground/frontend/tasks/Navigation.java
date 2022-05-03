@@ -12,7 +12,7 @@ public class Navigation {
 	public static void createTasks(FrontendTasks tasks) {
 		tasks.taskGroup("Navigation")
 		
-		     .waitsFor("InitialWindow")
+		     .waitsFor("Initialization")
 
 		     .andContains(subTasks -> {
 		    	 
