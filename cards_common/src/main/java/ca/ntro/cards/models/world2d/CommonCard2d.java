@@ -31,7 +31,8 @@ public abstract class CommonCard2d extends CommonObject2d {
 
 	@Override
 	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
+		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
+				&& evtFx.isPrimaryButtonDown()) {
 			
 			dragOffsetX = worldX - getTopLeftX();
 			dragOffsetY = worldY - getTopLeftY();

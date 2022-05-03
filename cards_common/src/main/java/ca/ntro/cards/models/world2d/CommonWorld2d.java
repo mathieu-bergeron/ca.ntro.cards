@@ -19,7 +19,8 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 	@Override
 	protected void onMouseEventNotConsumed(MouseEvent evtFx, double worldX, double worldY) {
 		if(movingCard != null 
-				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
+				&& evtFx.isPrimaryButtonDown()) {
 
 			movingCard.dragTo(worldX, worldY);
 
@@ -29,13 +30,15 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 			forgetDraggedCard();
 
 		}else if(movingCard == null 
-				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
+				&& evtFx.isMiddleButtonDown()) {
 			
 			anchorX = evtFx.getX();
 			anchorY = evtFx.getY();
 
 		}else if(movingCard == null 
-				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
+				&& evtFx.isMiddleButtonDown()) {
 			
 			// FIXME: we need a scaling factor
 			evtMoveViewport.setIncrementX(anchorX - evtFx.getX());
