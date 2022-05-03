@@ -1,6 +1,6 @@
 package ca.ntro.cards.models.world2d;
 
-import ca.ntro.app.views.controls.canvas.GraphicsContextFx;
+import ca.ntro.app.views.controls.canvas.World2dGraphicsContextFx;
 import ca.ntro.app.world2d.Object2dDrawingOptions;
 import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
@@ -52,7 +52,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 	}
 
 	@Override
-	public void draw(GraphicsContextFx gc, Object2dDrawingOptions options) {
+	public void draw(World2dGraphicsContextFx gc, Object2dDrawingOptions options) {
 		
 		if(levelOfDetails(options) <= 5) {
 
