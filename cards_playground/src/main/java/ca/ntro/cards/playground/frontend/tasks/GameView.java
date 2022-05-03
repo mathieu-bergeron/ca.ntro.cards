@@ -3,6 +3,7 @@ package ca.ntro.cards.playground.frontend.tasks;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
+import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
@@ -30,6 +31,7 @@ public class GameView {
 		    	 resizeViewport(subTasks);
 
 		    	 mouseEvtOnViewer(subTasks);
+		    	 mouseEvtOnTabletop(subTasks);
 
 		    	 displayNextImage(subTasks);
 
@@ -43,10 +45,25 @@ public class GameView {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  MouseEvtOnViewer   mouseEvtOnViwer = inputs.get(event(MouseEvtOnViewer.class));
-		    	  GameViewData       mainViewData    = inputs.get(created(PlaygroundGameViewData.class));
+		    	  MouseEvtOnViewer   mouseEvtOnViewer = inputs.get(event(MouseEvtOnViewer.class));
+		    	  GameViewData       gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
 		    	  
-		    	  mouseEvtOnViwer.applyTo(mainViewData);
+		    	  mouseEvtOnViewer.applyTo(gameViewData);
+
+		      });
+	}
+
+	private static void mouseEvtOnTabletop(FrontendTasks tasks) {
+		tasks.task("mouseEvtOnTabletop")
+		
+		      .waitsFor(event(MouseEvtOnTabletop.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  MouseEvtOnTabletop mouseEventOnTabletop = inputs.get(event(MouseEvtOnTabletop.class));
+		    	  PlaygroundGameView gameView             = inputs.get(created(PlaygroundGameView.class));
+		    	  
+		    	  mouseEventOnTabletop.applyTo(gameView);
 
 		      });
 	}
@@ -69,11 +86,11 @@ public class GameView {
 		    	  
 		    	  Tick                    tick          = inputs.get(clock().nextTick());
 		    	  GameViewData            mainViewData  = inputs.get(created(PlaygroundGameViewData.class));
-		    	  PlaygroundGameView      mainView      = inputs.get(created(PlaygroundGameView.class));
+		    	  PlaygroundGameView      gameView      = inputs.get(created(PlaygroundGameView.class));
 		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	  
 		    	  mainViewData.onTimePasses(tick.elapsedTime());
-		    	  mainViewData.displayOn(mainView, dashboardView);
+		    	  mainViewData.displayOn(gameView, dashboardView);
 
 		      });
 	}

@@ -10,6 +10,7 @@ import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
+import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import javafx.application.Platform;
@@ -49,7 +50,7 @@ public abstract class GameView extends ViewFx {
 		initializeViewerCanvas();
 		initializeTabletopCanvas();
 		
-		installMouseEvtOnMainDisplay();
+		installMouseEvtOnViewer();
 		installEvtMoveViewport();
 		installEvtResizeViewport();
 	
@@ -66,6 +67,7 @@ public abstract class GameView extends ViewFx {
 		viewerCanvas().setWorldHeight(initialWorldHeight());
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initializeTabletopCanvas() {
 		double screenHeight = initialTabletopScreenHeight();
 		double screenWidth = screenHeight * initialWorldWidth() / initialWorldHeight();
@@ -77,19 +79,33 @@ public abstract class GameView extends ViewFx {
 		tabletopCanvas().setWorldHeight(initialWorldHeight());
 
 		tabletopCanvas().relocateResizeViewport(0, 0, initialWorldWidth(), initialWorldHeight());
+
+		MouseEvtOnTabletop mouseEvtOnTabletop = NtroApp.newEvent(MouseEvtOnTabletop.class);
+		
+
+		tabletopCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+			
+			mouseEvtOnTabletop.setEvtFx(evtFx);
+			mouseEvtOnTabletop.setWorldX(worldX);
+			mouseEvtOnTabletop.setWorldY(worldY);
+			
+			mouseEvtOnTabletop.trigger();
+
+		});
+		
 	}
 
 	@SuppressWarnings("unchecked")
-	private void installMouseEvtOnMainDisplay() {
-		MouseEvtOnViewer mouseEvtOnMainDisplay = NtroApp.newEvent(MouseEvtOnViewer.class);
+	private void installMouseEvtOnViewer() {
+		MouseEvtOnViewer mouseEvtOnViewer = NtroApp.newEvent(MouseEvtOnViewer.class);
 		
 		viewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
 			
-			mouseEvtOnMainDisplay.setEvtFx(evtFx);
-			mouseEvtOnMainDisplay.setWorldX(worldX);
-			mouseEvtOnMainDisplay.setWorldY(worldY);
+			mouseEvtOnViewer.setEvtFx(evtFx);
+			mouseEvtOnViewer.setWorldX(worldX);
+			mouseEvtOnViewer.setWorldY(worldY);
 			
-			mouseEvtOnMainDisplay.trigger();
+			mouseEvtOnViewer.trigger();
 
 		});
 	}
@@ -199,5 +215,14 @@ public abstract class GameView extends ViewFx {
 	public void displayDashboardView(DashboardView dashboardView) {
 		dashboardContainer().getChildren().clear();
 		dashboardContainer().getChildren().add(dashboardView.rootNode());
+	}
+
+	public void mouseEvtOnTabletop(MouseEvent evtFx, double worldX, double worldY) {
+		if(evtFx.getEventType().equals(MouseEvent.MOUSE_CLICKED)
+				|| evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
+			
+			viewerCanvas().relocateViewport(worldX - viewerCanvas().viewportWidth() / 2, 
+					                        worldY - viewerCanvas().viewportHeight() / 2);
+		}
 	}
 }
