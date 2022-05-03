@@ -1,7 +1,6 @@
 package ca.ntro.cards.models.world2d;
 
 import ca.ntro.app.views.controls.canvas.World2dGraphicsContextFx;
-import ca.ntro.app.world2d.Object2dDrawingOptions;
 import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -52,9 +51,9 @@ public abstract class CommonCard2d extends CommonObject2d {
 	}
 
 	@Override
-	public void draw(World2dGraphicsContextFx gc, Object2dDrawingOptions options) {
-		
-		if(levelOfDetails(options) <= 5) {
+	public void draw(World2dGraphicsContextFx<CommonObject2d, CommonWorld2d> gc) {
+
+		if(levelOfDetails(gc) <= 5) {
 
 			gc.getRawGraphicsContext().setFill(Color.CORAL);
 			gc.fillRect(getTopLeftX(), 
@@ -71,14 +70,13 @@ public abstract class CommonCard2d extends CommonObject2d {
 						  getHeight());
 
 		}
-
 	}
 	
-	private int levelOfDetails(Object2dDrawingOptions options) {
+	private int levelOfDetails(World2dGraphicsContextFx<CommonObject2d, CommonWorld2d> gc) {
 		int levelOfDetails = 10;
 
-		if(options.widthOnScreen(getWidth()) <= 10
-				|| options.heightOnScreen(getHeight()) <= 30) {
+		if(gc.widthOnScreen(getWidth()) <= 10
+				|| gc.heightOnScreen(getHeight()) <= 30) {
 			
 			levelOfDetails = 4;
 
