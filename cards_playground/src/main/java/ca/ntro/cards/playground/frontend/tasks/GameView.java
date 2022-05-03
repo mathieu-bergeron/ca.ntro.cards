@@ -12,13 +12,13 @@ import ca.ntro.core.clock.Tick;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
-public class DisplayGameView {
+public class GameView {
 
 	public static void createTasks(FrontendTasks tasks) {
 		
 		createTabletopViewData(tasks);
 		
-		tasks.taskGroup("DisplayGameView")
+		tasks.taskGroup("GameView")
 		
 		     .waitsFor("InitialWindow")
 

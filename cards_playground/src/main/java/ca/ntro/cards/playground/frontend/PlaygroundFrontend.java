@@ -6,7 +6,7 @@ import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.CommonFrontendRegistrar;
-import ca.ntro.cards.playground.frontend.tasks.DisplayGameView;
+import ca.ntro.cards.playground.frontend.tasks.GameView;
 import ca.ntro.cards.playground.frontend.tasks.InitialWindow;
 import ca.ntro.cards.playground.frontend.tasks.Menu;
 import ca.ntro.cards.playground.frontend.tasks.Navigation;
@@ -20,7 +20,7 @@ public class PlaygroundFrontend implements FrontendFx {
 	@Override
 	public void createTasks(FrontendTasks tasks) {
 		InitialWindow.createTasks(tasks);
-		DisplayGameView.createTasks(tasks);
+		GameView.createTasks(tasks);
 		Navigation.createTasks(tasks);
 		Menu.createTasks(tasks);
 	}
