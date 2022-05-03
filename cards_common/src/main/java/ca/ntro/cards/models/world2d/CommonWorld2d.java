@@ -31,17 +31,18 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 		}else if(movingCard == null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
 			
-			anchorX = worldX;
-			anchorY = worldY;
+			anchorX = evtFx.getX();
+			anchorY = evtFx.getY();
 
 		}else if(movingCard == null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
 			
-			evtMoveViewport.setIncrementX(worldX - anchorX);
-			evtMoveViewport.setIncrementY(worldY - anchorY);
-			
-			anchorX = worldX;
-			anchorY = worldY;
+			// FIXME: we need a scaling factor
+			evtMoveViewport.setIncrementX(anchorX - evtFx.getX());
+			evtMoveViewport.setIncrementY(anchorY - evtFx.getY());
+
+			anchorX = evtFx.getX();
+			anchorY = evtFx.getY();
 			
 			evtMoveViewport.trigger();
 			
