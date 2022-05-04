@@ -36,7 +36,7 @@ public class DemoModel implements Model, Watchable {
 		gameViewData.removeCardsNotIn(cards);
 		
 		for(int i = 0; i < cards.size(); i++) {
-			gameViewData.addOrRelocateCard(i, cards.get(i));
+			gameViewData.addOrUpdateCard(i, cards.get(i));
 		}
 	}
 

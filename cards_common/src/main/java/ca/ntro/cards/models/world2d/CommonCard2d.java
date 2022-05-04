@@ -51,13 +51,17 @@ public abstract class CommonCard2d extends CommonObject2d {
 			dragOffsetX = worldX - getTopLeftX();
 			dragOffsetY = worldY - getTopLeftY();
 			
-			getWorld().registerDraggedCard(this);
+			onDragStarts();
 			
 			return true;
 			
 		} 
 
 		return false;
+	}
+
+	protected void onDragStarts() {
+		getWorld().registerDraggedCard(this);
 	}
 
 	public void dragTo(double worldX, double worldY) {

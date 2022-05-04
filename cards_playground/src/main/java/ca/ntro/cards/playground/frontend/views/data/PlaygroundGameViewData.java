@@ -14,7 +14,7 @@ public class PlaygroundGameViewData extends GameViewData {
 	}
 
 	@Override
-	public void addOrRelocateCard(int index, Card card) {
+	public void addOrUpdateCard(int index, Card card) {
 		Card2d card2d = new Card2d(card);
 		
 		card2d.setTopLeftX(10 + index * 60);
