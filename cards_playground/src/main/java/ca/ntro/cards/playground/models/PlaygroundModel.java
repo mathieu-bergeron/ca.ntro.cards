@@ -10,7 +10,16 @@ import ca.ntro.cards.models.values.Card;
 
 public class PlaygroundModel implements Model, Watchable {
 	
+	private long version = 0;
 	private List<Card> cards = new ArrayList<>();
+
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
 
 	public List<Card> getCards() {
 		return cards;
@@ -30,6 +39,7 @@ public class PlaygroundModel implements Model, Watchable {
 
 	public void updateList(List<Card> cards) {
 		setCards(cards);
+		version++;
 	}
 
 }
