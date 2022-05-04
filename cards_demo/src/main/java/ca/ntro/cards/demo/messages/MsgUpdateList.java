@@ -20,7 +20,7 @@ public class MsgUpdateList extends MessageNtro {
 	}
 
 	public void applyTo(DemoModel demoModel) {
-		demoModel.updateList(cards);
+		demoModel.updateCardsInOrder(cards);
 	}
 	
 	

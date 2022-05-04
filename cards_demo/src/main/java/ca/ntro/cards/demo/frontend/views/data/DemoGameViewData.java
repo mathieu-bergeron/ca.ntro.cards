@@ -14,14 +14,16 @@ public class DemoGameViewData extends GameViewData {
 	}
 
 	@Override
-	public void addCard(int index, Card card) {
-		Card2d card2d = new Card2d(card);
-		
-		card2d.setTopLeftX(10 + index * 60);
-		card2d.setTopLeftY(50);
-		
-		world2d().addObject2d(card2d);
+	public void addOrRelocateCard(int index, Card card) {
+		Card2d card2d = (Card2d) world2d().objectById(card.id());
 
+		if(card2d == null) {
+			card2d = new Card2d(card);
+			world2d().addObject2d(card2d);
+		}
+
+		card2d.setTopLeftX(25 + index * 75);
+		card2d.setTopLeftY(50);
 	}
 
 }

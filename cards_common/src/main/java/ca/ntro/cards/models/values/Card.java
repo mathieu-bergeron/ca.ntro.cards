@@ -40,7 +40,8 @@ public class Card implements Value, Identifiable {
 	public Card() {
 	}
 
-	public Card(int rank, Suit suit) {
+	public Card(long id, int rank, Suit suit) {
+		setId(id);
 		setRank(rank);
 		setSuit(suit.name());
 	}

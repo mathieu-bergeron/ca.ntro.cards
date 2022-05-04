@@ -1,9 +1,6 @@
 package ca.ntro.cards.models.world2d;
 
-import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
-import ca.ntro.app.frontend.views.elements.Color;
-import ca.ntro.app.views.controls.canvas.World2dGraphicsContextFx;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +21,8 @@ public abstract class CommonCard2d extends CommonObject2d {
 		this.card = card;
 	}
 
-	public CommonCard2d(int rank, Suit suit) {
-		setCard(new Card(rank, suit));
-
+	public CommonCard2d(long id, int rank, Suit suit) {
+		setCard(new Card(id, rank, suit));
 	}
 
 	public CommonCard2d(Card card) {
@@ -35,6 +31,11 @@ public abstract class CommonCard2d extends CommonObject2d {
 
 	protected abstract double initialWidth();
 	protected abstract double initialHeight();
+
+	@Override
+	public String id() {
+		return card.id();
+	}
 
 	@Override
 	public void initialize() {

@@ -1,5 +1,8 @@
 package ca.ntro.cards.models.world2d;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.World2dFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
@@ -59,5 +62,7 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 	public void registerDraggedCard(CommonCard2d card2d) {
 		this.movingCard = card2d;
 	}
+
+
 
 }

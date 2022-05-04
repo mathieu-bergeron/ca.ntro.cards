@@ -11,8 +11,8 @@ public class Card2d extends CommonCard2d {
 		super(card);
 	}
 
-	public Card2d(int rank, Suit suit) {
-		super(rank, suit);
+	public Card2d(long id, int rank, Suit suit) {
+		super(id, rank, suit);
 	}
 
 	@Override

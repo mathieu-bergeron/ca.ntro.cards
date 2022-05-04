@@ -1,5 +1,6 @@
 package ca.ntro.cards.frontend.views.data;
 
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,7 +10,6 @@ import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.GameView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.models.world2d.CommonObject2d;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import javafx.scene.input.MouseEvent;
 
@@ -43,10 +43,16 @@ public abstract class GameViewData implements ViewData {
 		world2d.dispatchMouseEvent(evtFx, worldX, worldY);
 	}
 
-	public void clearCards() {
-		world2d.getObjects().clear();
-	}
+	public abstract void addOrRelocateCard(int index, Card card);
 
-	public abstract void addCard(int index, Card card);
+	public void removeCardsNotIn(List<Card> cards) {
+		Set<String> cardIds = new HashSet<>();
+
+		for(Card card : cards) {
+			cardIds.add(card.id());
+		}
+
+		world2d.removeObject2dNotIn(cardIds);
+	}
 
 }
