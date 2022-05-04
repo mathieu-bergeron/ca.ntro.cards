@@ -12,5 +12,4 @@ public class PlaygroundConstants {
 	
 	public static final double INITIAL_TABLETOP_SCREEN_HEIGHT = CommonConstants.INITIAL_TABLETOP_SCREEN_HEIGHT;
 
-
 }

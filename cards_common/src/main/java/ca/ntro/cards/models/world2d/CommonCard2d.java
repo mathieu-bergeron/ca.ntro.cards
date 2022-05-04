@@ -1,9 +1,12 @@
 package ca.ntro.cards.models.world2d;
 
+import ca.ntro.app.NtroApp;
+import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
+import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.views.controls.canvas.World2dGraphicsContextFx;
+import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 public abstract class CommonCard2d extends CommonObject2d {
 	
@@ -12,12 +15,18 @@ public abstract class CommonCard2d extends CommonObject2d {
 	private double dragOffsetX;
 	private double dragOffsetY;
 
+
 	public Card getCard() {
 		return card;
 	}
 
 	public void setCard(Card card) {
 		this.card = card;
+	}
+
+	public CommonCard2d(int rank, Suit suit) {
+		setCard(new Card(rank, suit));
+
 	}
 	
 	protected abstract double initialWidth();
@@ -51,29 +60,19 @@ public abstract class CommonCard2d extends CommonObject2d {
 		setTopLeftY(worldY - dragOffsetY);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	public void draw(World2dGraphicsContextFx<CommonObject2d, CommonWorld2d> gc) {
-
-		if(levelOfDetails(gc) <= 5) {
-
-			gc.getRawGraphicsContext().setFill(Color.CORAL);
-			gc.fillRect(getTopLeftX(), 
-						getTopLeftY(),
-						getWidth(), 
-						getHeight());
-
-			
-		}else {
-
-			gc.strokeRect(getTopLeftX(), 
-						  getTopLeftY(),
-						  getWidth(), 
-						  getHeight());
-
-		}
+	public void draw(World2dGraphicsContext gc) {
+		card.draw(gc, 
+				  getTopLeftX(), 
+				  getTopLeftY(),
+				  getWidth(),
+				  getHeight(),
+				  levelOfDetails(gc));
 	}
 	
-	private int levelOfDetails(World2dGraphicsContextFx<CommonObject2d, CommonWorld2d> gc) {
+	@SuppressWarnings("rawtypes")
+	private int levelOfDetails(World2dGraphicsContext gc) {
 		int levelOfDetails = 10;
 
 		if(gc.widthOnScreen(getWidth()) <= 10
