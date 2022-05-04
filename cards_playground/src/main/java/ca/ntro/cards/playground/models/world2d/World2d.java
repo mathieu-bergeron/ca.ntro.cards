@@ -10,9 +10,9 @@ public class World2d extends CommonWorld2d {
 		super.initialize();
 
 		Card2d card01 = new Card2d(2, Suit.HEARTS);
-		Card2d card02 = new Card2d(3, Suit.DIAMONDS);
-		Card2d card03 = new Card2d(4, Suit.CLUBS);
-		Card2d card04 = new Card2d(5, Suit.SPADES);
+		Card2d card02 = new Card2d(10, Suit.DIAMONDS);
+		Card2d card03 = new Card2d(6, Suit.CLUBS);
+		Card2d card04 = new Card2d(4, Suit.SPADES);
 
 		addObject2d(card01);
 		addObject2d(card02);

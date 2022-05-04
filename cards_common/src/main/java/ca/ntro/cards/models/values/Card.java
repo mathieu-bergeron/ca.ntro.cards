@@ -51,30 +51,53 @@ public class Card implements Value {
 
 		if(levelOfDetails <= 5) {
 			
-			
-			setFill(gc);
-
-			gc.fillRect(topLeftX, 
-						topLeftY,
-						width, 
-						height);
+			drawLowDetails(gc, topLeftX, topLeftY, width, height);
 			
 		}else {
 
-			setStroke(gc);
-			setFill(gc);
-
-			gc.strokeText(String.valueOf(rank), topLeftX + 12, topLeftY + 24);
-			gc.fillText(suit.getSymbol(), topLeftX + 24, topLeftY + 24);
-
-			gc.strokeRect(topLeftX, 
-						  topLeftY,
-						  width, 
-						  height);
+			drawHighDetails(gc, topLeftX, topLeftY, width, height);
 
 		}
-		
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void drawHighDetails(World2dGraphicsContext gc, 
+			                     double topLeftX, 
+			                     double topLeftY, 
+			                     double width, 
+			                     double height) {
+
+		gc.setFill(NtroApp.colorFromString("#fff0db"));
+		gc.fillRect(topLeftX, 
+					topLeftY,
+					width, 
+					height);
+
+		setStroke(gc);
+		setFill(gc);
+
+		gc.strokeText(String.valueOf(rank), topLeftX + 12, topLeftY + 24);
+		gc.fillText(suit.getSymbol(), topLeftX + 12 + String.valueOf(rank).length() * 8, topLeftY + 24);
+
+		gc.strokeRect(topLeftX, 
+					  topLeftY,
+					  width, 
+					  height);
+	}
+
+	@SuppressWarnings("rawtypes")
+	private void drawLowDetails(World2dGraphicsContext gc, 
+			                    double topLeftX, 
+			                    double topLeftY, 
+			                    double width, 
+			                    double height) {
+		
+		setFill(gc);
+
+		gc.fillRect(topLeftX, 
+					topLeftY,
+					width, 
+					height);
+	}
 
 }
