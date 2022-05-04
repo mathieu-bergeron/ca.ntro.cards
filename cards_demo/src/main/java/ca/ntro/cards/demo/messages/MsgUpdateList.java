@@ -1,11 +1,11 @@
-package ca.ntro.cards.playground.messages;
+package ca.ntro.cards.demo.messages;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.app.messages.MessageNtro;
 import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.playground.models.PlaygroundModel;
+import ca.ntro.cards.demo.models.DemoModel;
 
 public class MsgUpdateList extends MessageNtro {
 	
@@ -19,8 +19,8 @@ public class MsgUpdateList extends MessageNtro {
 		this.cards = cards;
 	}
 
-	public void applyTo(PlaygroundModel playgroundModel) {
-		playgroundModel.updateList(cards);
+	public void applyTo(DemoModel demoModel) {
+		demoModel.updateList(cards);
 	}
 	
 	

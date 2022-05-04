@@ -55,7 +55,6 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 	protected void forgetDraggedCard() {
 		movingCard = null;
 	}
-	
 
 	public void registerDraggedCard(CommonCard2d card2d) {
 		this.movingCard = card2d;

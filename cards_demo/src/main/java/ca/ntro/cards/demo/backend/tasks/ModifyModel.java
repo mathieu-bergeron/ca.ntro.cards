@@ -1,8 +1,8 @@
-package ca.ntro.cards.playground.backend.tasks;
+package ca.ntro.cards.demo.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.playground.messages.MsgUpdateList;
-import ca.ntro.cards.playground.models.PlaygroundModel;
+import ca.ntro.cards.demo.messages.MsgUpdateList;
+import ca.ntro.cards.demo.models.DemoModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -21,16 +21,16 @@ public class ModifyModel {
 	private static void updateList(BackendTasks tasks) {
 		tasks.task("updateList")
 
-		     .waitsFor(model(PlaygroundModel.class))
+		     .waitsFor(model(DemoModel.class))
 		     
 		     .waitsFor(message(MsgUpdateList.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 PlaygroundModel playgroundModel = inputs.get(model(PlaygroundModel.class));
+		    	 DemoModel demoModel = inputs.get(model(DemoModel.class));
 		    	 MsgUpdateList   msgUpdateList   = inputs.get(message(MsgUpdateList.class));
 		    	 
-		    	 msgUpdateList.applyTo(playgroundModel);
+		    	 msgUpdateList.applyTo(demoModel);
 		    	 
 		     });
 	}

@@ -1,12 +1,15 @@
-package ca.ntro.cards.playground.backend;
+package ca.ntro.cards.demo.backend;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.demo.backend.tasks.ModifyModel;
 
-public class PlaygroundBackend extends LocalBackendNtro {
+public class DemoBackend extends LocalBackendNtro {
 
 	@Override
 	public void createTasks(BackendTasks tasks) {
+		
+		ModifyModel.createTasks(tasks);
 
 	}
 

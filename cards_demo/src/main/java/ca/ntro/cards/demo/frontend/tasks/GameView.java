@@ -1,4 +1,4 @@
-package ca.ntro.cards.playground.frontend.tasks;
+package ca.ntro.cards.demo.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
@@ -6,9 +6,10 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.views.data.GameViewData;
-import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
-import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
+import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
+import ca.ntro.cards.demo.frontend.views.DemoGameView;
+import ca.ntro.cards.demo.frontend.views.data.DemoGameViewData;
+import ca.ntro.cards.demo.models.DemoModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.reflection.observer.Modified;
 
@@ -24,7 +25,7 @@ public class GameView {
 		
 		     .waitsFor("Initialization")
 
-		     .waitsFor(created(PlaygroundGameViewData.class))
+		     .waitsFor(created(DemoGameViewData.class))
 
 		     .andContains(subTasks -> {
 		    	 
@@ -35,6 +36,8 @@ public class GameView {
 		    	 mouseEvtOnTabletop(subTasks);
 
 		    	 displayNextImage(subTasks);
+		    	 
+		    	 displayModel(subTasks);
 
 		     });
 	}
@@ -47,7 +50,7 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  MouseEvtOnViewer   mouseEvtOnViewer = inputs.get(event(MouseEvtOnViewer.class));
-		    	  GameViewData       gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
+		    	  GameViewData       gameViewData     = inputs.get(created(DemoGameViewData.class));
 		    	  
 		    	  mouseEvtOnViewer.applyTo(gameViewData);
 
@@ -62,7 +65,7 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  MouseEvtOnTabletop mouseEventOnTabletop = inputs.get(event(MouseEvtOnTabletop.class));
-		    	  PlaygroundGameView gameView             = inputs.get(created(PlaygroundGameView.class));
+		    	  DemoGameView gameView             = inputs.get(created(DemoGameView.class));
 		    	  
 		    	  mouseEventOnTabletop.applyTo(gameView);
 
@@ -70,11 +73,11 @@ public class GameView {
 	}
 
 	private static void createTabletopViewData(FrontendTasks tasks) {
-		tasks.task(create(PlaygroundGameViewData.class))
+		tasks.task(create(DemoGameViewData.class))
 		
 		     .executesAndReturnsCreatedValue(inputs -> {
 		    	 
-		    	 return new PlaygroundGameViewData();
+		    	 return new DemoGameViewData();
 		     });
 	}
 
@@ -86,9 +89,9 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  Tick                    tick          = inputs.get(clock().nextTick());
-		    	  GameViewData            gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
-		    	  PlaygroundGameView      gameView      = inputs.get(created(PlaygroundGameView.class));
-		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
+		    	  GameViewData            gameViewData  = inputs.get(created(DemoGameViewData.class));
+		    	  DemoGameView      gameView      = inputs.get(created(DemoGameView.class));
+		    	  DemoDashboardView dashboardView = inputs.get(created(DemoDashboardView.class));
 		    	  
 		    	  gameViewData.onTimePasses(tick.elapsedTime());
 		    	  gameViewData.displayOn(gameView, dashboardView);
@@ -104,7 +107,7 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtMoveViewport     evtMoveViewport = inputs.get(event(EvtMoveViewport.class));
-		    	  PlaygroundGameView  mainView        = inputs.get(created(PlaygroundGameView.class));
+		    	  DemoGameView  mainView        = inputs.get(created(DemoGameView.class));
 		    	  
 		    	  evtMoveViewport.applyTo(mainView);
 
@@ -119,11 +122,27 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtResizeViewport   evtResizeViewport = inputs.get(event(EvtResizeViewport.class));
-		    	  PlaygroundGameView  mainView          = inputs.get(created(PlaygroundGameView.class));
+		    	  DemoGameView  mainView          = inputs.get(created(DemoGameView.class));
 		    	  
 		    	  evtResizeViewport.applyTo(mainView);
 		    	  
 		      });
 	}
 
+	private static void displayModel(FrontendTasks tasks) {
+		tasks.task("displayModel")
+		
+		      .waitsFor(modified(DemoModel.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  GameViewData              gameViewData  = inputs.get(created(DemoGameViewData.class));
+		    	  Modified<DemoModel> modifiedModel = inputs.get(modified(DemoModel.class));
+		    	  
+		    	  DemoModel demoModel = modifiedModel.currentValue();
+		    	  
+		    	  demoModel.updateViewData(gameViewData);
+
+		      });
+	}
 }

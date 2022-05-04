@@ -1,4 +1,4 @@
-package ca.ntro.cards.playground.models;
+package ca.ntro.cards.demo.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.models.values.Card;
 
-public class PlaygroundModel implements Model, Watchable {
+public class DemoModel implements Model, Watchable {
 	
 	private long version = 0;
 	private List<Card> cards = new ArrayList<>();

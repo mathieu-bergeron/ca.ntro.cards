@@ -1,41 +1,37 @@
 package ca.ntro.cards.playground.models.world2d;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import ca.ntro.app.NtroApp;
-import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.models.world2d.CommonObject2d;
+import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
-import ca.ntro.cards.playground.messages.MsgUpdateList;
 
 public class World2d extends CommonWorld2d {
-	
-	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
 
 	@Override
-	protected void forgetDraggedCard() {
-		super.forgetDraggedCard();
+	protected void initialize() {
+		super.initialize();
 		
-		List<CommonObject2d> leftRightObjects = new ArrayList<>(getObjects());
+		Card2d card01 = new Card2d(2, Suit.HEARTS);
+		Card2d card02 = new Card2d(4, Suit.CLUBS);
+		Card2d card03 = new Card2d(6, Suit.DIAMONDS);
+		Card2d card04 = new Card2d(10, Suit.SPADES);
 		
-		leftRightObjects.sort((obj01, obj02) -> {
-			return Double.compare(obj01.getTopLeftX(), obj02.getTopLeftX());
-		});
+		addObject2d(card01);
+		addObject2d(card02);
+		addObject2d(card03);
+		addObject2d(card04);
 		
-		List<Card> leftRightCards = new ArrayList<>();
-		
-		for(CommonObject2d object2d : leftRightObjects) {
-			if(object2d instanceof Card2d) {
-				Card2d card2d = (Card2d) object2d;
-				leftRightCards.add(card2d.getCard());
-			}
-		}
-		
-		msgUpdateList.setCards(leftRightCards);
+		card01.setTopLeftX(50);
+		card01.setTopLeftY(50);
 
-		msgUpdateList.send();
+		card02.setTopLeftX(150);
+		card02.setTopLeftY(150);
 
+		card03.setTopLeftX(250);
+		card03.setTopLeftY(250);
+
+		card04.setTopLeftX(350);
+		card04.setTopLeftY(350);
+		
 	}
 
 }
