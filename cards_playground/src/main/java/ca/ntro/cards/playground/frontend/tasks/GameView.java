@@ -9,7 +9,9 @@ import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
 import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
+import ca.ntro.cards.playground.models.PlaygroundModel;
 import ca.ntro.core.clock.Tick;
+import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -34,6 +36,8 @@ public class GameView {
 		    	 mouseEvtOnTabletop(subTasks);
 
 		    	 displayNextImage(subTasks);
+		    	 
+		    	 displayModel(subTasks);
 
 		     });
 	}
@@ -85,12 +89,12 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  Tick                    tick          = inputs.get(clock().nextTick());
-		    	  GameViewData            mainViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  GameViewData            gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
 		    	  PlaygroundGameView      gameView      = inputs.get(created(PlaygroundGameView.class));
 		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	  
-		    	  mainViewData.onTimePasses(tick.elapsedTime());
-		    	  mainViewData.displayOn(gameView, dashboardView);
+		    	  gameViewData.onTimePasses(tick.elapsedTime());
+		    	  gameViewData.displayOn(gameView, dashboardView);
 
 		      });
 	}
@@ -122,6 +126,23 @@ public class GameView {
 		    	  
 		    	  evtResizeViewport.applyTo(mainView);
 		    	  
+		      });
+	}
+
+	private static void displayModel(FrontendTasks tasks) {
+		tasks.task("displayModel")
+		
+		      .waitsFor(modified(PlaygroundModel.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  GameViewData              gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  Modified<PlaygroundModel> modifiedModel = inputs.get(modified(PlaygroundModel.class));
+		    	  
+		    	  PlaygroundModel playgroundModel = modifiedModel.currentValue();
+		    	  
+		    	  playgroundModel.copyTo(gameViewData);
+
 		      });
 	}
 }

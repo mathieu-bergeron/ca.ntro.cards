@@ -28,7 +28,11 @@ public abstract class CommonCard2d extends CommonObject2d {
 		setCard(new Card(rank, suit));
 
 	}
-	
+
+	public CommonCard2d(Card card) {
+		setCard(card);
+	}
+
 	protected abstract double initialWidth();
 	protected abstract double initialHeight();
 

@@ -5,9 +5,13 @@ import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.core.identifyers.Identifiable;
 
-public class Card implements Value {
+public class Card implements Value, Identifiable {
 	
+	private static long nextId = 1;
+	
+	private long id;
 	private int rank;
 	private Suit suit;
 
@@ -26,10 +30,26 @@ public class Card implements Value {
 	public void setSuit(String suit) {
 		this.suit = Suit.valueOf(suit);
 	}
+	
+	public Card() {
+		generateId();
+	}
 
 	public Card(int rank, Suit suit) {
+		generateId();
+
 		setRank(rank);
 		setSuit(suit.name());
+	}
+
+	@Override
+	public String id() {
+		return String.valueOf(id);
+	}
+	
+	private void generateId() {
+		this.id = nextId;
+		nextId++;
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -95,5 +115,6 @@ public class Card implements Value {
 					width, 
 					height);
 	}
+
 
 }

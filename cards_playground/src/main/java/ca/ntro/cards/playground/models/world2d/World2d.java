@@ -8,7 +8,8 @@ public class World2d extends CommonWorld2d {
 	@Override
 	protected void initialize() {
 		super.initialize();
-
+		
+		/*
 		Card2d card01 = new Card2d(2, Suit.HEARTS);
 		Card2d card02 = new Card2d(10, Suit.DIAMONDS);
 		Card2d card03 = new Card2d(6, Suit.CLUBS);
@@ -30,6 +31,7 @@ public class World2d extends CommonWorld2d {
 
 		card04.setTopLeftX(350);
 		card04.setTopLeftY(50);
+		*/
 	}
 
 }
