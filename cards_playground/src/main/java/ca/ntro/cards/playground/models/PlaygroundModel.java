@@ -28,4 +28,8 @@ public class PlaygroundModel implements Model, Watchable {
 		}
 	}
 
+	public void updateList(List<Card> cards) {
+		setCards(cards);
+	}
+
 }
