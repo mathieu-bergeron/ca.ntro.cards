@@ -141,7 +141,7 @@ public class GameView {
 		    	  
 		    	  PlaygroundModel playgroundModel = modifiedModel.currentValue();
 		    	  
-		    	  playgroundModel.copyTo(gameViewData);
+		    	  playgroundModel.updateViewData(gameViewData);
 
 		      });
 	}

@@ -20,7 +20,7 @@ public class PlaygroundModel implements Model, Watchable {
 		this.cards = cards;
 	}
 
-	public void copyTo(GameViewData gameViewData) {
+	public void updateViewData(GameViewData gameViewData) {
 		gameViewData.clearCards();
 		
 		for(int i = 0; i < cards.size(); i++) {

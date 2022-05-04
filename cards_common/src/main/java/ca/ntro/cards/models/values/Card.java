@@ -9,8 +9,6 @@ import ca.ntro.core.identifyers.Identifiable;
 
 public class Card implements Value, Identifiable {
 	
-	private static long nextId = 1;
-	
 	private long id;
 	private int rank;
 	private Suit suit;
@@ -30,26 +28,26 @@ public class Card implements Value, Identifiable {
 	public void setSuit(String suit) {
 		this.suit = Suit.valueOf(suit);
 	}
-	
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public Card() {
-		generateId();
 	}
 
 	public Card(int rank, Suit suit) {
-		generateId();
-
 		setRank(rank);
 		setSuit(suit.name());
 	}
 
 	@Override
 	public String id() {
-		return String.valueOf(id);
-	}
-	
-	private void generateId() {
-		this.id = nextId;
-		nextId++;
+		return String.valueOf(getId());
 	}
 
 	@SuppressWarnings("rawtypes")
