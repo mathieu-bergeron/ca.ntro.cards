@@ -2,6 +2,7 @@ package ca.ntro.cards.models.values;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
+import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.models.enums.Suit;
 
@@ -31,14 +32,9 @@ public class Card implements Value {
 		setSuit(suit.name());
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void setFill(World2dGraphicsContext gc) {
-		gc.setFill(NtroApp.colorFromString(suit.getColor()));
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void setStroke(World2dGraphicsContext gc) {
-		gc.setStroke(NtroApp.colorFromString(suit.getColor()));
+	@SuppressWarnings("rawtypes")
+	private Color color() {
+		return NtroApp.colorFromString(suit.getColor());
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -72,12 +68,12 @@ public class Card implements Value {
 					topLeftY,
 					width, 
 					height);
+		
+		gc.setFill(color());
+		gc.setStroke(color());
 
-		setStroke(gc);
-		setFill(gc);
-
-		gc.strokeText(String.valueOf(rank), topLeftX + 12, topLeftY + 24);
-		gc.fillText(suit.getSymbol(), topLeftX + 12 + String.valueOf(rank).length() * 8, topLeftY + 24);
+		gc.strokeText(String.valueOf(rank) + " " + suit.getSymbol(), topLeftX + 12, topLeftY + 24);
+		gc.fillText(String.valueOf(rank) + " " + suit.getSymbol(), topLeftX + 12, topLeftY + 24);
 
 		gc.strokeRect(topLeftX, 
 					  topLeftY,
@@ -85,14 +81,14 @@ public class Card implements Value {
 					  height);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void drawLowDetails(World2dGraphicsContext gc, 
 			                    double topLeftX, 
 			                    double topLeftY, 
 			                    double width, 
 			                    double height) {
 		
-		setFill(gc);
+		gc.setFill(color());
 
 		gc.fillRect(topLeftX, 
 					topLeftY,
