@@ -14,17 +14,21 @@ public class PlaygroundCardsViewData extends CardsViewData {
 	}
 
 	@Override
-	public void addOrUpdateCard(int index, Card card) {
+	public void addOrUpdateCard(Card card,
+			                    double topLeftX,
+			                    double topLeftY) {
+
 		Card2d card2d = (Card2d) world2d().objectById(card.id());
 
 		if(card2d == null) {
 			card2d = new Card2d(card);
 			world2d().addObject2d(card2d);
+
+			card2d.setTopLeftX(topLeftX);
+			card2d.setTopLeftY(topLeftY);
 		}
 		
-		card2d.setTopLeftX(10 + index * 60);
-		card2d.setTopLeftY(50);
-
+		card2d.setCard(card);
 	}
 
 }

@@ -3,10 +3,12 @@ package ca.ntro.cards.playground.models;
 import java.util.HashMap;
 import java.util.Map;
 
+import ca.ntro.cards.CommonConstants;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
+import ca.ntro.core.initialization.Ntro;
 
 public class PlaygroundCardsModel extends CardsModel {
 	
@@ -41,11 +43,12 @@ public class PlaygroundCardsModel extends CardsModel {
 
 	@Override
 	public void updateViewData(CardsViewData gameViewData) {
-		int index = 0;
 		for(Card card : cards.values()) {
-			index++;
 			
-			gameViewData.addOrUpdateCard(index, card);
+			double targetTopLeftX = CommonConstants.INITIAL_CARD_WIDTH_MILIMETERS / 3 + Ntro.random().nextDouble(CommonConstants.INITIAL_CARD_WIDTH_MILIMETERS * 5);
+			double targetTopLeftY = CommonConstants.INITIAL_CARD_HEIGHT_MILIMETERS / 3 + Ntro.random().nextDouble(CommonConstants.INITIAL_CARD_HEIGHT_MILIMETERS * 5);
+			
+			gameViewData.addOrUpdateCard(card, targetTopLeftX, targetTopLeftY);
 		}
 	}
 

@@ -50,7 +50,7 @@ public abstract class CardsViewData implements ViewData {
 		world2d.dispatchMouseEvent(evtFx, worldX, worldY);
 	}
 
-	public abstract void addOrUpdateCard(int index, Card card);
+	public abstract void addOrUpdateCard(Card card, double topLeftX, double topLeftY);
 
 	public void removeCardsNotIn(List<Card> cards) {
 		Set<String> cardIds = new HashSet<>();

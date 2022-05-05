@@ -3,6 +3,7 @@ package ca.ntro.cards.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
@@ -24,9 +25,18 @@ public class DemoCardsModel extends CardsModel {
 	@Override
 	public void updateViewData(CardsViewData gameViewData) {
 		gameViewData.removeCardsNotIn(cards);
+
+		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
+		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
 		for(int i = 0; i < cards.size(); i++) {
-			gameViewData.addOrUpdateCard(i, cards.get(i));
+
+			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
+			double targetTopLeftY = cardHeight / 2;
+
+			gameViewData.addOrUpdateCard(cards.get(i),
+					                     targetTopLeftX,
+					                     targetTopLeftY);
 		}
 	}
 
