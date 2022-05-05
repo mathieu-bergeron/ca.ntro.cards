@@ -7,11 +7,18 @@ import ca.ntro.cards.demo.DemoConstants;
 
 public class Card2d extends CommonCard2d {
 	
-	private static final double EPSILON = 0.001;
+	private static final double EPSILON = 0.01;
 	private static final double SECONDS_TO_TARGET = 1;
+	private static final double INITIAL_SPEED = 1000;
 	
 	private double targetTopLeftX = -1;
 	private double targetTopLeftY = -1;
+
+	private double distanceToTargetX = 0;
+	private double distanceToTargetY = 0;
+
+	private int directionX = 0; 
+	private int directionY = 0; 
 
 	public Card2d(Card card) {
 		super(card);
@@ -31,46 +38,94 @@ public class Card2d extends CommonCard2d {
 		return DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 	}
 
-	public void setTargetTopLeftX(double targetTopLeftX) {
+	public void setTarget(double targetTopLeftX, double targetTopLeftY) {
 		this.targetTopLeftX = targetTopLeftX;
+		this.targetTopLeftY = targetTopLeftY;
+		
+		distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
+		distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
+		
+		directionX = Double.compare(targetTopLeftX, topLeftX());
+		directionY = Double.compare(targetTopLeftY, topLeftY());
+		
+		if(distanceToTargetX <= EPSILON) {
+			reachTargetX(targetTopLeftX);
+		}
+
+		if(distanceToTargetY <= EPSILON) {
+			reachTargetY(targetTopLeftY);
+		}
 	}
 
-	public void setTargetTopLeftY(double targetTopLeftY) {
-		this.targetTopLeftY = targetTopLeftY;
+	private void reachTargetY(double targetTopLeftY) {
+		setTopLeftY(targetTopLeftY);
+		distanceToTargetY = 0;
+	}
+
+	private void reachTargetX(double targetTopLeftX) {
+		setTopLeftX(targetTopLeftX);
+		distanceToTargetX = 0;
+		directionX = 0;
 	}
 
 	public void onTimePasses(double secondsElapsed) {
-		if(targetTopLeftX != -1
-				&& Math.abs(targetTopLeftX - topLeftX()) > EPSILON) {
-			
-			setTopLeftX(topLeftX() + (targetTopLeftX - topLeftX()) * secondsElapsed / SECONDS_TO_TARGET);
 
-		}else {
+		moveTowardsTargetX(secondsElapsed);
 
-			targetTopLeftX = -1;
-
-		}
-
-		if(targetTopLeftY != -1
-				&& Math.abs(targetTopLeftY - topLeftY()) > EPSILON) {
-			
-			setTopLeftY(topLeftY() + (targetTopLeftY - topLeftY()) * secondsElapsed / SECONDS_TO_TARGET);
-
-		}else {
-
-			targetTopLeftY = -1;
-
-		}
+		moveTowardsTargetY(secondsElapsed);
 		
 		super.onTimePasses(secondsElapsed);
 	}
+
+	private void moveTowardsTargetX(double secondsElapsed) {
+		if(distanceToTargetX > EPSILON) {
+			
+			double decrementX = speed() * secondsElapsed;
+			distanceToTargetX -= decrementX;
+			setTopLeftX(topLeftX() + directionX * decrementX);
+
+		}
+
+		if(distanceToTargetX <= 0
+				&& targetTopLeftX > 0) {
+
+			reachTargetX(targetTopLeftX);
+		}
+	}
+	
+	private double speed() {
+		return 500 + 1000/Math.max(distanceToTargetX, distanceToTargetY);
+
+	}
+
+	private void moveTowardsTargetY(double secondsElapsed) {
+		if(distanceToTargetY > EPSILON) {
+			
+			double decrementY = speed() * secondsElapsed;
+			distanceToTargetY -= decrementY;
+			setTopLeftY(topLeftY() + directionY * decrementY);
+
+		}
+
+		if(distanceToTargetY <= 0
+				&& targetTopLeftY > 0) {
+
+			reachTargetY(targetTopLeftY);
+		}
+	}
+
 
 	@Override
 	protected void onDragStarts() {
 		targetTopLeftX = -1;
 		targetTopLeftY = -1;
+		distanceToTargetX = 0;
+		distanceToTargetY = 0;
+		directionX = 0;
+		directionY = 0;
 		super.onDragStarts();
 	}
+
 
 
 }
