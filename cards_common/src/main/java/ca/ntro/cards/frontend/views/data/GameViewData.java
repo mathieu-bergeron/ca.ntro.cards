@@ -12,14 +12,14 @@ import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
-import ca.ntro.cards.models.world2d.DefaultDrawingOptions;
+import ca.ntro.cards.models.world2d.DrawingOptionsDefault;
 import javafx.scene.input.MouseEvent;
 
 public abstract class GameViewData implements ViewData {
 
 	private CommonWorld2d world2d = newWorld2d();
 	private FpsCounter fpsCounter = new FpsCounter();
-	private CommonDrawingOptions options = new DefaultDrawingOptions();
+	private CommonDrawingOptions options = new DrawingOptionsDefault();
 	
 	protected abstract CommonWorld2d newWorld2d();
 	
