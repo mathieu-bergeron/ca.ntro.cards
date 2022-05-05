@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class PlaygroundMenuView extends SettingsView {
+public class PlaygroundSettingsView extends SettingsView {
 	
 	@FXML
 	private Pane leftSpace;

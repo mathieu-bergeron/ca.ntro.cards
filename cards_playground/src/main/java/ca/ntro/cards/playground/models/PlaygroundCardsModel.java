@@ -8,7 +8,7 @@ import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 
-public class PlaygroundGameModel extends CardsModel {
+public class PlaygroundCardsModel extends CardsModel {
 	
 	private Map<String, Card> cards = new HashMap<>();
 

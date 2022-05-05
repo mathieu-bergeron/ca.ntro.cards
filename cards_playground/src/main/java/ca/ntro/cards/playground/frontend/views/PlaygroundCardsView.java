@@ -15,10 +15,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class PlaygroundGameView extends CardsView {
+public class PlaygroundCardsView extends CardsView {
 
 	@FXML
-	private VBox gameViewContainer;
+	private VBox cardsViewContainer;
 
 	@FXML
 	private PlaygroundTabletopCanvas tabletopCanvas;
@@ -32,7 +32,7 @@ public class PlaygroundGameView extends CardsView {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Ntro.assertNotNull("gameViewContainer", gameViewContainer);
+		Ntro.assertNotNull("cardsViewContainer", cardsViewContainer);
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
 		Ntro.assertNotNull("viewerCanvas", viewerCanvas);
 		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
@@ -59,7 +59,7 @@ public class PlaygroundGameView extends CardsView {
 
 	@Override
 	protected Pane cardsViewContainer() {
-		return gameViewContainer;
+		return cardsViewContainer;
 	}
 
 	@Override

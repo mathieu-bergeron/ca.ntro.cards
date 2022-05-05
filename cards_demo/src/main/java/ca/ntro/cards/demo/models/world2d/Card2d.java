@@ -3,16 +3,11 @@ package ca.ntro.cards.demo.models.world2d;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonCard2d;
-import javafx.scene.input.MouseEvent;
-import ca.ntro.app.NtroApp;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.messages.MsgFlipCard;
 
 public class Card2d extends CommonCard2d {
-	
+
 	private static final double EPSILON = 0.01;
-	
-	private MsgFlipCard msgFlipCard = NtroApp.newMessage(MsgFlipCard.class);
 	
 	private double targetTopLeftX = -1;
 	private double targetTopLeftY = -1;
@@ -117,7 +112,6 @@ public class Card2d extends CommonCard2d {
 		}
 	}
 
-
 	@Override
 	protected void onDragStarts() {
 		targetTopLeftX = -1;
@@ -128,20 +122,5 @@ public class Card2d extends CommonCard2d {
 		directionY = 0;
 		super.onDragStarts();
 	}
-
-	@Override
-	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
-				&& evtFx.isSecondaryButtonDown()) {
-			
-			msgFlipCard.setCardId(getCard().id());
-			msgFlipCard.send();
-		}
-		
-		return super.onMouseEvent(evtFx, worldX, worldY);
-		
-	}
-
-
 
 }

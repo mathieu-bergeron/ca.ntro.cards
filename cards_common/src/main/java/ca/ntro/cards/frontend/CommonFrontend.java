@@ -14,6 +14,8 @@ import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.tasks.Cards;
 import ca.ntro.cards.frontend.tasks.Initialization;
+import ca.ntro.cards.frontend.tasks.Menu;
+import ca.ntro.cards.frontend.tasks.Navigation;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.SettingsView;
@@ -96,7 +98,13 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 				          cardsModelClass(),
 				          settingsModelClass(),
 				          dashboardViewClass());
+
+		Navigation.createTasks(tasks, 
+				               rootViewClass());
 		
+		Menu.createTasks(tasks, 
+				         settingsViewClass(), 
+				         settingsModelClass());
 		
 	}
 	

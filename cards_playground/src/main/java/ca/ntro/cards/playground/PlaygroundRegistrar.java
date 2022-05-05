@@ -3,7 +3,7 @@ package ca.ntro.cards.playground;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.CommonRegistrar;
-import ca.ntro.cards.playground.models.PlaygroundGameModel;
+import ca.ntro.cards.playground.models.PlaygroundCardsModel;
 import ca.ntro.cards.playground.models.PlaygroundSettingsModel;
 
 public class PlaygroundRegistrar {
@@ -11,7 +11,7 @@ public class PlaygroundRegistrar {
 	public static void registerModels(ModelRegistrar registrar) {
 		CommonRegistrar.registerValues(registrar);
 		
-		registrar.registerModel(PlaygroundGameModel.class);
+		registrar.registerModel(PlaygroundCardsModel.class);
 		registrar.registerModel(PlaygroundSettingsModel.class);
 	}
 

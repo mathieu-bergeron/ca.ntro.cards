@@ -1,6 +1,8 @@
 package ca.ntro.cards.models.world2d;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
+import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 import javafx.scene.input.MouseEvent;
@@ -12,6 +14,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 	private double dragOffsetX;
 	private double dragOffsetY;
 
+	private MsgFlipCard msgFlipCard = NtroApp.newMessage(MsgFlipCard.class);
 
 	public Card getCard() {
 		return card;
@@ -55,7 +58,12 @@ public abstract class CommonCard2d extends CommonObject2d {
 			
 			return true;
 			
-		} 
+		}else if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
+				&& evtFx.isSecondaryButtonDown()) {
+			
+			msgFlipCard.setCardId(getCard().id());
+			msgFlipCard.send();
+		}
 
 		return false;
 	}

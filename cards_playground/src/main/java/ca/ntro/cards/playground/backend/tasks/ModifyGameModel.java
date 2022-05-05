@@ -3,7 +3,7 @@ package ca.ntro.cards.playground.backend.tasks;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.CardsModel;
-import ca.ntro.cards.playground.models.PlaygroundGameModel;
+import ca.ntro.cards.playground.models.PlaygroundCardsModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -27,11 +27,11 @@ public class ModifyGameModel {
 	private static void createFirstVersionIfNeeded(BackendTasks tasks) {
 		tasks.task("createFirstVersionIfNeeded")
 
-		     .waitsFor(model(PlaygroundGameModel.class))
+		     .waitsFor(model(PlaygroundCardsModel.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 CardsModel demoModel = inputs.get(model(PlaygroundGameModel.class));
+		    	 CardsModel demoModel = inputs.get(model(PlaygroundCardsModel.class));
 		    	 
 		    	 demoModel.createFirstVersionIfNeeded();
 		    	 
@@ -46,7 +46,7 @@ public class ModifyGameModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 CardsModel   demoModel   = inputs.get(model(PlaygroundGameModel.class));
+		    	 CardsModel   demoModel   = inputs.get(model(PlaygroundCardsModel.class));
 		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
 		    	 
 		    	 msgFlipCard.applyTo(demoModel);

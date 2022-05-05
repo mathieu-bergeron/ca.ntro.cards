@@ -1,57 +1,72 @@
 package ca.ntro.cards.playground.frontend;
 
-import ca.ntro.app.NtroApp;
-import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
-import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.CommonFrontendRegistrar;
-import ca.ntro.cards.playground.frontend.tasks.GameView;
-import ca.ntro.cards.playground.frontend.tasks.Initialization;
-import ca.ntro.cards.playground.frontend.tasks.Menu;
-import ca.ntro.cards.playground.frontend.tasks.Navigation;
-import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
+import ca.ntro.cards.frontend.CommonFrontend;
+import ca.ntro.cards.playground.frontend.views.PlaygroundCardsView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
-import ca.ntro.cards.playground.frontend.views.PlaygroundMenuView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundRootView;
+import ca.ntro.cards.playground.frontend.views.PlaygroundSettingsView;
+import ca.ntro.cards.playground.frontend.views.data.PlaygroundCardsViewData;
+import ca.ntro.cards.playground.models.PlaygroundCardsModel;
+import ca.ntro.cards.playground.models.PlaygroundSettingsModel;
 
-public class PlaygroundFrontend implements FrontendFx {
-
-	@Override
-	public void createTasks(FrontendTasks tasks) {
-		Initialization.createTasks(tasks);
-		GameView.createTasks(tasks);
-		Navigation.createTasks(tasks);
-		Menu.createTasks(tasks);
-	}
-
-	@Override
-	public void registerEvents(EventRegistrar registrar) {
-		CommonFrontendRegistrar.registerEvents(registrar);
-	}
+public class PlaygroundFrontend extends CommonFrontend<PlaygroundRootView,
+                                                       PlaygroundSettingsView,
+                                                       PlaygroundCardsView,
+                                                       PlaygroundDashboardView,
+                                                       PlaygroundCardsViewData,
+                                                       PlaygroundSettingsModel,
+                                                       PlaygroundCardsModel> {
 
 	@Override
-	public void registerViews(ViewRegistrarFx registrar) {
-		registrar.registerDefaultResources("/strings_fr.properties");
-		registrar.registerResources(NtroApp.locale("en"), "/strings_en.properties");
-
-		registrar.registerStylesheet("/dev.css");
-		//registrar.registerStylesheet("/prod.css");
-
-		registrar.registerView(PlaygroundRootView.class, "/root.xml");
-
-		registrar.registerView(PlaygroundGameView.class, "/game.xml");
-		registrar.registerView(PlaygroundDashboardView.class, "/dashboard.xml");
-
-		registrar.registerView(PlaygroundMenuView.class, "/menu.xml");
+	protected void registerAdditionnalEvents(EventRegistrar registrar) {
 		
-		CommonFrontendRegistrar.registerViewData(registrar);
 	}
 
+	@Override
+	protected boolean isProd() {
+		return false;
+	}
 
 	@Override
-	public void execute() {
+	protected Class<PlaygroundRootView> rootViewClass() {
+		return PlaygroundRootView.class;
+	}
+
+	@Override
+	protected Class<PlaygroundSettingsView> settingsViewClass() {
+		return PlaygroundSettingsView.class;
+	}
+
+	@Override
+	protected Class<PlaygroundCardsView> cardsViewClass() {
+		return PlaygroundCardsView.class;
+	}
+
+	@Override
+	protected Class<PlaygroundDashboardView> dashboardViewClass() {
+		return PlaygroundDashboardView.class;
+	}
+
+	@Override
+	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
 		
+	}
+
+	@Override
+	protected Class<PlaygroundCardsViewData> cardsViewDataClass() {
+		return PlaygroundCardsViewData.class;
+	}
+
+	@Override
+	protected Class<PlaygroundSettingsModel> settingsModelClass() {
+		return PlaygroundSettingsModel.class;
+	}
+
+	@Override
+	protected Class<PlaygroundCardsModel> cardsModelClass() {
+		return PlaygroundCardsModel.class;
 	}
 
 }
