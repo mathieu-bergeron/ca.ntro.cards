@@ -10,6 +10,7 @@ import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
 public class DemoMenuView extends MenuView {
@@ -57,6 +58,12 @@ public class DemoMenuView extends MenuView {
 	@Override
 	protected Button quitButton() {
 		return quitButton;
+	}
+
+	@Override
+	protected ToggleButton useFourCardColorsToggleButton() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

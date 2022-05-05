@@ -10,6 +10,7 @@ import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
 public class PlaygroundMenuView extends MenuView {
@@ -29,6 +30,9 @@ public class PlaygroundMenuView extends MenuView {
 	@FXML
 	private Button quitButton;
 
+	@FXML
+	private ToggleButton useFourCardColorsToggleButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -37,6 +41,7 @@ public class PlaygroundMenuView extends MenuView {
 		Ntro.assertNotNull("topSpace", topSpace);
 		Ntro.assertNotNull("bottomSpace", bottomSpace);
 		Ntro.assertNotNull("quitButton", quitButton);
+		Ntro.assertNotNull("useFourCardColorsToggleButton", useFourCardColorsToggleButton);
 		
 		super.initialize(location, resources);
 	}
@@ -57,6 +62,11 @@ public class PlaygroundMenuView extends MenuView {
 	@Override
 	protected Button quitButton() {
 		return quitButton;
+	}
+
+	@Override
+	protected ToggleButton useFourCardColorsToggleButton() {
+		return useFourCardColorsToggleButton;
 	}
 
 }

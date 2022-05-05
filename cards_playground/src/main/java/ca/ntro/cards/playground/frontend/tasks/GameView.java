@@ -141,9 +141,9 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  EvtResizeViewport   evtResizeViewport = inputs.get(event(EvtResizeViewport.class));
-		    	  PlaygroundGameView  mainView          = inputs.get(created(PlaygroundGameView.class));
+		    	  PlaygroundGameView  gameView          = inputs.get(created(PlaygroundGameView.class));
 		    	  
-		    	  evtResizeViewport.applyTo(mainView);
+		    	  evtResizeViewport.applyTo(gameView);
 		    	  
 		      });
 	}
