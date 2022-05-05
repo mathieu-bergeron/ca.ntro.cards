@@ -8,7 +8,7 @@ import ca.ntro.app.world2d.World2dFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import javafx.scene.input.MouseEvent;
 
-public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorld2d, CommonWorld2dDrawingOptions> {
+public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorld2d, CommonDrawingOptions> {
 	
 	private CommonCard2d movingCard = null;
 	private double anchorX;

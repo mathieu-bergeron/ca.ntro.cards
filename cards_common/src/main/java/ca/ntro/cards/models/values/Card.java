@@ -5,7 +5,7 @@ import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.models.enums.Suit;
-import ca.ntro.cards.models.world2d.CommonWorld2dDrawingOptions;
+import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
 
 public class Card implements Value, Identifiable {
@@ -62,7 +62,7 @@ public class Card implements Value, Identifiable {
 	}
 
 	@SuppressWarnings("rawtypes")
-	private Color color(CommonWorld2dDrawingOptions options) {
+	private Color color(CommonDrawingOptions options) {
 		return NtroApp.colorFromString(suit.color(options));
 	}
 
@@ -73,7 +73,7 @@ public class Card implements Value, Identifiable {
 			         double width, 
 			         double height, 
 			         int levelOfDetails, 
-			         CommonWorld2dDrawingOptions options) {
+			         CommonDrawingOptions options) {
 		
 		if(faceUp) {
 
@@ -93,7 +93,7 @@ public class Card implements Value, Identifiable {
 			               double width, 
 			               double height, 
 			               int levelOfDetails, 
-			               CommonWorld2dDrawingOptions options) {
+			               CommonDrawingOptions options) {
 
 		if(levelOfDetails > 5) {
 
@@ -113,7 +113,7 @@ public class Card implements Value, Identifiable {
 			                 double width, 
 			                 double height, 
 			                 int levelOfDetails, 
-			                 CommonWorld2dDrawingOptions options) {
+			                 CommonDrawingOptions options) {
 
 		if(levelOfDetails > 5) {
 
@@ -132,7 +132,7 @@ public class Card implements Value, Identifiable {
 			                     double topLeftY, 
 			                     double width, 
 			                     double height, 
-			                     CommonWorld2dDrawingOptions options) {
+			                     CommonDrawingOptions options) {
 
 		gc.setFill(NtroApp.colorFromString("#fff0db"));
 		gc.fillRect(topLeftX, 
@@ -158,7 +158,7 @@ public class Card implements Value, Identifiable {
 			                    double topLeftY, 
 			                    double width, 
 			                    double height, 
-			                    CommonWorld2dDrawingOptions options) {
+			                    CommonDrawingOptions options) {
 		
 		gc.setFill(color(options));
 
@@ -174,7 +174,7 @@ public class Card implements Value, Identifiable {
 			                  double topLeftY, 
 			                  double width, 
 			                  double height, 
-			                  CommonWorld2dDrawingOptions options) {
+			                  CommonDrawingOptions options) {
 		
 		gc.setFill(NtroApp.colorFromString("#999999"));
 		gc.fillRect(topLeftX, 
@@ -194,7 +194,7 @@ public class Card implements Value, Identifiable {
 			                            double topLeftX, 
 			                            double topLeftY, 
 			                            double width, 
-			                            double height, CommonWorld2dDrawingOptions options) {
+			                            double height, CommonDrawingOptions options) {
 		
 		gc.setFill(NtroApp.colorFromString("#aaaaaa"));
 		gc.fillRect(topLeftX, 

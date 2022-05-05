@@ -1,6 +1,6 @@
 package ca.ntro.cards.models.enums;
 
-import ca.ntro.cards.models.world2d.CommonWorld2dDrawingOptions;
+import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 
 public enum Suit {
 	
@@ -30,7 +30,7 @@ public enum Suit {
 		setColor(color);
 	}
 
-	public String color(CommonWorld2dDrawingOptions options) {
+	public String color(CommonDrawingOptions options) {
 		String color = this.color;
 
 		if(this == DIAMONDS

@@ -13,7 +13,7 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
-import ca.ntro.cards.models.world2d.CommonWorld2dDrawingOptions;
+import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import javafx.application.Platform;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -181,7 +181,7 @@ public abstract class GameView extends ViewFx {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void displayWorld2d(CommonWorld2d world2d, CommonWorld2dDrawingOptions options) {
+	public void displayWorld2d(CommonWorld2d world2d, CommonDrawingOptions options) {
 		tabletopCanvas().displayWorld2d(world2d, options);
 		viewerCanvas().displayWorld2d(world2d, options);
 	}
