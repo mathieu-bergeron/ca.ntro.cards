@@ -58,7 +58,7 @@ public class PlaygroundGameView extends CardsView {
 	}
 
 	@Override
-	protected Pane mainContainer() {
+	protected Pane cardsViewContainer() {
 		return gameViewContainer;
 	}
 

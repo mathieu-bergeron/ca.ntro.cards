@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 public class DemoCardsView extends CardsView {
 
 	@FXML
-	private VBox gameViewContainer;
+	private VBox cardsViewContainer;
 
 	@FXML
 	private DemoTabletopCanvas tabletopCanvas;
@@ -32,7 +32,7 @@ public class DemoCardsView extends CardsView {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Ntro.assertNotNull("gameViewContainer", gameViewContainer);
+		Ntro.assertNotNull("cardsViewContainer", cardsViewContainer);
 		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
 		Ntro.assertNotNull("viewerCanvas", viewerCanvas);
 		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
@@ -58,8 +58,8 @@ public class DemoCardsView extends CardsView {
 	}
 
 	@Override
-	protected Pane mainContainer() {
-		return gameViewContainer;
+	protected Pane cardsViewContainer() {
+		return cardsViewContainer;
 	}
 
 	@Override

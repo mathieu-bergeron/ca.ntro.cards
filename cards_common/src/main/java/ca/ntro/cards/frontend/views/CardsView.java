@@ -30,7 +30,7 @@ public abstract class CardsView extends ViewFx {
 
 	protected abstract Pane dashboardContainer();
 
-	protected abstract Pane mainContainer();
+	protected abstract Pane cardsViewContainer();
 	
 	protected abstract double initialWorldHeight();
 	protected abstract double initialWorldWidth();
