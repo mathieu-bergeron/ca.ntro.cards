@@ -1,5 +1,6 @@
 package ca.ntro.cards.frontend.tasks;
 
+import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.events.EvtQuit;
 import ca.ntro.cards.frontend.views.SettingsView;
@@ -10,14 +11,15 @@ import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
 import ca.ntro.app.NtroApp;
 
-public class Menu {
+public class Settings {
 
 	public static <SETTINGS_VIEW extends SettingsView,
 	               SETTINGS_MODEL extends SettingsModel> 
 	
 	       void createTasks(FrontendTasks tasks,
 	    		            Class<SETTINGS_VIEW> settingsViewClass,
-	    		            Class<SETTINGS_MODEL> settingsModelClass) {
+	    		            Class<SETTINGS_MODEL> settingsModelClass,
+	    		            SubTasksLambda<FrontendTasks> subTasksLambda) {
 
 		tasks.taskGroup("Menu")
 		
@@ -30,6 +32,8 @@ public class Menu {
 		    	 displaySettingsModel(subTasks,
 		    			              settingsViewClass,
 		    			              settingsModelClass);
+		    	 
+		    	 subTasksLambda.createSubTasks(subTasks);
 
 		     });
 	}

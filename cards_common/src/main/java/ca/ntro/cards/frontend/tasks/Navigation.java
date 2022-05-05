@@ -7,10 +7,13 @@ import ca.ntro.cards.frontend.views.RootView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
+import ca.ntro.app.tasks.SubTasksLambda;
+
 public class Navigation {
 
 	public static <ROOT_VIEW extends RootView> void createTasks(FrontendTasks tasks,
-			                                                    Class<ROOT_VIEW> rootViewClass) {
+			                                                    Class<ROOT_VIEW> rootViewClass,
+			                                                    SubTasksLambda<FrontendTasks> subTasksLambda) {
 
 		tasks.taskGroup("Navigation")
 		
@@ -21,6 +24,8 @@ public class Navigation {
 		    	 showMenu(subTasks, rootViewClass);
 
 		    	 hideMenu(subTasks, rootViewClass);
+		    	 
+		    	 subTasksLambda.createSubTasks(subTasks);
 
 		     });
 	}

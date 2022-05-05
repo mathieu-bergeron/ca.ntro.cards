@@ -2,6 +2,7 @@ package ca.ntro.cards.demo.frontend;
 
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
+import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
@@ -67,5 +68,29 @@ public class DemoFrontend extends CommonFrontend<DemoRootView,
 	@Override
 	protected Class<DemoCardsModel> cardsModelClass() {
 		return DemoCardsModel.class;
+	}
+
+	@Override
+	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToCards(FrontendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToSettings(FrontendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
 	}
 }

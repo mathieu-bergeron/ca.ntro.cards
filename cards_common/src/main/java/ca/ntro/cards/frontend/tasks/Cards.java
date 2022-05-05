@@ -16,6 +16,8 @@ import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
+import ca.ntro.app.tasks.SubTasksLambda;
+
 public class Cards {
 
 	public static <CARDS_VIEW extends CardsView,
@@ -30,7 +32,8 @@ public class Cards {
 	    		            Class<CARDS_VIEW_DATA> cardsViewDataClass,
 	    		            Class<CARDS_MODEL> cardsModelClass,
 	    		            Class<SETTINGS_MODEL> settingsModelClass,
-	    		            Class<DASHBOARD_VIEW> dashboardViewClass) {
+	    		            Class<DASHBOARD_VIEW> dashboardViewClass,
+	    		            SubTasksLambda<FrontendTasks> subTaskLambda) {
 		
 		createCardsViewData(tasks, cardsViewDataClass);
 		
@@ -66,6 +69,8 @@ public class Cards {
 		    	 displayCardsModel(subTasks,
 		    			      cardsViewDataClass,
 		    			      cardsModelClass);
+		    	 
+		    	 subTaskLambda.createSubTasks(subTasks);
 
 		     });
 	}

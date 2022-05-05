@@ -14,7 +14,7 @@ import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.tasks.Cards;
 import ca.ntro.cards.frontend.tasks.Initialization;
-import ca.ntro.cards.frontend.tasks.Menu;
+import ca.ntro.cards.frontend.tasks.Settings;
 import ca.ntro.cards.frontend.tasks.Navigation;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.CardsView;
@@ -86,34 +86,59 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 	@Override
 	public void createTasks(FrontendTasks tasks) {
+
 		Initialization.createTasks(tasks,
 				                   rootViewClass(),
 				                   cardsViewClass(),
 				                   settingsViewClass(),
-				                   dashboardViewClass());
+				                   dashboardViewClass(),
+				                   subTasks -> {
+
+				                	   addSubTasksToInitialization(subTasks);
+				                	   
+				                   });
 
 		Cards.createTasks(tasks, 
 				          cardsViewClass(),
 				          cardsViewDataClass(),
 				          cardsModelClass(),
 				          settingsModelClass(),
-				          dashboardViewClass());
+				          dashboardViewClass(),
+				          subTasks -> {
+				        	  
+				        	  addSubTasksToCards(subTasks);
+				        	  
+				          });
 
 		Navigation.createTasks(tasks, 
-				               rootViewClass());
+				               rootViewClass(),
+				               subTasks -> {
+				            	   
+				            	   addSubTasksToNavigation(subTasks);
+				            	   
+				               });
 		
-		Menu.createTasks(tasks, 
-				         settingsViewClass(), 
-				         settingsModelClass());
+		Settings.createTasks(tasks, 
+				             settingsViewClass(), 
+				             settingsModelClass(),
+				             subTasks -> {
+				            	 
+				            	 addSubTasksToSettings(subTasks);
+				            	 
+				             });
 		
 	}
 	
+	protected abstract void addSubTasksToInitialization(FrontendTasks subTasks);
+
+	protected abstract void addSubTasksToCards(FrontendTasks subTasks);
+
+	protected abstract void addSubTasksToNavigation(FrontendTasks subTasks);
+
+	protected abstract void addSubTasksToSettings(FrontendTasks subTasks);
+
 	
-	
-	
-	
-	
-	
+
 	@Override
 	public void execute() {
 	}

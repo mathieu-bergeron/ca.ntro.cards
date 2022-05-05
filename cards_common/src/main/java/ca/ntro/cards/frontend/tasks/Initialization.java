@@ -1,5 +1,6 @@
 package ca.ntro.cards.frontend.tasks;
 
+import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.DashboardView;
@@ -22,7 +23,8 @@ public class Initialization {
 			         Class<ROOT_VIEW> rootViewClass,
 			         Class<CARDS_VIEW> cardsViewClass,
 			         Class<SETTINGS_VIEW> settingsViewClass,
-			         Class<DASHBOARD_VIEW> dashboardViewClass) {
+			         Class<DASHBOARD_VIEW> dashboardViewClass,
+			         SubTasksLambda<FrontendTasks> subTaskLambda) {
 
 		tasks.taskGroup("Initialization")
 
@@ -59,6 +61,8 @@ public class Initialization {
 		    			              dashboardViewClass);
 
 		    	 showWindow(subTasks);
+		    	 
+		    	 subTaskLambda.createSubTasks(subTasks);
 
 		     });
 	}
