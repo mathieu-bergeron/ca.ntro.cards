@@ -8,8 +8,6 @@ import ca.ntro.cards.demo.DemoConstants;
 public class Card2d extends CommonCard2d {
 	
 	private static final double EPSILON = 0.01;
-	private static final double SECONDS_TO_TARGET = 1;
-	private static final double INITIAL_SPEED = 1000;
 	
 	private double targetTopLeftX = -1;
 	private double targetTopLeftY = -1;
