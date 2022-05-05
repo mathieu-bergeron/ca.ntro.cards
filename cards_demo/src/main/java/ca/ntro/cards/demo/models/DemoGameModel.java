@@ -1,17 +1,14 @@
 package ca.ntro.cards.demo.models;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import ca.ntro.app.models.Model;
-import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.frontend.views.data.GameViewData;
+import ca.ntro.cards.models.GameModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 
-public class DemoModel implements Model, Watchable {
+public class DemoGameModel extends GameModel {
 	
 	private long version = 0;
 	private List<Card> cards = new ArrayList<>();

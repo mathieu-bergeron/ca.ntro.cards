@@ -1,10 +1,10 @@
 package ca.ntro.cards.models.world2d;
 
-public class DrawingOptionsDefault implements CommonDrawingOptions {
+public class CommonDrawingOptionsDefault implements CommonDrawingOptions {
 
 	@Override
 	public boolean useFourCardColors() {
-		return false;
+		return true;
 	}
 
 }

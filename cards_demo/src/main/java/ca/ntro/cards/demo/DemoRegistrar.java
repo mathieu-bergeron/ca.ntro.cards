@@ -5,14 +5,14 @@ import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.CommonRegistrar;
 import ca.ntro.cards.demo.messages.MsgFlipCard;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
-import ca.ntro.cards.demo.models.DemoModel;
+import ca.ntro.cards.demo.models.DemoGameModel;
 
 public class DemoRegistrar {
 
 	public static void registerModels(ModelRegistrar registrar) {
 		CommonRegistrar.registerModels(registrar);
 
-		registrar.registerModel(DemoModel.class);
+		registrar.registerModel(DemoGameModel.class);
 	}
 
 	public static void registerMessages(MessageRegistrar registrar) {

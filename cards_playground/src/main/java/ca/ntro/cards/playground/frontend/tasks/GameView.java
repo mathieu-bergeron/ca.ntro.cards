@@ -9,6 +9,7 @@ import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
 import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
+import ca.ntro.cards.playground.models.PlaygroundSettingsModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.reflection.observer.Modified;
 
@@ -28,6 +29,9 @@ public class GameView {
 
 		     .andContains(subTasks -> {
 		    	 
+		    	 
+		    	 observeSettings(subTasks);
+		    	 
 		    	 moveViewport(subTasks);
 		    	 resizeViewport(subTasks);
 
@@ -37,6 +41,21 @@ public class GameView {
 		    	 displayNextImage(subTasks);
 
 		     });
+	}
+
+	private static void observeSettings(FrontendTasks tasks) {
+		tasks.task("observeSettings")
+		
+		      .waitsFor(modified(PlaygroundSettingsModel.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  GameViewData                      gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
+		    	  Modified<PlaygroundSettingsModel> modifiedSettings = inputs.get(modified(PlaygroundSettingsModel.class));
+		    	  
+		    	  gameViewData.setDrawingOptions(modifiedSettings.currentValue());
+
+		      });
 	}
 
 	private static void mouseEvtOnViewer(FrontendTasks tasks) {

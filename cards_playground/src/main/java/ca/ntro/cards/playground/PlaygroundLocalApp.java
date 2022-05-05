@@ -21,7 +21,7 @@ public class PlaygroundLocalApp implements NtroClientFx {
 
 	@Override
 	public void registerMessages(MessageRegistrar registrar) {
-
+		PlaygroundRegistrar.registerMessages(registrar);
 	}
 
 	@Override

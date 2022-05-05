@@ -5,7 +5,7 @@ import java.util.List;
 
 import ca.ntro.app.messages.MessageNtro;
 import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.demo.models.DemoModel;
+import ca.ntro.cards.demo.models.DemoGameModel;
 
 public class MsgUpdateList extends MessageNtro {
 	
@@ -19,7 +19,7 @@ public class MsgUpdateList extends MessageNtro {
 		this.cards = cards;
 	}
 
-	public void applyTo(DemoModel demoModel) {
+	public void applyTo(DemoGameModel demoModel) {
 		demoModel.updateCardsInOrder(cards);
 	}
 	

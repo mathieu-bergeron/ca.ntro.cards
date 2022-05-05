@@ -3,11 +3,11 @@ package ca.ntro.cards.demo.backend.tasks;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.demo.messages.MsgFlipCard;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
-import ca.ntro.cards.demo.models.DemoModel;
+import ca.ntro.cards.demo.models.DemoGameModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
-public class ModifyModel {
+public class ModifyGameModel {
 
 	public static void createTasks(BackendTasks tasks) {
 		
@@ -29,11 +29,11 @@ public class ModifyModel {
 	private static void createFirstVersion(BackendTasks tasks) {
 		tasks.task("createFirstVersion")
 
-		     .waitsFor(model(DemoModel.class))
+		     .waitsFor(model(DemoGameModel.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoModel demoModel = inputs.get(model(DemoModel.class));
+		    	 DemoGameModel demoModel = inputs.get(model(DemoGameModel.class));
 		    	 
 		    	 demoModel.createFirstVersion();
 		    	 
@@ -47,7 +47,7 @@ public class ModifyModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoModel     demoModel     = inputs.get(model(DemoModel.class));
+		    	 DemoGameModel     demoModel     = inputs.get(model(DemoGameModel.class));
 		    	 MsgUpdateList msgUpdateList = inputs.get(message(MsgUpdateList.class));
 		    	 
 		    	 msgUpdateList.applyTo(demoModel);
@@ -62,7 +62,7 @@ public class ModifyModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoModel   demoModel   = inputs.get(model(DemoModel.class));
+		    	 DemoGameModel   demoModel   = inputs.get(model(DemoGameModel.class));
 		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
 		    	 
 		    	 msgFlipCard.applyTo(demoModel);

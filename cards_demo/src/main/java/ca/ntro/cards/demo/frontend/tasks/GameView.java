@@ -9,7 +9,7 @@ import ca.ntro.cards.frontend.views.data.GameViewData;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoGameView;
 import ca.ntro.cards.demo.frontend.views.data.DemoGameViewData;
-import ca.ntro.cards.demo.models.DemoModel;
+import ca.ntro.cards.demo.models.DemoGameModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.reflection.observer.Modified;
 
@@ -132,14 +132,14 @@ public class GameView {
 	private static void displayModel(FrontendTasks tasks) {
 		tasks.task("displayModel")
 		
-		      .waitsFor(modified(DemoModel.class))
+		      .waitsFor(modified(DemoGameModel.class))
 		      
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  GameViewData              gameViewData  = inputs.get(created(DemoGameViewData.class));
-		    	  Modified<DemoModel> modifiedModel = inputs.get(modified(DemoModel.class));
+		    	  Modified<DemoGameModel> modifiedModel = inputs.get(modified(DemoGameModel.class));
 		    	  
-		    	  DemoModel demoModel = modifiedModel.currentValue();
+		    	  DemoGameModel demoModel = modifiedModel.currentValue();
 		    	  
 		    	  demoModel.updateViewData(gameViewData);
 

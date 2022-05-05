@@ -13,7 +13,7 @@ public class Card implements Value, Identifiable {
 	private long id;
 	private int rank;
 	private Suit suit;
-	private boolean faceUp = false;
+	private boolean faceUp = true;
 
 	public int getRank() {
 		return rank;
