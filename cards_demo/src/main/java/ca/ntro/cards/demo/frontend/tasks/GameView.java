@@ -10,6 +10,7 @@ import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoGameView;
 import ca.ntro.cards.demo.frontend.views.data.DemoGameViewData;
 import ca.ntro.cards.demo.models.DemoGameModel;
+import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.reflection.observer.Modified;
 
@@ -28,6 +29,8 @@ public class GameView {
 		     .waitsFor(created(DemoGameViewData.class))
 
 		     .andContains(subTasks -> {
+
+		    	 observeSettings(subTasks);
 		    	 
 		    	 moveViewport(subTasks);
 		    	 resizeViewport(subTasks);
@@ -40,6 +43,21 @@ public class GameView {
 		    	 displayModel(subTasks);
 
 		     });
+	}
+
+	private static void observeSettings(FrontendTasks tasks) {
+		tasks.task("observeSettings")
+		
+		      .waitsFor(modified(DemoSettingsModel.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  GameViewData                gameViewData     = inputs.get(created(DemoGameViewData.class));
+		    	  Modified<DemoSettingsModel> modifiedSettings = inputs.get(modified(DemoSettingsModel.class));
+		    	  
+		    	  gameViewData.setDrawingOptions(modifiedSettings.currentValue());
+
+		      });
 	}
 
 	private static void mouseEvtOnViewer(FrontendTasks tasks) {

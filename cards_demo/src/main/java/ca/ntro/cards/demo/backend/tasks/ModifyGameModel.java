@@ -1,9 +1,10 @@
 package ca.ntro.cards.demo.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.demo.messages.MsgFlipCard;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.DemoGameModel;
+import ca.ntro.cards.messages.MsgFlipCard;
+import ca.ntro.cards.models.GameModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -11,13 +12,13 @@ public class ModifyGameModel {
 
 	public static void createTasks(BackendTasks tasks) {
 		
-		createFirstVersion(tasks);
+		createFirstVersionIfNeeded(tasks);
 		
 		tasks.taskGroup("ModifyModel")
 		
-		     .waitsFor("createFirstVersion")
+		     .waitsFor("createFirstVersionIfNeeded")
 		
-		     .contains(subTasks -> {
+		     .andContains(subTasks -> {
 
 		    	 updateList(subTasks);
 
@@ -26,16 +27,16 @@ public class ModifyGameModel {
 		     });
 	}
 
-	private static void createFirstVersion(BackendTasks tasks) {
-		tasks.task("createFirstVersion")
+	private static void createFirstVersionIfNeeded(BackendTasks tasks) {
+		tasks.task("createFirstVersionIfNeeded")
 
 		     .waitsFor(model(DemoGameModel.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoGameModel demoModel = inputs.get(model(DemoGameModel.class));
+		    	 GameModel gameModel = inputs.get(model(DemoGameModel.class));
 		    	 
-		    	 demoModel.createFirstVersion();
+		    	 gameModel.createFirstVersionIfNeeded();
 		    	 
 		     });
 	}
@@ -47,7 +48,7 @@ public class ModifyGameModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoGameModel     demoModel     = inputs.get(model(DemoGameModel.class));
+		    	 DemoGameModel demoModel     = inputs.get(model(DemoGameModel.class));
 		    	 MsgUpdateList msgUpdateList = inputs.get(message(MsgUpdateList.class));
 		    	 
 		    	 msgUpdateList.applyTo(demoModel);
@@ -62,10 +63,10 @@ public class ModifyGameModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoGameModel   demoModel   = inputs.get(model(DemoGameModel.class));
+		    	 GameModel   gameModel   = inputs.get(model(DemoGameModel.class));
 		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
 		    	 
-		    	 msgFlipCard.applyTo(demoModel);
+		    	 msgFlipCard.applyTo(gameModel);
 		    	 
 		     });
 	}

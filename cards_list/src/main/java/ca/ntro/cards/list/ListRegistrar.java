@@ -6,7 +6,7 @@ import ca.ntro.cards.CommonRegistrar;
 public class ListRegistrar {
 
 	public static void registerModels(ModelRegistrar registrar) {
-		CommonRegistrar.registerModels(registrar);
+		CommonRegistrar.registerValues(registrar);
 	}
 
 }

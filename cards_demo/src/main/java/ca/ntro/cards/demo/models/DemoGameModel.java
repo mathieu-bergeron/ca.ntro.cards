@@ -10,16 +10,8 @@ import ca.ntro.cards.models.values.Card;
 
 public class DemoGameModel extends GameModel {
 	
-	private long version = 0;
 	private List<Card> cards = new ArrayList<>();
 
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
 
 	public List<Card> getCards() {
 		return cards;
@@ -29,6 +21,7 @@ public class DemoGameModel extends GameModel {
 		this.cards = cards;
 	}
 
+	@Override
 	public void updateViewData(GameViewData gameViewData) {
 		gameViewData.removeCardsNotIn(cards);
 		
@@ -39,20 +32,20 @@ public class DemoGameModel extends GameModel {
 
 	public void updateCardsInOrder(List<Card> cards) {
 		setCards(cards);
-		version++;
+		incrementVersion();
 	}
 
+	@Override
 	public void createFirstVersion() {
-		if(version == 0) {
-			cards.add(new Card(1, 3, Suit.HEARTS));
-			cards.add(new Card(2, 6, Suit.CLUBS));
-			cards.add(new Card(3, 4, Suit.SPADES));
-			cards.add(new Card(4, 10, Suit.DIAMONDS));
-			cards.add(new Card(5, 5, Suit.HEARTS));
-		}
+		cards.add(new Card(1, 3, Suit.HEARTS));
+		cards.add(new Card(2, 6, Suit.CLUBS));
+		cards.add(new Card(3, 4, Suit.SPADES));
+		cards.add(new Card(4, 10, Suit.DIAMONDS));
+		cards.add(new Card(5, 5, Suit.HEARTS));
 	}
 	
-	private Card cardById(String cardId) {
+	@Override
+	protected Card cardById(String cardId) {
 		Card result = null;
 		
 		for(Card candidate : cards) {
@@ -63,14 +56,6 @@ public class DemoGameModel extends GameModel {
 		}
 		
 		return result;
-	}
-
-	public void flipCard(String cardId) {
-		Card card = cardById(cardId);
-		
-		if(card != null) {
-			card.flip();
-		}
 	}
 
 }

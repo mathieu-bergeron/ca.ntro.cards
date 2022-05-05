@@ -6,7 +6,7 @@ import ca.ntro.cards.models.world2d.CommonCard2d;
 import javafx.scene.input.MouseEvent;
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.demo.messages.MsgFlipCard;
+import ca.ntro.cards.messages.MsgFlipCard;
 
 public class Card2d extends CommonCard2d {
 	

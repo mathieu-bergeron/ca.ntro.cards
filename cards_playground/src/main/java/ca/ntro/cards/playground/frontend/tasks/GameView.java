@@ -6,9 +6,11 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.views.data.GameViewData;
+import ca.ntro.cards.models.GameModel;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
 import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
+import ca.ntro.cards.playground.models.PlaygroundGameModel;
 import ca.ntro.cards.playground.models.PlaygroundSettingsModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.reflection.observer.Modified;
@@ -29,7 +31,6 @@ public class GameView {
 
 		     .andContains(subTasks -> {
 		    	 
-		    	 
 		    	 observeSettings(subTasks);
 		    	 
 		    	 moveViewport(subTasks);
@@ -39,6 +40,8 @@ public class GameView {
 		    	 mouseEvtOnTabletop(subTasks);
 
 		    	 displayNextImage(subTasks);
+
+		    	 displayModel(subTasks);
 
 		     });
 	}
@@ -142,6 +145,23 @@ public class GameView {
 		    	  
 		    	  evtResizeViewport.applyTo(mainView);
 		    	  
+		      });
+	}
+
+	private static void displayModel(FrontendTasks tasks) {
+		tasks.task("displayModel")
+		
+		      .waitsFor(modified(PlaygroundGameModel.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  GameViewData                  gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  Modified<PlaygroundGameModel> modifiedModel = inputs.get(modified(PlaygroundGameModel.class));
+		    	  
+		    	  GameModel demoModel = modifiedModel.currentValue();
+		    	  
+		    	  demoModel.updateViewData(gameViewData);
+
 		      });
 	}
 

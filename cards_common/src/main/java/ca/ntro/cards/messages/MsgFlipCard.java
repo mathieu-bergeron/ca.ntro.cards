@@ -1,7 +1,7 @@
-package ca.ntro.cards.demo.messages;
+package ca.ntro.cards.messages;
 
 import ca.ntro.app.messages.MessageNtro;
-import ca.ntro.cards.demo.models.DemoGameModel;
+import ca.ntro.cards.models.GameModel;
 
 public class MsgFlipCard extends MessageNtro {
 	
@@ -15,7 +15,7 @@ public class MsgFlipCard extends MessageNtro {
 		this.cardId = cardId;
 	}
 
-	public void applyTo(DemoGameModel demoModel) {
+	public void applyTo(GameModel demoModel) {
 
 		demoModel.flipCard(cardId);
 
