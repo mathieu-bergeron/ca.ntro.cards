@@ -1,7 +1,11 @@
 package ca.ntro.cards.demo.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
+import ca.ntro.cards.demo.frontend.views.DemoMenuView;
+import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.frontend.events.EvtQuit;
+import ca.ntro.cards.frontend.views.MenuView;
+import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -18,6 +22,8 @@ public class Menu {
 		    	 
 		    	 quit(subTasks);
 
+		    	 displayModel(subTasks);
+
 		     });
 	}
 
@@ -33,6 +39,21 @@ public class Menu {
 		    		 System.out.println("Quitting");
 		    		 
 		    	 });
+
+		     });
+	}
+
+	private static void displayModel(FrontendTasks tasks) {
+		tasks.task("displaySettingsModel")
+		
+		     .waitsFor(modified(DemoSettingsModel.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 MenuView                    menuView      = inputs.get(created(DemoMenuView.class));
+		    	 Modified<DemoSettingsModel> settingsModel = inputs.get(modified(DemoSettingsModel.class));
+		    	 
+		    	 settingsModel.currentValue().displayOn(menuView);
 
 		     });
 	}

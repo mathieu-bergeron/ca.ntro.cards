@@ -30,6 +30,9 @@ public class DemoMenuView extends MenuView {
 	@FXML
 	private Button quitButton;
 
+	@FXML
+	private ToggleButton useFourCardColorsToggleButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -38,6 +41,7 @@ public class DemoMenuView extends MenuView {
 		Ntro.assertNotNull("topSpace", topSpace);
 		Ntro.assertNotNull("bottomSpace", bottomSpace);
 		Ntro.assertNotNull("quitButton", quitButton);
+		Ntro.assertNotNull("useFourCardColorsToggleButton", useFourCardColorsToggleButton);
 		
 		super.initialize(location, resources);
 	}
@@ -62,8 +66,7 @@ public class DemoMenuView extends MenuView {
 
 	@Override
 	protected ToggleButton useFourCardColorsToggleButton() {
-		// TODO Auto-generated method stub
-		return null;
+		return useFourCardColorsToggleButton;
 	}
 
 }
