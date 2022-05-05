@@ -1,22 +1,33 @@
 package ca.ntro.cards.demo.backend;
 
-import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.demo.backend.tasks.ModifyGameModel;
-import ca.ntro.cards.demo.backend.tasks.ModifySettingsModel;
+import ca.ntro.cards.backend.CommonBackend;
+import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
+import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.DemoSettingsModel;
 
-public class DemoBackend extends LocalBackendNtro {
+public class DemoBackend extends CommonBackend<DemoCardsModel,
+                                               DemoSettingsModel> {
 
 	@Override
-	public void createTasks(BackendTasks tasks) {
-		
-		ModifyGameModel.createTasks(tasks);
-		ModifySettingsModel.createTasks(tasks);
+	protected Class<DemoCardsModel> cardsModelClass() {
+		return DemoCardsModel.class;
+	}
+
+	@Override
+	protected Class<DemoSettingsModel> settingsModelClass() {
+		return DemoSettingsModel.class;
+	}
+
+	@Override
+	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+
+		 DemoModifyCardsModel.updateList(subTasks);
 
 	}
 
 	@Override
-	public void execute() {
+	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
 		
 	}
 

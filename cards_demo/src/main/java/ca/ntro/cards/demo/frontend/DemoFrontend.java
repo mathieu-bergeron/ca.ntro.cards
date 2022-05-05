@@ -72,25 +72,21 @@ public class DemoFrontend extends CommonFrontend<DemoRootView,
 
 	@Override
 	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void addSubTasksToCards(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	protected void addSubTasksToSettings(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
+
 	}
 }
