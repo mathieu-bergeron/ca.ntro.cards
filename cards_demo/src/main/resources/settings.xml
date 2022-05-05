@@ -23,13 +23,10 @@
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.ToggleButton ?>
 
-<?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundTabletopCanvas ?>
-<?import ca.ntro.cards.playground.frontend.views.controls.PlaygroundViewerCanvas ?>
-
 <HBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.playground.frontend.views.PlaygroundMenuView" 
+    fx:controller="ca.ntro.cards.demo.frontend.views.DemoSettingsView" 
     styleClass="container"
-    id="menu-view">
+    id="settings-view">
 
     <VBox 
         fx:id="leftSpace"

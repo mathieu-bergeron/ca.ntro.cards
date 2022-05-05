@@ -1,7 +1,7 @@
 package ca.ntro.cards.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
-import ca.ntro.cards.frontend.views.GameView;
+import ca.ntro.cards.frontend.views.CardsView;
 import javafx.scene.input.MouseEvent;
 
 public class MouseEvtOnTabletop extends EventNtro {
@@ -35,7 +35,7 @@ public class MouseEvtOnTabletop extends EventNtro {
 	}
 
 
-	public void applyTo(GameView gameView) {
+	public void applyTo(CardsView gameView) {
 		gameView.mouseEvtOnTabletop(evtFx, worldX, worldY);
 	}
 

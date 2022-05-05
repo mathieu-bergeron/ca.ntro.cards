@@ -20,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 
-public abstract class GameView extends ViewFx {
+public abstract class CardsView extends ViewFx {
 	
 	@SuppressWarnings("rawtypes")
 	protected abstract World2dResizableCanvasFx viewerCanvas();

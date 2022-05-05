@@ -9,23 +9,15 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.EvtShowMenu;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.frontend.views.data.GameViewData;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
 
 public class CommonFrontendRegistrar {
 	
 	public static void registerViewData(ViewRegistrarFx registrar) {
-		registrar.registerViewData(GameViewData.class);
+		registrar.registerViewData(CardsViewData.class);
 	}
 
 	public static void registerEvents(EventRegistrar registrar) {
-		registrar.registerEvent(EvtMoveViewport.class);
-		registrar.registerEvent(EvtResizeViewport.class);
-		registrar.registerEvent(MouseEvtOnViewer.class);
-		registrar.registerEvent(MouseEvtOnTabletop.class);
-
-		registrar.registerEvent(EvtShowMenu.class);
-		registrar.registerEvent(EvtHideMenu.class);
-		registrar.registerEvent(EvtQuit.class);
 	}
 
 }

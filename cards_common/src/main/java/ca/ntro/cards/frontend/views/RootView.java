@@ -7,18 +7,18 @@ import ca.ntro.app.views.ViewFx;
 
 public abstract class RootView extends ViewFx {
 	
-	private MenuView menuView;
-	private GameView gameView;
+	private SettingsView menuView;
+	private CardsView gameView;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 
-	public void registerMenuView(MenuView menuView) {
+	public void registerSettingsView(SettingsView menuView) {
 		this.menuView = menuView;
 	}
 	
-	public void registerGameView(GameView gameView) {
+	public void registerCardsView(CardsView gameView) {
 		this.gameView = gameView;
 	}
 	

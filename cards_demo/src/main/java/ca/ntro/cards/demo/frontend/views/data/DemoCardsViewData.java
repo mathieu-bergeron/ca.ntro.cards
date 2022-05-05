@@ -1,13 +1,13 @@
 package ca.ntro.cards.demo.frontend.views.data;
 
-import ca.ntro.cards.frontend.views.data.GameViewData;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.models.world2d.Card2d;
 import ca.ntro.cards.demo.models.world2d.World2d;
 
-public class DemoGameViewData extends GameViewData {
+public class DemoCardsViewData extends CardsViewData {
 
 	@Override
 	protected CommonWorld2d newWorld2d() {

@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
-import ca.ntro.cards.frontend.views.GameView;
+import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas;
 import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas;
@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class DemoGameView extends GameView {
+public class DemoCardsView extends CardsView {
 
 	@FXML
 	private VBox gameViewContainer;

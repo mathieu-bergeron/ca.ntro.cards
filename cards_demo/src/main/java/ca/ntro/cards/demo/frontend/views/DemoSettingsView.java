@@ -3,7 +3,7 @@ package ca.ntro.cards.demo.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.cards.frontend.views.MenuView;
+import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class DemoMenuView extends MenuView {
+public class DemoSettingsView extends SettingsView {
 	
 	@FXML
 	private Pane leftSpace;

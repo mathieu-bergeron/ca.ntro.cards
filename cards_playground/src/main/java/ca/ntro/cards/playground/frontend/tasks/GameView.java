@@ -5,8 +5,8 @@ import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.frontend.views.data.GameViewData;
-import ca.ntro.cards.models.GameModel;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.playground.frontend.views.PlaygroundDashboardView;
 import ca.ntro.cards.playground.frontend.views.PlaygroundGameView;
 import ca.ntro.cards.playground.frontend.views.data.PlaygroundGameViewData;
@@ -53,7 +53,7 @@ public class GameView {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  GameViewData                      gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
+		    	  CardsViewData                      gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
 		    	  Modified<PlaygroundSettingsModel> modifiedSettings = inputs.get(modified(PlaygroundSettingsModel.class));
 		    	  
 		    	  gameViewData.setDrawingOptions(modifiedSettings.currentValue());
@@ -69,7 +69,7 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  MouseEvtOnViewer   mouseEvtOnViewer = inputs.get(event(MouseEvtOnViewer.class));
-		    	  GameViewData       gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
+		    	  CardsViewData       gameViewData     = inputs.get(created(PlaygroundGameViewData.class));
 		    	  
 		    	  mouseEvtOnViewer.applyTo(gameViewData);
 
@@ -108,7 +108,7 @@ public class GameView {
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  Tick                    tick          = inputs.get(clock().nextTick());
-		    	  GameViewData            gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  CardsViewData            gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
 		    	  PlaygroundGameView      gameView      = inputs.get(created(PlaygroundGameView.class));
 		    	  PlaygroundDashboardView dashboardView = inputs.get(created(PlaygroundDashboardView.class));
 		    	  
@@ -155,10 +155,10 @@ public class GameView {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  GameViewData                  gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
+		    	  CardsViewData                  gameViewData  = inputs.get(created(PlaygroundGameViewData.class));
 		    	  Modified<PlaygroundGameModel> modifiedModel = inputs.get(modified(PlaygroundGameModel.class));
 		    	  
-		    	  GameModel demoModel = modifiedModel.currentValue();
+		    	  CardsModel demoModel = modifiedModel.currentValue();
 		    	  
 		    	  demoModel.updateViewData(gameViewData);
 

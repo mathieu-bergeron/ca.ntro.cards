@@ -119,7 +119,7 @@ public class Initialization {
 		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
 		    	 PlaygroundGameView gameView = inputs.get(created(PlaygroundGameView.class));
 		    	 
-		    	 rootView.registerGameView(gameView);
+		    	 rootView.registerCardsView(gameView);
 		     });
 	}
 
@@ -135,7 +135,7 @@ public class Initialization {
 		    	 PlaygroundRootView rootView = inputs.get(created(PlaygroundRootView.class));
 		    	 PlaygroundMenuView menuView = inputs.get(created(PlaygroundMenuView.class));
 		    	 
-		    	 rootView.registerMenuView(menuView);
+		    	 rootView.registerSettingsView(menuView);
 		     });
 	}
 

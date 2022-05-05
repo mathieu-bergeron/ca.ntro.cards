@@ -3,12 +3,12 @@ package ca.ntro.cards.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.ntro.cards.frontend.views.data.GameViewData;
-import ca.ntro.cards.models.GameModel;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 
-public class DemoGameModel extends GameModel {
+public class DemoCardsModel extends CardsModel {
 	
 	private List<Card> cards = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class DemoGameModel extends GameModel {
 	}
 
 	@Override
-	public void updateViewData(GameViewData gameViewData) {
+	public void updateViewData(CardsViewData gameViewData) {
 		gameViewData.removeCardsNotIn(cards);
 		
 		for(int i = 0; i < cards.size(); i++) {

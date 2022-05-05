@@ -3,12 +3,12 @@ package ca.ntro.cards.playground.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.ntro.cards.frontend.views.data.GameViewData;
-import ca.ntro.cards.models.GameModel;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 
-public class PlaygroundGameModel extends GameModel {
+public class PlaygroundGameModel extends CardsModel {
 	
 	private Map<String, Card> cards = new HashMap<>();
 
@@ -40,7 +40,7 @@ public class PlaygroundGameModel extends GameModel {
 	}
 
 	@Override
-	public void updateViewData(GameViewData gameViewData) {
+	public void updateViewData(CardsViewData gameViewData) {
 		int index = 0;
 		for(Card card : cards.values()) {
 			index++;

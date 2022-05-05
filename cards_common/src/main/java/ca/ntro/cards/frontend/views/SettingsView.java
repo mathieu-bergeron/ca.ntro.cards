@@ -14,7 +14,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-public abstract class MenuView extends ViewFx {
+public abstract class SettingsView extends ViewFx {
 	
 	protected abstract Stream<Pane> spaces();
 	

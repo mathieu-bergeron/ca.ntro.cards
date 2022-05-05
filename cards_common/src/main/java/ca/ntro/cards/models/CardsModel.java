@@ -2,10 +2,10 @@ package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
-import ca.ntro.cards.frontend.views.data.GameViewData;
+import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.values.Card;
 
-public abstract class GameModel implements Model, Watchable {
+public abstract class CardsModel implements Model, Watchable {
 
 	private long version = 0;
 
@@ -40,6 +40,6 @@ public abstract class GameModel implements Model, Watchable {
 
 	protected abstract Card cardById(String cardId);
 
-	public abstract void updateViewData(GameViewData gameViewData);
+	public abstract void updateViewData(CardsViewData gameViewData);
 
 }

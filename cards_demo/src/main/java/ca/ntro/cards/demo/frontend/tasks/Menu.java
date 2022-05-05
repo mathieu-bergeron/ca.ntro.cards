@@ -1,10 +1,10 @@
 package ca.ntro.cards.demo.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.demo.frontend.views.DemoMenuView;
+import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.frontend.events.EvtQuit;
-import ca.ntro.cards.frontend.views.MenuView;
+import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
@@ -50,7 +50,7 @@ public class Menu {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 MenuView                    menuView      = inputs.get(created(DemoMenuView.class));
+		    	 SettingsView                    menuView      = inputs.get(created(DemoSettingsView.class));
 		    	 Modified<DemoSettingsModel> settingsModel = inputs.get(modified(DemoSettingsModel.class));
 		    	 
 		    	 settingsModel.currentValue().displayOn(menuView);

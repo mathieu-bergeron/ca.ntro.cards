@@ -2,7 +2,7 @@ package ca.ntro.cards.playground.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.messages.MsgFlipCard;
-import ca.ntro.cards.models.GameModel;
+import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.playground.models.PlaygroundGameModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
@@ -31,7 +31,7 @@ public class ModifyGameModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 GameModel demoModel = inputs.get(model(PlaygroundGameModel.class));
+		    	 CardsModel demoModel = inputs.get(model(PlaygroundGameModel.class));
 		    	 
 		    	 demoModel.createFirstVersionIfNeeded();
 		    	 
@@ -46,7 +46,7 @@ public class ModifyGameModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 GameModel   demoModel   = inputs.get(model(PlaygroundGameModel.class));
+		    	 CardsModel   demoModel   = inputs.get(model(PlaygroundGameModel.class));
 		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
 		    	 
 		    	 msgFlipCard.applyTo(demoModel);
