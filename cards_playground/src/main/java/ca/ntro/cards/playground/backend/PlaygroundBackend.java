@@ -1,21 +1,30 @@
 package ca.ntro.cards.playground.backend;
 
-import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.playground.backend.tasks.ModifyGameModel;
-import ca.ntro.cards.playground.backend.tasks.ModifySettingsModel;
+import ca.ntro.cards.backend.CommonBackend;
+import ca.ntro.cards.playground.models.PlaygroundCardsModel;
+import ca.ntro.cards.playground.models.PlaygroundSettingsModel;
 
-public class PlaygroundBackend extends LocalBackendNtro {
+public class PlaygroundBackend extends CommonBackend<PlaygroundCardsModel,
+                                                     PlaygroundSettingsModel> {
 
 	@Override
-	public void createTasks(BackendTasks tasks) {
-		ModifyGameModel.createTasks(tasks);
-		ModifySettingsModel.createTasks(tasks);
+	protected Class<PlaygroundCardsModel> cardsModelClass() {
+		return PlaygroundCardsModel.class;
 	}
 
 	@Override
-	public void execute() {
-		
+	protected Class<PlaygroundSettingsModel> settingsModelClass() {
+		return PlaygroundSettingsModel.class;
 	}
+
+	@Override
+	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+	}
+
+	@Override
+	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
+	}
+
 
 }
