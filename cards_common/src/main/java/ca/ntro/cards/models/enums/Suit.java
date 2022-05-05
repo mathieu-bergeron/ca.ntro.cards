@@ -1,5 +1,7 @@
 package ca.ntro.cards.models.enums;
 
+import ca.ntro.cards.models.world2d.CommonWorld2dDrawingOptions;
+
 public enum Suit {
 	
 	HEARTS("♥", "#e6194B"), DIAMONDS("♦", "#4363d8"), CLUBS("♣", "#3cb44b"), SPADES("♠", "#000000");
@@ -26,5 +28,23 @@ public enum Suit {
 	Suit(String symbol, String color){
 		setSymbol(symbol);
 		setColor(color);
+	}
+
+	public String color(CommonWorld2dDrawingOptions options) {
+		String color = this.color;
+
+		if(this == DIAMONDS
+				&& !options.useFourCardColors()) {
+			
+			color = HEARTS.color;
+
+		}else if(this == CLUBS
+				&& !options.useFourCardColors()) {
+			
+			color = SPADES.color;
+
+		}
+
+		return color;
 	}
 }

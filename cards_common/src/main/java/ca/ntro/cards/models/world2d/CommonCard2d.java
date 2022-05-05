@@ -71,13 +71,14 @@ public abstract class CommonCard2d extends CommonObject2d {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void draw(World2dGraphicsContext gc) {
+	public void draw(World2dGraphicsContext gc, CommonWorld2dDrawingOptions options) {
 		card.draw(gc, 
 				  getTopLeftX(), 
 				  getTopLeftY(),
 				  getWidth(),
 				  getHeight(),
-				  levelOfDetails(gc));
+				  levelOfDetails(gc),
+				  options);
 	}
 	
 	@SuppressWarnings("rawtypes")

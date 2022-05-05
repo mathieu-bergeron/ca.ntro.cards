@@ -11,12 +11,15 @@ import ca.ntro.cards.frontend.views.GameView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
+import ca.ntro.cards.models.world2d.CommonWorld2dDrawingOptions;
+import ca.ntro.cards.models.world2d.DefaultDrawingOptions;
 import javafx.scene.input.MouseEvent;
 
 public abstract class GameViewData implements ViewData {
 
 	private CommonWorld2d world2d = newWorld2d();
 	private FpsCounter fpsCounter = new FpsCounter();
+	private CommonWorld2dDrawingOptions options = new DefaultDrawingOptions();
 	
 	protected abstract CommonWorld2d newWorld2d();
 	
@@ -24,17 +27,21 @@ public abstract class GameViewData implements ViewData {
 		return world2d;
 	}
 	
+	public void setDrawingOptions(CommonWorld2dDrawingOptions options) {
+		this.options = options;
+	}
 
 	public void onTimePasses(double secondsElapsed) {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(GameView gameView, DashboardView dashboardView) {
+	public void displayOn(GameView gameView, 
+			              DashboardView dashboardView) {
 		fpsCounter.onNewFrame();
 
 		gameView.clearCanvas();
 		gameView.displayViewport();
-		gameView.displayWorld2d(world2d);
+		gameView.displayWorld2d(world2d, options);
 
 		dashboardView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 	}

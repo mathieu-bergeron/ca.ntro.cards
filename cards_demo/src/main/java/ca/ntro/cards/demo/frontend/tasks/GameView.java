@@ -88,8 +88,8 @@ public class GameView {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  Tick                    tick          = inputs.get(clock().nextTick());
-		    	  GameViewData            gameViewData  = inputs.get(created(DemoGameViewData.class));
+		    	  Tick              tick          = inputs.get(clock().nextTick());
+		    	  GameViewData      gameViewData  = inputs.get(created(DemoGameViewData.class));
 		    	  DemoGameView      gameView      = inputs.get(created(DemoGameView.class));
 		    	  DemoDashboardView dashboardView = inputs.get(created(DemoDashboardView.class));
 		    	  
