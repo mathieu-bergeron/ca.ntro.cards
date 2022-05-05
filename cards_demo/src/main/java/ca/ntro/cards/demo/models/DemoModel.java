@@ -54,5 +54,26 @@ public class DemoModel implements Model, Watchable {
 			cards.add(new Card(5, 5, Suit.HEARTS));
 		}
 	}
+	
+	private Card cardById(String cardId) {
+		Card result = null;
+		
+		for(Card candidate : cards) {
+			if(candidate.hasId(cardId)){
+				result = candidate;
+				break;
+			}
+		}
+		
+		return result;
+	}
+
+	public void flipCard(String cardId) {
+		Card card = cardById(cardId);
+		
+		if(card != null) {
+			card.flip();
+		}
+	}
 
 }

@@ -12,6 +12,7 @@ public class Card implements Value, Identifiable {
 	private long id;
 	private int rank;
 	private Suit suit;
+	private boolean faceUp = false;
 
 	public int getRank() {
 		return rank;
@@ -35,6 +36,14 @@ public class Card implements Value, Identifiable {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public boolean getFaceUp() {
+		return faceUp;
+	}
+
+	public void setFaceUp(boolean facesUp) {
+		this.faceUp = facesUp;
 	}
 
 	public Card() {
@@ -63,20 +72,58 @@ public class Card implements Value, Identifiable {
 			         double width, 
 			         double height, 
 			         int levelOfDetails) {
+		
+		if(faceUp) {
 
-		if(levelOfDetails <= 5) {
-			
-			drawLowDetails(gc, topLeftX, topLeftY, width, height);
-			
+			drawFaceUp(gc, topLeftX, topLeftY, width, height, levelOfDetails);
+
 		}else {
 
-			drawHighDetails(gc, topLeftX, topLeftY, width, height);
+			drawFaceDown(gc, topLeftX, topLeftY, width, height, levelOfDetails);
+			
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void drawFaceUp(World2dGraphicsContext gc, 
+			               double topLeftX, 
+			               double topLeftY, 
+			               double width, 
+			               double height, 
+			               int levelOfDetails) {
+
+		if(levelOfDetails > 5) {
+
+			drawFaceUpHighDetails(gc, topLeftX, topLeftY, width, height);
+
+		}else {
+
+			drawFaceUpLowDetails(gc, topLeftX, topLeftY, width, height);
+			
+		}
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void drawFaceDown(World2dGraphicsContext gc, 
+			                 double topLeftX, 
+			                 double topLeftY, 
+			                 double width, 
+			                 double height, 
+			                 int levelOfDetails) {
+
+		if(levelOfDetails > 5) {
+
+			drawFaceDownHighDetails(gc, topLeftX, topLeftY, width, height);
+
+		}else {
+
+			drawFaceDownLowDetails(gc, topLeftX, topLeftY, width, height);
 
 		}
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void drawHighDetails(World2dGraphicsContext gc, 
+	private void drawFaceUpHighDetails(World2dGraphicsContext gc, 
 			                     double topLeftX, 
 			                     double topLeftY, 
 			                     double width, 
@@ -101,7 +148,7 @@ public class Card implements Value, Identifiable {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void drawLowDetails(World2dGraphicsContext gc, 
+	private void drawFaceUpLowDetails(World2dGraphicsContext gc, 
 			                    double topLeftX, 
 			                    double topLeftY, 
 			                    double width, 
@@ -115,5 +162,46 @@ public class Card implements Value, Identifiable {
 					height);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void drawFaceDownHighDetails(World2dGraphicsContext gc, 
+			                  double topLeftX, 
+			                  double topLeftY, 
+			                  double width, 
+			                  double height) {
+		
+		gc.setFill(NtroApp.colorFromString("#999999"));
+		gc.fillRect(topLeftX, 
+					topLeftY,
+					width, 
+					height);
+
+		gc.setStroke(NtroApp.colorFromString("#000000"));
+		gc.strokeRect(topLeftX, 
+					  topLeftY,
+					  width, 
+					  height);
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void drawFaceDownLowDetails(World2dGraphicsContext gc, 
+			                            double topLeftX, 
+			                            double topLeftY, 
+			                            double width, 
+			                            double height) {
+		
+		gc.setFill(NtroApp.colorFromString("#aaaaaa"));
+		gc.fillRect(topLeftX, 
+					topLeftY,
+					width, 
+					height);
+	}
+
+	public boolean hasId(String id) {
+		return String.valueOf(this.id).equals(id);
+	}
+
+	public void flip() {
+		this.faceUp = !this.faceUp;
+	}
 
 }
