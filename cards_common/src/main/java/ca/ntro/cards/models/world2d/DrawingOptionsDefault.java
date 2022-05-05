@@ -4,7 +4,7 @@ public class DrawingOptionsDefault implements CommonDrawingOptions {
 
 	@Override
 	public boolean useFourCardColors() {
-		return true;
+		return false;
 	}
 
 }
