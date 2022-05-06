@@ -22,6 +22,8 @@ include 'cards_common'
 include 'cards_playground'
 include 'cards_demo'
 
+include 'cards_freesort'
+
 
 buildscript {
     repositories {

@@ -46,6 +46,9 @@
 
 1. Ouvrir le projet en Eclipse
 
+1. Lancer l'application
+
+        $ sh gradlew cards_bar:local
     
 
 ## Énoncés de projet
