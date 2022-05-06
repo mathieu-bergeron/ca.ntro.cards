@@ -26,9 +26,9 @@ if [ "$1" = "" -o "$2" = "" ]; then
     exit 0
 fi
 
-foo_dir=cards_demo
-Foo=Demo
-foo=demo
+foo_dir=_foo
+Foo=Foo
+foo=foo
 
 ProjectName=$1
 project_name=$2
