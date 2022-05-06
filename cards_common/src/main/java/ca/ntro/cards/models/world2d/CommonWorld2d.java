@@ -1,9 +1,8 @@
 package ca.ntro.cards.models.world2d;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import ca.ntro.app.NtroApp;
+import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.world2d.World2dFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import javafx.scene.input.MouseEvent;
@@ -20,7 +19,11 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 	}
 
 	@Override
-	protected void onMouseEventNotConsumed(MouseEvent evtFx, double worldX, double worldY) {
+	protected void onMouseEventNotConsumed(World2dMouseEventFx mouseEvent) {
+		MouseEvent evtFx = mouseEvent.rawMouseEvent();
+		double worldX = mouseEvent.worldX();
+		double worldY = mouseEvent.worldY();
+		
 		if(movingCard != null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
 				&& evtFx.isPrimaryButtonDown()) {
@@ -43,9 +46,8 @@ public abstract class CommonWorld2d extends World2dFx<CommonObject2d, CommonWorl
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
 				&& evtFx.isMiddleButtonDown()) {
 			
-			// FIXME: we need a scaling factor
-			evtMoveViewport.setIncrementX(anchorX - evtFx.getX());
-			evtMoveViewport.setIncrementY(anchorY - evtFx.getY());
+			evtMoveViewport.setIncrementX(mouseEvent.widthInWorld(anchorX - evtFx.getX()));
+			evtMoveViewport.setIncrementY(mouseEvent.heightInWorld(anchorY - evtFx.getY()));
 
 			anchorX = evtFx.getX();
 			anchorY = evtFx.getY();

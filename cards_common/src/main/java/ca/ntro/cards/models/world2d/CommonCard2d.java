@@ -2,6 +2,7 @@ package ca.ntro.cards.models.world2d;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
+import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
@@ -47,7 +48,11 @@ public abstract class CommonCard2d extends CommonObject2d {
 	}
 
 	@Override
-	protected boolean onMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
+	protected boolean onMouseEvent(World2dMouseEventFx mouseEvent) {
+		MouseEvent evtFx = mouseEvent.rawMouseEvent();
+		double worldX = mouseEvent.worldX();
+		double worldY = mouseEvent.worldY();
+		
 		if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
 				&& evtFx.isPrimaryButtonDown()) {
 			
