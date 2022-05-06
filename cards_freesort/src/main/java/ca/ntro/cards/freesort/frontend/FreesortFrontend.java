@@ -89,4 +89,10 @@ public class FreesortFrontend extends CommonFrontend<FreesortRootView,
 	protected void addSubTasksToSettings(FrontendTasks subTasks) {
 
 	}
+
+	@Override
+	protected void createAdditionnalTasks(FrontendTasks tasks) {
+
+		
+	}
 }

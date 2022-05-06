@@ -53,7 +53,7 @@
 
 ## Énoncés de projet
 
-### Projet `cards_freesort`
+### Projet `cards_freesort` (ADRIEN)
 
 1. Trier les cartes librement
 1. Afficher selon le cas:

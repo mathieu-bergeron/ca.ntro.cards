@@ -240,6 +240,8 @@ public class Initialization {
 
 		    	 Window window = inputs.get(window());
 		    	 
+		    	 window.resize(1080, 640);
+		    	 
 		    	 window.show();
 		     });
 	}

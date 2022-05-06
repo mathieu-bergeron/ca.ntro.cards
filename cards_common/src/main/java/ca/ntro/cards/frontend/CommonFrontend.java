@@ -127,6 +127,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 				            	 
 				             });
 		
+		createAdditionnalTasks(tasks);
+
 	}
 	
 	protected abstract void addSubTasksToInitialization(FrontendTasks subTasks);
@@ -136,6 +138,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 	protected abstract void addSubTasksToNavigation(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToSettings(FrontendTasks subTasks);
+
+	protected abstract void createAdditionnalTasks(FrontendTasks tasks);
 
 	
 

@@ -89,4 +89,9 @@ public class DemoFrontend extends CommonFrontend<DemoRootView,
 	protected void addSubTasksToSettings(FrontendTasks subTasks) {
 
 	}
+
+	@Override
+	protected void createAdditionnalTasks(FrontendTasks tasks) {
+		
+	}
 }
