@@ -25,11 +25,6 @@
             Clonage dans 'ntro'...
 
 
-## TODO
-
-* `World2dCanvas` avec un Viewport
-    1. on veut afficher plus de carte quand la fenêtre grandi
-    1. on veut pouvoir zoomer la table de cartes
 
 ## Énoncés de projet
 
@@ -41,6 +36,19 @@
 1. Animations des cartes 
     * animation pour retourner la carte
     * animation pour étaler un paquer
+
+### Projet `cards_freesort`
+
+1. Trier les cartes librement
+1. Afficher "Trier, bravo!" ou "Pas encore trié. Rappel ♥ < ♣ < ♠" selon le cas
+
+### Projet `cards_naivesort`
+
+1. Le jeu "force" l'utilisateur à trier une carte à la fois
+1. Deux rangées: liste source ET liste triée
+1. Les cartes sont face contre table et on peut en tourner seulemetn deux à la fois
+    * une carte marquée d'une flèche (la carte la plus petite)
+    * la carte courante (en cours d'évaluation dans une boucle)
 
 ### List
 
