@@ -48,13 +48,13 @@ find . -type f | while read i; do sed "s/$foo/$project_name/g" -i "$i"; done
 
 cd src/main/java/ca/ntro/cards
 
-mv $foo $project_name
+mv "$foo" "$project_name"
 
 cd "$root_dir"
 
-cd $project_dir
+cd "$project_dir"
 
-find . -type f -name "$Foo*.java" | while read i; do mv "$i" $(echo $i | sed "s/$Foo/$ProjectName/"); done
+find . -type f -name "$Foo*.java" | while read i; do mv "$i" "$(echo $i | sed s/$Foo/$ProjectName/)"; done
 
 
 restore_dir
