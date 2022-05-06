@@ -36,7 +36,7 @@
 
 1. Ouvrir `settings.gradle` et ajouter
 
-        include("cards_bar")
+        include 'cards_bar'
 
 1. Créer le projet Eclipse
 
