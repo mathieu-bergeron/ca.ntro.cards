@@ -14,8 +14,7 @@ import ca.ntro.core.stream.Stream;
 public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	public static long biggestId;
-	
-	private long version = 0;
+	private long version;
 
 	public long getVersion() {
 		return version;
@@ -60,7 +59,7 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 			if(ids.contains(c.id())) {
 				throw new IdNotUniqueException();
 			}
-			
+
 			updateBiggestId(c);
 			
 			ids.add(c.id());

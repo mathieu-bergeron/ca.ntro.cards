@@ -8,10 +8,11 @@ import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
+import ca.ntro.core.reflection.object_graph.Initializable;
 
-public class Card implements Value, Identifiable {
+public class Card implements Value, Identifiable, Initializable {
 	
-	private long id;
+	private long id = -1;
 	private int rank;
 	private Suit suit;
 	private boolean faceUp = true;
@@ -49,7 +50,13 @@ public class Card implements Value, Identifiable {
 	}
 
 	public Card() {
-		setId(CardsModel.nextId());
+	}
+
+	@Override
+	public void initialize() {
+		if(id == -1) {
+			id = CardsModel.nextId();
+		}
 	}
 
 	public Card(int rank, Suit suit) {
@@ -57,6 +64,7 @@ public class Card implements Value, Identifiable {
 		setRank(rank);
 		setSuit(suit.name());
 	}
+
 
 	@Override
 	public String id() {
@@ -212,5 +220,6 @@ public class Card implements Value, Identifiable {
 	public void flip() {
 		this.faceUp = !this.faceUp;
 	}
+
 
 }
