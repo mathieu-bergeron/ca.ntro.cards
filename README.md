@@ -39,7 +39,7 @@
 ### Projet `cards_freesort`
 
 1. Trier les cartes librement
-1. Afficher "Trier, bravo!" ou "Pas encore trié. Rappel ♥ < ♣ < ♠" selon le cas
+1. Afficher "Trier, bravo!" ou "Pas encore trié. Rappel ♥ < ♦ < ♣ < ♠" selon le cas
 
 ### Projet `cards_naivesort`
 
