@@ -96,8 +96,7 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 
 	public static long nextId() {
 		biggestId++;
-		long nextId = biggestId;
-		return nextId;
+		return biggestId;
 	}
 
 	public void updateViewData(CardsViewData cardsViewData) {
