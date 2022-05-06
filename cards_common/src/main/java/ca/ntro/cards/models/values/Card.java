@@ -4,6 +4,7 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.models.Value;
+import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
@@ -48,10 +49,11 @@ public class Card implements Value, Identifiable {
 	}
 
 	public Card() {
+		setId(CardsModel.nextId());
 	}
 
-	public Card(long id, int rank, Suit suit) {
-		setId(id);
+	public Card(int rank, Suit suit) {
+		setId(CardsModel.nextId());
 		setRank(rank);
 		setSuit(suit.name());
 	}

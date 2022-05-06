@@ -24,8 +24,8 @@ public abstract class CommonCard2d extends CommonObject2d {
 		this.card = card;
 	}
 
-	public CommonCard2d(long id, int rank, Suit suit) {
-		setCard(new Card(id, rank, suit));
+	public CommonCard2d(int rank, Suit suit) {
+		setCard(new Card(rank, suit));
 	}
 
 	public CommonCard2d(Card card) {

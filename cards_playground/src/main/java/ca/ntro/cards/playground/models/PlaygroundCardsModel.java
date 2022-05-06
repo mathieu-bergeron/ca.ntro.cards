@@ -9,6 +9,9 @@ import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
+import ca.ntro.core.stream.Stream;
+import ca.ntro.core.stream.StreamNtro;
+import ca.ntro.core.stream.Visitor;
 
 public class PlaygroundCardsModel extends CardsModel {
 	
@@ -30,10 +33,10 @@ public class PlaygroundCardsModel extends CardsModel {
 	@Override
 	public void createFirstVersion() {
 		
-		Card card01 = new Card(1,2, Suit.HEARTS);
-		Card card02 = new Card(2, 4, Suit.CLUBS);
-		Card card03 = new Card(3, 6, Suit.DIAMONDS);
-		Card card04 = new Card(4, 10, Suit.SPADES);
+		Card card01 = new Card(2, Suit.HEARTS);
+		Card card02 = new Card(4, Suit.CLUBS);
+		Card card03 = new Card(6, Suit.DIAMONDS);
+		Card card04 = new Card(10, Suit.SPADES);
 		
 		cards.put(card01.id(), card01);
 		cards.put(card02.id(), card02);
@@ -50,6 +53,23 @@ public class PlaygroundCardsModel extends CardsModel {
 			
 			gameViewData.addOrUpdateCard(card, targetTopLeftX, targetTopLeftY);
 		}
+	}
+
+	@Override
+	protected Stream<Card> cards() {
+		return new StreamNtro<Card>() {
+			@Override
+			public void forEach_(Visitor<Card> visitor) throws Throwable {
+				for(Card card : cards.values()) {
+					visitor.visit(card);
+				}
+			}
+		};
+	}
+
+	@Override
+	protected void addCardImpl(Card card) {
+		cards.put(card.id(), card);
 	}
 
 }
