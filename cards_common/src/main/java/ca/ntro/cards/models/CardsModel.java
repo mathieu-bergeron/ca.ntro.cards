@@ -49,7 +49,6 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	protected abstract Stream<Card> cards();
 
-	public abstract void updateViewData(CardsViewData gameViewData);
 	
 	@Override
 	public void initialize() {
@@ -89,5 +88,14 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 		biggestId++;
 		return nextId;
 	}
+
+	public void updateViewData(CardsViewData cardsViewData) {
+		cardsViewData.removeCardsNotIn(cards());
+		
+		updateViewDataImpl(cardsViewData);
+	}
+	
+	protected abstract void updateViewDataImpl(CardsViewData cardsViewData);
+		
 
 }

@@ -26,8 +26,7 @@ public class DemoCardsModel extends CardsModel {
 	}
 
 	@Override
-	public void updateViewData(CardsViewData gameViewData) {
-		gameViewData.removeCardsNotIn(cards);
+	protected void updateViewDataImpl(CardsViewData cardsViewData) {
 
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
@@ -37,7 +36,7 @@ public class DemoCardsModel extends CardsModel {
 			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
 
-			gameViewData.addOrUpdateCard(cards.get(i),
+			cardsViewData.addOrUpdateCard(cards.get(i),
 					                     targetTopLeftX,
 					                     targetTopLeftY);
 		}

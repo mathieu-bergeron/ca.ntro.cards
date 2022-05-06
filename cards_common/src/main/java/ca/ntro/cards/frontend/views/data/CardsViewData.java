@@ -11,6 +11,7 @@ import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
+import ca.ntro.core.stream.Stream;
 import ca.ntro.cards.models.world2d.CommonDrawingOptionsDefault;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import javafx.scene.input.MouseEvent;
@@ -52,12 +53,12 @@ public abstract class CardsViewData implements ViewData {
 
 	public abstract void addOrUpdateCard(Card card, double topLeftX, double topLeftY);
 
-	public void removeCardsNotIn(List<Card> cards) {
+	public void removeCardsNotIn(Stream<Card> cards) {
 		Set<String> cardIds = new HashSet<>();
 
-		for(Card card : cards) {
-			cardIds.add(card.id());
-		}
+		cards.forEach(c -> {
+			cardIds.add(c.id());
+		});
 
 		world2d.removeObject2dNotIn(cardIds);
 	}

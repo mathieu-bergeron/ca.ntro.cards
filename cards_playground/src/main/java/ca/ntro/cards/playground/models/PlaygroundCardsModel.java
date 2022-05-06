@@ -45,7 +45,7 @@ public class PlaygroundCardsModel extends CardsModel {
 	}
 
 	@Override
-	public void updateViewData(CardsViewData gameViewData) {
+	public void updateViewDataImpl(CardsViewData gameViewData) {
 		for(Card card : cards.values()) {
 			
 			double targetTopLeftX = CommonConstants.INITIAL_CARD_WIDTH_MILIMETERS / 3 + Ntro.random().nextDouble(CommonConstants.INITIAL_CARD_WIDTH_MILIMETERS * 5);
