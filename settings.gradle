@@ -15,11 +15,13 @@ project(':ntro_app_jdk').projectDir = file('ntro/ntro_app_jdk')
 include 'ntro_app_fx'
 project(':ntro_app_fx').projectDir = file('ntro/ntro_app_fx')
 
+
+include '_foo'
+
 include 'cards_common'
 include 'cards_playground'
 include 'cards_demo'
-include 'cards_list'
-include 'cards_map'
+
 
 buildscript {
     repositories {
