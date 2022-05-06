@@ -187,8 +187,19 @@ public abstract class CardsView extends ViewFx {
 	}
 
 	public void resizeViewport(double factor) {
-		viewerCanvas().resizeViewport(viewerCanvas().viewportWidth() * factor, 
-				                      viewerCanvas().viewportHeight() * factor);
+		double oldWidth = viewerCanvas().viewportWidth();
+		double oldHeight = viewerCanvas().viewportHeight();
+
+		double newWidth = oldWidth * factor;
+		double newHeight = oldHeight * factor;
+		
+		double newTopLeftX = viewerCanvas().viewportTopLeftX() - (newWidth - oldWidth) / 2;
+		double newTopLeftY = viewerCanvas().viewportTopLeftY() - (newHeight - oldHeight) / 2;
+		
+		viewerCanvas().relocateResizeViewport(newTopLeftX,
+				                              newTopLeftY, 
+				                              newWidth, 
+				                              newHeight);
 		
 	}
 
