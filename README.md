@@ -24,18 +24,17 @@
 
             Clonage dans 'ntro'...
 
+## Créer un nouveau projet
 
+1. Le dépôt contient le répertoire `_foo` avec un projet bidon
+
+1. Pour créer p.ex. le projet `Bar`, faire
+
+        $ sh scripts/new_project.sh Bar bar
+
+1. Devrait créer le répertoire `cards_bar` avec le nouveau projet
 
 ## Énoncés de projet
-
-### Common et Playground
-
-1. Affichage des cartes 
-    * afficher des figures de carte arbitraire comme 145 coeur ou 13378 pique.
-    * rassembler les cartes en paquet (si on a plusieurs cartes au même endroit, afficher un paquet)
-1. Animations des cartes 
-    * animation pour retourner la carte
-    * animation pour étaler un paquer
 
 ### Projet `cards_freesort`
 
@@ -49,6 +48,16 @@
 1. Les cartes sont face contre table et on peut en tourner seulemetn deux à la fois
     * une carte marquée d'une flèche (la carte la plus petite)
     * la carte courante (en cours d'évaluation dans une boucle)
+
+### Common et Playground
+
+1. Affichage des cartes 
+    * afficher des figures de carte arbitraire comme 145 coeur ou 13378 pique.
+    * rassembler les cartes en paquet (si on a plusieurs cartes au même endroit, afficher un paquet)
+1. Animations des cartes 
+    * animation pour retourner la carte
+    * animation pour étaler un paquer
+
 
 ### List
 
