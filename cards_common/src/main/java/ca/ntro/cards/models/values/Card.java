@@ -10,7 +10,7 @@ import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class Card implements Value, Identifiable {
+public class Card implements Value, Identifiable, Comparable<Card> {
 	
 	private long id = -1;
 	private int rank = 2;
@@ -212,6 +212,24 @@ public class Card implements Value, Identifiable {
 
 	public void flip() {
 		this.faceUp = !this.faceUp;
+	}
+
+	@Override
+	public int compareTo(Card otherCard) {
+		int result = 0;
+		
+		if(suit.equals(otherCard.suit)) {
+
+			result = Integer.compare(rank, otherCard.rank);
+
+		}else {
+			
+			result = Integer.compare(suit.ordinal(), otherCard.suit.ordinal());
+			
+		}
+
+		return result;
+
 	}
 
 
