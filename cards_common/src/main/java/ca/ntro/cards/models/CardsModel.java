@@ -39,9 +39,9 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	public void createFirstVersionIfNeeded() {
 		if(version == 0) {
 			createFirstVersion();
+			incrementVersion();
 		}
 	}
-
 
 	protected abstract void createFirstVersion();
 

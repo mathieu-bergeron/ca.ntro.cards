@@ -13,8 +13,8 @@ import ca.ntro.core.reflection.object_graph.Initializable;
 public class Card implements Value, Identifiable, Initializable {
 	
 	private long id = -1;
-	private int rank;
-	private Suit suit;
+	private int rank = 2;
+	private Suit suit = Suit.HEARTS;
 	private boolean faceUp = true;
 
 	public int getRank() {
