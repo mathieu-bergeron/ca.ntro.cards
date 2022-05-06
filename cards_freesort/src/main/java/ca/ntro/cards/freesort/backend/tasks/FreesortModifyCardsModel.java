@@ -20,6 +20,11 @@ public class FreesortModifyCardsModel {
 		    	 
 		    	 msgUpdateList.applyTo(freesortModel);
 		    	 
+		    	 if (msgUpdateList.isSorted() ) {
+		    		 // envoyer msgUpdateIsSorted
+		    		 // modifier dashboard model (contient isSorted)
+		    	 }
+		    	 
 		     });
 	}
 

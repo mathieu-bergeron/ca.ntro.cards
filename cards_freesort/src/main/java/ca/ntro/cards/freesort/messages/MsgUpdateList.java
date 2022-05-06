@@ -6,6 +6,7 @@ import java.util.List;
 import ca.ntro.app.messages.MessageNtro;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.freesort.models.FreesortCardsModel;
+import ca.ntro.cards.freesort.models.utils.Utils;
 
 public class MsgUpdateList extends MessageNtro {
 	
@@ -21,6 +22,12 @@ public class MsgUpdateList extends MessageNtro {
 
 	public void applyTo(FreesortCardsModel freesortModel) {
 		freesortModel.updateCardsInOrder(cards);
+	}
+
+	public boolean isSorted() {
+		// TODO Auto-generated method stub
+		// class utils -> compareTo each card
+		return Utils.cardsAreSorted(cards);
 	}
 	
 	
