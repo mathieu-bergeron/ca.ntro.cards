@@ -1,4 +1,4 @@
-# Data structures examples based on card games
+# Projet *Paquet de structures*
 
 ## Installation
 
@@ -33,6 +33,20 @@
         $ sh scripts/new_project.sh Bar bar
 
 1. Devrait créer le répertoire `cards_bar` avec le nouveau projet
+
+1. Ouvrir `settings.gradle` et ajouter
+
+        include("cards_bar")
+
+1. Créer le projet Eclipse
+
+        $ sh gradlew cards_bar:build
+        $ sh gradlew cards_bar:eclipse
+
+
+1. Ouvrir le projet en Eclipse
+
+    
 
 ## Énoncés de projet
 
