@@ -1,6 +1,7 @@
 package ca.ntro.cards.models.values;
 
 import ca.ntro.app.NtroApp;
+
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.app.models.Value;
@@ -8,9 +9,8 @@ import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
-import ca.ntro.core.reflection.object_graph.Initializable;
 
-public class Card implements Value, Identifiable, Initializable {
+public class Card implements Value, Identifiable {
 	
 	private long id = -1;
 	private int rank = 2;
@@ -50,13 +50,6 @@ public class Card implements Value, Identifiable, Initializable {
 	}
 
 	public Card() {
-	}
-
-	@Override
-	public void initialize() {
-		if(id == -1) {
-			id = CardsModel.nextId();
-		}
 	}
 
 	public Card(int rank, Suit suit) {

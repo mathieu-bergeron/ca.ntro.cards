@@ -52,17 +52,28 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	@Override
 	public void initialize() {
-		Set<String> ids = new HashSet<>();
+		Set<String> existingIds = new HashSet<>();
+		Set<Card> cardsNeedingId = new HashSet<>();
 		
 		cards().forEach(c -> {
-			if(ids.contains(c.id())) {
-				throw new IdNotUniqueException();
-			}
+			if(c.getId() == -1) {
 
-			updateBiggestId(c);
-			
-			ids.add(c.id());
+				cardsNeedingId.add(c);
+
+			}else if(existingIds.contains(c.id())) {
+
+				throw new IdNotUniqueException(c.id());
+
+			}else {
+
+				updateBiggestId(c);
+				existingIds.add(c.id());
+			}
 		});
+		
+		for(Card card : cardsNeedingId) {
+			card.setId(nextId());
+		}
 	}
 
 	private void updateBiggestId(Card card) {
@@ -73,7 +84,7 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	public void addCard(Card card) {
 		if(cardById(card.id()) != null) {
-			Ntro.throwException(new IdNotUniqueException());
+			Ntro.throwException(new IdNotUniqueException(card.id()));
 		}
 		
 		updateBiggestId(card);
@@ -84,8 +95,8 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	protected abstract void addCardImpl(Card card);
 
 	public static long nextId() {
-		long nextId = biggestId;
 		biggestId++;
+		long nextId = biggestId;
 		return nextId;
 	}
 
