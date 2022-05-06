@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import ca.ntro.app.frontend.ViewData;
+import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
@@ -47,8 +48,8 @@ public abstract class CardsViewData implements ViewData {
 		dashboardView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 	}
 
-	public void dispatchMouseEvent(MouseEvent evtFx, double worldX, double worldY) {
-		world2d.dispatchMouseEvent(evtFx, worldX, worldY);
+	public void dispatchMouseEvent(World2dMouseEventFx world2dMouseEventFx) {
+		world2d.dispatchMouseEvent(world2dMouseEventFx);
 	}
 
 	public abstract void addOrUpdateCard(Card card, double topLeftX, double topLeftY);

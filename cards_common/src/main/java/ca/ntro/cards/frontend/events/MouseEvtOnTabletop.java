@@ -1,42 +1,26 @@
 package ca.ntro.cards.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
+import ca.ntro.app.frontend.views.controls.canvas.World2dMouseEvent;
+import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.frontend.views.CardsView;
 import javafx.scene.input.MouseEvent;
 
 public class MouseEvtOnTabletop extends EventNtro {
 	
-	private MouseEvent evtFx;
-	private double worldX;
-	private double worldY;
+	private World2dMouseEventFx world2dMouseEventFx;
 
-	public MouseEvent getEvtFx() {
-		return evtFx;
+	public World2dMouseEventFx getWorld2dMouseEventFx() {
+		return world2dMouseEventFx;
 	}
 
-	public void setEvtFx(MouseEvent evtFx) {
-		this.evtFx = evtFx;
-	}
-
-	public double getWorldX() {
-		return worldX;
-	}
-
-	public void setWorldX(double worldX) {
-		this.worldX = worldX;
-	}
-
-	public double getWorldY() {
-		return worldY;
-	}
-
-	public void setWorldY(double worldY) {
-		this.worldY = worldY;
+	public void setWorld2dMouseEventFx(World2dMouseEventFx world2dMouseEventFx) {
+		this.world2dMouseEventFx = world2dMouseEventFx;
 	}
 
 
 	public void applyTo(CardsView gameView) {
-		gameView.mouseEvtOnTabletop(evtFx, worldX, worldY);
+		gameView.mouseEvtOnTabletop(world2dMouseEventFx);
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
+import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
@@ -84,12 +85,9 @@ public abstract class CardsView extends ViewFx {
 		MouseEvtOnTabletop mouseEvtOnTabletop = NtroApp.newEvent(MouseEvtOnTabletop.class);
 		
 
-		tabletopCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+		tabletopCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
 			
-			mouseEvtOnTabletop.setEvtFx(evtFx);
-			mouseEvtOnTabletop.setWorldX(worldX);
-			mouseEvtOnTabletop.setWorldY(worldY);
-			
+			mouseEvtOnTabletop.setWorld2dMouseEventFx(world2dMouseEventFx);
 			mouseEvtOnTabletop.trigger();
 
 		});
@@ -100,12 +98,9 @@ public abstract class CardsView extends ViewFx {
 	private void installMouseEvtOnViewer() {
 		MouseEvtOnViewer mouseEvtOnViewer = NtroApp.newEvent(MouseEvtOnViewer.class);
 		
-		viewerCanvas().addMouseEventFilter(MouseEvent.ANY, (evtFx, worldX, worldY) -> {
+		viewerCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
 			
-			mouseEvtOnViewer.setEvtFx(evtFx);
-			mouseEvtOnViewer.setWorldX(worldX);
-			mouseEvtOnViewer.setWorldY(worldY);
-			
+			mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
 			mouseEvtOnViewer.trigger();
 
 		});
@@ -218,7 +213,11 @@ public abstract class CardsView extends ViewFx {
 		dashboardContainer().getChildren().add(dashboardView.rootNode());
 	}
 
-	public void mouseEvtOnTabletop(MouseEvent evtFx, double worldX, double worldY) {
+	public void mouseEvtOnTabletop(World2dMouseEventFx world2dMouseEventFx) {
+		MouseEvent evtFx = world2dMouseEventFx.rawMouseEvent();
+		double worldX = world2dMouseEventFx.worldX();
+		double worldY = world2dMouseEventFx.worldY();
+		
 		if(evtFx.getEventType().equals(MouseEvent.MOUSE_CLICKED)
 				|| evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
 			
