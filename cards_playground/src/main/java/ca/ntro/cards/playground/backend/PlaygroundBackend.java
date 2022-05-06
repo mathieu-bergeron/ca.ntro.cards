@@ -26,5 +26,10 @@ public class PlaygroundBackend extends CommonBackend<PlaygroundCardsModel,
 	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
 	}
 
+	@Override
+	protected void createAdditionalTasks(BackendTasks tasks) {
+		
+	}
+
 
 }

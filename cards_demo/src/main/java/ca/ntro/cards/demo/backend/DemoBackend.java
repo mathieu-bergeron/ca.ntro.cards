@@ -31,4 +31,9 @@ public class DemoBackend extends CommonBackend<DemoCardsModel,
 		
 	}
 
+	@Override
+	protected void createAdditionalTasks(BackendTasks tasks) {
+		
+	}
+
 }

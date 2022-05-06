@@ -90,4 +90,9 @@ public class PlaygroundFrontend extends CommonFrontend<PlaygroundRootView,
 
 	}
 
+	@Override
+	protected void createAdditionnalTasks(FrontendTasks tasks) {
+		
+	}
+
 }

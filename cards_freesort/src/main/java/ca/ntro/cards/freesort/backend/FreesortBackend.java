@@ -31,4 +31,9 @@ public class FreesortBackend extends CommonBackend<FreesortCardsModel,
 		
 	}
 
+	@Override
+	protected void createAdditionalTasks(BackendTasks tasks) {
+		
+	}
+
 }
