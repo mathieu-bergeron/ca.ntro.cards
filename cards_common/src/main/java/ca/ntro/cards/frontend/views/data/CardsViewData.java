@@ -58,7 +58,9 @@ public abstract class CardsViewData implements ViewData {
 		Set<String> cardIds = new HashSet<>();
 
 		cards.forEach(c -> {
-			cardIds.add(c.id());
+			if(c != null) {
+				cardIds.add(c.id());
+			}
 		});
 
 		world2d.removeObject2dNotIn(cardIds);

@@ -18,10 +18,14 @@ public class DemoCardsViewData extends CardsViewData {
 			                    double targetTopLeftX,
 			                    double targetTopLeftY) {
 
-		Card2d card2d = (Card2d) world2d().objectById(card.id());
+		Card2d card2d = null;
+
+		if(card != null) {
+			card2d = (Card2d) world2d().objectById(card.id());
+		}
 
 		if(card2d == null) {
-			card2d = new Card2d(card);
+			card2d = new Card2d();
 			world2d().addObject2d(card2d);
 		}
 		

@@ -1,4 +1,4 @@
-package ca.ntro.cards.models;
+package ca.ntro.cards.models.identifyers;
 
 public class IdNotUniqueException extends Exception {
 

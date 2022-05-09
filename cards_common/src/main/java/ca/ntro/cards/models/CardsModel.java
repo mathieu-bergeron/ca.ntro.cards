@@ -6,6 +6,8 @@ import java.util.Set;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.models.identifyers.IdFactory;
+import ca.ntro.cards.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initializable;
@@ -13,7 +15,6 @@ import ca.ntro.core.stream.Stream;
 
 public abstract class CardsModel implements Model, Watchable, Initializable {
 	
-	public static long biggestId;
 	private long version;
 
 	public long getVersion() {
@@ -56,48 +57,41 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 		Set<Card> cardsNeedingId = new HashSet<>();
 		
 		cards().forEach(c -> {
-			if(c.getId() == -1) {
+			if(c != null
+					&& c.getId() == -1) {
 
 				cardsNeedingId.add(c);
 
-			}else if(existingIds.contains(c.id())) {
+			}else if(c != null
+					&& existingIds.contains(c.id())) {
 
 				throw new IdNotUniqueException(c.id());
 
-			}else {
+			}else if(c != null) {
 
-				updateBiggestId(c);
+				IdFactory.registerId(c.getId());
 				existingIds.add(c.id());
 			}
 		});
 		
 		for(Card card : cardsNeedingId) {
-			card.setId(nextId());
+			card.setId(IdFactory.nextId());
 		}
 	}
 
-	private void updateBiggestId(Card card) {
-		if(card.getId() > biggestId) {
-			biggestId = card.getId();
-		}
-	}
 	
 	public void addCard(Card card) {
 		if(cardById(card.id()) != null) {
 			Ntro.throwException(new IdNotUniqueException(card.id()));
 		}
 		
-		updateBiggestId(card);
+		IdFactory.registerId(card.getId());
 
 		addCardImpl(card);
 	}
 	
 	protected abstract void addCardImpl(Card card);
 
-	public static long nextId() {
-		biggestId++;
-		return biggestId;
-	}
 
 	public void updateViewData(CardsViewData cardsViewData) {
 		cardsViewData.removeCardsNotIn(cards());

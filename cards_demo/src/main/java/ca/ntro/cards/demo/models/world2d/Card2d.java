@@ -18,6 +18,11 @@ public class Card2d extends CommonCard2d {
 	private int directionX = 0; 
 	private int directionY = 0; 
 
+
+	public Card2d() {
+		super();
+	}
+
 	public Card2d(Card card) {
 		super(card);
 	}
