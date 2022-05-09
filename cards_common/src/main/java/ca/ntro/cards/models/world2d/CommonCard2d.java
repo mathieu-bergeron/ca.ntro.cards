@@ -106,7 +106,21 @@ public abstract class CommonCard2d extends CommonObject2d {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void draw(World2dGraphicsContext gc, CommonDrawingOptions options) {
-		if(card != null) {
+		if(isNullCard()) {
+
+			gc.strokeRect(getTopLeftX(), 
+					      getTopLeftY(),
+					      getWidth(),
+					      getHeight());
+			
+			/*
+			gc.fillText("null", 
+					    getTopLeftX() + getWidth() / 2 - 16, 
+					    getTopLeftY() + getHeight() / 2);
+			*/
+
+
+		}else {
 
 			card.draw(gc, 
 					  getTopLeftX(), 
@@ -115,13 +129,6 @@ public abstract class CommonCard2d extends CommonObject2d {
 					  getHeight(),
 					  levelOfDetails(gc),
 					  options);
-
-		}else {
-			
-			gc.strokeRect(getTopLeftX(), 
-					      getTopLeftY(),
-					      getWidth(),
-					      getHeight());
 		}
 	}
 	
@@ -139,5 +146,8 @@ public abstract class CommonCard2d extends CommonObject2d {
 		return levelOfDetails;
 	}
 
+	public boolean isNullCard() {
+		return card == null;
+	}
 
 }
