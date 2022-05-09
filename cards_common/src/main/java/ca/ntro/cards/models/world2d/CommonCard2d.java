@@ -121,10 +121,14 @@ public abstract class CommonCard2d extends CommonObject2d {
 					      getWidth(),
 					      getHeight());
 
-			gc.strokeRect(getTopLeftX() + getWidth()/2 - getWidth()/8, 
-					      getTopLeftY() + getHeight()/2 - getHeight()/8,
-					      getWidth()/4,
-					      getHeight()/4);
+			/*
+			gc.strokeArc(getTopLeftX() + getWidth()/2 - getWidth()/8, 
+					     getTopLeftY() + getHeight()/2 - getWidth()/8,
+					     getWidth()/4,
+					     getWidth()/4,
+					     0,
+					     360);
+					     */
 			
 			/*
 			gc.fillText("null", 
