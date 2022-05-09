@@ -108,10 +108,23 @@ public abstract class CommonCard2d extends CommonObject2d {
 	public void draw(World2dGraphicsContext gc, CommonDrawingOptions options) {
 		if(isNullCard()) {
 
+			
+			gc.setFill(NtroApp.colorFromString("#ffffff"));
+
+			gc.fillRect(getTopLeftX(), 
+					      getTopLeftY(),
+					      getWidth(),
+					      getHeight());
+
 			gc.strokeRect(getTopLeftX(), 
 					      getTopLeftY(),
 					      getWidth(),
 					      getHeight());
+
+			gc.strokeRect(getTopLeftX() + getWidth()/2 - getWidth()/8, 
+					      getTopLeftY() + getHeight()/2 - getHeight()/8,
+					      getWidth()/4,
+					      getHeight()/4);
 			
 			/*
 			gc.fillText("null", 
