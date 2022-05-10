@@ -8,6 +8,7 @@ import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.Card;
+import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -49,11 +50,18 @@ public class DemoCardsModel extends CardsModel {
 
 	@Override
 	public void createFirstVersion() {
-		cards.add(new Card(3, Suit.HEARTS));
-		cards.add(new Card(6, Suit.CLUBS));
-		cards.add(new Card(4, Suit.SPADES));
-		cards.add(new Card(10, Suit.DIAMONDS));
-		cards.add(new Card(5, Suit.HEARTS));
+		List<Card> cards = new ArrayList<>(List.of(new Card(2, Suit.HEARTS), 
+				                                   new Card(5, Suit.HEARTS), 
+				                                   new Card(5, Suit.DIAMONDS), 
+				                                   new Card(2, Suit.CLUBS), 
+				                                   new Card(5, Suit.CLUBS), 
+				                                   new Card(7, Suit.SPADES)));
+		
+		while(cards.size() > 0) {
+			Card card = Ntro.random().choice(cards);
+			cards.remove(card);
+			this.cards.add(card);
+		}
 	}
 	
 	@Override
