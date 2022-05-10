@@ -97,7 +97,6 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 
 	public void updateViewData(CardsViewData cardsViewData) {
 		cardsViewData.removeCardsNotIn(cards());
-		cardsViewData.removeNullCards();
 		
 		updateViewDataImpl(cardsViewData);
 	}
