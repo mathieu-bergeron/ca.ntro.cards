@@ -1,13 +1,14 @@
 package ca.ntro.cards.playground.models.world2d;
 
 import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonCard2d;
 import ca.ntro.cards.playground.PlaygroundConstants;
 
 public class Card2d extends CommonCard2d {
 
-	public Card2d(Card card) {
+	public Card2d(AbstractCard card) {
 		super(card);
 	}
 

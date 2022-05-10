@@ -11,6 +11,7 @@ import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.core.stream.Stream;
@@ -36,11 +37,14 @@ public abstract class CardsViewData implements ViewData {
 	}
 
 	public void onTimePasses(double secondsElapsed) {
+
 		world2d.onTimePasses(secondsElapsed);
+
 	}
 
 	public void displayOn(CardsView gameView, 
 			              DashboardView dashboardView) {
+
 		fpsCounter.onNewFrame();
 
 		gameView.clearCanvas();
@@ -54,7 +58,7 @@ public abstract class CardsViewData implements ViewData {
 		world2d.dispatchMouseEvent(world2dMouseEventFx);
 	}
 
-	public abstract void addOrUpdateCard(Card card, double topLeftX, double topLeftY);
+	public abstract void addOrUpdateCard(AbstractCard card, double topLeftX, double topLeftY);
 
 	public void removeCardsNotIn(Stream<Card> cards) {
 		Set<String> cardIds = new HashSet<>();

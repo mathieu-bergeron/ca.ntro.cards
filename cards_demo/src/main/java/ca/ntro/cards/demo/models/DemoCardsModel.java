@@ -7,7 +7,9 @@ import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
+import ca.ntro.cards.models.values.NullCard;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -35,14 +37,20 @@ public class DemoCardsModel extends CardsModel {
 
 			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
+			
+			AbstractCard card = cards.get(i);
+			
+			if(card == null) {
+				card = new NullCard();
+			}
 
-			cardsViewData.addOrUpdateCard(cards.get(i),
-					                     targetTopLeftX,
-					                     targetTopLeftY);
+			cardsViewData.addOrUpdateCard(card,
+					                      targetTopLeftX,
+					                      targetTopLeftY);
 		}
 	}
 
-	public void updateCardsInOrder(List<Card> cards) {
+	public void updateCards(List<Card> cards) {
 		setCards(cards);
 		incrementVersion();
 	}
@@ -85,6 +93,23 @@ public class DemoCardsModel extends CardsModel {
 	@Override
 	protected void addCardImpl(Card card) {
 		cards.add(card);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		format(builder);
+		
+		return builder.toString();
+
+	}
+	
+	public void format(StringBuilder builder) {
+		for(Card card : cards) {
+			builder.append(System.lineSeparator());
+			card.format(builder);
+		}
 	}
 
 }

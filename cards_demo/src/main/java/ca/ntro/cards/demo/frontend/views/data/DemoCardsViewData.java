@@ -1,7 +1,7 @@
 package ca.ntro.cards.demo.frontend.views.data;
 
 import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.models.values.Card;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.models.world2d.Card2d;
 import ca.ntro.cards.demo.models.world2d.World2d;
@@ -14,7 +14,7 @@ public class DemoCardsViewData extends CardsViewData {
 	}
 
 	@Override
-	public void addOrUpdateCard(Card card,
+	public void addOrUpdateCard(AbstractCard card,
 			                    double targetTopLeftX,
 			                    double targetTopLeftY) {
 
@@ -25,13 +25,27 @@ public class DemoCardsViewData extends CardsViewData {
 		}
 
 		if(card2d == null) {
-			card2d = new Card2d();
+
+			card2d = new Card2d(card);
 			world2d().addObject2d(card2d);
+
+		}else {
+			
+			card2d.setCard(card);
+			
 		}
 		
-		card2d.setTarget(targetTopLeftX, targetTopLeftY);
+		if(card2d.isNullCard()) {
+			
+			card2d.setTopLeftX(targetTopLeftX);
+			card2d.setTopLeftY(targetTopLeftY);
+			
+		}else {
+			
+			card2d.setTarget(targetTopLeftX, targetTopLeftY);
 
-		card2d.setCard(card);
+		}
+		
 	}
 
 }

@@ -1,6 +1,7 @@
 package ca.ntro.cards.demo.models.world2d;
 
 import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonCard2d;
 import ca.ntro.cards.demo.DemoConstants;
@@ -23,7 +24,7 @@ public class Card2d extends CommonCard2d {
 		super();
 	}
 
-	public Card2d(Card card) {
+	public Card2d(AbstractCard card) {
 		super(card);
 	}
 

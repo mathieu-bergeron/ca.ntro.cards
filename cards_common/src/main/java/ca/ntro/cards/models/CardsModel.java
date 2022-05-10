@@ -31,7 +31,7 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	public void flipCard(String cardId) {
 		Card card = cardById(cardId);
-		
+
 		if(card != null) {
 			card.flip();
 		}
@@ -49,7 +49,6 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	protected abstract Card cardById(String cardId);
 	
 	protected abstract Stream<Card> cards();
-
 	
 	@Override
 	public void initialize() {
@@ -57,20 +56,23 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 		Set<Card> cardsNeedingId = new HashSet<>();
 		
 		cards().forEach(c -> {
-			if(c != null
-					&& c.getId() == -1) {
+			if(c == null) {
+				return;
+			}
+
+			if(c.getId() == -1) {
 
 				cardsNeedingId.add(c);
 
-			}else if(c != null
-					&& existingIds.contains(c.id())) {
+			}else if(existingIds.contains(c.id())) {
 
 				throw new IdNotUniqueException(c.id());
 
-			}else if(c != null) {
+			}else {
 
 				IdFactory.registerId(c.getId());
 				existingIds.add(c.id());
+
 			}
 		});
 		

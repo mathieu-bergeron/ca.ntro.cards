@@ -1,6 +1,7 @@
 package ca.ntro.cards.playground.frontend.views.data;
 
 import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.cards.playground.models.world2d.Card2d;
@@ -14,7 +15,7 @@ public class PlaygroundCardsViewData extends CardsViewData {
 	}
 
 	@Override
-	public void addOrUpdateCard(Card card,
+	public void addOrUpdateCard(AbstractCard card,
 			                    double topLeftX,
 			                    double topLeftY) {
 

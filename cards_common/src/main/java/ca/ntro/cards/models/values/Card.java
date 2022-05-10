@@ -10,12 +10,10 @@ import ca.ntro.cards.models.identifyers.IdFactory;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class Card implements Value, Identifiable, Comparable<Card> {
+public class Card extends AbstractCard {
 	
-	private long id = -1;
 	private int rank = 2;
 	private Suit suit = Suit.HEARTS;
-	private boolean faceUp = true;
 
 	public int getRank() {
 		return rank;
@@ -33,61 +31,22 @@ public class Card implements Value, Identifiable, Comparable<Card> {
 		this.suit = Suit.valueOf(suit);
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public boolean getFaceUp() {
-		return faceUp;
-	}
-
-	public void setFaceUp(boolean facesUp) {
-		this.faceUp = facesUp;
-	}
-
 	public Card() {
+		super();
 	}
 
 	public Card(int rank, Suit suit) {
-		setId(IdFactory.nextId());
+		super();
 		setRank(rank);
 		setSuit(suit.name());
 	}
 
-
-	@Override
-	public String id() {
-		return String.valueOf(getId());
-	}
 
 	@SuppressWarnings("rawtypes")
 	private Color color(CommonDrawingOptions options) {
 		return NtroApp.colorFromString(suit.color(options));
 	}
 
-	@SuppressWarnings("rawtypes")
-	public void draw(World2dGraphicsContext gc, 
-			         double topLeftX, 
-			         double topLeftY, 
-			         double width, 
-			         double height, 
-			         int levelOfDetails, 
-			         CommonDrawingOptions options) {
-		
-		if(faceUp) {
-
-			drawFaceUp(gc, topLeftX, topLeftY, width, height, levelOfDetails, options);
-
-		}else {
-
-			drawFaceDown(gc, topLeftX, topLeftY, width, height, levelOfDetails, options);
-			
-		}
-	}
 
 	@SuppressWarnings("rawtypes")
 	public void drawFaceUp(World2dGraphicsContext gc, 
@@ -109,25 +68,6 @@ public class Card implements Value, Identifiable, Comparable<Card> {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
-	public void drawFaceDown(World2dGraphicsContext gc, 
-			                 double topLeftX, 
-			                 double topLeftY, 
-			                 double width, 
-			                 double height, 
-			                 int levelOfDetails, 
-			                 CommonDrawingOptions options) {
-
-		if(levelOfDetails > 5) {
-
-			drawFaceDownHighDetails(gc, topLeftX, topLeftY, width, height, options);
-
-		}else {
-
-			drawFaceDownLowDetails(gc, topLeftX, topLeftY, width, height, options);
-
-		}
-	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void drawFaceUpHighDetails(World2dGraphicsContext gc, 
@@ -155,6 +95,7 @@ public class Card implements Value, Identifiable, Comparable<Card> {
 					  height);
 	}
 
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void drawFaceUpLowDetails(World2dGraphicsContext gc, 
 			                    double topLeftX, 
@@ -171,51 +112,26 @@ public class Card implements Value, Identifiable, Comparable<Card> {
 					height);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void drawFaceDownHighDetails(World2dGraphicsContext gc, 
-			                  double topLeftX, 
-			                  double topLeftY, 
-			                  double width, 
-			                  double height, 
-			                  CommonDrawingOptions options) {
-		
-		gc.setFill(NtroApp.colorFromString("#999999"));
-		gc.fillRect(topLeftX, 
-					topLeftY,
-					width, 
-					height);
-
-		gc.setStroke(NtroApp.colorFromString("#000000"));
-		gc.strokeRect(topLeftX, 
-					  topLeftY,
-					  width, 
-					  height);
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void drawFaceDownLowDetails(World2dGraphicsContext gc, 
-			                            double topLeftX, 
-			                            double topLeftY, 
-			                            double width, 
-			                            double height, CommonDrawingOptions options) {
-		
-		gc.setFill(NtroApp.colorFromString("#aaaaaa"));
-		gc.fillRect(topLeftX, 
-					topLeftY,
-					width, 
-					height);
-	}
-
-	public boolean hasId(String id) {
-		return String.valueOf(this.id).equals(id);
-	}
-
-	public void flip() {
-		this.faceUp = !this.faceUp;
-	}
 
 	@Override
-	public int compareTo(Card otherCard) {
+	public int compareTo(AbstractCard otherCard) {
+		int result = 0;
+		
+		if(otherCard instanceof NullCard) {
+
+			result = -1;
+
+		}else {
+			
+			result = compareTo((Card) otherCard);
+			
+		}
+		
+		return result;
+
+	}
+
+	private int compareTo(Card otherCard) {
 		int result = 0;
 		
 		if(suit.equals(otherCard.suit)) {
@@ -232,5 +148,29 @@ public class Card implements Value, Identifiable, Comparable<Card> {
 
 	}
 
+	@Override
+	public boolean isNullCard() {
+		return false;
+	}
+	
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		format(builder);
+		
+		return builder.toString();
+	}
+	
+	@Override
+	public void format(StringBuilder builder) {
+		builder.append(rank);
+		builder.append(" of ");
+		builder.append(suit);
+		builder.append("  (");
+		super.format(builder);
+		builder.append(")");
+	}
 
 }
