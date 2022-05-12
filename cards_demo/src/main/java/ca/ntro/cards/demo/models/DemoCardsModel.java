@@ -7,8 +7,9 @@ import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
-import ca.ntro.core.initialization.Ntro;
+import ca.ntro.cards.models.values.NullCard;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -36,32 +37,31 @@ public class DemoCardsModel extends CardsModel {
 
 			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
+			
+			AbstractCard card = cards.get(i);
+			
+			if(card == null) {
+				card = new NullCard();
+			}
 
-			cardsViewData.addOrUpdateCard(cards.get(i),
-					                     targetTopLeftX,
-					                     targetTopLeftY);
+			cardsViewData.addOrUpdateCard(card,
+					                      targetTopLeftX,
+					                      targetTopLeftY);
 		}
 	}
 
-	public void updateCardsInOrder(List<Card> cards) {
+	public void updateCards(List<Card> cards) {
 		setCards(cards);
 		incrementVersion();
 	}
 
 	@Override
 	public void createFirstVersion() {
-		List<Card> cards = new ArrayList<>(List.of(new Card(2, Suit.HEARTS), 
-				                                   new Card(5, Suit.HEARTS), 
-				                                   new Card(5, Suit.DIAMONDS), 
-				                                   new Card(2, Suit.CLUBS), 
-				                                   new Card(5, Suit.CLUBS), 
-				                                   new Card(7, Suit.SPADES)));
-		
-		while(cards.size() > 0) {
-			Card card = Ntro.random().choice(cards);
-			cards.remove(card);
-			this.cards.add(card);
-		}
+		cards.add(new Card(3, Suit.HEARTS));
+		cards.add(new Card(6, Suit.CLUBS));
+		cards.add(new Card(4, Suit.SPADES));
+		cards.add(new Card(10, Suit.DIAMONDS));
+		cards.add(new Card(5, Suit.HEARTS));
 	}
 	
 	@Override
@@ -93,6 +93,23 @@ public class DemoCardsModel extends CardsModel {
 	@Override
 	protected void addCardImpl(Card card) {
 		cards.add(card);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		format(builder);
+		
+		return builder.toString();
+
+	}
+	
+	public void format(StringBuilder builder) {
+		for(Card card : cards) {
+			builder.append(System.lineSeparator());
+			card.format(builder);
+		}
 	}
 
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.app.NtroApp;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonObject2d;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
@@ -28,7 +29,11 @@ public class World2d extends CommonWorld2d {
 		for(CommonObject2d object2d : leftRightObjects) {
 			if(object2d instanceof Card2d) {
 				Card2d card2d = (Card2d) object2d;
-				leftRightCards.add(card2d.getCard());
+				if(card2d.isNullCard()) {
+					leftRightCards.add(null);
+				}else {
+					leftRightCards.add((Card) card2d.getCard());
+				}
 			}
 		}
 		

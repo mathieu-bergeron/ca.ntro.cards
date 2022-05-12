@@ -5,40 +5,37 @@ import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.enums.Suit;
-import ca.ntro.cards.models.identifyers.IdFactory;
+import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
+import ca.ntro.cards.models.values.NullCard;
 import javafx.scene.input.MouseEvent;
 
 public abstract class CommonCard2d extends CommonObject2d {
 	
-	private long nullId;
-	private Card card;
+	private AbstractCard card;
 
 	private double dragOffsetX;
 	private double dragOffsetY;
 
 	private MsgFlipCard msgFlipCard = NtroApp.newMessage(MsgFlipCard.class);
 
-	public Card getCard() {
+	public AbstractCard getCard() {
 		return card;
 	}
 
-	public void setCard(Card card) {
+	public void setCard(AbstractCard card) {
 		this.card = card;
-		if(card == null) {
-			nullId = IdFactory.nextId();
-		}
 	}
 
 	public CommonCard2d() {
-		setCard(null);
+		setCard(new NullCard());
 	}
 
 	public CommonCard2d(int rank, Suit suit) {
 		setCard(new Card(rank, suit));
 	}
 
-	public CommonCard2d(Card card) {
+	public CommonCard2d(AbstractCard card) {
 		setCard(card);
 	}
 
@@ -47,19 +44,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 
 	@Override
 	public String id() {
-		String id = null;
-
-		if(card != null) {
-
-			id = card.id();
-
-		}else {
-			
-			id = String.valueOf(nullId);
-			
-		}
-
-		return id;
+		return card.id();
 	}
 
 	@Override
@@ -106,47 +91,13 @@ public abstract class CommonCard2d extends CommonObject2d {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void draw(World2dGraphicsContext gc, CommonDrawingOptions options) {
-		if(isNullCard()) {
-
-			
-			gc.setFill(NtroApp.colorFromString("#ffffff"));
-
-			gc.fillRect(getTopLeftX(), 
-					      getTopLeftY(),
-					      getWidth(),
-					      getHeight());
-
-			gc.strokeRect(getTopLeftX(), 
-					      getTopLeftY(),
-					      getWidth(),
-					      getHeight());
-
-			/*
-			gc.strokeArc(getTopLeftX() + getWidth()/2 - getWidth()/8, 
-					     getTopLeftY() + getHeight()/2 - getWidth()/8,
-					     getWidth()/4,
-					     getWidth()/4,
-					     0,
-					     360);
-					     */
-			
-			/*
-			gc.fillText("null", 
-					    getTopLeftX() + getWidth() / 2 - 16, 
-					    getTopLeftY() + getHeight() / 2);
-			*/
-
-
-		}else {
-
-			card.draw(gc, 
-					  getTopLeftX(), 
-					  getTopLeftY(),
-					  getWidth(),
-					  getHeight(),
-					  levelOfDetails(gc),
-					  options);
-		}
+		card.draw(gc, 
+				  getTopLeftX(), 
+				  getTopLeftY(),
+				  getWidth(),
+				  getHeight(),
+				  levelOfDetails(gc),
+				  options);
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -164,7 +115,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 	}
 
 	public boolean isNullCard() {
-		return card == null;
+		return card.isNullCard();
 	}
 
 }
