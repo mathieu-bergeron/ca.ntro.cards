@@ -1,10 +1,31 @@
 package ca.ntro.cards.frontend.procedures;
 
-public class NaiveSort extends Procedure {
+import java.util.List;
 
-	private int indexOfSmallestElement = -1;
-	private int indexOfCandidateSmallestElement = 0;
-	private int indexOfNextEmptySpace = 0;
+public class NaiveSort<C extends Comparable<C>> extends Procedure {
+
+	protected int indexOfSmallestElement = -1;
+	protected int indexOfCandidateSmallestElement = 0;
+	protected int indexOfNextEmptySpace = 0;
+	
+	protected List<C> sourceArray;
+	protected List<C> targetArray;
+
+	public List<C> getSourceArray() {
+		return sourceArray;
+	}
+
+	public void setSourceArray(List<C> sourceArray) {
+		this.sourceArray = sourceArray;
+	}
+
+	public List<C> getTargetArray() {
+		return targetArray;
+	}
+
+	public void setTargetArray(List<C> targetArray) {
+		this.targetArray = targetArray;
+	}
 
 	public int getIndexOfSmallestElement() {
 		return indexOfSmallestElement;
@@ -29,9 +50,4 @@ public class NaiveSort extends Procedure {
 	public void setIndexOfCandidateSmallestElement(int indexOfCandidateSmallestElement) {
 		this.indexOfCandidateSmallestElement = indexOfCandidateSmallestElement;
 	}
-
-	protected void incrementIndexOfNextEmptySpace() {
-		this.indexOfSmallestElement++;
-	}
-
 }

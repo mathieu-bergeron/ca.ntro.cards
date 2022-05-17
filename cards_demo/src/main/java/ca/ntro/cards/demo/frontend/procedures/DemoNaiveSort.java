@@ -1,55 +1,51 @@
 package ca.ntro.cards.demo.frontend.procedures;
 
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import java.util.List;
+
 import ca.ntro.cards.frontend.procedures.NaiveSort;
 
-public class DemoNaiveSort extends NaiveSort {
+public class DemoNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 
-
-	public <C extends Comparable<C>> void sort(C[] sourceArray, C[] sortedArray) {
-		setIndexOfNextEmptySpace(0);
-		registerSimpleOperation();
+	public void sort() {
+		indexOfNextEmptySpace = 0;
 		
-		for(int i = 0; i < sourceArray.length; i++) {
+		for(int i = 0; i < sourceArray.size(); i++) {
 
 			findIndexOfSmallestElement(sourceArray);
 			
-			C smallestElement = sourceArray[getIndexOfSmallestElement()];
+			C smallestElement = sourceArray.get(indexOfSmallestElement);
 			
-			sortedArray[getIndexOfNextEmptySpace()] = smallestElement;
+			targetArray.add(indexOfNextEmptySpace, smallestElement);
 			
-			sourceArray[getIndexOfSmallestElement()] = null;
+			sourceArray.add(indexOfSmallestElement, null);
 			
-			incrementIndexOfNextEmptySpace();
+			indexOfNextEmptySpace++;
 
 			registerSimpleOperation();
 		}
 	}
 
 
-	private <C extends Comparable<C>>void findIndexOfSmallestElement(C[] sourceArray) {
-		setIndexOfSmallestElement(-1);
+	private void findIndexOfSmallestElement(List<C> sourceArray) {
+		indexOfSmallestElement = -1;
 
 		C currentSmallest = null;
 
-		for(int i = 0; i < sourceArray.length; i++) {
+		for(int i = 0; i < sourceArray.size(); i++) {
 			
-			setIndexOfCandidateSmallestElement(i);
+			indexOfCandidateSmallestElement = i;
 			registerSimpleOperation();
 			
-			C candidate = sourceArray[i];
+			C candidate = sourceArray.get(i);
 			
 			if(currentSmallest == null
 					|| candidate.compareTo(currentSmallest) < 0) {
 				
 				currentSmallest = candidate;
 				
-				setIndexOfSmallestElement(i);
+				indexOfSmallestElement = i;
 				registerSimpleOperation();
 			}
 		}
 	}
-
-
-
 }

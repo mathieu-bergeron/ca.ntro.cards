@@ -17,11 +17,11 @@ import ca.ntro.core.stream.Visitor;
 
 public class DemoCardsModel extends CardsModel {
 	
-	private DemoNaiveSort naiveSort;
+	private DemoNaiveSort naiveSort = new DemoNaiveSort();
 
 	private List<Card> sourceList = new ArrayList<>();
 	private List<Card> targetList = new ArrayList<>();
-
+	
 	public DemoNaiveSort getNaiveSort() {
 		return naiveSort;
 	}
@@ -102,28 +102,31 @@ public class DemoCardsModel extends CardsModel {
 		for(int i = 0; i < sourceList.size(); i++) {
 			targetList.add(null);
 		}
+
+		naiveSort.setSourceArray(new ArrayList(sourceList));
+		naiveSort.setTargetArray(new ArrayList(targetList));
 	}
 	
 	@Override
 	protected Card cardById(String cardId) {
+		Card result = cardById(cardId, sourceList);
+
+		if(result == null) {
+			result = cardById(cardId, targetList);
+		}
+
+		return result;
+	}
+	
+	private Card cardById(String cardId, List<Card> list) {
 		Card result = null;
 		
-		for(Card candidate : sourceList) {
+		for(Card candidate : list) {
 			if(candidate.hasId(cardId)){
 				result = candidate;
 				break;
 			}
 		}
-		
-		if(result == null) {
-			for(Card candidate : targetList) {
-				if(candidate.hasId(cardId)){
-					result = candidate;
-					break;
-				}
-			}
-		}
-
 		
 		return result;
 	}
@@ -133,10 +136,12 @@ public class DemoCardsModel extends CardsModel {
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				for(Card card : sourceList) {
-					visitor.visit(card);
-				}
-				for(Card card : targetList) {
+				visitList(visitor, sourceList);
+				visitList(visitor, targetList);
+			}
+
+			private void visitList(Visitor<Card> visitor, List<Card> listToVisit) throws Throwable {
+				for(Card card : listToVisit) {
 					visitor.visit(card);
 				}
 			}
@@ -145,7 +150,7 @@ public class DemoCardsModel extends CardsModel {
 
 	@Override
 	protected void addCardImpl(Card card) {
-		targetList.add(card);
+		sourceList.add(card);
 	}
 	
 	@Override
