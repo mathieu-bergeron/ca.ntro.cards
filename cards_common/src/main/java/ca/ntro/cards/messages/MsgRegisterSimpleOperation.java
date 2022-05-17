@@ -11,6 +11,6 @@ public abstract class MsgRegisterSimpleOperation<CARDS_MODEL extends CardsModel,
 	
 	public abstract void applyTo(CARDS_MODEL cardsModel);
 
-	public abstract void applyTo(DASHBOARD_MODEL cardsModel);
+	public abstract void applyTo(DASHBOARD_MODEL dashboardModel);
 
 }

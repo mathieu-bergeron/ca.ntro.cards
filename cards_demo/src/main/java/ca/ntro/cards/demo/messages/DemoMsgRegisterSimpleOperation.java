@@ -12,7 +12,7 @@ public class DemoMsgRegisterSimpleOperation extends MsgRegisterSimpleOperation<D
 	}
 
 	@Override
-	public void applyTo(DemoDashboardModel cardsModel) {
+	public void applyTo(DemoDashboardModel dashboardModel) {
 		
 	}
 
