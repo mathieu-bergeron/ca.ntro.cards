@@ -9,20 +9,26 @@ import ca.ntro.cards.demo.models.DemoCardsModel;
 
 public class MsgUpdateList extends MessageNtro {
 	
-	List<Card> cards = new ArrayList<>();
+	List<Card> sourceList = new ArrayList<>();
+	List<Card> targetList = new ArrayList<>();
 
-	public List<Card> getCards() {
-		return cards;
+	public List<Card> getSourceList() {
+		return sourceList;
 	}
 
-	public void setCards(List<Card> cards) {
-		this.cards = cards;
+	public void setSourceList(List<Card> sourceList) {
+		this.sourceList = sourceList;
+	}
+
+	public List<Card> getTargetList() {
+		return targetList;
+	}
+
+	public void setTargetList(List<Card> targetList) {
+		this.targetList = targetList;
 	}
 
 	public void applyTo(DemoCardsModel demoModel) {
-		demoModel.updateCards(cards);
+		demoModel.updateCards(sourceList, targetList);
 	}
-	
-	
-
 }

@@ -1,8 +1,10 @@
 package ca.ntro.cards.demo.frontend.procedures;
 
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.frontend.procedures.NaiveSort;
 
-public class MyNaiveSort extends NaiveSort {
+public class DemoNaiveSort extends NaiveSort {
+
 
 	public <C extends Comparable<C>> void sort(C[] sourceArray, C[] sortedArray) {
 		setIndexOfNextEmptySpace(0);
@@ -47,5 +49,7 @@ public class MyNaiveSort extends NaiveSort {
 			}
 		}
 	}
+
+
 
 }
