@@ -108,12 +108,22 @@ public class DemoCardsModel extends CardsModel {
 	protected Card cardById(String cardId) {
 		Card result = null;
 		
-		for(Card candidate : targetList) {
+		for(Card candidate : sourceList) {
 			if(candidate.hasId(cardId)){
 				result = candidate;
 				break;
 			}
 		}
+		
+		if(result == null) {
+			for(Card candidate : targetList) {
+				if(candidate.hasId(cardId)){
+					result = candidate;
+					break;
+				}
+			}
+		}
+
 		
 		return result;
 	}
@@ -123,6 +133,9 @@ public class DemoCardsModel extends CardsModel {
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
+				for(Card card : sourceList) {
+					visitor.visit(card);
+				}
 				for(Card card : targetList) {
 					visitor.visit(card);
 				}
