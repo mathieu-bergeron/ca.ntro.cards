@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.app.NtroApp;
-import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonObject2d;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
+import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 
 public class World2d extends CommonWorld2d {
 	
 	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
+	private DemoMsgRegisterSimpleOperation msgRegisterSimpleOperation = NtroApp.newMessage(DemoMsgRegisterSimpleOperation.class);
 
 	@Override
 	protected void forgetDraggedCard() {
@@ -40,6 +41,8 @@ public class World2d extends CommonWorld2d {
 		msgUpdateList.setCards(leftRightCards);
 
 		msgUpdateList.send();
+		
+		msgRegisterSimpleOperation.send();
 
 	}
 

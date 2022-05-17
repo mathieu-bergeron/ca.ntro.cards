@@ -13,6 +13,7 @@ import ca.ntro.cards.frontend.events.EvtShowMenu;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.tasks.Cards;
+import ca.ntro.cards.frontend.tasks.Dashboard;
 import ca.ntro.cards.frontend.tasks.Initialization;
 import ca.ntro.cards.frontend.tasks.Settings;
 import ca.ntro.cards.frontend.tasks.Navigation;
@@ -154,6 +155,16 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 				            	   addSubTasksToNavigation(subTasks);
 				            	   
 				               });
+
+		Dashboard.createTasks(tasks, 
+				              dashboardViewClass(),
+				              dashboardModelClass,
+
+				             subTasks -> {
+				            	 
+				            	 addSubTasksToDashboard(subTasks);
+				            	 
+				             });
 		
 		Settings.createTasks(tasks, 
 				             settingsViewClass(), 
@@ -175,6 +186,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 	protected abstract void addSubTasksToNavigation(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToSettings(FrontendTasks subTasks);
+
+	protected abstract void addSubTasksToDashboard(FrontendTasks subTasks);
 
 	protected abstract void createAdditionnalTasks(FrontendTasks tasks);
 

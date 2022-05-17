@@ -13,7 +13,7 @@ public class DemoMsgRegisterSimpleOperation extends MsgRegisterSimpleOperation<D
 
 	@Override
 	public void applyTo(DemoDashboardModel dashboardModel) {
-		
+		dashboardModel.incrementSimpleOperations();
 	}
 
 }

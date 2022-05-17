@@ -15,6 +15,10 @@ public class DashboardModel implements Model {
 		this.simpleOperations = simpleOperations;
 	}
 
+	public void incrementSimpleOperations() {
+		simpleOperations++;
+	}
+
 	public void displayOn(DashboardView dashboardView) {
 		dashboardView.displaySimpleOperations(simpleOperations);
 	}

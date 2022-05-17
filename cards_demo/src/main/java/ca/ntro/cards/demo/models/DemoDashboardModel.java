@@ -4,4 +4,5 @@ import ca.ntro.cards.models.DashboardModel;
 
 public class DemoDashboardModel extends DashboardModel {
 
+
 }
