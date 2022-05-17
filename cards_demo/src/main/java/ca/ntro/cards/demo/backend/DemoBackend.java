@@ -3,28 +3,15 @@ package ca.ntro.cards.demo.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
+import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 
 public class DemoBackend extends CommonBackend<DemoCardsModel,
                                                DemoDashboardModel,
-                                               DemoSettingsModel> {
-
-	@Override
-	protected Class<DemoCardsModel> cardsModelClass() {
-		return DemoCardsModel.class;
-	}
-
-	@Override
-	protected Class<DemoSettingsModel> settingsModelClass() {
-		return DemoSettingsModel.class;
-	}
-
-	@Override
-	protected Class<DemoDashboardModel> dashboardModelClass() {
-		return DemoDashboardModel.class;
-	}
+                                               DemoSettingsModel,
+                                               DemoMsgRegisterSimpleOperation> {
 
 	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {

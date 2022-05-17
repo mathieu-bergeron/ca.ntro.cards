@@ -7,7 +7,9 @@ import ca.ntro.cards.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
+import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
@@ -17,8 +19,10 @@ public class DemoFrontend extends CommonFrontend<DemoRootView,
                                                  DemoCardsView,
                                                  DemoDashboardView,
                                                  DemoCardsViewData,
+                                                 DemoCardsModel,
+                                                 DemoDashboardModel,
                                                  DemoSettingsModel,
-                                                 DemoCardsModel> {
+                                                 DemoMsgRegisterSimpleOperation> {
 
 	@Override
 	protected void registerAdditionnalEvents(EventRegistrar registrar) {
@@ -58,16 +62,6 @@ public class DemoFrontend extends CommonFrontend<DemoRootView,
 	@Override
 	protected Class<DemoCardsViewData> cardsViewDataClass() {
 		return DemoCardsViewData.class;
-	}
-
-	@Override
-	protected Class<DemoSettingsModel> settingsModelClass() {
-		return DemoSettingsModel.class;
-	}
-
-	@Override
-	protected Class<DemoCardsModel> cardsModelClass() {
-		return DemoCardsModel.class;
 	}
 
 	@Override
