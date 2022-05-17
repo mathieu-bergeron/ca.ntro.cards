@@ -4,9 +4,11 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
 import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 
 public class DemoBackend extends CommonBackend<DemoCardsModel,
+                                               DemoDashboardModel,
                                                DemoSettingsModel> {
 
 	@Override
@@ -20,6 +22,11 @@ public class DemoBackend extends CommonBackend<DemoCardsModel,
 	}
 
 	@Override
+	protected Class<DemoDashboardModel> dashboardModelClass() {
+		return DemoDashboardModel.class;
+	}
+
+	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
 
 		 DemoModifyCardsModel.updateList(subTasks);
@@ -28,7 +35,12 @@ public class DemoBackend extends CommonBackend<DemoCardsModel,
 
 	@Override
 	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
-		
+
+	}
+
+	@Override
+	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
+
 	}
 
 	@Override

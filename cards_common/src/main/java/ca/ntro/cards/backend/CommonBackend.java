@@ -5,9 +5,11 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
 
 public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
+                                    DASHBOARD_MODEL extends DashboardModel,
                                     SETTINGS_MODEL extends SettingsModel> 
 
        extends LocalBackendNtro {
@@ -36,9 +38,11 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	
 
 	protected abstract Class<CARDS_MODEL> cardsModelClass();
+	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();
 	protected abstract Class<SETTINGS_MODEL> settingsModelClass();
 
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
+	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
 	
 	protected abstract void createAdditionalTasks(BackendTasks tasks);
