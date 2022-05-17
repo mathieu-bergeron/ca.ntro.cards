@@ -25,6 +25,10 @@
     styleClass="container"
     id="dashboard-view">
 
+    <Label
+        fx:id="simpleOperationsLabel">
+    </Label>
+
     <Button
         text="☰"
         fx:id="menuButton">

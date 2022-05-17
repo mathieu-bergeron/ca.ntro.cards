@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public abstract class DashboardView extends ViewFx {
+
+	protected abstract Label simpleOperationsLabel();
 	
 	protected abstract Label fpsLabel();
 
@@ -30,6 +32,10 @@ public abstract class DashboardView extends ViewFx {
 
 	public void displayFps(String fps) {
 		fpsLabel().setText(fps);
+	}
+
+	public void displaySimpleOperations(long simpleOperations) {
+		simpleOperationsLabel().setText(String.valueOf(simpleOperations));
 	}
 
 

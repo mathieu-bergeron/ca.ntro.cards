@@ -1,6 +1,7 @@
 package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
+import ca.ntro.cards.frontend.views.DashboardView;
 
 public class DashboardModel implements Model {
 	
@@ -12,6 +13,10 @@ public class DashboardModel implements Model {
 
 	public void setSimpleOperations(long simpleOperations) {
 		this.simpleOperations = simpleOperations;
+	}
+
+	public void displayOn(DashboardView dashboardView) {
+		dashboardView.displaySimpleOperations(simpleOperations);
 	}
 
 }

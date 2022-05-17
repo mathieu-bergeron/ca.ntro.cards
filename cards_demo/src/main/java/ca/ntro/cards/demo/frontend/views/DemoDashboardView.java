@@ -15,12 +15,16 @@ public class DemoDashboardView extends DashboardView {
 	private Label fpsLabel;
 
 	@FXML
+	private Label simpleOperationsLabel;
+
+	@FXML
 	private Button menuButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
+		Ntro.assertNotNull("simpleOperationsLabel", simpleOperationsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
 		
 		super.initialize(location, resources);
@@ -34,6 +38,11 @@ public class DemoDashboardView extends DashboardView {
 	@Override
 	protected Button menuButton() {
 		return menuButton;
+	}
+
+	@Override
+	protected Label simpleOperationsLabel() {
+		return simpleOperationsLabel;
 	}
 
 }
