@@ -67,6 +67,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 		
 		ModifyCardsModel.createTasks(tasks, 
 				                     cardsModelClass,
+				                     msgRegisterSimpleOperationClass,
 				                     subTasks -> {
 				                    	 
 				                    	 addSubTasksToModifyCardsModel(subTasks);
@@ -75,6 +76,8 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
+				                         msgRegisterSimpleOperationClass,
+
 				                          subTasks -> {
 
 				                        	addSubTasksToModifySettingsModel(subTasks);

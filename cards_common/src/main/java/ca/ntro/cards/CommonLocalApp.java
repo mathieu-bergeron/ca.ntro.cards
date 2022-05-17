@@ -75,6 +75,7 @@ public abstract class CommonLocalApp<CARDS_MODEL extends CardsModel,
 		frontend.setCardsModelClass(cardsModelClass());
 		frontend.setDashboardModelClass(dashboardModelClass());
 		frontend.setSettingsModelClass(settingsModelClass());
+		frontend.setMsgRegisterSimpleOperationClass(msgRegisterSimpleOperationClass());
 		
 		registrar.registerFrontend(frontend);
 
@@ -89,6 +90,7 @@ public abstract class CommonLocalApp<CARDS_MODEL extends CardsModel,
 		backend.setCardsModelClass(cardsModelClass());
 		backend.setDashboardModelClass(dashboardModelClass());
 		backend.setSettingsModelClass(settingsModelClass());
+		backend.setMsgRegisterSimpleOperationClass(msgRegisterSimpleOperationClass());
 
 		registrar.registerBackend(backend);
 
