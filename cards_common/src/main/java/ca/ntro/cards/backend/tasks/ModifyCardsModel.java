@@ -111,7 +111,7 @@ public class ModifyCardsModel {
 		    	 
 		    	 msgRegisterSimpleOperation.applyTo(cardsModel, modelHistory);
 		    	 
-		    	 CommonBackend.indexCurrentModel++;
+		    	 CommonBackend.indexCurrentModel = modelHistory.size() - 1;
 
 		     });
 	}
