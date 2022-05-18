@@ -57,7 +57,7 @@ public class DemoDashboardView extends DashboardView {
 								msgUnlockThread.send();
 							});
 						}
-					} , 0, 100);
+					} , 0, 1000);
 		});
 	}
 
