@@ -17,6 +17,8 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			targetArray.set(indexOfNextEmptySpace, smallestElement);
 			
 			sourceArray.set(indexOfSmallestElement, null);
+			
+			indexOfNextEmptySpace++;
 
 			registerSimpleOperation();
 
