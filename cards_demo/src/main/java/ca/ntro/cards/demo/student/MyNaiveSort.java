@@ -20,7 +20,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			
 			indexOfNextEmptySpace++;
 
-			endSimpleOperation();
+			countSimpleOperation();
 
 		}
 	}
@@ -32,7 +32,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 		for(int i = 0; i < sourceArray.size(); i++) {
 			
 			indexOfCandidateSmallestElement = i;
-			endSimpleOperation();
+			countSimpleOperation();
 			
 			C candidate = sourceArray.get(i);
 			
@@ -42,7 +42,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 				indexOfSmallestElement = i;
 				currentSmallest = candidate;
 
-				endSimpleOperation();
+				countSimpleOperation();
 
 			}else if(currentSmallest != null 
 					&& candidate != null
@@ -51,7 +51,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 				indexOfSmallestElement = i;
 				currentSmallest = candidate;
 
-				endSimpleOperation();
+				countSimpleOperation();
 			}
 
 		}
