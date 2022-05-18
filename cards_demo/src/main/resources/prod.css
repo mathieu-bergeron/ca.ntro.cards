@@ -22,7 +22,7 @@
     -fx-alignment:center-right;
 }
 
-#menu-button-container{
+.bottom-right{
     -fx-alignment:bottom-right;
 }
 

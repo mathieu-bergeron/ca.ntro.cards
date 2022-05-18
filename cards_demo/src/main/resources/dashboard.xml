@@ -29,7 +29,7 @@
     <VBox HBox.hgrow="ALWAYS">
     </VBox>
 
-    <VBox styleClass="center-rigth">
+    <VBox styleClass="center-right">
 
         <VBox styleClass="vspace-small" >
         </VBox>
@@ -81,7 +81,7 @@
         <VBox styleClass="vspace-small" >
         </VBox>
 
-        <HBox styleClass="simple-operations-container">
+        <HBox styleClass="center-right">
             <Label
                 text="%simpleOperations"
                 styleClass="text-big">
@@ -101,7 +101,7 @@
     <VBox HBox.hgrow="ALWAYS">
     </VBox>
 
-    <VBox id="menu-button-container">
+    <VBox styleClass="bottom-right">
 
         <Button
             text="☰"
