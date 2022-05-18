@@ -69,7 +69,6 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 			Ntro.throwException(e);
 		}
 	}
-	
 
 	protected void incrementVersion() {
 		version++;

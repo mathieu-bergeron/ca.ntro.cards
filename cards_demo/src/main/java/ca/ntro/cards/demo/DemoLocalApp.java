@@ -79,7 +79,6 @@ public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		registrar.registerMessage(MsgUpdateList.class);
-		registrar.registerMessage(MsgExecuteCodeOneStep.class);
 	}
 
 

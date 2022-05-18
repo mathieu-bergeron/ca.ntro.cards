@@ -247,4 +247,5 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	public abstract void sort();
 
 
+
 }

@@ -1,6 +1,8 @@
 package ca.ntro.cards.demo.backend;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.messages.MsgExecutionEnded;
 
 public class StudentThread<STUDENT_MODEL extends DemoCardsModel> extends Thread {
 	
@@ -17,6 +19,10 @@ public class StudentThread<STUDENT_MODEL extends DemoCardsModel> extends Thread 
 	@Override
 	public void run() {
 		model.sort();
+		
+		MsgExecutionEnded msgExecutionEnded = NtroApp.newMessage(MsgExecutionEnded.class);
+		msgExecutionEnded.send();
+
 	}
 	
 	

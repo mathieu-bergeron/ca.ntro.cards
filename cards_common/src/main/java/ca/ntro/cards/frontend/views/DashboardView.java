@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.frontend.events.EvtShowMenu;
+import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
+import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
+import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -19,6 +22,12 @@ public abstract class DashboardView extends ViewFx {
 
 	protected abstract Button menuButton();
 
+	protected abstract Button playButton();
+
+	protected abstract Button pauseButton();
+
+	protected abstract Button oneStepButton();
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -30,6 +39,27 @@ public abstract class DashboardView extends ViewFx {
 			evtShowMenu.trigger();
 		});
 
+		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
+		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
+		MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
+		
+		playButton().setOnAction(evtFx -> {
+
+			evtStartCodeExecution.trigger();
+
+		});
+
+		pauseButton().setOnAction(evtFx -> {
+
+			evtStopCodeExecution.trigger();
+
+		});
+
+		oneStepButton().setOnAction(evtFx -> {
+			
+			msgExecuteCodeOneStep.send();
+
+		});
 	}
 
 	public void displayFps(String fps) {
@@ -42,6 +72,12 @@ public abstract class DashboardView extends ViewFx {
 
 	public void displayNumberOfCards(int numberOfCards) {
 		numberOfCardsLabel().setText(String.valueOf(numberOfCards));
+	}
+
+	public void disableExecutionButtons() {
+		playButton().setDisable(true);
+		pauseButton().setDisable(true);
+		oneStepButton().setDisable(true);
 	}
 
 }

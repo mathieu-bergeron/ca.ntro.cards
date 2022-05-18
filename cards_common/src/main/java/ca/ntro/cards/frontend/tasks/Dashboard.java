@@ -8,6 +8,7 @@ import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
@@ -39,6 +40,9 @@ public class Dashboard {
 		    			              dashboardViewClass,
 		    			              dashboardModelClass);
 
+		    	 executionEnded(subTasks,
+		    			        dashboardViewClass);
+
 		    	 subTasksLambda.createSubTasks(subTasks);
 
 		     });
@@ -61,6 +65,25 @@ public class Dashboard {
 		    	 Modified<DASHBOARD_MODEL> dashboardModel = inputs.get(modified(dashboardModelClass));
 		    	 
 		    	 dashboardModel.currentValue().displayOn(dashboardView);
+		     });
+	}
+
+	private static <DASHBOARD_VIEW extends DashboardView,
+	                DASHBOARD_MODEL extends DashboardModel> 
+	
+	        void executionEnded(FrontendTasks tasks, 
+			                    Class<DASHBOARD_VIEW> dashboardViewClass) {
+
+		tasks.task("executionEndedDashboard")
+		
+			 .waitsFor(message(MsgExecutionEnded.class))
+		
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DashboardView dashboardView  = inputs.get(created(dashboardViewClass));
+		    	 
+		    	 dashboardView.disableExecutionButtons();
+
 		     });
 	}
 

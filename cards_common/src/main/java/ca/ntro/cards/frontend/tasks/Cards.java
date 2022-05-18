@@ -10,6 +10,7 @@ import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.core.clock.Tick;
@@ -75,6 +76,8 @@ public class Cards {
 		    	 startCodeExecution(subTasks, cardsViewDataClass);
 
 		    	 stopCodeExecution(subTasks, cardsViewDataClass);
+
+		    	 executionEnded(subTasks, cardsViewDataClass);
 		    	 
 		    	 subTaskLambda.createSubTasks(subTasks);
 
@@ -235,6 +238,24 @@ public class Cards {
 
 		      });
 	}
+
+	private static <CARDS_VIEW_DATA extends CardsViewData>
+	
+	        void executionEnded(FrontendTasks tasks,
+	        		            Class<CARDS_VIEW_DATA> cardsViewDataClass) {
+
+		tasks.task("executionEnded")
+
+		      .waitsFor(message(MsgExecutionEnded.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
+		    	  cardsViewData.stopCodeExecution();
+
+		      });
+	}
+
 
 
 

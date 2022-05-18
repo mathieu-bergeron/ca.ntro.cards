@@ -50,27 +50,6 @@ public class DemoDashboardView extends DashboardView {
 		
 		super.initialize(location, resources);
 		
-		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
-		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
-		MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
-		
-		playButton.setOnAction(evtFx -> {
-
-			evtStartCodeExecution.trigger();
-
-		});
-
-		pauseButton.setOnAction(evtFx -> {
-
-			evtStopCodeExecution.trigger();
-
-		});
-
-		oneStepButton.setOnAction(evtFx -> {
-			
-			msgExecuteCodeOneStep.send();
-
-		});
 	}
 
 	@Override
@@ -91,6 +70,21 @@ public class DemoDashboardView extends DashboardView {
 	@Override
 	protected Label numberOfCardsLabel() {
 		return numberOfCardsLabel;
+	}
+
+	@Override
+	protected Button playButton() {
+		return playButton;
+	}
+
+	@Override
+	protected Button pauseButton() {
+		return pauseButton;
+	}
+
+	@Override
+	protected Button oneStepButton() {
+		return oneStepButton;
 	}
 
 }
