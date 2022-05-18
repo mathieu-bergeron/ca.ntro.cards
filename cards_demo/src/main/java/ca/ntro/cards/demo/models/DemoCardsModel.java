@@ -17,7 +17,7 @@ import ca.ntro.core.stream.Visitor;
 public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel<DemoCardsModel<C>> {
 	
 	protected int indexOfSmallestElement = -1;
-	protected int indexOfCandidateSmallestElement = 0;
+	protected int indexOfCandidateSmallestElement = -1;
 	protected int indexOfNextEmptySpace = 0;
 	
 	protected List<C> sourceArray = new ArrayList<>();
@@ -129,10 +129,11 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 			
 		}
 		
-		AbstractCard candidateCard = bottomCards.get(getIndexOfCandidateSmallestElement());
-		cardsViewData.displayCardFaceUp(candidateCard);
-		
-
+		int indexOfCandidateSmallestCard = getIndexOfCandidateSmallestElement();
+		if(indexOfCandidateSmallestCard >= 0 && indexOfCandidateSmallestCard < bottomCards.size()) {
+			AbstractCard candidateCard = bottomCards.get(getIndexOfCandidateSmallestElement());
+			cardsViewData.displayCardFaceUp(candidateCard);
+		}
 		
 	}
 

@@ -9,6 +9,9 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 	@Override
 	public void sort() {
 		indexOfNextEmptySpace = 0;
+		indexOfSmallestElement = -1;
+		indexOfCandidateSmallestElement = -1;
+		registerSimpleOperation();
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 
@@ -19,17 +22,24 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			targetArray.set(indexOfNextEmptySpace, smallestElement);
 			
 			sourceArray.set(indexOfSmallestElement, null);
-			
+
+			registerSimpleOperation();
+
+			indexOfSmallestElement = -1;
+			indexOfCandidateSmallestElement = -1;
 			indexOfNextEmptySpace++;
 
 			registerSimpleOperation();
 		}
+		
+		indexOfNextEmptySpace = 0;
+		indexOfCandidateSmallestElement = -1;
+		indexOfSmallestElement = -1;
+		registerSimpleOperation();
 	}
 
 
 	private void findIndexOfSmallestElement(List<C> sourceArray) {
-		indexOfSmallestElement = -1;
-
 		C currentSmallest = null;
 
 		for(int i = 0; i < sourceArray.size(); i++) {
@@ -52,9 +62,9 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 					&& currentSmallest == null) {
 				
 				currentSmallest = candidate;
+
 				indexOfSmallestElement = i;
 				registerSimpleOperation();
-
 			}
 		}
 	}

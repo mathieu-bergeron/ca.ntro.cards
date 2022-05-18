@@ -2,6 +2,7 @@ package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.frontend.views.DashboardView;
+import ca.ntro.core.reflection.object_graph.Initializable;
 
 public class DashboardModel implements Model {
 	
@@ -21,6 +22,10 @@ public class DashboardModel implements Model {
 
 	public void displayOn(DashboardView dashboardView) {
 		dashboardView.displaySimpleOperations(simpleOperations);
+	}
+
+	public void initialize() {
+		simpleOperations = 0;
 	}
 
 }

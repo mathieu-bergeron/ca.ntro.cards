@@ -29,8 +29,6 @@ public class   DemoBackend<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
 
-		 DemoModifyCardsModel.updateList(subTasks, getCardsModelClass());
-
 		 
 		 STUDENT_MODEL studentModel = Ntro.factory().newInstance(getCardsModelClass());
 		 studentModel.createFirstVersion();
@@ -42,6 +40,9 @@ public class   DemoBackend<STUDENT_MODEL extends DemoCardsModel>
 		 studentModel.registerMsgRegisterSimpleOperation(msgRegisterSimpleOperation);
 
 		 studentThread.setModel(studentModel);
+
+		 DemoModifyCardsModel.loadStudentModel(subTasks, getCardsModelClass(), studentModel);
+		 DemoModifyCardsModel.updateList(subTasks, getCardsModelClass());
 
 		 DemoManageThread.unlockThread(subTasks, lock);
 
@@ -64,6 +65,8 @@ public class   DemoBackend<STUDENT_MODEL extends DemoCardsModel>
 
 	@Override
 	public void execute() {
+		// XXX: the student thread starts locked!
+		lock.lock();
 		studentThread.start();
 	}
 

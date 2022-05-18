@@ -2,11 +2,14 @@ package ca.ntro.cards.demo.frontend.views;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.demo.messages.MsgUnlockThread;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.core.initialization.Ntro;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -40,9 +43,16 @@ public class DemoDashboardView extends DashboardView {
 		MsgUnlockThread msgUnlockThread = NtroApp.newMessage(MsgUnlockThread.class);
 		
 		playButton.setOnAction(evtFx -> {
-
-			msgUnlockThread.send();
 			
+			new Timer().scheduleAtFixedRate(
+					new TimerTask() {
+						@Override
+						public void run() {
+							Platform.runLater(() -> {
+								msgUnlockThread.send();
+							});
+						}
+					} , 0, 600);
 		});
 	}
 

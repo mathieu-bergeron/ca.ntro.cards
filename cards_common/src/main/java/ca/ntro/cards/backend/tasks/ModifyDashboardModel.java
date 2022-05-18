@@ -20,9 +20,13 @@ public class ModifyDashboardModel {
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
+		initializeDashboard(tasks, dashboardModelClass);
+		
 		tasks.taskGroup("ModifyDashboardModel")
 		
-		     .contains(subTasks -> {
+		     .waitsFor("initializeDashboard")
+		
+		     .andContains(subTasks -> {
 
 		    	 registerSimpleOperationOnDashboard(subTasks, 
 		    			                            dashboardModelClass, 
@@ -32,6 +36,25 @@ public class ModifyDashboardModel {
 
 		     });
 	}
+
+	public static <DASHBOARD_MODEL extends DashboardModel>
+	
+	        void initializeDashboard(BackendTasks tasks,
+	        		                 Class<DASHBOARD_MODEL> dashboardModelClass) {
+
+		tasks.task("initializeDashboard")
+
+		     .waitsFor(model(dashboardModelClass))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL gameModel = inputs.get(model(dashboardModelClass));
+
+		    	 gameModel.initialize();
+		    	 
+		     });
+	}
+
 
 	public static <CARDS_MODEL extends CardsModel,
 	               DASHBOARD_MODEL extends DashboardModel,
@@ -45,8 +68,6 @@ public class ModifyDashboardModel {
 		
 		     .waitsFor(message(msgRegisterSimpleOperationClass))
 
-		     .waitsFor(model(dashboardModelClass))
-		     
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 DASHBOARD_MODEL               dashboardModel             = inputs.get(model(dashboardModelClass));
