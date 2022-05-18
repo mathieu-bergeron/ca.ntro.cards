@@ -5,7 +5,8 @@ import java.util.List;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 
 public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
-
+	
+	@Override
 	public void sort() {
 		indexOfNextEmptySpace = 0;
 		
@@ -15,9 +16,9 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			
 			C smallestElement = sourceArray.get(indexOfSmallestElement);
 			
-			targetArray.add(indexOfNextEmptySpace, smallestElement);
+			targetArray.set(indexOfNextEmptySpace, smallestElement);
 			
-			sourceArray.add(indexOfSmallestElement, null);
+			sourceArray.set(indexOfSmallestElement, null);
 			
 			indexOfNextEmptySpace++;
 
@@ -38,13 +39,19 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			
 			C candidate = sourceArray.get(i);
 			
-			if(currentSmallest == null
-					|| candidate.compareTo(currentSmallest) < 0) {
-				
+			if(candidate != null 
+					&& currentSmallest != null
+					&& candidate.compareTo(currentSmallest) < 0) {
+
 				currentSmallest = candidate;
 				
 				indexOfSmallestElement = i;
 				registerSimpleOperation();
+				
+			}else {
+				
+				currentSmallest = candidate;
+
 			}
 		}
 	}

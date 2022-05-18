@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.demo.frontend.procedures.DemoNaiveSort;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.enums.Suit;
@@ -15,7 +14,7 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
+public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
 	
 	protected int indexOfSmallestElement = -1;
 	protected int indexOfCandidateSmallestElement = 0;
@@ -121,9 +120,11 @@ public class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
 	public void createFirstVersion() {
 		sourceArray.add((C) new Card(3, Suit.HEARTS));
 		sourceArray.add((C) new Card(6, Suit.CLUBS));
+		/*
 		sourceArray.add((C) new Card(4, Suit.SPADES));
 		sourceArray.add((C) new Card(10, Suit.DIAMONDS));
 		sourceArray.add((C) new Card(5, Suit.HEARTS));
+		*/
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 			targetArray.add(null);
@@ -194,5 +195,8 @@ public class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
 			card.format(builder);
 		});
 	}
+	
+	
+	public abstract void sort();
 
 }

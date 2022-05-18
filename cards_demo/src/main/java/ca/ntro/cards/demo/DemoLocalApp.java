@@ -12,6 +12,7 @@ import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
+import ca.ntro.cards.demo.messages.MsgUnlockThread;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
@@ -80,8 +81,8 @@ public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		registrar.registerMessage(MsgUpdateList.class);
+		registrar.registerMessage(MsgUnlockThread.class);
 	}
-
 
 
 }

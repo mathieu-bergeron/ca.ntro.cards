@@ -25,6 +25,11 @@
     styleClass="container"
     id="dashboard-view">
 
+    <Button
+        text="▶"
+        fx:id="playButton">
+    </Button>
+
     <Label
         fx:id="simpleOperationsLabel">
     </Label>

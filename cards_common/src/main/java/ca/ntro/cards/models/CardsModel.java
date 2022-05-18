@@ -24,6 +24,13 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	public void setVersion(long version) {
 		this.version = version;
 	}
+	
+	
+	protected void registerSimpleOperation() {
+		System.out.println("registerSimpleOperation");
+		System.out.flush();
+	}
+	
 
 	protected void incrementVersion() {
 		version++;
@@ -103,9 +110,6 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	
 	protected abstract void updateViewDataImpl(CardsViewData cardsViewData);
 	
-	protected void registerSimpleOperation() {
-		System.out.println("registerSimpleOperation");
-	}
 		
 
 }

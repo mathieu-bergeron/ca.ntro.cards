@@ -62,6 +62,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
