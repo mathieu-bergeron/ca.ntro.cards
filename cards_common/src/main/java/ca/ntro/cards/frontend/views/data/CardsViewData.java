@@ -77,6 +77,24 @@ public abstract class CardsViewData implements ViewData {
 		
 	}
 
+	public void displayCardFaceDown(AbstractCard card) {
+		setCardFaceUp(card, false);
+	}
+
+	public void setCardFaceUp(AbstractCard card, boolean faceUp) {
+
+		CommonCard2d card2d = (CommonCard2d) world2d().objectById(card.id());
+
+		if(card2d != null) {
+			card2d.getCard().setFaceUp(faceUp);
+		}
+	}
+
+	public void displayCardFaceUp(AbstractCard card) {
+		setCardFaceUp(card, true);
+	}
+
+
 	public void removeCardsNotIn(Stream<Card> cards) {
 		Set<String> cardIds = new HashSet<>();
 

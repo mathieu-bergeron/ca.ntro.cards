@@ -78,26 +78,13 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
-		for(int i = 0; i < sourceArray.size(); i++) {
-
-			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
-			double targetTopLeftY = cardHeight / 2;
-			
-			AbstractCard card = (Card) sourceArray.get(i);
-			
-			if(card == null) {
-				card = new NullCard();
-			}
-
-			cardsViewData.addOrUpdateCard(card,
-					                      targetTopLeftX,
-					                      targetTopLeftY);
-		}
-
+		List<AbstractCard> topCards = new ArrayList<>();
+		List<AbstractCard> bottomCards = new ArrayList<>();
+		
 		for(int i = 0; i < targetArray.size(); i++) {
 
-			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
-			double targetTopLeftY = cardHeight * 2;
+			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
+			double targetTopLeftY = cardHeight / 2;
 			
 			AbstractCard card = (Card) targetArray.get(i);
 			
@@ -108,12 +95,44 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 			cardsViewData.addOrUpdateCard(card,
 					                      targetTopLeftX,
 					                      targetTopLeftY);
+			topCards.add(card);
 		}
 
-		double markerTopLeftX = cardWidth / 2 + getIndexOfCandidateSmallestElement() * cardWidth * 3 / 2;
-		double markerTopLeftY = cardHeight * 3;
+		for(int i = 0; i < sourceArray.size(); i++) {
+
+			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
+			double targetTopLeftY = cardHeight * 2;
+			
+			AbstractCard card = (Card) sourceArray.get(i);
+			
+			if(card == null) {
+				card = new NullCard();
+			}
+
+			cardsViewData.addOrUpdateCard(card,
+					                      targetTopLeftX,
+					                      targetTopLeftY);
+
+			bottomCards.add(card);
+			cardsViewData.displayCardFaceDown(card);
+		}
+
+		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndexOfSmallestElement() * cardWidth * 3 / 2;
+		double markerTopLeftY = cardHeight * 3 + cardHeight / 3;
 		
 		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY);
+		
+		int indexOfSmallestCard = getIndexOfSmallestElement();
+		if(indexOfSmallestCard >= 0 && indexOfSmallestCard < bottomCards.size()) {
+			AbstractCard smallestCard = bottomCards.get(getIndexOfSmallestElement());
+			cardsViewData.displayCardFaceUp(smallestCard);
+			
+		}
+		
+		AbstractCard candidateCard = bottomCards.get(getIndexOfCandidateSmallestElement());
+		cardsViewData.displayCardFaceUp(candidateCard);
+		
+
 		
 	}
 
