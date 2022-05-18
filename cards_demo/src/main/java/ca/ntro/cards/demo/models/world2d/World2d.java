@@ -70,8 +70,6 @@ public class World2d extends CommonWorld2d {
 		msgUpdateList.setTargetList(targetList);
 
 		msgUpdateList.send();
-		
-		msgRegisterSimpleOperation.send();
 
 	}
 
