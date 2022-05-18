@@ -7,6 +7,7 @@ import java.util.TimerTask;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
+import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.core.initialization.Ntro;
@@ -33,6 +34,9 @@ public class DemoDashboardView extends DashboardView {
 	@FXML
 	private Button playButton;
 
+	@FXML
+	private Button pauseButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -41,14 +45,22 @@ public class DemoDashboardView extends DashboardView {
 		Ntro.assertNotNull("numberOfCardsLabel", numberOfCardsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("playButton", playButton);
+		Ntro.assertNotNull("pauseButton", pauseButton);
 		
 		super.initialize(location, resources);
 		
-		EvtStartCodeExecution msgStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
+		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
+		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
 		
 		playButton.setOnAction(evtFx -> {
 
-			msgStartCodeExecution.trigger();
+			evtStartCodeExecution.trigger();
+
+		});
+
+		pauseButton.setOnAction(evtFx -> {
+
+			evtStopCodeExecution.trigger();
 
 		});
 	}

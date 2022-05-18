@@ -6,6 +6,7 @@ import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
+import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
@@ -72,6 +73,8 @@ public class Cards {
 		    			      cardsModelClass);
 		    	 
 		    	 startCodeExecution(subTasks, cardsViewDataClass);
+
+		    	 stopCodeExecution(subTasks, cardsViewDataClass);
 		    	 
 		    	 subTaskLambda.createSubTasks(subTasks);
 
@@ -204,7 +207,7 @@ public class Cards {
 	        void startCodeExecution(FrontendTasks tasks,
 	        		                Class<CARDS_VIEW_DATA> cardsViewDataClass) {
 
-		tasks.task("executeCode")
+		tasks.task("startCodeExecution")
 
 		      .waitsFor(event(EvtStartCodeExecution.class))
 		      
@@ -212,6 +215,23 @@ public class Cards {
 		    	  
 		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
 		    	  cardsViewData.startCodeExecution();
+
+		      });
+	}
+
+	private static <CARDS_VIEW_DATA extends CardsViewData>
+	
+	        void stopCodeExecution(FrontendTasks tasks,
+	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass) {
+
+		tasks.task("stopCodeExecution")
+
+		      .waitsFor(event(EvtStopCodeExecution.class))
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
+		    	  cardsViewData.stopCodeExecution();
 
 		      });
 	}

@@ -143,4 +143,8 @@ public abstract class CardsViewData implements ViewData {
 		timeSinceLastExecutionStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
 	}
 
+	public void stopCodeExecution() {
+		isCodeExecuting = false;
+	}
+
 }

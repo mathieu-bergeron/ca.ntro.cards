@@ -29,20 +29,32 @@
     <VBox HBox.hgrow="ALWAYS">
     </VBox>
 
-    <VBox styleClass="simple-operations-container">
+    <VBox styleClass="center-rigth">
 
         <VBox styleClass="vspace-small" >
         </VBox>
 
-        <Button
-            text="%runCode"
-            fx:id="playButton">
-        </Button>
+        <HBox styleClass="center-right">
+
+            <Button
+                text="%runCode"
+                fx:id="playButton">
+            </Button>
+
+            <HBox styleClass="hspace-small">
+            </HBox>
+
+            <Button
+                text="%pause"
+                fx:id="pauseButton">
+            </Button>
+
+        </HBox>
 
         <VBox styleClass="vspace-small" >
         </VBox>
            
-        <HBox styleClass="simple-operations-container">
+        <HBox styleClass="center-right">
             <Label
                 text="%numberOfCards"
                 styleClass="text-big">

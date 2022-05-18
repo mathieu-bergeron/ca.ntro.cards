@@ -18,9 +18,8 @@
     -fx-alignment:center;
 }
 
-.simple-operations-container{
+.center-right{
     -fx-alignment:center-right;
-
 }
 
 #menu-button-container{
