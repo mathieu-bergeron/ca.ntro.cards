@@ -2,8 +2,6 @@ package ca.ntro.cards.demo.frontend.views;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
@@ -11,7 +9,6 @@ import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.core.initialization.Ntro;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
