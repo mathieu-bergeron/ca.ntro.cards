@@ -152,11 +152,12 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 
 	@Override
 	public void createFirstVersion() {
-		sourceArray.add((C) new Card(3, Suit.HEARTS));
-		sourceArray.add((C) new Card(6, Suit.CLUBS));
-		sourceArray.add((C) new Card(4, Suit.SPADES));
-		sourceArray.add((C) new Card(10, Suit.DIAMONDS));
+		sourceArray.add((C) new Card(2, Suit.CLUBS));
+		sourceArray.add((C) new Card(5, Suit.CLUBS));
+		sourceArray.add((C) new Card(5, Suit.DIAMONDS));
 		sourceArray.add((C) new Card(5, Suit.HEARTS));
+		sourceArray.add((C) new Card(7, Suit.SPADES));
+		sourceArray.add((C) new Card(2, Suit.HEARTS));
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 			targetArray.add(null);
