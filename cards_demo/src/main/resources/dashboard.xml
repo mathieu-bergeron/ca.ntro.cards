@@ -37,6 +37,14 @@
         <HBox styleClass="center-right">
 
             <Button
+                text="%backStep"
+                fx:id="backStepButton">
+            </Button>
+
+            <HBox styleClass="hspace-small">
+            </HBox>
+
+            <Button
                 text="%runCode"
                 fx:id="playButton">
             </Button>

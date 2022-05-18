@@ -9,6 +9,7 @@ import ca.ntro.cards.frontend.events.EvtShowMenu;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
+import ca.ntro.cards.messages.MsgExecutionBackStep;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -28,6 +29,8 @@ public abstract class DashboardView extends ViewFx {
 
 	protected abstract Button oneStepButton();
 
+	protected abstract Button backStepButton();
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -42,6 +45,7 @@ public abstract class DashboardView extends ViewFx {
 		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
 		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
 		MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
+		MsgExecutionBackStep msgExecutionBackStep = NtroApp.newMessage(MsgExecutionBackStep.class);
 		
 		playButton().setOnAction(evtFx -> {
 
@@ -59,6 +63,12 @@ public abstract class DashboardView extends ViewFx {
 			
 			msgExecuteCodeOneStep.send();
 
+		});
+		
+		backStepButton().setOnAction(evtFx -> {
+			
+			msgExecutionBackStep.send();
+			
 		});
 	}
 

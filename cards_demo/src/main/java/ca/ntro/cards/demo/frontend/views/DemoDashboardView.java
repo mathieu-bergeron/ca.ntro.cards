@@ -3,11 +3,7 @@ package ca.ntro.cards.demo.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.app.NtroApp;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
-import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,6 +33,9 @@ public class DemoDashboardView extends DashboardView {
 	@FXML
 	private Button oneStepButton;
 
+	@FXML
+	private Button backStepButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -47,6 +46,7 @@ public class DemoDashboardView extends DashboardView {
 		Ntro.assertNotNull("playButton", playButton);
 		Ntro.assertNotNull("pauseButton", pauseButton);
 		Ntro.assertNotNull("oneStepButton", oneStepButton);
+		Ntro.assertNotNull("backStepButton", backStepButton);
 		
 		super.initialize(location, resources);
 		
@@ -85,6 +85,11 @@ public class DemoDashboardView extends DashboardView {
 	@Override
 	protected Button oneStepButton() {
 		return oneStepButton;
+	}
+
+	@Override
+	protected Button backStepButton() {
+		return backStepButton;
 	}
 
 }

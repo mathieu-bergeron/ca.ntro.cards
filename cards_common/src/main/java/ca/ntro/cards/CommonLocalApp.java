@@ -17,6 +17,7 @@ import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
+import ca.ntro.cards.messages.MsgExecutionBackStep;
 import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
@@ -69,6 +70,7 @@ public abstract class CommonLocalApp<CARDS_MODEL extends CardsModel,
 		registrar.registerMessage(msgRegisterSimpleOperationClass());
 		registrar.registerMessage(MsgExecuteCodeOneStep.class);
 		registrar.registerMessage(MsgExecutionEnded.class);
+		registrar.registerMessage(MsgExecutionBackStep.class);
 
 		registerAdditionnalMessages(registrar);
 	}
