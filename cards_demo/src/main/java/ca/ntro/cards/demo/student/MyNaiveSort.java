@@ -8,11 +8,6 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 	
 	@Override
 	public void sort() {
-		indexOfNextEmptySpace = 0;
-		indexOfSmallestElement = -1;
-		indexOfCandidateSmallestElement = -1;
-		registerSimpleOperation();
-		
 		for(int i = 0; i < sourceArray.size(); i++) {
 
 			findIndexOfSmallestElement(sourceArray);
@@ -25,17 +20,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 
 			registerSimpleOperation();
 
-			indexOfSmallestElement = -1;
-			indexOfCandidateSmallestElement = -1;
-			indexOfNextEmptySpace++;
-
-			registerSimpleOperation();
 		}
-		
-		indexOfNextEmptySpace = 0;
-		indexOfCandidateSmallestElement = -1;
-		indexOfSmallestElement = -1;
-		registerSimpleOperation();
 	}
 
 
