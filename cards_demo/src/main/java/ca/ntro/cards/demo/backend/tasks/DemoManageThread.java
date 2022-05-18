@@ -17,9 +17,6 @@ public class DemoManageThread {
 		     
 		     .thenExecutes(inputs -> {
 
-				 System.out.println("unlock thread");
-				 System.out.flush();
-		    	 
 		    	 if(lock.isHeldByCurrentThread()) {
 					 lock.unlock();
 		    	 }

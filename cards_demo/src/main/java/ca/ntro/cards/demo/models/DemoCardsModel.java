@@ -23,6 +23,15 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	protected List<C> sourceArray = new ArrayList<>();
 	protected List<C> targetArray = new ArrayList<>();
 
+	@Override
+	public void copyDataFrom(DemoCardsModel<C> otherModel) {
+		setSourceArray(otherModel.getSourceArray());
+		setTargetArray(otherModel.getTargetArray());
+		setIndexOfSmallestElement(otherModel.getIndexOfSmallestElement());
+		setIndexOfCandidateSmallestElement(otherModel.getIndexOfCandidateSmallestElement());
+		setIndexOfNextEmptySpace(otherModel.getIndexOfNextEmptySpace());
+	}
+
 	public int getIndexOfSmallestElement() {
 		return indexOfSmallestElement;
 	}
@@ -196,10 +205,5 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	
 	public abstract void sort();
 
-	@Override
-	public void copyDataFrom(DemoCardsModel<C> cardsModel) {
-		setSourceArray(cardsModel.getSourceArray());
-		setTargetArray(cardsModel.getTargetArray());
-	}
 
 }
