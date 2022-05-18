@@ -45,7 +45,7 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 		this.msgRegisterSimpleOperation = msgRegisterSimpleOperation;
 	}
 	
-	protected void countSimpleOperation() {
+	protected void synchronize() {
 		// XXX: waiting for JavaFx GUI thread to unlock us 
 		lock.lock();
 		lock.unlock();
