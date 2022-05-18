@@ -45,6 +45,14 @@
             </HBox>
 
             <Button
+                text="%oneStep"
+                fx:id="oneStepButton">
+            </Button>
+
+            <HBox styleClass="hspace-small">
+            </HBox>
+
+            <Button
                 text="%pause"
                 fx:id="pauseButton">
             </Button>
