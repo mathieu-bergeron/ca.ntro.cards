@@ -48,19 +48,17 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 		// XXX: waiting for JavaFx GUI thread to unlock us 
 		lock.lock();
 		lock.unlock();
-
-		System.out.println("registerSimpleOperation");
-		System.out.flush();
 		
-		// XXX: JavaFx GUI thread acquires the lock
+		// XXX: JavaFx GUI thread 
+		//      acquires the lock
 		Platform.runLater(() -> {
 			lock.lock();
 
 			msgRegisterSimpleOperation.send();
 		}); 
-		
-		// XXX: wait for JavaFX GUI thread
-		//      to re-aquire the lock
+
+		// XXX: make sure JavaFX GUI thread
+		//      has acquired the lock
 		//      before returning
 		while(!lock.isLocked()) {
 			try {
@@ -68,11 +66,10 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 				Thread.sleep(10);
 
 			} catch (InterruptedException e) {
-				
+
 				Ntro.throwException(e);
 			}
 		}
-
 	}
 	
 
