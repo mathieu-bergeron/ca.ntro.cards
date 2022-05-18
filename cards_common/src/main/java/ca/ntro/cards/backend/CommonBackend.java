@@ -65,15 +65,6 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	@SuppressWarnings("unchecked")
 	@Override
 	public void createTasks(BackendTasks tasks) {
-		
-		ModifyCardsModel.createTasks(tasks, 
-				                     cardsModelClass,
-				                     msgRegisterSimpleOperationClass,
-				                     subTasks -> {
-				                    	 
-				                    	 addSubTasksToModifyCardsModel(subTasks);
-				                    	 
-				                     });
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
@@ -84,6 +75,16 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 				                        	addSubTasksToModifySettingsModel(subTasks);
 
 				                        });
+		
+		ModifyCardsModel.createTasks(tasks, 
+				                     cardsModelClass,
+				                     msgRegisterSimpleOperationClass,
+				                     subTasks -> {
+				                    	 
+				                    	 addSubTasksToModifyCardsModel(subTasks);
+				                    	 
+				                     });
+
 
 		ModifySettingsModel.createTasks(tasks,
 				                        settingsModelClass,

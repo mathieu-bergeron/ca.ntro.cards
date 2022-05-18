@@ -3,6 +3,7 @@ package ca.ntro.cards.demo.backend.tasks;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.DemoDashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -12,11 +13,16 @@ public class DemoModifyCardsModel {
 			                                                                   Class<STUDENT_MODEL> cardsModelClass,
 			                                                                   STUDENT_MODEL studentModel) {
 		tasks.task("loadStudentModel")
+		
+		     .waitsFor("initializeDashboard")
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 STUDENT_MODEL demoModel     = inputs.get(model(cardsModelClass));
+		    	 DemoDashboardModel dashboardModel = inputs.get(model(DemoDashboardModel.class));
+		    	 STUDENT_MODEL      demoModel      = inputs.get(model(cardsModelClass));
+
 		    	 demoModel.copyDataFrom(studentModel);
+		    	 dashboardModel.setNumberOfCards(demoModel.getSourceArray().size());
 
 		     });
 	}

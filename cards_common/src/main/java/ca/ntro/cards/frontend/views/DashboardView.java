@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 public abstract class DashboardView extends ViewFx {
 
 	protected abstract Label simpleOperationsLabel();
+
+	protected abstract Label numberOfCardsLabel();
 	
 	protected abstract Label fpsLabel();
 
@@ -38,5 +40,8 @@ public abstract class DashboardView extends ViewFx {
 		simpleOperationsLabel().setText(String.valueOf(simpleOperations));
 	}
 
+	public void displayNumberOfCards(int numberOfCards) {
+		numberOfCardsLabel().setText(String.valueOf(numberOfCards));
+	}
 
 }

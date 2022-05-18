@@ -44,13 +44,14 @@ public class ModifyDashboardModel {
 
 		tasks.task("initializeDashboard")
 
+
 		     .waitsFor(model(dashboardModelClass))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DASHBOARD_MODEL gameModel = inputs.get(model(dashboardModelClass));
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(dashboardModelClass));
 
-		    	 gameModel.initialize();
+		    	 dashboardModel.initialize();
 		    	 
 		     });
 	}

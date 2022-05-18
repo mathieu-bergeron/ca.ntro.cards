@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 
 public class DemoDashboardView extends DashboardView {
 	
+	
 	@FXML
 	private Label fpsLabel;
 
@@ -73,6 +74,11 @@ public class DemoDashboardView extends DashboardView {
 	@Override
 	protected Label simpleOperationsLabel() {
 		return simpleOperationsLabel;
+	}
+
+	@Override
+	protected Label numberOfCardsLabel() {
+		return numberOfCardsLabel;
 	}
 
 }
