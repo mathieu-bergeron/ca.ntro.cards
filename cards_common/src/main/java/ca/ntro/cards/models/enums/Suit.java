@@ -1,6 +1,7 @@
 package ca.ntro.cards.models.enums;
 
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
+import ca.ntro.core.initialization.Ntro;
 
 public enum Suit {
 	
@@ -46,5 +47,9 @@ public enum Suit {
 		}
 
 		return color;
+	}
+
+	public static Suit random() {
+		return Ntro.random().choice(Suit.values());
 	}
 }

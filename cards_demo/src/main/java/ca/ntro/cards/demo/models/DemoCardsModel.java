@@ -10,6 +10,7 @@ import ca.ntro.cards.models.enums.Suit;
 import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.values.NullCard;
+import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -153,12 +154,20 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 
 	@Override
 	public void createFirstVersion() {
+		
+		for(int i = 0; i < 20; i++) {
+			sourceArray.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
+		}
+		
+		
+		/*
 		sourceArray.add((C) new Card(2, Suit.CLUBS));
 		sourceArray.add((C) new Card(5, Suit.CLUBS));
 		sourceArray.add((C) new Card(5, Suit.DIAMONDS));
 		sourceArray.add((C) new Card(5, Suit.HEARTS));
 		sourceArray.add((C) new Card(7, Suit.SPADES));
 		sourceArray.add((C) new Card(2, Suit.HEARTS));
+		*/
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 			targetArray.add(null);

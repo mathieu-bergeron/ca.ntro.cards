@@ -23,6 +23,9 @@ public class DemoDashboardView extends DashboardView {
 	private Label simpleOperationsLabel;
 
 	@FXML
+	private Label numberOfCardsLabel;
+
+	@FXML
 	private Button menuButton;
 
 	@FXML
@@ -33,6 +36,7 @@ public class DemoDashboardView extends DashboardView {
 		
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
 		Ntro.assertNotNull("simpleOperationsLabel", simpleOperationsLabel);
+		Ntro.assertNotNull("numberOfCardsLabel", numberOfCardsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("playButton", playButton);
 		
@@ -52,7 +56,7 @@ public class DemoDashboardView extends DashboardView {
 								msgUnlockThread.send();
 							});
 						}
-					} , 0, 600);
+					} , 0, 100);
 		});
 	}
 

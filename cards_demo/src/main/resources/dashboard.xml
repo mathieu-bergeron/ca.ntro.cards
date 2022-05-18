@@ -17,30 +17,81 @@
 // along with aquiletour.  If not, see <https://www.gnu.org/licenses/> -->
 
 <?import javafx.scene.layout.VBox ?>
+<?import javafx.scene.layout.HBox ?>
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
+<HBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoDashboardView" 
     styleClass="container"
     id="dashboard-view">
 
-    <Button
-        text="▶"
-        fx:id="playButton">
-    </Button>
+    <VBox HBox.hgrow="ALWAYS">
+    </VBox>
 
-    <Label
-        fx:id="simpleOperationsLabel">
-    </Label>
+    <VBox styleClass="simple-operations-container">
 
-    <Button
-        text="☰"
-        fx:id="menuButton">
-    </Button>
+        <VBox styleClass="vspace-small" >
+        </VBox>
 
-    <Label
-        fx:id="fpsLabel">
-    </Label>
+        <Button
+            text="%runCode"
+            fx:id="playButton">
+        </Button>
 
-</VBox>
+        <VBox styleClass="vspace-small" >
+        </VBox>
+           
+        <HBox styleClass="simple-operations-container">
+            <Label
+                text="%numberOfCards"
+                styleClass="text-big">
+            </Label>
+
+            <HBox styleClass="hspace-small">
+            </HBox>
+
+            <Label
+                fx:id="numberOfCardsLabel"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <VBox styleClass="vspace-small" >
+        </VBox>
+
+        <HBox styleClass="simple-operations-container">
+            <Label
+                text="%simpleOperations"
+                styleClass="text-big">
+            </Label>
+
+            <HBox styleClass="hspace-small">
+            </HBox>
+
+            <Label
+                fx:id="simpleOperationsLabel"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+    </VBox>
+
+    <VBox HBox.hgrow="ALWAYS">
+    </VBox>
+
+    <VBox id="menu-button-container">
+
+        <Button
+            text="☰"
+            fx:id="menuButton">
+        </Button>
+
+        <Label
+            fx:id="fpsLabel">
+        </Label>
+
+    </VBox>
+
+</HBox>

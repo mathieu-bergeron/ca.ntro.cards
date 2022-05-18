@@ -17,3 +17,28 @@
     -fx-background-color:gray;
     -fx-alignment:center;
 }
+
+.simple-operations-container{
+    -fx-alignment:center-right;
+
+}
+
+#menu-button-container{
+    -fx-alignment:bottom-right;
+}
+
+.hspace-small{
+    -fx-min-width:20;
+    -fx-max-width:30;
+
+}
+
+.vspace-small{
+    -fx-min-height:20;
+    -fx-max-height:20;
+}
+
+.text-big{
+    -fx-font-size:24;
+
+}
