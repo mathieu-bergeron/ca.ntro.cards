@@ -109,6 +109,12 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 					                      targetTopLeftX,
 					                      targetTopLeftY);
 		}
+
+		double markerTopLeftX = cardWidth / 2 + getIndexOfCandidateSmallestElement() * cardWidth * 3 / 2;
+		double markerTopLeftY = cardHeight * 3;
+		
+		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY);
+		
 	}
 
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {

@@ -14,6 +14,7 @@ import ca.ntro.cards.frontend.views.utils.FpsCounter;
 import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
+import ca.ntro.cards.models.world2d.Marker2d;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.cards.models.world2d.CommonDrawingOptionsDefault;
 import ca.ntro.cards.models.world2d.CommonCard2d;
@@ -59,6 +60,22 @@ public abstract class CardsViewData implements ViewData {
 	}
 
 	public abstract void addOrUpdateCard(AbstractCard card, double topLeftX, double topLeftY);
+
+	public void addOrUpdateMarker(String markerId, double topLeftX, double topLeftY) {
+		
+		Marker2d marker2d = null;
+
+		marker2d = (Marker2d) world2d().objectById(markerId);
+
+		if(marker2d == null) {
+			marker2d = new Marker2d(markerId);
+			world2d().addObject2d(marker2d);
+		}
+		
+		marker2d.setTopLeftX(topLeftX);
+		marker2d.setTopLeftY(topLeftY);
+		
+	}
 
 	public void removeCardsNotIn(Stream<Card> cards) {
 		Set<String> cardIds = new HashSet<>();
