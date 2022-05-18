@@ -37,6 +37,9 @@ public class DemoDashboardView extends DashboardView {
 	@FXML
 	private Button pauseButton;
 
+	@FXML
+	private Button oneStepButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -46,11 +49,13 @@ public class DemoDashboardView extends DashboardView {
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("playButton", playButton);
 		Ntro.assertNotNull("pauseButton", pauseButton);
+		Ntro.assertNotNull("oneStepButton", oneStepButton);
 		
 		super.initialize(location, resources);
 		
 		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
 		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
+		MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
 		
 		playButton.setOnAction(evtFx -> {
 
@@ -61,6 +66,12 @@ public class DemoDashboardView extends DashboardView {
 		pauseButton.setOnAction(evtFx -> {
 
 			evtStopCodeExecution.trigger();
+
+		});
+
+		oneStepButton.setOnAction(evtFx -> {
+			
+			msgExecuteCodeOneStep.send();
 
 		});
 	}
