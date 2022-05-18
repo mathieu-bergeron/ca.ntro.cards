@@ -36,23 +36,24 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			
 			C candidate = sourceArray.get(i);
 			
-			if(candidate != null 
-					&& currentSmallest != null
-					&& candidate.compareTo(currentSmallest) < 0) {
+			if(currentSmallest == null
+					&& candidate != null) {
 
-				currentSmallest = candidate;
-				
 				indexOfSmallestElement = i;
+				currentSmallest = candidate;
+
 				registerSimpleOperation();
+
+			}else if(currentSmallest != null 
+					&& candidate != null
+					&& candidate.compareTo(currentSmallest) < 0) {
 				
-			}else if(candidate != null
-					&& currentSmallest == null) {
-				
+				indexOfSmallestElement = i;
 				currentSmallest = candidate;
 
-				indexOfSmallestElement = i;
 				registerSimpleOperation();
 			}
+
 		}
 	}
 

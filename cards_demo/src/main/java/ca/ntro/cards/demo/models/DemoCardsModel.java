@@ -123,17 +123,23 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		
 		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY);
 		
-		int indexOfSmallestCard = getIndexOfSmallestElement();
-		if(indexOfSmallestCard >= 0 && indexOfSmallestCard < bottomCards.size()) {
+		if(getIndexOfSmallestElement() >= 0 && getIndexOfSmallestElement() < bottomCards.size()) {
 			AbstractCard smallestCard = bottomCards.get(getIndexOfSmallestElement());
 			cardsViewData.displayCardFaceUp(smallestCard);
 			
 		}
 		
-		int indexOfCandidateSmallestCard = getIndexOfCandidateSmallestElement();
-		if(indexOfCandidateSmallestCard >= 0 && indexOfCandidateSmallestCard < bottomCards.size()) {
+		if(getIndexOfCandidateSmallestElement() >= 0 && getIndexOfCandidateSmallestElement() < bottomCards.size()) {
 			AbstractCard candidateCard = bottomCards.get(getIndexOfCandidateSmallestElement());
 			cardsViewData.displayCardFaceUp(candidateCard);
+		}
+
+		if(getIndexOfNextEmptySpace() >= 0 && getIndexOfNextEmptySpace() < topCards.size()) {
+			for(int i = getIndexOfNextEmptySpace() + 1; i < topCards.size(); i++) {
+				AbstractCard futureCard = topCards.get(i);
+				cardsViewData.displayCardFaceDown(futureCard);
+			}
+
 		}
 		
 	}
