@@ -5,18 +5,27 @@ import ca.ntro.cards.demo.messages.MsgUnlockThread;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class DemoManageThread {
+
 	
-	public static void unlockThread(BackendTasks tasks) {
+	public static void unlockThread(BackendTasks tasks, ReentrantLock lock) {
 		tasks.task("unlockThread")
 
 		     .waitsFor(message(MsgUnlockThread.class))
 		     
 		     .thenExecutes(inputs -> {
+
+				 System.out.println("unlock thread");
+				 System.out.flush();
 		    	 
-		    	 System.out.println("unlock thread");
-		    	 
+		    	 if(lock.isHeldByCurrentThread()) {
+					 lock.unlock();
+		    	 }
+
 		     });
 	}
+
 
 }

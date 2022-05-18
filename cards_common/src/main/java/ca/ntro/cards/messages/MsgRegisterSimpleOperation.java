@@ -9,7 +9,19 @@ public abstract class MsgRegisterSimpleOperation<CARDS_MODEL extends CardsModel,
 
        extends        MessageNtro {
 	
-	public abstract void applyTo(CARDS_MODEL cardsModel);
+	private CARDS_MODEL cardsModel;
+	
+	public CARDS_MODEL getCardsModel() {
+		return cardsModel;
+	}
+
+	public void setCardsModel(CARDS_MODEL cardsModel) {
+		this.cardsModel = cardsModel;
+	}
+
+	public void applyTo(CARDS_MODEL cardsModel) {
+		cardsModel.copyDataFrom(this.cardsModel);
+	}
 
 	public abstract void applyTo(DASHBOARD_MODEL dashboardModel);
 

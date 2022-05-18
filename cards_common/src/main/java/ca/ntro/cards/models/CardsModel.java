@@ -2,18 +2,23 @@ package ca.ntro.cards.models;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
+import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.identifyers.IdFactory;
 import ca.ntro.cards.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initializable;
 import ca.ntro.core.stream.Stream;
+import javafx.application.Platform;
 
-public abstract class CardsModel implements Model, Watchable, Initializable {
+public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>> 
+
+       implements     Model, Watchable, Initializable {
 	
 	private long version;
 
@@ -25,10 +30,44 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 		this.version = version;
 	}
 	
+	private ReentrantLock lock;
+
+	@SuppressWarnings("rawtypes")
+	private MsgRegisterSimpleOperation msgRegisterSimpleOperation;
+	
+	public void registerLock(ReentrantLock lock) {
+		this.lock = lock;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void registerMsgRegisterSimpleOperation(MsgRegisterSimpleOperation msgRegisterSimpleOperation) {
+		this.msgRegisterSimpleOperation = msgRegisterSimpleOperation;
+	}
 	
 	protected void registerSimpleOperation() {
+		// XXX: waiting for JavaFx GUI thread to unlock us 
+		lock.lock();
+		lock.unlock();
+
 		System.out.println("registerSimpleOperation");
 		System.out.flush();
+		
+		// XXX: JavaFx GUI thread acquires the lock
+		Platform.runLater(() -> {
+			lock.lock();
+
+			msgRegisterSimpleOperation.send();
+		}); 
+
+		try {
+
+			Thread.sleep(500);
+
+		} catch (InterruptedException e) {
+			
+			Ntro.throwException(e);
+
+		}
 	}
 	
 
@@ -109,6 +148,9 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	}
 	
 	protected abstract void updateViewDataImpl(CardsViewData cardsViewData);
+
+	
+	public abstract void copyDataFrom(CARDS_MODEL cardsModel);
 	
 		
 

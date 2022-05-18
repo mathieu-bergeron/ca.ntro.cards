@@ -5,7 +5,6 @@ import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.CommonLocalApp;
 import ca.ntro.cards.demo.backend.DemoBackend;
 import ca.ntro.cards.demo.frontend.DemoFrontend;
-import ca.ntro.cards.demo.frontend.procedures.DemoNaiveSort;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
@@ -75,7 +74,6 @@ public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
 
 	@Override
 	protected void registerAdditionnalModels(ModelRegistrar registrar) {
-		registrar.registerValue(DemoNaiveSort.class);
 	}
 
 	@Override

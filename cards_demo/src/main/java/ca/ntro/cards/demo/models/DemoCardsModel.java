@@ -14,7 +14,7 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
+public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel<DemoCardsModel<C>> {
 	
 	protected int indexOfSmallestElement = -1;
 	protected int indexOfCandidateSmallestElement = 0;
@@ -120,11 +120,9 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	public void createFirstVersion() {
 		sourceArray.add((C) new Card(3, Suit.HEARTS));
 		sourceArray.add((C) new Card(6, Suit.CLUBS));
-		/*
 		sourceArray.add((C) new Card(4, Suit.SPADES));
 		sourceArray.add((C) new Card(10, Suit.DIAMONDS));
 		sourceArray.add((C) new Card(5, Suit.HEARTS));
-		*/
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 			targetArray.add(null);
@@ -196,7 +194,12 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		});
 	}
 	
-	
 	public abstract void sort();
+
+	@Override
+	public void copyDataFrom(DemoCardsModel<C> cardsModel) {
+		setSourceArray(cardsModel.getSourceArray());
+		setTargetArray(cardsModel.getTargetArray());
+	}
 
 }

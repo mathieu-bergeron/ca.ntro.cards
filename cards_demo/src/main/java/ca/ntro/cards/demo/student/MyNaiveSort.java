@@ -48,11 +48,16 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 				indexOfSmallestElement = i;
 				registerSimpleOperation();
 				
-			}else {
+			}else if(candidate != null
+					&& currentSmallest == null) {
 				
 				currentSmallest = candidate;
+				indexOfSmallestElement = i;
+				registerSimpleOperation();
 
 			}
 		}
 	}
+
+
 }
