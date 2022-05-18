@@ -5,12 +5,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.ViewData;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.frontend.views.DashboardView;
+import ca.ntro.cards.CommonConstants;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.utils.FpsCounter;
+import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
@@ -22,6 +25,10 @@ import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 import javafx.scene.input.MouseEvent;
 
 public abstract class CardsViewData implements ViewData {
+	
+	private boolean isCodeExecuting = false;
+	private double timeSinceLastExecutionStep;
+	private MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
 
 	private CommonWorld2d world2d = newWorld2d();
 	private FpsCounter fpsCounter = new FpsCounter();
@@ -38,9 +45,17 @@ public abstract class CardsViewData implements ViewData {
 	}
 
 	public void onTimePasses(double secondsElapsed) {
+		if(isCodeExecuting) {
+
+			timeSinceLastExecutionStep -= secondsElapsed;
+			
+			if(timeSinceLastExecutionStep < 0) {
+				timeSinceLastExecutionStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
+				msgExecuteCodeOneStep.send();
+			}
+		}
 
 		world2d.onTimePasses(secondsElapsed);
-
 	}
 
 	public void displayOn(CardsView gameView, 
@@ -121,6 +136,11 @@ public abstract class CardsViewData implements ViewData {
 		
 		world2d.removeObject2dIn(toRemove);
 
+	}
+
+	public void startCodeExecution() {
+		isCodeExecuting = true;
+		timeSinceLastExecutionStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
 	}
 
 }

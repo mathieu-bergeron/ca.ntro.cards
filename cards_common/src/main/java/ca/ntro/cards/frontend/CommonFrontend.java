@@ -10,6 +10,8 @@ import ca.ntro.cards.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.events.EvtQuit;
 import ca.ntro.cards.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.frontend.events.EvtShowMenu;
+import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
+import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.tasks.Cards;
@@ -86,6 +88,9 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 		registrar.registerEvent(EvtShowMenu.class);
 		registrar.registerEvent(EvtHideMenu.class);
 		registrar.registerEvent(EvtQuit.class);
+		
+		registrar.registerEvent(EvtStartCodeExecution.class);
+		registrar.registerEvent(EvtStopCodeExecution.class);
 
 		registerAdditionnalEvents(registrar);
 	}

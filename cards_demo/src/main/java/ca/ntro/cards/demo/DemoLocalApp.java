@@ -11,12 +11,12 @@ import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
-import ca.ntro.cards.demo.messages.MsgUnlockThread;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
+import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 
 public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
 
@@ -79,7 +79,7 @@ public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		registrar.registerMessage(MsgUpdateList.class);
-		registrar.registerMessage(MsgUnlockThread.class);
+		registrar.registerMessage(MsgExecuteCodeOneStep.class);
 	}
 
 

@@ -1,7 +1,7 @@
 package ca.ntro.cards.demo.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.demo.messages.MsgUnlockThread;
+import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -13,7 +13,7 @@ public class DemoManageThread {
 	public static void unlockThread(BackendTasks tasks, ReentrantLock lock) {
 		tasks.task("unlockThread")
 
-		     .waitsFor(message(MsgUnlockThread.class))
+		     .waitsFor(message(MsgExecuteCodeOneStep.class))
 		     
 		     .thenExecutes(inputs -> {
 

@@ -6,8 +6,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ca.ntro.app.NtroApp;
-import ca.ntro.cards.demo.messages.MsgUnlockThread;
+import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.views.DashboardView;
+import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.core.initialization.Ntro;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -43,21 +44,12 @@ public class DemoDashboardView extends DashboardView {
 		
 		super.initialize(location, resources);
 		
-		
-		
-		MsgUnlockThread msgUnlockThread = NtroApp.newMessage(MsgUnlockThread.class);
+		EvtStartCodeExecution msgStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
 		
 		playButton.setOnAction(evtFx -> {
-			
-			new Timer().scheduleAtFixedRate(
-					new TimerTask() {
-						@Override
-						public void run() {
-							Platform.runLater(() -> {
-								msgUnlockThread.send();
-							});
-						}
-					} , 0, 100);
+
+			msgStartCodeExecution.trigger();
+
 		});
 	}
 

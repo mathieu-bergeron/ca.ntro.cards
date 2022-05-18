@@ -17,5 +17,7 @@ public class CommonConstants {
 	public static final String BLUE = "#4363d8";
 	public static final String GREEN = "#3cb44b";
 	public static final String BLACK = "#000000";
+	
+	public static final double SECONDS_BETWEEN_EXECUTION_STEPS = 0.15;
 
 }
