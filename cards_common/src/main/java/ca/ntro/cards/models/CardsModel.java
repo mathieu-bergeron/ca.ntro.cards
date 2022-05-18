@@ -58,16 +58,21 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 
 			msgRegisterSimpleOperation.send();
 		}); 
+		
+		// XXX: wait for JavaFX GUI thread
+		//      to re-aquire the lock
+		//      before returning
+		while(!lock.isLocked()) {
+			try {
 
-		try {
+				Thread.sleep(10);
 
-			Thread.sleep(500);
-
-		} catch (InterruptedException e) {
-			
-			Ntro.throwException(e);
-
+			} catch (InterruptedException e) {
+				
+				Ntro.throwException(e);
+			}
 		}
+
 	}
 	
 
