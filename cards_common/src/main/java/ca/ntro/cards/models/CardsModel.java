@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
+import ca.ntro.cards.CommonConstants;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.identifyers.IdFactory;
@@ -53,22 +54,19 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 		//      acquires the lock
 		Platform.runLater(() -> {
 			lock.lock();
-
 			msgRegisterSimpleOperation.send();
 		}); 
 
 		// XXX: make sure JavaFX GUI thread
-		//      has acquired the lock
-		//      before returning
-		while(!lock.isLocked()) {
-			try {
+		//      has time to lock before
+		//      resuming execution
+		try {
 
-				Thread.sleep(10);
+			Thread.sleep(Math.round(CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS * 1000));
 
-			} catch (InterruptedException e) {
-
-				Ntro.throwException(e);
-			}
+		} catch (InterruptedException e) {
+			
+			Ntro.throwException(e);
 		}
 	}
 	
