@@ -20,7 +20,7 @@ def commonConfig = {
 
 def localConfig = {
    configure commonConfig
-   main = "ca.ntro.cards.demo.DemoLocalApp"
+   main = "ca.ntro.cards.demo.student.StudentApp"
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 

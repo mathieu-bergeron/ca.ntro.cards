@@ -14,15 +14,17 @@ import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 
-public class DemoFrontend extends CommonFrontend<DemoRootView,
-                                                 DemoSettingsView,
-                                                 DemoCardsView,
-                                                 DemoDashboardView,
-                                                 DemoCardsViewData,
-                                                 DemoCardsModel,
-                                                 DemoDashboardModel,
-                                                 DemoSettingsModel,
-                                                 DemoMsgRegisterSimpleOperation> {
+public class DemoFrontend<STUDENT_MODEL extends DemoCardsModel> 
+
+       extends CommonFrontend<DemoRootView,
+                              DemoSettingsView, 
+                              DemoCardsView, 
+                              DemoDashboardView, 
+                              DemoCardsViewData, 
+                              STUDENT_MODEL, 
+                              DemoDashboardModel, 
+                              DemoSettingsModel, 
+                              DemoMsgRegisterSimpleOperation<STUDENT_MODEL>> {
 
 	@Override
 	protected void registerAdditionnalEvents(EventRegistrar registrar) {

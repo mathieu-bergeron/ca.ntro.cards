@@ -15,35 +15,53 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public class DemoCardsModel extends CardsModel {
+public class DemoCardsModel<C extends Comparable<C>> extends CardsModel {
 	
-	private DemoNaiveSort naiveSort = new DemoNaiveSort();
-
-	private List<Card> sourceList = new ArrayList<>();
-	private List<Card> targetList = new ArrayList<>();
+	protected int indexOfSmallestElement = -1;
+	protected int indexOfCandidateSmallestElement = 0;
+	protected int indexOfNextEmptySpace = 0;
 	
-	public DemoNaiveSort getNaiveSort() {
-		return naiveSort;
+	protected List<C> sourceArray = new ArrayList<>();
+	protected List<C> targetArray = new ArrayList<>();
+
+	public int getIndexOfSmallestElement() {
+		return indexOfSmallestElement;
 	}
 
-	public void setNaiveSort(DemoNaiveSort naiveSort) {
-		this.naiveSort = naiveSort;
+	public void setIndexOfSmallestElement(int indexOfSmallestElement) {
+		this.indexOfSmallestElement = indexOfSmallestElement;
 	}
 
-	public List<Card> getSourceList() {
-		return sourceList;
+	public int getIndexOfCandidateSmallestElement() {
+		return indexOfCandidateSmallestElement;
 	}
 
-	public void setSourceList(List<Card> sourceList) {
-		this.sourceList = sourceList;
+	public void setIndexOfCandidateSmallestElement(int indexOfCandidateSmallestElement) {
+		this.indexOfCandidateSmallestElement = indexOfCandidateSmallestElement;
 	}
 
-	public List<Card> getTargetList() {
-		return targetList;
+	public int getIndexOfNextEmptySpace() {
+		return indexOfNextEmptySpace;
 	}
 
-	public void setTargetList(List<Card> targetList) {
-		this.targetList = targetList;
+	public void setIndexOfNextEmptySpace(int indexOfNextEmptySpace) {
+		this.indexOfNextEmptySpace = indexOfNextEmptySpace;
+	}
+
+	public List<C> getSourceArray() {
+		return sourceArray;
+	}
+
+	public void setSourceArray(List<C> sourceArray) {
+		this.sourceArray = sourceArray;
+	}
+
+	public List<C> getTargetArray() {
+		return targetArray;
+	}
+
+	public void setTargetArray(List<C> targetArray) {
+		this.targetArray = targetArray;
 	}
 
 	@Override
@@ -52,12 +70,12 @@ public class DemoCardsModel extends CardsModel {
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
-		for(int i = 0; i < sourceList.size(); i++) {
+		for(int i = 0; i < sourceArray.size(); i++) {
 
 			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
 			
-			AbstractCard card = sourceList.get(i);
+			AbstractCard card = (Card) sourceArray.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -68,12 +86,12 @@ public class DemoCardsModel extends CardsModel {
 					                      targetTopLeftY);
 		}
 
-		for(int i = 0; i < targetList.size(); i++) {
+		for(int i = 0; i < targetArray.size(); i++) {
 
 			double targetTopLeftX = cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight * 2;
 			
-			AbstractCard card = targetList.get(i);
+			AbstractCard card = (Card) targetArray.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -86,45 +104,52 @@ public class DemoCardsModel extends CardsModel {
 	}
 
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		setSourceList(sourceList);
-		setTargetList(targetList);
+		sourceArray.clear();
+		for(Card card : sourceList) {
+			sourceArray.add((C) card);
+		}
+		
+		targetArray.clear();
+		for(Card card : targetList) {
+			targetArray.add((C) card);
+		}
+
 		incrementVersion();
 	}
 
 	@Override
 	public void createFirstVersion() {
-		sourceList.add(new Card(3, Suit.HEARTS));
-		sourceList.add(new Card(6, Suit.CLUBS));
-		sourceList.add(new Card(4, Suit.SPADES));
-		sourceList.add(new Card(10, Suit.DIAMONDS));
-		sourceList.add(new Card(5, Suit.HEARTS));
+		sourceArray.add((C) new Card(3, Suit.HEARTS));
+		sourceArray.add((C) new Card(6, Suit.CLUBS));
+		sourceArray.add((C) new Card(4, Suit.SPADES));
+		sourceArray.add((C) new Card(10, Suit.DIAMONDS));
+		sourceArray.add((C) new Card(5, Suit.HEARTS));
 		
-		for(int i = 0; i < sourceList.size(); i++) {
-			targetList.add(null);
+		for(int i = 0; i < sourceArray.size(); i++) {
+			targetArray.add(null);
 		}
-
-		naiveSort.setSourceArray(new ArrayList(sourceList));
-		naiveSort.setTargetArray(new ArrayList(targetList));
 	}
 	
 	@Override
 	protected Card cardById(String cardId) {
-		Card result = cardById(cardId, sourceList);
+		Card result = (Card) cardById(cardId, sourceArray);
 
 		if(result == null) {
-			result = cardById(cardId, targetList);
+			result = (Card) cardById(cardId, targetArray);
 		}
 
 		return result;
 	}
 	
-	private Card cardById(String cardId, List<Card> list) {
+	private Card cardById(String cardId, List<C> list) {
 		Card result = null;
 		
-		for(Card candidate : list) {
-			if(candidate.hasId(cardId)){
-				result = candidate;
-				break;
+		for(C candidate : list) {
+			if(candidate instanceof Card) {
+				Card candidateCard = (Card) candidate;
+				if(candidateCard.hasId(cardId)) {
+					result = candidateCard;
+				}
 			}
 		}
 		
@@ -136,13 +161,13 @@ public class DemoCardsModel extends CardsModel {
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				visitList(visitor, sourceList);
-				visitList(visitor, targetList);
+				visitList(visitor, sourceArray);
+				visitList(visitor, targetArray);
 			}
 
-			private void visitList(Visitor<Card> visitor, List<Card> listToVisit) throws Throwable {
-				for(Card card : listToVisit) {
-					visitor.visit(card);
+			private void visitList(Visitor<Card> visitor, List<C> listToVisit) throws Throwable {
+				for(C card : listToVisit) {
+					visitor.visit((Card) card);
 				}
 			}
 		};
@@ -150,7 +175,7 @@ public class DemoCardsModel extends CardsModel {
 
 	@Override
 	protected void addCardImpl(Card card) {
-		sourceList.add(card);
+		sourceArray.add((C) card);
 	}
 	
 	@Override
@@ -164,10 +189,10 @@ public class DemoCardsModel extends CardsModel {
 	}
 	
 	public void format(StringBuilder builder) {
-		for(Card card : targetList) {
+		cards().forEach(card -> {
 			builder.append(System.lineSeparator());
 			card.format(builder);
-		}
+		});
 	}
 
 }

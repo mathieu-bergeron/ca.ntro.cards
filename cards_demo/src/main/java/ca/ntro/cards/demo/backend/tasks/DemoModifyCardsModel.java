@@ -8,14 +8,14 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 public class DemoModifyCardsModel {
 
-	public static void updateList(BackendTasks tasks) {
+	public static <STUDENT_MODEL extends DemoCardsModel> void updateList(BackendTasks tasks, Class<STUDENT_MODEL> cardsModelClass) {
 		tasks.task("updateList")
 
 		     .waitsFor(message(MsgUpdateList.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoCardsModel demoModel     = inputs.get(model(DemoCardsModel.class));
+		    	 STUDENT_MODEL demoModel     = inputs.get(model(cardsModelClass));
 		    	 MsgUpdateList msgUpdateList = inputs.get(message(MsgUpdateList.class));
 		    	 
 		    	 msgUpdateList.applyTo(demoModel);

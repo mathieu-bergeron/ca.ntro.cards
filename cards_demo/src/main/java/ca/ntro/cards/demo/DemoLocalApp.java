@@ -1,6 +1,5 @@
 package ca.ntro.cards.demo;
 
-import ca.ntro.app.NtroClientFx;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.CommonLocalApp;
@@ -17,27 +16,30 @@ import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
+import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 
-public class DemoLocalApp extends CommonLocalApp<DemoCardsModel, 
-                                                 DemoDashboardModel,
-                                                 DemoSettingsModel,
-                                                 DemoMsgRegisterSimpleOperation,
-                                                 DemoBackend,
-                                                 DemoRootView,
-                                                 DemoCardsView,
-                                                 DemoDashboardView,
-                                                 DemoSettingsView,
-                                                 DemoCardsViewData,
-                                                 DemoFrontend> {
+public abstract class   DemoLocalApp<STUDENT_MODEL extends DemoCardsModel>
+
+                extends CommonLocalApp<STUDENT_MODEL, 
+                                       DemoDashboardModel,
+                                       DemoSettingsModel,
+                                       DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
+                                       DemoBackend<STUDENT_MODEL>,
+                                       DemoRootView,
+                                       DemoCardsView,
+                                       DemoDashboardView,
+                                       DemoSettingsView,
+                                       DemoCardsViewData,
+                                       DemoFrontend<STUDENT_MODEL>> {
 	
-	public static void main(String[] args) {
-		NtroClientFx.launch(args);
-	}
 
 	@Override
-	protected Class<DemoCardsModel> cardsModelClass() {
-		return DemoCardsModel.class;
+	protected Class<STUDENT_MODEL> cardsModelClass() {
+		return naiveSortClass();
 	}
+
+
+	protected abstract Class<STUDENT_MODEL> naiveSortClass();
 
 
 	@Override
@@ -53,7 +55,7 @@ public class DemoLocalApp extends CommonLocalApp<DemoCardsModel,
 
 
 	@Override
-	protected Class<DemoMsgRegisterSimpleOperation> msgRegisterSimpleOperationClass() {
+	protected Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass() {
 		return DemoMsgRegisterSimpleOperation.class;
 	}
 

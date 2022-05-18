@@ -8,15 +8,18 @@ import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 
-public class DemoBackend extends CommonBackend<DemoCardsModel,
-                                               DemoDashboardModel,
-                                               DemoSettingsModel,
-                                               DemoMsgRegisterSimpleOperation> {
+public class   DemoBackend<STUDENT_MODEL extends DemoCardsModel> 
+
+
+       extends CommonBackend<STUDENT_MODEL,
+                             DemoDashboardModel,
+                             DemoSettingsModel,
+                             DemoMsgRegisterSimpleOperation<STUDENT_MODEL>> {
 
 	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
 
-		 DemoModifyCardsModel.updateList(subTasks);
+		 DemoModifyCardsModel.updateList(subTasks, getCardsModelClass());
 
 	}
 

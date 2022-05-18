@@ -1,0 +1,51 @@
+package ca.ntro.cards.demo.student;
+
+import java.util.List;
+
+import ca.ntro.cards.demo.models.DemoCardsModel;
+
+public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
+
+	public void sort() {
+		indexOfNextEmptySpace = 0;
+		
+		for(int i = 0; i < sourceArray.size(); i++) {
+
+			findIndexOfSmallestElement(sourceArray);
+			
+			C smallestElement = sourceArray.get(indexOfSmallestElement);
+			
+			targetArray.add(indexOfNextEmptySpace, smallestElement);
+			
+			sourceArray.add(indexOfSmallestElement, null);
+			
+			indexOfNextEmptySpace++;
+
+			registerSimpleOperation();
+		}
+	}
+
+
+	private void findIndexOfSmallestElement(List<C> sourceArray) {
+		indexOfSmallestElement = -1;
+
+		C currentSmallest = null;
+
+		for(int i = 0; i < sourceArray.size(); i++) {
+			
+			indexOfCandidateSmallestElement = i;
+			registerSimpleOperation();
+			
+			C candidate = sourceArray.get(i);
+			
+			if(currentSmallest == null
+					|| candidate.compareTo(currentSmallest) < 0) {
+				
+				currentSmallest = candidate;
+				
+				indexOfSmallestElement = i;
+				registerSimpleOperation();
+			}
+		}
+	}
+}

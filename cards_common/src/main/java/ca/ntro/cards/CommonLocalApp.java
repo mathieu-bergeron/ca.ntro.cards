@@ -99,7 +99,7 @@ public abstract class CommonLocalApp<CARDS_MODEL extends CardsModel,
 	protected abstract Class<CARDS_MODEL> cardsModelClass();
 	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();
 	protected abstract Class<SETTINGS_MODEL> settingsModelClass();
-	protected abstract Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass();
+	protected abstract Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass();
 
 	protected abstract void registerAdditionnalModels(ModelRegistrar registrar);
 	protected abstract void registerAdditionnalMessages(MessageRegistrar registrar);

@@ -21,7 +21,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	private Class<CARDS_MODEL> cardsModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
-	private Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass;
+	private Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass;
 
 	public Class<CARDS_MODEL> getCardsModelClass() {
 		return cardsModelClass;
@@ -52,12 +52,12 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 		this.settingsModelClass = settingsModelClass;
 	}
 
-	public Class<MSG_REGISTER_SIMPLE_OPERATION> getMsgRegisterSimpleOperationClass() {
+	public Class<? extends MsgRegisterSimpleOperation> getMsgRegisterSimpleOperationClass() {
 		return msgRegisterSimpleOperationClass;
 	}
 
 
-	public void setMsgRegisterSimpleOperationClass(Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass) {
+	public void setMsgRegisterSimpleOperationClass(Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass) {
 		this.msgRegisterSimpleOperationClass = msgRegisterSimpleOperationClass;
 	}
 

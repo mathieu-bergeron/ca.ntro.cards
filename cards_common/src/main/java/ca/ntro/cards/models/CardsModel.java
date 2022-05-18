@@ -102,6 +102,10 @@ public abstract class CardsModel implements Model, Watchable, Initializable {
 	}
 	
 	protected abstract void updateViewDataImpl(CardsViewData cardsViewData);
+	
+	protected void registerSimpleOperation() {
+		System.out.println("registerSimpleOperation");
+	}
 		
 
 }
