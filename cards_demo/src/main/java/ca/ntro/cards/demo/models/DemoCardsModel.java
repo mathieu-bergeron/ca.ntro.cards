@@ -81,23 +81,6 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		
 		List<AbstractCard> topCards = new ArrayList<>();
 		List<AbstractCard> bottomCards = new ArrayList<>();
-		
-		for(int i = 0; i < targetArray.size(); i++) {
-
-			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
-			double targetTopLeftY = cardHeight / 2;
-			
-			AbstractCard card = (Card) targetArray.get(i);
-			
-			if(card == null) {
-				card = new NullCard();
-			}
-
-			cardsViewData.addOrUpdateCard(card,
-					                      targetTopLeftX,
-					                      targetTopLeftY);
-			topCards.add(card);
-		}
 
 		for(int i = 0; i < sourceArray.size(); i++) {
 
@@ -116,6 +99,23 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 
 			bottomCards.add(card);
 			cardsViewData.displayCardFaceDown(card);
+		}
+
+		for(int i = 0; i < targetArray.size(); i++) {
+
+			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
+			double targetTopLeftY = cardHeight / 2;
+			
+			AbstractCard card = (Card) targetArray.get(i);
+			
+			if(card == null) {
+				card = new NullCard();
+			}
+
+			cardsViewData.addOrUpdateCard(card,
+					                      targetTopLeftX,
+					                      targetTopLeftY);
+			topCards.add(card);
 		}
 
 		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndexOfSmallestElement() * cardWidth * 3 / 2;
@@ -161,17 +161,18 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	@Override
 	public void createFirstVersion() {
 		
-		/*
 		for(int i = 0; i < 20; i++) {
 			sourceArray.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
-		}*/
+		}
 		
+		/*
 		sourceArray.add((C) new Card(2, Suit.CLUBS));
 		sourceArray.add((C) new Card(5, Suit.CLUBS));
 		sourceArray.add((C) new Card(5, Suit.DIAMONDS));
 		sourceArray.add((C) new Card(5, Suit.HEARTS));
 		sourceArray.add((C) new Card(7, Suit.SPADES));
 		sourceArray.add((C) new Card(2, Suit.HEARTS));
+		*/
 		
 		for(int i = 0; i < sourceArray.size(); i++) {
 			targetArray.add(null);
