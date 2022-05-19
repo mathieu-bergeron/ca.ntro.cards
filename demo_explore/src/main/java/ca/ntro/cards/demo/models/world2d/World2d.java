@@ -47,22 +47,23 @@ public class World2d extends CommonWorld2d {
 		
 		List<Card> sourceList = new ArrayList<>();
 		List<Card> targetList = new ArrayList<>();
-		
-		for(Card2d card2d : topCards2d) {
+
+		for(Card2d card2d : bottomCards2d) {
 			if(card2d.isNullCard()) {
 				sourceList.add(null);
 			}else {
 				sourceList.add((Card) card2d.getCard());
 			}
 		}
-
-		for(Card2d card2d : bottomCards2d) {
+		
+		for(Card2d card2d : topCards2d) {
 			if(card2d.isNullCard()) {
 				targetList.add(null);
 			}else {
 				targetList.add((Card) card2d.getCard());
 			}
 		}
+
 		
 		msgUpdateList.setSourceList(sourceList);
 		msgUpdateList.setTargetList(targetList);
