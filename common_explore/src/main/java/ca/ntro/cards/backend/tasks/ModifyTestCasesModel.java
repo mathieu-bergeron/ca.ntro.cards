@@ -21,13 +21,15 @@ public class ModifyTestCasesModel {
 			                Class<TEST_CASES_MODEL> testCasesModelClass,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		createFirstVersionIfNeeded(tasks, testCasesModelClass);
+		initializeTestCases(tasks, testCasesModelClass);
 		
 		tasks.taskGroup("ModifyTestCasesModel")
 		
-		     .waitsFor("createFirstVersionIfNeeded")
+		     .waitsFor("initializeTestCases")
 		
 		     .andContains(subTasks -> {
+		    	 
+		    	 addTestCase(subTasks, testCasesModelClass);
 
 		     });
 	}
@@ -38,10 +40,10 @@ public class ModifyTestCasesModel {
 		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL extends DashboardModel>
 	
-	        void createFirstVersionIfNeeded(BackendTasks tasks,
-	        		                        Class<TEST_CASES_MODEL> testCasesModelClass) {
+	        void initializeTestCases(BackendTasks tasks,
+	        		                 Class<TEST_CASES_MODEL> testCasesModelClass) {
 
-		tasks.task("createFirstVersionIfNeeded")
+		tasks.task("initializeTestCases")
 
 		     .waitsFor(model(testCasesModelClass))
 		     
@@ -50,6 +52,23 @@ public class ModifyTestCasesModel {
 		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
 		    	 
 		    	 testCasesModel.generateFirstVersionIfNeeded();
+
+		     });
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <CARDS_MODEL extends CardsModel,
+	               TEST_CASE extends TestCase<CARDS_MODEL>,
+		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>>
+	
+	        void addTestCase(BackendTasks tasks,
+	        		         Class<TEST_CASES_MODEL> testCasesModelClass) {
+
+		tasks.task("addTestCaseDummy")
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
 
 		     });
 	}

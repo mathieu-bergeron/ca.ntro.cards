@@ -28,11 +28,11 @@ public class ModifyCardsModel {
 			                ModelThread<CARDS_MODEL> modelThread,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		createFirstVersionIfNeededCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
+		initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
 		
 		tasks.taskGroup("ModifyCardsModel")
 		
-		     .waitsFor(model(cardsModelClass))
+		     .waitsFor("initializeCards")
 		
 		     .andContains(subTasks -> {
 
@@ -55,15 +55,17 @@ public class ModifyCardsModel {
 	public static <CARDS_MODEL extends CardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
 	
-	        void createFirstVersionIfNeededCards(BackendTasks tasks,
+	        void initializeCards(BackendTasks tasks,
 	        		                        Class<CARDS_MODEL> cardsModelClass,
 	        		                        ModelHistory<CARDS_MODEL> modelHistory, 
 	        		                        ReentrantLock lock,
 	        		                        ModelThread<CARDS_MODEL> modelThread) {
 
-		tasks.task("createFirstVersionIfNeededCards")
+		tasks.task("initializeCards")
 
 		     .waitsFor(model(cardsModelClass))
+
+		     .waitsFor("initializeTestCases")
 		     
 		     .thenExecutes(inputs -> {
 		    	 
