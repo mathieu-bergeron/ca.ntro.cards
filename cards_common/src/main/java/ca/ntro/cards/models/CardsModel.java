@@ -7,6 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.CommonConstants;
+import ca.ntro.cards.backend.ModelHistory;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.identifyers.IdFactory;
@@ -36,6 +37,8 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 	@SuppressWarnings("rawtypes")
 	private MsgRegisterSimpleOperation msgRegisterSimpleOperation;
 	
+	private ModelHistory<CARDS_MODEL> modelHistory;
+	
 	public void registerLock(ReentrantLock lock) {
 		this.lock = lock;
 	}
@@ -44,30 +47,19 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 	public void registerMsgRegisterSimpleOperation(MsgRegisterSimpleOperation msgRegisterSimpleOperation) {
 		this.msgRegisterSimpleOperation = msgRegisterSimpleOperation;
 	}
+
+	public void registerModelHistory(ModelHistory<CARDS_MODEL> modelHistory) {
+		this.modelHistory = modelHistory;
+	}
 	
-	protected void synchronize() {
-		// XXX: waiting for JavaFx GUI thread to unlock us 
+	@SuppressWarnings("unchecked")
+	protected void saveStep() {
+		// XXX: only excute if we are
+		//      not locked by JavaFX GUI Thread
 		lock.lock();
 		lock.unlock();
-		
-		// XXX: JavaFx GUI thread 
-		//      acquires the lock
-		Platform.runLater(() -> {
-			lock.lock();
-			msgRegisterSimpleOperation.send();
-		}); 
 
-		// XXX: make sure JavaFX GUI thread
-		//      has time to lock before
-		//      resuming execution
-		try {
-
-			Thread.sleep(Math.round(CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS * 1000));
-
-		} catch (InterruptedException e) {
-			
-			Ntro.throwException(e);
-		}
+		modelHistory.pushCopyOf((CARDS_MODEL) this);
 	}
 
 	protected void incrementVersion() {
@@ -89,7 +81,7 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 		}
 	}
 
-	protected abstract void createFirstVersion();
+	public abstract void createFirstVersion();
 
 	protected abstract Card cardById(String cardId);
 	
@@ -151,6 +143,8 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 	
 	public abstract void copyDataFrom(CARDS_MODEL cardsModel);
 	
+	public abstract void run();
+
 		
 
 }

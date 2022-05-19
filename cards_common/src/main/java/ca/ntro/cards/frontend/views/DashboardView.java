@@ -9,7 +9,9 @@ import ca.ntro.cards.frontend.events.EvtShowMenu;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
-import ca.ntro.cards.messages.MsgExecutionBackStep;
+import ca.ntro.cards.messages.MsgExecutionStepBack;
+import ca.ntro.cards.messages.MsgExecutionStepForward;
+import def.dom.MSTemplatePrinter;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -42,10 +44,11 @@ public abstract class DashboardView extends ViewFx {
 			evtShowMenu.trigger();
 		});
 
-		EvtStartCodeExecution evtStartCodeExecution = NtroApp.newEvent(EvtStartCodeExecution.class);
-		EvtStopCodeExecution evtStopCodeExecution = NtroApp.newEvent(EvtStopCodeExecution.class);
-		MsgExecuteCodeOneStep msgExecuteCodeOneStep = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
-		MsgExecutionBackStep msgExecutionBackStep = NtroApp.newMessage(MsgExecutionBackStep.class);
+		EvtStartCodeExecution   evtStartCodeExecution   = NtroApp.newEvent(EvtStartCodeExecution.class);
+		EvtStopCodeExecution    evtStopCodeExecution    = NtroApp.newEvent(EvtStopCodeExecution.class);
+		MsgExecuteCodeOneStep   msgExecuteCodeOneStep   = NtroApp.newMessage(MsgExecuteCodeOneStep.class);
+		MsgExecutionStepBack    msgExecutionStepBack    = NtroApp.newMessage(MsgExecutionStepBack.class);
+		MsgExecutionStepForward msgExecutionStepForward = NtroApp.newMessage(MsgExecutionStepForward.class);
 		
 		playButton().setOnAction(evtFx -> {
 
@@ -61,13 +64,13 @@ public abstract class DashboardView extends ViewFx {
 
 		oneStepButton().setOnAction(evtFx -> {
 			
-			msgExecuteCodeOneStep.send();
+			msgExecutionStepForward.send();
 
 		});
 		
 		backStepButton().setOnAction(evtFx -> {
 			
-			msgExecutionBackStep.send();
+			msgExecutionStepBack.send();
 			
 		});
 	}

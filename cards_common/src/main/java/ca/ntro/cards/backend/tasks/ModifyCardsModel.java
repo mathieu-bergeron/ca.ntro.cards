@@ -1,8 +1,9 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.backend.CommonBackend;
-import ca.ntro.cards.messages.MsgExecutionBackStep;
+import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.messages.MsgExecutionStepBack;
+import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
@@ -10,8 +11,6 @@ import ca.ntro.cards.models.DashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
@@ -24,7 +23,7 @@ public class ModifyCardsModel {
 	       void createTasks(BackendTasks tasks,
 			                Class<CARDS_MODEL> cardsModelClass,
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                List<CARDS_MODEL> modelHistory,
+			                ModelHistory<CARDS_MODEL> modelHistory,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		createFirstVersionIfNeeded(tasks, cardsModelClass);
@@ -42,9 +41,13 @@ public class ModifyCardsModel {
 		    			                 msgRegisterSimpleOperationClass,
 		    			                 modelHistory);
 
-		    	 executionBackStep(subTasks, 
+		    	 executionStepBack(subTasks, 
 		    			           cardsModelClass,
 		    			           modelHistory);
+
+		    	 executionStepForward(subTasks, 
+		    			              cardsModelClass,
+		    			              modelHistory);
 		    	 
 		    	 subTasksLambda.createSubTasks(subTasks);
 
@@ -98,7 +101,7 @@ public class ModifyCardsModel {
 	        void registerSimpleOperation(BackendTasks tasks,
 	        		                     Class<CARDS_MODEL> cardsModelClass,
 			                             Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                             List<CARDS_MODEL> modelHistory) {
+			                             ModelHistory<CARDS_MODEL> modelHistory) {
 
 		tasks.task("registerSimpleOperation")
 		
@@ -111,7 +114,27 @@ public class ModifyCardsModel {
 		    	 
 		    	 msgRegisterSimpleOperation.applyTo(cardsModel, modelHistory);
 		    	 
-		    	 CommonBackend.indexCurrentModel = modelHistory.size() - 1;
+		     });
+	}
+
+	public static <CARDS_MODEL extends CardsModel,
+	               DASHBOARD_MODEL extends DashboardModel,
+	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
+
+	        void executionStepBack(BackendTasks tasks,
+	        		               Class<CARDS_MODEL> cardsModelClass,
+			                       ModelHistory<CARDS_MODEL> modelHistory) {
+
+		tasks.task("executionStepBack")
+		
+		     .waitsFor(message(MsgExecutionStepBack.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 CARDS_MODEL cardsModel = inputs.get(model(cardsModelClass));
+		    	 
+		    	 modelHistory.stepBackward();
+		    	 cardsModel.copyDataFrom(modelHistory.currentModel());
 
 		     });
 	}
@@ -120,20 +143,20 @@ public class ModifyCardsModel {
 	               DASHBOARD_MODEL extends DashboardModel,
 	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
 
-	        void executionBackStep(BackendTasks tasks,
-	        		               Class<CARDS_MODEL> cardsModelClass,
-			                       List<CARDS_MODEL> modelHistory) {
+	        void executionStepForward(BackendTasks tasks,
+	        		                  Class<CARDS_MODEL> cardsModelClass,
+			                          ModelHistory<CARDS_MODEL> modelHistory) {
 
-		tasks.task("executionBackStep")
+		tasks.task("executionStepForward")
 		
-		     .waitsFor(message(MsgExecutionBackStep.class))
+		     .waitsFor(message(MsgExecutionStepForward.class))
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 CARDS_MODEL                   cardsModel                 = inputs.get(model(cardsModelClass));
+		    	 CARDS_MODEL cardsModel = inputs.get(model(cardsModelClass));
 		    	 
-		    	 CommonBackend.indexCurrentModel--;
-		    	 cardsModel.copyDataFrom(modelHistory.get(CommonBackend.indexCurrentModel));
+		    	 modelHistory.stepForward();
+		    	 cardsModel.copyDataFrom(modelHistory.currentModel());
 
 		     });
 	}

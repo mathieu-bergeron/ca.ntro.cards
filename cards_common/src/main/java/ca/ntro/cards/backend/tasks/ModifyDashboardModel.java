@@ -1,6 +1,8 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
@@ -18,6 +20,7 @@ public class ModifyDashboardModel {
 	       void createTasks(BackendTasks tasks,
 			                Class<DASHBOARD_MODEL> dashboardModelClass,
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
+			                ModelHistory<CARDS_MODEL> modelHistory,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		initializeDashboard(tasks, dashboardModelClass);
@@ -31,6 +34,10 @@ public class ModifyDashboardModel {
 		    	 registerSimpleOperationOnDashboard(subTasks, 
 		    			                            dashboardModelClass, 
 		    			                            msgRegisterSimpleOperationClass);
+
+		    	 executionEnded(subTasks,
+		    			        dashboardModelClass,
+		    			        modelHistory);
 		    	 
 		    	 subTasksLambda.createSubTasks(subTasks);
 
@@ -75,6 +82,28 @@ public class ModifyDashboardModel {
 		    	 MSG_REGISTER_SIMPLE_OPERATION msgRegisterSimpleOperation = inputs.get(message(msgRegisterSimpleOperationClass));
 		    	 
 		    	 msgRegisterSimpleOperation.applyTo(dashboardModel);
+
+		     });
+	}
+
+	public static <CARDS_MODEL extends CardsModel,
+	               DASHBOARD_MODEL extends DashboardModel>
+
+	        void executionEnded(BackendTasks tasks,
+	        		            Class<DASHBOARD_MODEL> dashboardModelClass,
+			                    ModelHistory<CARDS_MODEL> modelHistory) {
+
+		tasks.task("executionEndedDashboard")
+		
+		     .waitsFor(message(MsgExecutionEnded.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(dashboardModelClass));
+
+		    	 modelHistory.updateDashboard(dashboardModel);
+		    	
+		    	 
 
 		     });
 	}

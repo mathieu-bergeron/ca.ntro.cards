@@ -82,7 +82,7 @@ public class Dashboard {
 		    	 
 		    	 DashboardView dashboardView  = inputs.get(created(dashboardViewClass));
 		    	 
-		    	 dashboardView.disableExecutionButtons();
+		    	 //dashboardView.disableExecutionButtons();
 
 		     });
 	}

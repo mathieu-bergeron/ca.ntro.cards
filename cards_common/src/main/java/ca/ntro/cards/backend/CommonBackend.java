@@ -1,10 +1,11 @@
 package ca.ntro.cards.backend;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.backend.tasks.ManageThread;
 import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.backend.tasks.ModifySettingsModel;
@@ -12,6 +13,7 @@ import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
                                     DASHBOARD_MODEL extends DashboardModel,
@@ -28,7 +30,10 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	private Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass;
 	
-	private List<CARDS_MODEL> modelHistory = new ArrayList<>();
+	private ReentrantLock lock = new ReentrantLock();
+	private ModelThread<CARDS_MODEL> modelThread = new ModelThread<>();
+	private ModelHistory<CARDS_MODEL> modelHistory = new ModelHistory<>();
+	
 
 	public Class<CARDS_MODEL> getCardsModelClass() {
 		return cardsModelClass;
@@ -75,6 +80,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
 				                         msgRegisterSimpleOperationClass,
+				                         modelHistory,
 
 				                          subTasks -> {
 
@@ -101,6 +107,18 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 				                        });
 		
+		
+		 CARDS_MODEL firstModel = Ntro.factory().newInstance(getCardsModelClass());
+		 firstModel.createFirstVersion();
+		 firstModel.registerLock(lock);
+		 firstModel.registerModelHistory(modelHistory);
+		 
+		 modelHistory.pushReferenceTo(firstModel);
+
+		 modelThread.setModel(firstModel);
+
+		 ManageThread.unlockThread(tasks, lock);
+		
 		createAdditionalTasks(tasks);
 	}
 	
@@ -113,7 +131,8 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 	@Override
 	public void execute() {
-		
+		lock.lock();
+		modelThread.start();
 	}
 
 }
