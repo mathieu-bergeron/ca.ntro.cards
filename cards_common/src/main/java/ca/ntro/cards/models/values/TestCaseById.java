@@ -8,6 +8,14 @@ import ca.ntro.cards.models.CardsModel;
 
 public class TestCaseById<CARDS_MODEL extends CardsModel> implements Value {
 	
-	private Map<String, CARDS_MODEL> testCases = new HashMap<>();
+	private Map<String, TestCase<CARDS_MODEL>> byId = new HashMap<>();
+
+	public Map<String, TestCase<CARDS_MODEL>> getById() {
+		return byId;
+	}
+
+	public void setById(Map<String, TestCase<CARDS_MODEL>> byId) {
+		this.byId = byId;
+	}
 
 }

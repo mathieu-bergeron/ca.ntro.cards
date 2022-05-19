@@ -24,7 +24,12 @@ import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.models.TestCasesModel;
 import ca.ntro.cards.models.values.Card;
+import ca.ntro.cards.models.values.TestCase;
+import ca.ntro.cards.models.values.TestCaseById;
+import ca.ntro.cards.models.values.TestCasesByCategory;
+import ca.ntro.cards.models.values.TestCasesBySize;
 
 public abstract class CommonApp<CARDS_MODEL extends CardsModel,
                                 DASHBOARD_MODEL extends DashboardModel,
@@ -56,11 +61,17 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
 		registrar.registerModel(cardsModelClass());
+		registrar.registerValue(Card.class);
+
 		registrar.registerModel(dashboardModelClass());
 		registrar.registerModel(settingsModelClass());
-		
-		registrar.registerValue(Card.class);
-		
+
+		registrar.registerModel(TestCasesModel.class);
+		registrar.registerValue(TestCase.class);
+		registrar.registerValue(TestCaseById.class);
+		registrar.registerValue(TestCasesByCategory.class);
+		registrar.registerValue(TestCasesBySize.class);
+
 		registerAdditionnalModels(registrar);
 	}
 

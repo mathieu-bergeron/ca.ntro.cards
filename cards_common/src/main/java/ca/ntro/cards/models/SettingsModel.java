@@ -1,11 +1,10 @@
 package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.app.models.Watchable;
 import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 
-public class SettingsModel implements Model, Watchable, CommonDrawingOptions {
+public class SettingsModel implements Model, CommonDrawingOptions {
 	
 	private boolean useFourCardColors = true;
 

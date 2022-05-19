@@ -5,20 +5,21 @@ import java.util.Set;
 import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.app.models.Watchable;
+import ca.ntro.app.models.WriteObjectGraph;
+import ca.ntro.app.models.Watch;
 import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.models.identifyers.IdFactory;
 import ca.ntro.cards.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
-import ca.ntro.core.reflection.object_graph.Initializable;
+import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 import javafx.application.Platform;
 
 public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>> 
 
-       implements     Model, Watchable, Initializable {
+       implements     Model, Watch, Initialize, WriteObjectGraph {
 	
 	private long version;
 

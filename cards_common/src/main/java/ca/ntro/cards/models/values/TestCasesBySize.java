@@ -8,6 +8,13 @@ import ca.ntro.cards.models.CardsModel;
 
 public class TestCasesBySize<CARDS_MODEL extends CardsModel> implements Value {
 	
-	private Map<String, CARDS_MODEL> testCases = new HashMap<>();
+	private Map<String, TestCase<CARDS_MODEL>> bySize = new HashMap<>();
 
+	public Map<String, TestCase<CARDS_MODEL>> getBySize() {
+		return bySize;
+	}
+
+	public void setBySize(Map<String, TestCase<CARDS_MODEL>> bySize) {
+		this.bySize = bySize;
+	}
 }

@@ -10,6 +10,22 @@ public class TestCasesModel<CARDS_MODEL extends CardsModel> implements Model {
 
 	private TestCasesByCategory<CARDS_MODEL> testCasesByCategory = new TestCasesByCategory<>();
 
+	public TestCaseById<CARDS_MODEL> getTestCasesById() {
+		return testCasesById;
+	}
+
+	public void setTestCasesById(TestCaseById<CARDS_MODEL> testCasesById) {
+		this.testCasesById = testCasesById;
+	}
+
+	public TestCasesByCategory<CARDS_MODEL> getTestCasesByCategory() {
+		return testCasesByCategory;
+	}
+
+	public void setTestCasesByCategory(TestCasesByCategory<CARDS_MODEL> testCasesByCategory) {
+		this.testCasesByCategory = testCasesByCategory;
+	}
+
 	
 	/* TODO:
 	 * 
