@@ -1,7 +1,5 @@
 package ca.ntro.cards.demo.student;
 
-import java.util.List;
-
 import ca.ntro.cards.demo.models.NaiveSort;
 
 public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
@@ -10,9 +8,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 	public void sort() {
 		for(int i = 0; i < source.size(); i++) {
 
-			findIndexOfSmallestElement(source);
-			
-			C smallestElement = source.get(smallest);
+			C smallestElement = findSmallest();
 			
 			target.set(nextEmpty, smallestElement);
 			
@@ -26,35 +22,37 @@ public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 	}
 
 
-	private void findIndexOfSmallestElement(List<C> sourceArray) {
-		C smallestElement = null;
+	private C findSmallest() {
+		C result = null;
 
-		for(int i = 0; i < sourceArray.size(); i++) {
+		for(int i = 0; i < source.size(); i++) {
 			
 			candidate = i;
 			saveStep();
 			
-			C candidate = sourceArray.get(i);
+			C candidate = source.get(i);
 			
-			if(smallestElement == null
+			if(result == null
 					&& candidate != null) {
 
 				smallest = i;
-				smallestElement = candidate;
+				result = candidate;
 
 				saveStep();
 
-			}else if(smallestElement != null 
+			}else if(result != null 
 					&& candidate != null
-					&& candidate.compareTo(smallestElement) < 0) {
+					&& candidate.compareTo(result) < 0) {
 				
 				smallest = i;
-				smallestElement = candidate;
+				result = candidate;
 
 				saveStep();
 			}
 
 		}
+		
+		return result;
 	}
 
 
