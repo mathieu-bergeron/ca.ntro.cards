@@ -2,23 +2,23 @@ package ca.ntro.cards.demo.student;
 
 import java.util.List;
 
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.NaiveSort;
 
-public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
+public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 	
 	@Override
 	public void sort() {
-		for(int i = 0; i < sourceArray.size(); i++) {
+		for(int i = 0; i < source.size(); i++) {
 
-			findIndexOfSmallestElement(sourceArray);
+			findIndexOfSmallestElement(source);
 			
-			C smallestElement = sourceArray.get(indexOfSmallestElement);
+			C smallestElement = source.get(smallest);
 			
-			targetArray.set(indexOfNextEmptySpace, smallestElement);
+			target.set(nextEmpty, smallestElement);
 			
-			sourceArray.set(indexOfSmallestElement, null);
+			source.set(smallest, null);
 			
-			indexOfNextEmptySpace++;
+			nextEmpty++;
 
 			saveStep();
 
@@ -31,7 +31,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 
 		for(int i = 0; i < sourceArray.size(); i++) {
 			
-			indexOfCandidateSmallestElement = i;
+			candidate = i;
 			saveStep();
 			
 			C candidate = sourceArray.get(i);
@@ -39,7 +39,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 			if(currentSmallest == null
 					&& candidate != null) {
 
-				indexOfSmallestElement = i;
+				smallest = i;
 				currentSmallest = candidate;
 
 				saveStep();
@@ -48,7 +48,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends DemoCardsModel<C> {
 					&& candidate != null
 					&& candidate.compareTo(currentSmallest) < 0) {
 				
-				indexOfSmallestElement = i;
+				smallest = i;
 				currentSmallest = candidate;
 
 				saveStep();

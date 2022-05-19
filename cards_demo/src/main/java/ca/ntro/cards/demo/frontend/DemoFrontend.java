@@ -8,13 +8,13 @@ import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 
-public class DemoFrontend<STUDENT_MODEL extends DemoCardsModel> 
+public class DemoFrontend<STUDENT_MODEL extends NaiveSort> 
 
        extends CommonFrontend<DemoRootView,
                               DemoSettingsView, 

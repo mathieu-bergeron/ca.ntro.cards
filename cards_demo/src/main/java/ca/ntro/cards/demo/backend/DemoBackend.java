@@ -5,11 +5,11 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
 import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 
-public class   DemoBackend<STUDENT_MODEL extends DemoCardsModel> 
+public class   DemoBackend<STUDENT_MODEL extends NaiveSort> 
 
 
        extends CommonBackend<STUDENT_MODEL,

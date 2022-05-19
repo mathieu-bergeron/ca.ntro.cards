@@ -15,17 +15,17 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel<DemoCardsModel<C>> {
+public abstract class NaiveSort<C extends Comparable<C>> extends CardsModel<NaiveSort<C>> {
 	
-	protected int indexOfSmallestElement = -1;
-	protected int indexOfCandidateSmallestElement = -1;
-	protected int indexOfNextEmptySpace = 0;
+	protected int smallest = -1;
+	protected int candidate = -1;
+	protected int nextEmpty = 0;
 	
-	protected List<C> sourceArray = new ArrayList<>();
-	protected List<C> targetArray = new ArrayList<>();
+	protected List<C> source = new ArrayList<>();
+	protected List<C> target = new ArrayList<>();
 
 	@Override
-	public void copyDataFrom(DemoCardsModel<C> otherModel) {
+	public void copyDataFrom(NaiveSort<C> otherModel) {
 		setSourceArray(otherModel.getSourceArray());
 		setTargetArray(otherModel.getTargetArray());
 		setIndexOfSmallestElement(otherModel.getIndexOfSmallestElement());
@@ -34,43 +34,43 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	}
 
 	public int getIndexOfSmallestElement() {
-		return indexOfSmallestElement;
+		return smallest;
 	}
 
 	public void setIndexOfSmallestElement(int indexOfSmallestElement) {
-		this.indexOfSmallestElement = indexOfSmallestElement;
+		this.smallest = indexOfSmallestElement;
 	}
 
 	public int getIndexOfCandidateSmallestElement() {
-		return indexOfCandidateSmallestElement;
+		return candidate;
 	}
 
 	public void setIndexOfCandidateSmallestElement(int indexOfCandidateSmallestElement) {
-		this.indexOfCandidateSmallestElement = indexOfCandidateSmallestElement;
+		this.candidate = indexOfCandidateSmallestElement;
 	}
 
 	public int getIndexOfNextEmptySpace() {
-		return indexOfNextEmptySpace;
+		return nextEmpty;
 	}
 
 	public void setIndexOfNextEmptySpace(int indexOfNextEmptySpace) {
-		this.indexOfNextEmptySpace = indexOfNextEmptySpace;
+		this.nextEmpty = indexOfNextEmptySpace;
 	}
 
 	public List<C> getSourceArray() {
-		return sourceArray;
+		return source;
 	}
 
 	public void setSourceArray(List<C> sourceArray) {
-		this.sourceArray = sourceArray;
+		this.source = sourceArray;
 	}
 
 	public List<C> getTargetArray() {
-		return targetArray;
+		return target;
 	}
 
 	public void setTargetArray(List<C> targetArray) {
-		this.targetArray = targetArray;
+		this.target = targetArray;
 	}
 
 	@Override
@@ -82,12 +82,12 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		List<AbstractCard> topCards = new ArrayList<>();
 		List<AbstractCard> bottomCards = new ArrayList<>();
 
-		for(int i = 0; i < sourceArray.size(); i++) {
+		for(int i = 0; i < source.size(); i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight * 2;
 			
-			AbstractCard card = (Card) sourceArray.get(i);
+			AbstractCard card = (Card) source.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -101,12 +101,12 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 			cardsViewData.displayCardFaceDown(card);
 		}
 
-		for(int i = 0; i < targetArray.size(); i++) {
+		for(int i = 0; i < target.size(); i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
 			
-			AbstractCard card = (Card) targetArray.get(i);
+			AbstractCard card = (Card) target.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -145,14 +145,14 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	}
 
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		sourceArray.clear();
+		source.clear();
 		for(Card card : sourceList) {
-			sourceArray.add((C) card);
+			source.add((C) card);
 		}
 		
-		targetArray.clear();
+		target.clear();
 		for(Card card : targetList) {
-			targetArray.add((C) card);
+			target.add((C) card);
 		}
 
 		incrementVersion();
@@ -162,7 +162,7 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 	public void createFirstVersion() {
 		
 		for(int i = 0; i < 20; i++) {
-			sourceArray.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
+			source.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
 		}
 		
 		/*
@@ -174,17 +174,17 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		sourceArray.add((C) new Card(2, Suit.HEARTS));
 		*/
 		
-		for(int i = 0; i < sourceArray.size(); i++) {
-			targetArray.add(null);
+		for(int i = 0; i < source.size(); i++) {
+			target.add(null);
 		}
 	}
 	
 	@Override
 	protected Card cardById(String cardId) {
-		Card result = (Card) cardById(cardId, sourceArray);
+		Card result = (Card) cardById(cardId, source);
 
 		if(result == null) {
-			result = (Card) cardById(cardId, targetArray);
+			result = (Card) cardById(cardId, target);
 		}
 
 		return result;
@@ -210,8 +210,8 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				visitList(visitor, sourceArray);
-				visitList(visitor, targetArray);
+				visitList(visitor, source);
+				visitList(visitor, target);
 			}
 
 			private void visitList(Visitor<Card> visitor, List<C> listToVisit) throws Throwable {
@@ -224,7 +224,7 @@ public abstract class DemoCardsModel<C extends Comparable<C>> extends CardsModel
 
 	@Override
 	protected void addCardImpl(Card card) {
-		sourceArray.add((C) card);
+		source.add((C) card);
 	}
 	
 	@Override

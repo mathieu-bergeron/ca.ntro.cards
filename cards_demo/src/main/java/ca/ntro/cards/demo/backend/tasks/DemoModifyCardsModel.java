@@ -2,14 +2,14 @@ package ca.ntro.cards.demo.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 public class DemoModifyCardsModel {
 
-	public static <STUDENT_MODEL extends DemoCardsModel> void loadStudentModel(BackendTasks tasks, 
+	public static <STUDENT_MODEL extends NaiveSort> void loadStudentModel(BackendTasks tasks, 
 			                                                                   Class<STUDENT_MODEL> cardsModelClass,
 			                                                                   STUDENT_MODEL studentModel) {
 		tasks.task("loadStudentModel")
@@ -27,7 +27,7 @@ public class DemoModifyCardsModel {
 		     });
 	}
 
-	public static <STUDENT_MODEL extends DemoCardsModel> void updateList(BackendTasks tasks, Class<STUDENT_MODEL> cardsModelClass) {
+	public static <STUDENT_MODEL extends NaiveSort> void updateList(BackendTasks tasks, Class<STUDENT_MODEL> cardsModelClass) {
 		tasks.task("updateList")
 
 		     .waitsFor(message(MsgUpdateList.class))

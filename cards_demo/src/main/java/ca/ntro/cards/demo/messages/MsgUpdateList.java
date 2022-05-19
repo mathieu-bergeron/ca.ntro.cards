@@ -5,7 +5,7 @@ import java.util.List;
 
 import ca.ntro.app.messages.MessageNtro;
 import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.demo.models.DemoCardsModel;
+import ca.ntro.cards.demo.models.NaiveSort;
 
 public class MsgUpdateList extends MessageNtro {
 	
@@ -28,7 +28,7 @@ public class MsgUpdateList extends MessageNtro {
 		this.targetList = targetList;
 	}
 
-	public void applyTo(DemoCardsModel demoModel) {
+	public void applyTo(NaiveSort demoModel) {
 		demoModel.updateCards(sourceList, targetList);
 	}
 }
