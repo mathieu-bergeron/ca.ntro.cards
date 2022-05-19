@@ -93,6 +93,8 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 				                     cardsModelClass,
 				                     msgRegisterSimpleOperationClass,
 				                     modelHistory,
+				                     lock,
+				                     modelThread,
 				                     subTasks -> {
 				                    	 
 				                    	 addSubTasksToModifyCardsModel(subTasks);
@@ -108,19 +110,10 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 				                        });
 		
-		
-		 CARDS_MODEL firstModel = Ntro.factory().newInstance(getCardsModelClass());
-		 firstModel.createFirstVersion();
-		 firstModel.registerLock(lock);
-		 firstModel.registerModelHistory(modelHistory);
-		 
-		 modelHistory.pushReferenceTo(firstModel);
-
-		 modelThread.setModel(firstModel);
-
 		 ManageThread.unlockThread(tasks, lock);
-		
-		createAdditionalTasks(tasks);
+
+		 createAdditionalTasks(tasks);
+
 	}
 	
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
@@ -132,8 +125,6 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 	@Override
 	public void execute() {
-		lock.lock();
-		modelThread.start();
 	}
 
 }

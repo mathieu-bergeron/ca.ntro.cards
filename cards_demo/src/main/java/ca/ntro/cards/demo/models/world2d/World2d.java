@@ -8,13 +8,11 @@ import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.CommonWorld2d;
 import ca.ntro.cards.CommonConstants;
-import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 
 public class World2d extends CommonWorld2d {
 	
 	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
-	private DemoMsgRegisterSimpleOperation msgRegisterSimpleOperation = NtroApp.newMessage(DemoMsgRegisterSimpleOperation.class);
 
 	@SuppressWarnings("rawtypes")
 	@Override

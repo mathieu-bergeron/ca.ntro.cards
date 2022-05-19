@@ -1,6 +1,8 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.backend.ModelThread;
+import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
@@ -11,6 +13,7 @@ import ca.ntro.cards.models.DashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
+import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
@@ -24,9 +27,11 @@ public class ModifyCardsModel {
 			                Class<CARDS_MODEL> cardsModelClass,
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
 			                ModelHistoryFull<CARDS_MODEL> modelHistory,
+			                ReentrantLock lock,
+			                ModelThread<CARDS_MODEL> modelThread,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		createFirstVersionIfNeeded(tasks, cardsModelClass);
+		createFirstVersionIfNeeded(tasks, cardsModelClass, modelHistory, lock, modelThread);
 		
 		tasks.taskGroup("ModifyCardsModel")
 		
@@ -54,12 +59,16 @@ public class ModifyCardsModel {
 		     });
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <CARDS_MODEL extends CardsModel,
 	               DASHBOARD_MODEL extends DashboardModel,
 	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
 	
 	        void createFirstVersionIfNeeded(BackendTasks tasks,
-	        		                        Class<CARDS_MODEL> cardsModelClass) {
+	        		                        Class<CARDS_MODEL> cardsModelClass,
+	        		                        ModelHistory<CARDS_MODEL> modelHistory, 
+	        		                        ReentrantLock lock,
+	        		                        ModelThread<CARDS_MODEL> modelThread) {
 
 		tasks.task("createFirstVersionIfNeeded")
 
@@ -67,10 +76,17 @@ public class ModifyCardsModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 CARDS_MODEL gameModel = inputs.get(model(cardsModelClass));
+		    	 CARDS_MODEL cardsModel = inputs.get(model(cardsModelClass));
 
-		    	 gameModel.createFirstVersionIfNeeded();
+		    	 cardsModel.createFirstVersionIfNeeded();
+				 cardsModel.registerLock(lock);
+				 cardsModel.registerModelHistory(modelHistory);
 		    	 
+		    	 modelHistory.pushCopyOf((CARDS_MODEL) cardsModel);
+
+				 modelThread.setModel(cardsModel);
+				 modelThread.start();
+
 		     });
 	}
 

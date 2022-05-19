@@ -1,8 +1,6 @@
 package ca.ntro.cards.models.world2d;
 
 
-import java.util.Set;
-
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.world2d.World2dFx;
