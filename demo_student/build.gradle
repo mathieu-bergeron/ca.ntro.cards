@@ -1,0 +1,97 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localJSweetPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+
+    implementation project(':cards_common')
+    implementation project(':demo_exploration')
+    implementation project(':demo_validation')
+    implementation project(':demo_analysis')
+}
+
+sourceSets{
+    main {
+        resources {
+            if(project.gradle.startParameter.taskNames.find{it.contains("exploration")} != null){
+
+                srcDirs = [project(':demo_exploration').sourceSets.main.resources]
+
+            }else if(project.gradle.startParameter.taskNames.find{it.contains("validation")} != null){
+
+                srcDirs = [project(':demo_validation').sourceSets.main.resources]
+
+            }else{
+
+                srcDirs = [project(':demo_analysis').sourceSets.main.resources]
+            }
+        }
+    }
+}
+
+
+def commonConfig = {
+   classpath = sourceSets.main.runtimeClasspath
+   standardInput = System.in
+   jvmArgs('-Dfile.encoding=UTF-8')
+   jvmArgs('-Dsun.java2d.opengl=true')
+}
+
+def explorationConfig = {
+    configure commonConfig
+
+    main = "student_demo.Exploration"
+}
+
+def validationConfig = {
+    configure commonConfig
+
+    main = "student_demo.Validation"
+}
+
+def analysisConfig = {
+    configure commonConfig
+    main = "student_demo.Analyse"
+}
+
+
+task(exploration, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   if (project.hasProperty("ex")){
+        args(project.getProperty("ex"))
+   }
+}
+
+task(ex01, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('ex01')
+}
+
+task(ex02, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('ex02')
+}
+
+task(random10, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('random10')
+}
+
+task(random20, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('random20')
+}
+
+task(analysis, dependsOn: 'classes', type: JavaExec) {
+   configure analysisConfig
+}
+
+task(validation, dependsOn: 'classes', type: JavaExec) {
+   configure validationConfig
+}
+
