@@ -11,7 +11,7 @@ dependencies {
 
     implementation project(':cards_common')
     implementation project(':demo_explore')
-    implementation project(':demo_vali')
+    implementation project(':demo_assert')
     implementation project(':demo_analyze')
 }
 
@@ -21,7 +21,7 @@ sourceSets{
 
             if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:valider")} != null){
 
-                srcDirs = [project(':demo_vali').sourceSets.main.resources]
+                srcDirs = [project(':demo_assert').sourceSets.main.resources]
 
 
             }else if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:analyser")} != null){

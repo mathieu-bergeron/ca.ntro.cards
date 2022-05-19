@@ -19,7 +19,7 @@ include 'cards_common'
 include 'cards_playground'
 
 include 'demo_explore'
-include 'demo_vali'
+include 'demo_assert'
 include 'demo_analyze'
 include 'demo_student'
 
