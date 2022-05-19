@@ -10,6 +10,7 @@ dependencies {
     }
 
     implementation project(':cards_common')
+    implementation project(':demo_common')
     implementation project(':demo_explore')
     implementation project(':demo_assert')
     implementation project(':demo_analyze')

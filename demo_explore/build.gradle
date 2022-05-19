@@ -10,4 +10,5 @@ dependencies {
     }
 
     implementation project(':cards_common')
+    implementation project(':demo_common')
 }
