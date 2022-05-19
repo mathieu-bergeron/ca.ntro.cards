@@ -22,7 +22,7 @@ public class ModelHistorySumOnly<CARDS_MODEL extends CardsModel>
 
 	@Override
 	public void updateDashboard(DashboardModel dashboardModel) {
-		dashboardModel.setSimpleOperations(size);
+		dashboardModel.setNumberOfSteps(size);
 	}
 
 }

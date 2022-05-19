@@ -14,6 +14,7 @@ import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initializable;
 import ca.ntro.core.stream.Stream;
+import javafx.application.Platform;
 
 public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>> 
 
@@ -48,6 +49,7 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 		lock.unlock();
 
 		modelHistory.pushCopyOf((CARDS_MODEL) this);
+
 	}
 
 	protected void incrementVersion() {

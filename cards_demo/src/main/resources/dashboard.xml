@@ -90,8 +90,9 @@
         </VBox>
 
         <HBox styleClass="center-right">
+
             <Label
-                text="%simpleOperations"
+                text="%numberOfSteps"
                 styleClass="text-big">
             </Label>
 
@@ -99,7 +100,17 @@
             </HBox>
 
             <Label
-                fx:id="simpleOperationsLabel"
+                fx:id="currentStepLabel"
+                styleClass="text-big">
+            </Label>
+
+            <Label
+                text=" / "
+                styleClass="text-big">
+            </Label>
+
+            <Label
+                fx:id="numberOfStepsLabel"
                 styleClass="text-big">
             </Label>
 

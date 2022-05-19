@@ -16,7 +16,10 @@ public class DemoDashboardView extends DashboardView {
 	private Label fpsLabel;
 
 	@FXML
-	private Label simpleOperationsLabel;
+	private Label numberOfStepsLabel;
+
+	@FXML
+	private Label currentStepLabel;
 
 	@FXML
 	private Label numberOfCardsLabel;
@@ -40,7 +43,8 @@ public class DemoDashboardView extends DashboardView {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
-		Ntro.assertNotNull("simpleOperationsLabel", simpleOperationsLabel);
+		Ntro.assertNotNull("numberOfStepsLabel", numberOfStepsLabel);
+		Ntro.assertNotNull("currentStepLabel", currentStepLabel);
 		Ntro.assertNotNull("numberOfCardsLabel", numberOfCardsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("playButton", playButton);
@@ -63,8 +67,8 @@ public class DemoDashboardView extends DashboardView {
 	}
 
 	@Override
-	protected Label simpleOperationsLabel() {
-		return simpleOperationsLabel;
+	protected Label numberOfStepsLabel() {
+		return numberOfStepsLabel;
 	}
 
 	@Override
@@ -90,6 +94,11 @@ public class DemoDashboardView extends DashboardView {
 	@Override
 	protected Button backStepButton() {
 		return backStepButton;
+	}
+
+	@Override
+	protected Label currentStepLabel() {
+		return currentStepLabel;
 	}
 
 }

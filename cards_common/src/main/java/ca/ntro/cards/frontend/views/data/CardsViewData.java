@@ -23,6 +23,9 @@ import ca.ntro.cards.models.world2d.CommonDrawingOptions;
 
 public abstract class CardsViewData implements ViewData {
 	
+	private boolean isThreadRunning = false;
+	private double timeSinceLastDashboardUpdate;
+	
 	private boolean isCodeExecuting = false;
 	private double timeSinceLastExecutionStep;
 	private MsgExecutionStepForward msgExecutionStepForward = NtroApp.newMessage(MsgExecutionStepForward.class);

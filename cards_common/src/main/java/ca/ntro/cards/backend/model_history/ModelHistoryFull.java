@@ -59,6 +59,7 @@ public class ModelHistoryFull<CARDS_MODEL extends CardsModel>
 
 	@Override
 	public void updateDashboard(DashboardModel dashboardModel) {
-		dashboardModel.setSimpleOperations(history.size());
+		dashboardModel.setNumberOfSteps(history.size());
+		dashboardModel.setCurrentStep(current);
 	}
 }

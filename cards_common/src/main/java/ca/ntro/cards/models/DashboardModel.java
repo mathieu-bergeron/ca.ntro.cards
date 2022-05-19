@@ -2,19 +2,27 @@ package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.core.reflection.object_graph.Initializable;
 
 public class DashboardModel implements Model {
 	
-	private long simpleOperations = 0;
+	private long numberOfSteps = 0;
+	private int currentStep = 0;
 	private int numberOfCards = 0;
 
-	public long getSimpleOperations() {
-		return simpleOperations;
+	public long getNumberOfSteps() {
+		return numberOfSteps;
 	}
 
-	public void setSimpleOperations(long simpleOperations) {
-		this.simpleOperations = simpleOperations;
+	public void setNumberOfSteps(long numberOfSteps) {
+		this.numberOfSteps = numberOfSteps;
+	}
+
+	public int getCurrentStep() {
+		return currentStep;
+	}
+
+	public void setCurrentStep(int currentStep) {
+		this.currentStep = currentStep;
 	}
 
 	public int getNumberOfCards() {
@@ -26,16 +34,17 @@ public class DashboardModel implements Model {
 	}
 
 	public void incrementSimpleOperations() {
-		simpleOperations++;
+		numberOfSteps++;
 	}
 
 	public void displayOn(DashboardView dashboardView) {
 		dashboardView.displayNumberOfCards(numberOfCards);
-		dashboardView.displaySimpleOperations(simpleOperations);
+		dashboardView.displayCurrentStep(currentStep);
+		dashboardView.displayNumberOfSteps(numberOfSteps);
 	}
 
 	public void initialize() {
-		simpleOperations = 0;
+		numberOfSteps = 0;
 	}
 
 }

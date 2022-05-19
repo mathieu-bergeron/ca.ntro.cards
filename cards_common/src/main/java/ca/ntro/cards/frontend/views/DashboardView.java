@@ -11,13 +11,14 @@ import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import def.dom.MSTemplatePrinter;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public abstract class DashboardView extends ViewFx {
 
-	protected abstract Label simpleOperationsLabel();
+	protected abstract Label numberOfStepsLabel();
+
+	protected abstract Label currentStepLabel();
 
 	protected abstract Label numberOfCardsLabel();
 	
@@ -79,8 +80,12 @@ public abstract class DashboardView extends ViewFx {
 		fpsLabel().setText(fps);
 	}
 
-	public void displaySimpleOperations(long simpleOperations) {
-		simpleOperationsLabel().setText(String.valueOf(simpleOperations));
+	public void displayNumberOfSteps(long numberOfSteps) {
+		numberOfStepsLabel().setText(String.valueOf(numberOfSteps));
+	}
+
+	public void displayCurrentStep(int currentStep) {
+		currentStepLabel().setText(String.valueOf(currentStep));
 	}
 
 	public void displayNumberOfCards(int numberOfCards) {
@@ -92,5 +97,6 @@ public abstract class DashboardView extends ViewFx {
 		pauseButton().setDisable(true);
 		oneStepButton().setDisable(true);
 	}
+
 
 }
