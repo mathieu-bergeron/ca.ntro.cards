@@ -2,7 +2,7 @@ package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
+import ca.ntro.cards.messages.MsgLockThread;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -18,7 +18,7 @@ public class ManageThread {
 		
 		     .contains(subTasks -> {
 		    	 
-		    	 unlockThread(subTasks, lock);
+		    	 lockThread(subTasks, lock);
 		    	 
 		    	 subTasksLambda.createSubTasks(subTasks);
 
@@ -26,17 +26,15 @@ public class ManageThread {
 		
 	}
 	
-	private static void unlockThread(BackendTasks tasks, ReentrantLock lock) {
+	private static void lockThread(BackendTasks tasks, ReentrantLock lock) {
 
-		tasks.task("unlockThread")
+		tasks.task("lockThread")
 
-		     .waitsFor(message(MsgExecuteCodeOneStep.class))
+		     .waitsFor(message(MsgLockThread.class))
 		     
 		     .thenExecutes(inputs -> {
-
-		    	 if(lock.isHeldByCurrentThread()) {
-					 lock.unlock();
-		    	 }
+		    	 
+		    	 lock.lock();
 
 		     });
 	}

@@ -16,7 +16,7 @@ import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
-import ca.ntro.cards.messages.MsgExecuteCodeOneStep;
+import ca.ntro.cards.messages.MsgLockThread;
 
 public abstract class   DemoLocalApp<STUDENT_MODEL extends NaiveSort>
 
