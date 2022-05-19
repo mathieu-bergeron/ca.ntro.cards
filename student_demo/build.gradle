@@ -17,7 +17,6 @@ def commonConfig = {
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in
    jvmArgs('-Dfile.encoding=UTF-8')
-   jvmArgs('-Duser.language=fr')
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 
@@ -26,13 +25,22 @@ def explorationConfig = {
    main = "student_demo.Exploration"
 }
 
-def graphsConfig = {
+def validationConfig = {
    configure commonConfig
-   main = "student_demo.Graphes"
+   main = "student_demo.Validation"
 }
+
+def analysisConfig = {
+   configure commonConfig
+   main = "student_demo.Analyse"
+}
+
 
 task(exploration, dependsOn: 'classes', type: JavaExec) {
    configure explorationConfig
+   if (project.hasProperty("ex")){
+        args(project.getProperty("ex"))
+   }
 }
 
 task(ex01, dependsOn: 'classes', type: JavaExec) {
@@ -54,3 +62,4 @@ task(random20, dependsOn: 'classes', type: JavaExec) {
    configure explorationConfig
    args('random20')
 }
+

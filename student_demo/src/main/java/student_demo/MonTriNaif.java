@@ -7,6 +7,12 @@ public class MonTriNaif<C extends Comparable<C>> extends NaiveSort<C> {
 	@Override
 	public void sort() {
 		for(int i = 0; i < source.size(); i++) {
+			candidate = i;
+			saveStep();
+		}
+		
+		/*
+		for(int i = 0; i < source.size(); i++) {
 
 			C plusPetitElement = trouverPlusPetit();
 			
@@ -19,6 +25,7 @@ public class MonTriNaif<C extends Comparable<C>> extends NaiveSort<C> {
 			saveStep();
 
 		}
+		*/
 	}
 
 	private C trouverPlusPetit() {
