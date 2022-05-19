@@ -33,27 +33,6 @@ public class ModifyTestCasesModel {
 		     });
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <CARDS_MODEL extends CardsModel,
-	               TEST_CASE extends TestCase<CARDS_MODEL>,
-		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-	               DASHBOARD_MODEL extends DashboardModel>
-	
-	        void initializeTestCases(BackendTasks tasks,
-	        		                 Class<TEST_CASES_MODEL> testCasesModelClass) {
-
-		tasks.task("initializeTestCases")
-
-		     .waitsFor(model(testCasesModelClass))
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
-		    	 
-		    	 testCasesModel.generateFirstVersionIfNeeded();
-
-		     });
-	}
 
 	@SuppressWarnings("unchecked")
 	public static <CARDS_MODEL extends CardsModel,

@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.backend.tasks.InitializeModels;
 import ca.ntro.cards.backend.tasks.ManageThread;
 import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
@@ -79,15 +80,14 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 		return settingsModelClass;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
-		ModifyTestCasesModel.initializeTestCases(tasks, testCasesModelClass);
+		InitializeModels.initializeTestCases(tasks, testCasesModelClass);
 		
-		ModifyCardsModel.initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
+		InitializeModels.initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
 
-		ModifyDashboardModel.initializeDashboard(tasks, dashboardModelClass);
+		InitializeModels.initializeDashboard(tasks, dashboardModelClass, modelHistory);
 
 		ModifyCardsModel.createTasks(tasks, 
 				                     cardsModelClass,

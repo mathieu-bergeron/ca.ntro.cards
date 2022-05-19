@@ -50,37 +50,6 @@ public class ModifyCardsModel {
 		     });
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel>
-	
-	        void initializeCards(BackendTasks tasks,
-	        		                        Class<CARDS_MODEL> cardsModelClass,
-	        		                        ModelHistory<CARDS_MODEL> modelHistory, 
-	        		                        ReentrantLock lock,
-	        		                        ModelThread<CARDS_MODEL> modelThread) {
-
-		tasks.task("initializeCards")
-
-		     .waitsFor(model(cardsModelClass))
-
-		     .waitsFor("initializeTestCases")
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CARDS_MODEL cardsModel = inputs.get(model(cardsModelClass));
-
-		    	 cardsModel.createFirstVersionIfNeeded();
-				 cardsModel.registerLock(lock);
-				 cardsModel.registerModelHistory(modelHistory);
-		    	 
-		    	 modelHistory.pushCopyOf((CARDS_MODEL) cardsModel);
-
-				 modelThread.setModel(cardsModel);
-				 modelThread.start();
-
-		     });
-	}
 
 
 	private static <CARDS_MODEL extends CardsModel> 

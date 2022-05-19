@@ -1,6 +1,7 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.CardsModel;
@@ -36,25 +37,6 @@ public class ModifyDashboardModel {
 		     });
 	}
 
-	public static <DASHBOARD_MODEL extends DashboardModel>
-	
-	        void initializeDashboard(BackendTasks tasks,
-	        		                 Class<DASHBOARD_MODEL> dashboardModelClass) {
-
-		tasks.task("initializeDashboard")
-
-		     .waitsFor(model(dashboardModelClass))
-
-		     .waitsFor("initializeCards")
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(dashboardModelClass));
-
-		    	 dashboardModel.initialize();
-		    	 
-		     });
-	}
 
 	public static <CARDS_MODEL extends CardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
