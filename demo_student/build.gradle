@@ -10,25 +10,28 @@ dependencies {
     }
 
     implementation project(':cards_common')
-    implementation project(':demo_exploration')
-    implementation project(':demo_validation')
-    implementation project(':demo_analysis')
+    implementation project(':demo_explore')
+    implementation project(':demo_vali')
+    implementation project(':demo_analyze')
 }
 
 sourceSets{
     main {
         resources {
-            if(project.gradle.startParameter.taskNames.find{it.contains("exploration")} != null){
 
-                srcDirs = [project(':demo_exploration').sourceSets.main.resources]
+            if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:valider")} != null){
 
-            }else if(project.gradle.startParameter.taskNames.find{it.contains("validation")} != null){
+                srcDirs = [project(':demo_vali').sourceSets.main.resources]
 
-                srcDirs = [project(':demo_validation').sourceSets.main.resources]
+
+            }else if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:analyser")} != null){
+
+                srcDirs = [project(':demo_analyze').sourceSets.main.resources]
 
             }else{
 
-                srcDirs = [project(':demo_analysis').sourceSets.main.resources]
+                srcDirs = [project(':demo_explore').sourceSets.main.resources]
+
             }
         }
     }
@@ -42,56 +45,53 @@ def commonConfig = {
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 
-def explorationConfig = {
+def exploreConfig = {
     configure commonConfig
-
-    main = "student_demo.Exploration"
+    main = "demo_student.Explorer"
 }
 
-def validationConfig = {
+def validateConfig = {
     configure commonConfig
-
-    main = "student_demo.Validation"
+    main = "demo_student.Valider"
 }
 
-def analysisConfig = {
+def analyzeConfig = {
     configure commonConfig
-    main = "student_demo.Analyse"
+    main = "demo_student.Analyser"
 }
 
 
-task(exploration, dependsOn: 'classes', type: JavaExec) {
-   configure explorationConfig
+task(explorer, dependsOn: 'classes', type: JavaExec) {
+   configure exploreConfig
    if (project.hasProperty("ex")){
         args(project.getProperty("ex"))
    }
 }
 
 task(ex01, dependsOn: 'classes', type: JavaExec) {
-   configure explorationConfig
+   configure exploreConfig
    args('ex01')
 }
 
 task(ex02, dependsOn: 'classes', type: JavaExec) {
-   configure explorationConfig
+   configure exploreConfig
    args('ex02')
 }
 
 task(random10, dependsOn: 'classes', type: JavaExec) {
-   configure explorationConfig
+   configure exploreConfig
    args('random10')
 }
 
 task(random20, dependsOn: 'classes', type: JavaExec) {
-   configure explorationConfig
+   configure exploreConfig
    args('random20')
 }
 
-task(analysis, dependsOn: 'classes', type: JavaExec) {
-   configure analysisConfig
+task(analyser, dependsOn: 'classes', type: JavaExec) {
+   configure analyzeConfig
 }
 
-task(validation, dependsOn: 'classes', type: JavaExec) {
-   configure validationConfig
+task(valider, dependsOn: 'classes', type: JavaExec) {
+   configure validateConfig
 }
-

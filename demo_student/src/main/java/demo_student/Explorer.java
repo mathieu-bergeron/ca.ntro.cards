@@ -4,7 +4,7 @@ import ca.ntro.app.NtroClientFx;
 import ca.ntro.cards.demo.DemoValidationApp;
 
 @SuppressWarnings("rawtypes")
-public class Validation extends DemoValidationApp<MonTriNaif> {
+public class Explorer extends DemoValidationApp<MonTriNaif> {
 
 	public static void main(String[] args) {
 		NtroClientFx.launch(args);
