@@ -24,7 +24,6 @@ import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.cards.frontend.views.RootView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
@@ -36,15 +35,13 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
                                      CARDS_VIEW_DATA extends CardsViewData,
                                      CARDS_MODEL extends CardsModel,
                                      DASHBOARD_MODEL extends DashboardModel,
-                                     SETTINGS_MODEL extends SettingsModel,
-                                     MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, 
-                                                                                                      DASHBOARD_MODEL>> 
+                                     SETTINGS_MODEL extends SettingsModel>
+
                  implements FrontendFx {
 
 	private Class<CARDS_MODEL> cardsModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
-	private Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass;
 
 	public Class<CARDS_MODEL> getCardsModelClass() {
 		return cardsModelClass;
@@ -68,14 +65,6 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 	public void setSettingsModelClass(Class<SETTINGS_MODEL> settingsModelClass) {
 		this.settingsModelClass = settingsModelClass;
-	}
-
-	public Class<? extends MsgRegisterSimpleOperation> getMsgRegisterSimpleOperationClass() {
-		return msgRegisterSimpleOperationClass;
-	}
-
-	public void setMsgRegisterSimpleOperationClass(Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass) {
-		this.msgRegisterSimpleOperationClass = msgRegisterSimpleOperationClass;
 	}
 
 	@Override

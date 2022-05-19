@@ -7,7 +7,6 @@ import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 
@@ -20,12 +19,10 @@ import ca.ntro.app.tasks.SubTasksLambda;
 public class ModifyCardsModel {
 	
 	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel,
-	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
+	               DASHBOARD_MODEL extends DashboardModel>
 
 	       void createTasks(BackendTasks tasks,
 			                Class<CARDS_MODEL> cardsModelClass,
-			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
 			                ModelHistoryFull<CARDS_MODEL> modelHistory,
 			                ReentrantLock lock,
 			                ModelThread<CARDS_MODEL> modelThread,
@@ -40,11 +37,6 @@ public class ModifyCardsModel {
 		     .andContains(subTasks -> {
 
 		    	 flipCard(subTasks, cardsModelClass);
-
-		    	 registerSimpleOperation(subTasks, 
-		    			                 cardsModelClass,
-		    			                 msgRegisterSimpleOperationClass,
-		    			                 modelHistory);
 
 		    	 executionStepBack(subTasks, 
 		    			           cardsModelClass,
@@ -61,8 +53,7 @@ public class ModifyCardsModel {
 
 	@SuppressWarnings("unchecked")
 	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel,
-	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
+	               DASHBOARD_MODEL extends DashboardModel>
 	
 	        void createFirstVersionIfNeeded(BackendTasks tasks,
 	        		                        Class<CARDS_MODEL> cardsModelClass,
@@ -111,31 +102,7 @@ public class ModifyCardsModel {
 	}
 
 	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel,
-	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
-
-	        void registerSimpleOperation(BackendTasks tasks,
-	        		                     Class<CARDS_MODEL> cardsModelClass,
-			                             Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                             ModelHistoryFull<CARDS_MODEL> modelHistory) {
-
-		tasks.task("registerSimpleOperation")
-		
-		     .waitsFor(message(msgRegisterSimpleOperationClass))
-
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CARDS_MODEL                   cardsModel                 = inputs.get(model(cardsModelClass));
-		    	 MSG_REGISTER_SIMPLE_OPERATION msgRegisterSimpleOperation = inputs.get(message(msgRegisterSimpleOperationClass));
-		    	 
-		    	 msgRegisterSimpleOperation.applyTo(cardsModel, modelHistory);
-		    	 
-		     });
-	}
-
-	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel,
-	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
+	               DASHBOARD_MODEL extends DashboardModel>
 
 	        void executionStepBack(BackendTasks tasks,
 	        		               Class<CARDS_MODEL> cardsModelClass,

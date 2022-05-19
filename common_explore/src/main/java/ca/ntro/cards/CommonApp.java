@@ -32,12 +32,14 @@ import ca.ntro.cards.models.values.TestCasesByCategory;
 import ca.ntro.cards.models.values.TestCasesBySize;
 
 public abstract class CommonApp<CARDS_MODEL extends CardsModel,
+                                TEST_CASE extends TestCase<CARDS_MODEL>,
+                                TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                 DASHBOARD_MODEL extends DashboardModel,
                                 SETTINGS_MODEL extends SettingsModel,
-                                MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, 
-                                                                                                      DASHBOARD_MODEL>,
                                                                                                       
-                                BACKEND extends CommonBackend<CARDS_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL, MSG_REGISTER_SIMPLE_OPERATION>,
+                                BACKEND extends CommonBackend<CARDS_MODEL, 
+                                                              TEST_CASE, 
+                                                              TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
                                 ROOT_VIEW extends RootView, 
                                 CARDS_VIEW extends CardsView, 
@@ -52,8 +54,7 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
                                                                CARDS_VIEW_DATA,
                                                                CARDS_MODEL,
                                                                DASHBOARD_MODEL,
-                                                               SETTINGS_MODEL,
-                                                               MSG_REGISTER_SIMPLE_OPERATION>> 
+                                                               SETTINGS_MODEL>>
 
        implements NtroClientFx {
 	
@@ -97,7 +98,6 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 		frontend.setCardsModelClass(cardsModelClass());
 		frontend.setDashboardModelClass(dashboardModelClass());
 		frontend.setSettingsModelClass(settingsModelClass());
-		frontend.setMsgRegisterSimpleOperationClass(msgRegisterSimpleOperationClass());
 		
 		registrar.registerFrontend(frontend);
 
@@ -109,24 +109,27 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 	public void registerBackend(BackendRegistrar registrar) {
 		BACKEND backend = createBackend();
 		
-		backend.setCardsModelClass(cardsModelClass());
-		backend.setDashboardModelClass(dashboardModelClass());
-		backend.setSettingsModelClass(settingsModelClass());
-		backend.setMsgRegisterSimpleOperationClass(msgRegisterSimpleOperationClass());
+		backend.registerCardsModelClass(cardsModelClass());
+		backend.registerTestCaseClass(testCaseClass());
+		backend.registerTestCasesModelClass(testCasesModelClass());
+		backend.registerDashboardModelClass(dashboardModelClass());
+		backend.registerSettingsModelClass(settingsModelClass());
 
 		registrar.registerBackend(backend);
 
 	}
 
 	protected abstract Class<CARDS_MODEL> cardsModelClass();
+	protected abstract Class<TEST_CASE> testCaseClass();
+	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();
 	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();
 	protected abstract Class<SETTINGS_MODEL> settingsModelClass();
-	protected abstract Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass();
 
 	protected abstract void registerAdditionnalModels(ModelRegistrar registrar);
 	protected abstract void registerAdditionnalMessages(MessageRegistrar registrar);
 
 	protected abstract FRONTEND createFrontend();
 	protected abstract BACKEND createBackend();
+
 
 }

@@ -2,9 +2,15 @@ package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.models.values.TestCasesByCategory;
+import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.cards.models.values.TestCaseById;
 
-public class TestCasesModel<CARDS_MODEL extends CardsModel> implements Model {
+public abstract class      TestCasesModel<CARDS_MODEL extends CardsModel, 
+                                          TEST_CASE extends TestCase<CARDS_MODEL>> 
+
+                implements Model {
+	
+	private long version = 0;
 	
 	private TestCaseById<CARDS_MODEL> testCasesById = new TestCaseById<>();
 
@@ -25,6 +31,15 @@ public class TestCasesModel<CARDS_MODEL extends CardsModel> implements Model {
 	public void setTestCasesByCategory(TestCasesByCategory<CARDS_MODEL> testCasesByCategory) {
 		this.testCasesByCategory = testCasesByCategory;
 	}
+
+	public void generateFirstVersionIfNeeded() {
+		if(version == 0) {
+			generateFirstVersion();
+			version++;
+		}
+	}
+
+	protected abstract void generateFirstVersion();
 
 	
 	/* TODO:

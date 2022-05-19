@@ -23,8 +23,7 @@ public class DemoFrontend<STUDENT_MODEL extends NaiveSort>
                               DemoCardsViewData, 
                               STUDENT_MODEL, 
                               DemoDashboardModel, 
-                              DemoSettingsModel, 
-                              DemoMsgRegisterSimpleOperation<STUDENT_MODEL>> {
+                              DemoSettingsModel> {
 
 	@Override
 	protected void registerAdditionnalEvents(EventRegistrar registrar) {

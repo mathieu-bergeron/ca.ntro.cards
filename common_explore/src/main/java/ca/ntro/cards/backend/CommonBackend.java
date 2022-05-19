@@ -10,77 +10,72 @@ import ca.ntro.cards.backend.tasks.ManageThread;
 import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.backend.tasks.ModifySettingsModel;
+import ca.ntro.cards.backend.tasks.ModifyTestCasesModel;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.models.TestCasesModel;
+import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
+                                    TEST_CASE extends TestCase<CARDS_MODEL>,
+                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                     DASHBOARD_MODEL extends DashboardModel,
-                                    SETTINGS_MODEL extends SettingsModel,
-                                    MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, 
-                                                                                                     DASHBOARD_MODEL>> 
+                                    SETTINGS_MODEL extends SettingsModel>
 
        extends LocalBackendNtro {
 	
 	public static int indexCurrentModel = 0;
 	
 	private Class<CARDS_MODEL> cardsModelClass;
+	private Class<TEST_CASE> testCaseClass;
+	private Class<TEST_CASES_MODEL> testCasesModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
-	private Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass;
 	
 	private ReentrantLock lock = new ReentrantLock();
 	private ModelThread<CARDS_MODEL> modelThread = new ModelThread<>();
 	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
 	
 
-	public Class<CARDS_MODEL> getCardsModelClass() {
-		return cardsModelClass;
-	}
-
-	public void setCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
+	public void registerCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
 		this.cardsModelClass = cardsModelClass;
 	}
 
-
-	public Class<DASHBOARD_MODEL> getDashboardModelClass() {
-		return dashboardModelClass;
-	}
-
-
-	public void setDashboardModelClass(Class<DASHBOARD_MODEL> dashboardModelClass) {
+	public void registerDashboardModelClass(Class<DASHBOARD_MODEL> dashboardModelClass) {
 		this.dashboardModelClass = dashboardModelClass;
 	}
 
-
-	public Class<SETTINGS_MODEL> getSettingsModelClass() {
-		return settingsModelClass;
-	}
-
-
-	public void setSettingsModelClass(Class<SETTINGS_MODEL> settingsModelClass) {
+	public void registerSettingsModelClass(Class<SETTINGS_MODEL> settingsModelClass) {
 		this.settingsModelClass = settingsModelClass;
 	}
 
-	public Class<? extends MsgRegisterSimpleOperation> getMsgRegisterSimpleOperationClass() {
-		return msgRegisterSimpleOperationClass;
+	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
+		this.testCaseClass = testCaseClass;
 	}
 
-
-	public void setMsgRegisterSimpleOperationClass(Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass) {
-		this.msgRegisterSimpleOperationClass = msgRegisterSimpleOperationClass;
+	public void registerTestCasesModelClass(Class<TEST_CASES_MODEL> testCasesModelClass) {
+		this.testCasesModelClass = testCasesModelClass;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void createTasks(BackendTasks tasks) {
 
+		ModifyTestCasesModel.createTasks(tasks, 
+				                    lock,
+				                    testCaseClass,
+				                    testCasesModelClass,
+							        subTasks -> {
+										
+										addSubTasksToModifyTestCasesModel(subTasks);
+
+							        });
+
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
-				                         msgRegisterSimpleOperationClass,
 				                         modelHistory,
 
 				                          subTasks -> {
@@ -91,7 +86,6 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 		
 		ModifyCardsModel.createTasks(tasks, 
 				                     cardsModelClass,
-				                     msgRegisterSimpleOperationClass,
 				                     modelHistory,
 				                     lock,
 				                     modelThread,
@@ -123,6 +117,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 	}
 	
+	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
