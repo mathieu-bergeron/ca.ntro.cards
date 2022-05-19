@@ -155,9 +155,7 @@ public class ModifyCardsModel {
 		     });
 	}
 
-	public static <CARDS_MODEL extends CardsModel,
-	               DASHBOARD_MODEL extends DashboardModel,
-	               MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, DASHBOARD_MODEL>> 
+	public static <CARDS_MODEL extends CardsModel>
 
 	        void executionStepForward(BackendTasks tasks,
 	        		                  Class<CARDS_MODEL> cardsModelClass,
