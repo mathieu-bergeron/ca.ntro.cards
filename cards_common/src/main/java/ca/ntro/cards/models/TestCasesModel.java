@@ -1,11 +1,15 @@
 package ca.ntro.cards.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import ca.ntro.app.models.Model;
+import ca.ntro.cards.models.values.TestCasesByCategory;
+import ca.ntro.cards.models.values.TestCaseById;
 
-public class TestCasesModel<CARDS_MODEL extends CardsModel> {
+public class TestCasesModel<CARDS_MODEL extends CardsModel> implements Model {
 	
-	private Map<String, CARDS_MODEL> testCases = new HashMap<>();
+	private TestCaseById<CARDS_MODEL> testCasesById = new TestCaseById<>();
+
+	private TestCasesByCategory<CARDS_MODEL> testCasesByCategory = new TestCasesByCategory<>();
+
 	
 	/* TODO:
 	 * 
