@@ -10,7 +10,6 @@ import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
-import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
@@ -20,18 +19,18 @@ import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   ExploreDemo<STUDENT_MODEL extends NaiveSort>
 
-                extends CommonApp<STUDENT_MODEL, 
-                                  DemoTestCase<STUDENT_MODEL>,
-                                  DemoTestCasesModel<STUDENT_MODEL>,
+                extends CommonApp<NaiveSort, 
+                                  DemoTestCase,
+                                  DemoTestCasesModel,
                                   DemoDashboardModel,
                                   DemoSettingsModel,
-                                  DemoBackend<STUDENT_MODEL>,
+                                  DemoBackend,
                                   DemoRootView,
                                   DemoCardsView,
                                   DemoDashboardView,
                                   DemoSettingsView,
                                   DemoCardsViewData,
-                                  DemoFrontend<STUDENT_MODEL>> {
+                                  DemoFrontend> {
 
                                     	   
     private String[] args;
@@ -42,13 +41,24 @@ public abstract class   ExploreDemo<STUDENT_MODEL extends NaiveSort>
 	}
 	
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	protected Class<STUDENT_MODEL> cardsModelClass() {
-		return naiveSortClass();
+	protected Class<NaiveSort> cardsModelClass() {
+		return (Class<NaiveSort>) naiveSortClass();
 	}
 
 
 	protected abstract Class<STUDENT_MODEL> naiveSortClass();
+
+	@Override
+	protected Class<DemoTestCase> testCaseClass() {
+		return DemoTestCase.class;
+	}
+
+	@Override
+	protected Class<DemoTestCasesModel> testCasesModelClass() {
+		return DemoTestCasesModel.class;
+	}
 
 
 	@Override
@@ -61,13 +71,6 @@ public abstract class   ExploreDemo<STUDENT_MODEL extends NaiveSort>
 	protected Class<DemoSettingsModel> settingsModelClass() {
 		return DemoSettingsModel.class;
 	}
-
-
-	@Override
-	protected Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass() {
-		return DemoMsgRegisterSimpleOperation.class;
-	}
-
 
 	@Override
 	protected DemoFrontend createFrontend() {

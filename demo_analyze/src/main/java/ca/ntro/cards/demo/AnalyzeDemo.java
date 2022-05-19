@@ -10,26 +10,29 @@ import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
-import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.NaiveSort;
+import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
+import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   AnalyzeDemo<STUDENT_MODEL extends NaiveSort>
 
-                extends CommonApp<STUDENT_MODEL, 
+                extends CommonApp<NaiveSort, 
+                                  DemoTestCase,
+                                  DemoTestCasesModel,
                                   DemoDashboardModel,
                                   DemoSettingsModel,
-                                  DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
-                                  DemoBackend<STUDENT_MODEL>,
-                                       DemoRootView,
-                                       DemoCardsView,
-                                       DemoDashboardView,
-                                       DemoSettingsView,
-                                       DemoCardsViewData,
-                                       DemoFrontend<STUDENT_MODEL>> {
+                                  DemoBackend,
+                                  DemoRootView,
+                                  DemoCardsView,
+                                  DemoDashboardView,
+                                  DemoSettingsView,
+                                  DemoCardsViewData,
+                                  DemoFrontend> {
+
+
                                     	   
     private String[] args;
 
@@ -39,14 +42,23 @@ public abstract class   AnalyzeDemo<STUDENT_MODEL extends NaiveSort>
 	}
 	
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	protected Class<STUDENT_MODEL> cardsModelClass() {
-		return naiveSortClass();
+	protected Class<NaiveSort> cardsModelClass() {
+		return (Class<NaiveSort>) naiveSortClass();
 	}
-
 
 	protected abstract Class<STUDENT_MODEL> naiveSortClass();
 
+	@Override
+	protected Class<DemoTestCase> testCaseClass() {
+		return DemoTestCase.class;
+	}
+
+	@Override
+	protected Class<DemoTestCasesModel> testCasesModelClass() {
+		return DemoTestCasesModel.class;
+	}
 
 	@Override
 	protected Class<DemoDashboardModel> dashboardModelClass() {
@@ -58,13 +70,6 @@ public abstract class   AnalyzeDemo<STUDENT_MODEL extends NaiveSort>
 	protected Class<DemoSettingsModel> settingsModelClass() {
 		return DemoSettingsModel.class;
 	}
-
-
-	@Override
-	protected Class<? extends MsgRegisterSimpleOperation> msgRegisterSimpleOperationClass() {
-		return DemoMsgRegisterSimpleOperation.class;
-	}
-
 
 	@Override
 	protected DemoFrontend createFrontend() {

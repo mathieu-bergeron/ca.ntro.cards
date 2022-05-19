@@ -7,7 +7,6 @@ import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.frontend.CommonFrontend;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.views.CardsView;
 import ca.ntro.cards.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.views.RootView;
@@ -66,8 +65,9 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 		registrar.registerModel(dashboardModelClass());
 		registrar.registerModel(settingsModelClass());
 
-		registrar.registerModel(TestCasesModel.class);
-		registrar.registerValue(TestCase.class);
+		registrar.registerModel(testCasesModelClass());
+		registrar.registerValue(testCaseClass());
+
 		registrar.registerValue(TestCaseById.class);
 		registrar.registerValue(TestCasesByCategory.class);
 		registrar.registerValue(TestCasesBySize.class);
@@ -80,7 +80,6 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 	public void registerMessages(MessageRegistrar registrar) {
 		registrar.registerMessage(MsgFlipCard.class);
 		registrar.registerMessage(MsgToggleUseFourCardColors.class);
-		registrar.registerMessage(msgRegisterSimpleOperationClass());
 		registrar.registerMessage(MsgLockThread.class);
 		registrar.registerMessage(MsgExecutionEnded.class);
 		registrar.registerMessage(MsgExecutionStepBack.class);
@@ -108,11 +107,11 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 	public void registerBackend(BackendRegistrar registrar) {
 		BACKEND backend = createBackend();
 		
-		backend.registerCardsModelClass(cardsModelClass());
-		backend.registerTestCaseClass(testCaseClass());
-		backend.registerTestCasesModelClass(testCasesModelClass());
-		backend.registerDashboardModelClass(dashboardModelClass());
-		backend.registerSettingsModelClass(settingsModelClass());
+		backend.setCardsModelClass(cardsModelClass());
+		backend.setTestCaseClass(testCaseClass());
+		backend.setTestCasesModelClass(testCasesModelClass());
+		backend.setDashboardModelClass(dashboardModelClass());
+		backend.setSettingsModelClass(settingsModelClass());
 
 		registrar.registerBackend(backend);
 

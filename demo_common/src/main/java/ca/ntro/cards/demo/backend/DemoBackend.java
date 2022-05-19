@@ -4,19 +4,18 @@ package ca.ntro.cards.demo.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
-import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
-public class   DemoBackend<STUDENT_MODEL extends NaiveSort> 
+public class   DemoBackend
 
 
-       extends CommonBackend<STUDENT_MODEL,
-                             DemoTestCase<STUDENT_MODEL>,
-                             DemoTestCasesModel<STUDENT_MODEL>,
+       extends CommonBackend<NaiveSort,
+                             DemoTestCase,
+                             DemoTestCasesModel,
                              DemoDashboardModel,
                              DemoSettingsModel> {
 	

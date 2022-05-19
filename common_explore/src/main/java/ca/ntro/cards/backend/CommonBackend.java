@@ -11,7 +11,6 @@ import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.backend.tasks.ModifyTestCasesModel;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
@@ -40,24 +39,44 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
 	
 
-	public void registerCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
+	public void setCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
 		this.cardsModelClass = cardsModelClass;
 	}
 
-	public void registerDashboardModelClass(Class<DASHBOARD_MODEL> dashboardModelClass) {
+	public void setDashboardModelClass(Class<DASHBOARD_MODEL> dashboardModelClass) {
 		this.dashboardModelClass = dashboardModelClass;
 	}
 
-	public void registerSettingsModelClass(Class<SETTINGS_MODEL> settingsModelClass) {
+	public void setSettingsModelClass(Class<SETTINGS_MODEL> settingsModelClass) {
 		this.settingsModelClass = settingsModelClass;
 	}
 
-	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
+	public void setTestCaseClass(Class<TEST_CASE> testCaseClass) {
 		this.testCaseClass = testCaseClass;
 	}
 
-	public void registerTestCasesModelClass(Class<TEST_CASES_MODEL> testCasesModelClass) {
+	public void setTestCasesModelClass(Class<TEST_CASES_MODEL> testCasesModelClass) {
 		this.testCasesModelClass = testCasesModelClass;
+	}
+
+	public Class<CARDS_MODEL> getCardsModelClass() {
+		return cardsModelClass;
+	}
+
+	public Class<TEST_CASE> getTestCaseClass() {
+		return testCaseClass;
+	}
+
+	public Class<TEST_CASES_MODEL> getTestCasesModelClass() {
+		return testCasesModelClass;
+	}
+
+	public Class<DASHBOARD_MODEL> getDashboardModelClass() {
+		return dashboardModelClass;
+	}
+
+	public Class<SETTINGS_MODEL> getSettingsModelClass() {
+		return settingsModelClass;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -65,14 +84,12 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	public void createTasks(BackendTasks tasks) {
 
 		ModifyTestCasesModel.createTasks(tasks, 
-				                    lock,
-				                    testCaseClass,
-				                    testCasesModelClass,
-							        subTasks -> {
+				                         testCasesModelClass,
+							             subTasks -> {
 										
-										addSubTasksToModifyTestCasesModel(subTasks);
+										      addSubTasksToModifyTestCasesModel(subTasks);
 
-							        });
+							             });
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
