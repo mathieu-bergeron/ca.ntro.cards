@@ -18,7 +18,9 @@ public class ModifySettingsModel {
 		
 		tasks.taskGroup("ModifySettingsModel")
 		
-		     .contains(subTasks -> {
+		     .waitsFor(model(settingsModelClass))
+		
+		     .andContains(subTasks -> {
 
 		    	 toggleUseFourCardColors(subTasks, settingsModelClass);
 		    	 
@@ -33,8 +35,6 @@ public class ModifySettingsModel {
 	        		                     Class<SETTINGS_MODEL> settingsModelClass) {
 
 		tasks.task("toggleUseFourCardColors")
-
-		     .waitsFor(model(settingsModelClass))
 
 		     .waitsFor(message(MsgToggleUseFourCardColors.class))
 		     
