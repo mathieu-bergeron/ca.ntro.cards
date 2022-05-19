@@ -15,9 +15,8 @@ project(':ntro_app_jdk').projectDir = file('ntro/ntro_app_jdk')
 include 'ntro_app_fx'
 project(':ntro_app_fx').projectDir = file('ntro/ntro_app_fx')
 
-include 'cards_common'
-include 'cards_playground'
-
+include 'common'
+include 'common_explore'
 
 include 'demo_common'
 include 'demo_explore'
@@ -25,7 +24,6 @@ include 'demo_assert'
 include 'demo_analyze'
 include 'demo_student'
 
-include 'cards_freesort'
 
 
 buildscript {

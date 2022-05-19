@@ -9,6 +9,7 @@ dependencies {
         implementation project(":ntro_${it}")
     }
 
-    implementation project(':cards_common')
+    implementation project(':common')
+    implementation project(':common_explore')
     implementation project(':demo_common')
 }

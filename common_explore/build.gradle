@@ -10,6 +10,4 @@ dependencies {
     }
 
     implementation project(':common')
-    implementation project(':common_explore')
-    implementation project(':demo_common')
 }
