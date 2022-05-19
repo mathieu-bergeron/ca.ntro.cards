@@ -17,7 +17,9 @@ project(':ntro_app_fx').projectDir = file('ntro/ntro_app_fx')
 
 include 'cards_common'
 include 'cards_playground'
+
 include 'cards_demo'
+include 'student_demo'
 
 include 'cards_freesort'
 

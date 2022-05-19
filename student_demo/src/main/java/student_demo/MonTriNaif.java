@@ -1,4 +1,4 @@
-package ca.ntro.cards.demo.student;
+package student_demo;
 
 import ca.ntro.cards.demo.models.NaiveSort;
 
