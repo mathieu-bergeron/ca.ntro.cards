@@ -110,7 +110,14 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 				                        });
 		
-		 ManageThread.unlockThread(tasks, lock);
+
+		ManageThread.createTasks(tasks, 
+				                 lock,
+							     subTasks -> {
+										
+										addSubTasksToManageThread(subTasks);
+
+							     });
 
 		 createAdditionalTasks(tasks);
 
@@ -119,6 +126,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
+	protected abstract void addSubTasksToManageThread(BackendTasks subTasks);
 	
 	protected abstract void createAdditionalTasks(BackendTasks tasks);
 

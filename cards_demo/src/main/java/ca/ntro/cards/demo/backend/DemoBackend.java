@@ -41,4 +41,9 @@ public class   DemoBackend<STUDENT_MODEL extends NaiveSort>
 		
 	}
 
+	@Override
+	protected void addSubTasksToManageThread(BackendTasks subTasks) {
+		
+	}
+
 }
