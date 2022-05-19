@@ -1,4 +1,4 @@
-package ca.ntro.cards.backend;
+package ca.ntro.cards.backend.model_history;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,17 +8,21 @@ import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.core.initialization.Ntro;
 
-public class ModelHistory<CARDS_MODEL extends CardsModel> {
+public class ModelHistoryFull<CARDS_MODEL extends CardsModel> 
+
+       implements ModelHistory<CARDS_MODEL> {
 
 	private List<CARDS_MODEL> history = Collections.synchronizedList(new ArrayList<>());
 	
 	private int current = 0;
 	
+	@Override
 	public void pushReferenceTo(CARDS_MODEL model) {
 		history.add(model);
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public void pushCopyOf(CARDS_MODEL model) {
 		history.add((CARDS_MODEL) Ntro.reflection().clone(model));
 	}
@@ -53,6 +57,7 @@ public class ModelHistory<CARDS_MODEL extends CardsModel> {
 		}
 	}
 
+	@Override
 	public void updateDashboard(DashboardModel dashboardModel) {
 		dashboardModel.setSimpleOperations(history.size());
 	}

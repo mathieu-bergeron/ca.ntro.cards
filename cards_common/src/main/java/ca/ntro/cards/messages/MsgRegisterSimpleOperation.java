@@ -1,7 +1,7 @@
 package ca.ntro.cards.messages;
 
 import ca.ntro.app.messages.MessageNtro;
-import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.models.CardsModel;
 import ca.ntro.cards.models.DashboardModel;
 
@@ -20,7 +20,7 @@ public abstract class MsgRegisterSimpleOperation<CARDS_MODEL extends CardsModel,
 		this.cardsModel = cardsModel;
 	}
 
-	public void applyTo(CARDS_MODEL cardsModel, ModelHistory<CARDS_MODEL> modelHistory) {
+	public void applyTo(CARDS_MODEL cardsModel, ModelHistoryFull<CARDS_MODEL> modelHistory) {
 		cardsModel.copyDataFrom(this.cardsModel);
 		modelHistory.pushReferenceTo(this.cardsModel);
 	}

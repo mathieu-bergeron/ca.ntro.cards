@@ -5,6 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.backend.tasks.ManageThread;
 import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
@@ -32,7 +33,7 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	
 	private ReentrantLock lock = new ReentrantLock();
 	private ModelThread<CARDS_MODEL> modelThread = new ModelThread<>();
-	private ModelHistory<CARDS_MODEL> modelHistory = new ModelHistory<>();
+	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
 	
 
 	public Class<CARDS_MODEL> getCardsModelClass() {

@@ -6,17 +6,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watchable;
-import ca.ntro.cards.CommonConstants;
-import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.identifyers.IdFactory;
 import ca.ntro.cards.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initializable;
 import ca.ntro.core.stream.Stream;
-import javafx.application.Platform;
 
 public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>> 
 
@@ -33,19 +30,10 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 	}
 	
 	private ReentrantLock lock;
-
-	@SuppressWarnings("rawtypes")
-	private MsgRegisterSimpleOperation msgRegisterSimpleOperation;
-	
 	private ModelHistory<CARDS_MODEL> modelHistory;
 	
 	public void registerLock(ReentrantLock lock) {
 		this.lock = lock;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void registerMsgRegisterSimpleOperation(MsgRegisterSimpleOperation msgRegisterSimpleOperation) {
-		this.msgRegisterSimpleOperation = msgRegisterSimpleOperation;
 	}
 
 	public void registerModelHistory(ModelHistory<CARDS_MODEL> modelHistory) {

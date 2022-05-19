@@ -1,7 +1,7 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -23,7 +23,7 @@ public class ModifyCardsModel {
 	       void createTasks(BackendTasks tasks,
 			                Class<CARDS_MODEL> cardsModelClass,
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                ModelHistory<CARDS_MODEL> modelHistory,
+			                ModelHistoryFull<CARDS_MODEL> modelHistory,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		createFirstVersionIfNeeded(tasks, cardsModelClass);
@@ -101,7 +101,7 @@ public class ModifyCardsModel {
 	        void registerSimpleOperation(BackendTasks tasks,
 	        		                     Class<CARDS_MODEL> cardsModelClass,
 			                             Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                             ModelHistory<CARDS_MODEL> modelHistory) {
+			                             ModelHistoryFull<CARDS_MODEL> modelHistory) {
 
 		tasks.task("registerSimpleOperation")
 		
@@ -123,7 +123,7 @@ public class ModifyCardsModel {
 
 	        void executionStepBack(BackendTasks tasks,
 	        		               Class<CARDS_MODEL> cardsModelClass,
-			                       ModelHistory<CARDS_MODEL> modelHistory) {
+			                       ModelHistoryFull<CARDS_MODEL> modelHistory) {
 
 		tasks.task("executionStepBack")
 		
@@ -145,7 +145,7 @@ public class ModifyCardsModel {
 
 	        void executionStepForward(BackendTasks tasks,
 	        		                  Class<CARDS_MODEL> cardsModelClass,
-			                          ModelHistory<CARDS_MODEL> modelHistory) {
+			                          ModelHistoryFull<CARDS_MODEL> modelHistory) {
 
 		tasks.task("executionStepForward")
 		

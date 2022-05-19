@@ -1,7 +1,7 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.backend.ModelHistory;
+import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.models.CardsModel;
@@ -20,7 +20,7 @@ public class ModifyDashboardModel {
 	       void createTasks(BackendTasks tasks,
 			                Class<DASHBOARD_MODEL> dashboardModelClass,
 			                Class<MSG_REGISTER_SIMPLE_OPERATION> msgRegisterSimpleOperationClass,
-			                ModelHistory<CARDS_MODEL> modelHistory,
+			                ModelHistoryFull<CARDS_MODEL> modelHistory,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		initializeDashboard(tasks, dashboardModelClass);
@@ -91,7 +91,7 @@ public class ModifyDashboardModel {
 
 	        void executionEnded(BackendTasks tasks,
 	        		            Class<DASHBOARD_MODEL> dashboardModelClass,
-			                    ModelHistory<CARDS_MODEL> modelHistory) {
+			                    ModelHistoryFull<CARDS_MODEL> modelHistory) {
 
 		tasks.task("executionEndedDashboard")
 		
