@@ -26,29 +26,29 @@ import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.cards.models.values.Card;
 
-public abstract class CommonLocalApp<CARDS_MODEL extends CardsModel,
-                                     DASHBOARD_MODEL extends DashboardModel,
-                                     SETTINGS_MODEL extends SettingsModel,
-                                     MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, 
+public abstract class CommonApp<CARDS_MODEL extends CardsModel,
+                                DASHBOARD_MODEL extends DashboardModel,
+                                SETTINGS_MODEL extends SettingsModel,
+                                MSG_REGISTER_SIMPLE_OPERATION extends MsgRegisterSimpleOperation<CARDS_MODEL, 
                                                                                                       DASHBOARD_MODEL>,
                                                                                                       
-                                     BACKEND extends CommonBackend<CARDS_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL, MSG_REGISTER_SIMPLE_OPERATION>,
+                                BACKEND extends CommonBackend<CARDS_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL, MSG_REGISTER_SIMPLE_OPERATION>,
+                                   
+                                ROOT_VIEW extends RootView, 
+                                CARDS_VIEW extends CardsView, 
+                                DASHBOARD_VIEW extends DashboardView,
+                                SETTINGS_VIEW extends SettingsView,
+                                CARDS_VIEW_DATA extends CardsViewData,
                                      
-                                     ROOT_VIEW extends RootView, 
-                                     CARDS_VIEW extends CardsView, 
-                                     DASHBOARD_VIEW extends DashboardView,
-                                     SETTINGS_VIEW extends SettingsView,
-                                     CARDS_VIEW_DATA extends CardsViewData,
-                                     
-                                     FRONTEND extends CommonFrontend<ROOT_VIEW, 
-                                                                     SETTINGS_VIEW, 
-                                                                     CARDS_VIEW, 
-                                                                     DASHBOARD_VIEW, 
-                                                                     CARDS_VIEW_DATA,
-                                                                     CARDS_MODEL,
-                                                                     DASHBOARD_MODEL,
-                                                                     SETTINGS_MODEL,
-                                                                     MSG_REGISTER_SIMPLE_OPERATION>> 
+                               FRONTEND extends CommonFrontend<ROOT_VIEW, 
+                                                               SETTINGS_VIEW, 
+                                                               CARDS_VIEW, 
+                                                               DASHBOARD_VIEW, 
+                                                               CARDS_VIEW_DATA,
+                                                               CARDS_MODEL,
+                                                               DASHBOARD_MODEL,
+                                                               SETTINGS_MODEL,
+                                                               MSG_REGISTER_SIMPLE_OPERATION>> 
 
        implements NtroClientFx {
 	

@@ -1,10 +1,10 @@
 package student_demo;
 
 import ca.ntro.app.NtroClientFx;
-import ca.ntro.cards.demo.DemoLocalApp;
+import ca.ntro.cards.demo.DemoExplorationApp;
 
 @SuppressWarnings("rawtypes")
-public class App extends DemoLocalApp<MonTriNaif> {
+public class Exploration extends DemoExplorationApp<MonTriNaif> {
 
 	public static void main(String[] args) {
 		NtroClientFx.launch(args);
@@ -14,5 +14,6 @@ public class App extends DemoLocalApp<MonTriNaif> {
 	protected Class<MonTriNaif> naiveSortClass() {
 		return MonTriNaif.class;
 	}
+
 
 }

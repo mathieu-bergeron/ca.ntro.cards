@@ -17,15 +17,40 @@ def commonConfig = {
    classpath = sourceSets.main.runtimeClasspath
    standardInput = System.in
    jvmArgs('-Dfile.encoding=UTF-8')
-}
-
-def localConfig = {
-   configure commonConfig
-   main = "student_demo.App"
+   jvmArgs('-Duser.language=fr')
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 
-task(local, dependsOn: 'classes', type: JavaExec) {
-   configure localConfig
-   jvmArgs('-Duser.language=fr')
+def explorationConfig = {
+   configure commonConfig
+   main = "student_demo.Exploration"
+}
+
+def graphsConfig = {
+   configure commonConfig
+   main = "student_demo.Graphes"
+}
+
+task(exploration, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+}
+
+task(ex01, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('ex01')
+}
+
+task(ex02, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('ex02')
+}
+
+task(random10, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('random10')
+}
+
+task(random20, dependsOn: 'classes', type: JavaExec) {
+   configure explorationConfig
+   args('random20')
 }

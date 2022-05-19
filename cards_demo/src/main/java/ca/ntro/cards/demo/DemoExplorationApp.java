@@ -2,7 +2,7 @@ package ca.ntro.cards.demo;
 
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
-import ca.ntro.cards.CommonLocalApp;
+import ca.ntro.cards.CommonApp;
 import ca.ntro.cards.demo.backend.DemoBackend;
 import ca.ntro.cards.demo.frontend.DemoFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
@@ -16,11 +16,10 @@ import ca.ntro.cards.demo.models.NaiveSort;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
-import ca.ntro.cards.messages.MsgLockThread;
 
-public abstract class   DemoLocalApp<STUDENT_MODEL extends NaiveSort>
+public abstract class   DemoExplorationApp<STUDENT_MODEL extends NaiveSort>
 
-                extends CommonLocalApp<STUDENT_MODEL, 
+                extends CommonApp<STUDENT_MODEL, 
                                        DemoDashboardModel,
                                        DemoSettingsModel,
                                        DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
@@ -31,6 +30,13 @@ public abstract class   DemoLocalApp<STUDENT_MODEL extends NaiveSort>
                                        DemoSettingsView,
                                        DemoCardsViewData,
                                        DemoFrontend<STUDENT_MODEL>> {
+                                    	   
+    private String[] args;
+
+	@Override
+	public void registerArgs(String[] args) {
+		this.args = args;
+	}
 	
 
 	@Override
