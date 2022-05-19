@@ -27,7 +27,7 @@ public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 
 
 	private void findIndexOfSmallestElement(List<C> sourceArray) {
-		C currentSmallest = null;
+		C smallestElement = null;
 
 		for(int i = 0; i < sourceArray.size(); i++) {
 			
@@ -36,20 +36,20 @@ public class MyNaiveSort<C extends Comparable<C>> extends NaiveSort<C> {
 			
 			C candidate = sourceArray.get(i);
 			
-			if(currentSmallest == null
+			if(smallestElement == null
 					&& candidate != null) {
 
 				smallest = i;
-				currentSmallest = candidate;
+				smallestElement = candidate;
 
 				saveStep();
 
-			}else if(currentSmallest != null 
+			}else if(smallestElement != null 
 					&& candidate != null
-					&& candidate.compareTo(currentSmallest) < 0) {
+					&& candidate.compareTo(smallestElement) < 0) {
 				
 				smallest = i;
-				currentSmallest = candidate;
+				smallestElement = candidate;
 
 				saveStep();
 			}
