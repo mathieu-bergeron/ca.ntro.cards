@@ -41,6 +41,8 @@ public abstract class      TestCasesModel<CARDS_MODEL extends CardsModel,
 
 	protected abstract void generateFirstVersion();
 
+	public abstract void generateTestCase();
+
 	
 	/* TODO:
 	 * 

@@ -10,4 +10,10 @@ public class DemoTestCasesModel extends TestCasesModel<NaiveSort, DemoTestCase>{
 		
 	}
 
+	@Override
+	public void generateTestCase() {
+
+		
+	}
+
 }

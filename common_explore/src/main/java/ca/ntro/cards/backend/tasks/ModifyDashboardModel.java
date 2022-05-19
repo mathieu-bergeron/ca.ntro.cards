@@ -20,7 +20,6 @@ public class ModifyDashboardModel {
 			                ModelHistoryFull<CARDS_MODEL> modelHistory,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		initializeDashboard(tasks, dashboardModelClass);
 		
 		tasks.taskGroup("ModifyDashboardModel")
 		
@@ -44,8 +43,9 @@ public class ModifyDashboardModel {
 
 		tasks.task("initializeDashboard")
 
-
 		     .waitsFor(model(dashboardModelClass))
+
+		     .waitsFor("initializeCards")
 		     
 		     .thenExecutes(inputs -> {
 		    	 

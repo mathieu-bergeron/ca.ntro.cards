@@ -82,6 +82,23 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 	@SuppressWarnings("unchecked")
 	@Override
 	public void createTasks(BackendTasks tasks) {
+		
+		ModifyTestCasesModel.initializeTestCases(tasks, testCasesModelClass);
+		
+		ModifyCardsModel.initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
+
+		ModifyDashboardModel.initializeDashboard(tasks, dashboardModelClass);
+
+		ModifyCardsModel.createTasks(tasks, 
+				                     cardsModelClass,
+				                     modelHistory,
+				                     lock,
+				                     modelThread,
+				                     subTasks -> {
+				                    	 
+				                    	 addSubTasksToModifyCardsModel(subTasks);
+				                    	 
+				                     });
 
 		ModifyTestCasesModel.createTasks(tasks, 
 				                         testCasesModelClass,
@@ -101,16 +118,6 @@ public abstract class CommonBackend<CARDS_MODEL extends CardsModel,
 
 				                        });
 		
-		ModifyCardsModel.createTasks(tasks, 
-				                     cardsModelClass,
-				                     modelHistory,
-				                     lock,
-				                     modelThread,
-				                     subTasks -> {
-				                    	 
-				                    	 addSubTasksToModifyCardsModel(subTasks);
-				                    	 
-				                     });
 
 
 		ModifySettingsModel.createTasks(tasks,

@@ -13,6 +13,7 @@ import ca.ntro.cards.frontend.views.RootView;
 import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.messages.MsgFlipCard;
+import ca.ntro.cards.messages.MsgGenerateTestCase;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.messages.MsgLockThread;
@@ -85,6 +86,7 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
 		registrar.registerMessage(MsgRefreshDashboard.class);
+		registrar.registerMessage(MsgGenerateTestCase.class);
 
 		registerAdditionnalMessages(registrar);
 	}

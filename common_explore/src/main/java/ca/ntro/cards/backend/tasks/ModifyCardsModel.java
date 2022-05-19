@@ -28,7 +28,6 @@ public class ModifyCardsModel {
 			                ModelThread<CARDS_MODEL> modelThread,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
 		
 		tasks.taskGroup("ModifyCardsModel")
 		
