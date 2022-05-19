@@ -13,23 +13,26 @@ import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.messages.DemoMsgRegisterSimpleOperation;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.NaiveSort;
+import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
+import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   ExploreDemo<STUDENT_MODEL extends NaiveSort>
 
                 extends CommonApp<STUDENT_MODEL, 
-                                       DemoDashboardModel,
-                                       DemoSettingsModel,
-                                       DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
-                                       DemoBackend<STUDENT_MODEL>,
-                                       DemoRootView,
-                                       DemoCardsView,
-                                       DemoDashboardView,
-                                       DemoSettingsView,
-                                       DemoCardsViewData,
-                                       DemoFrontend<STUDENT_MODEL>> {
+                                  DemoTestCase<STUDENT_MODEL>,
+                                  DemoTestCasesModel<STUDENT_MODEL>,
+                                  DemoDashboardModel,
+                                  DemoSettingsModel,
+                                  DemoBackend<STUDENT_MODEL>,
+                                  DemoRootView,
+                                  DemoCardsView,
+                                  DemoDashboardView,
+                                  DemoSettingsView,
+                                  DemoCardsViewData,
+                                  DemoFrontend<STUDENT_MODEL>> {
+
                                     	   
     private String[] args;
 

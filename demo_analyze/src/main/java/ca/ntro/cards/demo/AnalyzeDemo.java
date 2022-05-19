@@ -20,10 +20,10 @@ import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 public abstract class   AnalyzeDemo<STUDENT_MODEL extends NaiveSort>
 
                 extends CommonApp<STUDENT_MODEL, 
-                                       DemoDashboardModel,
-                                       DemoSettingsModel,
-                                       DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
-                                       DemoBackend<STUDENT_MODEL>,
+                                  DemoDashboardModel,
+                                  DemoSettingsModel,
+                                  DemoMsgRegisterSimpleOperation<STUDENT_MODEL>,
+                                  DemoBackend<STUDENT_MODEL>,
                                        DemoRootView,
                                        DemoCardsView,
                                        DemoDashboardView,

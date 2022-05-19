@@ -15,7 +15,6 @@ import ca.ntro.cards.frontend.views.SettingsView;
 import ca.ntro.cards.frontend.views.data.CardsViewData;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
-import ca.ntro.cards.messages.MsgRegisterSimpleOperation;
 import ca.ntro.cards.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.messages.MsgLockThread;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
