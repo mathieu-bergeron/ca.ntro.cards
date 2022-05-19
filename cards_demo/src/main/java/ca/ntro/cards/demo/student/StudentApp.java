@@ -4,15 +4,15 @@ import ca.ntro.app.NtroClientFx;
 import ca.ntro.cards.demo.DemoLocalApp;
 
 @SuppressWarnings("rawtypes")
-public class StudentApp extends DemoLocalApp<MyNaiveSort> {
+public class StudentApp extends DemoLocalApp<MonTriNaif> {
 
 	public static void main(String[] args) {
 		NtroClientFx.launch(args);
 	}
 
 	@Override
-	protected Class<MyNaiveSort> naiveSortClass() {
-		return MyNaiveSort.class;
+	protected Class<MonTriNaif> naiveSortClass() {
+		return MonTriNaif.class;
 	}
 
 }
