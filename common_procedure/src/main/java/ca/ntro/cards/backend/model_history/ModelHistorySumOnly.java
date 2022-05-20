@@ -1,7 +1,7 @@
 package ca.ntro.cards.backend.model_history;
 
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
 
 public class ModelHistorySumOnly<CARDS_MODEL extends ProcedureCardsModel> 
 
@@ -21,7 +21,7 @@ public class ModelHistorySumOnly<CARDS_MODEL extends ProcedureCardsModel>
 	}
 
 	@Override
-	public void updateDashboard(DashboardModel dashboardModel) {
+	public void updateDashboard(CommonDashboardModel dashboardModel) {
 		dashboardModel.setNumberOfSteps(size);
 	}
 

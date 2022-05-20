@@ -1,10 +1,10 @@
-package ca.ntro.cards.models;
+package ca.ntro.cards.common.models;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 
-public class SettingsModel implements Model, CommonDrawingOptions {
+public class CommonSettingsModel implements Model, CommonDrawingOptions {
 	
 	private boolean useFourCardColors = true;
 
@@ -26,7 +26,7 @@ public class SettingsModel implements Model, CommonDrawingOptions {
 		this.useFourCardColors = !this.useFourCardColors;
 	}
 
-	public void displayOn(SettingsView menuView) {
+	public void displayOn(CommonSettingsView menuView) {
 		menuView.displayUseFourCardColors(useFourCardColors);
 		
 	}

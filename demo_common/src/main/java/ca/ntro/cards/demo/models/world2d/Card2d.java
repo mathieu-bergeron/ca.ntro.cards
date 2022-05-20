@@ -3,10 +3,10 @@ package ca.ntro.cards.demo.models.world2d;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.world2d.CommonCard2d;
 import ca.ntro.cards.demo.DemoConstants;
+import ca.ntro.cards.models.world2d.Card2d;
 
-public class Card2d extends CommonCard2d {
+public class Card2d extends Card2d {
 
 	private static final double EPSILON = 0.01;
 	

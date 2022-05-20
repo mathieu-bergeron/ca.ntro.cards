@@ -1,8 +1,8 @@
 package ca.ntro.cards.demo.models;
 
-import ca.ntro.cards.models.DashboardModel;
+import ca.ntro.cards.common.models.CommonDashboardModel;
 
-public class DemoDashboardModel extends DashboardModel {
+public class DemoDashboardModel extends CommonDashboardModel {
 
 
 }

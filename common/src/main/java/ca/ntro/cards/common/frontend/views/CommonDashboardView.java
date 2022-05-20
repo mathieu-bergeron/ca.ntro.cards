@@ -9,7 +9,7 @@ import ca.ntro.cards.common.frontend.events.EvtShowMenu;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public abstract class DashboardView extends ViewFx {
+public abstract class CommonDashboardView extends ViewFx {
 
 	protected abstract Label numberOfStepsLabel();
 

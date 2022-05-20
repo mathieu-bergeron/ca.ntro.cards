@@ -14,7 +14,7 @@ import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 
-public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>> 
+public abstract class CommonCardsModel<CARDS_MODEL extends CommonCardsModel<CARDS_MODEL>> 
 
        implements     Model, Watch, Initialize, WriteObjectGraph {
 

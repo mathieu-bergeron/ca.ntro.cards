@@ -2,7 +2,7 @@ package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
-import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -10,7 +10,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifySettingsModel {
 
-	public static <SETTINGS_MODEL extends SettingsModel> 
+	public static <SETTINGS_MODEL extends CommonSettingsModel> 
 
 	       void createTasks(BackendTasks tasks,
 	    		            Class<SETTINGS_MODEL> settingsModelClass,
@@ -29,7 +29,7 @@ public class ModifySettingsModel {
 		     });
 	}
 
-	private static <SETTINGS_MODEL extends SettingsModel> 
+	private static <SETTINGS_MODEL extends CommonSettingsModel> 
 
 	        void toggleUseFourCardColors(BackendTasks tasks,
 	        		                     Class<SETTINGS_MODEL> settingsModelClass) {
@@ -40,7 +40,7 @@ public class ModifySettingsModel {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 SettingsModel settingsModel = inputs.get(model(settingsModelClass));
+		    	 CommonSettingsModel settingsModel = inputs.get(model(settingsModelClass));
 
 		    	 settingsModel.toggleUseFourCardColors();
 

@@ -1,9 +1,9 @@
-package ca.ntro.cards.models;
+package ca.ntro.cards.common.models;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.cards.common.frontend.views.DashboardView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 
-public class DashboardModel implements Model {
+public class CommonDashboardModel implements Model {
 	
 	private long numberOfSteps = 0;
 	private int currentStep = 0;
@@ -37,7 +37,7 @@ public class DashboardModel implements Model {
 		numberOfSteps++;
 	}
 
-	public void displayOn(DashboardView dashboardView) {
+	public void displayOn(CommonDashboardView dashboardView) {
 		dashboardView.displayNumberOfCards(numberOfCards);
 		dashboardView.displayCurrentStep(currentStep);
 		dashboardView.displayNumberOfSteps(numberOfSteps);

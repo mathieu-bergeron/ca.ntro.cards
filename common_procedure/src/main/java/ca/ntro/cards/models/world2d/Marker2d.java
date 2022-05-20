@@ -1,10 +1,15 @@
-package ca.ntro.cards.common.models.world2d;
+package ca.ntro.cards.models.world2d;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
+import ca.ntro.cards.common.models.world2d.CommonObject2d;
 
-public class Marker2d extends CommonObject2d {
+public abstract class Marker2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                               WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                               OPTIONS  extends ProcedureDrawingOptions>
+
+       extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS> {
 	
 	private String id;
 	
@@ -24,7 +29,7 @@ public class Marker2d extends CommonObject2d {
 	}
 
 	@Override
-	public void draw(World2dGraphicsContext gc, CommonDrawingOptions options) {
+	public void draw(World2dGraphicsContext gc, OPTIONS options) {
 		
 		gc.setFill(NtroApp.colorFromString("#03cffc"));
 		gc.fillArc(getTopLeftX(), 

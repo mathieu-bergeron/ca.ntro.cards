@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.core.initialization.Ntro;
 
 public class ModelHistoryFull<CARDS_MODEL extends ProcedureCardsModel> 
@@ -58,7 +58,7 @@ public class ModelHistoryFull<CARDS_MODEL extends ProcedureCardsModel>
 	}
 
 	@Override
-	public void updateDashboard(DashboardModel dashboardModel) {
+	public void updateDashboard(CommonDashboardModel dashboardModel) {
 		dashboardModel.setNumberOfSteps(history.size());
 		dashboardModel.setCurrentStep(current);
 	}

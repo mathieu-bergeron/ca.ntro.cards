@@ -1,11 +1,11 @@
-package ca.ntro.cards.frontend.tasks;
+package ca.ntro.cards.common.frontend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.views.CanvasView;
-import ca.ntro.cards.common.frontend.views.DashboardView;
-import ca.ntro.cards.common.frontend.views.RootView;
-import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.frontend.views.CommonRootView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -14,10 +14,10 @@ import ca.ntro.app.services.Window;
 
 public class Initialization {
 
-	public static <ROOT_VIEW extends RootView, 
-	               CARDS_VIEW extends CanvasView,
-	               SETTINGS_VIEW extends SettingsView,
-	               DASHBOARD_VIEW extends DashboardView> 
+	public static <ROOT_VIEW extends CommonRootView, 
+	               CARDS_VIEW extends CommonCanvasView,
+	               SETTINGS_VIEW extends CommonSettingsView,
+	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	void createTasks(FrontendTasks tasks,
 			         Class<ROOT_VIEW> rootViewClass,
@@ -67,7 +67,7 @@ public class Initialization {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView> void createRootView(FrontendTasks tasks,
+	private static <ROOT_VIEW extends CommonRootView> void createRootView(FrontendTasks tasks,
 			                                                        Class<ROOT_VIEW> rootViewClass) {
 
 		tasks.task(create(rootViewClass))
@@ -82,7 +82,7 @@ public class Initialization {
 		     });
 	}
 
-	private static <CARDS_VIEW extends CanvasView> void createCardsView(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CommonCanvasView> void createCardsView(FrontendTasks tasks,
 			                                                           Class<CARDS_VIEW> cardsViewClass) {
 
 		tasks.task(create(cardsViewClass))
@@ -98,7 +98,7 @@ public class Initialization {
 		
 	}
 
-	private static <SETTINGS_VIEW extends SettingsView> void createSettingsView(FrontendTasks tasks,
+	private static <SETTINGS_VIEW extends CommonSettingsView> void createSettingsView(FrontendTasks tasks,
 			                                                                    Class<SETTINGS_VIEW> settingsViewClass) {
 
 		tasks.task(create(settingsViewClass))
@@ -114,7 +114,7 @@ public class Initialization {
 		
 	}
 
-	private static <DASHBOARD_VIEW extends DashboardView> void createDashboardView(FrontendTasks tasks,
+	private static <DASHBOARD_VIEW extends CommonDashboardView> void createDashboardView(FrontendTasks tasks,
 			                                                                       Class<DASHBOARD_VIEW> dashboardViewClass) {
 
 		tasks.task(create(dashboardViewClass))
@@ -130,7 +130,7 @@ public class Initialization {
 		
 	}
 
-	private static <ROOT_VIEW extends RootView> void installRootView(FrontendTasks tasks,
+	private static <ROOT_VIEW extends CommonRootView> void installRootView(FrontendTasks tasks,
 			                                                         Class<ROOT_VIEW> rootViewClass) {
 
 		tasks.task("installRootView")
@@ -148,8 +148,8 @@ public class Initialization {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView,
-	                CARDS_VIEW extends CanvasView> void registerCardsView(FrontendTasks tasks,
+	private static <ROOT_VIEW extends CommonRootView,
+	                CARDS_VIEW extends CommonCanvasView> void registerCardsView(FrontendTasks tasks,
 	                		                                             Class<ROOT_VIEW> rootViewClass,
 	                		                                             Class<CARDS_VIEW> cardsViewClass) {
 
@@ -168,8 +168,8 @@ public class Initialization {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView,
-	                SETTINGS_VIEW extends SettingsView> 
+	private static <ROOT_VIEW extends CommonRootView,
+	                SETTINGS_VIEW extends CommonSettingsView> 
 
 	        void registerSettingsView(FrontendTasks tasks,
 	        		                  Class<ROOT_VIEW> rootViewClass,
@@ -190,7 +190,7 @@ public class Initialization {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView> void installSubViews(FrontendTasks tasks, 
+	private static <ROOT_VIEW extends CommonRootView> void installSubViews(FrontendTasks tasks, 
 			                                                         Class<ROOT_VIEW> rootViewClass) {
 
 		tasks.task("installSubViews")
@@ -207,8 +207,8 @@ public class Initialization {
 		     });
 	}
 
-	private static <CARDS_VIEW extends CanvasView,
-	                DASHBOARD_VIEW extends DashboardView> 
+	private static <CARDS_VIEW extends CommonCanvasView,
+	                DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	        void installDashboardView(FrontendTasks tasks,
 	        		                  Class<CARDS_VIEW> cardsViewClass,

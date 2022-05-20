@@ -4,14 +4,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
-import ca.ntro.cards.common.frontend.views.DashboardView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
 
-public abstract class ProcedureDashboardView extends DashboardView {
+public abstract class ProcedureDashboardView extends CommonDashboardView {
 
 	protected abstract Button playButton();
 

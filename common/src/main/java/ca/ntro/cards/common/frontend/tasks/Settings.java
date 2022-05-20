@@ -1,10 +1,10 @@
-package ca.ntro.cards.frontend.tasks;
+package ca.ntro.cards.common.frontend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.events.EvtQuit;
-import ca.ntro.cards.common.frontend.views.SettingsView;
-import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
@@ -13,8 +13,8 @@ import ca.ntro.app.NtroApp;
 
 public class Settings {
 
-	public static <SETTINGS_VIEW extends SettingsView,
-	               SETTINGS_MODEL extends SettingsModel> 
+	public static <SETTINGS_VIEW extends CommonSettingsView,
+	               SETTINGS_MODEL extends CommonSettingsModel> 
 	
 	       void createTasks(FrontendTasks tasks,
 	    		            Class<SETTINGS_VIEW> settingsViewClass,
@@ -52,8 +52,8 @@ public class Settings {
 		     });
 	}
 
-	private static <SETTINGS_VIEW extends SettingsView,
-	                SETTINGS_MODEL extends SettingsModel> 
+	private static <SETTINGS_VIEW extends CommonSettingsView,
+	                SETTINGS_MODEL extends CommonSettingsModel> 
 	
 	void displaySettingsModel(FrontendTasks tasks,
 			                  Class<SETTINGS_VIEW> settingsViewClass,
@@ -65,7 +65,7 @@ public class Settings {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 SettingsView             settingsView  = inputs.get(created(settingsViewClass));
+		    	 CommonSettingsView             settingsView  = inputs.get(created(settingsViewClass));
 		    	 Modified<SETTINGS_MODEL> settingsModel = inputs.get(modified(settingsModelClass));
 		    	 
 		    	 settingsModel.currentValue().displayOn(settingsView);

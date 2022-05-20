@@ -1,7 +1,7 @@
 package ca.ntro.cards.frontend.views;
 
-import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 
-public abstract class ProcedureSettingsView extends SettingsView {
+public abstract class ProcedureSettingsView extends CommonSettingsView {
 
 }

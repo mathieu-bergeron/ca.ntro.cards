@@ -1,47 +1,43 @@
-package ca.ntro.cards.frontend;
+package ca.ntro.cards.common.frontend;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtHideMenu;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtQuit;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
-import ca.ntro.cards.common.frontend.views.CanvasView;
-import ca.ntro.cards.common.frontend.views.DashboardView;
-import ca.ntro.cards.common.frontend.views.RootView;
-import ca.ntro.cards.common.frontend.views.SettingsView;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
-import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
-import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
-import ca.ntro.cards.frontend.tasks.Cards;
-import ca.ntro.cards.frontend.tasks.Dashboard;
-import ca.ntro.cards.frontend.tasks.Initialization;
-import ca.ntro.cards.frontend.tasks.Settings;
-import ca.ntro.cards.frontend.tasks.Navigation;
-import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
-import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.common.frontend.tasks.Cards;
+import ca.ntro.cards.common.frontend.tasks.Dashboard;
+import ca.ntro.cards.common.frontend.tasks.Initialization;
+import ca.ntro.cards.common.frontend.tasks.Navigation;
+import ca.ntro.cards.common.frontend.tasks.Settings;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.frontend.views.CommonRootView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 
-public abstract class CommonFrontend<ROOT_VIEW extends RootView, 
-                                     SETTINGS_VIEW extends SettingsView,
-                                     CARDS_VIEW extends CanvasView, 
-                                     DASHBOARD_VIEW extends DashboardView,
-                                     CARDS_VIEW_DATA extends ProcedureViewData,
-                                     CARDS_MODEL extends ProcedureCardsModel,
-                                     DASHBOARD_MODEL extends DashboardModel,
-                                     SETTINGS_MODEL extends SettingsModel>
+public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView, 
+                                     SETTINGS_VIEW   extends CommonSettingsView,
+                                     CANVAS_VIEW     extends CommonCanvasView, 
+                                     DASHBOARD_VIEW  extends CommonDashboardView,
+                                     VIEW_DATA       extends CommonViewData,
+                                     CARDS_MODEL     extends CommonCardsModel<CARDS_MODEL>,
+                                     DASHBOARD_MODEL extends CommonDashboardModel,
+                                     SETTINGS_MODEL  extends CommonSettingsModel>
 
                  implements FrontendFx {
 
-	private Class<CARDS_MODEL> cardsModelClass;
+	private Class<CARDS_MODEL>     cardsModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
-	private Class<SETTINGS_MODEL> settingsModelClass;
+	private Class<SETTINGS_MODEL>  settingsModelClass;
 
 	public Class<CARDS_MODEL> getCardsModelClass() {
 		return cardsModelClass;
@@ -72,14 +68,11 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 		registrar.registerEvent(EvtMoveViewport.class);
 		registrar.registerEvent(EvtResizeViewport.class);
 		registrar.registerEvent(MouseEvtOnMainCanvas.class);
-		registrar.registerEvent(MouseEvtOnPreviewCanvas.class);
 
 		registrar.registerEvent(EvtShowMenu.class);
 		registrar.registerEvent(EvtHideMenu.class);
 		registrar.registerEvent(EvtQuit.class);
 		
-		registrar.registerEvent(EvtStartCodeExecution.class);
-		registrar.registerEvent(EvtStopCodeExecution.class);
 
 		registerAdditionnalEvents(registrar);
 	}
@@ -88,9 +81,9 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 	protected abstract boolean isProd();
 	
-	protected abstract Class<ROOT_VIEW> rootViewClass();
-	protected abstract Class<SETTINGS_VIEW> settingsViewClass();
-	protected abstract Class<CARDS_VIEW> cardsViewClass();
+	protected abstract Class<ROOT_VIEW>      rootViewClass();
+	protected abstract Class<SETTINGS_VIEW>  settingsViewClass();
+	protected abstract Class<CANVAS_VIEW>    canvasViewClass();
 	protected abstract Class<DASHBOARD_VIEW> dashboardViewClass();
 
 	@Override
@@ -106,7 +99,7 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 		registrar.registerView(rootViewClass(), "/root.xml");
 		registrar.registerView(settingsViewClass(), "/settings.xml");
-		registrar.registerView(cardsViewClass(), "/cards.xml");
+		registrar.registerView(canvasViewClass(), "/cards.xml");
 		registrar.registerView(dashboardViewClass(), "/dashboard.xml");
 		
 		registerAdditionnalViews(registrar);
@@ -114,14 +107,14 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 	protected abstract void registerAdditionnalViews(ViewRegistrarFx registrar);
 	
-	protected abstract Class<CARDS_VIEW_DATA> cardsViewDataClass();
+	protected abstract Class<VIEW_DATA> viewDataClass();
 
 	@Override
 	public void createTasks(FrontendTasks tasks) {
 
 		Initialization.createTasks(tasks,
 				                   rootViewClass(),
-				                   cardsViewClass(),
+				                   canvasViewClass(),
 				                   settingsViewClass(),
 				                   dashboardViewClass(),
 				                   subTasks -> {
@@ -131,8 +124,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 				                   });
 
 		Cards.createTasks(tasks, 
-				          cardsViewClass(),
-				          cardsViewDataClass(),
+				          canvasViewClass(),
+				          viewDataClass(),
 				          cardsModelClass,
 				          settingsModelClass,
 				          dashboardViewClass(),
@@ -185,7 +178,6 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 
 	protected abstract void createAdditionnalTasks(FrontendTasks tasks);
 
-	
 
 	@Override
 	public void execute() {

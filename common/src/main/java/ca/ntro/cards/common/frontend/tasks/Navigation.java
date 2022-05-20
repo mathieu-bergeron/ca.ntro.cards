@@ -1,9 +1,9 @@
-package ca.ntro.cards.frontend.tasks;
+package ca.ntro.cards.common.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.events.EvtHideMenu;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
-import ca.ntro.cards.common.frontend.views.RootView;
+import ca.ntro.cards.common.frontend.views.CommonRootView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -11,7 +11,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class Navigation {
 
-	public static <ROOT_VIEW extends RootView> void createTasks(FrontendTasks tasks,
+	public static <ROOT_VIEW extends CommonRootView> void createTasks(FrontendTasks tasks,
 			                                                    Class<ROOT_VIEW> rootViewClass,
 			                                                    SubTasksLambda<FrontendTasks> subTasksLambda) {
 
@@ -30,7 +30,7 @@ public class Navigation {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView> void showMenu(FrontendTasks tasks,
+	private static <ROOT_VIEW extends CommonRootView> void showMenu(FrontendTasks tasks,
 			                                                  Class<ROOT_VIEW> rootViewClass) {
 		tasks.task("showMenu")
 		
@@ -45,7 +45,7 @@ public class Navigation {
 		     });
 	}
 
-	private static <ROOT_VIEW extends RootView> void hideMenu(FrontendTasks tasks,
+	private static <ROOT_VIEW extends CommonRootView> void hideMenu(FrontendTasks tasks,
 			                                                  Class<ROOT_VIEW> rootViewClass) {
 		tasks.task("hideMenu")
 		

@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 
-public abstract class CanvasView extends ViewFx {
+public abstract class CommonCanvasView extends ViewFx {
 	
 	@SuppressWarnings("rawtypes")
 	protected abstract World2dResizableCanvasFx mainCanvas();
@@ -177,7 +177,7 @@ public abstract class CanvasView extends ViewFx {
 	}
 
 
-	public void displayDashboardView(DashboardView dashboardView) {
+	public void displayDashboardView(CommonDashboardView dashboardView) {
 		dashboardContainer().getChildren().clear();
 		dashboardContainer().getChildren().add(dashboardView.rootNode());
 	}

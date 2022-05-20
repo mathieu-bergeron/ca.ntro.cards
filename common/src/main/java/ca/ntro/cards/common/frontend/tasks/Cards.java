@@ -1,19 +1,14 @@
-package ca.ntro.cards.frontend.tasks;
+package ca.ntro.cards.common.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
-import ca.ntro.cards.common.frontend.views.CanvasView;
-import ca.ntro.cards.common.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.ProcedureViewData;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
-import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
-import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
-import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.SettingsModel;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.observer.Modified;
@@ -24,61 +19,54 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class Cards {
 
-	public static <CARDS_VIEW extends CanvasView,
-	               CARDS_VIEW_DATA extends ProcedureViewData,
-	               CARDS_MODEL extends ProcedureCardsModel,
-	               SETTINGS_MODEL extends SettingsModel,
-	               DASHBOARD_VIEW extends DashboardView> 
-	
+	public static <CANVAS_VIEW    extends CommonCanvasView,
+	               VIEW_DATA      extends CommonViewData,
+	               CARDS_MODEL    extends CommonCardsModel<CARDS_MODEL>,
+	               SETTINGS_MODEL extends CommonSettingsModel,
+	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	       void createTasks(FrontendTasks tasks, 
-	    		            Class<CARDS_VIEW> cardsViewClass,
-	    		            Class<CARDS_VIEW_DATA> cardsViewDataClass,
-	    		            Class<CARDS_MODEL> cardsModelClass,
-	    		            Class<SETTINGS_MODEL> settingsModelClass,
-	    		            Class<DASHBOARD_VIEW> dashboardViewClass,
+	    		            Class<CANVAS_VIEW>            canvasViewClass,
+	    		            Class<VIEW_DATA>              viewDataClass,
+	    		            Class<CARDS_MODEL>            cardsModelClass,
+	    		            Class<SETTINGS_MODEL>         settingsModelClass,
+	    		            Class<DASHBOARD_VIEW>         dashboardViewClass,
 	    		            SubTasksLambda<FrontendTasks> subTaskLambda) {
 		
-		createCardsViewData(tasks, cardsViewDataClass);
+		createCardsViewData(tasks, viewDataClass);
 		
 		tasks.taskGroup("Cards")
 
 		     .waitsFor("Initialization")
 
-		     .waitsFor(created(cardsViewDataClass))
+		     .waitsFor(created(viewDataClass))
 
 		     .andContains(subTasks -> {
 
 		    	 observeSettings(subTasks,
-		    			         cardsViewDataClass,
+		    			         viewDataClass,
 		    			         settingsModelClass);
 		    	 
 		    	 moveViewport(subTasks,
-		    			      cardsViewClass);
+		    			      canvasViewClass);
 
 		    	 resizeViewport(subTasks,
-		    			        cardsViewClass);
+		    			        canvasViewClass);
 
 		    	 mouseEvtOnViewer(subTasks,
-		    			          cardsViewDataClass);
+		    			          viewDataClass);
 
 		    	 mouseEvtOnTabletop(subTasks,
-		    			            cardsViewClass);
+		    			            canvasViewClass);
 
 		    	 displayNextImage(subTasks,
-		    			          cardsViewDataClass,
-		    			          cardsViewClass,
+		    			          viewDataClass,
+		    			          canvasViewClass,
 		    			          dashboardViewClass);
 		    	 
 		    	 displayCardsModel(subTasks,
-		    			      cardsViewDataClass,
-		    			      cardsModelClass);
-		    	 
-		    	 startCodeExecution(subTasks, cardsViewDataClass);
-
-		    	 stopCodeExecution(subTasks, cardsViewDataClass);
-
-		    	 executionEnded(subTasks, cardsViewDataClass);
+		    			           viewDataClass,
+		    			           cardsModelClass);
 		    	 
 		    	 subTaskLambda.createSubTasks(subTasks);
 
@@ -97,7 +85,7 @@ public class Cards {
 	}
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                SETTINGS_MODEL extends SettingsModel> 
+	                SETTINGS_MODEL extends CommonSettingsModel> 
 	
 	        void observeSettings(FrontendTasks tasks,
 	        		             Class<CARDS_VIEW_DATA> cardsViewDataClass,
@@ -117,7 +105,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW extends CanvasView> void moveViewport(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CommonCanvasView> void moveViewport(FrontendTasks tasks,
 			                                                        Class<CARDS_VIEW> cardsViewClass) {
 
 		tasks.task("moveViewport")
@@ -133,7 +121,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW extends CanvasView> void resizeViewport(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CommonCanvasView> void resizeViewport(FrontendTasks tasks,
 			                                                          Class<CARDS_VIEW> cardsViewClass) {
 		tasks.task("resizeViewport")
 		
@@ -164,25 +152,14 @@ public class Cards {
 	}
 
 
-	private static <CARDS_VIEW extends CanvasView> void mouseEvtOnTabletop(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CommonCanvasView> void mouseEvtOnTabletop(FrontendTasks tasks,
 			                                                              Class<CARDS_VIEW> cardsViewClass) {
-		tasks.task("mouseEvtOnTabletop")
-		
-		      .waitsFor(event(MouseEvtOnPreviewCanvas.class))
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  MouseEvtOnPreviewCanvas mouseEventOnTabletop = inputs.get(event(MouseEvtOnPreviewCanvas.class));
-		    	  CARDS_VIEW         cardsView            = inputs.get(created(cardsViewClass));
-		    	  
-		    	  mouseEventOnTabletop.applyTo(cardsView);
-		      });
 	}
 
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_VIEW extends CanvasView,
-	                DASHBOARD_VIEW extends DashboardView> 
+	                CARDS_VIEW extends CommonCanvasView,
+	                DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	        void displayNextImage(FrontendTasks tasks,
 	        		              Class<CARDS_VIEW_DATA> cardsViewDataClass,
@@ -206,62 +183,8 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW_DATA extends ProcedureViewData>
-	
-	        void startCodeExecution(FrontendTasks tasks,
-	        		                Class<CARDS_VIEW_DATA> cardsViewDataClass) {
-
-		tasks.task("startCodeExecution")
-
-		      .waitsFor(event(EvtStartCodeExecution.class))
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
-		    	  cardsViewData.startCodeExecution();
-
-		      });
-	}
-
-	private static <CARDS_VIEW_DATA extends ProcedureViewData>
-	
-	        void stopCodeExecution(FrontendTasks tasks,
-	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass) {
-
-		tasks.task("stopCodeExecution")
-
-		      .waitsFor(event(EvtStopCodeExecution.class))
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
-		    	  cardsViewData.stopCodeExecution();
-
-		      });
-	}
-
-	private static <CARDS_VIEW_DATA extends ProcedureViewData>
-	
-	        void executionEnded(FrontendTasks tasks,
-	        		            Class<CARDS_VIEW_DATA> cardsViewDataClass) {
-
-		tasks.task("executionEnded")
-
-		      .waitsFor(message(MsgExecutionEnded.class))
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
-		    	  cardsViewData.stopCodeExecution();
-
-		      });
-	}
-
-
-
-
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_MODEL extends ProcedureCardsModel> 
+	                CARDS_MODEL     extends CommonCardsModel<CARDS_MODEL>> 
 	
 	        void displayCardsModel(FrontendTasks tasks,
 	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass,

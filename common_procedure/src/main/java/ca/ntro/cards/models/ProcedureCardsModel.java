@@ -9,7 +9,7 @@ import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
 import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.models.CardsModel;
+import ca.ntro.cards.common.models.CommonCardsModel;
 import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.common.models.values.Card;
@@ -19,7 +19,7 @@ import ca.ntro.core.stream.Stream;
 
 public abstract class ProcedureCardsModel<CARDS_MODEL extends ProcedureCardsModel<CARDS_MODEL>> 
 
-       extends CardsModel<CARDS_MODEL>
+       extends CommonCardsModel<CARDS_MODEL>
 
        implements     Model, Watch, Initialize, WriteObjectGraph {
 	

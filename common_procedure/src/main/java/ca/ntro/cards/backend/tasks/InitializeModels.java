@@ -5,8 +5,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.ModelThread;
 import ca.ntro.cards.backend.model_history.ModelHistory;
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.TestCasesModel;
 import ca.ntro.cards.models.values.TestCase;
 
@@ -18,7 +18,7 @@ public class InitializeModels {
 	public static <CARDS_MODEL extends ProcedureCardsModel,
 	               TEST_CASE extends TestCase<CARDS_MODEL>,
 		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-	               DASHBOARD_MODEL extends DashboardModel>
+	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeTestCases(BackendTasks tasks,
 	        		                 Class<TEST_CASES_MODEL> testCasesModelClass) {
@@ -38,7 +38,7 @@ public class InitializeModels {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <CARDS_MODEL extends ProcedureCardsModel,
-	               DASHBOARD_MODEL extends DashboardModel>
+	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeCards(BackendTasks tasks,
 	        		             Class<CARDS_MODEL> cardsModelClass,
@@ -70,7 +70,7 @@ public class InitializeModels {
 
 	@SuppressWarnings("rawtypes")
 	public static <CARDS_MODEL extends ProcedureCardsModel,
-	               DASHBOARD_MODEL extends DashboardModel>
+	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeDashboard(BackendTasks tasks,
 	        		                 Class<DASHBOARD_MODEL> dashboardModelClass,

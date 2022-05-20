@@ -5,20 +5,20 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.ViewFx;
 
-public abstract class RootView extends ViewFx {
+public abstract class CommonRootView extends ViewFx {
 	
-	private SettingsView menuView;
-	private CanvasView gameView;
+	private CommonSettingsView menuView;
+	private CommonCanvasView gameView;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 
-	public void registerSettingsView(SettingsView menuView) {
+	public void registerSettingsView(CommonSettingsView menuView) {
 		this.menuView = menuView;
 	}
 	
-	public void registerCardsView(CanvasView gameView) {
+	public void registerCardsView(CommonCanvasView gameView) {
 		this.gameView = gameView;
 	}
 	

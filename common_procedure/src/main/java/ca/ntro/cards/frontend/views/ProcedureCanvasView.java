@@ -5,13 +5,13 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
-import ca.ntro.cards.common.frontend.views.CanvasView;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 import javafx.scene.input.MouseEvent;
 
-public abstract class ProcedureCanvasView extends CanvasView {
+public abstract class ProcedureCanvasView extends CommonCanvasView {
 
 	@SuppressWarnings("rawtypes")
 	protected abstract World2dCanvasFx previewCanvas();

@@ -7,15 +7,17 @@ import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.common.CommonApp;
+import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.frontend.views.CanvasView;
-import ca.ntro.cards.common.frontend.views.DashboardView;
-import ca.ntro.cards.common.frontend.views.RootView;
-import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.frontend.views.CommonRootView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.messages.MsgFlipCard;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
+import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.frontend.CommonFrontend;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -28,8 +30,6 @@ import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
-import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.cards.models.TestCasesModel;
 import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.cards.models.values.TestCaseById;
@@ -39,8 +39,8 @@ import ca.ntro.cards.models.values.TestCasesBySize;
 public abstract class ProcedureApp<CARDS_MODEL extends ProcedureCardsModel,
                                 TEST_CASE extends TestCase<CARDS_MODEL>,
                                 TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-                                DASHBOARD_MODEL extends DashboardModel,
-                                SETTINGS_MODEL extends SettingsModel,
+                                DASHBOARD_MODEL extends CommonDashboardModel,
+                                SETTINGS_MODEL extends CommonSettingsModel,
                                                                                                       
                                 BACKEND extends CommonBackend<CARDS_MODEL, 
                                                               TEST_CASE, 

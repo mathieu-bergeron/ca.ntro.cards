@@ -12,9 +12,9 @@ import ca.ntro.cards.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.backend.tasks.ModifyTestCasesModel;
+import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
-import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.cards.models.TestCasesModel;
 import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.core.initialization.Ntro;
@@ -22,8 +22,8 @@ import ca.ntro.core.initialization.Ntro;
 public abstract class CommonBackend<CARDS_MODEL extends ProcedureCardsModel,
                                     TEST_CASE extends TestCase<CARDS_MODEL>,
                                     TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-                                    DASHBOARD_MODEL extends DashboardModel,
-                                    SETTINGS_MODEL extends SettingsModel>
+                                    DASHBOARD_MODEL extends CommonDashboardModel,
+                                    SETTINGS_MODEL extends CommonSettingsModel>
 
        extends LocalBackendNtro {
 	

@@ -1,9 +1,9 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.messages.MsgGenerateTestCase;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.TestCasesModel;
 import ca.ntro.cards.models.values.TestCase;
 
@@ -16,7 +16,7 @@ public class ModifyTestCasesModel {
 	public static <CARDS_MODEL extends ProcedureCardsModel,
 	               TEST_CASE extends TestCase<CARDS_MODEL>,
 	               TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-	               DASHBOARD_MODEL extends DashboardModel> 
+	               DASHBOARD_MODEL extends CommonDashboardModel> 
 
 	       void createTasks(BackendTasks tasks,
 			                Class<TEST_CASES_MODEL> testCasesModelClass,

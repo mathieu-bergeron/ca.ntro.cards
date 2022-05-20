@@ -5,10 +5,10 @@ import ca.ntro.cards.backend.ModelThread;
 import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.messages.MsgFlipCard;
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.DashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -19,7 +19,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 public class ModifyCardsModel {
 	
 	public static <CARDS_MODEL extends ProcedureCardsModel,
-	               DASHBOARD_MODEL extends DashboardModel>
+	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	       void createTasks(BackendTasks tasks,
 			                Class<CARDS_MODEL> cardsModelClass,
@@ -72,7 +72,7 @@ public class ModifyCardsModel {
 	}
 
 	public static <CARDS_MODEL extends ProcedureCardsModel,
-	               DASHBOARD_MODEL extends DashboardModel>
+	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	        void executionStepBack(BackendTasks tasks,
 	        		               Class<CARDS_MODEL> cardsModelClass,

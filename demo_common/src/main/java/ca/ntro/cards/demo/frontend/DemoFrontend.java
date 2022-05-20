@@ -3,13 +3,13 @@ package ca.ntro.cards.demo.frontend;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
+import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 
@@ -45,7 +45,7 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoCardsView> cardsViewClass() {
+	protected Class<DemoCardsView> canvasViewClass() {
 		return DemoCardsView.class;
 	}
 
@@ -60,7 +60,7 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoCardsViewData> cardsViewDataClass() {
+	protected Class<DemoCardsViewData> viewDataClass() {
 		return DemoCardsViewData.class;
 	}
 

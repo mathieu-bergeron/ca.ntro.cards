@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models.world2d;
+package ca.ntro.cards.models.world2d;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
@@ -8,9 +8,16 @@ import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.NullCard;
+import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
+import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import javafx.scene.input.MouseEvent;
 
-public abstract class CommonCard2d extends CommonObject2d {
+@SuppressWarnings("rawtypes")
+public abstract class   Card2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                               WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                               OPTIONS  extends ProcedureDrawingOptions>
+
+                extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> {
 	
 	private AbstractCard card;
 
@@ -27,15 +34,15 @@ public abstract class CommonCard2d extends CommonObject2d {
 		this.card = card;
 	}
 
-	public CommonCard2d() {
+	public Card2d() {
 		setCard(new NullCard());
 	}
 
-	public CommonCard2d(int rank, Suit suit) {
+	public Card2d(int rank, Suit suit) {
 		setCard(new Card(rank, suit));
 	}
 
-	public CommonCard2d(AbstractCard card) {
+	public Card2d(AbstractCard card) {
 		setCard(card);
 	}
 
@@ -90,7 +97,7 @@ public abstract class CommonCard2d extends CommonObject2d {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void draw(World2dGraphicsContext gc, CommonDrawingOptions options) {
+	public void draw(World2dGraphicsContext gc, OPTIONS options) {
 		card.draw(gc, 
 				  getTopLeftX(), 
 				  getTopLeftY(),

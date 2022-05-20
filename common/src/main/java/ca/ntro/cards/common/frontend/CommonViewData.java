@@ -8,15 +8,15 @@ import ca.ntro.app.frontend.ViewData;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.frontend.utils.FpsCounter;
-import ca.ntro.cards.common.frontend.views.CanvasView;
-import ca.ntro.cards.common.frontend.views.DashboardView;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
+import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.world2d.CommonCard2d;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptionsDefault;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
-import ca.ntro.cards.common.models.world2d.Marker2d;
+import ca.ntro.cards.models.world2d.CommonCard2d;
+import ca.ntro.cards.models.world2d.Marker2d;
 import ca.ntro.core.stream.Stream;
 
 public abstract class CommonViewData implements ViewData {
@@ -41,8 +41,8 @@ public abstract class CommonViewData implements ViewData {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(CanvasView canvasView, 
-			              DashboardView dashboardView) {
+	public void displayOn(CommonCanvasView canvasView, 
+			              CommonDashboardView dashboardView) {
 
 		fpsCounter.onNewFrame();
 

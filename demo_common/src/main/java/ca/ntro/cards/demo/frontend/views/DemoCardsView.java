@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
-import ca.ntro.cards.common.frontend.views.CanvasView;
+import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas;
 import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas;

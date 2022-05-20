@@ -3,7 +3,7 @@ package ca.ntro.cards.demo.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
