@@ -5,11 +5,11 @@ import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.ProcedureApp;
 import ca.ntro.cards.demo.backend.DemoBackend;
 import ca.ntro.cards.demo.frontend.DemoFrontend;
+import ca.ntro.cards.demo.frontend.DemoViewData;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
-import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
@@ -29,7 +29,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
                                   DemoCardsView,
                                   DemoDashboardView,
                                   DemoSettingsView,
-                                  DemoCardsViewData,
+                                  DemoViewData,
                                   DemoFrontend> {
 
                                     	   

@@ -9,6 +9,7 @@ import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.models.CommonCardsModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.observer.Modified;
@@ -85,7 +86,8 @@ public class Cards {
 	}
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                SETTINGS_MODEL extends CommonSettingsModel> 
+	                SETTINGS_MODEL extends CommonSettingsModel,
+	                OPTIONS extends CommonDrawingOptions> 
 	
 	        void observeSettings(FrontendTasks tasks,
 	        		             Class<CARDS_VIEW_DATA> cardsViewDataClass,
@@ -100,7 +102,7 @@ public class Cards {
 		    	  CommonViewData            gameViewData     = inputs.get(created(cardsViewDataClass));
 		    	  Modified<SETTINGS_MODEL> modifiedSettings = inputs.get(modified(settingsModelClass));
 		    	  
-		    	  gameViewData.setDrawingOptions(modifiedSettings.currentValue());
+		    	  gameViewData.setDrawingOptions((OPTIONS) modifiedSettings.currentValue());
 
 		      });
 	}

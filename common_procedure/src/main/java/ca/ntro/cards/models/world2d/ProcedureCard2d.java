@@ -14,8 +14,8 @@ import javafx.scene.input.MouseEvent;
 
 @SuppressWarnings("rawtypes")
 public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                               WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
-                               OPTIONS  extends ProcedureDrawingOptions>
+                                        WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                        OPTIONS  extends ProcedureDrawingOptions>
 
                 extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> {
 	

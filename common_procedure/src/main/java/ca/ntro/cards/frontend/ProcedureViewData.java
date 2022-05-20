@@ -100,5 +100,21 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 
 	}
 
+	@Override
+	public void addOrUpdateCard(AbstractCard card, double topLeftX, double topLeftY) {
+
+		ProcedureCard2d card2d = (ProcedureCard2d) world2d().objectById(card.id());
+		
+		if(card2d == null) {
+			card2d = newCard2d(card);
+			world2d().addObject2d((OBJECT2D) card2d);
+		}
+		
+		card2d.setTopLeftX(topLeftX);
+		card2d.setTopLeftY(topLeftY);
+	}
+
+	protected abstract ProcedureCard2d newCard2d(AbstractCard card);
+
 
 }

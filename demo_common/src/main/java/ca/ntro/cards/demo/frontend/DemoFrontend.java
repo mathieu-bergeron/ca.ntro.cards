@@ -5,7 +5,6 @@ import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
-import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
@@ -19,7 +18,7 @@ public class DemoFrontend
                                 DemoSettingsView, 
                                 DemoCardsView, 
                                 DemoDashboardView, 
-                                DemoCardsViewData, 
+                                DemoViewData, 
                                 TriNaif, 
                                 DemoDashboardModel, 
                                 DemoSettingsModel> {
@@ -60,8 +59,8 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoCardsViewData> viewDataClass() {
-		return DemoCardsViewData.class;
+	protected Class<DemoViewData> viewDataClass() {
+		return DemoViewData.class;
 	}
 
 	@Override
