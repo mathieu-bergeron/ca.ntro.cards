@@ -4,9 +4,9 @@ import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.models.world2d.Card2d;
 import ca.ntro.cards.demo.models.world2d.World2d;
-import ca.ntro.cards.frontend.views.data.ExploreViewData;
+import ca.ntro.cards.frontend.ProcedureViewData;
 
-public class DemoCardsViewData extends ExploreViewData {
+public class DemoCardsViewData extends ProcedureViewData {
 
 	@Override
 	protected CommonWorld2d newWorld2d() {

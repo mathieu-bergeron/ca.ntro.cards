@@ -4,13 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ca.ntro.cards.common.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.ExploreDashboardView;
+import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class DemoDashboardView extends ExploreDashboardView {
+public class DemoDashboardView extends ProcedureDashboardView {
 	
 	
 	@FXML

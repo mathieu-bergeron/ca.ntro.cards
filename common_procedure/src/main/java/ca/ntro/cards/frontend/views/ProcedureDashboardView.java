@@ -11,7 +11,7 @@ import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
 
-public abstract class ExploreDashboardView extends DashboardView {
+public abstract class ProcedureDashboardView extends DashboardView {
 
 	protected abstract Button playButton();
 

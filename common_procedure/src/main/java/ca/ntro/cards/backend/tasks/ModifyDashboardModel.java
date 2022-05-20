@@ -4,7 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
@@ -13,7 +13,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyDashboardModel {
 
-	public static <CARDS_MODEL extends ExploreCardsModel,
+	public static <CARDS_MODEL extends ProcedureCardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
 	
 	       void createTasks(BackendTasks tasks,
@@ -38,7 +38,7 @@ public class ModifyDashboardModel {
 	}
 
 
-	public static <CARDS_MODEL extends ExploreCardsModel,
+	public static <CARDS_MODEL extends ProcedureCardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
 
 	        void executionEnded(BackendTasks tasks,

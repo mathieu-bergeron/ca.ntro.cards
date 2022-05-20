@@ -9,13 +9,13 @@ import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.NullCard;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel<TriNaif<C>> {
+public abstract class TriNaif<C extends Comparable<C>> extends ProcedureCardsModel<TriNaif<C>> {
 	
 	protected int indicePlusPetit = -1;
 	protected int indiceCandidat = -1;

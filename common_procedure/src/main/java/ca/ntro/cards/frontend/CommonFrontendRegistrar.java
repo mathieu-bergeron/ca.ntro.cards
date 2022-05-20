@@ -8,8 +8,8 @@ import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtQuit;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
+import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
+import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 
 public class CommonFrontendRegistrar {
 	

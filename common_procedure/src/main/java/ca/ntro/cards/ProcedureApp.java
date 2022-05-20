@@ -16,14 +16,18 @@ import ca.ntro.cards.common.messages.MsgFlipCard;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.frontend.CommonFrontend;
-import ca.ntro.cards.frontend.views.data.ExploreViewData;
+import ca.ntro.cards.frontend.ProcedureViewData;
+import ca.ntro.cards.frontend.views.ProcedureCanvasView;
+import ca.ntro.cards.frontend.views.ProcedureDashboardView;
+import ca.ntro.cards.frontend.views.ProcedureRootView;
+import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.messages.MsgGenerateTestCase;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgLockThread;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.cards.models.TestCasesModel;
@@ -32,7 +36,7 @@ import ca.ntro.cards.models.values.TestCaseById;
 import ca.ntro.cards.models.values.TestCasesByCategory;
 import ca.ntro.cards.models.values.TestCasesBySize;
 
-public abstract class ProcedureApp<CARDS_MODEL extends ExploreCardsModel,
+public abstract class ProcedureApp<CARDS_MODEL extends ProcedureCardsModel,
                                 TEST_CASE extends TestCase<CARDS_MODEL>,
                                 TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                 DASHBOARD_MODEL extends DashboardModel,
@@ -42,11 +46,11 @@ public abstract class ProcedureApp<CARDS_MODEL extends ExploreCardsModel,
                                                               TEST_CASE, 
                                                               TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
-                                ROOT_VIEW extends RootView, 
-                                CARDS_VIEW extends CanvasView, 
-                                DASHBOARD_VIEW extends DashboardView,
-                                SETTINGS_VIEW extends SettingsView,
-                                CARDS_VIEW_DATA extends ExploreViewData,
+                                ROOT_VIEW       extends ProcedureRootView, 
+                                CARDS_VIEW      extends ProcedureCanvasView, 
+                                DASHBOARD_VIEW  extends ProcedureDashboardView,
+                                SETTINGS_VIEW   extends ProcedureSettingsView,
+                                CARDS_VIEW_DATA extends ProcedureViewData,
                                      
                                FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                SETTINGS_VIEW, 

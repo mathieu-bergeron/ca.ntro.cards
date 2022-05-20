@@ -1,10 +1,10 @@
 package ca.ntro.cards.models.values;
 
 import ca.ntro.app.models.Value;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class TestCase<CARDS_MODEL extends ExploreCardsModel> implements Value, Identifiable {
+public class TestCase<CARDS_MODEL extends ProcedureCardsModel> implements Value, Identifiable {
 	
 	private String category;
 	private long testCaseId;

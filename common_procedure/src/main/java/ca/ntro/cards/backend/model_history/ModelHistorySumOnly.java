@@ -1,9 +1,9 @@
 package ca.ntro.cards.backend.model_history;
 
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 
-public class ModelHistorySumOnly<CARDS_MODEL extends ExploreCardsModel> 
+public class ModelHistorySumOnly<CARDS_MODEL extends ProcedureCardsModel> 
 
        implements ModelHistory<CARDS_MODEL> {
     	   

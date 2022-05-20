@@ -9,13 +9,14 @@ import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas;
 import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas;
+import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class DemoCardsView extends CanvasView {
+public class DemoCardsView extends ProcedureCanvasView {
 
 	@FXML
 	private VBox cardsViewContainer;
@@ -73,9 +74,8 @@ public class DemoCardsView extends CanvasView {
 	}
 
 	@Override
-	protected double initialTabletopScreenHeight() {
-		return DemoConstants.INITIAL_TABLETOP_SCREEN_HEIGHT;
+	protected double initialPreviewCanvasScreenHeight() {
+		return DemoConstants.INITIAL_PREVIEW_CANVAS_SCREEN_HEIGHT;
 	}
-
 
 }

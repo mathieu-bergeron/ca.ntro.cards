@@ -5,7 +5,7 @@ import ca.ntro.cards.models.values.TestCasesByCategory;
 import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.cards.models.values.TestCaseById;
 
-public abstract class      TestCasesModel<CARDS_MODEL extends ExploreCardsModel, 
+public abstract class      TestCasesModel<CARDS_MODEL extends ProcedureCardsModel, 
                                           TEST_CASE extends TestCase<CARDS_MODEL>> 
 
                 implements Model {

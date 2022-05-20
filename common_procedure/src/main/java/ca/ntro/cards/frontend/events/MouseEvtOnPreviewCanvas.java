@@ -1,14 +1,15 @@
-package ca.ntro.cards.common.frontend.events;
+package ca.ntro.cards.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
+import ca.ntro.app.frontend.views.controls.canvas.World2dMouseEvent;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
-import ca.ntro.cards.common.frontend.CommonViewData;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import javafx.scene.input.MouseEvent;
 
-public class MouseEvtOnViewer extends EventNtro {
+public class MouseEvtOnPreviewCanvas extends EventNtro {
 	
 	private World2dMouseEventFx world2dMouseEventFx;
-	
+
 	public World2dMouseEventFx getWorld2dMouseEventFx() {
 		return world2dMouseEventFx;
 	}
@@ -17,10 +18,9 @@ public class MouseEvtOnViewer extends EventNtro {
 		this.world2dMouseEventFx = world2dMouseEventFx;
 	}
 
-	public void applyTo(CommonViewData tabletopData) {
-		tabletopData.dispatchMouseEvent(world2dMouseEventFx);
+
+	public void applyTo(CanvasView gameView) {
+		gameView.mouseEvtOnTabletop(world2dMouseEventFx);
 	}
-
-
 
 }

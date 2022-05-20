@@ -4,15 +4,15 @@ import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
+import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
 import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
+import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
-import ca.ntro.cards.frontend.views.data.ExploreViewData;
+import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.core.clock.Tick;
 import ca.ntro.core.initialization.Ntro;
@@ -25,8 +25,8 @@ import ca.ntro.app.tasks.SubTasksLambda;
 public class Cards {
 
 	public static <CARDS_VIEW extends CanvasView,
-	               CARDS_VIEW_DATA extends ExploreViewData,
-	               CARDS_MODEL extends ExploreCardsModel,
+	               CARDS_VIEW_DATA extends ProcedureViewData,
+	               CARDS_MODEL extends ProcedureCardsModel,
 	               SETTINGS_MODEL extends SettingsModel,
 	               DASHBOARD_VIEW extends DashboardView> 
 	
@@ -152,11 +152,11 @@ public class Cards {
 			                                                                     Class<CARDS_VIEW_DATA> cardsViewDataClass) {
 		tasks.task("mouseEvtOnViewer")
 		
-		      .waitsFor(event(MouseEvtOnViewer.class))
+		      .waitsFor(event(MouseEvtOnMainCanvas.class))
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  MouseEvtOnViewer mouseEvtOnViewer = inputs.get(event(MouseEvtOnViewer.class));
+		    	  MouseEvtOnMainCanvas mouseEvtOnViewer = inputs.get(event(MouseEvtOnMainCanvas.class));
 		    	  CARDS_VIEW_DATA  cardsViewData    = inputs.get(created(cardsViewDataClass));
 		    	  
 		    	  mouseEvtOnViewer.applyTo(cardsViewData);
@@ -168,11 +168,11 @@ public class Cards {
 			                                                              Class<CARDS_VIEW> cardsViewClass) {
 		tasks.task("mouseEvtOnTabletop")
 		
-		      .waitsFor(event(MouseEvtOnTabletop.class))
+		      .waitsFor(event(MouseEvtOnPreviewCanvas.class))
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  MouseEvtOnTabletop mouseEventOnTabletop = inputs.get(event(MouseEvtOnTabletop.class));
+		    	  MouseEvtOnPreviewCanvas mouseEventOnTabletop = inputs.get(event(MouseEvtOnPreviewCanvas.class));
 		    	  CARDS_VIEW         cardsView            = inputs.get(created(cardsViewClass));
 		    	  
 		    	  mouseEventOnTabletop.applyTo(cardsView);
@@ -206,7 +206,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW_DATA extends ExploreViewData>
+	private static <CARDS_VIEW_DATA extends ProcedureViewData>
 	
 	        void startCodeExecution(FrontendTasks tasks,
 	        		                Class<CARDS_VIEW_DATA> cardsViewDataClass) {
@@ -223,7 +223,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW_DATA extends ExploreViewData>
+	private static <CARDS_VIEW_DATA extends ProcedureViewData>
 	
 	        void stopCodeExecution(FrontendTasks tasks,
 	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass) {
@@ -240,7 +240,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW_DATA extends ExploreViewData>
+	private static <CARDS_VIEW_DATA extends ProcedureViewData>
 	
 	        void executionEnded(FrontendTasks tasks,
 	        		            Class<CARDS_VIEW_DATA> cardsViewDataClass) {
@@ -261,7 +261,7 @@ public class Cards {
 
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_MODEL extends ExploreCardsModel> 
+	                CARDS_MODEL extends ProcedureCardsModel> 
 	
 	        void displayCardsModel(FrontendTasks tasks,
 	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass,

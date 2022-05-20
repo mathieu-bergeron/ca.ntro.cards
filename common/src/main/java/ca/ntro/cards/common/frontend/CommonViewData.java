@@ -41,14 +41,14 @@ public abstract class CommonViewData implements ViewData {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(CanvasView gameView, 
+	public void displayOn(CanvasView canvasView, 
 			              DashboardView dashboardView) {
 
 		fpsCounter.onNewFrame();
 
-		gameView.clearCanvas();
-		gameView.displayViewport();
-		gameView.displayWorld2d(world2d, options);
+		canvasView.clearCanvas();
+		canvasView.displayViewport();
+		canvasView.displayWorld2d(world2d, options);
 
 		dashboardView.displayFps(String.format("FPS %.0f", fpsCounter.currentFps()));
 	}

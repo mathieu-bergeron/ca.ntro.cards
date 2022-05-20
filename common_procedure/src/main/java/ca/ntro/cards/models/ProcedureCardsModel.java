@@ -17,7 +17,7 @@ import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 
-public abstract class ExploreCardsModel<CARDS_MODEL extends ExploreCardsModel<CARDS_MODEL>> 
+public abstract class ProcedureCardsModel<CARDS_MODEL extends ProcedureCardsModel<CARDS_MODEL>> 
 
        extends CardsModel<CARDS_MODEL>
 

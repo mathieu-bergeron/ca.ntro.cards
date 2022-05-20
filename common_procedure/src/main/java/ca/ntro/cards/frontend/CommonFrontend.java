@@ -11,21 +11,20 @@ import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtQuit;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
+import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
 import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.common.frontend.views.RootView;
 import ca.ntro.cards.common.frontend.views.SettingsView;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
+import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 import ca.ntro.cards.frontend.tasks.Cards;
 import ca.ntro.cards.frontend.tasks.Dashboard;
 import ca.ntro.cards.frontend.tasks.Initialization;
 import ca.ntro.cards.frontend.tasks.Settings;
-import ca.ntro.cards.frontend.views.data.ExploreViewData;
 import ca.ntro.cards.frontend.tasks.Navigation;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
 
@@ -33,8 +32,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
                                      SETTINGS_VIEW extends SettingsView,
                                      CARDS_VIEW extends CanvasView, 
                                      DASHBOARD_VIEW extends DashboardView,
-                                     CARDS_VIEW_DATA extends ExploreViewData,
-                                     CARDS_MODEL extends ExploreCardsModel,
+                                     CARDS_VIEW_DATA extends ProcedureViewData,
+                                     CARDS_MODEL extends ProcedureCardsModel,
                                      DASHBOARD_MODEL extends DashboardModel,
                                      SETTINGS_MODEL extends SettingsModel>
 
@@ -72,8 +71,8 @@ public abstract class CommonFrontend<ROOT_VIEW extends RootView,
 	public void registerEvents(EventRegistrar registrar) {
 		registrar.registerEvent(EvtMoveViewport.class);
 		registrar.registerEvent(EvtResizeViewport.class);
-		registrar.registerEvent(MouseEvtOnViewer.class);
-		registrar.registerEvent(MouseEvtOnTabletop.class);
+		registrar.registerEvent(MouseEvtOnMainCanvas.class);
+		registrar.registerEvent(MouseEvtOnPreviewCanvas.class);
 
 		registrar.registerEvent(EvtShowMenu.class);
 		registrar.registerEvent(EvtHideMenu.class);

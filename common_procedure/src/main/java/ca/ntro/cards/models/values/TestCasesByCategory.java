@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ca.ntro.app.models.Value;
-import ca.ntro.cards.models.ExploreCardsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 
-public class TestCasesByCategory<CARDS_MODEL extends ExploreCardsModel> implements Value {
+public class TestCasesByCategory<CARDS_MODEL extends ProcedureCardsModel> implements Value {
 	
 	private Map<String, TestCasesBySize<CARDS_MODEL>> byCategory = new HashMap<>();
 

@@ -10,6 +10,6 @@ public class DemoConstants {
 	public static final double INITIAL_WORLD_WIDTH = CommonConstants.INITIAL_WORLD_WIDTH;
 	public static final double INITIAL_WORLD_HEIGHT = CommonConstants.INITIAL_WORLD_HEIGHT;
 	
-	public static final double INITIAL_TABLETOP_SCREEN_HEIGHT = CommonConstants.INITIAL_TABLETOP_SCREEN_HEIGHT;
+	public static final double INITIAL_PREVIEW_CANVAS_SCREEN_HEIGHT = CommonConstants.INITIAL_TABLETOP_SCREEN_HEIGHT;
 
 }

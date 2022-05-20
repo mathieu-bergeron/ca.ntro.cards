@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ca.ntro.cards.common.frontend.views.SettingsView;
+import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
@@ -13,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class DemoSettingsView extends SettingsView {
+public class DemoSettingsView extends ProcedureSettingsView {
 	
 	@FXML
 	private Pane leftSpace;

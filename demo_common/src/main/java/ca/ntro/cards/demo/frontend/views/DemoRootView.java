@@ -1,9 +1,8 @@
 package ca.ntro.cards.demo.frontend.views;
 
-import ca.ntro.cards.common.frontend.views.RootView;
+import ca.ntro.cards.frontend.views.ProcedureRootView;
 
-public class DemoRootView extends RootView {
-
+public class DemoRootView extends ProcedureRootView {
 
 
 }

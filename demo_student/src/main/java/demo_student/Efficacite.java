@@ -10,12 +10,4 @@ public class Efficacite extends EfficaciteTriNaif<MonTriNaif> {
 		NtroClientFx.launch(args);
 	}
 
-	@Override
-	protected Class<MonTriNaif> classeTriNaif() {
-		return MonTriNaif.class;
-	}
-
-
-
-
 }
