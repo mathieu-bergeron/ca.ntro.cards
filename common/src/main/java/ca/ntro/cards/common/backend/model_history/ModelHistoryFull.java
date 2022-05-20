@@ -1,14 +1,14 @@
-package ca.ntro.cards.backend.model_history;
+package ca.ntro.cards.common.backend.model_history;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ca.ntro.cards.common.models.CommonCardsModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.core.initialization.Ntro;
 
-public class ModelHistoryFull<CARDS_MODEL extends ProcedureCardsModel> 
+public class ModelHistoryFull<CARDS_MODEL extends CommonCardsModel> 
 
        implements ModelHistory<CARDS_MODEL> {
 

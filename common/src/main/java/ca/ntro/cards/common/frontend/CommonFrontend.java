@@ -29,7 +29,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
                                      CANVAS_VIEW     extends CommonCanvasView, 
                                      DASHBOARD_VIEW  extends CommonDashboardView,
                                      VIEW_DATA       extends CommonViewData,
-                                     CARDS_MODEL     extends CommonCardsModel<CARDS_MODEL>,
+                                     CARDS_MODEL     extends CommonCardsModel,
                                      DASHBOARD_MODEL extends CommonDashboardModel,
                                      SETTINGS_MODEL  extends CommonSettingsModel>
 

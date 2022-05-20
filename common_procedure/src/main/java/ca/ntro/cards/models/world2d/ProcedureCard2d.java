@@ -13,7 +13,7 @@ import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import javafx.scene.input.MouseEvent;
 
 @SuppressWarnings("rawtypes")
-public abstract class   Card2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
                                WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
                                OPTIONS  extends ProcedureDrawingOptions>
 
@@ -34,15 +34,15 @@ public abstract class   Card2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORL
 		this.card = card;
 	}
 
-	public Card2d() {
+	public ProcedureCard2d() {
 		setCard(new NullCard());
 	}
 
-	public Card2d(int rank, Suit suit) {
+	public ProcedureCard2d(int rank, Suit suit) {
 		setCard(new Card(rank, suit));
 	}
 
-	public Card2d(AbstractCard card) {
+	public ProcedureCard2d(AbstractCard card) {
 		setCard(card);
 	}
 

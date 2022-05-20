@@ -1,12 +1,12 @@
-package ca.ntro.cards.models.values;
+package ca.ntro.cards.common.models.values;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import ca.ntro.app.models.Value;
-import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.common.models.CommonCardsModel;
 
-public class TestCasesByCategory<CARDS_MODEL extends ProcedureCardsModel> implements Value {
+public class TestCasesByCategory<CARDS_MODEL extends CommonCardsModel> implements Value {
 	
 	private Map<String, TestCasesBySize<CARDS_MODEL>> byCategory = new HashMap<>();
 

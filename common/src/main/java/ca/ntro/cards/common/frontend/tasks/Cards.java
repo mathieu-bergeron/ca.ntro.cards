@@ -21,7 +21,7 @@ public class Cards {
 
 	public static <CANVAS_VIEW    extends CommonCanvasView,
 	               VIEW_DATA      extends CommonViewData,
-	               CARDS_MODEL    extends CommonCardsModel<CARDS_MODEL>,
+	               CARDS_MODEL    extends CommonCardsModel,
 	               SETTINGS_MODEL extends CommonSettingsModel,
 	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
@@ -184,7 +184,7 @@ public class Cards {
 	}
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_MODEL     extends CommonCardsModel<CARDS_MODEL>> 
+	                CARDS_MODEL     extends CommonCardsModel> 
 	
 	        void displayCardsModel(FrontendTasks tasks,
 	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass,

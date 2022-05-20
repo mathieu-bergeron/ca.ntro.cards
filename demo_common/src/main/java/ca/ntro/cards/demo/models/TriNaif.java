@@ -9,14 +9,21 @@ import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.NullCard;
 import ca.ntro.cards.demo.DemoConstants;
+import ca.ntro.cards.demo.frontend.DemoViewData;
+import ca.ntro.cards.demo.models.world2d.DemoDrawingOptions;
+import ca.ntro.cards.demo.models.world2d.DemoObject2d;
+import ca.ntro.cards.demo.models.world2d.DemoWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public abstract class TriNaif<C extends Comparable<C>> extends ProcedureCardsModel<TriNaif<C>> {
-	
+public abstract class   TriNaif<C extends Comparable<C>> 
+
+                extends ProcedureCardsModel<TriNaif, DemoObject2d, DemoWorld2d, DemoDrawingOptions, DemoViewData> { 
+                	
+                	
 	protected int indicePlusPetit = -1;
 	protected int indiceCandidat = -1;
 	protected int indiceProchainVide = 0;
@@ -25,7 +32,8 @@ public abstract class TriNaif<C extends Comparable<C>> extends ProcedureCardsMod
 	protected List<C> listeCible = new ArrayList<>();
 
 	@Override
-	public void copyDataFrom(TriNaif<C> otherModel) {
+	public void copyDataFrom(TriNaif otherModel) {
+
 		setSourceArray(otherModel.getSourceArray());
 		setTargetArray(otherModel.getTargetArray());
 		setIndexOfSmallestElement(otherModel.getIndexOfSmallestElement());
@@ -74,7 +82,7 @@ public abstract class TriNaif<C extends Comparable<C>> extends ProcedureCardsMod
 	}
 
 	@Override
-	protected void updateViewDataImpl(CommonViewData cardsViewData) {
+	protected void updateViewDataImpl(DemoViewData cardsViewData) {
 
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

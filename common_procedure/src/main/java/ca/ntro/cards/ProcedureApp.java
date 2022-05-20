@@ -1,46 +1,40 @@
 package ca.ntro.cards;
 
-import ca.ntro.app.NtroClientFx;
 import ca.ntro.app.backend.BackendRegistrar;
 import ca.ntro.app.frontend.FrontendRegistrarFx;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
-import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.common.CommonApp;
+import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
-import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.frontend.views.CommonCanvasView;
-import ca.ntro.cards.common.frontend.views.CommonDashboardView;
-import ca.ntro.cards.common.frontend.views.CommonRootView;
-import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgFlipCard;
+import ca.ntro.cards.common.messages.MsgGenerateTestCase;
+import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.common.models.CommonTestCasesModel;
 import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.values.CommonTestCase;
+import ca.ntro.cards.common.models.values.TestCaseById;
+import ca.ntro.cards.common.models.values.TestCasesByCategory;
+import ca.ntro.cards.common.models.values.TestCasesBySize;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
-import ca.ntro.cards.messages.MsgGenerateTestCase;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
-import ca.ntro.cards.messages.MsgLockThread;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.TestCasesModel;
-import ca.ntro.cards.models.values.TestCase;
-import ca.ntro.cards.models.values.TestCaseById;
-import ca.ntro.cards.models.values.TestCasesByCategory;
-import ca.ntro.cards.models.values.TestCasesBySize;
 
-public abstract class ProcedureApp<CARDS_MODEL extends ProcedureCardsModel,
-                                TEST_CASE extends TestCase<CARDS_MODEL>,
-                                TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-                                DASHBOARD_MODEL extends CommonDashboardModel,
-                                SETTINGS_MODEL extends CommonSettingsModel,
+public abstract class ProcedureApp<CARDS_MODEL      extends ProcedureCardsModel,
+                                   TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
+                                   TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                   DASHBOARD_MODEL  extends CommonDashboardModel,
+                                   SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       
                                 BACKEND extends CommonBackend<CARDS_MODEL, 
                                                               TEST_CASE, 

@@ -1,12 +1,12 @@
-package ca.ntro.cards.models;
+package ca.ntro.cards.common.models;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.cards.models.values.TestCasesByCategory;
-import ca.ntro.cards.models.values.TestCase;
-import ca.ntro.cards.models.values.TestCaseById;
+import ca.ntro.cards.common.models.values.CommonTestCase;
+import ca.ntro.cards.common.models.values.TestCaseById;
+import ca.ntro.cards.common.models.values.TestCasesByCategory;
 
-public abstract class      TestCasesModel<CARDS_MODEL extends ProcedureCardsModel, 
-                                          TEST_CASE extends TestCase<CARDS_MODEL>> 
+public abstract class      CommonTestCasesModel<CARDS_MODEL extends CommonCardsModel, 
+                                                TEST_CASE   extends CommonTestCase<CARDS_MODEL>> 
 
                 implements Model {
 	

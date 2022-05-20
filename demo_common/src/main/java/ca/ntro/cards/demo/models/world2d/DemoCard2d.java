@@ -2,11 +2,10 @@ package ca.ntro.cards.demo.models.world2d;
 
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.AbstractCard;
-import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.models.world2d.Card2d;
+import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class Card2d extends Card2d {
+public class DemoCard2d extends ProcedureCard2d<DemoObject2d, DemoWorld2d, DemoDrawingOptions> {
 
 	private static final double EPSILON = 0.01;
 	
@@ -20,15 +19,15 @@ public class Card2d extends Card2d {
 	private int directionY = 0; 
 
 
-	public Card2d() {
+	public DemoCard2d() {
 		super();
 	}
 
-	public Card2d(AbstractCard card) {
+	public DemoCard2d(AbstractCard card) {
 		super(card);
 	}
 
-	public Card2d(int rank, Suit suit) {
+	public DemoCard2d(int rank, Suit suit) {
 		super(rank, suit);
 	}
 

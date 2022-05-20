@@ -12,7 +12,7 @@ public class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD
 
        extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS> {
 
-	private Card2d<OBJECT2D, WORLD2D, OPTIONS> movingCard = null;
+	private ProcedureCard2d<OBJECT2D, WORLD2D, OPTIONS> movingCard = null;
 	private double anchorX;
 	private double anchorY;
 	private EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
@@ -59,7 +59,7 @@ public class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD
 		movingCard = null;
 	}
 
-	public void registerDraggedCard(Card2d<OBJECT2D, WORLD2D, OPTIONS> card2d) {
+	public void registerDraggedCard(ProcedureCard2d<OBJECT2D, WORLD2D, OPTIONS> card2d) {
 		this.movingCard = card2d;
 	}
 }

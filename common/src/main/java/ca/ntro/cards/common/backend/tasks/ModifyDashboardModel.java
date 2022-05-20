@@ -1,11 +1,10 @@
-package ca.ntro.cards.backend.tasks;
+package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.backend.model_history.ModelHistory;
-import ca.ntro.cards.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.common.messages.MsgExecutionEnded;
+import ca.ntro.cards.common.models.CommonCardsModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ProcedureCardsModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -13,7 +12,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyDashboardModel {
 
-	public static <CARDS_MODEL extends ProcedureCardsModel,
+	public static <CARDS_MODEL extends CommonCardsModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	       void createTasks(BackendTasks tasks,
@@ -38,7 +37,7 @@ public class ModifyDashboardModel {
 	}
 
 
-	public static <CARDS_MODEL extends ProcedureCardsModel,
+	public static <CARDS_MODEL extends CommonCardsModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	        void executionEnded(BackendTasks tasks,

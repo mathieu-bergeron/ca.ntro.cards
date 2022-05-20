@@ -2,15 +2,15 @@ package ca.ntro.cards.demo.frontend.views.data;
 
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
-import ca.ntro.cards.demo.models.world2d.Card2d;
-import ca.ntro.cards.demo.models.world2d.World2d;
+import ca.ntro.cards.demo.models.world2d.DemoCard2d;
+import ca.ntro.cards.demo.models.world2d.DemoWorld2d;
 import ca.ntro.cards.frontend.ProcedureViewData;
 
 public class DemoCardsViewData extends ProcedureViewData {
 
 	@Override
 	protected CommonWorld2d newWorld2d() {
-		return new World2d();
+		return new DemoWorld2d();
 	}
 
 	@Override
@@ -18,15 +18,15 @@ public class DemoCardsViewData extends ProcedureViewData {
 			                    double targetTopLeftX,
 			                    double targetTopLeftY) {
 
-		Card2d card2d = null;
+		DemoCard2d card2d = null;
 
 		if(card != null) {
-			card2d = (Card2d) world2d().objectById(card.id());
+			card2d = (DemoCard2d) world2d().objectById(card.id());
 		}
 
 		if(card2d == null) {
 
-			card2d = new Card2d(card);
+			card2d = new DemoCard2d(card);
 			world2d().addObject2d(card2d);
 
 		}else {

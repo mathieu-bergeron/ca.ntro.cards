@@ -1,52 +1,27 @@
 package ca.ntro.cards.models;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
-import ca.ntro.cards.backend.model_history.ModelHistory;
-import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.CommonCardsModel;
-import ca.ntro.cards.common.models.identifyers.IdFactory;
-import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
-import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.core.initialization.Ntro;
+import ca.ntro.cards.frontend.ProcedureViewData;
+import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
+import ca.ntro.cards.models.world2d.ProcedureObject2d;
+import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 import ca.ntro.core.reflection.object_graph.Initialize;
-import ca.ntro.core.stream.Stream;
 
-public abstract class ProcedureCardsModel<CARDS_MODEL extends ProcedureCardsModel<CARDS_MODEL>> 
+public abstract class      ProcedureCardsModel<CARDS_MODEL extends ProcedureCardsModel,
+                                               OBJECT2D    extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                               WORLD2D     extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                               OPTIONS     extends ProcedureDrawingOptions,
+                                               VIEW_DATA   extends ProcedureViewData<OBJECT2D, WORLD2D, OPTIONS>>
 
-       extends CommonCardsModel<CARDS_MODEL>
+                extends    CommonCardsModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA>
 
-       implements     Model, Watch, Initialize, WriteObjectGraph {
+                implements Model, Watch, Initialize, WriteObjectGraph {
 	
 	
-	private ReentrantLock lock;
-	private ModelHistory<CARDS_MODEL> modelHistory;
-	
-	public void registerLock(ReentrantLock lock) {
-		this.lock = lock;
-	}
-
-	public void registerModelHistory(ModelHistory<CARDS_MODEL> modelHistory) {
-		this.modelHistory = modelHistory;
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected void signalerEtape() {
-		// XXX: only excute if we are
-		//      not locked by JavaFX GUI Thread
-		lock.lock();
-		lock.unlock();
-
-		modelHistory.pushCopyOf((CARDS_MODEL) this);
-
-	}
-	
-	public abstract void run();
 
 		
 

@@ -1,29 +1,29 @@
-package ca.ntro.cards.backend;
+package ca.ntro.cards.common.backend;
 
 
 import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.backend.model_history.ModelHistoryFull;
-import ca.ntro.cards.backend.tasks.InitializeModels;
-import ca.ntro.cards.backend.tasks.ManageThread;
-import ca.ntro.cards.backend.tasks.ModifyCardsModel;
-import ca.ntro.cards.backend.tasks.ModifyDashboardModel;
-import ca.ntro.cards.backend.tasks.ModifySettingsModel;
-import ca.ntro.cards.backend.tasks.ModifyTestCasesModel;
+import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.common.backend.tasks.InitializeModels;
+import ca.ntro.cards.common.backend.tasks.ManageThread;
+import ca.ntro.cards.common.backend.tasks.ModifyCardsModel;
+import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
+import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
+import ca.ntro.cards.common.backend.tasks.ModifyTestCasesModel;
+import ca.ntro.cards.common.models.CommonCardsModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
-import ca.ntro.cards.models.ProcedureCardsModel;
-import ca.ntro.cards.models.TestCasesModel;
-import ca.ntro.cards.models.values.TestCase;
+import ca.ntro.cards.common.models.CommonTestCasesModel;
+import ca.ntro.cards.common.models.values.CommonTestCase;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class CommonBackend<CARDS_MODEL extends ProcedureCardsModel,
-                                    TEST_CASE extends TestCase<CARDS_MODEL>,
-                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-                                    DASHBOARD_MODEL extends CommonDashboardModel,
-                                    SETTINGS_MODEL extends CommonSettingsModel>
+public abstract class CommonBackend<CARDS_MODEL      extends CommonCardsModel,
+                                    TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
+                                    TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                    DASHBOARD_MODEL  extends CommonDashboardModel,
+                                    SETTINGS_MODEL   extends CommonSettingsModel>
 
        extends LocalBackendNtro {
 	
@@ -38,7 +38,10 @@ public abstract class CommonBackend<CARDS_MODEL extends ProcedureCardsModel,
 	private ReentrantLock lock = new ReentrantLock();
 	private ModelThread<CARDS_MODEL> modelThread = new ModelThread<>();
 	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
-	
+
+	protected ModelHistoryFull<CARDS_MODEL> getModelHistory(){
+		return modelHistory;
+	}
 
 	public void setCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
 		this.cardsModelClass = cardsModelClass;

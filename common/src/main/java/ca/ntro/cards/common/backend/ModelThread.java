@@ -1,10 +1,10 @@
-package ca.ntro.cards.backend;
+package ca.ntro.cards.common.backend;
 
 import ca.ntro.app.NtroApp;
-import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.common.messages.MsgExecutionEnded;
+import ca.ntro.cards.common.models.CommonCardsModel;
 
-public class ModelThread<CARDS_MODEL extends ProcedureCardsModel> extends Thread {
+public class ModelThread<CARDS_MODEL extends CommonCardsModel> extends Thread {
 	
 	private CARDS_MODEL model;
 
@@ -19,11 +19,9 @@ public class ModelThread<CARDS_MODEL extends ProcedureCardsModel> extends Thread
 	@Override
 	public void run() {
 		model.run();
-		
+
 		MsgExecutionEnded msgExecutionEnded = NtroApp.newMessage(MsgExecutionEnded.class);
 		msgExecutionEnded.send();
 	}
-	
-	
 
 }

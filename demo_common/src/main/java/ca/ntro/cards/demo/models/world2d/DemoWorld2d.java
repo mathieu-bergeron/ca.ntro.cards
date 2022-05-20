@@ -7,10 +7,10 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
+import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class World2d extends CommonWorld2d {
+public class DemoWorld2d extends ProcedureWorld2d<DemoObject2d, DemoWorld2d, DemoDrawingOptions> {
 	
 	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
 
@@ -19,20 +19,20 @@ public class World2d extends CommonWorld2d {
 	protected void forgetDraggedCard() {
 		super.forgetDraggedCard();
 		
-		List<Card2d> topCards2d = new ArrayList<>();
-		List<Card2d> bottomCards2d = new ArrayList<>();
+		List<DemoCard2d> topCards2d = new ArrayList<>();
+		List<DemoCard2d> bottomCards2d = new ArrayList<>();
 		
 		for(Object2d object2d : getObjects()) {
 
-			if(object2d instanceof Card2d) {
+			if(object2d instanceof DemoCard2d) {
 
 				if(object2d.topLeftY() < CommonConstants.INITIAL_CARD_HEIGHT_MILIMETERS) {
 					
-					topCards2d.add((Card2d) object2d);
+					topCards2d.add((DemoCard2d) object2d);
 
 				}else {
 
-					bottomCards2d.add((Card2d) object2d);
+					bottomCards2d.add((DemoCard2d) object2d);
 				}
 			}
 		}
@@ -48,7 +48,7 @@ public class World2d extends CommonWorld2d {
 		List<Card> sourceList = new ArrayList<>();
 		List<Card> targetList = new ArrayList<>();
 
-		for(Card2d card2d : bottomCards2d) {
+		for(DemoCard2d card2d : bottomCards2d) {
 			if(card2d.isNullCard()) {
 				sourceList.add(null);
 			}else {
@@ -56,7 +56,7 @@ public class World2d extends CommonWorld2d {
 			}
 		}
 		
-		for(Card2d card2d : topCards2d) {
+		for(DemoCard2d card2d : topCards2d) {
 			if(card2d.isNullCard()) {
 				targetList.add(null);
 			}else {

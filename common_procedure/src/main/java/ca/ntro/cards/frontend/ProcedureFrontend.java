@@ -3,6 +3,7 @@ package ca.ntro.cards.frontend;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonFrontend;
+import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
@@ -10,7 +11,6 @@ import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
-import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -22,7 +22,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
                                         CARDS_VIEW      extends ProcedureCanvasView, 
                                         DASHBOARD_VIEW  extends ProcedureDashboardView,
                                         CARDS_VIEW_DATA extends ProcedureViewData,
-                                        CARDS_MODEL     extends ProcedureCardsModel<CARDS_MODEL>,
+                                        CARDS_MODEL     extends ProcedureCardsModel,
                                         DASHBOARD_MODEL extends ProcedureDashboardModel,
                                         SETTINGS_MODEL  extends ProcedureSettingsModel>
 

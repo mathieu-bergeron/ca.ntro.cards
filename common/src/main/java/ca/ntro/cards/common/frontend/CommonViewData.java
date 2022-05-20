@@ -3,10 +3,8 @@ package ca.ntro.cards.common.frontend;
 import java.util.HashSet;
 import java.util.Set;
 
-import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.ViewData;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
-import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.frontend.utils.FpsCounter;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
@@ -14,21 +12,23 @@ import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptionsDefault;
+import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
-import ca.ntro.cards.models.world2d.CommonCard2d;
-import ca.ntro.cards.models.world2d.Marker2d;
 import ca.ntro.core.stream.Stream;
 
-public abstract class CommonViewData implements ViewData {
-	
+public abstract class CommonViewData<OBJECT2D extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                     WORLD2D  extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                     OPTIONS  extends CommonDrawingOptions>
 
-	private CommonWorld2d world2d = newWorld2d();
-	private FpsCounter fpsCounter = new FpsCounter();
-	private CommonDrawingOptions options = new CommonDrawingOptionsDefault();
+       implements     ViewData {
 	
-	protected abstract CommonWorld2d newWorld2d();
+	protected WORLD2D              world2d = newWorld2d();
+	private   FpsCounter           fpsCounter = new FpsCounter();
+	private   CommonDrawingOptions options = new CommonDrawingOptionsDefault();
 	
-	protected CommonWorld2d world2d() {
+	protected abstract WORLD2D newWorld2d();
+
+	protected WORLD2D world2d() {
 		return world2d;
 	}
 	
@@ -59,40 +59,6 @@ public abstract class CommonViewData implements ViewData {
 
 	public abstract void addOrUpdateCard(AbstractCard card, double topLeftX, double topLeftY);
 
-	public void addOrUpdateMarker(String markerId, double topLeftX, double topLeftY) {
-		
-		Marker2d marker2d = null;
-
-		marker2d = (Marker2d) world2d().objectById(markerId);
-
-		if(marker2d == null) {
-			marker2d = new Marker2d(markerId);
-			world2d().addObject2d(marker2d);
-		}
-		
-		marker2d.setTopLeftX(topLeftX);
-		marker2d.setTopLeftY(topLeftY);
-		
-	}
-
-	public void displayCardFaceDown(AbstractCard card) {
-		setCardFaceUp(card, false);
-	}
-
-	public void setCardFaceUp(AbstractCard card, boolean faceUp) {
-
-		CommonCard2d card2d = (CommonCard2d) world2d().objectById(card.id());
-
-		if(card2d != null) {
-			card2d.getCard().setFaceUp(faceUp);
-		}
-	}
-
-	public void displayCardFaceUp(AbstractCard card) {
-		setCardFaceUp(card, true);
-	}
-
-
 	public void removeCardsNotIn(Stream<Card> cards) {
 		Set<String> cardIds = new HashSet<>();
 
@@ -103,23 +69,6 @@ public abstract class CommonViewData implements ViewData {
 		});
 
 		world2d.removeObject2dNotIn(cardIds);
-
 	}
-
-	public void removeNullCards() {
-		Set<String> toRemove = new HashSet<>();
-		
-		for(Object2d object2d : world2d.getObjects()) {
-			if(object2d instanceof CommonCard2d) {
-				if(((CommonCard2d) object2d).isNullCard()) {
-					toRemove.add(object2d.id());
-				}
-			}
-		}
-		
-		world2d.removeObject2dIn(toRemove);
-
-	}
-
 
 }

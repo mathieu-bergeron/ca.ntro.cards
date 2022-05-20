@@ -7,22 +7,22 @@ import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
 import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
-import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
 
 public class DemoFrontend
 
-       extends CommonFrontend<DemoRootView,
-                              DemoSettingsView, 
-                              DemoCardsView, 
-                              DemoDashboardView, 
-                              DemoCardsViewData, 
-                              TriNaif, 
-                              DemoDashboardModel, 
-                              DemoSettingsModel> {
+       extends ProcedureFrontend<DemoRootView,
+                                DemoSettingsView, 
+                                DemoCardsView, 
+                                DemoDashboardView, 
+                                DemoCardsViewData, 
+                                TriNaif, 
+                                DemoDashboardModel, 
+                                DemoSettingsModel> {
 
 	@Override
 	protected void registerAdditionnalEvents(EventRegistrar registrar) {
