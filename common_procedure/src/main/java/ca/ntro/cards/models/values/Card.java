@@ -1,15 +1,13 @@
-package ca.ntro.cards.common.models.values;
+package ca.ntro.cards.models.values;
 
 import ca.ntro.app.NtroApp;
 
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
-import ca.ntro.app.models.Value;
-import ca.ntro.cards.common.models.enums.Suit;
-import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
-import ca.ntro.core.identifyers.Identifiable;
+import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 
-public class Card extends AbstractCard {
+public class Card<OPTIONS extends ProcedureDrawingOptions> extends AbstractCard<OPTIONS> {
 	
 	private int rank = 2;
 	private Suit suit = Suit.HEARTS;
@@ -42,7 +40,7 @@ public class Card extends AbstractCard {
 
 
 	@SuppressWarnings("rawtypes")
-	private Color color(CommonDrawingOptions options) {
+	private Color color(OPTIONS options) {
 		return NtroApp.colorFromString(suit.color(options));
 	}
 
@@ -54,7 +52,7 @@ public class Card extends AbstractCard {
 			               double width, 
 			               double height, 
 			               int levelOfDetails, 
-			               CommonDrawingOptions options) {
+			               OPTIONS options) {
 
 		if(levelOfDetails > 5) {
 
@@ -74,7 +72,7 @@ public class Card extends AbstractCard {
 			                     double topLeftY, 
 			                     double width, 
 			                     double height, 
-			                     CommonDrawingOptions options) {
+			                     OPTIONS options) {
 
 		gc.setFill(NtroApp.colorFromString("#fff0db"));
 		gc.fillRect(topLeftX, 
@@ -101,7 +99,7 @@ public class Card extends AbstractCard {
 			                    double topLeftY, 
 			                    double width, 
 			                    double height, 
-			                    CommonDrawingOptions options) {
+			                    OPTIONS options) {
 		
 		gc.setFill(color(options));
 

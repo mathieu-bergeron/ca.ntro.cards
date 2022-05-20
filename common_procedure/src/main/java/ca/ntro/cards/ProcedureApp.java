@@ -8,14 +8,12 @@ import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
-import ca.ntro.cards.common.messages.MsgFlipCard;
 import ca.ntro.cards.common.messages.MsgGenerateTestCase;
 import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.common.models.values.TestCaseById;
 import ca.ntro.cards.common.models.values.TestCasesByCategory;
@@ -28,7 +26,9 @@ import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
+import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.values.Card;
 
 public abstract class ProcedureApp<CARDS_MODEL      extends ProcedureCardsModel,
                                    TEST_CASE        extends TestCase<CARDS_MODEL>,

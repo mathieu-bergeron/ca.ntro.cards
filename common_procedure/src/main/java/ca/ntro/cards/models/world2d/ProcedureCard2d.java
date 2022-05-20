@@ -3,13 +3,13 @@ package ca.ntro.cards.models.world2d;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
-import ca.ntro.cards.common.messages.MsgFlipCard;
-import ca.ntro.cards.common.models.enums.Suit;
-import ca.ntro.cards.common.models.values.AbstractCard;
-import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.values.NullCard;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
+import ca.ntro.cards.messages.MsgFlipCard;
+import ca.ntro.cards.models.enums.Suit;
+import ca.ntro.cards.models.values.AbstractCard;
+import ca.ntro.cards.models.values.Card;
+import ca.ntro.cards.models.values.NullCard;
 import javafx.scene.input.MouseEvent;
 
 @SuppressWarnings("rawtypes")

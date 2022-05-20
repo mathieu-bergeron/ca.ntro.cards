@@ -48,7 +48,7 @@ public class InitializeModels {
 
 		     .waitsFor(model(dashboardModelClass))
 
-		     .waitsFor("initializeCards")
+		     .waitsFor("initializeCanvasModel")
 		     
 		     .thenExecutes(inputs -> {
 		    	 

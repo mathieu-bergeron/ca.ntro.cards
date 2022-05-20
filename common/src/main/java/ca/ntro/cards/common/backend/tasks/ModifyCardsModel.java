@@ -3,7 +3,6 @@ package ca.ntro.cards.common.backend.tasks;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CardsModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
-import ca.ntro.cards.common.messages.MsgFlipCard;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 
@@ -27,7 +26,7 @@ public class ModifyCardsModel {
 		
 		tasks.taskGroup("ModifyCardsModel")
 		
-		     .waitsFor("initializeCards")
+		     .waitsFor("initializeCanvasModel")
 		
 		     .andContains(subTasks -> {
 
@@ -45,18 +44,6 @@ public class ModifyCardsModel {
 	        void flipCard(BackendTasks tasks,
 	        		      Class<CARDS_MODEL> cardsModelClass) {
 
-		tasks.task("flipCard")
-
-		     .waitsFor(message(MsgFlipCard.class))
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CARDS_MODEL cardsModel  = inputs.get(model(cardsModelClass));
-		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
-		    	 
-		    	 msgFlipCard.applyTo(cardsModel);
-
-		     });
 	}
 
 }

@@ -1,7 +1,8 @@
-package ca.ntro.cards.common.messages;
+package ca.ntro.cards.messages;
 
 import ca.ntro.app.messages.MessageNtro;
 import ca.ntro.cards.common.models.CommonCanvasModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 
 public class MsgFlipCard extends MessageNtro {
 	
@@ -15,9 +16,9 @@ public class MsgFlipCard extends MessageNtro {
 		this.cardId = cardId;
 	}
 
-	public void applyTo(CommonCanvasModel demoModel) {
+	public void applyTo(ProcedureCardsModel cardsModel) {
 
-		demoModel.flipCard(cardId);
+		cardsModel.flipCard(cardId);
 
 	}
 

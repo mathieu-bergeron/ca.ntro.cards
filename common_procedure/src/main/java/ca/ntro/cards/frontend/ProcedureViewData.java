@@ -6,14 +6,16 @@ import java.util.Set;
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
+import ca.ntro.cards.models.values.AbstractCard;
+import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 import ca.ntro.cards.models.world2d.ProcedureMarker2d;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
+import ca.ntro.core.stream.Stream;
 
 public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
                                           WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
@@ -100,7 +102,6 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 
 	}
 
-	@Override
 	public void addOrUpdateCard(AbstractCard card, double topLeftX, double topLeftY) {
 
 		ProcedureCard2d card2d = (ProcedureCard2d) world2d().objectById(card.id());
@@ -115,6 +116,18 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 	}
 
 	protected abstract ProcedureCard2d newCard2d(AbstractCard card);
+
+	public void removeCardsNotIn(Stream<Card> cards) {
+		Set<String> cardIds = new HashSet<>();
+
+		cards.forEach(c -> {
+			if(c != null) {
+				cardIds.add(c.id());
+			}
+		});
+
+		world2d.removeObject2dNotIn(cardIds);
+	}
 
 
 }

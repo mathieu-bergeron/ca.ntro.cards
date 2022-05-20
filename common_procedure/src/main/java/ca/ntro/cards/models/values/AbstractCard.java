@@ -1,13 +1,14 @@
-package ca.ntro.cards.common.models.values;
+package ca.ntro.cards.models.values;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
+import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 import ca.ntro.core.identifyers.Identifiable;
 
-public abstract class AbstractCard implements Value, Identifiable, Comparable<AbstractCard> {
+public abstract class AbstractCard<OPTIONS extends ProcedureDrawingOptions> implements Value, Identifiable, Comparable<AbstractCard> {
 
 	private long id = -1;
 	private boolean faceUp = true;
@@ -52,7 +53,7 @@ public abstract class AbstractCard implements Value, Identifiable, Comparable<Ab
 			         double width, 
 			         double height, 
 			         int levelOfDetails, 
-			         CommonDrawingOptions options) {
+			         OPTIONS options) {
 		
 		if(faceUp) {
 
@@ -72,7 +73,7 @@ public abstract class AbstractCard implements Value, Identifiable, Comparable<Ab
 			                    double width, 
 			                    double height, 
 			                    int levelOfDetails, 
-			                    CommonDrawingOptions options) {
+			                    OPTIONS options) {
 
 		if(levelOfDetails > 5) {
 
@@ -91,7 +92,8 @@ public abstract class AbstractCard implements Value, Identifiable, Comparable<Ab
 			                            double topLeftX, 
 			                            double topLeftY, 
 			                            double width, 
-			                            double height, CommonDrawingOptions options) {
+			                            double height, 
+			                            OPTIONS options) {
 		
 		gc.setFill(NtroApp.colorFromString("#aaaaaa"));
 		gc.fillRect(topLeftX, 
@@ -107,7 +109,7 @@ public abstract class AbstractCard implements Value, Identifiable, Comparable<Ab
 			                  double topLeftY, 
 			                  double width, 
 			                  double height, 
-			                  CommonDrawingOptions options) {
+			                  OPTIONS options) {
 		
 		gc.setFill(NtroApp.colorFromString("#999999"));
 		gc.fillRect(topLeftX, 
@@ -129,7 +131,7 @@ public abstract class AbstractCard implements Value, Identifiable, Comparable<Ab
 			                           double width, 
 			                           double height, 
 			                           int levelOfDetails, 
-			                           CommonDrawingOptions options);
+			                           OPTIONS options);
 
 	public abstract boolean isNullCard();
 

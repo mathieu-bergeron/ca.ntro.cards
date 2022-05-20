@@ -8,6 +8,7 @@ import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
+import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -63,6 +64,23 @@ public abstract class ProcedureBackend<CARDS_MODEL      extends ProcedureCardsMo
 
 		executionStepForward(tasks);
 
+		flipCard(tasks);
+
+	}
+
+	private void flipCard(BackendTasks tasks) {
+		tasks.task("flipCard")
+
+		     .waitsFor(message(MsgFlipCard.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 CARDS_MODEL cardsModel  = inputs.get(model(getCardsModelClass()));
+		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
+		    	 
+		    	 msgFlipCard.applyTo(cardsModel);
+
+		     });
 	}
 
 	private void executionStepForward(BackendTasks tasks) {

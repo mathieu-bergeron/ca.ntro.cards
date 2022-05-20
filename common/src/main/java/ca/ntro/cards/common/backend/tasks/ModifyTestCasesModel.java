@@ -24,7 +24,7 @@ public class ModifyTestCasesModel {
 		
 		tasks.taskGroup("ModifyTestCasesModel")
 		
-		     .waitsFor("initializeCards")
+		     .waitsFor("initializeCanvasModel")
 		
 		     .andContains(subTasks -> {
 		    	 

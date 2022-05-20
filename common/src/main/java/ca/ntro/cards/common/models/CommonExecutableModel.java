@@ -8,7 +8,7 @@ import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 
-public abstract class CommonCardsModel<CARDS_MODEL extends CommonCardsModel,
+public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutableModel,
                                        OBJECT2D    extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
                                        WORLD2D     extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
                                        OPTIONS     extends CommonDrawingOptions,

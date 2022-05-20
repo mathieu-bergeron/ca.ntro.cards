@@ -1,23 +1,14 @@
 package ca.ntro.cards.common.models;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watch;
 import ca.ntro.app.models.WriteObjectGraph;
-import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.models.identifyers.IdFactory;
-import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
-import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
-import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
-import ca.ntro.core.stream.Stream;
 
 public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel, 
                                         OBJECT2D     extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
@@ -44,13 +35,6 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 	
 	
 	
-	public void flipCard(String cardId) {
-		Card card = cardById(cardId);
-
-		if(card != null) {
-			card.flip();
-		}
-	}
 	
 	public void createFirstVersionIfNeeded() {
 		if(getVersion() == 0) {
@@ -61,66 +45,15 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 
 	public abstract void createFirstVersion();
 
-	protected abstract Card cardById(String cardId);
-	
-	protected abstract Stream<Card> cards();
-	
-	@Override
-	public void initialize() {
-		Set<String> existingIds = new HashSet<>();
-		Set<Card> cardsNeedingId = new HashSet<>();
-		
-		cards().forEach(c -> {
-			if(c == null) {
-				return;
-			}
-
-			if(c.getId() == -1) {
-
-				cardsNeedingId.add(c);
-
-			}else if(existingIds.contains(c.id())) {
-
-				throw new IdNotUniqueException(c.id());
-
-			}else {
-
-				IdFactory.registerId(c.getId());
-				existingIds.add(c.id());
-
-			}
-		});
-		
-		for(Card card : cardsNeedingId) {
-			card.setId(IdFactory.nextId());
-		}
-	}
-
-	
-	public void addCard(Card card) {
-		if(cardById(card.id()) != null) {
-			Ntro.throwException(new IdNotUniqueException(card.id()));
-		}
-		
-		IdFactory.registerId(card.getId());
-
-		addCardImpl(card);
-	}
-	
-	protected abstract void addCardImpl(Card card);
-
-
-	public void updateViewData(VIEW_DATA viewData) {
-
-		viewData.removeCardsNotIn(cards());
-		
-		updateViewDataImpl(viewData);
-	}
 	
 	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
 
 	
 	public abstract void copyDataFrom(CANVAS_MODEL cardsModel);
+
+	public void updateViewData(VIEW_DATA viewData) {
+
+	}
 
 
 }
