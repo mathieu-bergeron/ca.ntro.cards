@@ -1,7 +1,7 @@
 package ca.ntro.cards.common.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 
 public class EvtMoveViewport extends EventNtro {
 	
@@ -24,7 +24,7 @@ public class EvtMoveViewport extends EventNtro {
 		this.incrementY = incrementY;
 	}
 	
-	public void applyTo(CardsView tabletopView) {
+	public void applyTo(CanvasView tabletopView) {
 		tabletopView.moveViewport(incrementX, incrementY);
 	}
 

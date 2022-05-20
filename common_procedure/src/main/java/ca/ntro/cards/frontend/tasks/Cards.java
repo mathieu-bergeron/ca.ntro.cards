@@ -1,12 +1,12 @@
 package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
@@ -24,7 +24,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class Cards {
 
-	public static <CARDS_VIEW extends CardsView,
+	public static <CARDS_VIEW extends CanvasView,
 	               CARDS_VIEW_DATA extends ExploreViewData,
 	               CARDS_MODEL extends ExploreCardsModel,
 	               SETTINGS_MODEL extends SettingsModel,
@@ -85,7 +85,7 @@ public class Cards {
 		     });
 	}
 
-	private  static <CARDS_VIEW_DATA extends CardsViewData> void createCardsViewData(FrontendTasks tasks, 
+	private  static <CARDS_VIEW_DATA extends CommonViewData> void createCardsViewData(FrontendTasks tasks, 
 			                                                                         Class<CARDS_VIEW_DATA> cardsViewDataClass) {
 
 		tasks.task(create(cardsViewDataClass))
@@ -96,7 +96,7 @@ public class Cards {
 		     });
 	}
 
-	private static <CARDS_VIEW_DATA extends CardsViewData,
+	private static <CARDS_VIEW_DATA extends CommonViewData,
 	                SETTINGS_MODEL extends SettingsModel> 
 	
 	        void observeSettings(FrontendTasks tasks,
@@ -109,7 +109,7 @@ public class Cards {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  CardsViewData            gameViewData     = inputs.get(created(cardsViewDataClass));
+		    	  CommonViewData            gameViewData     = inputs.get(created(cardsViewDataClass));
 		    	  Modified<SETTINGS_MODEL> modifiedSettings = inputs.get(modified(settingsModelClass));
 		    	  
 		    	  gameViewData.setDrawingOptions(modifiedSettings.currentValue());
@@ -117,7 +117,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW extends CardsView> void moveViewport(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CanvasView> void moveViewport(FrontendTasks tasks,
 			                                                        Class<CARDS_VIEW> cardsViewClass) {
 
 		tasks.task("moveViewport")
@@ -133,7 +133,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW extends CardsView> void resizeViewport(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CanvasView> void resizeViewport(FrontendTasks tasks,
 			                                                          Class<CARDS_VIEW> cardsViewClass) {
 		tasks.task("resizeViewport")
 		
@@ -148,7 +148,7 @@ public class Cards {
 		      });
 	}
 
-	private static <CARDS_VIEW_DATA extends CardsViewData> void mouseEvtOnViewer(FrontendTasks tasks,
+	private static <CARDS_VIEW_DATA extends CommonViewData> void mouseEvtOnViewer(FrontendTasks tasks,
 			                                                                     Class<CARDS_VIEW_DATA> cardsViewDataClass) {
 		tasks.task("mouseEvtOnViewer")
 		
@@ -164,7 +164,7 @@ public class Cards {
 	}
 
 
-	private static <CARDS_VIEW extends CardsView> void mouseEvtOnTabletop(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CanvasView> void mouseEvtOnTabletop(FrontendTasks tasks,
 			                                                              Class<CARDS_VIEW> cardsViewClass) {
 		tasks.task("mouseEvtOnTabletop")
 		
@@ -180,8 +180,8 @@ public class Cards {
 	}
 
 
-	private static <CARDS_VIEW_DATA extends CardsViewData,
-	                CARDS_VIEW extends CardsView,
+	private static <CARDS_VIEW_DATA extends CommonViewData,
+	                CARDS_VIEW extends CanvasView,
 	                DASHBOARD_VIEW extends DashboardView> 
 	
 	        void displayNextImage(FrontendTasks tasks,
@@ -260,7 +260,7 @@ public class Cards {
 
 
 
-	private static <CARDS_VIEW_DATA extends CardsViewData,
+	private static <CARDS_VIEW_DATA extends CommonViewData,
 	                CARDS_MODEL extends ExploreCardsModel> 
 	
 	        void displayCardsModel(FrontendTasks tasks,

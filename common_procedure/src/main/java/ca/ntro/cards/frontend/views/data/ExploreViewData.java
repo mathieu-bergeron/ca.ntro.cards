@@ -2,10 +2,10 @@ package ca.ntro.cards.frontend.views.data;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.common.CommonConstants;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 
-public abstract class ExploreViewData extends CardsViewData {
+public abstract class ExploreViewData extends CommonViewData {
 
 	private boolean isThreadRunning = false;
 	private double timeSinceLastDashboardUpdate;

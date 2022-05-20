@@ -3,7 +3,7 @@ package ca.ntro.cards.common.frontend.events;
 import ca.ntro.app.frontend.events.EventNtro;
 import ca.ntro.app.frontend.views.controls.canvas.World2dMouseEvent;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import javafx.scene.input.MouseEvent;
 
 public class MouseEvtOnTabletop extends EventNtro {
@@ -19,7 +19,7 @@ public class MouseEvtOnTabletop extends EventNtro {
 	}
 
 
-	public void applyTo(CardsView gameView) {
+	public void applyTo(CanvasView gameView) {
 		gameView.mouseEvtOnTabletop(world2dMouseEventFx);
 	}
 

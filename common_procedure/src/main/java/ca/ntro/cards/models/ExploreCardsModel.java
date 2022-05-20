@@ -8,7 +8,7 @@ import ca.ntro.app.models.Model;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
 import ca.ntro.cards.backend.model_history.ModelHistory;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.CardsModel;
 import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;

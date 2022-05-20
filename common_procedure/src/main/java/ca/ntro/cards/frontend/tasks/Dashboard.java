@@ -1,12 +1,12 @@
 package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.messages.MsgExecutionEnded;
 import ca.ntro.cards.models.ExploreCardsModel;

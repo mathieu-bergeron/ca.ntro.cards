@@ -6,7 +6,7 @@ import java.util.Set;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Watch;
 import ca.ntro.app.models.WriteObjectGraph;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.common.models.values.Card;
@@ -98,13 +98,13 @@ public abstract class CardsModel<CARDS_MODEL extends CardsModel<CARDS_MODEL>>
 	protected abstract void addCardImpl(Card card);
 
 
-	public void updateViewData(CardsViewData cardsViewData) {
+	public void updateViewData(CommonViewData cardsViewData) {
 		cardsViewData.removeCardsNotIn(cards());
 		
 		updateViewDataImpl(cardsViewData);
 	}
 	
-	protected abstract void updateViewDataImpl(CardsViewData cardsViewData);
+	protected abstract void updateViewDataImpl(CommonViewData cardsViewData);
 
 	
 	public abstract void copyDataFrom(CARDS_MODEL cardsModel);

@@ -3,7 +3,7 @@ package ca.ntro.cards.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
@@ -74,7 +74,7 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 	}
 
 	@Override
-	protected void updateViewDataImpl(CardsViewData cardsViewData) {
+	protected void updateViewDataImpl(CommonViewData cardsViewData) {
 
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

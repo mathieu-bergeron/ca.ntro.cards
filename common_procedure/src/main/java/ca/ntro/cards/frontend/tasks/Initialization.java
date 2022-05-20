@@ -2,7 +2,7 @@ package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.common.frontend.views.RootView;
 import ca.ntro.cards.common.frontend.views.SettingsView;
@@ -15,7 +15,7 @@ import ca.ntro.app.services.Window;
 public class Initialization {
 
 	public static <ROOT_VIEW extends RootView, 
-	               CARDS_VIEW extends CardsView,
+	               CARDS_VIEW extends CanvasView,
 	               SETTINGS_VIEW extends SettingsView,
 	               DASHBOARD_VIEW extends DashboardView> 
 	
@@ -82,7 +82,7 @@ public class Initialization {
 		     });
 	}
 
-	private static <CARDS_VIEW extends CardsView> void createCardsView(FrontendTasks tasks,
+	private static <CARDS_VIEW extends CanvasView> void createCardsView(FrontendTasks tasks,
 			                                                           Class<CARDS_VIEW> cardsViewClass) {
 
 		tasks.task(create(cardsViewClass))
@@ -149,7 +149,7 @@ public class Initialization {
 	}
 
 	private static <ROOT_VIEW extends RootView,
-	                CARDS_VIEW extends CardsView> void registerCardsView(FrontendTasks tasks,
+	                CARDS_VIEW extends CanvasView> void registerCardsView(FrontendTasks tasks,
 	                		                                             Class<ROOT_VIEW> rootViewClass,
 	                		                                             Class<CARDS_VIEW> cardsViewClass) {
 
@@ -207,7 +207,7 @@ public class Initialization {
 		     });
 	}
 
-	private static <CARDS_VIEW extends CardsView,
+	private static <CARDS_VIEW extends CanvasView,
 	                DASHBOARD_VIEW extends DashboardView> 
 	
 	        void installDashboardView(FrontendTasks tasks,

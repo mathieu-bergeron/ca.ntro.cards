@@ -8,7 +8,7 @@ import ca.ntro.app.frontend.ViewData;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.frontend.utils.FpsCounter;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
@@ -19,7 +19,7 @@ import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.common.models.world2d.Marker2d;
 import ca.ntro.core.stream.Stream;
 
-public abstract class CardsViewData implements ViewData {
+public abstract class CommonViewData implements ViewData {
 	
 
 	private CommonWorld2d world2d = newWorld2d();
@@ -41,7 +41,7 @@ public abstract class CardsViewData implements ViewData {
 		world2d.onTimePasses(secondsElapsed);
 	}
 
-	public void displayOn(CardsView gameView, 
+	public void displayOn(CanvasView gameView, 
 			              DashboardView dashboardView) {
 
 		fpsCounter.onNewFrame();

@@ -1,7 +1,7 @@
 package ca.ntro.cards.common.frontend.events;
 
 import ca.ntro.app.frontend.events.EventNtro;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 
 public class EvtResizeViewport extends EventNtro {
 	
@@ -15,7 +15,7 @@ public class EvtResizeViewport extends EventNtro {
 		this.factor = factor;
 	}
 
-	public void applyTo(CardsView tabletopView) {
+	public void applyTo(CanvasView tabletopView) {
 		tabletopView.resizeViewport(factor);
 	}
 

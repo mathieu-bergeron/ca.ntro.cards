@@ -5,7 +5,7 @@ import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.events.EvtHideMenu;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.frontend.events.EvtQuit;
@@ -13,7 +13,7 @@ import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnTabletop;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.common.frontend.views.RootView;
 import ca.ntro.cards.common.frontend.views.SettingsView;
@@ -31,7 +31,7 @@ import ca.ntro.cards.models.SettingsModel;
 
 public abstract class CommonFrontend<ROOT_VIEW extends RootView, 
                                      SETTINGS_VIEW extends SettingsView,
-                                     CARDS_VIEW extends CardsView, 
+                                     CARDS_VIEW extends CanvasView, 
                                      DASHBOARD_VIEW extends DashboardView,
                                      CARDS_VIEW_DATA extends ExploreViewData,
                                      CARDS_MODEL extends ExploreCardsModel,

@@ -7,8 +7,8 @@ import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.common.CommonApp;
-import ca.ntro.cards.common.frontend.CardsViewData;
-import ca.ntro.cards.common.frontend.views.CardsView;
+import ca.ntro.cards.common.frontend.CommonViewData;
+import ca.ntro.cards.common.frontend.views.CanvasView;
 import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.common.frontend.views.RootView;
 import ca.ntro.cards.common.frontend.views.SettingsView;
@@ -43,7 +43,7 @@ public abstract class ProcedureApp<CARDS_MODEL extends ExploreCardsModel,
                                                               TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
                                 ROOT_VIEW extends RootView, 
-                                CARDS_VIEW extends CardsView, 
+                                CARDS_VIEW extends CanvasView, 
                                 DASHBOARD_VIEW extends DashboardView,
                                 SETTINGS_VIEW extends SettingsView,
                                 CARDS_VIEW_DATA extends ExploreViewData,

@@ -21,13 +21,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Pane;
 
-public abstract class CardsView extends ViewFx {
+public abstract class CanvasView extends ViewFx {
 	
 	@SuppressWarnings("rawtypes")
-	protected abstract World2dResizableCanvasFx viewerCanvas();
+	protected abstract World2dResizableCanvasFx mainCanvas();
 
 	@SuppressWarnings("rawtypes")
-	protected abstract World2dCanvasFx tabletopCanvas();
+	protected abstract World2dCanvasFx previewCanvas();
 
 	protected abstract Pane dashboardContainer();
 
@@ -39,11 +39,11 @@ public abstract class CardsView extends ViewFx {
 	protected abstract double initialTabletopScreenHeight();
 	
 	protected double worldWidth() {
-		return viewerCanvas().worldWidth();
+		return mainCanvas().worldWidth();
 	}
 
 	protected double worldHeight() {
-		return viewerCanvas().worldHeight();
+		return mainCanvas().worldHeight();
 	}
 	
 	@Override
@@ -59,14 +59,14 @@ public abstract class CardsView extends ViewFx {
 	}
 
 	private void initializeViewerCanvas() {
-		viewerCanvas().setFocusTraversable(true);
+		mainCanvas().setFocusTraversable(true);
 
 		Platform.runLater(() -> {
-			viewerCanvas().requestFocus();
+			mainCanvas().requestFocus();
 		});
 		
-		viewerCanvas().setWorldWidth(initialWorldWidth());
-		viewerCanvas().setWorldHeight(initialWorldHeight());
+		mainCanvas().setWorldWidth(initialWorldWidth());
+		mainCanvas().setWorldHeight(initialWorldHeight());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -74,18 +74,18 @@ public abstract class CardsView extends ViewFx {
 		double screenHeight = initialTabletopScreenHeight();
 		double screenWidth = screenHeight * initialWorldWidth() / initialWorldHeight();
 
-		tabletopCanvas().setWidth(screenWidth);
-		tabletopCanvas().setHeight(screenHeight);
+		previewCanvas().setWidth(screenWidth);
+		previewCanvas().setHeight(screenHeight);
 
-		tabletopCanvas().setWorldWidth(initialWorldWidth());
-		tabletopCanvas().setWorldHeight(initialWorldHeight());
+		previewCanvas().setWorldWidth(initialWorldWidth());
+		previewCanvas().setWorldHeight(initialWorldHeight());
 
-		tabletopCanvas().relocateResizeViewport(0, 0, initialWorldWidth(), initialWorldHeight());
+		previewCanvas().relocateResizeViewport(0, 0, initialWorldWidth(), initialWorldHeight());
 
 		MouseEvtOnTabletop mouseEvtOnTabletop = NtroApp.newEvent(MouseEvtOnTabletop.class);
 		
 
-		tabletopCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
+		previewCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
 			
 			mouseEvtOnTabletop.setWorld2dMouseEventFx(world2dMouseEventFx);
 			mouseEvtOnTabletop.trigger();
@@ -98,7 +98,7 @@ public abstract class CardsView extends ViewFx {
 	private void installMouseEvtOnViewer() {
 		MouseEvtOnViewer mouseEvtOnViewer = NtroApp.newEvent(MouseEvtOnViewer.class);
 		
-		viewerCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
+		mainCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
 			
 			mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
 			mouseEvtOnViewer.trigger();
@@ -109,7 +109,7 @@ public abstract class CardsView extends ViewFx {
 	private void installEvtMoveViewport() {
 		EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
 		
-		viewerCanvas().setOnKeyPressed(evtFx -> {
+		mainCanvas().setOnKeyPressed(evtFx -> {
 			
 			if(evtFx.getCode().equals(KeyCode.W)
 					|| evtFx.getCode().equals(KeyCode.UP)) {
@@ -147,7 +147,7 @@ public abstract class CardsView extends ViewFx {
 
 		EvtResizeViewport evtResizeViewport = NtroApp.newEvent(EvtResizeViewport.class);
 
-		viewerCanvas().setOnKeyTyped(evtFx -> {
+		mainCanvas().setOnKeyTyped(evtFx -> {
 			if(evtFx.getCharacter().equals("+")) {
 				
 				evtResizeViewport.setFactor(0.9);
@@ -160,7 +160,7 @@ public abstract class CardsView extends ViewFx {
 			}
 		});
 		
-		viewerCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
+		mainCanvas().addEventFilter(ScrollEvent.ANY, evtFx -> {
 			if(evtFx.getDeltaY() > 0) {
 
 				evtResizeViewport.setFactor(0.9);
@@ -177,26 +177,26 @@ public abstract class CardsView extends ViewFx {
 
 	@SuppressWarnings("unchecked")
 	public void displayWorld2d(CommonWorld2d world2d, CommonDrawingOptions options) {
-		tabletopCanvas().displayWorld2d(world2d, options);
-		viewerCanvas().displayWorld2d(world2d, options);
+		previewCanvas().displayWorld2d(world2d, options);
+		mainCanvas().displayWorld2d(world2d, options);
 	}
 
 	public void clearCanvas() {
-		tabletopCanvas().clearCanvas();
-		viewerCanvas().clearCanvas();
+		previewCanvas().clearCanvas();
+		mainCanvas().clearCanvas();
 	}
 
 	public void resizeViewport(double factor) {
-		double oldWidth = viewerCanvas().viewportWidth();
-		double oldHeight = viewerCanvas().viewportHeight();
+		double oldWidth = mainCanvas().viewportWidth();
+		double oldHeight = mainCanvas().viewportHeight();
 
 		double newWidth = oldWidth * factor;
 		double newHeight = oldHeight * factor;
 		
-		double newTopLeftX = viewerCanvas().viewportTopLeftX() - (newWidth - oldWidth) / 2;
-		double newTopLeftY = viewerCanvas().viewportTopLeftY() - (newHeight - oldHeight) / 2;
+		double newTopLeftX = mainCanvas().viewportTopLeftX() - (newWidth - oldWidth) / 2;
+		double newTopLeftY = mainCanvas().viewportTopLeftY() - (newHeight - oldHeight) / 2;
 		
-		viewerCanvas().relocateResizeViewport(newTopLeftX,
+		mainCanvas().relocateResizeViewport(newTopLeftX,
 				                              newTopLeftY, 
 				                              newWidth, 
 				                              newHeight);
@@ -204,18 +204,18 @@ public abstract class CardsView extends ViewFx {
 	}
 
 	public void moveViewport(double incrementX, double incrementY) {
-		viewerCanvas().relocateViewport(viewerCanvas().viewportTopLeftX() + incrementX, 
-				                        viewerCanvas().viewportTopLeftY() + incrementY);
+		mainCanvas().relocateViewport(mainCanvas().viewportTopLeftX() + incrementX, 
+				                        mainCanvas().viewportTopLeftY() + incrementY);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void displayViewport() {
-		tabletopCanvas().drawOnWorld(gc -> {
+		previewCanvas().drawOnWorld(gc -> {
 
-			gc.strokeRect(viewerCanvas().viewportTopLeftX(),
-					      viewerCanvas().viewportTopLeftY(),
-					      viewerCanvas().viewportWidth(),
-					      viewerCanvas().viewportHeight());
+			gc.strokeRect(mainCanvas().viewportTopLeftX(),
+					      mainCanvas().viewportTopLeftY(),
+					      mainCanvas().viewportWidth(),
+					      mainCanvas().viewportHeight());
 		});
 	}
 
@@ -232,8 +232,8 @@ public abstract class CardsView extends ViewFx {
 		if(evtFx.getEventType().equals(MouseEvent.MOUSE_CLICKED)
 				|| evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
 			
-			viewerCanvas().relocateViewport(worldX - viewerCanvas().viewportWidth() / 2, 
-					                        worldY - viewerCanvas().viewportHeight() / 2);
+			mainCanvas().relocateViewport(worldX - mainCanvas().viewportWidth() / 2, 
+					                        worldY - mainCanvas().viewportHeight() / 2);
 		}
 	}
 }
