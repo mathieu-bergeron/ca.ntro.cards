@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.models.CardsModel;
-import ca.ntro.cards.models.enums.Suit;
-import ca.ntro.cards.models.values.AbstractCard;
-import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.models.values.NullCard;
+import ca.ntro.cards.models.ExploreCardsModel;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
+import common.frontend.views.data.CardsViewData;
+import common.models.enums.Suit;
+import common.models.values.AbstractCard;
+import common.models.values.Card;
+import common.models.values.NullCard;
 
-public abstract class NaiveSort<C extends Comparable<C>> extends CardsModel<NaiveSort<C>> {
+public abstract class NaiveSort<C extends Comparable<C>> extends ExploreCardsModel<NaiveSort<C>> {
 	
 	protected int smallest = -1;
 	protected int candidate = -1;
@@ -166,12 +166,12 @@ public abstract class NaiveSort<C extends Comparable<C>> extends CardsModel<Naiv
 		}
 		
 		/*
-		sourceArray.add((C) new Card(2, Suit.CLUBS));
-		sourceArray.add((C) new Card(5, Suit.CLUBS));
-		sourceArray.add((C) new Card(5, Suit.DIAMONDS));
-		sourceArray.add((C) new Card(5, Suit.HEARTS));
-		sourceArray.add((C) new Card(7, Suit.SPADES));
-		sourceArray.add((C) new Card(2, Suit.HEARTS));
+		source.add((C) new Card(2, Suit.CLUBS));
+		source.add((C) new Card(5, Suit.CLUBS));
+		source.add((C) new Card(5, Suit.DIAMONDS));
+		source.add((C) new Card(5, Suit.HEARTS));
+		source.add((C) new Card(7, Suit.SPADES));
+		source.add((C) new Card(2, Suit.HEARTS));
 		*/
 		
 		for(int i = 0; i < source.size(); i++) {

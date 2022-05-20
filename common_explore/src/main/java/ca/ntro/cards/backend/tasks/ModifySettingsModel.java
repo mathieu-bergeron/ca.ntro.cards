@@ -1,8 +1,8 @@
 package ca.ntro.cards.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.models.SettingsModel;
+import common.messages.MsgToggleUseFourCardColors;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 

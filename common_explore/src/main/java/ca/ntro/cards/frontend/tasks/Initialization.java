@@ -2,10 +2,10 @@ package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.views.CardsView;
-import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.RootView;
-import ca.ntro.cards.frontend.views.SettingsView;
+import common.frontend.views.CardsView;
+import common.frontend.views.DashboardView;
+import common.frontend.views.RootView;
+import common.frontend.views.SettingsView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 

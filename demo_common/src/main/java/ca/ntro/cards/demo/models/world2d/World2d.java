@@ -5,9 +5,9 @@ import java.util.List;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.Object2d;
-import ca.ntro.cards.models.values.Card;
-import ca.ntro.cards.models.world2d.CommonWorld2d;
-import ca.ntro.cards.CommonConstants;
+import common.CommonConstants;
+import common.models.values.Card;
+import common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 
 public class World2d extends CommonWorld2d {

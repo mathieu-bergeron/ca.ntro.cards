@@ -7,30 +7,31 @@ import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.backend.CommonBackend;
 import ca.ntro.cards.frontend.CommonFrontend;
-import ca.ntro.cards.frontend.views.CardsView;
-import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.RootView;
-import ca.ntro.cards.frontend.views.SettingsView;
-import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.messages.MsgFlipCard;
+import ca.ntro.cards.frontend.views.data.ExploreViewData;
 import ca.ntro.cards.messages.MsgGenerateTestCase;
 import ca.ntro.cards.messages.MsgRefreshDashboard;
-import ca.ntro.cards.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.messages.MsgLockThread;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.ExploreCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.cards.models.TestCasesModel;
-import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.models.values.TestCase;
 import ca.ntro.cards.models.values.TestCaseById;
 import ca.ntro.cards.models.values.TestCasesByCategory;
 import ca.ntro.cards.models.values.TestCasesBySize;
+import common.frontend.views.CardsView;
+import common.frontend.views.DashboardView;
+import common.frontend.views.RootView;
+import common.frontend.views.SettingsView;
+import common.frontend.views.data.CardsViewData;
+import common.messages.MsgFlipCard;
+import common.messages.MsgToggleUseFourCardColors;
+import common.models.values.Card;
 
-public abstract class CommonApp<CARDS_MODEL extends CardsModel,
+public abstract class CommonApp<CARDS_MODEL extends ExploreCardsModel,
                                 TEST_CASE extends TestCase<CARDS_MODEL>,
                                 TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                 DASHBOARD_MODEL extends DashboardModel,
@@ -44,7 +45,7 @@ public abstract class CommonApp<CARDS_MODEL extends CardsModel,
                                 CARDS_VIEW extends CardsView, 
                                 DASHBOARD_VIEW extends DashboardView,
                                 SETTINGS_VIEW extends SettingsView,
-                                CARDS_VIEW_DATA extends CardsViewData,
+                                CARDS_VIEW_DATA extends ExploreViewData,
                                      
                                FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                SETTINGS_VIEW, 

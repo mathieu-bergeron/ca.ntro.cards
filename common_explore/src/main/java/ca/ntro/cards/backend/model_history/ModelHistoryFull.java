@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.ExploreCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.core.initialization.Ntro;
 
-public class ModelHistoryFull<CARDS_MODEL extends CardsModel> 
+public class ModelHistoryFull<CARDS_MODEL extends ExploreCardsModel> 
 
        implements ModelHistory<CARDS_MODEL> {
 

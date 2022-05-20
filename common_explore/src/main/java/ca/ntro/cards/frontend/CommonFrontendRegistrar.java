@@ -2,14 +2,14 @@ package ca.ntro.cards.frontend;
 
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
-import ca.ntro.cards.frontend.events.EvtHideMenu;
-import ca.ntro.cards.frontend.events.EvtMoveViewport;
-import ca.ntro.cards.frontend.events.EvtQuit;
-import ca.ntro.cards.frontend.events.EvtResizeViewport;
-import ca.ntro.cards.frontend.events.EvtShowMenu;
-import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
-import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.frontend.views.data.CardsViewData;
+import common.frontend.events.EvtHideMenu;
+import common.frontend.events.EvtMoveViewport;
+import common.frontend.events.EvtQuit;
+import common.frontend.events.EvtResizeViewport;
+import common.frontend.events.EvtShowMenu;
+import common.frontend.events.MouseEvtOnTabletop;
+import common.frontend.events.MouseEvtOnViewer;
+import common.frontend.views.data.CardsViewData;
 
 public class CommonFrontendRegistrar {
 	

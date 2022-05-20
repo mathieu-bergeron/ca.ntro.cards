@@ -1,9 +1,9 @@
 package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.events.EvtHideMenu;
-import ca.ntro.cards.frontend.events.EvtShowMenu;
-import ca.ntro.cards.frontend.views.RootView;
+import common.frontend.events.EvtHideMenu;
+import common.frontend.events.EvtShowMenu;
+import common.frontend.views.RootView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 

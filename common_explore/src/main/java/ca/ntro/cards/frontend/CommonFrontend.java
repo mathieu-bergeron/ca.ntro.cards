@@ -5,35 +5,36 @@ import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.frontend.events.EvtHideMenu;
-import ca.ntro.cards.frontend.events.EvtMoveViewport;
-import ca.ntro.cards.frontend.events.EvtQuit;
-import ca.ntro.cards.frontend.events.EvtResizeViewport;
-import ca.ntro.cards.frontend.events.EvtShowMenu;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
-import ca.ntro.cards.frontend.events.MouseEvtOnTabletop;
-import ca.ntro.cards.frontend.events.MouseEvtOnViewer;
 import ca.ntro.cards.frontend.tasks.Cards;
 import ca.ntro.cards.frontend.tasks.Dashboard;
 import ca.ntro.cards.frontend.tasks.Initialization;
 import ca.ntro.cards.frontend.tasks.Settings;
+import ca.ntro.cards.frontend.views.data.ExploreViewData;
 import ca.ntro.cards.frontend.tasks.Navigation;
-import ca.ntro.cards.frontend.views.DashboardView;
-import ca.ntro.cards.frontend.views.CardsView;
-import ca.ntro.cards.frontend.views.SettingsView;
-import ca.ntro.cards.frontend.views.RootView;
-import ca.ntro.cards.frontend.views.data.CardsViewData;
-import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.ExploreCardsModel;
 import ca.ntro.cards.models.DashboardModel;
 import ca.ntro.cards.models.SettingsModel;
+import common.frontend.events.EvtHideMenu;
+import common.frontend.events.EvtMoveViewport;
+import common.frontend.events.EvtQuit;
+import common.frontend.events.EvtResizeViewport;
+import common.frontend.events.EvtShowMenu;
+import common.frontend.events.MouseEvtOnTabletop;
+import common.frontend.events.MouseEvtOnViewer;
+import common.frontend.views.CardsView;
+import common.frontend.views.DashboardView;
+import common.frontend.views.RootView;
+import common.frontend.views.SettingsView;
+import common.frontend.views.data.CardsViewData;
 
 public abstract class CommonFrontend<ROOT_VIEW extends RootView, 
                                      SETTINGS_VIEW extends SettingsView,
                                      CARDS_VIEW extends CardsView, 
                                      DASHBOARD_VIEW extends DashboardView,
-                                     CARDS_VIEW_DATA extends CardsViewData,
-                                     CARDS_MODEL extends CardsModel,
+                                     CARDS_VIEW_DATA extends ExploreViewData,
+                                     CARDS_MODEL extends ExploreCardsModel,
                                      DASHBOARD_MODEL extends DashboardModel,
                                      SETTINGS_MODEL extends SettingsModel>
 

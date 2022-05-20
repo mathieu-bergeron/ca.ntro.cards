@@ -1,6 +1,6 @@
 package ca.ntro.cards.demo;
 
-import ca.ntro.cards.CommonConstants;
+import common.CommonConstants;
 
 public class DemoConstants {
 

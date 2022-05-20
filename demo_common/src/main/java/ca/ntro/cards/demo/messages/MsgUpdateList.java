@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.app.messages.MessageNtro;
-import ca.ntro.cards.models.values.Card;
 import ca.ntro.cards.demo.models.NaiveSort;
+import common.models.values.Card;
 
 public class MsgUpdateList extends MessageNtro {
 	

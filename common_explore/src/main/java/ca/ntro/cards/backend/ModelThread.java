@@ -2,9 +2,9 @@ package ca.ntro.cards.backend;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.messages.MsgExecutionEnded;
-import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.ExploreCardsModel;
 
-public class ModelThread<CARDS_MODEL extends CardsModel> extends Thread {
+public class ModelThread<CARDS_MODEL extends ExploreCardsModel> extends Thread {
 	
 	private CARDS_MODEL model;
 

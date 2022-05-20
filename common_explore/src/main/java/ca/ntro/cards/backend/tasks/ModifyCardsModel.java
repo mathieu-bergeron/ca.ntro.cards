@@ -6,8 +6,8 @@ import ca.ntro.cards.backend.model_history.ModelHistory;
 import ca.ntro.cards.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import ca.ntro.cards.messages.MsgFlipCard;
-import ca.ntro.cards.models.CardsModel;
+import ca.ntro.cards.models.ExploreCardsModel;
+import common.messages.MsgFlipCard;
 import ca.ntro.cards.models.DashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
@@ -18,7 +18,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyCardsModel {
 	
-	public static <CARDS_MODEL extends CardsModel,
+	public static <CARDS_MODEL extends ExploreCardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
 
 	       void createTasks(BackendTasks tasks,
@@ -52,7 +52,7 @@ public class ModifyCardsModel {
 	
 
 
-	private static <CARDS_MODEL extends CardsModel> 
+	private static <CARDS_MODEL extends ExploreCardsModel> 
 
 	        void flipCard(BackendTasks tasks,
 	        		      Class<CARDS_MODEL> cardsModelClass) {
@@ -71,7 +71,7 @@ public class ModifyCardsModel {
 		     });
 	}
 
-	public static <CARDS_MODEL extends CardsModel,
+	public static <CARDS_MODEL extends ExploreCardsModel,
 	               DASHBOARD_MODEL extends DashboardModel>
 
 	        void executionStepBack(BackendTasks tasks,
@@ -92,7 +92,7 @@ public class ModifyCardsModel {
 		     });
 	}
 
-	public static <CARDS_MODEL extends CardsModel>
+	public static <CARDS_MODEL extends ExploreCardsModel>
 
 	        void executionStepForward(BackendTasks tasks,
 	        		                  Class<CARDS_MODEL> cardsModelClass,
