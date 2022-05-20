@@ -4,7 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.ModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.messages.MsgFlipCard;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
@@ -15,7 +15,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyCardsModel {
 	
-	public static <CARDS_MODEL extends CommonCardsModel,
+	public static <CARDS_MODEL extends CommonCanvasModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	       void createTasks(BackendTasks tasks,
@@ -41,7 +41,7 @@ public class ModifyCardsModel {
 	
 
 
-	private static <CARDS_MODEL extends CommonCardsModel> 
+	private static <CARDS_MODEL extends CommonCanvasModel> 
 
 	        void flipCard(BackendTasks tasks,
 	        		      Class<CARDS_MODEL> cardsModelClass) {

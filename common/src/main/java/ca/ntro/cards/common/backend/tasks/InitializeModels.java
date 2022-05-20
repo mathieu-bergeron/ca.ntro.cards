@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.ModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistory;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonTestCasesModel;
 import ca.ntro.cards.common.models.values.CommonTestCase;
@@ -15,7 +15,7 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 public class InitializeModels {
 
 	@SuppressWarnings("rawtypes")
-	public static <CARDS_MODEL      extends CommonCardsModel,
+	public static <CARDS_MODEL      extends CommonCanvasModel,
 	               TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
 		           TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel>
@@ -37,7 +37,7 @@ public class InitializeModels {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <CARDS_MODEL extends CommonCardsModel,
+	public static <CARDS_MODEL extends CommonCanvasModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeCards(BackendTasks tasks,
@@ -69,7 +69,7 @@ public class InitializeModels {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static <CARDS_MODEL extends CommonCardsModel,
+	public static <CARDS_MODEL extends CommonCanvasModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeDashboard(BackendTasks tasks,

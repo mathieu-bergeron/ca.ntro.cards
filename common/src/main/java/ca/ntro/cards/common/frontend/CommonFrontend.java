@@ -20,7 +20,7 @@ import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 
@@ -29,7 +29,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
                                      CANVAS_VIEW     extends CommonCanvasView, 
                                      DASHBOARD_VIEW  extends CommonDashboardView,
                                      VIEW_DATA       extends CommonViewData,
-                                     CARDS_MODEL     extends CommonCardsModel,
+                                     CARDS_MODEL     extends CommonCanvasModel,
                                      DASHBOARD_MODEL extends CommonDashboardModel,
                                      SETTINGS_MODEL  extends CommonSettingsModel>
 

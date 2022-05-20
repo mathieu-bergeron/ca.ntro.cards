@@ -1,10 +1,10 @@
 package ca.ntro.cards.common.models.values;
 
 import ca.ntro.app.models.Value;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class CommonTestCase<CARDS_MODEL extends CommonCardsModel> implements Value, Identifiable {
+public class CommonTestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, Identifiable {
 	
 	private String category;
 	private long testCaseId;

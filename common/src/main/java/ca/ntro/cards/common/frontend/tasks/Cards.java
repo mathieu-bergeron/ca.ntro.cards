@@ -7,7 +7,7 @@ import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.core.clock.Tick;
@@ -22,7 +22,7 @@ public class Cards {
 
 	public static <CANVAS_VIEW    extends CommonCanvasView,
 	               VIEW_DATA      extends CommonViewData,
-	               CARDS_MODEL    extends CommonCardsModel,
+	               CARDS_MODEL    extends CommonCanvasModel,
 	               SETTINGS_MODEL extends CommonSettingsModel,
 	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
@@ -186,7 +186,7 @@ public class Cards {
 	}
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_MODEL     extends CommonCardsModel> 
+	                CARDS_MODEL     extends CommonCanvasModel> 
 	
 	        void displayCardsModel(FrontendTasks tasks,
 	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass,

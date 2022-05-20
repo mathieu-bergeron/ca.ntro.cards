@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.CommonTestCase;
 import ca.ntro.cards.common.models.values.TestCaseById;
 import ca.ntro.cards.common.models.values.TestCasesByCategory;
 
-public abstract class      CommonTestCasesModel<CARDS_MODEL extends CommonCardsModel, 
+public abstract class      CommonTestCasesModel<CARDS_MODEL extends CommonCanvasModel, 
                                                 TEST_CASE   extends CommonTestCase<CARDS_MODEL>> 
 
                 implements Model {

@@ -12,14 +12,14 @@ import ca.ntro.cards.common.backend.tasks.ModifyCardsModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.common.backend.tasks.ModifyTestCasesModel;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.CommonTestCasesModel;
 import ca.ntro.cards.common.models.values.CommonTestCase;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class CommonBackend<CARDS_MODEL      extends CommonCardsModel,
+public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
                                     TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
                                     TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
                                     DASHBOARD_MODEL  extends CommonDashboardModel,

@@ -2,7 +2,7 @@ package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.messages.MsgGenerateTestCase;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonTestCasesModel;
 import ca.ntro.cards.common.models.values.CommonTestCase;
@@ -13,7 +13,7 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyTestCasesModel {
 	
-	public static <CARDS_MODEL      extends CommonCardsModel,
+	public static <CARDS_MODEL      extends CommonCanvasModel,
 	               TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
 	               TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel> 
@@ -35,7 +35,7 @@ public class ModifyTestCasesModel {
 
 
 	@SuppressWarnings("unchecked")
-	public static <CARDS_MODEL      extends CommonCardsModel,
+	public static <CARDS_MODEL      extends CommonCanvasModel,
 	               TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
 		           TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>>
 	

@@ -19,7 +19,7 @@ import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 
-public abstract class CommonCardsModel<CARDS_MODEL extends CommonCardsModel,
+public abstract class CommonCanvasModel<CARDS_MODEL extends CommonCanvasModel,
                                        OBJECT2D    extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
                                        WORLD2D     extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
                                        OPTIONS     extends CommonDrawingOptions,

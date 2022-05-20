@@ -4,7 +4,7 @@ package ca.ntro.cards.models;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
-import ca.ntro.cards.common.models.CommonCardsModel;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;
@@ -17,7 +17,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL extends ProcedureCard
                                                OPTIONS     extends ProcedureDrawingOptions,
                                                VIEW_DATA   extends ProcedureViewData<OBJECT2D, WORLD2D, OPTIONS>>
 
-                extends    CommonCardsModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA>
+                extends    CommonCanvasModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA>
 
                 implements Model, Watch, Initialize, WriteObjectGraph {
 	
