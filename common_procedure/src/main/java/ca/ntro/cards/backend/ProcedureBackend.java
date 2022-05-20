@@ -1,24 +1,56 @@
 package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+import ca.ntro.cards.common.backend.CardsModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
+import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.common.models.TestCasesModel;
+import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
-import ca.ntro.cards.models.ProcedureTestCasesModel;
-import ca.ntro.cards.models.values.ProcedureTestCase;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public abstract class ProcedureBackend<CARDS_MODEL      extends ProcedureCardsModel,
-                                       TEST_CASE        extends ProcedureTestCase<CARDS_MODEL>,
-                                       TEST_CASES_MODEL extends ProcedureTestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                       TEST_CASE        extends TestCase<CARDS_MODEL>,
+                                       TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                        DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                        SETTINGS_MODEL   extends ProcedureSettingsModel>
 
                 extends CommonBackend<CARDS_MODEL, TEST_CASE, TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL> {
+
+	private ReentrantLock lock = new ReentrantLock();
+	private CardsModelThread<CARDS_MODEL> modelThread = new CardsModelThread<>();
+	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
+
+	@Override
+	protected void initializeCanvasModel(BackendTasks tasks) {
+		tasks.task("initializeCanvasModel")
+
+		     .waitsFor(model(getCardsModelClass()))
+
+		     .waitsFor("initializeTestCases")
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 CARDS_MODEL cardsModel = inputs.get(model(getCardsModelClass()));
+
+		    	 cardsModel.createFirstVersionIfNeeded();
+				 cardsModel.registerLock(lock);
+				 cardsModel.registerModelHistory(modelHistory);
+		    	 
+		    	 modelHistory.pushCopyOf((CARDS_MODEL) cardsModel);
+
+				 modelThread.setModel(cardsModel);
+				 modelThread.start();
+
+		     });
+	}
 
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks tasks) {
 		

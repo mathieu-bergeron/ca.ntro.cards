@@ -4,7 +4,7 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class CommonTestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, Identifiable {
+public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, Identifiable {
 	
 	private String category;
 	private long testCaseId;

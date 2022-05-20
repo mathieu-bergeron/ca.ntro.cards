@@ -19,11 +19,11 @@ import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 
-public abstract class CommonCanvasModel<CARDS_MODEL extends CommonCanvasModel,
-                                       OBJECT2D    extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                       WORLD2D     extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                       OPTIONS     extends CommonDrawingOptions,
-                                       VIEW_DATA   extends CommonViewData<OBJECT2D, WORLD2D, OPTIONS>>
+public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel, 
+                                        OBJECT2D     extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                        WORLD2D      extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                        OPTIONS      extends CommonDrawingOptions,
+                                        VIEW_DATA    extends CommonViewData<OBJECT2D, WORLD2D, OPTIONS>>
 
        implements     Model, Watch, Initialize, WriteObjectGraph {
 
@@ -42,27 +42,6 @@ public abstract class CommonCanvasModel<CARDS_MODEL extends CommonCanvasModel,
 	}
 	
 	
-	private ReentrantLock lock;
-	private ModelHistory<CARDS_MODEL> modelHistory;
-	
-	public void registerLock(ReentrantLock lock) {
-		this.lock = lock;
-	}
-
-	public void registerModelHistory(ModelHistory<CARDS_MODEL> modelHistory) {
-		this.modelHistory = modelHistory;
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected void signalerEtape() {
-		// XXX: only excute if we are
-		//      not locked by JavaFX GUI Thread
-		lock.lock();
-		lock.unlock();
-
-		modelHistory.pushCopyOf((CARDS_MODEL) this);
-
-	}
 	
 	
 	public void flipCard(String cardId) {
@@ -141,9 +120,7 @@ public abstract class CommonCanvasModel<CARDS_MODEL extends CommonCanvasModel,
 	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
 
 	
-	public abstract void copyDataFrom(CARDS_MODEL cardsModel);
+	public abstract void copyDataFrom(CANVAS_MODEL cardsModel);
 
-	
-	public abstract void run();
 
 }

@@ -3,12 +3,12 @@ package ca.ntro.cards.common.backend.tasks;
 import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.ModelThread;
+import ca.ntro.cards.common.backend.CardsModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.common.models.CommonTestCasesModel;
-import ca.ntro.cards.common.models.values.CommonTestCase;
+import ca.ntro.cards.common.models.TestCasesModel;
+import ca.ntro.cards.common.models.values.TestCase;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -16,8 +16,8 @@ public class InitializeModels {
 
 	@SuppressWarnings("rawtypes")
 	public static <CARDS_MODEL      extends CommonCanvasModel,
-	               TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
-		           TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
+	               TEST_CASE        extends TestCase<CARDS_MODEL>,
+		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel>
 	
 	        void initializeTestCases(BackendTasks tasks,
@@ -32,38 +32,6 @@ public class InitializeModels {
 		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
 		    	 
 		    	 testCasesModel.generateFirstVersionIfNeeded();
-
-		     });
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <CARDS_MODEL extends CommonCanvasModel,
-	               DASHBOARD_MODEL extends CommonDashboardModel>
-	
-	        void initializeCards(BackendTasks tasks,
-	        		             Class<CARDS_MODEL> cardsModelClass,
-	        		             ModelHistory<CARDS_MODEL> modelHistory, 
-	        		             ReentrantLock lock,
-	        		             ModelThread<CARDS_MODEL> modelThread) {
-
-		tasks.task("initializeCards")
-
-		     .waitsFor(model(cardsModelClass))
-
-		     .waitsFor("initializeTestCases")
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CARDS_MODEL cardsModel = inputs.get(model(cardsModelClass));
-
-		    	 cardsModel.createFirstVersionIfNeeded();
-				 cardsModel.registerLock(lock);
-				 cardsModel.registerModelHistory(modelHistory);
-		    	 
-		    	 modelHistory.pushCopyOf((CARDS_MODEL) cardsModel);
-
-				 modelThread.setModel(cardsModel);
-				 modelThread.start();
 
 		     });
 	}

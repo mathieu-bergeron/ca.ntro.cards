@@ -1,7 +1,7 @@
 package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.ModelThread;
+import ca.ntro.cards.common.backend.CardsModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.messages.MsgFlipCard;
 import ca.ntro.cards.common.models.CommonCanvasModel;
@@ -22,7 +22,6 @@ public class ModifyCardsModel {
 			                Class<CARDS_MODEL> cardsModelClass,
 			                ModelHistoryFull<CARDS_MODEL> modelHistory,
 			                ReentrantLock lock,
-			                ModelThread<CARDS_MODEL> modelThread,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		

@@ -15,13 +15,13 @@ import ca.ntro.cards.common.backend.tasks.ModifyTestCasesModel;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
-import ca.ntro.cards.common.models.CommonTestCasesModel;
-import ca.ntro.cards.common.models.values.CommonTestCase;
+import ca.ntro.cards.common.models.TestCasesModel;
+import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
-                                    TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
-                                    TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                    TEST_CASE        extends TestCase<CARDS_MODEL>,
+                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                     DASHBOARD_MODEL  extends CommonDashboardModel,
                                     SETTINGS_MODEL   extends CommonSettingsModel>
 
@@ -36,7 +36,6 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
 	private ReentrantLock lock = new ReentrantLock();
-	private ModelThread<CARDS_MODEL> modelThread = new ModelThread<>();
 	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
 
 	protected ModelHistoryFull<CARDS_MODEL> getModelHistory(){
@@ -88,7 +87,7 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
 		
 		InitializeModels.initializeTestCases(tasks, testCasesModelClass);
 		
-		InitializeModels.initializeCards(tasks, cardsModelClass, modelHistory, lock, modelThread);
+		initializeCanvasModel(tasks);
 
 		InitializeModels.initializeDashboard(tasks, dashboardModelClass, modelHistory);
 
@@ -96,7 +95,6 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
 				                     cardsModelClass,
 				                     modelHistory,
 				                     lock,
-				                     modelThread,
 				                     subTasks -> {
 				                    	 
 				                    	 addSubTasksToModifyCardsModel(subTasks);
@@ -143,6 +141,13 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonCanvasModel,
 		 createAdditionalTasks(tasks);
 
 	}
+
+	protected abstract void initializeCanvasModel(BackendTasks tasks);
+
+	/*
+	private void initializeCanvasModel(BackendTasks tasks) {
+	}
+	*/
 	
 	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);

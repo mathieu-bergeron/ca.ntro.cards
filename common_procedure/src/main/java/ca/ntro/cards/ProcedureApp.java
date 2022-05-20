@@ -14,9 +14,9 @@ import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
-import ca.ntro.cards.common.models.CommonTestCasesModel;
+import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.values.CommonTestCase;
+import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.common.models.values.TestCaseById;
 import ca.ntro.cards.common.models.values.TestCasesByCategory;
 import ca.ntro.cards.common.models.values.TestCasesBySize;
@@ -31,8 +31,8 @@ import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
 
 public abstract class ProcedureApp<CARDS_MODEL      extends ProcedureCardsModel,
-                                   TEST_CASE        extends CommonTestCase<CARDS_MODEL>,
-                                   TEST_CASES_MODEL extends CommonTestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                   TEST_CASE        extends TestCase<CARDS_MODEL>,
+                                   TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
                                    DASHBOARD_MODEL  extends CommonDashboardModel,
                                    SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       

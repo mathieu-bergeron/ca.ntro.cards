@@ -12,6 +12,4 @@ dependencies {
     implementation project(':common')
     implementation project(':common_procedure')
 
-    implementation project(':demo_common')
-
 }
