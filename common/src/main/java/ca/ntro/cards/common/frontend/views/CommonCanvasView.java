@@ -1,6 +1,5 @@
 package ca.ntro.cards.common.frontend.views;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 

@@ -11,8 +11,6 @@ import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgGenerateTestCase;
 import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
-import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.common.models.values.TestCaseById;
@@ -28,32 +26,34 @@ import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.ProcedureDashboardModel;
+import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.models.values.Card;
 
 public abstract class ProcedureApp<CARDS_MODEL      extends ProcedureCardsModel,
                                    TEST_CASE        extends TestCase<CARDS_MODEL>,
                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
-                                   DASHBOARD_MODEL  extends CommonDashboardModel,
-                                   SETTINGS_MODEL   extends CommonSettingsModel,
+                                   DASHBOARD_MODEL  extends ProcedureDashboardModel,
+                                   SETTINGS_MODEL   extends ProcedureSettingsModel,
                                                                                                       
-                                BACKEND extends CommonBackend<CARDS_MODEL, 
-                                                              TEST_CASE, 
-                                                              TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
+                                   BACKEND extends CommonBackend<CARDS_MODEL, 
+                                                                 TEST_CASE, 
+                                                                 TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
-                                ROOT_VIEW       extends ProcedureRootView, 
-                                CARDS_VIEW      extends ProcedureCanvasView, 
-                                DASHBOARD_VIEW  extends ProcedureDashboardView,
-                                SETTINGS_VIEW   extends ProcedureSettingsView,
-                                CARDS_VIEW_DATA extends ProcedureViewData,
+                                   ROOT_VIEW       extends ProcedureRootView, 
+                                   CARDS_VIEW      extends ProcedureCanvasView, 
+                                   DASHBOARD_VIEW  extends ProcedureDashboardView,
+                                   SETTINGS_VIEW   extends ProcedureSettingsView,
+                                   CARDS_VIEW_DATA extends ProcedureViewData,
                                      
-                               FRONTEND extends CommonFrontend<ROOT_VIEW, 
-                                                               SETTINGS_VIEW, 
-                                                               CARDS_VIEW, 
-                                                               DASHBOARD_VIEW, 
-                                                               CARDS_VIEW_DATA,
-                                                               CARDS_MODEL,
-                                                               DASHBOARD_MODEL,
-                                                               SETTINGS_MODEL>>
+                                   FRONTEND extends CommonFrontend<ROOT_VIEW, 
+                                                                   SETTINGS_VIEW, 
+                                                                   CARDS_VIEW, 
+                                                                   DASHBOARD_VIEW, 
+                                                                   CARDS_VIEW_DATA,
+                                                                   CARDS_MODEL,
+                                                                   DASHBOARD_MODEL,
+                                                                   SETTINGS_MODEL>>
 
        extends CommonApp {
 	

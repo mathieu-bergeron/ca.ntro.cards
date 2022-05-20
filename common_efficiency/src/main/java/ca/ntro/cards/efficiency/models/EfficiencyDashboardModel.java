@@ -1,5 +1,7 @@
 package ca.ntro.cards.efficiency.models;
 
-public class EfficiencyDashboardModel {
+import ca.ntro.cards.common.models.CommonDashboardModel;
+
+public class EfficiencyDashboardModel extends CommonDashboardModel {
 
 }
