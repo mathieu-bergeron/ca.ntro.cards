@@ -85,12 +85,12 @@ public class Cards {
 		     });
 	}
 
-	private static <CARDS_VIEW_DATA extends CommonViewData,
+	private static <VIEW_DATA extends CommonViewData,
 	                SETTINGS_MODEL extends CommonSettingsModel,
 	                OPTIONS extends CommonDrawingOptions> 
 	
 	        void observeSettings(FrontendTasks tasks,
-	        		             Class<CARDS_VIEW_DATA> cardsViewDataClass,
+	        		             Class<VIEW_DATA> cardsViewDataClass,
 	        		             Class<SETTINGS_MODEL> settingsModelClass) {
 
 		tasks.task("observeSettings")
@@ -99,10 +99,10 @@ public class Cards {
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  CommonViewData            gameViewData     = inputs.get(created(cardsViewDataClass));
-		    	  Modified<SETTINGS_MODEL> modifiedSettings = inputs.get(modified(settingsModelClass));
+		    	  VIEW_DATA                 viewData         = inputs.get(created(cardsViewDataClass));
+		    	  Modified<SETTINGS_MODEL>  modifiedSettings = inputs.get(modified(settingsModelClass));
 		    	  
-		    	  gameViewData.setDrawingOptions((OPTIONS) modifiedSettings.currentValue());
+		    	  viewData.setDrawingOptions(modifiedSettings.currentValue().drawingOptions());
 
 		      });
 	}
