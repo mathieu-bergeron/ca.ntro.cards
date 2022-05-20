@@ -7,8 +7,8 @@ import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
-import ca.ntro.cards.demo.models.DemoDashboardModel;
-import ca.ntro.cards.demo.models.DemoSettingsModel;
+import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
+import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public class   DemoBackend
@@ -17,8 +17,8 @@ public class   DemoBackend
        extends ProcedureBackend<TriNaif,
                                 DemoTestCase,
                                 DemoTestCasesModel,
-                                DemoDashboardModel,
-                                DemoSettingsModel> {
+                                DemoProcedureDashboardModel,
+                                DemoProcedureSettingsModel> {
 	
 	
 

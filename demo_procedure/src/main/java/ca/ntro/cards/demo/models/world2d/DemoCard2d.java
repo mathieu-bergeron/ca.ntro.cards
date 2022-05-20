@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class DemoCard2d extends ProcedureCard2d<DemoObject2d, DemoWorld2d, DemoDrawingOptions> {
+public class DemoCard2d extends ProcedureCard2d<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 
 	private static final double EPSILON = 0.01;
 	

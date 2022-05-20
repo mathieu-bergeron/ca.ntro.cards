@@ -11,7 +11,7 @@ import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class DemoWorld2d extends ProcedureWorld2d<DemoObject2d, DemoWorld2d, DemoDrawingOptions> {
+public class DemoProcedureWorld2d extends ProcedureWorld2d<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 	
 	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
 

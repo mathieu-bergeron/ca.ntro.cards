@@ -2,17 +2,17 @@ package ca.ntro.cards.demo.frontend;
 
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.demo.models.world2d.DemoCard2d;
-import ca.ntro.cards.demo.models.world2d.DemoDrawingOptions;
-import ca.ntro.cards.demo.models.world2d.DemoObject2d;
-import ca.ntro.cards.demo.models.world2d.DemoWorld2d;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureWorld2d;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class DemoViewData extends ProcedureViewData<DemoObject2d, DemoWorld2d, DemoDrawingOptions> {
+public class DemoViewData extends ProcedureViewData<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 
 	@Override
-	protected DemoWorld2d newWorld2d() {
-		return new DemoWorld2d();
+	protected DemoProcedureWorld2d newWorld2d() {
+		return new DemoProcedureWorld2d();
 	}
 
 	@Override

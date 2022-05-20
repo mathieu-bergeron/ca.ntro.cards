@@ -3,7 +3,7 @@ package ca.ntro.cards.demo.backend.tasks;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
-import ca.ntro.cards.demo.models.DemoDashboardModel;
+import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -18,7 +18,7 @@ public class DemoModifyCardsModel {
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 DemoDashboardModel dashboardModel = inputs.get(model(DemoDashboardModel.class));
+		    	 DemoProcedureDashboardModel dashboardModel = inputs.get(model(DemoProcedureDashboardModel.class));
 		    	 STUDENT_MODEL      demoModel      = inputs.get(model(cardsModelClass));
 
 		    	 demoModel.copyDataFrom(studentModel);

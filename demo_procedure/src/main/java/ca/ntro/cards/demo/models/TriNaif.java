@@ -10,9 +10,9 @@ import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.NullCard;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.DemoViewData;
-import ca.ntro.cards.demo.models.world2d.DemoDrawingOptions;
-import ca.ntro.cards.demo.models.world2d.DemoObject2d;
-import ca.ntro.cards.demo.models.world2d.DemoWorld2d;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;
+import ca.ntro.cards.demo.models.world2d.DemoProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
@@ -21,7 +21,7 @@ import ca.ntro.core.stream.Visitor;
 
 public abstract class   TriNaif<C extends Comparable<C>> 
 
-                extends ProcedureCardsModel<TriNaif, DemoObject2d, DemoWorld2d, DemoDrawingOptions, DemoViewData> { 
+                extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoViewData> { 
                 	
                 	
 	protected int indicePlusPetit = -1;
