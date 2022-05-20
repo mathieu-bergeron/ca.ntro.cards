@@ -2,10 +2,10 @@ package ca.ntro.cards.frontend.tasks;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
+import ca.ntro.cards.common.frontend.events.EvtQuit;
+import ca.ntro.cards.common.frontend.views.SettingsView;
 import ca.ntro.cards.models.SettingsModel;
 import ca.ntro.core.reflection.observer.Modified;
-import common.frontend.events.EvtQuit;
-import common.frontend.views.SettingsView;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 

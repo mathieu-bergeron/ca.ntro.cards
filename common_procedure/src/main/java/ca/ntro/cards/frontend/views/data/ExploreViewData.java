@@ -1,9 +1,9 @@
 package ca.ntro.cards.frontend.views.data;
 
 import ca.ntro.app.NtroApp;
+import ca.ntro.cards.common.CommonConstants;
+import ca.ntro.cards.common.frontend.CardsViewData;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import common.CommonConstants;
-import common.frontend.views.data.CardsViewData;
 
 public abstract class ExploreViewData extends CardsViewData {
 

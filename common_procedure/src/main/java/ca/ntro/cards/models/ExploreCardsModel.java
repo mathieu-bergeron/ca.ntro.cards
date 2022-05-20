@@ -8,14 +8,14 @@ import ca.ntro.app.models.Model;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
 import ca.ntro.cards.backend.model_history.ModelHistory;
+import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.models.CardsModel;
+import ca.ntro.cards.common.models.identifyers.IdFactory;
+import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
+import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
-import common.frontend.views.data.CardsViewData;
-import common.models.CardsModel;
-import common.models.identifyers.IdFactory;
-import common.models.identifyers.IdNotUniqueException;
-import common.models.values.Card;
 
 public abstract class ExploreCardsModel<CARDS_MODEL extends ExploreCardsModel<CARDS_MODEL>> 
 
@@ -36,7 +36,7 @@ public abstract class ExploreCardsModel<CARDS_MODEL extends ExploreCardsModel<CA
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected void ajouterEtape() {
+	protected void signalerEtape() {
 		// XXX: only excute if we are
 		//      not locked by JavaFX GUI Thread
 		lock.lock();

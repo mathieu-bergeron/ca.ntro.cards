@@ -1,7 +1,7 @@
 package ca.ntro.cards.models;
 
 import ca.ntro.app.models.Model;
-import common.frontend.views.DashboardView;
+import ca.ntro.cards.common.frontend.views.DashboardView;
 
 public class DashboardModel implements Model {
 	

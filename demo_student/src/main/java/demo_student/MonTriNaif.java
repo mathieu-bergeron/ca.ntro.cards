@@ -13,17 +13,17 @@ public class MonTriNaif<C extends Comparable<C>> extends TriNaif<C> {
 		}
 		*/
 		
-		for(int i = 0; i < source.size(); i++) {
+		for(int i = 0; i < listeSource.size(); i++) {
 
 			C plusPetitElement = trouverPlusPetit();
+
+			listeSource.set(indicePlusPetit, null);
 			
-			cible.set(indiceProchainVide, plusPetitElement);
-			
-			source.set(indicePlusPetit, null);
+			listeCible.set(indiceProchainVide, plusPetitElement);
 			
 			indiceProchainVide++;
 
-			ajouterEtape();
+			signalerEtape();
 
 		}
 	}
@@ -31,12 +31,12 @@ public class MonTriNaif<C extends Comparable<C>> extends TriNaif<C> {
 	private C trouverPlusPetit() {
 		C resultat = null;
 
-		for(int i = 0; i < source.size(); i++) {
+		for(int i = 0; i < listeSource.size(); i++) {
 			
-			indiceCandidate = i;
-			ajouterEtape();
+			indiceCandidat = i;
+			signalerEtape();
 			
-			C elementCandidat = source.get(i);
+			C elementCandidat = listeSource.get(i);
 			
 			if(resultat == null
 					&& elementCandidat != null) {
@@ -44,7 +44,7 @@ public class MonTriNaif<C extends Comparable<C>> extends TriNaif<C> {
 				indicePlusPetit = i;
 				resultat = elementCandidat;
 
-				ajouterEtape();
+				signalerEtape();
 
 			}else if(resultat != null 
 					&& elementCandidat != null
@@ -53,7 +53,7 @@ public class MonTriNaif<C extends Comparable<C>> extends TriNaif<C> {
 				indicePlusPetit = i;
 				resultat = elementCandidat;
 
-				ajouterEtape();
+				signalerEtape();
 			}
 
 		}

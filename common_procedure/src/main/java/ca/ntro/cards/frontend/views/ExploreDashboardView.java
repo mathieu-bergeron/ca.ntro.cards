@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
+import ca.ntro.cards.common.frontend.views.DashboardView;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import common.frontend.views.DashboardView;
 import javafx.scene.control.Button;
 
 public abstract class ExploreDashboardView extends DashboardView {

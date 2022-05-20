@@ -1,9 +1,9 @@
 package ca.ntro.cards.demo.models.world2d;
 
-import common.models.enums.Suit;
-import common.models.values.AbstractCard;
-import common.models.values.Card;
-import common.models.world2d.CommonCard2d;
+import ca.ntro.cards.common.models.enums.Suit;
+import ca.ntro.cards.common.models.values.AbstractCard;
+import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.world2d.CommonCard2d;
 import ca.ntro.cards.demo.DemoConstants;
 
 public class Card2d extends CommonCard2d {

@@ -11,10 +11,9 @@ public class Procedure extends ProcedureTriNaif<MonTriNaif> {
 	}
 
 	@Override
-	protected Class<MonTriNaif> naiveSortClass() {
+	protected Class<MonTriNaif> classeTriNaif() {
 		return MonTriNaif.class;
 	}
-
 
 
 }

@@ -3,26 +3,26 @@ package ca.ntro.cards.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ntro.cards.common.frontend.CardsViewData;
+import ca.ntro.cards.common.models.enums.Suit;
+import ca.ntro.cards.common.models.values.AbstractCard;
+import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.values.NullCard;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.models.ExploreCardsModel;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
-import common.frontend.views.data.CardsViewData;
-import common.models.enums.Suit;
-import common.models.values.AbstractCard;
-import common.models.values.Card;
-import common.models.values.NullCard;
 
 public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel<TriNaif<C>> {
 	
 	protected int indicePlusPetit = -1;
-	protected int indiceCandidate = -1;
+	protected int indiceCandidat = -1;
 	protected int indiceProchainVide = 0;
 	
-	protected List<C> source = new ArrayList<>();
-	protected List<C> cible = new ArrayList<>();
+	protected List<C> listeSource = new ArrayList<>();
+	protected List<C> listeCible = new ArrayList<>();
 
 	@Override
 	public void copyDataFrom(TriNaif<C> otherModel) {
@@ -42,11 +42,11 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 	}
 
 	public int getIndexOfCandidateSmallestElement() {
-		return indiceCandidate;
+		return indiceCandidat;
 	}
 
 	public void setIndexOfCandidateSmallestElement(int indexOfCandidateSmallestElement) {
-		this.indiceCandidate = indexOfCandidateSmallestElement;
+		this.indiceCandidat = indexOfCandidateSmallestElement;
 	}
 
 	public int getIndexOfNextEmptySpace() {
@@ -58,19 +58,19 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 	}
 
 	public List<C> getSourceArray() {
-		return source;
+		return listeSource;
 	}
 
 	public void setSourceArray(List<C> sourceArray) {
-		this.source = sourceArray;
+		this.listeSource = sourceArray;
 	}
 
 	public List<C> getTargetArray() {
-		return cible;
+		return listeCible;
 	}
 
 	public void setTargetArray(List<C> targetArray) {
-		this.cible = targetArray;
+		this.listeCible = targetArray;
 	}
 
 	@Override
@@ -82,12 +82,12 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 		List<AbstractCard> topCards = new ArrayList<>();
 		List<AbstractCard> bottomCards = new ArrayList<>();
 
-		for(int i = 0; i < source.size(); i++) {
+		for(int i = 0; i < listeSource.size(); i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight * 2;
 			
-			AbstractCard card = (Card) source.get(i);
+			AbstractCard card = (Card) listeSource.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -101,12 +101,12 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 			cardsViewData.displayCardFaceDown(card);
 		}
 
-		for(int i = 0; i < cible.size(); i++) {
+		for(int i = 0; i < listeCible.size(); i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
 			
-			AbstractCard card = (Card) cible.get(i);
+			AbstractCard card = (Card) listeCible.get(i);
 			
 			if(card == null) {
 				card = new NullCard();
@@ -145,14 +145,14 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 	}
 
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		source.clear();
+		listeSource.clear();
 		for(Card card : sourceList) {
-			source.add((C) card);
+			listeSource.add((C) card);
 		}
 		
-		cible.clear();
+		listeCible.clear();
 		for(Card card : targetList) {
-			cible.add((C) card);
+			listeCible.add((C) card);
 		}
 
 		incrementVersion();
@@ -162,7 +162,7 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 	public void createFirstVersion() {
 		
 		for(int i = 0; i < 20; i++) {
-			source.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
+			listeSource.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
 		}
 		
 		/*
@@ -174,17 +174,17 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 		source.add((C) new Card(2, Suit.HEARTS));
 		*/
 		
-		for(int i = 0; i < source.size(); i++) {
-			cible.add(null);
+		for(int i = 0; i < listeSource.size(); i++) {
+			listeCible.add(null);
 		}
 	}
 	
 	@Override
 	protected Card cardById(String cardId) {
-		Card result = (Card) cardById(cardId, source);
+		Card result = (Card) cardById(cardId, listeSource);
 
 		if(result == null) {
-			result = (Card) cardById(cardId, cible);
+			result = (Card) cardById(cardId, listeCible);
 		}
 
 		return result;
@@ -210,8 +210,8 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				visitList(visitor, source);
-				visitList(visitor, cible);
+				visitList(visitor, listeSource);
+				visitList(visitor, listeCible);
 			}
 
 			private void visitList(Visitor<Card> visitor, List<C> listToVisit) throws Throwable {
@@ -224,7 +224,7 @@ public abstract class TriNaif<C extends Comparable<C>> extends ExploreCardsModel
 
 	@Override
 	protected void addCardImpl(Card card) {
-		source.add((C) card);
+		listeSource.add((C) card);
 	}
 	
 	@Override

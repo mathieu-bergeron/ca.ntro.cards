@@ -5,11 +5,11 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
+import ca.ntro.cards.common.frontend.views.CardsView;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas;
 import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas;
 import ca.ntro.core.initialization.Ntro;
-import common.frontend.views.CardsView;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;

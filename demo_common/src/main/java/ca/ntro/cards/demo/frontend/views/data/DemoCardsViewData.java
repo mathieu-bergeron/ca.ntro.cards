@@ -1,7 +1,7 @@
 package ca.ntro.cards.demo.frontend.views.data;
 
-import common.models.values.AbstractCard;
-import common.models.world2d.CommonWorld2d;
+import ca.ntro.cards.common.models.values.AbstractCard;
+import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import ca.ntro.cards.demo.models.world2d.Card2d;
 import ca.ntro.cards.demo.models.world2d.World2d;
 import ca.ntro.cards.frontend.views.data.ExploreViewData;

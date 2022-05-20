@@ -2,7 +2,7 @@ package ca.ntro.cards.demo;
 
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
-import ca.ntro.cards.CommonApp;
+import ca.ntro.cards.ProcedureApp;
 import ca.ntro.cards.demo.backend.DemoBackend;
 import ca.ntro.cards.demo.frontend.DemoFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
@@ -19,9 +19,9 @@ import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
 
-                extends CommonApp<TriNaif, 
-                                  DemoTestCase,
-                                  DemoTestCasesModel,
+                extends ProcedureApp<TriNaif, 
+                                     DemoTestCase,
+                                     DemoTestCasesModel,
                                   DemoDashboardModel,
                                   DemoSettingsModel,
                                   DemoBackend,
@@ -45,10 +45,10 @@ public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Class<TriNaif> cardsModelClass() {
-		return (Class<TriNaif>) naiveSortClass();
+		return (Class<TriNaif>) classeTriNaif();
 	}
 
-	protected abstract Class<STUDENT_MODEL> naiveSortClass();
+	protected abstract Class<STUDENT_MODEL> classeTriNaif();
 
 	@Override
 	protected Class<DemoTestCase> testCaseClass() {
