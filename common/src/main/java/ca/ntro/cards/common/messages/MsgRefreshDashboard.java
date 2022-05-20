@@ -1,4 +1,4 @@
-package ca.ntro.cards.messages;
+package ca.ntro.cards.common.messages;
 
 import ca.ntro.app.messages.MessageNtro;
 
