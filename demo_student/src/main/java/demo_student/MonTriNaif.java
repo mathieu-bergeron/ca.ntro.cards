@@ -1,11 +1,11 @@
 package demo_student;
 
-import ca.ntro.cards.demo.models.NaiveSort;
+import ca.ntro.cards.demo.models.TriNaif;
 
-public class MonTriNaif<C extends Comparable<C>> extends NaiveSort<C> {
+public class MonTriNaif<C extends Comparable<C>> extends TriNaif<C> {
 	
 	@Override
-	public void sort() {
+	public void trier() {
 		/*
 		for(int i = 0; i < source.size(); i++) {
 			candidate = i;
@@ -17,13 +17,13 @@ public class MonTriNaif<C extends Comparable<C>> extends NaiveSort<C> {
 
 			C plusPetitElement = trouverPlusPetit();
 			
-			target.set(nextEmpty, plusPetitElement);
+			cible.set(indiceProchainVide, plusPetitElement);
 			
-			source.set(smallest, null);
+			source.set(indicePlusPetit, null);
 			
-			nextEmpty++;
+			indiceProchainVide++;
 
-			saveStep();
+			ajouterEtape();
 
 		}
 	}
@@ -33,27 +33,27 @@ public class MonTriNaif<C extends Comparable<C>> extends NaiveSort<C> {
 
 		for(int i = 0; i < source.size(); i++) {
 			
-			candidate = i;
-			saveStep();
+			indiceCandidate = i;
+			ajouterEtape();
 			
 			C elementCandidat = source.get(i);
 			
 			if(resultat == null
 					&& elementCandidat != null) {
 
-				smallest = i;
+				indicePlusPetit = i;
 				resultat = elementCandidat;
 
-				saveStep();
+				ajouterEtape();
 
 			}else if(resultat != null 
 					&& elementCandidat != null
 					&& elementCandidat.compareTo(resultat) < 0) {
 				
-				smallest = i;
+				indicePlusPetit = i;
 				resultat = elementCandidat;
 
-				saveStep();
+				ajouterEtape();
 			}
 
 		}

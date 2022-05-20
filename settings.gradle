@@ -16,17 +16,13 @@ include 'ntro_app_fx'
 project(':ntro_app_fx').projectDir = file('ntro/ntro_app_fx')
 
 include 'common'
-include 'common_execute'
-include 'common_explore'
-include 'common_assert'
-include 'common_analyse'
+include 'common_procedure'
+include 'common_efficiency'
 
 include 'demo_common'
-include 'demo_explore'
-include 'demo_assert'
-include 'demo_analyze'
+include 'demo_procedure'
+include 'demo_efficiency'
 include 'demo_student'
-
 
 
 buildscript {

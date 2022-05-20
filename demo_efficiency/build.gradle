@@ -13,4 +13,7 @@ dependencies {
 
     // TMP: should not be necessary
     implementation project(':common_procedure')
+
+    implementation project(':common_efficiency')
+    implementation project(':demo_common')
 }

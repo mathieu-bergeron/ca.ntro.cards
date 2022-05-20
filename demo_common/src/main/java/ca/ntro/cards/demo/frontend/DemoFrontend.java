@@ -7,7 +7,7 @@ import ca.ntro.cards.frontend.CommonFrontend;
 import ca.ntro.cards.demo.frontend.views.DemoRootView;
 import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
 import ca.ntro.cards.demo.frontend.views.data.DemoCardsViewData;
-import ca.ntro.cards.demo.models.NaiveSort;
+import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.DemoDashboardModel;
 import ca.ntro.cards.demo.models.DemoSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
@@ -20,7 +20,7 @@ public class DemoFrontend
                               DemoCardsView, 
                               DemoDashboardView, 
                               DemoCardsViewData, 
-                              NaiveSort, 
+                              TriNaif, 
                               DemoDashboardModel, 
                               DemoSettingsModel> {
 

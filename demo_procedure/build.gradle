@@ -10,7 +10,6 @@ dependencies {
     }
 
     implementation project(':common')
-
-    // TMP: should not be necessary
     implementation project(':common_procedure')
+    implementation project(':demo_common')
 }

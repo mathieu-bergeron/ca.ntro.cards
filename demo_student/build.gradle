@@ -10,29 +10,25 @@ dependencies {
     }
 
     implementation project(':common')
-    implementation project(':common_explore')
+    implementation project(':common_procedure')
+    implementation project(':common_efficiency')
     implementation project(':demo_common')
-    implementation project(':demo_explore')
-    implementation project(':demo_assert')
-    implementation project(':demo_analyze')
+    implementation project(':demo_procedure')
+    implementation project(':demo_efficiency')
 }
 
 sourceSets{
     main {
         resources {
 
-            if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:valider")} != null){
+            if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:procedure")} != null){
 
-                srcDirs = [project(':demo_assert').sourceSets.main.resources]
+                srcDirs = [project(':demo_procedure').sourceSets.main.resources]
 
 
-            }else if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:analyser")} != null){
+            }else if(project.gradle.startParameter.taskNames.find{it.contains("${project.name}:efficacite")} != null){
 
-                srcDirs = [project(':demo_analyze').sourceSets.main.resources]
-
-            }else{
-
-                srcDirs = [project(':demo_explore').sourceSets.main.resources]
+                srcDirs = [project(':demo_efficiency').sourceSets.main.resources]
 
             }
         }
@@ -47,53 +43,45 @@ def commonConfig = {
    jvmArgs('-Dsun.java2d.opengl=true')
 }
 
-def exploreConfig = {
+def procedureConfig = {
     configure commonConfig
-    main = "demo_student.Explorer"
+    main = "demo_student.Procedure"
 }
 
-def validateConfig = {
+def efficiencyConfig = {
     configure commonConfig
-    main = "demo_student.Valider"
-}
-
-def analyzeConfig = {
-    configure commonConfig
-    main = "demo_student.Analyser"
+    main = "demo_student.Efficacite"
 }
 
 
-task(explorer, dependsOn: 'classes', type: JavaExec) {
-   configure exploreConfig
+task(procedure, dependsOn: 'classes', type: JavaExec) {
+   configure procedureConfig
    if (project.hasProperty("ex")){
         args(project.getProperty("ex"))
    }
 }
 
 task(ex01, dependsOn: 'classes', type: JavaExec) {
-   configure exploreConfig
+   configure procedureConfig
    args('ex01')
 }
 
 task(ex02, dependsOn: 'classes', type: JavaExec) {
-   configure exploreConfig
+   configure procedureConfig
    args('ex02')
 }
 
 task(random10, dependsOn: 'classes', type: JavaExec) {
-   configure exploreConfig
+   configure procedureConfig
    args('random10')
 }
 
 task(random20, dependsOn: 'classes', type: JavaExec) {
-   configure exploreConfig
+   configure procedureConfig
    args('random20')
 }
 
-task(analyser, dependsOn: 'classes', type: JavaExec) {
-   configure analyzeConfig
+task(efficacite, dependsOn: 'classes', type: JavaExec) {
+   configure efficiencyConfig
 }
 
-task(valider, dependsOn: 'classes', type: JavaExec) {
-   configure validateConfig
-}
