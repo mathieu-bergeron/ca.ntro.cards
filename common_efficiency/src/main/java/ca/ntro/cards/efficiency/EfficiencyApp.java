@@ -15,14 +15,17 @@ import ca.ntro.cards.efficiency.frontend.views.EfficiencySettingsView;
 import ca.ntro.cards.efficiency.models.EfficiencyDashboardModel;
 import ca.ntro.cards.efficiency.models.EfficiencyGraphsModel;
 import ca.ntro.cards.efficiency.models.EfficiencySettingsModel;
+import ca.ntro.cards.models.ProcedureCardsModel;
 
-public abstract class EfficiencyApp<CARDS_MODEL      extends EfficiencyGraphsModel,
-                                    TEST_CASE        extends TestCase<CARDS_MODEL>,
-                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
+public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
+                                    CANVAS_MODEL     extends EfficiencyGraphsModel,
+                                    TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                    TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
                                     DASHBOARD_MODEL  extends EfficiencyDashboardModel,
                                     SETTINGS_MODEL   extends EfficiencySettingsModel,
                                                                                                       
-                                    BACKEND extends EfficiencyBackend<CARDS_MODEL, 
+                                    BACKEND extends EfficiencyBackend<EXECUTABLE_MODEL,
+                                                                      CANVAS_MODEL, 
                                                                       TEST_CASE, 
                                                                       TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
@@ -37,11 +40,12 @@ public abstract class EfficiencyApp<CARDS_MODEL      extends EfficiencyGraphsMod
                                                                         CARDS_VIEW, 
                                                                         DASHBOARD_VIEW, 
                                                                         CARDS_VIEW_DATA,
-                                                                        CARDS_MODEL,
+                                                                        CANVAS_MODEL,
                                                                         DASHBOARD_MODEL,
                                                                         SETTINGS_MODEL>>
 
-               extends CommonApp<CARDS_MODEL,
+               extends CommonApp<EXECUTABLE_MODEL,
+                                 CANVAS_MODEL,
                                  TEST_CASE,
                                  TEST_CASES_MODEL,
                                  DASHBOARD_MODEL,
@@ -61,7 +65,13 @@ public abstract class EfficiencyApp<CARDS_MODEL      extends EfficiencyGraphsMod
 	}
 
 	@Override
-	protected Class<CARDS_MODEL> cardsModelClass() {
+	protected Class<EXECUTABLE_MODEL> executableModelClass() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Class<CANVAS_MODEL> canvasModelClass() {
 		// TODO Auto-generated method stub
 		return null;
 	}

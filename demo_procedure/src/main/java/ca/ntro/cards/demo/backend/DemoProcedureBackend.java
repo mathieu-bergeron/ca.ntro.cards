@@ -11,7 +11,7 @@ import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
-public class   DemoBackend
+public class   DemoProcedureBackend
 
 
        extends ProcedureBackend<TriNaif,

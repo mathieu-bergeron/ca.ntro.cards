@@ -3,13 +3,13 @@ package ca.ntro.cards.demo;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.ProcedureApp;
-import ca.ntro.cards.demo.backend.DemoBackend;
-import ca.ntro.cards.demo.frontend.DemoFrontend;
-import ca.ntro.cards.demo.frontend.DemoViewData;
+import ca.ntro.cards.demo.backend.DemoProcedureBackend;
+import ca.ntro.cards.demo.frontend.DemoProcedureFrontend;
+import ca.ntro.cards.demo.frontend.DemoProcedureViewData;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
-import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
-import ca.ntro.cards.demo.frontend.views.DemoRootView;
-import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
@@ -24,13 +24,13 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
                                   DemoTestCasesModel,
                                   DemoProcedureDashboardModel,
                                   DemoProcedureSettingsModel,
-                                  DemoBackend,
-                                  DemoRootView,
+                                  DemoProcedureBackend,
+                                  DemoProcedureRootView,
                                   DemoCardsView,
-                                  DemoDashboardView,
-                                  DemoSettingsView,
-                                  DemoViewData,
-                                  DemoFrontend> {
+                                  DemoProcedureDashboardView,
+                                  DemoProcedureSettingsView,
+                                  DemoProcedureViewData,
+                                  DemoProcedureFrontend> {
 
                                     	   
     private String[] args;
@@ -73,14 +73,14 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 	}
 
 	@Override
-	protected DemoFrontend createFrontend() {
-		return new DemoFrontend();
+	protected DemoProcedureFrontend createFrontend() {
+		return new DemoProcedureFrontend();
 	}
 
 
 	@Override
-	protected DemoBackend createBackend() {
-		return new DemoBackend();
+	protected DemoProcedureBackend createBackend() {
+		return new DemoProcedureBackend();
 	}
 
 

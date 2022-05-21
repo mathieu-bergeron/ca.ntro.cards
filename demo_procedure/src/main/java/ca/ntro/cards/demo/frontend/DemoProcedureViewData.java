@@ -8,7 +8,7 @@ import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class DemoViewData extends ProcedureViewData<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
+public class DemoProcedureViewData extends ProcedureViewData<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 
 	@Override
 	protected DemoProcedureWorld2d newWorld2d() {

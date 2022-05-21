@@ -22,42 +22,45 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.models.values.Card;
 
-public abstract class ProcedureApp<CARDS_MODEL      extends ProcedureCardsModel,
-                                   TEST_CASE        extends TestCase<CARDS_MODEL>,
-                                   TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
+public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
+	                               CANVAS_MODEL     extends ProcedureCardsModel,
+                                   TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                   TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
                                    DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                    SETTINGS_MODEL   extends ProcedureSettingsModel,
                                                                                                       
-                                   BACKEND extends CommonBackend<CARDS_MODEL, 
+                                   BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
+                                                                 CANVAS_MODEL,
                                                                  TEST_CASE, 
                                                                  TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
                                    ROOT_VIEW       extends ProcedureRootView, 
-                                   CARDS_VIEW      extends ProcedureCanvasView, 
+                                   CANVAS_VIEW     extends ProcedureCanvasView, 
                                    DASHBOARD_VIEW  extends ProcedureDashboardView,
                                    SETTINGS_VIEW   extends ProcedureSettingsView,
-                                   CARDS_VIEW_DATA extends ProcedureViewData,
+                                   VIEW_DATA       extends ProcedureViewData,
                                      
                                    FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                    SETTINGS_VIEW, 
-                                                                   CARDS_VIEW, 
+                                                                   CANVAS_VIEW, 
                                                                    DASHBOARD_VIEW, 
-                                                                   CARDS_VIEW_DATA,
-                                                                   CARDS_MODEL,
+                                                                   VIEW_DATA,
+                                                                   CANVAS_MODEL,
                                                                    DASHBOARD_MODEL,
                                                                    SETTINGS_MODEL>>
 
-       extends CommonApp<CARDS_MODEL,
+       extends CommonApp<EXECUTABLE_MODEL,
+                         CANVAS_MODEL,
                          TEST_CASE,
                          TEST_CASES_MODEL,
                          DASHBOARD_MODEL,
                          SETTINGS_MODEL,
                          BACKEND,
                          ROOT_VIEW,
-                         CARDS_VIEW,
+                         CANVAS_VIEW,
                          DASHBOARD_VIEW,
                          SETTINGS_VIEW,
-                         CARDS_VIEW_DATA,
+                         VIEW_DATA,
                          FRONTEND> {
 
 	@Override

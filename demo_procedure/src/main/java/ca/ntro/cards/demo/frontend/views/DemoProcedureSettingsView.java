@@ -14,7 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
-public class DemoSettingsView extends ProcedureSettingsView {
+public class DemoProcedureSettingsView extends ProcedureSettingsView {
 	
 	@FXML
 	private Pane leftSpace;

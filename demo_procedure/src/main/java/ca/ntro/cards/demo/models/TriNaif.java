@@ -5,7 +5,7 @@ import java.util.List;
 
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.demo.frontend.DemoViewData;
+import ca.ntro.cards.demo.frontend.DemoProcedureViewData;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureWorld2d;
@@ -21,7 +21,7 @@ import ca.ntro.core.stream.Visitor;
 
 public abstract class   TriNaif<C extends Comparable<C>> 
 
-                extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoViewData> { 
+                extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
                 	
                 	
 	protected int indicePlusPetit = -1;
@@ -82,7 +82,7 @@ public abstract class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	protected void updateViewDataImpl(DemoViewData cardsViewData) {
+	protected void updateViewDataImpl(DemoProcedureViewData cardsViewData) {
 
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

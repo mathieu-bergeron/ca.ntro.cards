@@ -29,22 +29,22 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
                                      CANVAS_VIEW     extends CommonCanvasView, 
                                      DASHBOARD_VIEW  extends CommonDashboardView,
                                      VIEW_DATA       extends CommonViewData,
-                                     CARDS_MODEL     extends CommonCanvasModel,
+                                     CANVAS_MODEL    extends CommonCanvasModel,
                                      DASHBOARD_MODEL extends CommonDashboardModel,
                                      SETTINGS_MODEL  extends CommonSettingsModel>
 
                  implements FrontendFx {
 
-	private Class<CARDS_MODEL>     cardsModelClass;
+	private Class<CANVAS_MODEL>    canvasModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL>  settingsModelClass;
 
-	public Class<CARDS_MODEL> getCardsModelClass() {
-		return cardsModelClass;
+	public Class<CANVAS_MODEL> getCanvasModelClass() {
+		return canvasModelClass;
 	}
 
-	public void setCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
-		this.cardsModelClass = cardsModelClass;
+	public void setCanvasModelClass(Class<CANVAS_MODEL> canvasModelClass) {
+		this.canvasModelClass = canvasModelClass;
 	}
 
 	public Class<DASHBOARD_MODEL> getDashboardModelClass() {
@@ -126,7 +126,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 		Cards.createTasks(tasks, 
 				          canvasViewClass(),
 				          viewDataClass(),
-				          cardsModelClass,
+				          canvasModelClass,
 				          settingsModelClass,
 				          dashboardViewClass(),
 				          subTasks -> {

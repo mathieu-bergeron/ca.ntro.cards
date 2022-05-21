@@ -17,6 +17,7 @@ import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
@@ -24,13 +25,15 @@ import ca.ntro.cards.common.models.values.TestCaseById;
 import ca.ntro.cards.common.models.values.TestCasesByCategory;
 import ca.ntro.cards.common.models.values.TestCasesBySize;
 
-public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
-                                TEST_CASE        extends TestCase<CARDS_MODEL>,
-                                TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
+public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                CANVAS_MODEL     extends CommonCanvasModel,
+                                TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
                                 DASHBOARD_MODEL  extends CommonDashboardModel,
                                 SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       
-                                BACKEND extends CommonBackend<CARDS_MODEL, 
+                                BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
+                                                              CANVAS_MODEL,
                                                               TEST_CASE, 
                                                               TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
@@ -38,14 +41,14 @@ public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
                                 CARDS_VIEW      extends CommonCanvasView, 
                                 DASHBOARD_VIEW  extends CommonDashboardView,
                                 SETTINGS_VIEW   extends CommonSettingsView,
-                                CARDS_VIEW_DATA extends CommonViewData,
+                                VIEW_DATA       extends CommonViewData,
                                      
                                 FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                 SETTINGS_VIEW, 
                                                                 CARDS_VIEW, 
                                                                 DASHBOARD_VIEW, 
-                                                                CARDS_VIEW_DATA,
-                                                                CARDS_MODEL,
+                                                                VIEW_DATA,
+                                                                CANVAS_MODEL,
                                                                 DASHBOARD_MODEL,
                                                                 SETTINGS_MODEL>>
 
@@ -53,7 +56,7 @@ public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
 
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
-		registrar.registerModel(cardsModelClass());
+		registrar.registerModel(executableModelClass());
 
 		registrar.registerModel(dashboardModelClass());
 		registrar.registerModel(settingsModelClass());
@@ -82,7 +85,7 @@ public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
 	public void registerFrontend(FrontendRegistrarFx registrar) {
 		FRONTEND frontend = createFrontend();
 		
-		frontend.setCardsModelClass(cardsModelClass());
+		frontend.setCanvasModelClass(canvasModelClass());
 		frontend.setDashboardModelClass(dashboardModelClass());
 		frontend.setSettingsModelClass(settingsModelClass());
 		
@@ -95,7 +98,7 @@ public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
 	public void registerBackend(BackendRegistrar registrar) {
 		BACKEND backend = createBackend();
 		
-		backend.setCardsModelClass(cardsModelClass());
+		backend.setCardsModelClass(executableModelClass());
 		backend.setTestCaseClass(testCaseClass());
 		backend.setTestCasesModelClass(testCasesModelClass());
 		backend.setDashboardModelClass(dashboardModelClass());
@@ -105,7 +108,8 @@ public abstract class CommonApp<CARDS_MODEL      extends CommonCanvasModel,
 
 	}
 
-	protected abstract Class<CARDS_MODEL> cardsModelClass();
+	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
+	protected abstract Class<CANVAS_MODEL> canvasModelClass();
 	protected abstract Class<TEST_CASE> testCaseClass();
 	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();
 	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();

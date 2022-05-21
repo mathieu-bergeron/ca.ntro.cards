@@ -10,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class DemoDashboardView extends ProcedureDashboardView {
+public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	
 	
 	@FXML

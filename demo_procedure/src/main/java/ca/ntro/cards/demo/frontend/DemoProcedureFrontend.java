@@ -3,22 +3,22 @@ package ca.ntro.cards.demo.frontend;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
-import ca.ntro.cards.demo.frontend.views.DemoRootView;
-import ca.ntro.cards.demo.frontend.views.DemoSettingsView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
-import ca.ntro.cards.demo.frontend.views.DemoDashboardView;
+import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 
-public class DemoFrontend
+public class DemoProcedureFrontend
 
-       extends ProcedureFrontend<DemoRootView,
-                                DemoSettingsView, 
+       extends ProcedureFrontend<DemoProcedureRootView,
+                                DemoProcedureSettingsView, 
                                 DemoCardsView, 
-                                DemoDashboardView, 
-                                DemoViewData, 
+                                DemoProcedureDashboardView, 
+                                DemoProcedureViewData, 
                                 TriNaif, 
                                 DemoProcedureDashboardModel, 
                                 DemoProcedureSettingsModel> {
@@ -34,13 +34,13 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoRootView> rootViewClass() {
-		return DemoRootView.class;
+	protected Class<DemoProcedureRootView> rootViewClass() {
+		return DemoProcedureRootView.class;
 	}
 
 	@Override
-	protected Class<DemoSettingsView> settingsViewClass() {
-		return DemoSettingsView.class;
+	protected Class<DemoProcedureSettingsView> settingsViewClass() {
+		return DemoProcedureSettingsView.class;
 	}
 
 	@Override
@@ -49,8 +49,8 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoDashboardView> dashboardViewClass() {
-		return DemoDashboardView.class;
+	protected Class<DemoProcedureDashboardView> dashboardViewClass() {
+		return DemoProcedureDashboardView.class;
 	}
 
 	@Override
@@ -59,8 +59,8 @@ public class DemoFrontend
 	}
 
 	@Override
-	protected Class<DemoViewData> viewDataClass() {
-		return DemoViewData.class;
+	protected Class<DemoProcedureViewData> viewDataClass() {
+		return DemoProcedureViewData.class;
 	}
 
 	@Override
