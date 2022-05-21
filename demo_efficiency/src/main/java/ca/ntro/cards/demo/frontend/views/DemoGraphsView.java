@@ -1,10 +1,18 @@
 package ca.ntro.cards.demo.frontend.views;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.efficiency.frontend.views.EfficiencyGraphsView;
 import javafx.scene.layout.Pane;
 
 public class DemoGraphsView extends EfficiencyGraphsView {
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+	}
 
 	@Override
 	protected World2dResizableCanvasFx mainCanvas() {
