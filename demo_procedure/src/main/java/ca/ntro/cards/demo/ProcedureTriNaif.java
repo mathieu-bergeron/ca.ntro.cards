@@ -19,18 +19,19 @@ import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
-                extends ProcedureApp<TriNaif, 
-                                  DemoTestCase,
-                                  DemoTestCasesModel,
-                                  DemoProcedureDashboardModel,
-                                  DemoProcedureSettingsModel,
-                                  DemoProcedureBackend,
-                                  DemoProcedureRootView,
-                                  DemoCardsView,
-                                  DemoProcedureDashboardView,
-                                  DemoProcedureSettingsView,
-                                  DemoProcedureViewData,
-                                  DemoProcedureFrontend> {
+                extends ProcedureApp<TriNaif,  // executable model
+                                     TriNaif,  // canvas model
+                                     DemoTestCase,
+                                     DemoTestCasesModel,
+                                     DemoProcedureDashboardModel,
+                                     DemoProcedureSettingsModel,
+                                     DemoProcedureBackend,
+                                     DemoProcedureRootView,
+                                     DemoCardsView,
+                                     DemoProcedureDashboardView,
+                                     DemoProcedureSettingsView,
+                                     DemoProcedureViewData,
+                                     DemoProcedureFrontend> {
 
                                     	   
     private String[] args;
@@ -43,7 +44,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	protected Class<TriNaif> cardsModelClass() {
+	protected Class<TriNaif> executableModelClass() {
 		return (Class<TriNaif>) classeTriNaif();
 	}
 
@@ -91,6 +92,12 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		registrar.registerMessage(MsgUpdateList.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Class<TriNaif> canvasModelClass() {
+		return (Class<TriNaif>) classeTriNaif();
 	}
 
 

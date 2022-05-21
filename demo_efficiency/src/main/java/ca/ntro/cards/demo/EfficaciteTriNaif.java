@@ -1,6 +1,13 @@
 package ca.ntro.cards.demo;
 
 
+import ca.ntro.cards.demo.backend.DemoEfficiencyBackend;
+import ca.ntro.cards.demo.frontend.DemoEfficiencyFrontend;
+import ca.ntro.cards.demo.frontend.DemoEfficiencyViewData;
+import ca.ntro.cards.demo.frontend.views.DemoEfficiencyDashboardView;
+import ca.ntro.cards.demo.frontend.views.DemoEfficiencyRootView;
+import ca.ntro.cards.demo.frontend.views.DemoEfficiencySettingsView;
+import ca.ntro.cards.demo.frontend.views.DemoGraphsView;
 import ca.ntro.cards.demo.models.DemoEfficiencyDashboardModel;
 import ca.ntro.cards.demo.models.DemoEfficiencySettingsModel;
 import ca.ntro.cards.demo.models.DemoGraphsModel;

@@ -2,6 +2,7 @@ package demo_student;
 
 import ca.ntro.app.NtroClientFx;
 import ca.ntro.cards.demo.ProcedureTriNaif;
+import ca.ntro.cards.demo.models.TriNaif;
 
 @SuppressWarnings("rawtypes")
 public class Procedure extends ProcedureTriNaif<MonTriNaif> {
@@ -14,6 +15,7 @@ public class Procedure extends ProcedureTriNaif<MonTriNaif> {
 	protected Class<MonTriNaif> classeTriNaif() {
 		return MonTriNaif.class;
 	}
+
 
 
 }
