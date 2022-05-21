@@ -1,11 +1,11 @@
 package ca.ntro.cards.demo.frontend;
 
+import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.demo.models.world2d.DemoCard2d;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureWorld2d;
 import ca.ntro.cards.frontend.ProcedureViewData;
-import ca.ntro.cards.models.values.AbstractCard;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
 public class DemoProcedureViewData extends ProcedureViewData<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {

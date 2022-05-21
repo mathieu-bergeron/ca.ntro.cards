@@ -44,35 +44,39 @@ public abstract class CommonCanvasView extends ViewFx {
 
 		initializeMainCanvas();
 
-		installMouseEvtOnViewer();
+		installMouseEvtOnMainCanvas();
 		installEvtMoveViewport();
 		installEvtResizeViewport();
 	
 	}
 
 	private void initializeMainCanvas() {
-		mainCanvas().setFocusTraversable(true);
+		if(mainCanvas() != null) {
 
-		Platform.runLater(() -> {
-			mainCanvas().requestFocus();
-		});
-		
-		mainCanvas().setWorldWidth(initialWorldWidth());
-		mainCanvas().setWorldHeight(initialWorldHeight());
+			mainCanvas().setFocusTraversable(true);
+
+			Platform.runLater(() -> {
+				mainCanvas().requestFocus();
+			});
+			
+			mainCanvas().setWorldWidth(initialWorldWidth());
+			mainCanvas().setWorldHeight(initialWorldHeight());
+		}
 	}
 
-
-
 	@SuppressWarnings("unchecked")
-	private void installMouseEvtOnViewer() {
+	private void installMouseEvtOnMainCanvas() {
 		MouseEvtOnMainCanvas mouseEvtOnViewer = NtroApp.newEvent(MouseEvtOnMainCanvas.class);
 		
-		mainCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
-			
-			mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
-			mouseEvtOnViewer.trigger();
+		if(mainCanvas() != null) {
 
-		});
+			mainCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
+				
+				mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
+				mouseEvtOnViewer.trigger();
+
+			});
+		}
 	}
 
 	private void installEvtMoveViewport() {

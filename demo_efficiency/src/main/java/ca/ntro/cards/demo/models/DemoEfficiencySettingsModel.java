@@ -10,4 +10,9 @@ public class DemoEfficiencySettingsModel extends EfficiencySettingsModel<DemoEff
 		return this;
 	}
 
+	@Override
+	public boolean useFourCardColors() {
+		return getUseFourCardColors();
+	}
+
 }

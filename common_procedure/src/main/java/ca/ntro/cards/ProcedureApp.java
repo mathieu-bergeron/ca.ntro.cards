@@ -8,6 +8,7 @@ import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.TestCasesModel;
+import ca.ntro.cards.common.models.values.Card;
 import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
@@ -20,7 +21,6 @@ import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
-import ca.ntro.cards.models.values.Card;
 
 public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 	                               CANVAS_MODEL     extends ProcedureCardsModel,
@@ -66,8 +66,6 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
 		super.registerModels(registrar);
-
-		registrar.registerValue(Card.class);
 	}
 
 	@Override

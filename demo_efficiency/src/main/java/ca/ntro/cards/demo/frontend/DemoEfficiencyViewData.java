@@ -19,7 +19,10 @@ public class   DemoEfficiencyViewData
 	@Override
 	protected DemoEfficiencyDrawingOptions defaultDrawingOptions() {
 		return new DemoEfficiencyDrawingOptions() {
-
+			@Override
+			public boolean useFourCardColors() {
+				return true;
+			}
 		};
 	}
 

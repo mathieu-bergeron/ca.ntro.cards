@@ -21,33 +21,41 @@ public abstract class CommonDashboardView extends ViewFx {
 
 	protected abstract Button menuButton();
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		menuButton().setFocusTraversable(false);
-		
 		EvtShowMenu evtShowMenu = NtroApp.newEvent(EvtShowMenu.class);
 
-		menuButton().setOnAction(evtFx -> {
-			evtShowMenu.trigger();
-		});
+		if(menuButton() != null) {
+			menuButton().setFocusTraversable(false);
+
+			menuButton().setOnAction(evtFx -> {
+				evtShowMenu.trigger();
+			});
+		}
 	}
 
 	public void displayFps(String fps) {
-		fpsLabel().setText(fps);
+		if(fpsLabel() != null) {
+			fpsLabel().setText(fps);
+		}
 	}
 
 	public void displayNumberOfSteps(long numberOfSteps) {
-		numberOfStepsLabel().setText(String.valueOf(numberOfSteps));
+		if(numberOfStepsLabel() != null) {
+			numberOfStepsLabel().setText(String.valueOf(numberOfSteps));
+		}
 	}
 
 	public void displayCurrentStep(int currentStep) {
-		currentStepLabel().setText(String.valueOf(currentStep));
+		if(currentStepLabel() != null) {
+			currentStepLabel().setText(String.valueOf(currentStep));
+		}
 	}
 
 	public void displayNumberOfCards(int numberOfCards) {
-		numberOfCardsLabel().setText(String.valueOf(numberOfCards));
+		if(numberOfCardsLabel() != null) {
+			numberOfCardsLabel().setText(String.valueOf(numberOfCards));
+		}
 	}
 
 

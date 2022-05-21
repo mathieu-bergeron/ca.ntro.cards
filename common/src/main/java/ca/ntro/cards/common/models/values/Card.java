@@ -1,13 +1,13 @@
-package ca.ntro.cards.models.values;
+package ca.ntro.cards.common.models.values;
 
 import ca.ntro.app.NtroApp;
 
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
-import ca.ntro.cards.models.enums.Suit;
-import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
+import ca.ntro.cards.common.models.enums.Suit;
+import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 
-public class Card<OPTIONS extends ProcedureDrawingOptions> extends AbstractCard<OPTIONS> {
+public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPTIONS> {
 	
 	private int rank = 2;
 	private Suit suit = Suit.HEARTS;

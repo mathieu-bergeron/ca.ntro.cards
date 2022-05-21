@@ -1,11 +1,10 @@
-package ca.ntro.cards.models.values;
+package ca.ntro.cards.common.models.values;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
-import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 
-public class NullCard<OPTIONS extends ProcedureDrawingOptions> extends AbstractCard<OPTIONS> {
+public class NullCard<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPTIONS> {
 	
 	public NullCard() {
 		super();

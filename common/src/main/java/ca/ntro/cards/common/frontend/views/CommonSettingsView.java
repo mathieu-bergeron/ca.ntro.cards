@@ -44,20 +44,24 @@ public abstract class CommonSettingsView extends ViewFx {
 
 	private void initializeQuitButton() {
 		EvtQuit evtQuit = NtroApp.newEvent(EvtQuit.class);
-
-		quitButton().setOnAction(evtFx -> {
-			evtQuit.trigger();
-		});
+		
+		if(quitButton() != null) {
+			quitButton().setOnAction(evtFx -> {
+				evtQuit.trigger();
+			});
+		}
 	}
 
 	private void initializeSpaces() {
 		EvtHideMenu evtHideMenu = NtroApp.newEvent(EvtHideMenu.class);
-
-		spaces().forEach(space -> {
-			space.addEventFilter(MouseEvent.MOUSE_CLICKED, evtFx -> {
-				evtHideMenu.trigger();
+		
+		if(spaces() != null) {
+			spaces().forEach(space -> {
+				space.addEventFilter(MouseEvent.MOUSE_CLICKED, evtFx -> {
+					evtHideMenu.trigger();
+				});
 			});
-		});
+		}
 	}
 
 	public void displayUseFourCardColors(boolean useFourCardColors) {
