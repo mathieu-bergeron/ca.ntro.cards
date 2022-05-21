@@ -1,5 +1,6 @@
 package ca.ntro.cards.efficiency.backend;
 
+import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
@@ -21,6 +22,47 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
                                     TEST_CASES_MODEL, 
                                     DASHBOARD_MODEL, 
                                     SETTINGS_MODEL> {
+
+	@Override
+	protected void initializeCanvasModel(CANVAS_MODEL canvasModel) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addSubTasksToManageThread(BackendTasks subTasks) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void createAdditionalTasks(BackendTasks tasks) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

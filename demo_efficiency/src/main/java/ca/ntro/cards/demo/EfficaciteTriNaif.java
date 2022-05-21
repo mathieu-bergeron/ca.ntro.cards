@@ -1,6 +1,8 @@
 package ca.ntro.cards.demo;
 
 
+import ca.ntro.app.messages.MessageRegistrar;
+import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.demo.backend.DemoEfficiencyBackend;
 import ca.ntro.cards.demo.frontend.DemoEfficiencyFrontend;
 import ca.ntro.cards.demo.frontend.DemoEfficiencyViewData;
@@ -32,5 +34,57 @@ public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
                                       DemoEfficiencyViewData,
                                       DemoEfficiencyFrontend> {
 
+	@Override
+	protected DemoEfficiencyFrontend createFrontend() {
+		return new DemoEfficiencyFrontend();
+	}
+
+	@Override
+	protected DemoEfficiencyBackend createBackend() {
+		return new DemoEfficiencyBackend();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	protected Class<TriNaif> executableModelClass() {
+		return (Class<TriNaif>) classeTriNaif();
+	}
+	
+	protected abstract Class<STUDENT_MODEL> classeTriNaif();
+
+	@Override
+	protected Class<DemoGraphsModel> canvasModelClass() {
+		return DemoGraphsModel.class;
+	}
+
+	@Override
+	protected Class<DemoTestCase> testCaseClass() {
+		return DemoTestCase.class;
+	}
+
+	@Override
+	protected Class<DemoTestCasesModel> testCasesModelClass() {
+		return DemoTestCasesModel.class;
+	}
+
+	@Override
+	protected Class<DemoEfficiencyDashboardModel> dashboardModelClass() {
+		return DemoEfficiencyDashboardModel.class;
+	}
+
+	@Override
+	protected Class<DemoEfficiencySettingsModel> settingsModelClass() {
+		return DemoEfficiencySettingsModel.class;
+	}
+
+	@Override
+	protected void registerAdditionnalModels(ModelRegistrar registrar) {
+		
+	}
+
+	@Override
+	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
+		
+	}
 
 }

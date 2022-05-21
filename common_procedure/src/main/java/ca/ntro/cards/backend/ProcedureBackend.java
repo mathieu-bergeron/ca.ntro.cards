@@ -36,28 +36,22 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 	private ModelHistoryFull<EXECUTABLE_MODEL> modelHistory = new ModelHistoryFull<>();
 
 	@Override
-	protected void initializeCanvasModel(BackendTasks tasks) {
-		tasks.task("initializeCanvasModel")
+	protected void initializeCanvasModel(CANVAS_MODEL canvasModel) {
+		
+		@SuppressWarnings("unchecked")
+		EXECUTABLE_MODEL executableModel = (EXECUTABLE_MODEL) canvasModel;
 
-		     .waitsFor(model(getCardsModelClass()))
+		executableModel.createFirstVersionIfNeeded();
+		executableModel.registerLock(lock);
+		executableModel.registerModelHistory(modelHistory);
 
-		     .waitsFor("initializeTestCases")
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getCardsModelClass()));
+		modelHistory.pushCopyOf(executableModel);
 
-		    	 cardsModel.createFirstVersionIfNeeded();
-				 cardsModel.registerLock(lock);
-				 cardsModel.registerModelHistory(modelHistory);
-		    	 
-		    	 modelHistory.pushCopyOf((EXECUTABLE_MODEL) cardsModel);
+		modelThread.setModel(executableModel);
+		modelThread.start();
 
-				 modelThread.setModel(cardsModel);
-				 modelThread.start();
-
-		     });
 	}
+
 
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks tasks) {
 		
@@ -81,7 +75,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 EXECUTABLE_MODEL cardsModel  = inputs.get(model(getCardsModelClass()));
+		    	 EXECUTABLE_MODEL cardsModel  = inputs.get(model(getExecutableModelClass()));
 		    	 MsgFlipCard msgFlipCard = inputs.get(message(MsgFlipCard.class));
 		    	 
 		    	 msgFlipCard.applyTo(cardsModel);
@@ -96,7 +90,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getCardsModelClass()));
+		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
 		    	 
 		    	 getModelHistory().stepForward();
 		    	 cardsModel.copyDataFrom(getModelHistory().currentModel());
@@ -111,7 +105,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getCardsModelClass()));
+		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
 		    	 
 		    	 getModelHistory().stepBackward();
 		    	 cardsModel.copyDataFrom(getModelHistory().currentModel());

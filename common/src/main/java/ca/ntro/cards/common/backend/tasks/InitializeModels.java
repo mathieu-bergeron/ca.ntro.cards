@@ -1,9 +1,7 @@
 package ca.ntro.cards.common.backend.tasks;
 
-import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.CardsModelThread;
 import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;

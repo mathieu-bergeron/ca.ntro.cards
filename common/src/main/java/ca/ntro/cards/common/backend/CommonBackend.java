@@ -1,7 +1,7 @@
 package ca.ntro.cards.common.backend;
 
-
 import java.util.concurrent.locks.ReentrantLock;
+import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
@@ -18,12 +18,11 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
-import ca.ntro.core.initialization.Ntro;
 
-public abstract class CommonBackend<CARDS_MODEL      extends CommonExecutableModel,
+public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableModel,
                                     CANVAS_MODEL     extends CommonCanvasModel,
-                                    TEST_CASE        extends TestCase<CARDS_MODEL>,
-                                    TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
+                                    TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                    TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
                                     DASHBOARD_MODEL  extends CommonDashboardModel,
                                     SETTINGS_MODEL   extends CommonSettingsModel>
 
@@ -31,21 +30,22 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonExecutableMod
 	
 	public static int indexCurrentModel = 0;
 	
-	private Class<CARDS_MODEL> cardsModelClass;
+	private Class<EXECUTABLE_MODEL> executableModelClass;
+	private Class<CANVAS_MODEL> canvasModelClass;
 	private Class<TEST_CASE> testCaseClass;
 	private Class<TEST_CASES_MODEL> testCasesModelClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
 	private ReentrantLock lock = new ReentrantLock();
-	private ModelHistoryFull<CARDS_MODEL> modelHistory = new ModelHistoryFull<>();
+	private ModelHistoryFull<EXECUTABLE_MODEL> modelHistory = new ModelHistoryFull<>();
 
-	protected ModelHistoryFull<CARDS_MODEL> getModelHistory(){
+	protected ModelHistoryFull<EXECUTABLE_MODEL> getModelHistory(){
 		return modelHistory;
 	}
 
-	public void setCardsModelClass(Class<CARDS_MODEL> cardsModelClass) {
-		this.cardsModelClass = cardsModelClass;
+	public void setExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
+		this.executableModelClass = executableModelClass;
 	}
 
 	public void setDashboardModelClass(Class<DASHBOARD_MODEL> dashboardModelClass) {
@@ -64,8 +64,8 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonExecutableMod
 		this.testCasesModelClass = testCasesModelClass;
 	}
 
-	public Class<CARDS_MODEL> getCardsModelClass() {
-		return cardsModelClass;
+	public Class<EXECUTABLE_MODEL> getExecutableModelClass() {
+		return executableModelClass;
 	}
 
 	public Class<TEST_CASE> getTestCaseClass() {
@@ -84,17 +84,25 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonExecutableMod
 		return settingsModelClass;
 	}
 
+	public Class<CANVAS_MODEL> getCanvasModelClass() {
+		return canvasModelClass;
+	}
+
+	public void setCanvasModelClass(Class<CANVAS_MODEL> canvasModelClass) {
+		this.canvasModelClass = canvasModelClass;
+	}
+
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
 		InitializeModels.initializeTestCases(tasks, testCasesModelClass);
 		
-		initializeCanvasModel(tasks);
+		initializeCanvasModelTask(tasks);
 
 		InitializeModels.initializeDashboard(tasks, dashboardModelClass, modelHistory);
 
 		ModifyCardsModel.createTasks(tasks, 
-				                     cardsModelClass,
+				                     executableModelClass,
 				                     modelHistory,
 				                     lock,
 				                     subTasks -> {
@@ -144,13 +152,27 @@ public abstract class CommonBackend<CARDS_MODEL      extends CommonExecutableMod
 
 	}
 
-	protected abstract void initializeCanvasModel(BackendTasks tasks);
+	protected void initializeCanvasModelTask(BackendTasks tasks) {
+		tasks.task("initializeCanvasModel")
 
-	/*
-	private void initializeCanvasModel(BackendTasks tasks) {
+		     .waitsFor(model(canvasModelClass))
+
+		     .waitsFor("initializeTestCases")
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 CANVAS_MODEL canvasModel = inputs.get(model(canvasModelClass));
+		    	 
+		    	 initializeCanvasModel(canvasModel);
+
+
+		     });
+		
+		
 	}
-	*/
-	
+
+	protected abstract void initializeCanvasModel(CANVAS_MODEL canvasModel);
+
 	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);

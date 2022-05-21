@@ -31,79 +31,66 @@ public class DemoEfficiencyFrontend
 
 	@Override
 	protected boolean isProd() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	protected Class<DemoEfficiencyRootView> rootViewClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return DemoEfficiencyRootView.class;
 	}
 
 	@Override
 	protected Class<DemoEfficiencySettingsView> settingsViewClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return DemoEfficiencySettingsView.class;
 	}
 
 	@Override
 	protected Class<DemoGraphsView> canvasViewClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return DemoGraphsView.class;
 	}
 
 	@Override
 	protected Class<DemoEfficiencyDashboardView> dashboardViewClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return DemoEfficiencyDashboardView.class;
 	}
 
 	@Override
 	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected Class<DemoEfficiencyViewData> viewDataClass() {
-		// TODO Auto-generated method stub
-		return null;
+		return DemoEfficiencyViewData.class;
 	}
 
 	@Override
 	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToCards(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToSettings(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToDashboard(FrontendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void createAdditionnalTasks(FrontendTasks tasks) {
-		// TODO Auto-generated method stub
 		
 	}
 

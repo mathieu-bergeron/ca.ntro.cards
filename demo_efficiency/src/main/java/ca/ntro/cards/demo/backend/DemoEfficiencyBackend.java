@@ -19,45 +19,34 @@ public class DemoEfficiencyBackend
                                  DemoEfficiencySettingsModel> {
 
 
-	@Override
-	protected void initializeCanvasModel(BackendTasks tasks) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void addSubTasksToManageThread(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	protected void createAdditionalTasks(BackendTasks tasks) {
-		// TODO Auto-generated method stub
 		
 	}
 }

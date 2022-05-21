@@ -19,13 +19,14 @@ public class   DemoProcedureBackend
                                 DemoTestCasesModel,
                                 DemoProcedureDashboardModel,
                                 DemoProcedureSettingsModel> {
+
 	
 	
 
 	@Override
 	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
 
-		 DemoModifyCardsModel.updateList(subTasks, getCardsModelClass());
+		 DemoModifyCardsModel.updateList(subTasks, getExecutableModelClass());
 
 	}
 
@@ -53,6 +54,8 @@ public class   DemoProcedureBackend
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
 
 	}
+
+
 
 
 }

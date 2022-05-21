@@ -98,7 +98,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public void registerBackend(BackendRegistrar registrar) {
 		BACKEND backend = createBackend();
 		
-		backend.setCardsModelClass(executableModelClass());
+		backend.setExecutableModelClass(executableModelClass());
+		backend.setCanvasModelClass(canvasModelClass());
 		backend.setTestCaseClass(testCaseClass());
 		backend.setTestCasesModelClass(testCasesModelClass());
 		backend.setDashboardModelClass(dashboardModelClass());
