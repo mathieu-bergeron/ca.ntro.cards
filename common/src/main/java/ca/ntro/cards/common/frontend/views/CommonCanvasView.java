@@ -42,41 +42,37 @@ public abstract class CommonCanvasView extends ViewFx {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		initializeMainCanvas();
-
-		installMouseEvtOnMainCanvas();
-		installEvtMoveViewport();
-		installEvtResizeViewport();
+		if(mainCanvas() != null) {
+			initializeMainCanvas();
+			installMouseEvtOnMainCanvas();
+			installEvtMoveViewport();
+			installEvtResizeViewport();
+		}
 	
 	}
 
 	private void initializeMainCanvas() {
-		if(mainCanvas() != null) {
+		mainCanvas().setFocusTraversable(true);
 
-			mainCanvas().setFocusTraversable(true);
-
-			Platform.runLater(() -> {
-				mainCanvas().requestFocus();
-			});
-			
-			mainCanvas().setWorldWidth(initialWorldWidth());
-			mainCanvas().setWorldHeight(initialWorldHeight());
-		}
+		Platform.runLater(() -> {
+			mainCanvas().requestFocus();
+		});
+		
+		mainCanvas().setWorldWidth(initialWorldWidth());
+		mainCanvas().setWorldHeight(initialWorldHeight());
 	}
 
 	@SuppressWarnings("unchecked")
 	private void installMouseEvtOnMainCanvas() {
 		MouseEvtOnMainCanvas mouseEvtOnViewer = NtroApp.newEvent(MouseEvtOnMainCanvas.class);
 		
-		if(mainCanvas() != null) {
 
-			mainCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
-				
-				mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
-				mouseEvtOnViewer.trigger();
+		mainCanvas().addMouseEventFilter(MouseEvent.ANY, world2dMouseEventFx -> {
+			
+			mouseEvtOnViewer.setWorld2dMouseEventFx(world2dMouseEventFx);
+			mouseEvtOnViewer.trigger();
 
-			});
-		}
+		});
 	}
 
 	private void installEvtMoveViewport() {
@@ -150,11 +146,15 @@ public abstract class CommonCanvasView extends ViewFx {
 
 	@SuppressWarnings("unchecked")
 	public void displayWorld2d(CommonWorld2d world2d, CommonDrawingOptions options) {
-		mainCanvas().displayWorld2d(world2d, options);
+		if(mainCanvas() != null) {
+			mainCanvas().displayWorld2d(world2d, options);
+		}
 	}
 
 	public void clearCanvas() {
-		mainCanvas().clearCanvas();
+		if(mainCanvas() != null) {
+			mainCanvas().clearCanvas();
+		}
 	}
 
 	public void resizeViewport(double factor) {
@@ -181,8 +181,10 @@ public abstract class CommonCanvasView extends ViewFx {
 
 
 	public void displayDashboardView(CommonDashboardView dashboardView) {
-		dashboardContainer().getChildren().clear();
-		dashboardContainer().getChildren().add(dashboardView.rootNode());
+		if(dashboardContainer() != null) {
+			dashboardContainer().getChildren().clear();
+			dashboardContainer().getChildren().add(dashboardView.rootNode());
+		}
 	}
 
 	public void mouseEvtOnTabletop(World2dMouseEventFx world2dMouseEventFx) {
