@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.control.Button ?>
 
-<?import ca.ntro.cards.efficiency.frontend.views.controls.EfficiencyMainCanvas ?>
+<?import ca.ntro.cards.demo.frontend.views.controls.DemoEfficiencyMainCanvas ?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoGraphsView" 
@@ -29,11 +29,11 @@
     styleClass="container"
     id="cards-view">
 
-    <EfficiencyMainCanvas
+    <DemoEfficiencyMainCanvas
         fx:id="viewerCanvas"
         VBox.vgrow="ALWAYS"
         styleClass="container">
-    </EfficiencyMainCanvas>
+    </DemoEfficiencyMainCanvas>
 
     <HBox>
 

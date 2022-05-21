@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.demo.DemoConstants;
+import ca.ntro.cards.demo.frontend.views.controls.DemoEfficiencyMainCanvas;
 import ca.ntro.cards.efficiency.frontend.views.EfficiencyGraphsView;
 import ca.ntro.cards.efficiency.frontend.views.controls.EfficiencyMainCanvas;
 import ca.ntro.core.initialization.Ntro;
@@ -19,7 +20,7 @@ public class DemoGraphsView extends EfficiencyGraphsView {
 	private VBox cardsViewContainer;
 
 	@FXML
-	private EfficiencyMainCanvas viewerCanvas;
+	private DemoEfficiencyMainCanvas viewerCanvas;
 
 	@FXML
 	private StackPane dashboardContainer;
