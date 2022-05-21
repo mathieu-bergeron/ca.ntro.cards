@@ -3,7 +3,6 @@ package ca.ntro.cards.demo.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class DemoProcedureDashboardView extends ProcedureDashboardView {
-	
 	
 	@FXML
 	private Label fpsLabel;
