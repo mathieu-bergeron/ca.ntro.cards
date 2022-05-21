@@ -18,7 +18,7 @@ import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
-public class Cards {
+public class Canvas {
 
 	public static <CANVAS_VIEW    extends CommonCanvasView,
 	               VIEW_DATA      extends CommonViewData,
@@ -36,7 +36,7 @@ public class Cards {
 		
 		createCardsViewData(tasks, viewDataClass);
 		
-		tasks.taskGroup("Cards")
+		tasks.taskGroup("Canvas")
 
 		     .waitsFor("Initialization")
 

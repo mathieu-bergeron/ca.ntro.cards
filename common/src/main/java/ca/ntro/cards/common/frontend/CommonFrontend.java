@@ -11,7 +11,7 @@ import ca.ntro.cards.common.frontend.events.EvtQuit;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
-import ca.ntro.cards.common.frontend.tasks.Cards;
+import ca.ntro.cards.common.frontend.tasks.Canvas;
 import ca.ntro.cards.common.frontend.tasks.Dashboard;
 import ca.ntro.cards.common.frontend.tasks.Initialization;
 import ca.ntro.cards.common.frontend.tasks.Navigation;
@@ -99,7 +99,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 
 		registrar.registerView(rootViewClass(), "/root.xml");
 		registrar.registerView(settingsViewClass(), "/settings.xml");
-		registrar.registerView(canvasViewClass(), "/cards.xml");
+		registrar.registerView(canvasViewClass(), "/canvas.xml");
 		registrar.registerView(dashboardViewClass(), "/dashboard.xml");
 		
 		registerAdditionnalViews(registrar);
@@ -123,7 +123,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 				                	   
 				                   });
 
-		Cards.createTasks(tasks, 
+		Canvas.createTasks(tasks, 
 				          canvasViewClass(),
 				          viewDataClass(),
 				          canvasModelClass,

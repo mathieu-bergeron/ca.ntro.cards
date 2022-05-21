@@ -24,7 +24,7 @@
 <?import javafx.scene.control.ToggleButton ?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.demo.frontend.views.DemoSettingsView" 
+    fx:controller="ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView" 
     styleClass="container"
     id="settings-view">
 
