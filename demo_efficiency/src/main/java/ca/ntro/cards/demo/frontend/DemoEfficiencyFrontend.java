@@ -2,6 +2,7 @@ package ca.ntro.cards.demo.frontend;
 
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.demo.frontend.views.DemoEfficiencyDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoEfficiencyRootView;
@@ -93,5 +94,6 @@ public class DemoEfficiencyFrontend
 	protected void createAdditionnalTasks(FrontendTasks tasks) {
 		
 	}
+
 
 }

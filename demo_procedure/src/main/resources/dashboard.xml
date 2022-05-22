@@ -35,7 +35,7 @@
     <VBox 
         HBox.hgrow="ALWAYS"
         styleClass="container"
-        fx:id="replayContainer">
+        fx:id="replayControlsContainer">
     </VBox>
 
     <VBox 

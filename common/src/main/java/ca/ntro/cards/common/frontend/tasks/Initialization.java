@@ -1,7 +1,9 @@
 package ca.ntro.cards.common.frontend.tasks;
 
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
+import ca.ntro.cards.common.frontend.DashboardSubViewsLambda;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
@@ -14,19 +16,22 @@ import ca.ntro.app.services.Window;
 
 public class Initialization {
 
-	public static <ROOT_VIEW extends CommonRootView, 
-	               CARDS_VIEW extends CommonCanvasView,
-	               SETTINGS_VIEW extends CommonSettingsView,
+	public static <ROOT_VIEW      extends CommonRootView, 
+	               CANVAS_VIEW    extends CommonCanvasView,
+	               SETTINGS_VIEW  extends CommonSettingsView,
 	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	void createTasks(FrontendTasks tasks,
 			         Class<ROOT_VIEW> rootViewClass,
-			         Class<CARDS_VIEW> cardsViewClass,
+			         Class<CANVAS_VIEW> cardsViewClass,
 			         Class<SETTINGS_VIEW> settingsViewClass,
 			         Class<DASHBOARD_VIEW> dashboardViewClass,
+			         DashboardSubViewsLambda dashboadSubViewsLamba,
 			         SubTasksLambda<FrontendTasks> subTaskLambda) {
 
 		tasks.taskGroup("Initialization")
+		
+		     .waitsFor(window())
 
 		     .contains(subTasks -> {
 		    	 
@@ -45,7 +50,7 @@ public class Initialization {
 		    	 installRootView(subTasks,
 		    			         rootViewClass);
 
-		    	 registerCardsView(subTasks,
+		    	 registerCanvasView(subTasks,
 		    			           rootViewClass,
 		    			           cardsViewClass);
 
@@ -53,12 +58,14 @@ public class Initialization {
 		    			              rootViewClass,
 		    			              settingsViewClass);
 		    	 
-		    	 installSubViews(subTasks,
+		    	 installRootSubViews(subTasks,
 		    			         rootViewClass);
 		    	 
 		    	 installDashboardView(subTasks,
 		    			              cardsViewClass,
 		    			              dashboardViewClass);
+		    	 
+		    	 installDashboardSubViews(subTasks, dashboadSubViewsLamba);
 
 		    	 showWindow(subTasks);
 		    	 
@@ -135,8 +142,6 @@ public class Initialization {
 
 		tasks.task("installRootView")
 
-		     .waitsFor(window())
-		
 		     .waitsFor(created(rootViewClass))
 		     
 		     .thenExecutes(inputs -> {
@@ -149,11 +154,11 @@ public class Initialization {
 	}
 
 	private static <ROOT_VIEW extends CommonRootView,
-	                CARDS_VIEW extends CommonCanvasView> void registerCardsView(FrontendTasks tasks,
+	                CARDS_VIEW extends CommonCanvasView> void registerCanvasView(FrontendTasks tasks,
 	                		                                             Class<ROOT_VIEW> rootViewClass,
 	                		                                             Class<CARDS_VIEW> cardsViewClass) {
 
-		tasks.task("registerCardsView")
+		tasks.task("registerCanvasView")
 		
 		     .waitsFor("installRootView")
 
@@ -164,7 +169,7 @@ public class Initialization {
 		    	 ROOT_VIEW  rootView   = inputs.get(created(rootViewClass));
 		    	 CARDS_VIEW cardsView = inputs.get(created(cardsViewClass));
 		    	 
-		    	 rootView.registerCardsView(cardsView);
+		    	 rootView.registerCanvasView(cardsView);
 		     });
 	}
 
@@ -190,12 +195,12 @@ public class Initialization {
 		     });
 	}
 
-	private static <ROOT_VIEW extends CommonRootView> void installSubViews(FrontendTasks tasks, 
+	private static <ROOT_VIEW extends CommonRootView> void installRootSubViews(FrontendTasks tasks, 
 			                                                         Class<ROOT_VIEW> rootViewClass) {
 
-		tasks.task("installSubViews")
+		tasks.task("installRootSubViews")
 
-		     .waitsFor("registerCardsView")
+		     .waitsFor("registerCanvasView")
 		
 		     .waitsFor("registerSettingsView")
 
@@ -216,7 +221,7 @@ public class Initialization {
 
 		tasks.task("installDashboardView")
 		
-		     .waitsFor("registerCardsView")
+		     .waitsFor("registerCanvasView")
 
 		     .waitsFor(created(dashboardViewClass))
 		     
@@ -229,12 +234,21 @@ public class Initialization {
 		     });
 	}
 
+	private static void installDashboardSubViews(FrontendTasks tasks, 
+			                                     DashboardSubViewsLambda dashboadSubViewsLamba) {
+		
+		SimpleTaskCreator<?> taskCreator = tasks.task("installDashboardSubViews")
+		
+		                                        .waitsFor("installDashboardView");
+		
+		dashboadSubViewsLamba.completeTaskDefinition(taskCreator);
+		
+	}
+
 	private static void showWindow(FrontendTasks tasks) {
 		tasks.task("showWindow")
 		
-		     .waitsFor("installSubViews")
-
-		     .waitsFor("installDashboardView")
+		     .waitsFor("installDashboardSubViews")
 		     
 		     .thenExecutes(inputs -> {
 

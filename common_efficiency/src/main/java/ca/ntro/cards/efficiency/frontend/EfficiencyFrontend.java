@@ -1,5 +1,6 @@
 package ca.ntro.cards.efficiency.frontend;
 
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.efficiency.frontend.views.EfficiencyGraphsView;
 import ca.ntro.cards.efficiency.frontend.views.EfficiencyDashboardView;
@@ -26,5 +27,10 @@ public abstract class EfficiencyFrontend<ROOT_VIEW       extends EfficiencyRootV
                               GRAPHS_MODEL,
                               DASHBOARD_MODEL,
                               SETTINGS_MODEL> {
+
+	@Override
+	protected void installDashboardSubViews(SimpleTaskCreator<?> taskCreator) {
+		taskCreator.thenExecutes(inputs -> {});
+	}
 
 }

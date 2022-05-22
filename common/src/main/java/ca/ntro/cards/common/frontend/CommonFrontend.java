@@ -4,6 +4,7 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.FrontendFx;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.events.EvtHideMenu;
 import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
@@ -117,6 +118,11 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 				                   canvasViewClass(),
 				                   settingsViewClass(),
 				                   dashboardViewClass(),
+				                   taskCreator -> {
+				                	   
+				                	   installDashboardSubViews(taskCreator);
+				                	   
+				                   },
 				                   subTasks -> {
 
 				                	   addSubTasksToInitialization(subTasks);
@@ -165,7 +171,9 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 		createAdditionnalTasks(tasks);
 
 	}
-	
+
+	protected abstract void installDashboardSubViews(SimpleTaskCreator<?> taskCreator);
+
 	protected abstract void addSubTasksToInitialization(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToCards(FrontendTasks subTasks);

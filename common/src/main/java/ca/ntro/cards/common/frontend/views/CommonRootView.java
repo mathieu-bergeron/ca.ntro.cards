@@ -18,8 +18,8 @@ public abstract class CommonRootView extends ViewFx {
 		this.menuView = menuView;
 	}
 	
-	public void registerCardsView(CommonCanvasView gameView) {
-		this.gameView = gameView;
+	public void registerCanvasView(CommonCanvasView canvasView) {
+		this.gameView = canvasView;
 	}
 	
 	public void installSubViews() {

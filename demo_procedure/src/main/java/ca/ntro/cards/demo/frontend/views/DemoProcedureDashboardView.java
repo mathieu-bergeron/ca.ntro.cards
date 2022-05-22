@@ -8,6 +8,8 @@ import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	
@@ -15,41 +17,26 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	private Label fpsLabel;
 
 	@FXML
-	private Label numberOfStepsLabel;
-
-	@FXML
-	private Label currentStepLabel;
-
-	@FXML
-	private Label numberOfCardsLabel;
-
-	@FXML
 	private Button menuButton;
 
 	@FXML
-	private Button playButton;
+	private VBox categoriesContainer;
 
 	@FXML
-	private Button pauseButton;
+	private VBox replayControlsContainer;
 
 	@FXML
-	private Button oneStepButton;
+	private VBox variablesContainer;
 
-	@FXML
-	private Button backStepButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		Ntro.assertNotNull("fpsLabel", fpsLabel);
-		Ntro.assertNotNull("numberOfStepsLabel", numberOfStepsLabel);
-		Ntro.assertNotNull("currentStepLabel", currentStepLabel);
-		Ntro.assertNotNull("numberOfCardsLabel", numberOfCardsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
-		Ntro.assertNotNull("playButton", playButton);
-		Ntro.assertNotNull("pauseButton", pauseButton);
-		Ntro.assertNotNull("oneStepButton", oneStepButton);
-		Ntro.assertNotNull("backStepButton", backStepButton);
+		Ntro.assertNotNull("fpsLabel", fpsLabel);
+		Ntro.assertNotNull("categoriesContainer", categoriesContainer);
+		Ntro.assertNotNull("replayControlsContainer", replayControlsContainer);
+		Ntro.assertNotNull("variablesContainer", variablesContainer);
 		
 		super.initialize(location, resources);
 		
@@ -66,38 +53,19 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	}
 
 	@Override
-	protected Label numberOfStepsLabel() {
-		return numberOfStepsLabel;
+	protected Pane categoriesContainer() {
+		return categoriesContainer;
 	}
 
 	@Override
-	protected Label numberOfCardsLabel() {
-		return numberOfCardsLabel;
+	protected Pane replayControlsContainer() {
+		return replayControlsContainer;
 	}
 
 	@Override
-	protected Button playButton() {
-		return playButton;
+	protected Pane variablesContainer() {
+		return variablesContainer;
 	}
 
-	@Override
-	protected Button pauseButton() {
-		return pauseButton;
-	}
-
-	@Override
-	protected Button oneStepButton() {
-		return oneStepButton;
-	}
-
-	@Override
-	protected Button backStepButton() {
-		return backStepButton;
-	}
-
-	@Override
-	protected Label currentStepLabel() {
-		return currentStepLabel;
-	}
 
 }

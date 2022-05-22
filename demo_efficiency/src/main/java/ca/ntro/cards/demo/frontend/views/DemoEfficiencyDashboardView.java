@@ -64,20 +64,5 @@ public class DemoEfficiencyDashboardView extends EfficiencyDashboardView {
 	protected Button menuButton() {
 		return menuButton;
 	}
-
-	@Override
-	protected Label numberOfStepsLabel() {
-		return numberOfStepsLabel;
-	}
-
-	@Override
-	protected Label numberOfCardsLabel() {
-		return numberOfCardsLabel;
-	}
-
-	@Override
-	protected Label currentStepLabel() {
-		return currentStepLabel;
-	}
 }
 

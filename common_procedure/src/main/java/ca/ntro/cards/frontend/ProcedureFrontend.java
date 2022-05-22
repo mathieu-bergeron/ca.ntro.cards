@@ -1,36 +1,45 @@
 package ca.ntro.cards.frontend;
 
+import ca.ntro.app.frontend.ViewLoader;
+import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
+import ca.ntro.cards.frontend.views.CategoriesView;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
+import ca.ntro.cards.frontend.views.ReplayControlsView;
+import ca.ntro.cards.frontend.views.VariablesView;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
-public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootView, 
-                                        SETTINGS_VIEW   extends ProcedureSettingsView,
-                                        CARDS_VIEW      extends ProcedureCanvasView, 
-                                        DASHBOARD_VIEW  extends ProcedureDashboardView,
-                                        CARDS_VIEW_DATA extends ProcedureViewData,
-                                        CARDS_MODEL     extends ProcedureCardsModel,
-                                        DASHBOARD_MODEL extends ProcedureDashboardModel,
-                                        SETTINGS_MODEL  extends ProcedureSettingsModel>
+public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRootView, 
+                                        SETTINGS_VIEW        extends ProcedureSettingsView,
+                                        CARDS_VIEW           extends ProcedureCanvasView, 
+                                        DASHBOARD_VIEW       extends ProcedureDashboardView,
+                                        CATEGORIES_VIEW      extends CategoriesView,
+                                        REPLAY_CONTROLS_VIEW extends ReplayControlsView,
+                                        VARIABLES_VIEW       extends VariablesView,
+                                        VIEW_DATA            extends ProcedureViewData,
+                                        CARDS_MODEL          extends ProcedureCardsModel,
+                                        DASHBOARD_MODEL      extends ProcedureDashboardModel,
+                                        SETTINGS_MODEL       extends ProcedureSettingsModel>
 
        extends CommonFrontend<ROOT_VIEW,
                               SETTINGS_VIEW,
                               CARDS_VIEW,
                               DASHBOARD_VIEW,
-                              CARDS_VIEW_DATA,
+                              VIEW_DATA,
                               CARDS_MODEL,
                               DASHBOARD_MODEL,
                               SETTINGS_MODEL> {
@@ -43,6 +52,15 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
 
 		registrar.registerEvent(EvtStartCodeExecution.class);
 		registrar.registerEvent(EvtStopCodeExecution.class);
+	}
+
+	@Override
+	public void registerViews(ViewRegistrarFx registrar) {
+		super.registerViews(registrar);
+
+		registrar.registerView(categoriesViewClass(), "/categories.xml");
+		registrar.registerView(replayControlsViewClass(), "/replay_controls.xml");
+		registrar.registerView(variablesViewClass(), "/variables.xml");
 	}
 
 
@@ -69,7 +87,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
+		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.startCodeExecution();
 		      });
 	}
@@ -82,7 +100,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
+		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.stopCodeExecution();
 
 		      });
@@ -96,7 +114,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
 		      
 		      .thenExecutes(inputs -> {
 		    	  
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
+		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.stopCodeExecution();
 
 		      });
@@ -138,6 +156,31 @@ public abstract class ProcedureFrontend<ROOT_VIEW       extends ProcedureRootVie
 
 		     });
 	}
+
+	@Override
+	protected void installDashboardSubViews(SimpleTaskCreator<?> taskCreator) {
+		
+		taskCreator.waitsFor(viewLoader(categoriesViewClass()))
+		           .waitsFor(viewLoader(replayControlsViewClass()))
+		           .waitsFor(viewLoader(variablesViewClass()))
+		           
+		           .thenExecutes(inputs -> {
+		        	   
+		        	   ViewLoader<CATEGORIES_VIEW>      categoriesViewLoader     = inputs.get(viewLoader(categoriesViewClass()));
+		        	   ViewLoader<REPLAY_CONTROLS_VIEW> replayControlsViewLoader = inputs.get(viewLoader(replayControlsViewClass()));
+		        	   ViewLoader<VARIABLES_VIEW>       variablesViewLoader      = inputs.get(viewLoader(variablesViewClass()));
+		        	   DASHBOARD_VIEW                   dashboardView            = inputs.get(created(dashboardViewClass()));
+		        	   
+		        	   dashboardView.installCategoriesView(categoriesViewLoader.createView());
+		        	   dashboardView.installReplayControlsView(replayControlsViewLoader.createView());
+		        	   dashboardView.installVariablesView(variablesViewLoader.createView());
+		        	   
+		           });
+	}
+
+	protected abstract Class<CATEGORIES_VIEW> categoriesViewClass();
+	protected abstract Class<REPLAY_CONTROLS_VIEW> replayControlsViewClass();
+	protected abstract Class<VARIABLES_VIEW> variablesViewClass();
 
 	
 }

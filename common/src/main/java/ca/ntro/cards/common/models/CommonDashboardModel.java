@@ -38,9 +38,9 @@ public class CommonDashboardModel implements Model {
 	}
 
 	public void displayOn(CommonDashboardView dashboardView) {
-		dashboardView.displayNumberOfCards(numberOfCards);
-		dashboardView.displayCurrentStep(currentStep);
-		dashboardView.displayNumberOfSteps(numberOfSteps);
+		//dashboardView.displayNumberOfCards(numberOfCards);
+		//dashboardView.displayCurrentStep(currentStep);
+		//dashboardView.displayNumberOfSteps(numberOfSteps);
 	}
 
 	public void initialize() {

@@ -11,11 +11,6 @@ import javafx.scene.control.Label;
 
 public abstract class CommonDashboardView extends ViewFx {
 
-	protected abstract Label numberOfStepsLabel();
-
-	protected abstract Label currentStepLabel();
-
-	protected abstract Label numberOfCardsLabel();
 	
 	protected abstract Label fpsLabel();
 
@@ -37,24 +32,6 @@ public abstract class CommonDashboardView extends ViewFx {
 	public void displayFps(String fps) {
 		if(fpsLabel() != null) {
 			fpsLabel().setText(fps);
-		}
-	}
-
-	public void displayNumberOfSteps(long numberOfSteps) {
-		if(numberOfStepsLabel() != null) {
-			numberOfStepsLabel().setText(String.valueOf(numberOfSteps));
-		}
-	}
-
-	public void displayCurrentStep(int currentStep) {
-		if(currentStepLabel() != null) {
-			currentStepLabel().setText(String.valueOf(currentStep));
-		}
-	}
-
-	public void displayNumberOfCards(int numberOfCards) {
-		if(numberOfCardsLabel() != null) {
-			numberOfCardsLabel().setText(String.valueOf(numberOfCards));
 		}
 	}
 

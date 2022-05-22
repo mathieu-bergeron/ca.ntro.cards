@@ -2,14 +2,18 @@ package ca.ntro.cards.demo.frontend;
 
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
+import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
+import ca.ntro.cards.demo.frontend.views.DemoReplayControlsView;
+import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
+import ca.ntro.cards.demo.frontend.views.DemoCategoriesView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 
 public class DemoProcedureFrontend
@@ -18,6 +22,9 @@ public class DemoProcedureFrontend
                                 DemoProcedureSettingsView, 
                                 DemoCardsView, 
                                 DemoProcedureDashboardView, 
+                                DemoCategoriesView,
+                                DemoReplayControlsView,
+                                DemoVariablesView,
                                 DemoProcedureViewData, 
                                 TriNaif, 
                                 DemoProcedureDashboardModel, 
@@ -92,5 +99,21 @@ public class DemoProcedureFrontend
 	protected void createAdditionnalTasks(FrontendTasks tasks) {
 		
 	}
+
+	@Override
+	protected Class<DemoCategoriesView> categoriesViewClass() {
+		return DemoCategoriesView.class;
+	}
+
+	@Override
+	protected Class<DemoReplayControlsView> replayControlsViewClass() {
+		return DemoReplayControlsView.class;
+	}
+
+	@Override
+	protected Class<DemoVariablesView> variablesViewClass() {
+		return DemoVariablesView.class;
+	}
+
 
 }

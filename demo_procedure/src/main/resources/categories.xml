@@ -20,9 +20,44 @@
 <?import javafx.scene.layout.HBox ?>
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
+<?import javafx.scene.control.ComboBox ?>
+<?import javafx.collections.FXCollections ?>
+<?import java.lang.String?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoCategoriesView" 
     id="categories-view">
+
+    <Label
+        text="%testCase"
+        fx:id="testCaseLabel"
+        styleClass="big-text">
+    </Label>
+
+    <ComboBox>
+    <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="ex01" />
+            <String fx:value="ex02" />
+            <String fx:value="random20" />
+    </FXCollections>
+    </items>
+    </ComboBox>
+
+    <Label
+        text="%mode"
+        fx:id="modeLabel"
+        styleClass="big-text">
+    </Label>
+
+    <ComboBox>
+    <items>
+        <FXCollections fx:factory="observableArrayList">
+            <String fx:value="manuel" />
+            <String fx:value="mon code" />
+            <String fx:value="solution" />
+    </FXCollections>
+    </items>
+    </ComboBox>
 
 </VBox>
