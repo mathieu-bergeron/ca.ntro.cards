@@ -6,7 +6,7 @@ import ca.ntro.cards.common.models.TestCasesModel;
 public class MsgGenerateTestCase extends MessageNtro {
 
 	public void applyTo(TestCasesModel testCasesModel) {
-		testCasesModel.generateTestCase();
+		testCasesModel.emptyTestCase();
 	}
 
 

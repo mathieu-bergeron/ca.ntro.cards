@@ -21,12 +21,6 @@ public class   DemoGraphsModel
 	}
 
 	@Override
-	public void createFirstVersion() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	protected void updateViewDataImpl(DemoEfficiencyViewData cardsViewData) {
 		// TODO Auto-generated method stub
 		

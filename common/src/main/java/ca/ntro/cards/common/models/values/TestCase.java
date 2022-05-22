@@ -7,10 +7,10 @@ import ca.ntro.core.identifyers.Identifiable;
 public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, Identifiable {
 	
 	private String category;
-	private long testCaseId;
+	private String testCaseId;
 	private long size;
 
-	private CARDS_MODEL startingState;
+	private CARDS_MODEL model;
 	private boolean passed;
 
 	public String getCategory() {
@@ -21,11 +21,11 @@ public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, I
 		this.category = category;
 	}
 
-	public long getTestCaseId() {
+	public String getTestCaseId() {
 		return testCaseId;
 	}
 
-	public void setTestCaseId(long testCaseId) {
+	public void setTestCaseId(String testCaseId) {
 		this.testCaseId = testCaseId;
 	}
 
@@ -37,20 +37,20 @@ public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, I
 		this.size = size;
 	}
 
-	public CARDS_MODEL getStartingState() {
-		return startingState;
-	}
-
-	public void setStartingState(CARDS_MODEL startingState) {
-		this.startingState = startingState;
-	}
-
 	public boolean isPassed() {
 		return passed;
 	}
 
 	public void setPassed(boolean passed) {
 		this.passed = passed;
+	}
+
+	public CARDS_MODEL getModel() {
+		return model;
+	}
+
+	public void setModel(CARDS_MODEL model) {
+		this.model = model;
 	}
 
 	@Override

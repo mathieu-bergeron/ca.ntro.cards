@@ -8,27 +8,36 @@ import ca.ntro.cards.common.models.values.TestCasesByCategory;
 public abstract class      TestCasesModel<STUDENT_MODEL extends CommonExecutableModel, 
                                           TEST_CASE     extends TestCase<STUDENT_MODEL>> 
 
+
                 implements Model {
 	
 	private long version = 0;
 	
-	private TestCaseById<STUDENT_MODEL> testCasesById = new TestCaseById<>();
+	private TestCaseById<STUDENT_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
 
-	private TestCasesByCategory<STUDENT_MODEL> testCasesByCategory = new TestCasesByCategory<>();
+	private TestCasesByCategory<STUDENT_MODEL, TEST_CASE> testCasesByCategory = new TestCasesByCategory<>();
 
-	public TestCaseById<STUDENT_MODEL> getTestCasesById() {
+	public long getVersion() {
+		return version;
+	}
+
+	public void setVersion(long version) {
+		this.version = version;
+	}
+
+	public TestCaseById<STUDENT_MODEL, TEST_CASE> getTestCasesById() {
 		return testCasesById;
 	}
 
-	public void setTestCasesById(TestCaseById<STUDENT_MODEL> testCasesById) {
+	public void setTestCasesById(TestCaseById<STUDENT_MODEL, TEST_CASE> testCasesById) {
 		this.testCasesById = testCasesById;
 	}
 
-	public TestCasesByCategory<STUDENT_MODEL> getTestCasesByCategory() {
+	public TestCasesByCategory<STUDENT_MODEL, TEST_CASE> getTestCasesByCategory() {
 		return testCasesByCategory;
 	}
 
-	public void setTestCasesByCategory(TestCasesByCategory<STUDENT_MODEL> testCasesByCategory) {
+	public void setTestCasesByCategory(TestCasesByCategory<STUDENT_MODEL, TEST_CASE> testCasesByCategory) {
 		this.testCasesByCategory = testCasesByCategory;
 	}
 
@@ -38,24 +47,22 @@ public abstract class      TestCasesModel<STUDENT_MODEL extends CommonExecutable
 			version++;
 		}
 	}
+	
+	public void addTestCase(TestCaseDescriptor descriptor, STUDENT_MODEL model) {
+		TEST_CASE testCase = emptyTestCase();
+		testCase.setCategory(descriptor.category());
+		testCase.setSize(model.testCaseSize());
+		testCase.setTestCaseId(descriptor.testCaseId());
+		testCase.setModel(model);
+		
+		testCasesById.addTestCase(testCase);
+		testCasesByCategory.addTestCase(testCase);
+		
+	}
 
 	protected abstract void generateFirstVersion(Class<STUDENT_MODEL> studentModelClass);
 
-	public abstract void generateTestCase();
+	public abstract TEST_CASE emptyTestCase();
 
-	
-	/* TODO:
-	 * 
-	 *   - generate test cases on first launch
-	 *   - use TestCasesModel.json if it exists
-	 *   
-	 *   - on start, load a test case in CardsModel
-	 *   - (the one specified in args if it is the case)
-	 *   
-	 *   
-	 *   NOTE: when validating, use all existing test cases + random test cases
-	 *         if validation fails, add the failed test case to the list of test cases 
-	 *         
-	 */
 
 }

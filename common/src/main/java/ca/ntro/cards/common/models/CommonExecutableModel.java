@@ -40,6 +40,10 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 
 	}
 
+	public abstract void generateTestCase(TestCaseDescriptor descriptor);
+
+	protected abstract int testCaseSize();
+
 	public abstract void onBeforeRunning();
 	public abstract void run();
 	public abstract void onAfterRunning();

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.cards.common.frontend.CommonViewData;
+import ca.ntro.cards.common.models.TestCaseDescriptor;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.AbstractCard;
 import ca.ntro.cards.common.models.values.Card;
@@ -167,24 +168,34 @@ public abstract class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public void createFirstVersion() {
+	public void generateTestCase(TestCaseDescriptor descriptor) {
 		
-		for(int i = 0; i < 20; i++) {
-			listeSource.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
+		if(descriptor.testCaseId().equals("ex01")) {
+
+			listeSource.add((C) new Card(2, Suit.CLUBS));
+			listeSource.add((C) new Card(5, Suit.CLUBS));
+			listeSource.add((C) new Card(5, Suit.DIAMONDS));
+			listeSource.add((C) new Card(5, Suit.HEARTS));
+			listeSource.add((C) new Card(7, Suit.SPADES));
+			listeSource.add((C) new Card(2, Suit.HEARTS));
+
+		}else {
+			
+			for(int i = 0; i < descriptor.size(); i++) {
+
+				listeSource.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
+
+			}
 		}
-		
-		/*
-		source.add((C) new Card(2, Suit.CLUBS));
-		source.add((C) new Card(5, Suit.CLUBS));
-		source.add((C) new Card(5, Suit.DIAMONDS));
-		source.add((C) new Card(5, Suit.HEARTS));
-		source.add((C) new Card(7, Suit.SPADES));
-		source.add((C) new Card(2, Suit.HEARTS));
-		*/
-		
+
 		for(int i = 0; i < listeSource.size(); i++) {
 			listeCible.add(null);
 		}
+	}
+
+	@Override
+	protected int testCaseSize() {
+		return listeSource.size();
 	}
 	
 	@Override
@@ -270,5 +281,6 @@ public abstract class   TriNaif<C extends Comparable<C>>
 	}
 
 	public abstract void trier();
+
 
 }

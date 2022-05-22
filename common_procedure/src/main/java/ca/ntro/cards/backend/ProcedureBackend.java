@@ -4,6 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.ExecutableModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
+import ca.ntro.cards.common.models.TestCaseDescriptor;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
@@ -41,7 +42,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 		@SuppressWarnings("unchecked")
 		EXECUTABLE_MODEL executableModel = (EXECUTABLE_MODEL) canvasModel;
 
-		executableModel.createFirstVersionIfNeeded();
+		executableModel.generateTestCase(TestCaseDescriptor.create().testCaseId("ex01"));
 		executableModel.registerLock(lock);
 		executableModel.registerModelHistory(modelHistory);
 

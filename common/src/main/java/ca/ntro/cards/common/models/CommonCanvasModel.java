@@ -31,23 +31,9 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 	protected void incrementVersion() {
 		version++;
 	}
-	
-	
-	
-	
-	
-	public void createFirstVersionIfNeeded() {
-		if(getVersion() == 0) {
-			createFirstVersion();
-			incrementVersion();
-		}
-	}
-
-	public abstract void createFirstVersion();
 
 	
 	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
-
 	
 	public abstract void copyDataFrom(CANVAS_MODEL cardsModel);
 
