@@ -158,23 +158,59 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	}
 
 	@Override
+	protected void addDashboardSubViewLoaders(FrontendTasks subTasks) {
+
+		subTasks.task(create(categoriesViewClass()))
+
+		        .waitsFor(viewLoader(categoriesViewClass()))
+		        
+		        .thenExecutesAndReturnsValue(inputs -> {
+
+		        	   ViewLoader<CATEGORIES_VIEW> categoriesViewLoader = inputs.get(viewLoader(categoriesViewClass()));
+		        	   
+		        	   return categoriesViewLoader.createView();
+		        });
+
+		subTasks.task(create(replayControlsViewClass()))
+
+		        .waitsFor(viewLoader(replayControlsViewClass()))
+		        
+		        .thenExecutesAndReturnsValue(inputs -> {
+
+		        	   ViewLoader<REPLAY_CONTROLS_VIEW> replayControlViewLoader = inputs.get(viewLoader(replayControlsViewClass()));
+		        	   
+		        	   return replayControlViewLoader.createView();
+		        });
+
+		subTasks.task(create(variablesViewClass()))
+
+		        .waitsFor(viewLoader(variablesViewClass()))
+		        
+		        .thenExecutesAndReturnsValue(inputs -> {
+
+		        	   ViewLoader<VARIABLES_VIEW> variablesViewLoader = inputs.get(viewLoader(variablesViewClass()));
+		        	   
+		        	   return variablesViewLoader.createView();
+		        });
+	}
+
+	@Override
 	protected void installDashboardSubViews(SimpleTaskCreator<?> taskCreator) {
 		
-		taskCreator.waitsFor(viewLoader(categoriesViewClass()))
-		           .waitsFor(viewLoader(replayControlsViewClass()))
-		           .waitsFor(viewLoader(variablesViewClass()))
+		taskCreator.waitsFor(created(categoriesViewClass()))
+		           .waitsFor(created(replayControlsViewClass()))
+		           .waitsFor(created(variablesViewClass()))
 		           
 		           .thenExecutes(inputs -> {
 		        	   
-		        	   ViewLoader<CATEGORIES_VIEW>      categoriesViewLoader     = inputs.get(viewLoader(categoriesViewClass()));
-		        	   ViewLoader<REPLAY_CONTROLS_VIEW> replayControlsViewLoader = inputs.get(viewLoader(replayControlsViewClass()));
-		        	   ViewLoader<VARIABLES_VIEW>       variablesViewLoader      = inputs.get(viewLoader(variablesViewClass()));
-		        	   DASHBOARD_VIEW                   dashboardView            = inputs.get(created(dashboardViewClass()));
+		        	   CATEGORIES_VIEW      categoriesView     = inputs.get(created(categoriesViewClass()));
+		        	   REPLAY_CONTROLS_VIEW replayControlsView = inputs.get(created(replayControlsViewClass()));
+		        	   VARIABLES_VIEW       variablesView      = inputs.get(created(variablesViewClass()));
+		        	   DASHBOARD_VIEW       dashboardView      = inputs.get(created(dashboardViewClass()));
 		        	   
-		        	   dashboardView.installCategoriesView(categoriesViewLoader.createView());
-		        	   dashboardView.installReplayControlsView(replayControlsViewLoader.createView());
-		        	   dashboardView.installVariablesView(variablesViewLoader.createView());
-		        	   
+		        	   dashboardView.installCategoriesView(categoriesView);
+		        	   dashboardView.installReplayControlsView(replayControlsView);
+		        	   dashboardView.installVariablesView(variablesView);
 		           });
 	}
 

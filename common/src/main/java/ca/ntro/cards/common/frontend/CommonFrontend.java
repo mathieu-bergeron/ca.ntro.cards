@@ -118,6 +118,11 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 				                   canvasViewClass(),
 				                   settingsViewClass(),
 				                   dashboardViewClass(),
+				                   subTasks -> {
+				                	   
+				                	   addDashboardSubViewLoaders(subTasks);
+				                	   
+				                   },
 				                   taskCreator -> {
 				                	   
 				                	   installDashboardSubViews(taskCreator);
@@ -171,6 +176,7 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 		createAdditionnalTasks(tasks);
 
 	}
+	protected abstract void addDashboardSubViewLoaders(FrontendTasks subTasks);
 
 	protected abstract void installDashboardSubViews(SimpleTaskCreator<?> taskCreator);
 

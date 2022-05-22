@@ -26,6 +26,7 @@ public class Initialization {
 			         Class<CANVAS_VIEW> cardsViewClass,
 			         Class<SETTINGS_VIEW> settingsViewClass,
 			         Class<DASHBOARD_VIEW> dashboardViewClass,
+			         SubTasksLambda<FrontendTasks> addDashboardSubViewLoadersLabmda,
 			         DashboardSubViewsLambda dashboadSubViewsLamba,
 			         SubTasksLambda<FrontendTasks> subTaskLambda) {
 
@@ -64,6 +65,8 @@ public class Initialization {
 		    	 installDashboardView(subTasks,
 		    			              cardsViewClass,
 		    			              dashboardViewClass);
+		    	 
+		    	 addDashboardSubViewLoadersLabmda.createSubTasks(subTasks);
 		    	 
 		    	 installDashboardSubViews(subTasks, dashboadSubViewsLamba);
 
