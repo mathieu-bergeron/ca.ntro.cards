@@ -67,7 +67,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 
 
 	@Override
-	protected void addSubTasksToCards(FrontendTasks tasks) {
+	protected void addSubTasksToViewData(FrontendTasks tasks) {
 
 		mouseEvtOnPreviewCanvas(tasks);
 

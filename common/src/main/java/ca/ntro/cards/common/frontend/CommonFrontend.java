@@ -12,7 +12,7 @@ import ca.ntro.cards.common.frontend.events.EvtQuit;
 import ca.ntro.cards.common.frontend.events.EvtResizeViewport;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
 import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
-import ca.ntro.cards.common.frontend.tasks.Canvas;
+import ca.ntro.cards.common.frontend.tasks.ViewData;
 import ca.ntro.cards.common.frontend.tasks.Dashboard;
 import ca.ntro.cards.common.frontend.tasks.Initialization;
 import ca.ntro.cards.common.frontend.tasks.Navigation;
@@ -134,15 +134,15 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 				                	   
 				                   });
 
-		Canvas.createTasks(tasks, 
-				          canvasViewClass(),
-				          viewDataClass(),
-				          canvasModelClass,
-				          settingsModelClass,
-				          dashboardViewClass(),
-				          subTasks -> {
+		ViewData.createTasks(tasks, 
+				             canvasViewClass(),
+				             viewDataClass(),
+				             canvasModelClass,
+				             settingsModelClass,
+				             dashboardViewClass(),
+				             subTasks -> {
 				        	  
-				        	  addSubTasksToCards(subTasks);
+								  addSubTasksToViewData(subTasks);
 				        	  
 				          });
 
@@ -176,13 +176,14 @@ public abstract class CommonFrontend<ROOT_VIEW       extends CommonRootView,
 		createAdditionnalTasks(tasks);
 
 	}
+
 	protected abstract void addDashboardSubViewLoaders(FrontendTasks subTasks);
 
 	protected abstract void installDashboardSubViews(SimpleTaskCreator<?> taskCreator);
 
 	protected abstract void addSubTasksToInitialization(FrontendTasks subTasks);
 
-	protected abstract void addSubTasksToCards(FrontendTasks subTasks);
+	protected abstract void addSubTasksToViewData(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToNavigation(FrontendTasks subTasks);
 

@@ -71,9 +71,10 @@ public class DemoEfficiencyFrontend
 	}
 
 	@Override
-	protected void addSubTasksToCards(FrontendTasks subTasks) {
+	protected void addSubTasksToViewData(FrontendTasks subTasks) {
 		
 	}
+
 
 	@Override
 	protected void addSubTasksToNavigation(FrontendTasks subTasks) {

@@ -18,7 +18,7 @@ import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
-public class Canvas {
+public class ViewData {
 
 	public static <CANVAS_VIEW    extends CommonCanvasView,
 	               VIEW_DATA      extends CommonViewData,
@@ -33,16 +33,19 @@ public class Canvas {
 	    		            Class<SETTINGS_MODEL>         settingsModelClass,
 	    		            Class<DASHBOARD_VIEW>         dashboardViewClass,
 	    		            SubTasksLambda<FrontendTasks> subTaskLambda) {
-		
-		createCardsViewData(tasks, viewDataClass);
-		
-		tasks.taskGroup("Canvas")
 
-		     .waitsFor("Initialization")
+		createViewData(tasks, viewDataClass);
+		
+		tasks.taskGroup("ViewData")
 
 		     .waitsFor(created(viewDataClass))
 
 		     .andContains(subTasks -> {
+
+		    	 timePasses(subTasks,
+		    			    viewDataClass,
+		    			    canvasViewClass,
+		    			    dashboardViewClass);
 
 		    	 observeSettings(subTasks,
 		    			         viewDataClass,
@@ -59,11 +62,6 @@ public class Canvas {
 
 		    	 mouseEvtOnTabletop(subTasks,
 		    			            canvasViewClass);
-
-		    	 displayNextImage(subTasks,
-		    			          viewDataClass,
-		    			          canvasViewClass,
-		    			          dashboardViewClass);
 		    	 
 		    	 displayCardsModel(subTasks,
 		    			           viewDataClass,
@@ -74,16 +72,45 @@ public class Canvas {
 		     });
 	}
 
-	private  static <CARDS_VIEW_DATA extends CommonViewData> void createCardsViewData(FrontendTasks tasks, 
-			                                                                         Class<CARDS_VIEW_DATA> cardsViewDataClass) {
+	private  static <VIEW_DATA extends CommonViewData> void createViewData(FrontendTasks tasks, 
+			                                                               Class<VIEW_DATA> cardsViewDataClass) {
 
 		tasks.task(create(cardsViewDataClass))
+		
+		     .waitsFor("Initialization")
 		
 		     .executesAndReturnsCreatedValue(inputs -> {
 
 		    	 return Ntro.factory().newInstance(cardsViewDataClass);
 		     });
 	}
+
+	private static <VIEW_DATA extends CommonViewData,
+	                CARDS_VIEW extends CommonCanvasView,
+	                DASHBOARD_VIEW extends CommonDashboardView> 
+	
+	        void timePasses(FrontendTasks tasks,
+	        		              Class<VIEW_DATA>      viewDataClass,
+	        		              Class<CARDS_VIEW>     cardsViewClass,
+	        		              Class<DASHBOARD_VIEW> dashboardViewClass) {
+
+		tasks.task("timePasses")
+		
+		      .waitsFor(clock().nextTick())
+		      
+		      .thenExecutes(inputs -> {
+		    	  
+		    	  Tick            tick          = inputs.get(clock().nextTick());
+		    	  VIEW_DATA       viewData      = inputs.get(created(viewDataClass));
+		    	  CARDS_VIEW      cardsView     = inputs.get(created(cardsViewClass));
+		    	  DASHBOARD_VIEW  dashboardView = inputs.get(created(dashboardViewClass));
+		    	  
+		    	  viewData.onTimePasses(tick.elapsedTime());
+		    	  viewData.displayOn(cardsView, dashboardView);
+
+		      });
+	}
+
 
 	private static <VIEW_DATA extends CommonViewData,
 	                SETTINGS_MODEL extends CommonSettingsModel,
@@ -158,32 +185,6 @@ public class Canvas {
 			                                                              Class<CARDS_VIEW> cardsViewClass) {
 	}
 
-
-	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_VIEW extends CommonCanvasView,
-	                DASHBOARD_VIEW extends CommonDashboardView> 
-	
-	        void displayNextImage(FrontendTasks tasks,
-	        		              Class<CARDS_VIEW_DATA> cardsViewDataClass,
-	        		              Class<CARDS_VIEW> cardsViewClass,
-	        		              Class<DASHBOARD_VIEW> dashboardViewClass) {
-
-		tasks.task("displayNextImage")
-		
-		      .waitsFor(clock().nextTick())
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  Tick            tick          = inputs.get(clock().nextTick());
-		    	  CARDS_VIEW_DATA cardsViewData = inputs.get(created(cardsViewDataClass));
-		    	  CARDS_VIEW      cardsView     = inputs.get(created(cardsViewClass));
-		    	  DASHBOARD_VIEW  dashboardView = inputs.get(created(dashboardViewClass));
-		    	  
-		    	  cardsViewData.onTimePasses(tick.elapsedTime());
-		    	  cardsViewData.displayOn(cardsView, dashboardView);
-
-		      });
-	}
 
 	private static <CARDS_VIEW_DATA extends CommonViewData,
 	                CARDS_MODEL     extends CommonCanvasModel> 

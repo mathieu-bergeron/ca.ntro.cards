@@ -76,7 +76,7 @@ public class DemoProcedureFrontend
 	}
 
 	@Override
-	protected void addSubTasksToCards(FrontendTasks subTasks) {
+	protected void addSubTasksToViewData(FrontendTasks subTasks) {
 
 	}
 
