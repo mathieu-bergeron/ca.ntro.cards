@@ -23,102 +23,32 @@
 
 <HBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoEfficiencyDashboardView" 
-    styleClass="container"
+    styleClass="container, center-left"
     id="dashboard-view">
 
-    <VBox HBox.hgrow="ALWAYS">
-    </VBox>
+    <HBox 
+        HBox.hgrow="ALWAYS" 
+        styleClass="container, center-left"
+        fx:id="categoriesContainer">
 
-    <VBox styleClass="center-right">
+    <Label
+        text="%categories"
+        styleClass="text-big">
+    </Label>
+    
+        <Button
+            text="aléatoire"
+            styleClass="text-big">
+        </Button>
 
-        <VBox styleClass="vspace-small" >
-        </VBox>
 
-        <HBox styleClass="center-right">
+        <Button
+            text="déjà trié"
+            styleClass="text-big">
+        </Button>
 
-            <Button
-                text="%backStep"
-                fx:id="backStepButton">
-            </Button>
+    </HBox>
 
-            <HBox styleClass="hspace-small">
-            </HBox>
-
-            <Button
-                text="%runCode"
-                fx:id="playButton">
-            </Button>
-
-            <HBox styleClass="hspace-small">
-            </HBox>
-
-            <Button
-                text="%pause"
-                fx:id="pauseButton">
-            </Button>
-
-            <HBox styleClass="hspace-small">
-            </HBox>
-
-            <Button
-                text="%oneStep"
-                fx:id="oneStepButton">
-            </Button>
-
-        </HBox>
-
-        <VBox styleClass="vspace-small" >
-        </VBox>
-           
-        <HBox styleClass="center-right">
-            <Label
-                text="%numberOfCards"
-                styleClass="text-big">
-            </Label>
-
-            <HBox styleClass="hspace-small">
-            </HBox>
-
-            <Label
-                fx:id="numberOfCardsLabel"
-                styleClass="text-big">
-            </Label>
-
-        </HBox>
-
-        <VBox styleClass="vspace-small" >
-        </VBox>
-
-        <HBox styleClass="center-right">
-
-            <Label
-                text="%numberOfSteps"
-                styleClass="text-big">
-            </Label>
-
-            <HBox styleClass="hspace-small">
-            </HBox>
-
-            <Label
-                fx:id="currentStepLabel"
-                styleClass="text-big">
-            </Label>
-
-            <Label
-                text=" / "
-                styleClass="text-big">
-            </Label>
-
-            <Label
-                fx:id="numberOfStepsLabel"
-                styleClass="text-big">
-            </Label>
-
-        </HBox>
-    </VBox>
-
-    <VBox HBox.hgrow="ALWAYS">
-    </VBox>
 
     <VBox styleClass="bottom-right">
 
