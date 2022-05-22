@@ -4,7 +4,8 @@ import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 
-public abstract class CommonSettingsModel<OPTIONS extends CommonDrawingOptions> implements Model {
+public abstract class CommonSettingsModel<SETTINGS_VIEW extends CommonSettingsView, 
+                                          OPTIONS extends CommonDrawingOptions> implements Model {
 	
 	private boolean useFourCardColors = true;
 
@@ -22,9 +23,6 @@ public abstract class CommonSettingsModel<OPTIONS extends CommonDrawingOptions> 
 		this.useFourCardColors = !this.useFourCardColors;
 	}
 
-	public void displayOn(CommonSettingsView menuView) {
-		menuView.displayUseFourCardColors(useFourCardColors);
-		
-	}
+	public abstract void displayOn(SETTINGS_VIEW settingsView);
 
 }

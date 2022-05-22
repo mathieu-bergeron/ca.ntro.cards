@@ -47,12 +47,6 @@
             VBox.vgrow="ALWAYS">
 
             <HBox>
-                <Label text="%useFourCardColors">
-                </Label>
-
-                <ToggleButton
-                    fx:id="useFourCardColorsToggleButton">
-                </ToggleButton>
 
             </HBox>
 

@@ -19,27 +19,13 @@ public abstract class CommonSettingsView extends ViewFx {
 	protected abstract Stream<Pane> spaces();
 	
 	protected abstract Button quitButton();
-
-	protected abstract ToggleButton useFourCardColorsToggleButton();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		initializeSpaces();
 		initializeQuitButton();
-		initializeUseFourCardColorsToggleButton();
 
-	}
-
-	private void initializeUseFourCardColorsToggleButton() {
-		MsgToggleUseFourCardColors msgToggleUseFourCardColors = NtroApp.newMessage(MsgToggleUseFourCardColors.class);
-		
-		ToggleButton button = useFourCardColorsToggleButton();
-		if(button != null) {
-			button.setOnAction(evtFx -> {
-				msgToggleUseFourCardColors.send();
-			});
-		}
 	}
 
 	private void initializeQuitButton() {
@@ -64,11 +50,5 @@ public abstract class CommonSettingsView extends ViewFx {
 		}
 	}
 
-	public void displayUseFourCardColors(boolean useFourCardColors) {
-		ToggleButton button = useFourCardColorsToggleButton();
-		if(button != null) {
-			button.setSelected(useFourCardColors);
-		}
-	}
 
 }

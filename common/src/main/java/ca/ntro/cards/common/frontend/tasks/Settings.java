@@ -65,7 +65,7 @@ public class Settings {
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 CommonSettingsView             settingsView  = inputs.get(created(settingsViewClass));
+		    	 SETTINGS_VIEW            settingsView  = inputs.get(created(settingsViewClass));
 		    	 Modified<SETTINGS_MODEL> settingsModel = inputs.get(modified(settingsModelClass));
 		    	 
 		    	 settingsModel.currentValue().displayOn(settingsView);
