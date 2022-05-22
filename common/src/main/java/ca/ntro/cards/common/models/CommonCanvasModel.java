@@ -16,7 +16,7 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
                                         OPTIONS      extends CommonDrawingOptions,
                                         VIEW_DATA    extends CommonViewData<OBJECT2D, WORLD2D, OPTIONS>>
 
-       implements     Model, Watch, Initialize, WriteObjectGraph {
+       implements     Model, Initialize {
 
 	private long version;
 

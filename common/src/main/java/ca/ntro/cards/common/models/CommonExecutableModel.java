@@ -2,6 +2,8 @@ package ca.ntro.cards.common.models;
 
 import java.util.concurrent.locks.ReentrantLock;
 
+import ca.ntro.app.models.Watch;
+import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
@@ -16,7 +18,9 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 
 
 
-               extends CommonCanvasModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA> {
+               extends CommonCanvasModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA> 
+
+               implements Watch, WriteObjectGraph {
 
 	private ReentrantLock lock;
 	private ModelHistory<CARDS_MODEL> modelHistory;
