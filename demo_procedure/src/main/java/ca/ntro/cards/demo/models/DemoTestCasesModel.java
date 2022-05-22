@@ -20,7 +20,7 @@ public class DemoTestCasesModel extends TestCasesModel<TriNaif, DemoTestCase>{
 		
 		addTestCase(descriptor, model);
 		
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < 2; i++) {
 			
 			int size = 10 + Ntro.random().nextInt(20);
 			
