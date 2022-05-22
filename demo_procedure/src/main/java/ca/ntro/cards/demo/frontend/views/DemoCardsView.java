@@ -5,10 +5,9 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
-import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.demo.DemoConstants;
-import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas;
-import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas;
+import ca.ntro.cards.demo.frontend.views.controls.DemoPreviewCanvas;
+import ca.ntro.cards.demo.frontend.views.controls.DemoMainCanvas;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
@@ -22,10 +21,10 @@ public class DemoCardsView extends ProcedureCanvasView {
 	private VBox cardsViewContainer;
 
 	@FXML
-	private DemoTabletopCanvas tabletopCanvas;
+	private DemoPreviewCanvas previewCanvas;
 
 	@FXML
-	private DemoViewerCanvas viewerCanvas;
+	private DemoMainCanvas mainCanvas;
 
 	@FXML
 	private StackPane dashboardContainer;
@@ -34,8 +33,8 @@ public class DemoCardsView extends ProcedureCanvasView {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		Ntro.assertNotNull("cardsViewContainer", cardsViewContainer);
-		Ntro.assertNotNull("tabletopCanvas", tabletopCanvas);
-		Ntro.assertNotNull("viewerCanvas", viewerCanvas);
+		Ntro.assertNotNull("previewCanvas", previewCanvas);
+		Ntro.assertNotNull("mainCanvas", mainCanvas);
 		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
 
 		super.initialize(location, resources);
@@ -44,13 +43,13 @@ public class DemoCardsView extends ProcedureCanvasView {
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected World2dResizableCanvasFx mainCanvas() {
-		return viewerCanvas;
+		return mainCanvas;
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected World2dCanvasFx previewCanvas() {
-		return tabletopCanvas;
+		return previewCanvas;
 	}
 
 	@Override

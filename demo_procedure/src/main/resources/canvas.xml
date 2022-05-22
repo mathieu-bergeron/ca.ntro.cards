@@ -21,8 +21,8 @@
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.control.Button ?>
 
-<?import ca.ntro.cards.demo.frontend.views.controls.DemoTabletopCanvas ?>
-<?import ca.ntro.cards.demo.frontend.views.controls.DemoViewerCanvas ?>
+<?import ca.ntro.cards.demo.frontend.views.controls.DemoPreviewCanvas ?>
+<?import ca.ntro.cards.demo.frontend.views.controls.DemoMainCanvas ?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoCardsView" 
@@ -30,19 +30,19 @@
     styleClass="container"
     id="cards-view">
 
-    <DemoViewerCanvas
-        fx:id="viewerCanvas"
+    <DemoMainCanvas
+        fx:id="mainCanvas"
         VBox.vgrow="ALWAYS"
         styleClass="container">
-    </DemoViewerCanvas>
+    </DemoMainCanvas>
 
     <HBox>
 
-        <DemoTabletopCanvas
-            fx:id="tabletopCanvas"
+        <DemoPreviewCanvas
+            fx:id="previewCanvas"
             VBox.vgrow="ALWAYS"
             styleClass="container">
-        </DemoTabletopCanvas>
+        </DemoPreviewCanvas>
 
         <StackPane
             fx:id="dashboardContainer"
