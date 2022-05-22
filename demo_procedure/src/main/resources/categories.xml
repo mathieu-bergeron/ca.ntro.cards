@@ -21,40 +21,8 @@
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
 
-<HBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView" 
-    styleClass="container"
-    id="dashboard-view">
+<VBox xmlns:fx="http://javafx.com/fxml"
+    fx:controller="ca.ntro.cards.demo.frontend.views.DemoCategoriesView" 
+    id="categories-view">
 
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="categoriesContainer">
-    </VBox>
-
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="replayContainer">
-    </VBox>
-
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="variablesContainer">
-    </VBox>
-
-    <VBox styleClass="bottom-right">
-
-        <Button
-            text="☰"
-            fx:id="menuButton">
-        </Button>
-
-        <Label
-            fx:id="fpsLabel">
-        </Label>
-
-    </VBox>
-
-</HBox>
+</VBox>
