@@ -5,6 +5,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.TestCase;
 
@@ -13,12 +14,14 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 public class InitializeModels {
 
 	@SuppressWarnings("rawtypes")
-	public static <CARDS_MODEL      extends CommonCanvasModel,
-	               TEST_CASE        extends TestCase<CARDS_MODEL>,
-		           TEST_CASES_MODEL extends TestCasesModel<CARDS_MODEL, TEST_CASE>,
+	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
+	               CANVAS_MODEL     extends CommonCanvasModel,
+	               TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel>
 	
 	        void initializeTestCases(BackendTasks tasks,
+	        		                 Class<EXECUTABLE_MODEL> executableModelClass,
 	        		                 Class<TEST_CASES_MODEL> testCasesModelClass) {
 
 		tasks.task("initializeTestCases")
@@ -29,7 +32,7 @@ public class InitializeModels {
 		    	 
 		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
 		    	 
-		    	 testCasesModel.generateFirstVersionIfNeeded();
+		    	 testCasesModel.generateFirstVersionIfNeeded(executableModelClass);
 
 		     });
 	}

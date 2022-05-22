@@ -6,8 +6,7 @@ import ca.ntro.cards.demo.models.values.DemoTestCase;
 public class DemoTestCasesModel extends TestCasesModel<TriNaif, DemoTestCase>{
 
 	@Override
-	protected void generateFirstVersion() {
-		
+	protected void generateFirstVersion(Class<TriNaif> studentModelClass) {
 	}
 
 	@Override
@@ -15,5 +14,6 @@ public class DemoTestCasesModel extends TestCasesModel<TriNaif, DemoTestCase>{
 
 		
 	}
+
 
 }

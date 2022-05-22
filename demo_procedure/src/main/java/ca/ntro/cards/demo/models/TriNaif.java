@@ -252,11 +252,23 @@ public abstract class   TriNaif<C extends Comparable<C>>
 		});
 	}
 	
-	public abstract void trier();
+
+	@Override
+	public void onBeforeRunning() {
+		indicePlusPetit = 0;
+		indiceCandidat = 0;
+		indiceProchainVide = 0;
+	}
 	
 	@Override
 	public void run() {
 		trier();
 	}
+
+	@Override
+	public void onAfterRunning() {
+	}
+
+	public abstract void trier();
 
 }

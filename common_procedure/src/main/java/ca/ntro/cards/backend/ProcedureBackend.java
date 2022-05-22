@@ -1,7 +1,7 @@
 package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.CardsModelThread;
+import ca.ntro.cards.common.backend.ExecutableModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.models.TestCasesModel;
@@ -32,7 +32,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
                                       SETTINGS_MODEL> {
 
 	private ReentrantLock lock = new ReentrantLock();
-	private CardsModelThread<EXECUTABLE_MODEL> modelThread = new CardsModelThread<>();
+	private ExecutableModelThread<EXECUTABLE_MODEL> modelThread = new ExecutableModelThread<>();
 	private ModelHistoryFull<EXECUTABLE_MODEL> modelHistory = new ModelHistoryFull<>();
 
 	@Override

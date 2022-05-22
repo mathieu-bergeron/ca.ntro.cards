@@ -5,41 +5,41 @@ import ca.ntro.cards.common.models.values.TestCase;
 import ca.ntro.cards.common.models.values.TestCaseById;
 import ca.ntro.cards.common.models.values.TestCasesByCategory;
 
-public abstract class      TestCasesModel<CARDS_MODEL extends CommonCanvasModel, 
-                                                TEST_CASE   extends TestCase<CARDS_MODEL>> 
+public abstract class      TestCasesModel<STUDENT_MODEL extends CommonExecutableModel, 
+                                          TEST_CASE     extends TestCase<STUDENT_MODEL>> 
 
                 implements Model {
 	
 	private long version = 0;
 	
-	private TestCaseById<CARDS_MODEL> testCasesById = new TestCaseById<>();
+	private TestCaseById<STUDENT_MODEL> testCasesById = new TestCaseById<>();
 
-	private TestCasesByCategory<CARDS_MODEL> testCasesByCategory = new TestCasesByCategory<>();
+	private TestCasesByCategory<STUDENT_MODEL> testCasesByCategory = new TestCasesByCategory<>();
 
-	public TestCaseById<CARDS_MODEL> getTestCasesById() {
+	public TestCaseById<STUDENT_MODEL> getTestCasesById() {
 		return testCasesById;
 	}
 
-	public void setTestCasesById(TestCaseById<CARDS_MODEL> testCasesById) {
+	public void setTestCasesById(TestCaseById<STUDENT_MODEL> testCasesById) {
 		this.testCasesById = testCasesById;
 	}
 
-	public TestCasesByCategory<CARDS_MODEL> getTestCasesByCategory() {
+	public TestCasesByCategory<STUDENT_MODEL> getTestCasesByCategory() {
 		return testCasesByCategory;
 	}
 
-	public void setTestCasesByCategory(TestCasesByCategory<CARDS_MODEL> testCasesByCategory) {
+	public void setTestCasesByCategory(TestCasesByCategory<STUDENT_MODEL> testCasesByCategory) {
 		this.testCasesByCategory = testCasesByCategory;
 	}
 
-	public void generateFirstVersionIfNeeded() {
+	public void generateFirstVersionIfNeeded(Class<STUDENT_MODEL> studentModelClass) {
 		if(version == 0) {
-			generateFirstVersion();
+			generateFirstVersion(studentModelClass);
 			version++;
 		}
 	}
 
-	protected abstract void generateFirstVersion();
+	protected abstract void generateFirstVersion(Class<STUDENT_MODEL> studentModelClass);
 
 	public abstract void generateTestCase();
 

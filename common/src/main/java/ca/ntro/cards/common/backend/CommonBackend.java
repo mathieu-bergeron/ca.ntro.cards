@@ -95,7 +95,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
-		InitializeModels.initializeTestCases(tasks, testCasesModelClass);
+		InitializeModels.initializeTestCases(tasks, executableModelClass, testCasesModelClass);
 		
 		initializeCanvasModelTask(tasks);
 
