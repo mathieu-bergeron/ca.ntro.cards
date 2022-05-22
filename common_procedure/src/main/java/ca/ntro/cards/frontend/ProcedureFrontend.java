@@ -23,6 +23,8 @@ import ca.ntro.cards.models.ProcedureSettingsModel;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
+import ca.ntro.app.NtroApp;
+
 public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRootView, 
                                         SETTINGS_VIEW        extends ProcedureSettingsView,
                                         CARDS_VIEW           extends ProcedureCanvasView, 
@@ -87,6 +89,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		      
 		      .thenExecutes(inputs -> {
 		    	  
+		    	  // FIXME: should be in the backend
+		    	  NtroApp.models().suspendDiskOperations();
+
 		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.startCodeExecution();
 		      });
@@ -99,6 +104,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		      .waitsFor(event(EvtStopCodeExecution.class))
 		      
 		      .thenExecutes(inputs -> {
+
+		    	  // FIXME: should be in the backend
+		    	  NtroApp.models().resumeDiskOperations();
 		    	  
 		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.stopCodeExecution();
