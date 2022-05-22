@@ -53,7 +53,7 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	}
 
 	@Override
-	protected Pane categoriesContainer() {
+	protected Pane selectionsContainer() {
 		return selectionsContainer;
 	}
 

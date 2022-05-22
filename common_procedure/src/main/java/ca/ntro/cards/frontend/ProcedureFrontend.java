@@ -208,7 +208,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		        	   VARIABLES_VIEW       variablesView      = inputs.get(created(variablesViewClass()));
 		        	   DASHBOARD_VIEW       dashboardView      = inputs.get(created(dashboardViewClass()));
 		        	   
-		        	   dashboardView.installCategoriesView(selectionsView);
+		        	   dashboardView.installSelectionsView(selectionsView);
 		        	   dashboardView.installReplayControlsView(replayControlsView);
 		        	   dashboardView.installVariablesView(variablesView);
 		           });

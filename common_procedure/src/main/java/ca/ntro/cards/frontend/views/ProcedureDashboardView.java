@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 
 public abstract class ProcedureDashboardView extends CommonDashboardView {
 	
-	protected abstract Pane categoriesContainer();
+	protected abstract Pane selectionsContainer();
 
 	protected abstract Pane replayControlsContainer();
 
@@ -21,10 +21,10 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 		
 	}
 
-	public void installCategoriesView(SelectionsView categoriesView) {
-		if(categoriesContainer() != null) {
-			categoriesContainer().getChildren().clear();
-			categoriesContainer().getChildren().add(categoriesView.rootNode());
+	public void installSelectionsView(SelectionsView selectionsView) {
+		if(selectionsContainer() != null) {
+			selectionsContainer().getChildren().clear();
+			selectionsContainer().getChildren().add(selectionsView.rootNode());
 		}
 	}
 
