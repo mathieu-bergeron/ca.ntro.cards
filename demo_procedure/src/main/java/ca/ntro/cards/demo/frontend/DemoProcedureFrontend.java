@@ -13,7 +13,7 @@ import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.frontend.views.DemoCardsView;
-import ca.ntro.cards.demo.frontend.views.DemoCategoriesView;
+import ca.ntro.cards.demo.frontend.views.DemoSelectionsView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 
 public class DemoProcedureFrontend
@@ -22,7 +22,7 @@ public class DemoProcedureFrontend
                                 DemoProcedureSettingsView, 
                                 DemoCardsView, 
                                 DemoProcedureDashboardView, 
-                                DemoCategoriesView,
+                                DemoSelectionsView,
                                 DemoReplayControlsView,
                                 DemoVariablesView,
                                 DemoProcedureViewData, 
@@ -101,8 +101,8 @@ public class DemoProcedureFrontend
 	}
 
 	@Override
-	protected Class<DemoCategoriesView> categoriesViewClass() {
-		return DemoCategoriesView.class;
+	protected Class<DemoSelectionsView> selectionsViewClass() {
+		return DemoSelectionsView.class;
 	}
 
 	@Override

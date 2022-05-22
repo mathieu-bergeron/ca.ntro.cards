@@ -10,7 +10,7 @@ import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
-import ca.ntro.cards.frontend.views.CategoriesView;
+import ca.ntro.cards.frontend.views.SelectionsView;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
@@ -27,7 +27,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                                         SETTINGS_VIEW        extends ProcedureSettingsView,
                                         CARDS_VIEW           extends ProcedureCanvasView, 
                                         DASHBOARD_VIEW       extends ProcedureDashboardView,
-                                        CATEGORIES_VIEW      extends CategoriesView,
+                                        SELECTIONS_VIEW      extends SelectionsView,
                                         REPLAY_CONTROLS_VIEW extends ReplayControlsView,
                                         VARIABLES_VIEW       extends VariablesView,
                                         VIEW_DATA            extends ProcedureViewData,
@@ -58,7 +58,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	public void registerViews(ViewRegistrarFx registrar) {
 		super.registerViews(registrar);
 
-		registrar.registerView(categoriesViewClass(), "/categories.xml");
+		registrar.registerView(selectionsViewClass(), "/selections.xml");
 		registrar.registerView(replayControlsViewClass(), "/replay_controls.xml");
 		registrar.registerView(variablesViewClass(), "/variables.xml");
 	}
@@ -160,15 +160,15 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	@Override
 	protected void addDashboardSubViewLoaders(FrontendTasks subTasks) {
 
-		subTasks.task(create(categoriesViewClass()))
+		subTasks.task(create(selectionsViewClass()))
 
-		        .waitsFor(viewLoader(categoriesViewClass()))
+		        .waitsFor(viewLoader(selectionsViewClass()))
 		        
 		        .thenExecutesAndReturnsValue(inputs -> {
 
-		        	   ViewLoader<CATEGORIES_VIEW> categoriesViewLoader = inputs.get(viewLoader(categoriesViewClass()));
+		        	   ViewLoader<SELECTIONS_VIEW> selectionsViewLoader = inputs.get(viewLoader(selectionsViewClass()));
 		        	   
-		        	   return categoriesViewLoader.createView();
+		        	   return selectionsViewLoader.createView();
 		        });
 
 		subTasks.task(create(replayControlsViewClass()))
@@ -197,24 +197,24 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	@Override
 	protected void installDashboardSubViews(SimpleTaskCreator<?> taskCreator) {
 		
-		taskCreator.waitsFor(created(categoriesViewClass()))
+		taskCreator.waitsFor(created(selectionsViewClass()))
 		           .waitsFor(created(replayControlsViewClass()))
 		           .waitsFor(created(variablesViewClass()))
 		           
 		           .thenExecutes(inputs -> {
 		        	   
-		        	   CATEGORIES_VIEW      categoriesView     = inputs.get(created(categoriesViewClass()));
+		        	   SELECTIONS_VIEW      selectionsView     = inputs.get(created(selectionsViewClass()));
 		        	   REPLAY_CONTROLS_VIEW replayControlsView = inputs.get(created(replayControlsViewClass()));
 		        	   VARIABLES_VIEW       variablesView      = inputs.get(created(variablesViewClass()));
 		        	   DASHBOARD_VIEW       dashboardView      = inputs.get(created(dashboardViewClass()));
 		        	   
-		        	   dashboardView.installCategoriesView(categoriesView);
+		        	   dashboardView.installCategoriesView(selectionsView);
 		        	   dashboardView.installReplayControlsView(replayControlsView);
 		        	   dashboardView.installVariablesView(variablesView);
 		           });
 	}
 
-	protected abstract Class<CATEGORIES_VIEW> categoriesViewClass();
+	protected abstract Class<SELECTIONS_VIEW> selectionsViewClass();
 	protected abstract Class<REPLAY_CONTROLS_VIEW> replayControlsViewClass();
 	protected abstract Class<VARIABLES_VIEW> variablesViewClass();
 

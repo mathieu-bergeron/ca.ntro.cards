@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.ViewFx;
 
-public class CategoriesView extends ViewFx {
+public class SelectionsView extends ViewFx {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

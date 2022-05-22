@@ -20,7 +20,7 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 	private Button menuButton;
 
 	@FXML
-	private VBox categoriesContainer;
+	private VBox selectionsContainer;
 
 	@FXML
 	private VBox replayControlsContainer;
@@ -34,7 +34,7 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 		
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
-		Ntro.assertNotNull("categoriesContainer", categoriesContainer);
+		Ntro.assertNotNull("selectionsContainer", selectionsContainer);
 		Ntro.assertNotNull("replayControlsContainer", replayControlsContainer);
 		Ntro.assertNotNull("variablesContainer", variablesContainer);
 		
@@ -54,7 +54,7 @@ public class DemoProcedureDashboardView extends ProcedureDashboardView {
 
 	@Override
 	protected Pane categoriesContainer() {
-		return categoriesContainer;
+		return selectionsContainer;
 	}
 
 	@Override

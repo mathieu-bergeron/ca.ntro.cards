@@ -21,7 +21,7 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 		
 	}
 
-	public void installCategoriesView(CategoriesView categoriesView) {
+	public void installCategoriesView(SelectionsView categoriesView) {
 		if(categoriesContainer() != null) {
 			categoriesContainer().getChildren().clear();
 			categoriesContainer().getChildren().add(categoriesView.rootNode());
