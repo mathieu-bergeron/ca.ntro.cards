@@ -25,7 +25,7 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoReplayControlsView" 
     id="replay-view">
 
-    <HBox styleClass="center-right">
+    <HBox styleClass="center">
 
         <Button
             text="%backStep"
@@ -61,7 +61,7 @@
     <VBox styleClass="vspace-small" >
     </VBox>
            
-    <HBox styleClass="center-right">
+    <HBox styleClass="center">
         <Label
             text="%numberOfCards"
             styleClass="text-big">
@@ -80,7 +80,7 @@
     <VBox styleClass="vspace-small" >
     </VBox>
 
-    <HBox styleClass="center-right">
+    <HBox styleClass="center">
 
         <Label
             text="%numberOfSteps"

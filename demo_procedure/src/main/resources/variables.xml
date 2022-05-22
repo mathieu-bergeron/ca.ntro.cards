@@ -25,5 +25,20 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoVariablesView" 
     id="variables-view">
 
+    <Label
+        text="indicePlusPetit   -1"
+        styleClass="text-big">
+    </Label>
+
+    <Label
+        text="indiceCandidat   -1"
+        styleClass="text-big">
+    </Label>
+
+    <Label
+        text="indiceProchainVide   -1"
+        styleClass="text-big">
+    </Label>
+
 
 </VBox>

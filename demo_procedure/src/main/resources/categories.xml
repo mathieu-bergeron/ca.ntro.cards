@@ -31,7 +31,7 @@
     <Label
         text="%testCase"
         fx:id="testCaseLabel"
-        styleClass="big-text">
+        styleClass="text-big">
     </Label>
 
     <ComboBox>
@@ -47,7 +47,7 @@
     <Label
         text="%mode"
         fx:id="modeLabel"
-        styleClass="big-text">
+        styleClass="text-big">
     </Label>
 
     <ComboBox>

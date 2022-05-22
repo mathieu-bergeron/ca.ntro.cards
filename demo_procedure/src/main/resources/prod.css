@@ -22,6 +22,10 @@
     -fx-alignment:center-right;
 }
 
+.center{
+    -fx-alignment:center;
+}
+
 .bottom-right{
     -fx-alignment:bottom-right;
 }
