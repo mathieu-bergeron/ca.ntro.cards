@@ -1,5 +1,6 @@
 package ca.ntro.cards.common.models;
 
+import java.io.Serializable;
 import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Watch;
@@ -20,7 +21,7 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 
                extends CommonCanvasModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA> 
 
-               implements Watch, WriteObjectGraph {
+               implements Watch, WriteObjectGraph, Serializable {
 
 	private ReentrantLock lock;
 	private ExecutionTrace<CARDS_MODEL> modelHistory;

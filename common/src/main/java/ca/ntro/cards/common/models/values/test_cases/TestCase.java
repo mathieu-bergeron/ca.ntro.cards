@@ -1,11 +1,15 @@
 package ca.ntro.cards.common.models.values.test_cases;
 
+import java.io.Serializable;
+
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel> implements Value, Identifiable {
+public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel> 
+
+       implements Value, Identifiable, Serializable {
 	
 	private String category;
 	private String testCaseId;

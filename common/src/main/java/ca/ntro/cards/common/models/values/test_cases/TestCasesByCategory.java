@@ -1,5 +1,6 @@
 package ca.ntro.cards.common.models.values.test_cases;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public class TestCasesByCategory<STUDENT_MODEL extends CommonExecutableModel,
                                  TEST_CASE     extends TestCase<STUDENT_MODEL>> 
 
 
-       implements Value {
+       implements Value, Serializable {
 	
 	private Map<String, TestCasesBySize<STUDENT_MODEL, TEST_CASE>> byCategory = new HashMap<>();
 

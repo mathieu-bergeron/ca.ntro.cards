@@ -10,7 +10,22 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends TriNaif>
        extends        GenerateTestCases<TriNaif, 
                                         STUDENT_MODEL,
                                         DemoTestCase,
-                                        DemoTestCasesModel<STUDENT_MODEL>> {
+                                        DemoTestCasesModel> {
 
+	
+	@Override
+	protected Class<DemoTestCase> testCaseClass(){
+		return DemoTestCase.class;
+	}
+
+	@Override
+	protected Class<DemoTestCasesModel> testCasesModelClass(){
+		return DemoTestCasesModel.class;
+	}
+
+	@Override
+	protected Class<TriNaif> executableModelClass() {
+		return TriNaif.class;
+	}
 
 }

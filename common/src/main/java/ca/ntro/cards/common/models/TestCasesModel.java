@@ -1,5 +1,7 @@
 package ca.ntro.cards.common.models;
 
+import java.io.Serializable;
+
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.models.values.test_cases.TestCase;
@@ -12,7 +14,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
                                           TEST_CASE        extends TestCase<EXECUTABLE_MODEL>> 
 
 
-                implements Model {
+                implements Model, Serializable {
 	
 	private long version = 0;
 	
@@ -29,6 +31,14 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	
 	public void registerExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
 		this.executableModelClass = executableModelClass;
+	}
+	
+	protected Class<EXECUTABLE_MODEL> executableModelClass(){
+		return executableModelClass;
+	}
+	
+	protected Class<STUDENT_MODEL> studentModelClass(){
+		return studentModelClass;
 	}
 
 	public long getVersion() {
@@ -55,9 +65,9 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		this.testCasesByCategory = testCasesByCategory;
 	}
 
-	public void generateFirstVersionIfNeeded(Class<STUDENT_MODEL> studentModelClass) {
+	public void generateFirstVersionIfNeeded() {
 		if(version == 0) {
-			generateFirstVersion(studentModelClass);
+			generateFirstVersion();
 			version++;
 		}
 	}
@@ -83,7 +93,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		
 	}
 
-	protected abstract void generateFirstVersion(Class<STUDENT_MODEL> studentModelClass);
+	protected abstract void generateFirstVersion();
 
 	public abstract STUDENT_MODEL emptyStudentModel();
 

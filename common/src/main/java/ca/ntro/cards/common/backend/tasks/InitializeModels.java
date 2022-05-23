@@ -37,7 +37,7 @@ public class InitializeModels {
 		    	 testCasesModel.registerExecutableModelClass(executableModelClass);
 		    	 testCasesModel.registerStudentModelClass(studentModelClass);
 
-		    	 testCasesModel.generateFirstVersionIfNeeded(studentModelClass);
+		    	 testCasesModel.generateFirstVersionIfNeeded();
 
 		     });
 	}
