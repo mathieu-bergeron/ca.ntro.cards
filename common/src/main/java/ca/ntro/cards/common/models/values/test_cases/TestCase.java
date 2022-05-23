@@ -1,16 +1,17 @@
-package ca.ntro.cards.common.models.values;
+package ca.ntro.cards.common.models.values.test_cases;
 
 import ca.ntro.app.models.Value;
-import ca.ntro.cards.common.models.CommonCanvasModel;
+import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
 import ca.ntro.core.identifyers.Identifiable;
 
-public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, Identifiable {
+public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel> implements Value, Identifiable {
 	
 	private String category;
 	private String testCaseId;
 	private long size;
 
-	private CARDS_MODEL model;
+	private ExecutionTrace<EXECUTABLE_MODEL> trace;
 	private boolean passed;
 
 	public String getCategory() {
@@ -45,12 +46,12 @@ public class TestCase<CARDS_MODEL extends CommonCanvasModel> implements Value, I
 		this.passed = passed;
 	}
 
-	public CARDS_MODEL getModel() {
-		return model;
+	public ExecutionTrace<EXECUTABLE_MODEL> getTrace() {
+		return trace;
 	}
 
-	public void setModel(CARDS_MODEL model) {
-		this.model = model;
+	public void setTrace(ExecutionTrace<EXECUTABLE_MODEL> trace) {
+		this.trace = trace;
 	}
 
 	@Override

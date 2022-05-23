@@ -10,10 +10,11 @@ import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
-public class   DemoProcedureBackend
+public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 
 
        extends ProcedureBackend<TriNaif, // executable model
+                                STUDENT_MODEL,
                                 TriNaif, // canvas model
                                 DemoTestCase,
                                 DemoTestCasesModel,

@@ -1,10 +1,10 @@
 package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.ExecutableModelThread;
-import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
+import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -14,12 +14,12 @@ import ca.ntro.app.tasks.SubTasksLambda;
 
 public class ModifyCardsModel {
 	
-	public static <CARDS_MODEL extends CommonCanvasModel,
+	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	       void createTasks(BackendTasks tasks,
-			                Class<CARDS_MODEL> cardsModelClass,
-			                ModelHistoryFull<CARDS_MODEL> modelHistory,
+			                Class<EXECUTABLE_MODEL> cardsModelClass,
+			                ExecutionTraceFull<EXECUTABLE_MODEL> executionTrace,
 			                ReentrantLock lock,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		

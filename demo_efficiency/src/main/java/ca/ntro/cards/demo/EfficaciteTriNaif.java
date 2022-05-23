@@ -21,12 +21,13 @@ import ca.ntro.cards.efficiency.EfficiencyApp;
 public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
 
                 extends EfficiencyApp<TriNaif, 
+                                      STUDENT_MODEL,
                                       DemoGraphsModel,
                                       DemoTestCase,
                                       DemoTestCasesModel,
                                       DemoEfficiencyDashboardModel,
                                       DemoEfficiencySettingsModel,
-                                      DemoEfficiencyBackend,
+                                      DemoEfficiencyBackend<STUDENT_MODEL>,
                                       DemoEfficiencyRootView,
                                       DemoGraphsView,
                                       DemoEfficiencyDashboardView,
@@ -44,10 +45,15 @@ public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
 		return new DemoEfficiencyBackend();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected Class<TriNaif> executableModelClass() {
-		return (Class<TriNaif>) classeTriNaif();
+		return TriNaif.class;
+	}
+
+	@Override
+	protected Class<STUDENT_MODEL> studentModelClass() {
+		return classeTriNaif();
 	}
 	
 	protected abstract Class<STUDENT_MODEL> classeTriNaif();

@@ -4,8 +4,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.models.Watch;
 import ca.ntro.app.models.WriteObjectGraph;
-import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.frontend.CommonViewData;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
@@ -23,13 +23,13 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
                implements Watch, WriteObjectGraph {
 
 	private ReentrantLock lock;
-	private ModelHistory<CARDS_MODEL> modelHistory;
+	private ExecutionTrace<CARDS_MODEL> modelHistory;
 	
 	public void registerLock(ReentrantLock lock) {
 		this.lock = lock;
 	}
 
-	public void registerModelHistory(ModelHistory<CARDS_MODEL> modelHistory) {
+	public void registerModelHistory(ExecutionTrace<CARDS_MODEL> modelHistory) {
 		this.modelHistory = modelHistory;
 	}
 

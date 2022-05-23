@@ -22,21 +22,25 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.AbstractCard;
-import ca.ntro.cards.common.models.values.Card;
-import ca.ntro.cards.common.models.values.TestCase;
-import ca.ntro.cards.common.models.values.TestCaseById;
-import ca.ntro.cards.common.models.values.TestCasesByCategory;
-import ca.ntro.cards.common.models.values.TestCasesBySize;
+import ca.ntro.cards.common.models.values.cards.AbstractCard;
+import ca.ntro.cards.common.models.values.cards.Card;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceSizeOnly;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
+import ca.ntro.cards.common.models.values.test_cases.TestCaseById;
+import ca.ntro.cards.common.models.values.test_cases.TestCasesByCategory;
+import ca.ntro.cards.common.models.values.test_cases.TestCasesBySize;
 
 public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                 CANVAS_MODEL     extends CommonCanvasModel,
                                 TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-                                TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+                                TEST_CASES_MODEL extends TestCasesModel,
                                 DASHBOARD_MODEL  extends CommonDashboardModel,
                                 SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       
                                 BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
+                                                              STUDENT_MODEL,
                                                               CANVAS_MODEL,
                                                               TEST_CASE, 
                                                               TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
@@ -61,6 +65,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
 		registrar.registerModel(executableModelClass());
+		registrar.registerModel(studentModelClass());
 		registrar.registerModel(canvasModelClass());
 
 		registrar.registerModel(dashboardModelClass());
@@ -75,6 +80,9 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		registrar.registerValue(TestCaseById.class);
 		registrar.registerValue(TestCasesByCategory.class);
 		registrar.registerValue(TestCasesBySize.class);
+
+		registrar.registerValue(ExecutionTraceFull.class);
+		registrar.registerValue(ExecutionTraceSizeOnly.class);
 
 		registerAdditionnalModels(registrar);
 	}
@@ -109,6 +117,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		BACKEND backend = createBackend();
 		
 		backend.setExecutableModelClass(executableModelClass());
+		backend.setStudentModelClass(studentModelClass());
 		backend.setCanvasModelClass(canvasModelClass());
 		backend.setTestCaseClass(testCaseClass());
 		backend.setTestCasesModelClass(testCasesModelClass());
@@ -120,6 +129,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 
 	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
+	protected abstract Class<STUDENT_MODEL> studentModelClass();
 	protected abstract Class<CANVAS_MODEL> canvasModelClass();
 	protected abstract Class<TEST_CASE> testCaseClass();
 	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();

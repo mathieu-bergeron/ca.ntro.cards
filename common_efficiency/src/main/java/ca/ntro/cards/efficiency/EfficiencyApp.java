@@ -1,10 +1,8 @@
 package ca.ntro.cards.efficiency;
 
-import ca.ntro.app.messages.MessageRegistrar;
-import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.TestCase;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
 import ca.ntro.cards.efficiency.backend.EfficiencyBackend;
 import ca.ntro.cards.efficiency.frontend.EfficiencyFrontend;
 import ca.ntro.cards.efficiency.frontend.EfficiencyViewData;
@@ -18,13 +16,15 @@ import ca.ntro.cards.efficiency.models.EfficiencySettingsModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
 
 public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
+                                    STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL     extends EfficiencyGraphsModel,
                                     TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-                                    TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+                                    TEST_CASES_MODEL extends TestCasesModel,
                                     DASHBOARD_MODEL  extends EfficiencyDashboardModel,
                                     SETTINGS_MODEL   extends EfficiencySettingsModel,
                                                                                                       
                                     BACKEND extends EfficiencyBackend<EXECUTABLE_MODEL,
+                                                                      STUDENT_MODEL,
                                                                       CANVAS_MODEL, 
                                                                       TEST_CASE, 
                                                                       TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
@@ -45,6 +45,7 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
                                                                         SETTINGS_MODEL>>
 
                extends CommonApp<EXECUTABLE_MODEL,
+                                 STUDENT_MODEL,
                                  CANVAS_MODEL,
                                  TEST_CASE,
                                  TEST_CASES_MODEL,

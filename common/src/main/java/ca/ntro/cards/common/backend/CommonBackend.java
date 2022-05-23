@@ -5,7 +5,6 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.backend.tasks.InitializeModels;
 import ca.ntro.cards.common.backend.tasks.ManageThread;
 import ca.ntro.cards.common.backend.tasks.ModifyCardsModel;
@@ -17,12 +16,14 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.TestCase;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
 
 public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                    STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL     extends CommonCanvasModel,
                                     TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-                                    TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+                                    TEST_CASES_MODEL extends TestCasesModel,
                                     DASHBOARD_MODEL  extends CommonDashboardModel,
                                     SETTINGS_MODEL   extends CommonSettingsModel>
 
@@ -31,6 +32,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	public static int indexCurrentModel = 0;
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
+	private Class<STUDENT_MODEL> studentModelClass;
 	private Class<CANVAS_MODEL> canvasModelClass;
 	private Class<TEST_CASE> testCaseClass;
 	private Class<TEST_CASES_MODEL> testCasesModelClass;
@@ -38,11 +40,21 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
 	private ReentrantLock lock = new ReentrantLock();
-	private ModelHistoryFull<EXECUTABLE_MODEL> modelHistory = new ModelHistoryFull<>();
+	private ExecutionTraceFull<EXECUTABLE_MODEL> modelHistory = new ExecutionTraceFull<>();
 
-	protected ModelHistoryFull<EXECUTABLE_MODEL> getModelHistory(){
+	protected ExecutionTraceFull<EXECUTABLE_MODEL> getModelHistory(){
 		return modelHistory;
 	}
+
+	public Class<STUDENT_MODEL> getStudentModelClass() {
+		return studentModelClass;
+	}
+
+	public void setStudentModelClass(Class<STUDENT_MODEL> studentModelClass) {
+		this.studentModelClass = studentModelClass;
+	}
+
+
 
 	public void setExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
 		this.executableModelClass = executableModelClass;

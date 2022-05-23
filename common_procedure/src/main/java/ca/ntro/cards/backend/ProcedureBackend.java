@@ -3,10 +3,10 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.ExecutableModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
-import ca.ntro.cards.common.backend.model_history.ModelHistoryFull;
 import ca.ntro.cards.common.models.TestCaseDescriptor;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.TestCase;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -19,13 +19,15 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsModel,
+                                       STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                        CANVAS_MODEL     extends ProcedureCardsModel,
                                        TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-                                       TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+                                       TEST_CASES_MODEL extends TestCasesModel,
                                        DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                        SETTINGS_MODEL   extends ProcedureSettingsModel>
 
                 extends CommonBackend<EXECUTABLE_MODEL, 
+                                      STUDENT_MODEL,
                                       CANVAS_MODEL,
                                       TEST_CASE, 
                                       TEST_CASES_MODEL, 
@@ -34,7 +36,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 
 	private ReentrantLock lock = new ReentrantLock();
 	private ExecutableModelThread<EXECUTABLE_MODEL> modelThread = new ExecutableModelThread<>();
-	private ModelHistoryFull<EXECUTABLE_MODEL> modelHistory = new ModelHistoryFull<>();
+	private ExecutionTraceFull<EXECUTABLE_MODEL> modelHistory = new ExecutionTraceFull<>();
 
 	@Override
 	protected void initializeCanvasModel(CANVAS_MODEL canvasModel) {

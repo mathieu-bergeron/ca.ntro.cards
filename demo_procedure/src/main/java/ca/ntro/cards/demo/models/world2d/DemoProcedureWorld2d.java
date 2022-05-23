@@ -7,7 +7,7 @@ import java.util.List;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.CommonConstants;
-import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 

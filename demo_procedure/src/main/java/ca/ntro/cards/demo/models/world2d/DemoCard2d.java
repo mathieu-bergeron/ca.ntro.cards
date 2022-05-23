@@ -1,7 +1,7 @@
 package ca.ntro.cards.demo.models.world2d;
 
 import ca.ntro.cards.common.models.enums.Suit;
-import ca.ntro.cards.common.models.values.AbstractCard;
+import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 

@@ -6,7 +6,7 @@ import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.TestCase;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -15,8 +15,9 @@ import ca.ntro.app.tasks.SubTasksLambda;
 public class ModifyTestCasesModel {
 	
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
+	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-	               TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+	               TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel> 
 
 	       void createTasks(BackendTasks tasks,
@@ -37,8 +38,9 @@ public class ModifyTestCasesModel {
 
 	@SuppressWarnings("unchecked")
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
+	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>>
+		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>>
 	
 	        void generateTestCase(BackendTasks tasks,
 	        		              Class<TEST_CASES_MODEL> testCasesModelClass) {

@@ -9,9 +9,10 @@ import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.efficiency.backend.EfficiencyBackend;
 
-public class DemoEfficiencyBackend 
+public class DemoEfficiencyBackend<STUDENT_MODEL extends TriNaif>
 
-       extends EfficiencyBackend<TriNaif,         // executable model
+       extends EfficiencyBackend<TriNaif, 
+                                 STUDENT_MODEL,
                                  DemoGraphsModel, // canvas model
                                  DemoTestCase,
                                  DemoTestCasesModel,

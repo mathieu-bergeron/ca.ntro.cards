@@ -1,6 +1,6 @@
 package ca.ntro.cards.demo.frontend;
 
-import ca.ntro.cards.common.models.values.AbstractCard;
+import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.demo.models.world2d.DemoCard2d;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;

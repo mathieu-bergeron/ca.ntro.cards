@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models.values;
+package ca.ntro.cards.common.models.values.test_cases;
 
 import java.util.HashMap;
 import java.util.Map;

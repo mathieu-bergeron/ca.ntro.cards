@@ -2,12 +2,12 @@ package ca.ntro.cards.common.backend.tasks;
 
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.model_history.ModelHistory;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.TestCase;
+import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
+import ca.ntro.cards.common.models.values.test_cases.TestCase;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -15,9 +15,10 @@ public class InitializeModels {
 
 	@SuppressWarnings("rawtypes")
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
+	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               CANVAS_MODEL     extends CommonCanvasModel,
 	               TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
-		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, TEST_CASE>,
+		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel>
 	
 	        void initializeTestCases(BackendTasks tasks,
@@ -38,12 +39,12 @@ public class InitializeModels {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public static <CARDS_MODEL extends CommonCanvasModel,
+	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 	
 	        void initializeDashboard(BackendTasks tasks,
 	        		                 Class<DASHBOARD_MODEL> dashboardModelClass,
-	        		                 ModelHistory<CARDS_MODEL> modelHistory) {
+	        		                 ExecutionTrace<EXECUTABLE_MODEL> executionTrace) {
 
 		tasks.task("initializeDashboard")
 
@@ -55,7 +56,7 @@ public class InitializeModels {
 		    	 
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(dashboardModelClass));
 		    	 
-		    	 modelHistory.updateDashboard(dashboardModel);
+		    	 executionTrace.updateDashboard(dashboardModel);
 		    	 
 		     });
 	}

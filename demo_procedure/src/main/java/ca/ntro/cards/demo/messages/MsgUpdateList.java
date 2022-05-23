@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.app.messages.MessageNtro;
-import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.demo.models.TriNaif;
 
 public class MsgUpdateList extends MessageNtro {

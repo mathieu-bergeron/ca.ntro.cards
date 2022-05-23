@@ -19,13 +19,14 @@ import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
-                extends ProcedureApp<TriNaif,  // executable model
-                                     TriNaif,  // canvas model
+                extends ProcedureApp<TriNaif,           // executable model
+                                     STUDENT_MODEL,
+                                     TriNaif,           // canvas model
                                      DemoTestCase,
                                      DemoTestCasesModel,
                                      DemoProcedureDashboardModel,
                                      DemoProcedureSettingsModel,
-                                     DemoProcedureBackend,
+                                     DemoProcedureBackend<STUDENT_MODEL>,
                                      DemoProcedureRootView,
                                      DemoCardsView,
                                      DemoProcedureDashboardView,
@@ -94,10 +95,15 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 		registrar.registerMessage(MsgUpdateList.class);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected Class<TriNaif> canvasModelClass() {
-		return (Class<TriNaif>) classeTriNaif();
+		return TriNaif.class;
+	}
+
+	@Override
+	protected Class<STUDENT_MODEL> studentModelClass() {
+		return classeTriNaif();
 	}
 
 

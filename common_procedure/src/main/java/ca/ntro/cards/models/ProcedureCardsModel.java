@@ -10,7 +10,7 @@ import ca.ntro.app.models.Watch;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
-import ca.ntro.cards.common.models.values.Card;
+import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;

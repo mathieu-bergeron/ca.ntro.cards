@@ -15,4 +15,5 @@ public class Efficacite extends EfficaciteTriNaif<MonTriNaif> {
 		return MonTriNaif.class;
 	}
 
+
 }

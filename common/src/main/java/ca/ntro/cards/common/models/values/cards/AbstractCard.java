@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models.values;
+package ca.ntro.cards.common.models.values.cards;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
