@@ -22,7 +22,9 @@ include 'common_efficiency'
 include 'demo_common'
 include 'demo_procedure'
 include 'demo_efficiency'
-include 'demo_student'
+
+include 'demo_solutions'
+project(':demo_solutions').projectDir = file('solutions/demo_solutions')
 
 
 buildscript {

@@ -48,5 +48,9 @@ else
 
 fi
 
+git clone git@github.com:mathieu-bergeron/ca.ntro.cards.solutions solutions
+
+
+
 restore_dir
 
