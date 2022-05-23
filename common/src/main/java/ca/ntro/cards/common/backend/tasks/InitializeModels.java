@@ -23,6 +23,7 @@ public class InitializeModels {
 	
 	        void initializeTestCases(BackendTasks tasks,
 	        		                 Class<EXECUTABLE_MODEL> executableModelClass,
+	        		                 Class<STUDENT_MODEL> studentModelClass,
 	        		                 Class<TEST_CASES_MODEL> testCasesModelClass) {
 
 		tasks.task("initializeTestCases")
@@ -33,7 +34,10 @@ public class InitializeModels {
 		    	 
 		    	 TEST_CASES_MODEL testCasesModel = inputs.get(model(testCasesModelClass));
 		    	 
-		    	 testCasesModel.generateFirstVersionIfNeeded(executableModelClass);
+		    	 testCasesModel.registerExecutableModelClass(executableModelClass);
+		    	 testCasesModel.registerStudentModelClass(studentModelClass);
+
+		    	 testCasesModel.generateFirstVersionIfNeeded(studentModelClass);
 
 		     });
 	}

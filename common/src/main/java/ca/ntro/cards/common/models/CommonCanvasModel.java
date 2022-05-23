@@ -35,7 +35,7 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 	
 	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
 	
-	public abstract void copyDataFrom(CANVAS_MODEL cardsModel);
+	public abstract void copyDataFrom(CANVAS_MODEL otherModel);
 
 	public void updateViewData(VIEW_DATA viewData) {
 

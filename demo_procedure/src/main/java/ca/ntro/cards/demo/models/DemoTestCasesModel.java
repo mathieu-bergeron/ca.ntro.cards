@@ -8,14 +8,14 @@ import ca.ntro.core.initialization.Ntro;
 public class DemoTestCasesModel<STUDENT_MODEL extends TriNaif> extends TestCasesModel<TriNaif, STUDENT_MODEL, DemoTestCase>{
 
 	@Override
-	protected void generateFirstVersion(Class<TriNaif> studentModelClass) {
+	protected void generateFirstVersion(Class<STUDENT_MODEL> studentModelClass) {
 		
 
 		TestCaseDescriptor descriptor = TestCaseDescriptor.create()
 				                                          .category("examples")
 				                                          .testCaseId("ex01");
 
-		TriNaif model = Ntro.factory().newInstance(studentModelClass);
+		STUDENT_MODEL model = Ntro.factory().newInstance(studentModelClass);
 		model.generateTestCase(descriptor);
 		
 		addTestCase(descriptor, model);

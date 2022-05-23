@@ -7,7 +7,7 @@ import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.tasks.InitializeModels;
 import ca.ntro.cards.common.backend.tasks.ManageThread;
-import ca.ntro.cards.common.backend.tasks.ModifyCardsModel;
+import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.common.backend.tasks.ModifyTestCasesModel;
@@ -107,17 +107,17 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
-		InitializeModels.initializeTestCases(tasks, executableModelClass, testCasesModelClass);
+		InitializeModels.initializeTestCases(tasks, executableModelClass, studentModelClass, testCasesModelClass);
 		
 		initializeCanvasModelTask(tasks);
 
 		InitializeModels.initializeDashboard(tasks, dashboardModelClass, modelHistory);
 
-		ModifyCardsModel.createTasks(tasks, 
-				                     executableModelClass,
-				                     modelHistory,
-				                     lock,
-				                     subTasks -> {
+		ModifyCanvasModel.createTasks(tasks, 
+				                      canvasModelClass,
+				                      modelHistory,
+				                      lock,
+				                      subTasks -> {
 				                    	 
 				                    	 addSubTasksToModifyCardsModel(subTasks);
 				                    	 

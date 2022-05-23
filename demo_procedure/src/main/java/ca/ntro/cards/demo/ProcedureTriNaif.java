@@ -43,10 +43,9 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 	}
 	
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected Class<TriNaif> executableModelClass() {
-		return (Class<TriNaif>) classeTriNaif();
+		return TriNaif.class;
 	}
 
 
@@ -95,10 +94,10 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 		registrar.registerMessage(MsgUpdateList.class);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Class<TriNaif> canvasModelClass() {
-		return TriNaif.class;
+		return (Class<TriNaif>) classeTriNaif();
 	}
 
 	@Override

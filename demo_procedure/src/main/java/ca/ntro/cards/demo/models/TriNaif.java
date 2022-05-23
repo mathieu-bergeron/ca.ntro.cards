@@ -20,9 +20,9 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public abstract class   TriNaif<C extends Comparable<C>> 
+public class   TriNaif<C extends Comparable<C>> 
 
-                extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
+       extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
                 	
                 	
 	protected int indicePlusPetit = -1;
@@ -280,7 +280,8 @@ public abstract class   TriNaif<C extends Comparable<C>>
 	public void onAfterRunning() {
 	}
 
-	public abstract void trier();
+	public void trier() {
+	}
 
 
 }

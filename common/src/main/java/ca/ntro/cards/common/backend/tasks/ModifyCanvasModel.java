@@ -12,13 +12,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
-public class ModifyCardsModel {
+public class ModifyCanvasModel {
 	
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
-	               DASHBOARD_MODEL extends CommonDashboardModel>
+	               CANVAS_MODEL     extends CommonCanvasModel,
+	               DASHBOARD_MODEL  extends CommonDashboardModel>
 
 	       void createTasks(BackendTasks tasks,
-			                Class<EXECUTABLE_MODEL> cardsModelClass,
+			                Class<CANVAS_MODEL> canvasModelClass,
 			                ExecutionTraceFull<EXECUTABLE_MODEL> executionTrace,
 			                ReentrantLock lock,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
@@ -30,7 +31,7 @@ public class ModifyCardsModel {
 		
 		     .andContains(subTasks -> {
 
-		    	 flipCard(subTasks, cardsModelClass);
+		    	 flipCard(subTasks, canvasModelClass);
 
 		    	 subTasksLambda.createSubTasks(subTasks);
 
