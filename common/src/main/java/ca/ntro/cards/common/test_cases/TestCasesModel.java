@@ -5,6 +5,7 @@ import java.io.Serializable;
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
@@ -81,14 +82,39 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		throw new RuntimeException("DEPRECATED");
 	}
 
-	public abstract void generateTestCases();
-
-	protected void createTestCase(TestCaseDescriptor descriptor) {
+	public void generateTestCasesAsync(DoneHandler doneHandler) {
+		executionEngine.setDoneHandler(doneHandler);
 		
-		TEST_CASE testCase = executionEngine.createTestCase(descriptor);
+		executionEngine.prepareToGenerateTestCases();
 
-		testCasesById.addTestCase(testCase);
-		testCasesByCategory.addTestCase(testCase);
+		describeTestCasesToGenerate();
 
+		executionEngine.generateTestCases(doneHandler);
+
+	}
+
+	public abstract void describeTestCasesToGenerate();
+
+	protected void addTestCase(TestCaseDescriptor descriptor) {
+		
+		executionEngine.createTestCase(descriptor, testCase -> {
+
+			testCasesById.addTestCase(testCase);
+			testCasesByCategory.addTestCase(testCase);
+
+		});
+	}
+
+	public void writeTestCasesAsync(boolean shouldSaveJson, DoneHandler doneHandler) {
+		
+		executionEngine.setDoneHandler(doneHandler);
+		
+		executionEngine.prepareToWriteTestCases();
+		
+		testCasesById.testCases().forEach(testCase -> {
+			
+			executionEngine.writeTestCaseAsync(testCase, shouldSaveJson);
+
+		});
 	}
 }

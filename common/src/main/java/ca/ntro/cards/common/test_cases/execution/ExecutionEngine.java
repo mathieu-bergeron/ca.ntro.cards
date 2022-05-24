@@ -1,13 +1,19 @@
 package ca.ntro.cards.common.test_cases.execution;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
+import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.core.initialization.Ntro;
 
 public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -19,6 +25,14 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private Class<TEST_CASE> testCaseClass;
 	
 	private Map<Long, TEST_CASE> testCaseByThreadId = new HashMap<>();
+	
+	private Deque<TestCaseCreationTask> testCasesToCreate = new ConcurrentLinkedDeque<>();
+	private Deque<TEST_CASE> testCasesToWrite = new ConcurrentLinkedDeque<>();
+	
+	private Map<String, TestCaseHandler> testCaseHandlers = new HashMap<>();
+
+	private DoneHandler doneHandler;
+	private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
 	
 	public Class<EXECUTABLE_MODEL> executableModelClass() {
 		return executableModelClass;
@@ -43,6 +57,10 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
 		this.testCaseClass = testCaseClass;
 	}
+	
+	public void setDoneHandler(DoneHandler doneHandler) {
+		this.doneHandler = doneHandler;
+	}
 
 	public void addStep(long threadId) {
 		TEST_CASE testCase = testCaseByThreadId.get(threadId);
@@ -60,32 +78,91 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		testCase.run();
 	}
 
-	public TEST_CASE createTestCase(TestCaseDescriptor descriptor) {
-
-		STUDENT_MODEL model = Ntro.factory().newInstance(studentModelClass);
-		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass());
-
-		model.generateTestCase(descriptor);
-
-		testCase.setCategory(descriptor.category());
-		testCase.setSize(model.testCaseSize());
-		testCase.setTestCaseId(descriptor.testCaseId());
-		testCase.registerStudentModel(model);
-		testCase.registerExecutableModelClass(executableModelClass);
-
-		ExecutionTraceFull<EXECUTABLE_MODEL> trace = new ExecutionTraceFull<>();
+	public void createTestCase(TestCaseDescriptor descriptor, TestCaseHandler<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> testCaseHandler) {
+		TestCaseCreationTask<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task = new TestCaseCreationTask<>();
+		task.setExecutableModelClass(executableModelClass);
+		task.setStudentModelClass(studentModelClass);
+		task.setTestCaseClass(testCaseClass);
+		task.setDescriptor(descriptor);
+		task.setHandler(testCaseHandler);
+		task.setExecutionEngine(this);
 		
-		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
-		//      (i.e. work in projects where the solution class is not accessible)
-		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
-		snapshot.copyDataFrom(model);
+		testCasesToCreate.push(task);
+	}
 
-		trace.pushReferenceTo(snapshot);
-		testCase.setTrace(trace);
+	public void prepareToWriteTestCases() {
+		if(dbDir.exists()) {
+			deleteFiles(dbDir);
+			dbDir.delete();
+		}
+
+		dbDir.mkdir();
+	}
+
+	private void deleteFiles(File dbDir) {
+		for(File file : dbDir.listFiles()) {
+			file.delete();
+		}
+	}
+
+	public void writeTestCaseAsync(TEST_CASE testCase, boolean shouldWriteJson) {
+		if(shouldWriteJson) {
+			writeJson(testCase);
+		}
 		
-		runTestCase(testCase);
+		writeBin(testCase);
+	}
 
-		return testCase;
+	private void writeJson(TEST_CASE testCase) {
+		File outFile = testCaseFile(testCase, "json");
+		
+		try {
+
+			FileOutputStream fileOutput = new FileOutputStream(outFile);
+			fileOutput.write(Ntro.reflection().toJsonObject(testCase).toJsonString().getBytes());
+			fileOutput.close();
+
+		} catch (IOException e) {
+			
+			Ntro.throwException(e);
+		}
+	}
+
+	private File testCaseFile(TEST_CASE testCase, String extension) {
+		return Paths.get(dbDir.getAbsolutePath(), testCase.getTestCaseId() + "." + extension).toFile();
+	}
+
+	private void writeBin(TEST_CASE testCase) {
+		File outFile = testCaseFile(testCase, "bin");
+
+		try {
+
+			FileOutputStream fileOutput = new FileOutputStream(outFile);
+			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
+			objectOutput.writeObject(testCase);
+
+			objectOutput.close();
+
+		} catch (IOException e) {
+			
+			Ntro.throwException(e);
+
+		}
+	}
+
+	public void prepareToGenerateTestCases() {
+		testCasesToCreate.clear();
+	}
+
+	public void generateTestCases(DoneHandler doneHandler) {
+		// TODO: simply start the first N threads and wait
+		//       for threads to finish
+
+		for(TestCaseCreationTask task : testCasesToCreate) {
+			task.createTestCase();
+		}
+
+		doneHandler.done();
 	}
 
 }

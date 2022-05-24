@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
 import ca.ntro.core.NtroJdk;
@@ -24,11 +25,15 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	private ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new ExecutionEngine<>();
 	private TEST_CASES_MODEL testCasesModel = Ntro.factory().newInstance(testCasesModelClass());
 	
-	private int numberOfThreads = CommonConstants.INITIAL_NUMBER_OF_EXECUTION_THREADS;
+	private int numberOfThreads = CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS;
 	
+	private long startTime;
+	private long endTime;
 
 	public void generateTestCases() {
-
+		
+		determineNumberOfThreads();
+		
 		System.out.println("\n\n[INIT]\n");
 		System.out.flush();
 
@@ -38,34 +43,45 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		System.out.println(String.format("\n... using %s threads", numberOfThreads));
 		System.out.flush();
 		
-		long startTime = System.currentTimeMillis();
-		
-		generateTestCasesImpl();
-		
-		long endTime = System.currentTimeMillis();
-
-		System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
-		System.out.flush();
-
-		System.out.println("\n\n[WRITING TEST CASES]");
-		System.out.println(String.format("\n... using %s threads", numberOfThreads));
-		System.out.flush();
-
 		startTime = System.currentTimeMillis();
+		
+		generateTestCasesImpl(() -> {
 
-		writeTestCases();
+			endTime = System.currentTimeMillis();
+			
+			System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.flush();
+			
+			System.out.println("\n\n[WRITING TEST CASES]");
+			System.out.println(String.format("\n... using %s threads", numberOfThreads));
+			System.out.flush();
 
-		endTime = System.currentTimeMillis();
+			startTime = System.currentTimeMillis();
 
-		System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
-		System.out.flush();
+			writeTestCases(() -> {
+
+				endTime = System.currentTimeMillis();
+
+				System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
+				System.out.flush();
+			});
+		});
+	}
+
+	private void determineNumberOfThreads() {
+		try {
+			int numberOfCpus = Runtime.getRuntime().availableProcessors();
+			if(numberOfCpus >= 1) {
+				numberOfThreads = numberOfCpus;
+			}
+		} finally {}
 	}
 
 	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
 	protected abstract Class<STUDENT_MODEL> studentModelClass();
 	protected abstract Class<TEST_CASE> testCaseClass();
 	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();
-	protected abstract boolean shouldSaveJson();
+	protected abstract boolean shouldWriteJson();
 
 	private void initialize() {
 		NtroJdk.initializer().executeBlocking();
@@ -98,45 +114,15 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	}
 
 
-	private void generateTestCasesImpl() {
+	private void generateTestCasesImpl(DoneHandler doneHandler) {
 		
-		
-		testCasesModel.generateTestCases();
+		testCasesModel.generateTestCasesAsync(doneHandler);
 
 	}
 
-	private void writeTestCases() {
+	private void writeTestCases(DoneHandler doneHandler) {
 
-		if(shouldSaveJson()) {
-			saveJson();
-		}
-	
-		saveBin();
-	}
+		testCasesModel.writeTestCasesAsync(shouldWriteJson(), doneHandler);
 
-	private void saveJson() {
-		try {
-
-			FileOutputStream fileOutput = new FileOutputStream(new File("db.json"));
-			fileOutput.write(Ntro.reflection().toJsonObject(testCasesModel).toJsonString().getBytes());
-
-		} catch (IOException e) {
-			
-			Ntro.throwException(e);
-		}
-	}
-
-	private void saveBin() {
-		try {
-
-			FileOutputStream fileOutput = new FileOutputStream(new File("db.bin"));
-			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-			objectOutput.writeObject(testCasesModel);
-
-		} catch (IOException e) {
-			
-			Ntro.throwException(e);
-
-		}
 	}
 }

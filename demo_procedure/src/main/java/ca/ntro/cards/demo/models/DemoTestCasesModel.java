@@ -11,13 +11,13 @@ public class   DemoTestCasesModel<STUDENT_MODEL extends TriNaif>
        extends TestCasesModel<TriNaif, STUDENT_MODEL, DemoTestCase>{
 
 	@Override
-	public void generateTestCases() {
+	public void describeTestCasesToGenerate() {
 
 		TestCaseDescriptor descriptor = TestCaseDescriptor.create()
 				                                          .category("examples")
 				                                          .testCaseId("ex01");
 		
-		createTestCase(descriptor);
+		addTestCase(descriptor);
 		
 		
 		for(int i = 0; i < 10; i++) {
@@ -28,7 +28,7 @@ public class   DemoTestCasesModel<STUDENT_MODEL extends TriNaif>
 			descriptor = TestCaseDescriptor.create()
 					                       .random(size);
 			
-			createTestCase(descriptor);
+			addTestCase(descriptor);
 		}
 	}
 
