@@ -1,14 +1,17 @@
 package ca.ntro.cards.common;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.TestCasesModel;
-import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.core.NtroJdk;
 import ca.ntro.core.initialization.Ntro;
+import io.vertx.core.impl.ConcurrentHashSet;
 
 public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutableModel,
                                         STUDENT_MODEL extends EXECUTABLE_MODEL,
@@ -24,8 +27,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	private long startTime;
 	private long endTime;
 	
-	private boolean generationDone = false;
-	private boolean writingDone = false;
+	private Set<String> tasksDone = new ConcurrentHashSet<>();
 
 	public void generateTestCases() {
 		
@@ -53,7 +55,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 			System.out.println(String.format("\n... generation done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 			
-			generationDone = true;
+			tasksDone.add("generation");
 			quitWhenAllDone();
 			
 		});
@@ -65,15 +67,15 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 			System.out.println(String.format("\n... writing done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 
-			writingDone = true;
+			tasksDone.add("writing");
 			quitWhenAllDone();
 			
 		});
 	}
 
 	private void quitWhenAllDone() {
-		if(generationDone 
-				&& writingDone) {
+		if(tasksDone.contains("generation")
+				&& tasksDone.contains("writing")) {
 
 			endTime = System.currentTimeMillis();
 
@@ -131,18 +133,5 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		testCasesModel.registerStudentModelClass(studentModelClass());
 		
 		testCasesModel.registerExecutionEngine(executionEngine);
-	}
-
-
-	private void queueTestCaseCreationTasks() {
-
-		testCasesModel.createTestCaseGenerationTasks();
-
-	}
-
-	private void writeTestCases(DoneHandler doneHandler) {
-
-		testCasesModel.writeTestCasesAsync(shouldWriteJson(), doneHandler);
-
 	}
 }

@@ -115,9 +115,11 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 
 	protected void addTestCase(TestCaseDescriptor descriptor) {
 
-		STUDENT_MODEL model = Ntro.factory().newInstance(studentModelClass);
+		STUDENT_MODEL studentModel = Ntro.factory().newInstance(studentModelClass);
 
 		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass);
+		testCase.registerStudentModel(studentModel);
+		testCase.registerExecutableModelClass(executableModelClass);
 		
 		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new TestCaseCreationJob<>();
 		creationJob.setTestCase(testCase);
