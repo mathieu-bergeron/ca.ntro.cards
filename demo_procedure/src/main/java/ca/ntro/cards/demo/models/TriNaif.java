@@ -172,7 +172,7 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public void generateTestCase(TestCaseDescriptor descriptor) {
+	public void initializeAsTestCase(TestCaseDescriptor descriptor) {
 		
 		if(descriptor.testCaseId().equals("ex01")) {
 

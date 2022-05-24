@@ -35,7 +35,7 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 		this.modelHistory = modelHistory;
 	}
 
-	public abstract void generateTestCase(TestCaseDescriptor descriptor);
+	public abstract void initializeAsTestCase(TestCaseDescriptor descriptor);
 
 	public abstract int testCaseSize();
 

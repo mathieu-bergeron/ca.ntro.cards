@@ -16,26 +16,24 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseJob;
 import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
                              STUDENT_MODEL extends EXECUTABLE_MODEL,
-                             TEST_CASE extends TestCase>  {
+                             TEST_CASE extends TestCase>  
+       extends Thread {
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
 	private Class<TEST_CASE> testCaseClass;
 	
-	private Map<Long, TEST_CASE> testCaseByThreadId = new HashMap<>();
-	
 	private Map<Long, TestCaseJobThread> threadById = new ConcurrentHashMap<>();
+	private Deque<TestCaseJob> jobs = new ConcurrentLinkedDeque<>();
 
-	private Deque<TestCaseCreationJob> testCasesToCreate = new ConcurrentLinkedDeque<>();
-	private Deque<TEST_CASE> testCasesToWrite = new ConcurrentLinkedDeque<>();
 	
-	private Map<String, TestCaseHandler> testCaseHandlers = new HashMap<>();
 
 	private DoneHandler doneHandler;
 	private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
@@ -68,10 +66,10 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		this.doneHandler = doneHandler;
 	}
 
-	public void addStep(long threadId) {
-		TEST_CASE testCase = testCaseByThreadId.get(threadId);
-
-		testCase.addStep();
+	public void addExecutionStep(long threadId) {
+		TestCaseJobThread thread = threadById.get(threadId);
+		
+		thread.addExecutionStep();
 	}
 
 	public void initialize(int numberOfThreads) {
@@ -82,33 +80,14 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 			
 			thread.start();
 		}
-
 	}
 	
 	public void executeJob(TestCaseJob job, DoneHandler doneHandler) {
-		
-		
+		job.setDoneHandler(doneHandler);
+
+		jobs.push(job);
 	}
 	
-
-	public void runTestCase(TEST_CASE testCase) {
-		testCaseByThreadId.put(Thread.currentThread().getId(), testCase);
-		
-		testCase.run();
-	}
-
-	public void createTestCase(TestCaseDescriptor descriptor, TestCaseHandler<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> testCaseHandler) {
-		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task = new TestCaseCreationJob<>();
-		task.setExecutableModelClass(executableModelClass);
-		task.setStudentModelClass(studentModelClass);
-		task.setTestCaseClass(testCaseClass);
-		task.setDescriptor(descriptor);
-		task.setHandler(testCaseHandler);
-		task.setExecutionEngine(this);
-		
-		testCasesToCreate.push(task);
-	}
-
 	public void resetTestCasesDirectory() {
 
 		if(dbDir.exists()) {
@@ -125,92 +104,34 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		}
 	}
 
-	public void writeTestCaseAsync(TEST_CASE testCase, boolean shouldWriteJson) {
-		if(shouldWriteJson) {
-			writeJson(testCase);
-		}
-		
-		writeBin(testCase);
-		
-	}
-
-	public void writeTestCases() {
-	}
-
-	private void writeJson(TEST_CASE testCase) {
-		File outFile = testCaseFile(testCase, "json");
-		
-		try {
-
-			FileOutputStream fileOutput = new FileOutputStream(outFile);
-			fileOutput.write(Ntro.reflection().toJsonObject(testCase).toJsonString().getBytes());
-			fileOutput.close();
-
-		} catch (IOException e) {
+	@Override
+	public void run() {
+		while(!isInterrupted()) {
 			
-			Ntro.throwException(e);
+			try {
+				
+				updateJobs();
+
+				sleep(CommonConstants.TEST_CASE_JOB_ENGINE_CONTROL_THREAD_SLEEP_TIME_MILISECONDS);
+
+			} catch (InterruptedException e) {
+
+				interrupt();
+
+			}
 		}
-	}
-
-	private File testCaseFile(TEST_CASE testCase, String extension) {
-		return Paths.get(dbDir.getAbsolutePath(), testCase.getTestCaseId() + "." + extension).toFile();
-	}
-
-	private void writeBin(TEST_CASE testCase) {
-		File outFile = testCaseFile(testCase, "bin");
-
-		try {
-
-			FileOutputStream fileOutput = new FileOutputStream(outFile);
-			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-			objectOutput.writeObject(testCase);
-
-			objectOutput.close();
-
-		} catch (IOException e) {
-			
-			Ntro.throwException(e);
-
-		}
-	}
-
-	public void prepareToGenerateTestCases() {
-		testCasesToCreate.clear();
-		
-		
-		
-	}
-
-	public void generateTestCases(DoneHandler doneHandler) {
-		// TODO: simply start the first N threads and wait
-		//       for threads to finish
-
-		for(TestCaseCreationJob task : testCasesToCreate) {
-			task.createTestCase();
-		}
-
-		doneHandler.done();
 	}
 	
-	public void run() {
+	private void updateJobs() {
+		
 		
 	}
 
 	public void shutdown() {
 		for(TestCaseJobThread thread : threadById.values()) {
-			thread.shutdown();
-
-			try {
-
-				thread.join();
-
-			} catch (InterruptedException e) {
-				
-				Ntro.throwException(e);
-			}
+			thread.interrupt();
 		}
+
+		this.interrupt();
 	}
-
-
-
 }

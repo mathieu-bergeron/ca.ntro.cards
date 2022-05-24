@@ -1,10 +1,10 @@
 package ca.ntro.cards.common.test_cases.execution;
 
-import ca.ntro.cards.common.CommonConstants;
+import java.util.concurrent.locks.ReentrantLock;
+
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseJob;
-import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
                             STUDENT_MODEL extends EXECUTABLE_MODEL,
@@ -12,40 +12,50 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 
        extends Thread {
 	
-	private boolean shouldRun = true;
+	private TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> job;
+	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+
+	private ReentrantLock nextJob = new ReentrantLock();
 	
-	private TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task;
-
-	public TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getTask() {
-		return task;
+	public TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getJob() {
+		return job;
 	}
 
-	public void setTask(TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task) {
-		this.task = task;
+	public void setJob(TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> job) {
+		this.job = job;
 	}
 
+	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getExecutionEngine() {
+		return executionEngine;
+	}
+
+	public void setExecutionEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
+		this.executionEngine = executionEngine;
+	}
+	
 
 	@Override
 	public void run() {
-		while(shouldRun) {
-			if(task != null) {
+		while(!isInterrupted()) {
+			
+			try {
 				
-				task.run();
+				//job.run();
 				
-			}else {
 				
-				try {
+			}catch(Throwable t){
+				
+				//job.failedWith(t);
 
-					sleep(CommonConstants.EXECUTION_THREAD_SLEEP_TIME_MILISECONDS);
-
-				} catch (InterruptedException e) {
-					Ntro.throwException(e);
-				}
 			}
+			
+			
+			
 		}
+
 	}
 
-	public void shutdown() {
-		this.shouldRun = false;
+	public void addExecutionStep() {
+		job.addExecutionStep();
 	}
 }

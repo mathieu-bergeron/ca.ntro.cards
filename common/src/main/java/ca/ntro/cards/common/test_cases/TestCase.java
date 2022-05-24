@@ -88,7 +88,7 @@ public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
 		studentModel.run();
 	}
 
-	public void addStep() {
+	public void addExecutionStep() {
 		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
 		snapshot.copyDataFrom(studentModel);
 

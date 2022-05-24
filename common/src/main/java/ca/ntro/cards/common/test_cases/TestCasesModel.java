@@ -1,6 +1,7 @@
 package ca.ntro.cards.common.test_cases;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -10,15 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
-import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
+import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseWritingJob;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
-import io.vertx.core.impl.ConcurrentHashSet;
 
 public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                           STUDENT_MODEL    extends EXECUTABLE_MODEL,
@@ -41,8 +41,8 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	private transient Map<String, TestCaseCreationJob> creationJobs = new ConcurrentHashMap<>();
 	private transient Map<String, TestCaseWritingJob> writingJobs = new ConcurrentHashMap<>();
 
-	private transient Set<String> creationJobsDone = new ConcurrentHashSet<>();
-	private transient Set<String> writingJobsDone = new ConcurrentHashSet<>();
+	private transient Set<String> creationJobsDone = Collections.synchronizedSet(new HashSet<>());
+	private transient Set<String> writingJobsDone = Collections.synchronizedSet(new HashSet<>());
 	
 	private transient DoneHandler onCreationDoneHandler;
 	private transient DoneHandler onWritingDoneHandler;
@@ -94,32 +94,44 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	public void setTestCasesByCategory(TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory) {
 		this.testCasesByCategory = testCasesByCategory;
 	}
-	
+
+	public Class<TEST_CASE> testCaseClass() {
+		return testCaseClass;
+	}
+
+	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
+		this.testCaseClass = testCaseClass;
+	}
 
 	public void generateFirstVersionIfNeeded() {
 		throw new RuntimeException("DEPRECATED");
 	}
 
-	public void generateTestCasesAsync(DoneHandler doneHandler) {
-		executionEngine.setDoneHandler(doneHandler);
-		
-		executionEngine.prepareToGenerateTestCases();
-
-		describeTestCasesToGenerate();
-
-		executionEngine.generateTestCases(doneHandler);
-
-	}
-
 	public abstract void describeTestCasesToGenerate();
 
+	@SuppressWarnings("unchecked")
 	protected void addTestCase(TestCaseDescriptor descriptor) {
 
 		STUDENT_MODEL studentModel = Ntro.factory().newInstance(studentModelClass);
-
 		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass);
+		
+		studentModel.initializeAsTestCase(descriptor);
+
+		testCase.setCategory(descriptor.category());
+		testCase.setSize(studentModel.testCaseSize());
+		testCase.setTestCaseId(descriptor.testCaseId());
 		testCase.registerStudentModel(studentModel);
 		testCase.registerExecutableModelClass(executableModelClass);
+
+		ExecutionTraceFull<EXECUTABLE_MODEL> trace = new ExecutionTraceFull<>();
+
+		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
+		//      (i.e. work in projects where the solution class is not accessible)
+		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
+		snapshot.copyDataFrom(studentModel);
+
+		trace.pushReferenceTo(snapshot);
+		testCase.setTrace(trace);
 		
 		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new TestCaseCreationJob<>();
 		creationJob.setTestCase(testCase);
@@ -154,6 +166,8 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 				});
 			});
 		}
+
+		executionEngine.start();
 	}
 
 	private void onCreationJobDone(String testCaseId) {
@@ -163,7 +177,6 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 				&& onCreationDoneHandler != null) {
 			
 			onCreationDoneHandler.done();
-			
 		}
 	}
 	

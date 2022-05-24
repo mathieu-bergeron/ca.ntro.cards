@@ -44,7 +44,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 		@SuppressWarnings("unchecked")
 		EXECUTABLE_MODEL executableModel = (EXECUTABLE_MODEL) canvasModel;
 
-		executableModel.generateTestCase(TestCaseDescriptor.create().testCaseId("ex01"));
+		executableModel.initializeAsTestCase(TestCaseDescriptor.create().testCaseId("ex01"));
 		executableModel.registerLock(lock);
 		executableModel.registerModelHistory(modelHistory);
 

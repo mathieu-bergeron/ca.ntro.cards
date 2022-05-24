@@ -10,7 +10,7 @@ public class Execution {
 	}
 
 	public static void ajouterEtape() {
-		executionEngine.addStep(Thread.currentThread().getId());
+		executionEngine.addExecutionStep(Thread.currentThread().getId());
 	}
 
 }

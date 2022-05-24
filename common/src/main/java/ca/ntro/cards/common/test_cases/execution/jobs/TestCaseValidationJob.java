@@ -13,4 +13,8 @@ public class TestCaseValidationJob<EXECUTABLE_MODEL extends CommonExecutableMode
 
        extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
+	@Override
+	public void run() {
+	}
+
 }

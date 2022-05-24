@@ -13,4 +13,8 @@ public class TestCaseReadingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
        extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
+	@Override
+	public void run() {
+	}
+
 }

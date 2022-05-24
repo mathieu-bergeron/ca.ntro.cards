@@ -1,6 +1,7 @@
 package ca.ntro.cards.common;
 
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,6 @@ import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.core.NtroJdk;
 import ca.ntro.core.initialization.Ntro;
-import io.vertx.core.impl.ConcurrentHashSet;
 
 public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutableModel,
                                         STUDENT_MODEL extends EXECUTABLE_MODEL,
@@ -27,7 +27,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	private long startTime;
 	private long endTime;
 	
-	private Set<String> tasksDone = new ConcurrentHashSet<>();
+	private Set<String> tasksDone = Collections.synchronizedSet(new HashSet<>());
 
 	public void generateTestCases() {
 		
@@ -71,6 +71,8 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 			quitWhenAllDone();
 			
 		});
+
+		executionEngine.shutdown();
 	}
 
 	private void quitWhenAllDone() {
@@ -87,7 +89,6 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 		}
 	}
-
 
 	private void determineNumberOfThreads() {
 		try {
@@ -131,6 +132,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 		testCasesModel.registerExecutableModelClass(executableModelClass());
 		testCasesModel.registerStudentModelClass(studentModelClass());
+		testCasesModel.registerTestCaseClass(testCaseClass());
 		
 		testCasesModel.registerExecutionEngine(executionEngine);
 	}
