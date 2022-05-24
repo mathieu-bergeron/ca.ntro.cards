@@ -6,7 +6,7 @@ import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.DoneHandler;
-import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
+import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
@@ -28,13 +28,16 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
 	
-	private transient ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+	private transient TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+	
+	private transient DoneHandler onGenerationDoneHandler;
+	private transient DoneHandler onWritingDoneHandler;
 
-	public ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
+	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
 		return executionEngine;
 	}
 
-	public void registerExecutionEngine(ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
+	public void registerExecutionEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
 		this.executionEngine = executionEngine;
 	}
 
@@ -77,6 +80,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	public void setTestCasesByCategory(TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory) {
 		this.testCasesByCategory = testCasesByCategory;
 	}
+	
 
 	public void generateFirstVersionIfNeeded() {
 		throw new RuntimeException("DEPRECATED");
@@ -109,8 +113,6 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		
 		executionEngine.setDoneHandler(doneHandler);
 		
-		executionEngine.prepareToWriteTestCases();
-		
 		testCasesById.testCases().forEach(testCase -> {
 			
 			executionEngine.writeTestCaseAsync(testCase, shouldSaveJson);
@@ -118,5 +120,17 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		});
 
 		executionEngine.writeTestCases();
+	}
+
+	public void queueTestCaseCreationTasks() {
+	}
+
+	public void onGenerationDone(DoneHandler onGenerationDoneHandler) {
+		this.onGenerationDoneHandler = onGenerationDoneHandler;
+
+	}
+
+	public void onWritingDone(DoneHandler onWritingDoneHandler) {
+		this.onWritingDoneHandler = onWritingDoneHandler;
 	}
 }

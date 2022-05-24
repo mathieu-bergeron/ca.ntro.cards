@@ -1,20 +1,14 @@
 package ca.ntro.cards.common;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.TestCasesModel;
 import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.Execution;
-import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
+import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.core.NtroJdk;
 import ca.ntro.core.initialization.Ntro;
-import ca.ntro.core.path.Path;
 
 public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutableModel,
                                         STUDENT_MODEL extends EXECUTABLE_MODEL,
@@ -22,13 +16,16 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
                                         TEST_CASES_MODEL extends TestCasesModel> {
 
 
-	private ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new ExecutionEngine<>();
+	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
 	private TEST_CASES_MODEL testCasesModel = Ntro.factory().newInstance(testCasesModelClass());
 	
 	private int numberOfThreads = CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS;
 	
 	private long startTime;
 	private long endTime;
+	
+	private boolean generationDone = false;
+	private boolean writingDone = false;
 
 	public void generateTestCases() {
 		
@@ -45,28 +42,49 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		
 		startTime = System.currentTimeMillis();
 		
-		generateTestCasesImpl(() -> {
+		testCasesModel.queueTestCaseCreationTasks();
+		
+		executionEngine.run();
+		
+		testCasesModel.onGenerationDone(() -> {
 
 			endTime = System.currentTimeMillis();
 			
-			System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.println(String.format("\n... generation done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 			
-			System.out.println("\n\n[WRITING TEST CASES]");
-			System.out.println(String.format("\n... using %s threads", numberOfThreads));
+			generationDone = true;
+			quitWhenAllDone();
+			
+		});
+
+		testCasesModel.onWritingDone(() -> {
+
+			endTime = System.currentTimeMillis();
+			
+			System.out.println(String.format("\n... writing done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 
-			startTime = System.currentTimeMillis();
-
-			writeTestCases(() -> {
-
-				endTime = System.currentTimeMillis();
-
-				System.out.println(String.format("\n... done in %.2f seconds\n", (endTime - startTime) / 1E3));
-				System.out.flush();
-			});
+			writingDone = true;
+			quitWhenAllDone();
+			
 		});
 	}
+
+	private void quitWhenAllDone() {
+		if(generationDone 
+				&& writingDone) {
+
+			endTime = System.currentTimeMillis();
+
+			System.out.println(String.format("\n... all done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.flush();
+
+			executionEngine.shutdown();
+
+		}
+	}
+
 
 	private void determineNumberOfThreads() {
 		try {
@@ -94,14 +112,15 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 
 	private void initializeExecutionEngine() {
-		
+		Execution.registerExecutionEngine(executionEngine);
+
 		executionEngine.registerExecutableModelClass(executableModelClass());
 		executionEngine.registerStudentModelClass(studentModelClass());
 		executionEngine.registerTestCaseClass(testCaseClass());
 		
 		executionEngine.initialize(numberOfThreads);
 		
-		Execution.registerExecutionEngine(executionEngine);
+		executionEngine.resetTestCasesDirectory();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -114,9 +133,9 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	}
 
 
-	private void generateTestCasesImpl(DoneHandler doneHandler) {
-		
-		testCasesModel.generateTestCasesAsync(doneHandler);
+	private void queueTestCaseCreationTasks() {
+
+		testCasesModel.queueTestCaseCreationTasks();
 
 	}
 

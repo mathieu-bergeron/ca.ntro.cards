@@ -1,17 +1,19 @@
-package ca.ntro.cards.common.test_cases.execution;
+package ca.ntro.cards.common.test_cases.execution.jobs;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
+import ca.ntro.cards.common.test_cases.execution.TestCaseHandler;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.core.initialization.Ntro;
 
-public class TestCaseCreationTask<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class TestCaseCreationJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                                   STUDENT_MODEL extends EXECUTABLE_MODEL,
                                   TEST_CASE extends TestCase>  
 
 
-       extends TestCaseTask<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+       extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
@@ -20,7 +22,7 @@ public class TestCaseCreationTask<EXECUTABLE_MODEL extends CommonExecutableModel
 	private TestCaseDescriptor descriptor;
 	private TestCaseHandler handler;
 
-	private transient ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+	private transient TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 
 	public Class<EXECUTABLE_MODEL> getExecutableModelClass() {
 		return executableModelClass;
@@ -62,11 +64,11 @@ public class TestCaseCreationTask<EXECUTABLE_MODEL extends CommonExecutableModel
 		this.handler = handler;
 	}
 
-	public ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getExecutionEngine() {
+	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getExecutionEngine() {
 		return executionEngine;
 	}
 
-	public void setExecutionEngine(ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
+	public void setExecutionEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
 		this.executionEngine = executionEngine;
 	}
 

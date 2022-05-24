@@ -21,6 +21,8 @@ public class CommonConstants {
 	public static final double SECONDS_BETWEEN_EXECUTION_STEPS = 0.15;
 	
 	public static final int DEFAULT_NUMBER_OF_EXECUTION_THREADS = 4;
+
+	public static final long EXECUTION_THREAD_SLEEP_TIME_MILISECONDS = 200;
 	
 	public static final String TEST_CASES_DIR = "db";
 

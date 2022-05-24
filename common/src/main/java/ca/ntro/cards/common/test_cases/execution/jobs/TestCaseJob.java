@@ -1,9 +1,9 @@
-package ca.ntro.cards.common.test_cases.execution;
+package ca.ntro.cards.common.test_cases.execution.jobs;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 
-public class TestCaseTask<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class TestCaseJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                           STUDENT_MODEL extends EXECUTABLE_MODEL,
                           TEST_CASE extends TestCase>  {
 

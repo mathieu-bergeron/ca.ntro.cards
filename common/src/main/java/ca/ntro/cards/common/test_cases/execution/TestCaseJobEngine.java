@@ -16,9 +16,10 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
 import ca.ntro.core.initialization.Ntro;
 
-public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
                              STUDENT_MODEL extends EXECUTABLE_MODEL,
                              TEST_CASE extends TestCase>  {
 	
@@ -28,9 +29,9 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	
 	private Map<Long, TEST_CASE> testCaseByThreadId = new HashMap<>();
 	
-	private Map<Long, TestCaseThread> threadById = new ConcurrentHashMap<>();
+	private Map<Long, TestCaseJobThread> threadById = new ConcurrentHashMap<>();
 
-	private Deque<TestCaseCreationTask> testCasesToCreate = new ConcurrentLinkedDeque<>();
+	private Deque<TestCaseCreationJob> testCasesToCreate = new ConcurrentLinkedDeque<>();
 	private Deque<TEST_CASE> testCasesToWrite = new ConcurrentLinkedDeque<>();
 	
 	private Map<String, TestCaseHandler> testCaseHandlers = new HashMap<>();
@@ -75,7 +76,7 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public void initialize(int numberOfThreads) {
 		for(int i = 0; i < numberOfThreads; i++) {
 			
-			TestCaseThread thread = new TestCaseThread();
+			TestCaseJobThread thread = new TestCaseJobThread();
 			threadById.put(thread.getId(), thread);
 			
 			thread.start();
@@ -94,7 +95,7 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 
 	public void createTestCase(TestCaseDescriptor descriptor, TestCaseHandler<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> testCaseHandler) {
-		TestCaseCreationTask<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task = new TestCaseCreationTask<>();
+		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> task = new TestCaseCreationJob<>();
 		task.setExecutableModelClass(executableModelClass);
 		task.setStudentModelClass(studentModelClass);
 		task.setTestCaseClass(testCaseClass);
@@ -105,7 +106,8 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		testCasesToCreate.push(task);
 	}
 
-	public void prepareToWriteTestCases() {
+	public void resetTestCasesDirectory() {
+
 		if(dbDir.exists()) {
 			deleteFiles(dbDir);
 			dbDir.delete();
@@ -180,12 +182,32 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		// TODO: simply start the first N threads and wait
 		//       for threads to finish
 
-		for(TestCaseCreationTask task : testCasesToCreate) {
+		for(TestCaseCreationJob task : testCasesToCreate) {
 			task.createTestCase();
 		}
 
 		doneHandler.done();
 	}
+	
+	public void run() {
+		
+	}
+
+	public void shutdown() {
+		for(TestCaseJobThread thread : threadById.values()) {
+			thread.shutdown();
+
+			try {
+
+				thread.join();
+
+			} catch (InterruptedException e) {
+				
+				Ntro.throwException(e);
+			}
+		}
+	}
+
 
 
 }

@@ -2,7 +2,7 @@ package ca.ntro.cards.demo.models;
 
 import ca.ntro.cards.common.test_cases.TestCasesModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
-import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
+import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.core.initialization.Ntro;
 

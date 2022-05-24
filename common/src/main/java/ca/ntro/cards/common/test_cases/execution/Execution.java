@@ -3,9 +3,9 @@ package ca.ntro.cards.common.test_cases.execution;
 public class Execution {
 	
 	@SuppressWarnings("rawtypes")
-	private static ExecutionEngine executionEngine;
+	private static TestCaseJobEngine executionEngine;
 	
-	public static void registerExecutionEngine(ExecutionEngine executionEngine) {
+	public static void registerExecutionEngine(TestCaseJobEngine executionEngine) {
 		Execution.executionEngine = executionEngine;
 	}
 
