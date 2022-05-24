@@ -8,7 +8,10 @@ import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseCreationTask<EXECUTABLE_MODEL extends CommonExecutableModel,
                                   STUDENT_MODEL extends EXECUTABLE_MODEL,
-                                  TEST_CASE extends TestCase>  {
+                                  TEST_CASE extends TestCase>  
+
+
+       extends TestCaseTask<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;

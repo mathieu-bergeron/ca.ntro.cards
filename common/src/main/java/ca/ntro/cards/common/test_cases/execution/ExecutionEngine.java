@@ -7,7 +7,9 @@ import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import ca.ntro.cards.common.CommonConstants;
@@ -26,6 +28,8 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	
 	private Map<Long, TEST_CASE> testCaseByThreadId = new HashMap<>();
 	
+	private Map<Long, TestCaseThread> threadById = new ConcurrentHashMap<>();
+
 	private Deque<TestCaseCreationTask> testCasesToCreate = new ConcurrentLinkedDeque<>();
 	private Deque<TEST_CASE> testCasesToWrite = new ConcurrentLinkedDeque<>();
 	
@@ -68,9 +72,20 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		testCase.addStep();
 	}
 
-	public void initialize(int initialNumberOfThreads) {
+	public void initialize(int numberOfThreads) {
+		for(int i = 0; i < numberOfThreads; i++) {
+			
+			TestCaseThread thread = new TestCaseThread();
+			threadById.put(thread.getId(), thread);
+			
+			thread.start();
+		}
 
 	}
+	
+	
+	
+	
 
 	public void runTestCase(TEST_CASE testCase) {
 		testCaseByThreadId.put(Thread.currentThread().getId(), testCase);
@@ -111,6 +126,10 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		}
 		
 		writeBin(testCase);
+		
+	}
+
+	public void writeTestCases() {
 	}
 
 	private void writeJson(TEST_CASE testCase) {
@@ -152,6 +171,9 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	public void prepareToGenerateTestCases() {
 		testCasesToCreate.clear();
+		
+		
+		
 	}
 
 	public void generateTestCases(DoneHandler doneHandler) {
@@ -164,5 +186,6 @@ public class ExecutionEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 		doneHandler.done();
 	}
+
 
 }

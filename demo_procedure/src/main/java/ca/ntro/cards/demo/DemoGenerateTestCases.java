@@ -30,7 +30,7 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected boolean shouldWriteJson() {
-		return true;
+		return false;
 	}
 
 }

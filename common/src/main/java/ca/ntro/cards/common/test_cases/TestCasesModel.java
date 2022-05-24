@@ -116,5 +116,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 			executionEngine.writeTestCaseAsync(testCase, shouldSaveJson);
 
 		});
+
+		executionEngine.writeTestCases();
 	}
 }

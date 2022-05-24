@@ -20,9 +20,9 @@ public class   DemoTestCasesModel<STUDENT_MODEL extends TriNaif>
 		addTestCase(descriptor);
 		
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 2; i++) {
 			
-			int size = 10 + Ntro.random().nextInt(100);
+			int size = 10 + Ntro.random().nextInt(3);
 			
 
 			descriptor = TestCaseDescriptor.create()
