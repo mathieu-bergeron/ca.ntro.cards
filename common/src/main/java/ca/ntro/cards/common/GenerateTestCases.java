@@ -30,9 +30,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		testCasesModel.registerStudentModelClass(studentModelClass());
 		
 		testCasesModel.generateFirstVersionIfNeeded();
-		
-		Ntro.storage().writeTextFile(Path.fromRawPath("../db.json"), Ntro.reflection().toJsonObject(testCasesModel).toJsonString());
-		
+	
 		try {
 
 			FileOutputStream fileOutput = new FileOutputStream(new File("db.bin"));
