@@ -4,6 +4,8 @@ package ca.ntro.cards.common;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
@@ -73,6 +75,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		});
 
 		executionEngine.shutdown();
+
 	}
 
 	private void quitWhenAllDone() {

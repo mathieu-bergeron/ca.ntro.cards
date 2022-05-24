@@ -14,6 +14,8 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 	
 	private TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> job;
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+	
+	private boolean shouldQuit = false;
 
 	private ReentrantLock nextJob = new ReentrantLock();
 	
@@ -36,23 +38,30 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void run() {
-		while(!isInterrupted()) {
+		while(!shouldQuit) {
 			
 			try {
 				
-				//job.run();
+				nextJob.lock();
 				
+				//job.run();
 				
 			}catch(Throwable t){
 				
-				//job.failedWith(t);
+				//job.failsWith(t);
+
+				shouldQuit = true;
+
+			}finally {
+				
+				nextJob.unlock();
 
 			}
-			
-			
-			
 		}
-
+	}
+	
+	public void quit() {
+		shouldQuit = true;
 	}
 
 	public void addExecutionStep() {

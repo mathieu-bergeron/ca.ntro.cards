@@ -9,8 +9,12 @@ import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
@@ -31,12 +35,12 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private Class<TEST_CASE> testCaseClass;
 	
 	private Map<Long, TestCaseJobThread> threadById = new ConcurrentHashMap<>();
-	private Deque<TestCaseJob> jobs = new ConcurrentLinkedDeque<>();
 
-	
+	private Queue<TestCaseJob> jobs = new LinkedBlockingQueue<>();
 
-	private DoneHandler doneHandler;
 	private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
+	
+	private boolean shouldQuit = false;
 	
 	public Class<EXECUTABLE_MODEL> executableModelClass() {
 		return executableModelClass;
@@ -61,10 +65,6 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
 		this.testCaseClass = testCaseClass;
 	}
-	
-	public void setDoneHandler(DoneHandler doneHandler) {
-		this.doneHandler = doneHandler;
-	}
 
 	public void addExecutionStep(long threadId) {
 		TestCaseJobThread thread = threadById.get(threadId);
@@ -77,15 +77,14 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 			
 			TestCaseJobThread thread = new TestCaseJobThread();
 			threadById.put(thread.getId(), thread);
-			
-			thread.start();
+
 		}
 	}
 	
 	public void executeJob(TestCaseJob job, DoneHandler doneHandler) {
 		job.setDoneHandler(doneHandler);
 
-		jobs.push(job);
+		jobs.add(job);
 	}
 	
 	public void resetTestCasesDirectory() {
@@ -106,7 +105,9 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void run() {
-		while(!isInterrupted()) {
+		startThreads();
+		
+		while(!shouldQuit) {
 			
 			try {
 				
@@ -116,22 +117,41 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 			} catch (InterruptedException e) {
 
-				interrupt();
+				shouldQuit = true;
 
 			}
 		}
+		
 	}
 	
+	private void startThreads() {
+		for(TestCaseJobThread thread : threadById.values()) {
+			thread.start();
+		}
+	}
+
 	private void updateJobs() {
 		
+	}
+
+	private void forceQuitThreads() {
+		for(TestCaseJobThread thread : threadById.values()) {
+			System.out.println(String.format("thread %s %s", thread.getId(), thread.getState()));
+		}
 		
 	}
 
 	public void shutdown() {
 		for(TestCaseJobThread thread : threadById.values()) {
-			thread.interrupt();
+			thread.quit();
 		}
+		
+		this.shouldQuit = true;
 
-		this.interrupt();
 	}
+
+	public void forceShutdown() {
+		System.out.println("forceShutdown");
+	}
+
 }
