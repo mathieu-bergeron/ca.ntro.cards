@@ -7,6 +7,7 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
+import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
@@ -22,9 +23,8 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	private long version = 0;
 	
 	private TestCaseById<EXECUTABLE_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
-
 	private TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory = new TestCasesByCategory<>();
-	
+
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
 	
@@ -100,12 +100,25 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	public abstract void describeTestCasesToGenerate();
 
 	protected void addTestCase(TestCaseDescriptor descriptor) {
+		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new TestCaseCreationJob<>();
+		creationJob.setExecutableModelClass(executableModelClass);
+		creationJob.setStudentModelClass(studentModelClass);
+		creationJob.setTestCaseClass(testCaseClass);
+		creationJob.setDescriptor(descriptor);
+		creationJob.setHandler(testCaseHandler);
+		creationJob.setExecutionEngine(executionEngine);
 		
-		executionEngine.createTestCase(descriptor, testCase -> {
-
+		executionEngine.executeJob(creationJob, () -> {
+			
 			testCasesById.addTestCase(testCase);
 			testCasesByCategory.addTestCase(testCase);
-
+			
+			TestCaseWritingJob writingJob = new TestCaseWritingJob();
+			
+			executionEngine.executeJob(writingJob, () -> {
+				
+				
+			});
 		});
 	}
 

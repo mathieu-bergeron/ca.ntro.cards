@@ -77,7 +77,8 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 			endTime = System.currentTimeMillis();
 
-			System.out.println(String.format("\n... all done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.println("\n\n[ALL DONE]");
+			System.out.println(String.format("\n... in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 
 			executionEngine.shutdown();
