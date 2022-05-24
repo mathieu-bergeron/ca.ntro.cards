@@ -42,11 +42,11 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		
 		startTime = System.currentTimeMillis();
 		
-		testCasesModel.queueTestCaseCreationTasks();
+		testCasesModel.createTestCaseGenerationTasks();
 		
-		executionEngine.run();
+		testCasesModel.runTestCaseGenerationTasks();
 		
-		testCasesModel.onGenerationDone(() -> {
+		testCasesModel.onCreationDone(() -> {
 
 			endTime = System.currentTimeMillis();
 			
@@ -136,7 +136,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 	private void queueTestCaseCreationTasks() {
 
-		testCasesModel.queueTestCaseCreationTasks();
+		testCasesModel.createTestCaseGenerationTasks();
 
 	}
 

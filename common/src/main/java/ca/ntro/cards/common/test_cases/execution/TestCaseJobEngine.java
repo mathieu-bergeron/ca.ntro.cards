@@ -17,6 +17,7 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseJob;
 import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -84,8 +85,10 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	}
 	
-	
-	
+	public void executeJob(TestCaseJob job, DoneHandler doneHandler) {
+		
+		
+	}
 	
 
 	public void runTestCase(TEST_CASE testCase) {
