@@ -22,7 +22,7 @@ public class CommonConstants {
 	
 	public static final int DEFAULT_NUMBER_OF_EXECUTION_THREADS = 4;
 
-	public static final long TEST_CASE_JOB_ENGINE_CONTROL_THREAD_SLEEP_TIME_MILISECONDS = 200;
+	public static final long ENGINE_THREAD_SLEEP_TIME_MILISECONDS = 200;
 	
 	public static final String TEST_CASES_DIR = "db";
 

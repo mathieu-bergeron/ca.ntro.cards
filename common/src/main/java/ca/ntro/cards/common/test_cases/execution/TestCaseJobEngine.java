@@ -112,7 +112,7 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 				
 				updateJobs();
 
-				sleep(CommonConstants.TEST_CASE_JOB_ENGINE_CONTROL_THREAD_SLEEP_TIME_MILISECONDS);
+				sleep(CommonConstants.ENGINE_THREAD_SLEEP_TIME_MILISECONDS);
 
 			} catch (InterruptedException e) {
 
