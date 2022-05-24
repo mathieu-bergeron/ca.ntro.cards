@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models;
+package ca.ntro.cards.common.test_cases.descriptor;
 
 public interface TestCaseDescriptor {
 	

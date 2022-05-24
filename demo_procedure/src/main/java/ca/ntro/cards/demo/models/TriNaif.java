@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.models.TestCaseDescriptor;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.models.values.cards.NullCard;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.DemoProcedureViewData;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
@@ -34,52 +34,56 @@ public class   TriNaif<C extends Comparable<C>>
 
 	@Override
 	public void copyDataFrom(TriNaif otherModel) {
+		listeSource.clear();
+		listeSource.addAll(otherModel.listeSource);
+		
+		listeCible.clear();
+		listeCible.addAll(otherModel.listeCible);
+		
+		indicePlusPetit = otherModel.indicePlusPetit;
+		indiceCandidat = otherModel.indiceCandidat;
+		indiceProchainVide = otherModel.indiceProchainVide;
 
-		setSourceArray(otherModel.getSourceArray());
-		setTargetArray(otherModel.getTargetArray());
-		setIndexOfSmallestElement(otherModel.getIndexOfSmallestElement());
-		setIndexOfCandidateSmallestElement(otherModel.getIndexOfCandidateSmallestElement());
-		setIndexOfNextEmptySpace(otherModel.getIndexOfNextEmptySpace());
 	}
 
-	public int getIndexOfSmallestElement() {
+	public int getIndicePlusPetit() {
 		return indicePlusPetit;
 	}
 
-	public void setIndexOfSmallestElement(int indexOfSmallestElement) {
-		this.indicePlusPetit = indexOfSmallestElement;
+	public void setIndicePlusPetit(int indicePlusPetit) {
+		this.indicePlusPetit = indicePlusPetit;
 	}
 
-	public int getIndexOfCandidateSmallestElement() {
+	public int getIndiceCandidat() {
 		return indiceCandidat;
 	}
 
-	public void setIndexOfCandidateSmallestElement(int indexOfCandidateSmallestElement) {
-		this.indiceCandidat = indexOfCandidateSmallestElement;
+	public void setIndiceCandidat(int indiceCandidat) {
+		this.indiceCandidat = indiceCandidat;
 	}
 
-	public int getIndexOfNextEmptySpace() {
+	public int getIndiceProchainVide() {
 		return indiceProchainVide;
 	}
 
-	public void setIndexOfNextEmptySpace(int indexOfNextEmptySpace) {
-		this.indiceProchainVide = indexOfNextEmptySpace;
+	public void setIndiceProchainVide(int indiceProchainVide) {
+		this.indiceProchainVide = indiceProchainVide;
 	}
 
-	public List<C> getSourceArray() {
+	public List<C> getListeSource() {
 		return listeSource;
 	}
 
-	public void setSourceArray(List<C> sourceArray) {
-		this.listeSource = sourceArray;
+	public void setListeSource(List<C> listeSource) {
+		this.listeSource = listeSource;
 	}
 
-	public List<C> getTargetArray() {
+	public List<C> getListeCible() {
 		return listeCible;
 	}
 
-	public void setTargetArray(List<C> targetArray) {
-		this.listeCible = targetArray;
+	public void setListeCible(List<C> listeCible) {
+		this.listeCible = listeCible;
 	}
 
 	@Override
@@ -127,24 +131,24 @@ public class   TriNaif<C extends Comparable<C>>
 			topCards.add(card);
 		}
 
-		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndexOfSmallestElement() * cardWidth * 3 / 2;
+		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndicePlusPetit() * cardWidth * 3 / 2;
 		double markerTopLeftY = cardHeight * 3 + cardHeight / 3;
 		
 		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY);
 		
-		if(getIndexOfSmallestElement() >= 0 && getIndexOfSmallestElement() < bottomCards.size()) {
-			AbstractCard smallestCard = bottomCards.get(getIndexOfSmallestElement());
+		if(getIndicePlusPetit() >= 0 && getIndicePlusPetit() < bottomCards.size()) {
+			AbstractCard smallestCard = bottomCards.get(getIndicePlusPetit());
 			cardsViewData.displayCardFaceUp(smallestCard);
 			
 		}
 		
-		if(getIndexOfCandidateSmallestElement() >= 0 && getIndexOfCandidateSmallestElement() < bottomCards.size()) {
-			AbstractCard candidateCard = bottomCards.get(getIndexOfCandidateSmallestElement());
+		if(getIndiceCandidat() >= 0 && getIndiceCandidat() < bottomCards.size()) {
+			AbstractCard candidateCard = bottomCards.get(getIndiceCandidat());
 			cardsViewData.displayCardFaceUp(candidateCard);
 		}
 
-		if(getIndexOfNextEmptySpace() >= 0 && getIndexOfNextEmptySpace() < topCards.size()) {
-			for(int i = getIndexOfNextEmptySpace() + 1; i < topCards.size(); i++) {
+		if(getIndiceProchainVide() >= 0 && getIndiceProchainVide() < topCards.size()) {
+			for(int i = getIndiceProchainVide() + 1; i < topCards.size(); i++) {
 				AbstractCard futureCard = topCards.get(i);
 				cardsViewData.displayCardFaceDown(futureCard);
 			}
@@ -194,7 +198,7 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	protected int testCaseSize() {
+	public int testCaseSize() {
 		return listeSource.size();
 	}
 	

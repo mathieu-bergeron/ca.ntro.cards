@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models.values.test_cases;
+package ca.ntro.cards.common.test_cases.indexing;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -6,9 +6,10 @@ import java.util.Map;
 
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.test_cases.TestCase;
 
 public class     TestCasesBySize<STUDENT_MODEL extends CommonExecutableModel, 
-                                 TEST_CASE     extends TestCase<STUDENT_MODEL>> 
+                                 TEST_CASE     extends TestCase> 
 
        implements Value, Serializable {
 	

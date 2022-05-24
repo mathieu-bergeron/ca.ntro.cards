@@ -21,20 +21,20 @@ import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
-import ca.ntro.cards.common.models.TestCasesModel;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceSizeOnly;
-import ca.ntro.cards.common.models.values.test_cases.TestCase;
-import ca.ntro.cards.common.models.values.test_cases.TestCaseById;
-import ca.ntro.cards.common.models.values.test_cases.TestCasesByCategory;
-import ca.ntro.cards.common.models.values.test_cases.TestCasesBySize;
+import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceSizeOnly;
+import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
+import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
+import ca.ntro.cards.common.test_cases.indexing.TestCasesBySize;
 
 public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
                                 STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                 CANVAS_MODEL     extends CommonCanvasModel,
-                                TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                TEST_CASE        extends TestCase,
                                 TEST_CASES_MODEL extends TestCasesModel,
                                 DASHBOARD_MODEL  extends CommonDashboardModel,
                                 SETTINGS_MODEL   extends CommonSettingsModel,

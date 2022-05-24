@@ -28,4 +28,9 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends TriNaif>
 		return TriNaif.class;
 	}
 
+	@Override
+	protected boolean shouldSaveJson() {
+		return true;
+	}
+
 }

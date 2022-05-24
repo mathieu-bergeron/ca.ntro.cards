@@ -1,19 +1,24 @@
-package ca.ntro.cards.common.models.values.test_cases;
+package ca.ntro.cards.common.test_cases;
 
 import java.io.Serializable;
 
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
 import ca.ntro.core.identifyers.Identifiable;
+import ca.ntro.core.initialization.Ntro;
 
-public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel> 
+public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
+                      STUDENT_MODEL    extends EXECUTABLE_MODEL> 
 
        implements Value, Identifiable, Serializable {
 	
 	private String category;
 	private String testCaseId;
 	private long size;
+	
+	private transient STUDENT_MODEL studentModel;
+	private transient Class<EXECUTABLE_MODEL> executableModelClass;
 
 	private ExecutionTrace<EXECUTABLE_MODEL> trace;
 	private boolean passed;
@@ -58,8 +63,35 @@ public class TestCase<EXECUTABLE_MODEL extends CommonExecutableModel>
 		this.trace = trace;
 	}
 
+	public STUDENT_MODEL studentModel() {
+		return studentModel;
+	}
+
+	public void registerStudentModel(STUDENT_MODEL studentModel) {
+		this.studentModel = studentModel;
+	}
+
+	public Class<EXECUTABLE_MODEL> executableModelClass() {
+		return executableModelClass;
+	}
+
+	public void registerExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
+		this.executableModelClass = executableModelClass;
+	}
+
 	@Override
 	public String id() {
 		return category + "_" + String.valueOf(size) + "_" + testCaseId;
+	}
+
+	public void run() {
+		studentModel.run();
+	}
+
+	public void addStep() {
+		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
+		snapshot.copyDataFrom(studentModel);
+
+		trace.pushReferenceTo(snapshot);
 	}
 }

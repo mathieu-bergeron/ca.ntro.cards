@@ -19,5 +19,7 @@ public class CommonConstants {
 	public static final String BLACK = "#000000";
 	
 	public static final double SECONDS_BETWEEN_EXECUTION_STEPS = 0.15;
+	
+	public static final int INITIAL_NUMBER_OF_EXECUTION_THREADS = 4;
 
 }

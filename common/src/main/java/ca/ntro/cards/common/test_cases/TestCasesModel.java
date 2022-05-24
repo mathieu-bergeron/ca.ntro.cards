@@ -1,17 +1,19 @@
-package ca.ntro.cards.common.models;
+package ca.ntro.cards.common.test_cases;
 
 import java.io.Serializable;
 
 import ca.ntro.app.models.Model;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
-import ca.ntro.cards.common.models.values.test_cases.TestCase;
-import ca.ntro.cards.common.models.values.test_cases.TestCaseById;
-import ca.ntro.cards.common.models.values.test_cases.TestCasesByCategory;
+import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution.ExecutionEngine;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
+import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                           STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                          TEST_CASE        extends TestCase<EXECUTABLE_MODEL>> 
+                                          TEST_CASE        extends TestCase> 
 
 
                 implements Model, Serializable {
@@ -24,6 +26,16 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
+	
+	private transient ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
+
+	public ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
+		return executionEngine;
+	}
+
+	public void registerExecutionEngine(ExecutionEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
+		this.executionEngine = executionEngine;
+	}
 
 	public void registerStudentModelClass(Class<STUDENT_MODEL> studentModelClass) {
 		this.studentModelClass = studentModelClass;
@@ -66,39 +78,17 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	}
 
 	public void generateFirstVersionIfNeeded() {
-		if(version == 0) {
-			generateFirstVersion();
-			version++;
-		}
+		throw new RuntimeException("DEPRECATED");
 	}
-	
-	public void addTestCase(TestCaseDescriptor descriptor, STUDENT_MODEL model) {
-		TEST_CASE testCase = emptyTestCase();
-		testCase.setCategory(descriptor.category());
-		testCase.setSize(model.testCaseSize());
-		testCase.setTestCaseId(descriptor.testCaseId());
 
-		ExecutionTraceFull<EXECUTABLE_MODEL> trace = new ExecutionTraceFull<>();
-		
-		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
-		//      (i.e. work in projects where the solution class is not accessible)
-		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
-		snapshot.copyDataFrom(model);
+	public abstract void generateTestCases();
 
-		trace.pushReferenceTo(snapshot);
-		testCase.setTrace(trace);
+	protected void createTestCase(TestCaseDescriptor descriptor) {
 		
+		TEST_CASE testCase = executionEngine.createTestCase(descriptor);
+
 		testCasesById.addTestCase(testCase);
 		testCasesByCategory.addTestCase(testCase);
-		
+
 	}
-
-	protected abstract void generateFirstVersion();
-
-	public abstract STUDENT_MODEL emptyStudentModel();
-
-	public abstract TEST_CASE emptyTestCase();
-
-
-
 }

@@ -6,10 +6,11 @@ import java.util.concurrent.locks.ReentrantLock;
 import ca.ntro.app.models.Watch;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.cards.common.frontend.CommonViewData;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
 
 public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutableModel,
                                        OBJECT2D    extends CommonObject2d<OBJECT2D, WORLD2D, OPTIONS>,
@@ -34,20 +35,9 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 		this.modelHistory = modelHistory;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected void signalerEtape() {
-		// XXX: only excute if we are
-		//      not locked by JavaFX GUI Thread
-		lock.lock();
-		lock.unlock();
-
-		modelHistory.pushCopyOf((CARDS_MODEL) this);
-
-	}
-
 	public abstract void generateTestCase(TestCaseDescriptor descriptor);
 
-	protected abstract int testCaseSize();
+	public abstract int testCaseSize();
 
 	public abstract void onBeforeRunning();
 	public abstract void run();

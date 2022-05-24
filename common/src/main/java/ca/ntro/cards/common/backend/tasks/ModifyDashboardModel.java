@@ -4,7 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 

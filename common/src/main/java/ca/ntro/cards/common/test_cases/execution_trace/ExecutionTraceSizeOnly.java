@@ -1,4 +1,4 @@
-package ca.ntro.cards.common.models.values.execution_trace;
+package ca.ntro.cards.common.test_cases.execution_trace;
 
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;

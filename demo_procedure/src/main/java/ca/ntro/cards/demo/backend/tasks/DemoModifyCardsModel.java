@@ -22,7 +22,7 @@ public class DemoModifyCardsModel {
 		    	 STUDENT_MODEL      demoModel      = inputs.get(model(cardsModelClass));
 
 		    	 demoModel.copyDataFrom(studentModel);
-		    	 dashboardModel.setNumberOfCards(demoModel.getSourceArray().size());
+		    	 dashboardModel.setNumberOfCards(demoModel.getListeSource().size());
 
 		     });
 	}

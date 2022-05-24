@@ -3,10 +3,10 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.ExecutableModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
-import ca.ntro.cards.common.models.TestCaseDescriptor;
-import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTraceFull;
-import ca.ntro.cards.common.models.values.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -21,7 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsModel,
                                        STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                        CANVAS_MODEL     extends ProcedureCardsModel,
-                                       TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+                                       TEST_CASE        extends TestCase,
                                        TEST_CASES_MODEL extends TestCasesModel,
                                        DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                        SETTINGS_MODEL   extends ProcedureSettingsModel>

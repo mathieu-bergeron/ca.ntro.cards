@@ -5,9 +5,9 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.models.TestCasesModel;
-import ca.ntro.cards.common.models.values.execution_trace.ExecutionTrace;
-import ca.ntro.cards.common.models.values.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -17,7 +17,7 @@ public class InitializeModels {
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               CANVAS_MODEL     extends CommonCanvasModel,
-	               TEST_CASE        extends TestCase<EXECUTABLE_MODEL>,
+	               TEST_CASE        extends TestCase,
 		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel>
 	
