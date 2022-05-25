@@ -3,7 +3,7 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.TestCasesDatabase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -17,7 +17,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
                                        STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                        CANVAS_MODEL     extends ProcedureCardsModel,
                                        TEST_CASE        extends TestCase,
-                                       TEST_CASES_MODEL extends TestCasesModel,
+                                       TEST_CASES_MODEL extends TestCasesDatabase,
                                        DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                        SETTINGS_MODEL   extends ProcedureSettingsModel>
 

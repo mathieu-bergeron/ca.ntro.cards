@@ -9,7 +9,7 @@ import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.TestCasesDatabase;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -26,7 +26,7 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 							       STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	                               CANVAS_MODEL     extends ProcedureCardsModel,
                                    TEST_CASE        extends TestCase,
-                                   TEST_CASES_MODEL extends TestCasesModel,
+                                   TEST_CASES_MODEL extends TestCasesDatabase,
                                    DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                    SETTINGS_MODEL   extends ProcedureSettingsModel,
                                                                                                       

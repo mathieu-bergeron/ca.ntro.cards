@@ -15,7 +15,7 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.TestCasesDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
@@ -25,7 +25,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
                                     STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL     extends CommonCanvasModel,
                                     TEST_CASE        extends TestCase,
-                                    TEST_CASES_MODEL extends TestCasesModel,
+                                    TEST_CASES_MODEL extends TestCasesDatabase,
                                     DASHBOARD_MODEL  extends CommonDashboardModel,
                                     SETTINGS_MODEL   extends CommonSettingsModel>
 

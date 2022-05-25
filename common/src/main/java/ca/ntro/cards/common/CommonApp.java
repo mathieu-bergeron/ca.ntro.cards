@@ -24,7 +24,7 @@ import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.TestCasesDatabase;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceSizeOnly;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
@@ -35,7 +35,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
                                 STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                 CANVAS_MODEL     extends CommonCanvasModel,
                                 TEST_CASE        extends TestCase,
-                                TEST_CASES_MODEL extends TestCasesModel,
+                                TEST_CASES_MODEL extends TestCasesDatabase,
                                 DASHBOARD_MODEL  extends CommonDashboardModel,
                                 SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       
@@ -64,14 +64,14 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
-		registrar.registerModel(executableModelClass());
-		registrar.registerModel(studentModelClass());
+		registrar.registerValue(executableModelClass());
+		registrar.registerValue(studentModelClass());
 		registrar.registerModel(canvasModelClass());
 
 		registrar.registerModel(dashboardModelClass());
 		registrar.registerModel(settingsModelClass());
 
-		registrar.registerModel(testCasesModelClass());
+		registrar.registerValue(testCasesModelClass());
 		registrar.registerValue(testCaseClass());
 
 		registrar.registerValue(Card.class);

@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ca.ntro.app.models.Model;
+import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
@@ -21,12 +22,12 @@ import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecutableModel, 
-                                          STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                          TEST_CASE        extends TestCase> 
+public abstract class      TestCasesDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
+                                             STUDENT_MODEL    extends EXECUTABLE_MODEL,
+                                             TEST_CASE        extends TestCase> 
 
 
-                implements Model, Serializable {
+                implements Value, Serializable {
 	
 	private long version = 0;
 	
