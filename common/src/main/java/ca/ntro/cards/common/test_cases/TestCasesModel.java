@@ -171,6 +171,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	}
 
 	private void onCreationJobDone(String testCaseId) {
+
 		creationJobsDone.add(testCaseId);
 		
 		if(creationJobsDone.size() >= creationJobs.size()
@@ -185,7 +186,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		
 		if(writingJobsDone.size() >= writingJobs.size()
 				&& onWritingDoneHandler != null) {
-			
+
 			onWritingDoneHandler.done();
 		}
 	}

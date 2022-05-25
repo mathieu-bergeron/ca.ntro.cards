@@ -24,11 +24,14 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void run() {
+
 		if(shouldWriteJson) {
 			writeJson();
 		}
 		
 		writeBin();
+		
+		getDoneHandler().done();
 	}
 
 	private void writeJson() {
@@ -37,7 +40,7 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 		try {
 
 			FileOutputStream fileOutput = new FileOutputStream(outFile);
-			fileOutput.write(Ntro.reflection().toJsonObject(this).toJsonString().getBytes());
+			fileOutput.write(Ntro.reflection().toJsonObject(getTestCase()).toJsonString().getBytes());
 			fileOutput.close();
 
 		} catch (IOException e) {
@@ -57,7 +60,7 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 			FileOutputStream fileOutput = new FileOutputStream(outFile);
 			ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-			objectOutput.writeObject(this);
+			objectOutput.writeObject(getTestCase());
 
 			objectOutput.close();
 

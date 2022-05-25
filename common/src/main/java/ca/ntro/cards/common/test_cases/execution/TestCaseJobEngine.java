@@ -85,7 +85,7 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		for(int i = 0; i < numberOfThreads; i++) {
 			
 			TestCaseJobThread thread = new TestCaseJobThread();
-			thread.setExecutionEngine(this);
+			thread.registerExecutionEngine(this);
 
 			threadById.put(thread.getId(), thread);
 		}
@@ -141,7 +141,15 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 
 	private void updateJobs() {
-		
+		for(TestCaseJobThread thread : threadById.values()) {
+			
+			if(!jobs.isEmpty()) {
+
+				Job job = jobs.remove();
+				
+				thread.pushSignal(job);
+			}
+		}
 	}
 
 	private void forceQuitThreads() {

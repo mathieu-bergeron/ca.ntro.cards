@@ -54,10 +54,12 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 			endTime = System.currentTimeMillis();
 			
-			System.out.println(String.format("\n... generation done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.println(String.format("\n... creation done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 			
-			tasksDone.add("generation");
+			startTime = System.currentTimeMillis();
+			
+			tasksDone.add("creation");
 			quitWhenAllDone();
 			
 		});
@@ -66,27 +68,20 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 			endTime = System.currentTimeMillis();
 			
-			System.out.println(String.format("\n... writing done in %.2f seconds\n", (endTime - startTime) / 1E3));
+			System.out.println(String.format("... writing done in %.2f seconds\n", (endTime - startTime) / 1E3));
 			System.out.flush();
 
 			tasksDone.add("writing");
 			quitWhenAllDone();
 			
 		});
-
-		executionEngine.shutdown();
-
 	}
 
 	private void quitWhenAllDone() {
-		if(tasksDone.contains("generation")
+		if(tasksDone.contains("creation")
 				&& tasksDone.contains("writing")) {
 
 			endTime = System.currentTimeMillis();
-
-			System.out.println("\n\n[ALL DONE]");
-			System.out.println(String.format("\n... in %.2f seconds\n", (endTime - startTime) / 1E3));
-			System.out.flush();
 
 			executionEngine.shutdown();
 

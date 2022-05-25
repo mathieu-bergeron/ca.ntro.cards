@@ -22,15 +22,9 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	
-
-	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getExecutionEngine() {
-		return executionEngine;
-	}
-
-	public void setExecutionEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
+	public void registerExecutionEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine) {
 		this.executionEngine = executionEngine;
 	}
-	
 
 	@Override
 	public void run() {
