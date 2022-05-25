@@ -1,5 +1,7 @@
 package ca.ntro.cards.common.test_cases.execution.jobs;
 
+import java.io.File;
+
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
@@ -12,9 +14,19 @@ public class ReadingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 
        extends Job<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+    	   
+    private File testCaseFile;
 
 	@Override
-	public void run() {
+	public void runImpl() {
+	}
+
+	public void registerFile(File testCaseFile) {
+		this.testCaseFile = testCaseFile;
+	}
+
+	public String testCaseId() {
+		return testCaseFile.getName();
 	}
 
 

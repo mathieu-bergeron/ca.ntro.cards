@@ -1,5 +1,7 @@
 package ca.ntro.cards.common.test_cases;
 
+import java.io.File;
+import java.io.FilenameFilter;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,21 +10,25 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Value;
+import ca.ntro.cards.common.CommonConstants;
+import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.ReadingJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.WritingJob;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class      TestCasesDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
+public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                              STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                              TEST_CASE        extends TestCase> 
 
@@ -210,6 +216,28 @@ public abstract class      TestCasesDatabase<EXECUTABLE_MODEL extends CommonExec
 	}
 
 	public void loadFromDbDir() {
+		File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
+		FilenameFilter filter = new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith("bin");
+			}
+		};
+		
+		
+		for(File testCaseFile : dbDir.listFiles(filter)) {
+			ReadingJob readingJob = new ReadingJob();
+			readingJob.registerFile(testCaseFile);
+
+			executionEngine.executeJob(readingJob, () -> {
+
+				MsgNewTestCaseLoaded msgNewTestCaseLoaded = NtroApp.newMessage(MsgNewTestCaseLoaded.class);
+				msgNewTestCaseLoaded.setTestCaseId(readingJob.testCaseId());
+				msgNewTestCaseLoaded.send();
+				
+			});
+		}
+
 	}
 
 	public void stepForward() {

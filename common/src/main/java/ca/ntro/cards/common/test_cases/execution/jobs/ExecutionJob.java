@@ -17,10 +17,8 @@ public class ExecutionJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 
 	@Override
-	public void run() {
+	public void runImpl() {
 		getTestCase().run();
-		
-		getDoneHandler().done();
 	}
 
 

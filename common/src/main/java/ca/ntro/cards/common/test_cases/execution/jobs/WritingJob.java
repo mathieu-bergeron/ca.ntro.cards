@@ -20,10 +20,10 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
     	   
     	   
     private boolean shouldWriteJson = false;
-    private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
+    private File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
 
 	@Override
-	public void run() {
+	public void runImpl() {
 		
 		if(shouldWriteJson) {
 			writeJson();

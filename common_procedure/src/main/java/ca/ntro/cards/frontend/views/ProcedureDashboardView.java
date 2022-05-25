@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 public abstract class ProcedureDashboardView extends CommonDashboardView {
@@ -40,6 +41,14 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 			variablesContainer().getChildren().clear();
 			variablesContainer().getChildren().add(variablesView.rootNode());
 		}
+	}
+
+	public void clearTestCases() {
+		selectionsContainer().getChildren().clear();
+	}
+
+	public void addTestCase(String testCaseId) {
+		selectionsContainer().getChildren().add(new Label(testCaseId));
 	}
 
 

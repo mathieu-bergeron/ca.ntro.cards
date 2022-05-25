@@ -3,7 +3,7 @@ package ca.ntro.cards.efficiency.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesDatabase;
+import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.efficiency.models.EfficiencyDashboardModel;
 import ca.ntro.cards.efficiency.models.EfficiencyGraphsModel;
 import ca.ntro.cards.efficiency.models.EfficiencySettingsModel;
@@ -13,7 +13,7 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
                                          STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                          CANVAS_MODEL     extends EfficiencyGraphsModel,
                                          TEST_CASE        extends TestCase,
-                                         TEST_CASES_MODEL extends TestCasesDatabase,
+                                         TEST_CASES_MODEL extends TestCaseDatabase,
                                          DASHBOARD_MODEL  extends EfficiencyDashboardModel,
                                          SETTINGS_MODEL   extends EfficiencySettingsModel>
 

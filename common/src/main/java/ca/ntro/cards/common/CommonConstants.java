@@ -25,6 +25,6 @@ public class CommonConstants {
 	public static final long ENGINE_THREAD_SLEEP_TIME_MILISECONDS = 200;
 	public static final long THREAD_UNRESPONSIVE_TIMEOUT_MILISECONDS = 2000;
 	
-	public static final String TEST_CASES_DIR = "db";
+	public static final String TEST_CASE_DATABASE_DIR = "db";
 
 }

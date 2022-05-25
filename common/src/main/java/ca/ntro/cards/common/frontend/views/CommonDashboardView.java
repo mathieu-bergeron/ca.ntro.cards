@@ -35,6 +35,11 @@ public abstract class CommonDashboardView extends ViewFx {
 		}
 	}
 
+	public void clearTestCases() {
+	}
+
+	public void addTestCase(String testCase) {
+	}
 
 
 

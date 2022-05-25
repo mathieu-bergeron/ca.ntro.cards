@@ -13,7 +13,7 @@ public class CreationJob<EXECUTABLE_MODEL extends CommonExecutableModel,
        extends ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 	@Override
-	public void run() {
+	public void runImpl() {
 	}
 
 }

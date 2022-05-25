@@ -41,6 +41,8 @@ public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
+		super.addSubTasksToModifyDashboardModel(subTasks);
+
 		subTasks.task("updateListDashboard")
 		     .waitsFor(message(MsgUpdateList.class))
 		     .thenExecutes(inputs -> {

@@ -47,7 +47,7 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	private Queue<Job> jobs = new ConcurrentLinkedQueue<>();
 
-	private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
+	private File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
 	
 	private boolean shouldQuit = false;
 	

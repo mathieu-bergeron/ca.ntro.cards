@@ -1,26 +1,19 @@
 package ca.ntro.cards.common.messages;
 
 import ca.ntro.app.messages.MessageNtro;
-import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.common.test_cases.TestCase;
 
 public class MsgNewTestCaseLoaded extends MessageNtro {
 	
-	private TestCase testCase;
+	private String testCaseId;
 
-	public TestCase getTestCase() {
-		return testCase;
+	public String getTestCaseId() {
+		return testCaseId;
 	}
 
-	public void setTestCase(TestCase testCase) {
-		this.testCase = testCase;
+	public void setTestCaseId(String testCaseId) {
+		this.testCaseId = testCaseId;
 	}
 	
-	public void applyTo(CommonDashboardModel dashboardModel) {
-
-		dashboardModel.addTestCase(testCase);
-
-	}
 	
 	
 	

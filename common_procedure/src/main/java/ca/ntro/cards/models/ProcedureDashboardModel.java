@@ -4,4 +4,5 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 
 public class ProcedureDashboardModel extends CommonDashboardModel {
 
+
 }

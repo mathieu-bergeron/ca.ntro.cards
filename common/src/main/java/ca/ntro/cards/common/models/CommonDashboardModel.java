@@ -53,12 +53,10 @@ public class CommonDashboardModel implements Model {
 	}
 
 	public void displayOn(CommonDashboardView dashboardView) {
-		/*
 		dashboardView.clearTestCases();
 		for(String testCase : testCases) {
 			dashboardView.addTestCase(testCase);
 		}
-		*/
 
 		//dashboardView.displayNumberOfCards(numberOfCards);
 		//dashboardView.displayCurrentStep(currentStep);
@@ -71,6 +69,10 @@ public class CommonDashboardModel implements Model {
 
 	public void addTestCase(TestCase testCase) {
 
+	}
+
+	public void addTestCaseId(String testCaseId) {
+		testCases.add(testCaseId);
 	}
 
 }

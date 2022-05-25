@@ -15,6 +15,7 @@ import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgGenerateTestCase;
 import ca.ntro.cards.common.messages.MsgLockThread;
+import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonCanvasModel;
@@ -24,7 +25,7 @@ import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesDatabase;
+import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceSizeOnly;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
@@ -35,7 +36,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
                                 STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                 CANVAS_MODEL     extends CommonCanvasModel,
                                 TEST_CASE        extends TestCase,
-                                TEST_CASES_MODEL extends TestCasesDatabase,
+                                TEST_CASES_MODEL extends TestCaseDatabase,
                                 DASHBOARD_MODEL  extends CommonDashboardModel,
                                 SETTINGS_MODEL   extends CommonSettingsModel,
                                                                                                       
@@ -95,6 +96,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		registrar.registerMessage(MsgLockThread.class);
 		registrar.registerMessage(MsgRefreshDashboard.class);
 		registrar.registerMessage(MsgGenerateTestCase.class);
+		registrar.registerMessage(MsgNewTestCaseLoaded.class);
 
 		registerAdditionnalMessages(registrar);
 	}
@@ -124,7 +126,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		backend.setDashboardModelClass(dashboardModelClass());
 		backend.setSettingsModelClass(settingsModelClass());
 		
-		backend.initialize();
+		backend.initializeTestCaseDatabase();
 
 		registrar.registerBackend(backend);
 

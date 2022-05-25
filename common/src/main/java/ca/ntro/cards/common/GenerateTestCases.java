@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesDatabase;
+import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.core.NtroJdk;
@@ -18,7 +18,7 @@ import ca.ntro.core.initialization.Ntro;
 public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutableModel,
                                         STUDENT_MODEL extends EXECUTABLE_MODEL,
                                         TEST_CASE extends TestCase,
-                                        TEST_CASES_MODEL extends TestCasesDatabase> {
+                                        TEST_CASES_MODEL extends TestCaseDatabase> {
 
 
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();

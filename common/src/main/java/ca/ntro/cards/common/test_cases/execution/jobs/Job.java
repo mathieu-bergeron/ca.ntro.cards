@@ -44,7 +44,12 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 		return getTestCase().getTestCaseId();
 	}
 
-	public abstract void run();
+	public void run() {
+		runImpl();
+		doneHandler.done();
+	}
+
+	public abstract void runImpl();
 
 	public void addExecutionStep() {
 		testCase.addExecutionStep();

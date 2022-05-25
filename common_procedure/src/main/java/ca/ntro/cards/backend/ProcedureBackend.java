@@ -2,8 +2,10 @@ package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
+import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
+import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesDatabase;
+import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -17,7 +19,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
                                        STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                        CANVAS_MODEL     extends ProcedureCardsModel,
                                        TEST_CASE        extends TestCase,
-                                       TEST_CASES_MODEL extends TestCasesDatabase,
+                                       TEST_CASES_MODEL extends TestCaseDatabase,
                                        DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                        SETTINGS_MODEL   extends ProcedureSettingsModel>
 
@@ -90,6 +92,22 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 	}
 
 	protected void addSubTasksToModifyDashboardModel(BackendTasks tasks) {
+		System.out.println("addSubTasks");
+		
+		tasks.task("addTestCase")
+		
+		     .waitsFor(message(MsgNewTestCaseLoaded.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 MsgNewTestCaseLoaded msgNewTestCaseLoaded = inputs.get(message(MsgNewTestCaseLoaded.class));
+		    	 DASHBOARD_MODEL      dashboardModel       = inputs.get(model(getDashboardModelClass()));
+		    	 
+		    	 dashboardModel.addTestCaseId(msgNewTestCaseLoaded.getTestCaseId());
+		    	 
+		    	 System.out.println("addTestCase: " + msgNewTestCaseLoaded.getTestCaseId());
+		    	 
+		     });
 		
 	}
 

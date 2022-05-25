@@ -1,49 +1,45 @@
 package ca.ntro.cards.common.backend;
 
-import java.util.concurrent.locks.ReentrantLock;
-import static ca.ntro.app.tasks.backend.BackendTasks.*;
-
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
-import ca.ntro.cards.common.backend.tasks.ModifyTestCasesDatabase;
+import ca.ntro.cards.common.backend.tasks.ModifyTestCaseDatabase;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCasesDatabase;
+import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                    STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                    CANVAS_MODEL     extends CommonCanvasModel,
-                                    TEST_CASE        extends TestCase,
-                                    TEST_CASES_MODEL extends TestCasesDatabase,
-                                    DASHBOARD_MODEL  extends CommonDashboardModel,
-                                    SETTINGS_MODEL   extends CommonSettingsModel>
+public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableModel,
+                                    STUDENT_MODEL      extends EXECUTABLE_MODEL,
+                                    CANVAS_MODEL       extends CommonCanvasModel,
+                                    TEST_CASE          extends TestCase,
+                                    TEST_CASE_DATABASE extends TestCaseDatabase,
+                                    DASHBOARD_MODEL    extends CommonDashboardModel,
+                                    SETTINGS_MODEL     extends CommonSettingsModel>
 
        extends LocalBackendNtro {
 
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
-	private TEST_CASES_MODEL testCasesModel;
+	private TEST_CASE_DATABASE testCaseDatabase;
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
 	private Class<CANVAS_MODEL> canvasModelClass;
 	private Class<TEST_CASE> testCaseClass;
-	private Class<TEST_CASES_MODEL> testCasesModelClass;
+	private Class<TEST_CASE_DATABASE> testCaseDatabaseClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
-	protected TEST_CASES_MODEL testCasesModel() {
-		return testCasesModel;
+	protected TEST_CASE_DATABASE testCasesModel() {
+		return testCaseDatabase;
 	}
 
 	public Class<STUDENT_MODEL> getStudentModelClass() {
@@ -70,8 +66,8 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 		this.testCaseClass = testCaseClass;
 	}
 
-	public void setTestCasesModelClass(Class<TEST_CASES_MODEL> testCasesModelClass) {
-		this.testCasesModelClass = testCasesModelClass;
+	public void setTestCasesModelClass(Class<TEST_CASE_DATABASE> testCasesModelClass) {
+		this.testCaseDatabaseClass = testCasesModelClass;
 	}
 
 	public Class<EXECUTABLE_MODEL> getExecutableModelClass() {
@@ -82,8 +78,8 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 		return testCaseClass;
 	}
 
-	public Class<TEST_CASES_MODEL> getTestCasesModelClass() {
-		return testCasesModelClass;
+	public Class<TEST_CASE_DATABASE> getTestCasesModelClass() {
+		return testCaseDatabaseClass;
 	}
 
 	public Class<DASHBOARD_MODEL> getDashboardModelClass() {
@@ -102,17 +98,16 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 		this.canvasModelClass = canvasModelClass;
 	}
 	
-	public void initialize() {
-		testCasesModel = Ntro.factory().newInstance(testCasesModelClass);
-		testCasesModel.registerExecutableModelClass(executableModelClass);
-		testCasesModel.registerStudentModelClass(studentModelClass);
-		testCasesModel.registerTestCaseClass(testCaseClass);
-		testCasesModel.registerShouldWriteJson(false);
+	public void initializeTestCaseDatabase() {
+
+		testCaseDatabase = Ntro.factory().newInstance(testCaseDatabaseClass);
+		testCaseDatabase.registerExecutableModelClass(executableModelClass);
+		testCaseDatabase.registerStudentModelClass(studentModelClass);
+		testCaseDatabase.registerTestCaseClass(testCaseClass);
+		testCaseDatabase.registerShouldWriteJson(false);
 		
-		testCasesModel.registerExecutionEngine(executionEngine);
-		
-		
-		
+		testCaseDatabase.registerExecutionEngine(executionEngine);
+
 	}
 
 	@Override
@@ -126,8 +121,8 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 				                    	 
 				                     });
 
-		ModifyTestCasesDatabase.createTasks(tasks, 
-				                         testCasesModel,
+		ModifyTestCaseDatabase.createTasks(tasks, 
+				                         testCaseDatabase,
 							             subTasks -> {
 										
 										      addSubTasksToModifyTestCasesModel(subTasks);
@@ -182,7 +177,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 		System.out.println(String.format("\n... using %s threads\n\n", numberOfThreads));
 		System.out.flush();
 
-		testCasesModel.loadFromDbDir();
+		testCaseDatabase.loadFromDbDir();
 
 	}
 
