@@ -63,9 +63,9 @@ public class ViewData {
 		    	 mouseEvtOnTabletop(subTasks,
 		    			            canvasViewClass);
 		    	 
-		    	 displayCardsModel(subTasks,
-		    			           viewDataClass,
-		    			           cardsModelClass);
+		    	 displayCanvasModel(subTasks,
+		    			            viewDataClass,
+		    			            cardsModelClass);
 		    	 
 		    	 subTaskLambda.createSubTasks(subTasks);
 
@@ -186,25 +186,26 @@ public class ViewData {
 	}
 
 
-	private static <CARDS_VIEW_DATA extends CommonViewData,
-	                CARDS_MODEL     extends CommonCanvasModel> 
+	private static <VIEW_DATA    extends CommonViewData,
+	                CANVAS_MODEL extends CommonCanvasModel> 
 	
-	        void displayCardsModel(FrontendTasks tasks,
-	        		               Class<CARDS_VIEW_DATA> cardsViewDataClass,
-	        		               Class<CARDS_MODEL> cardsModelClass) {
+	        void displayCanvasModel(FrontendTasks tasks,
+	        		               Class<VIEW_DATA> cardsViewDataClass,
+	        		               Class<CANVAS_MODEL> canvasModelClass) {
 
-		tasks.task("displayCardsModel")
+		tasks.task("observeCanvasModel")
 		
-		      .waitsFor(modified(cardsModelClass))
+		      .waitsFor(modified(canvasModelClass))
 		      
 		      .thenExecutes(inputs -> {
 
-		    	  CARDS_VIEW_DATA       gameViewData  = inputs.get(created(cardsViewDataClass));
-		    	  Modified<CARDS_MODEL> modifiedModel = inputs.get(modified(cardsModelClass));
+		    	  VIEW_DATA              viewData      = inputs.get(created(cardsViewDataClass));
+		    	  Modified<CANVAS_MODEL> modifiedModel = inputs.get(modified(canvasModelClass));
 
-		    	  CARDS_MODEL demoModel = modifiedModel.currentValue();
+		    	  CANVAS_MODEL canvasModel = modifiedModel.currentValue();
 		    	  
-		    	  demoModel.updateViewData(gameViewData);
+		    	  canvasModel.updateViewData(viewData);
+
 		      });
 	}
 }
