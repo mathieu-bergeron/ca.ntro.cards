@@ -24,7 +24,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
 	private TEST_CASES_MODEL testCasesModel = Ntro.factory().newInstance(testCasesModelClass());
 	
-	private int numberOfThreads = CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS;
+	private int numberOfThreads;
 	
 	private long startTime;
 	private long endTime;
@@ -33,7 +33,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 
 	public void generateTestCases() {
 		
-		determineNumberOfThreads();
+		numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
 		
 		System.out.println("\n\n[INIT]\n");
 		System.out.flush();
@@ -88,14 +88,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		}
 	}
 
-	private void determineNumberOfThreads() {
-		try {
-			int numberOfCpus = Runtime.getRuntime().availableProcessors();
-			if(numberOfCpus >= 1) {
-				numberOfThreads = numberOfCpus;
-			}
-		} finally {}
-	}
+
 
 	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
 	protected abstract Class<STUDENT_MODEL> studentModelClass();

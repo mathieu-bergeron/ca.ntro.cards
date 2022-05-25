@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ca.ntro.app.models.Model;
+import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
@@ -106,7 +107,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	}
 
 	public void generateFirstVersionIfNeeded() {
-		throw new RuntimeException("DEPRECATED");
+
 	}
 
 	public abstract void describeTestCasesToGenerate();
@@ -205,5 +206,18 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 
 	public void registerShouldWriteJson(boolean shouldWriteJson) {
 		this.shouldWriteJson = shouldWriteJson;
+	}
+
+	public void loadFromDbDir() {
+	}
+
+	public void stepForward() {
+	}
+
+	public CommonCanvasModel currentModel() {
+		return null;
+	}
+
+	public void stepBackward() {
 	}
 }

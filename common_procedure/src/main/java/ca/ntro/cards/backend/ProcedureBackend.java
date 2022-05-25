@@ -1,12 +1,9 @@
 package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.ExecutableModelThread;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.TestCasesModel;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
@@ -15,8 +12,6 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
-
-import java.util.concurrent.locks.ReentrantLock;
 
 public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsModel,
                                        STUDENT_MODEL    extends EXECUTABLE_MODEL,
@@ -33,28 +28,6 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
                                       TEST_CASES_MODEL, 
                                       DASHBOARD_MODEL, 
                                       SETTINGS_MODEL> {
-
-	private ReentrantLock lock = new ReentrantLock();
-	private ExecutableModelThread<EXECUTABLE_MODEL> modelThread = new ExecutableModelThread<>();
-	private ExecutionTraceFull<EXECUTABLE_MODEL> modelHistory = new ExecutionTraceFull<>();
-
-	@Override
-	protected void initializeCanvasModel(CANVAS_MODEL canvasModel) {
-		
-		@SuppressWarnings("unchecked")
-		EXECUTABLE_MODEL executableModel = (EXECUTABLE_MODEL) canvasModel;
-
-		executableModel.initializeAsTestCase(TestCaseDescriptor.create().testCaseId("ex01"));
-		executableModel.registerLock(lock);
-		executableModel.registerModelHistory(modelHistory);
-
-		modelHistory.pushCopyOf(executableModel);
-
-		modelThread.setModel(executableModel);
-		modelThread.start();
-
-	}
-
 
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks tasks) {
 		
@@ -95,8 +68,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 		    	 
 		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
 		    	 
-		    	 getModelHistory().stepForward();
-		    	 cardsModel.copyDataFrom(getModelHistory().currentModel());
+		    	 testCasesModel().stepForward();
+		    	 cardsModel.copyDataFrom(testCasesModel().currentModel());
 
 		     });
 	}
@@ -109,9 +82,9 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsMo
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
-		    	 
-		    	 getModelHistory().stepBackward();
-		    	 cardsModel.copyDataFrom(getModelHistory().currentModel());
+
+		    	 testCasesModel().stepBackward();
+		    	 cardsModel.copyDataFrom(testCasesModel().currentModel());
 
 		     });
 	}

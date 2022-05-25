@@ -13,4 +13,17 @@ public class Execution {
 		executionEngine.addExecutionStep(Thread.currentThread().getId());
 	}
 
+	public static int determineNumberOfThreads(int defaultNumberOfThreads) {
+		int numberOfThreads = defaultNumberOfThreads;
+
+		try {
+			int numberOfCpus = Runtime.getRuntime().availableProcessors();
+			if(numberOfCpus >= 1) {
+				numberOfThreads = numberOfCpus;
+			}
+		} finally {}
+		
+		return numberOfThreads;
+	}
+
 }

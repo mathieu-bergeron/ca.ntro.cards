@@ -21,16 +21,14 @@ public class ModifyTestCasesModel {
 	               DASHBOARD_MODEL  extends CommonDashboardModel> 
 
 	       void createTasks(BackendTasks tasks,
-			                Class<TEST_CASES_MODEL> testCasesModelClass,
+	    		            TEST_CASES_MODEL testCasesModel,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		tasks.taskGroup("ModifyTestCasesModel")
 		
-		     .waitsFor("initializeCanvasModel")
-		
-		     .andContains(subTasks -> {
+		     .contains(subTasks -> {
 		    	 
-		    	 generateTestCase(subTasks, testCasesModelClass);
+		    	 generateTestCase(subTasks, testCasesModel);
 
 		     });
 	}
@@ -43,7 +41,7 @@ public class ModifyTestCasesModel {
 		           TEST_CASES_MODEL extends TestCasesModel<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>>
 	
 	        void generateTestCase(BackendTasks tasks,
-	        		              Class<TEST_CASES_MODEL> testCasesModelClass) {
+	        		              TEST_CASES_MODEL testCasesModel) {
 
 		tasks.task("generateTestCase")
 		
@@ -52,11 +50,8 @@ public class ModifyTestCasesModel {
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 MsgGenerateTestCase msgGenerateTestCase = inputs.get(message(MsgGenerateTestCase.class));
-		    	 TEST_CASES_MODEL    testCasesModel      = inputs.get(model(testCasesModelClass));
 		    	 
 		    	 msgGenerateTestCase.applyTo(testCasesModel);
-		    	 
-		    	 
 
 		     });
 	}

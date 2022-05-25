@@ -17,19 +17,17 @@ public class ModifyDashboardModel {
 	
 	       void createTasks(BackendTasks tasks,
 			                Class<DASHBOARD_MODEL> dashboardModelClass,
-			                ExecutionTraceFull<EXECUTABLE_MODEL> executionTrace,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		
 		tasks.taskGroup("ModifyDashboardModel")
 		
-		     .waitsFor("initializeDashboard")
+		     .waitsFor(model(dashboardModelClass))
 		
 		     .andContains(subTasks -> {
 
 		    	 executionEnded(subTasks,
-		    			        dashboardModelClass,
-		    			        executionTrace);
+		    			        dashboardModelClass);
 		    	 
 		    	 subTasksLambda.createSubTasks(subTasks);
 
@@ -41,8 +39,7 @@ public class ModifyDashboardModel {
 	               DASHBOARD_MODEL extends CommonDashboardModel>
 
 	        void executionEnded(BackendTasks tasks,
-	        		            Class<DASHBOARD_MODEL> dashboardModelClass,
-			                    ExecutionTraceFull<EXECUTABLE_MODEL> executionTrace) {
+	        		            Class<DASHBOARD_MODEL> dashboardModelClass) {
 
 		tasks.task("executionEndedDashboard")
 		
@@ -51,10 +48,6 @@ public class ModifyDashboardModel {
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(dashboardModelClass));
-
-		    	 executionTrace.updateDashboard(dashboardModel);
-		    	
-		    	 
 
 		     });
 	}

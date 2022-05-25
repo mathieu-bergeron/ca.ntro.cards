@@ -1,14 +1,12 @@
 package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
+
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
-
-import java.util.concurrent.locks.ReentrantLock;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
@@ -20,14 +18,12 @@ public class ModifyCanvasModel {
 
 	       void createTasks(BackendTasks tasks,
 			                Class<CANVAS_MODEL> canvasModelClass,
-			                ExecutionTraceFull<EXECUTABLE_MODEL> executionTrace,
-			                ReentrantLock lock,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
 		
-		tasks.taskGroup("ModifyCardsModel")
+		tasks.taskGroup("ModifyCanvasModel")
 		
-		     .waitsFor("initializeCanvasModel")
+		     .waitsFor(model(canvasModelClass))
 		
 		     .andContains(subTasks -> {
 

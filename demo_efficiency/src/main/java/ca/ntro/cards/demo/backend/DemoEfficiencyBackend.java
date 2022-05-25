@@ -41,10 +41,6 @@ public class DemoEfficiencyBackend<STUDENT_MODEL extends TriNaif>
 		
 	}
 
-	@Override
-	protected void addSubTasksToManageThread(BackendTasks subTasks) {
-		
-	}
 
 	@Override
 	protected void createAdditionalTasks(BackendTasks tasks) {

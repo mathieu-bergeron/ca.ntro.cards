@@ -5,8 +5,7 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.common.backend.tasks.InitializeModels;
-import ca.ntro.cards.common.backend.tasks.ManageThread;
+import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
@@ -17,7 +16,10 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.TestCasesModel;
+import ca.ntro.cards.common.test_cases.execution.Execution;
+import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
+import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableModel,
                                     STUDENT_MODEL    extends EXECUTABLE_MODEL,
@@ -28,8 +30,9 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
                                     SETTINGS_MODEL   extends CommonSettingsModel>
 
        extends LocalBackendNtro {
-	
-	public static int indexCurrentModel = 0;
+
+	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
+	private TEST_CASES_MODEL testCasesModel;
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
@@ -39,11 +42,8 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
-	private ReentrantLock lock = new ReentrantLock();
-	private ExecutionTraceFull<EXECUTABLE_MODEL> modelHistory = new ExecutionTraceFull<>();
-
-	protected ExecutionTraceFull<EXECUTABLE_MODEL> getModelHistory(){
-		return modelHistory;
+	protected TEST_CASES_MODEL testCasesModel() {
+		return testCasesModel;
 	}
 
 	public Class<STUDENT_MODEL> getStudentModelClass() {
@@ -53,8 +53,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	public void setStudentModelClass(Class<STUDENT_MODEL> studentModelClass) {
 		this.studentModelClass = studentModelClass;
 	}
-
-
 
 	public void setExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
 		this.executableModelClass = executableModelClass;
@@ -103,20 +101,25 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 	public void setCanvasModelClass(Class<CANVAS_MODEL> canvasModelClass) {
 		this.canvasModelClass = canvasModelClass;
 	}
+	
+	public void initialize() {
+		testCasesModel = Ntro.factory().newInstance(testCasesModelClass);
+		testCasesModel.registerExecutableModelClass(executableModelClass);
+		testCasesModel.registerStudentModelClass(studentModelClass);
+		testCasesModel.registerTestCaseClass(testCaseClass);
+		testCasesModel.registerShouldWriteJson(false);
+		
+		testCasesModel.registerExecutionEngine(executionEngine);
+		
+		
+		
+	}
 
 	@Override
 	public void createTasks(BackendTasks tasks) {
 		
-		InitializeModels.initializeTestCases(tasks, executableModelClass, studentModelClass, testCasesModelClass);
-		
-		initializeCanvasModelTask(tasks);
-
-		InitializeModels.initializeDashboard(tasks, dashboardModelClass, modelHistory);
-
 		ModifyCanvasModel.createTasks(tasks, 
 				                      canvasModelClass,
-				                      modelHistory,
-				                      lock,
 				                      subTasks -> {
 				                    	 
 				                    	 addSubTasksToModifyCardsModel(subTasks);
@@ -124,7 +127,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 				                     });
 
 		ModifyTestCasesModel.createTasks(tasks, 
-				                         testCasesModelClass,
+				                         testCasesModel,
 							             subTasks -> {
 										
 										      addSubTasksToModifyTestCasesModel(subTasks);
@@ -133,11 +136,10 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
-				                         modelHistory,
 
 				                          subTasks -> {
 
-				                        	addSubTasksToModifySettingsModel(subTasks);
+				                        	addSubTasksToModifyDashboardModel(subTasks);
 
 				                        });
 		
@@ -151,51 +153,37 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 
 				                        });
 		
-
-		ManageThread.createTasks(tasks, 
-				                 lock,
-							     subTasks -> {
-										
-										addSubTasksToManageThread(subTasks);
-
-							     });
-
 		 createAdditionalTasks(tasks);
 
 	}
-
-	protected void initializeCanvasModelTask(BackendTasks tasks) {
-		tasks.task("initializeCanvasModel")
-
-		     .waitsFor(model(canvasModelClass))
-
-		     .waitsFor("initializeTestCases")
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CANVAS_MODEL canvasModel = inputs.get(model(canvasModelClass));
-		    	 
-		    	 initializeCanvasModel(canvasModel);
-
-
-		     });
-		
-		
-	}
-
-	protected abstract void initializeCanvasModel(CANVAS_MODEL canvasModel);
 
 	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
-	protected abstract void addSubTasksToManageThread(BackendTasks subTasks);
 	
 	protected abstract void createAdditionalTasks(BackendTasks tasks);
 
 
 	@Override
 	public void execute() {
+
+		int numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
+		
+		executionEngine.registerExecutableModelClass(executableModelClass);
+		executionEngine.registerStudentModelClass(studentModelClass);
+		executionEngine.registerTestCaseClass(testCaseClass);
+
+		executionEngine.initialize(numberOfThreads);
+		
+		executionEngine.start();
+
+		System.out.println("\n\n[LOADING TEST CASES]");
+		System.out.println(String.format("\n... using %s threads\n\n", numberOfThreads));
+		System.out.flush();
+
+		testCasesModel.loadFromDbDir();
+
 	}
 
 }

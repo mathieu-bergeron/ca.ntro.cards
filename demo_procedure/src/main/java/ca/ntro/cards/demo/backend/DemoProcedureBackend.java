@@ -1,9 +1,12 @@
 package ca.ntro.cards.demo.backend;
 
 
+
 import ca.ntro.app.tasks.backend.BackendTasks;
+import static ca.ntro.app.tasks.backend.BackendTasks.*;
 import ca.ntro.cards.backend.ProcedureBackend;
 import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
+import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
@@ -38,6 +41,14 @@ public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
+		subTasks.task("updateListDashboard")
+		     .waitsFor(message(MsgUpdateList.class))
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 System.out.println("ModifyDashbaordModel.updateList");
+		    	 
+		    	 
+		     });
 
 	}
 

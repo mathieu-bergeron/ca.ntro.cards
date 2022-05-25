@@ -26,11 +26,6 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
                                     SETTINGS_MODEL> {
 
 	@Override
-	protected void initializeCanvasModel(CANVAS_MODEL canvasModel) {
-		
-	}
-
-	@Override
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
 		// TODO Auto-generated method stub
 		
@@ -54,11 +49,6 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
 		
 	}
 
-	@Override
-	protected void addSubTasksToManageThread(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected void createAdditionalTasks(BackendTasks tasks) {

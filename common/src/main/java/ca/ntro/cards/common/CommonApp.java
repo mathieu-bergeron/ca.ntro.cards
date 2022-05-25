@@ -123,6 +123,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		backend.setTestCasesModelClass(testCasesModelClass());
 		backend.setDashboardModelClass(dashboardModelClass());
 		backend.setSettingsModelClass(settingsModelClass());
+		
+		backend.initialize();
 
 		registrar.registerBackend(backend);
 
