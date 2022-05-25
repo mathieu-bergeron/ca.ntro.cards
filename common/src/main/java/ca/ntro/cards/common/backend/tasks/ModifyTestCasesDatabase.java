@@ -12,7 +12,7 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.tasks.SubTasksLambda;
 
-public class ModifyTestCasesModel {
+public class ModifyTestCasesDatabase {
 	
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
@@ -24,9 +24,13 @@ public class ModifyTestCasesModel {
 	    		            TEST_CASES_MODEL testCasesModel,
 			                SubTasksLambda<BackendTasks> subTasksLambda) {
 		
-		tasks.taskGroup("ModifyTestCasesModel")
+		tasks.task("TestCasesDatabase").executes(inputs -> {});
 		
-		     .contains(subTasks -> {
+		tasks.taskGroup("ModifyTestCasesDatabase")
+		
+		     .waitsFor("TestCasesDatabase")
+		
+		     .andContains(subTasks -> {
 		    	 
 		    	 generateTestCase(subTasks, testCasesModel);
 

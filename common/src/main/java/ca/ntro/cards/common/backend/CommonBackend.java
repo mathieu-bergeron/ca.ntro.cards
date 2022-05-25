@@ -9,7 +9,7 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
-import ca.ntro.cards.common.backend.tasks.ModifyTestCasesModel;
+import ca.ntro.cards.common.backend.tasks.ModifyTestCasesDatabase;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
@@ -126,7 +126,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL extends CommonExecutableMod
 				                    	 
 				                     });
 
-		ModifyTestCasesModel.createTasks(tasks, 
+		ModifyTestCasesDatabase.createTasks(tasks, 
 				                         testCasesModel,
 							             subTasks -> {
 										
