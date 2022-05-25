@@ -13,8 +13,8 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
-import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
-import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseWritingJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.WritingJob;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
@@ -38,8 +38,8 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	
 	private transient TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	
-	private transient Map<String, TestCaseCreationJob> creationJobs = new ConcurrentHashMap<>();
-	private transient Map<String, TestCaseWritingJob> writingJobs = new ConcurrentHashMap<>();
+	private transient Map<String, ExecutionJob> creationJobs = new ConcurrentHashMap<>();
+	private transient Map<String, WritingJob> writingJobs = new ConcurrentHashMap<>();
 
 	private transient Set<String> creationJobsDone = Collections.synchronizedSet(new HashSet<>());
 	private transient Set<String> writingJobsDone = Collections.synchronizedSet(new HashSet<>());
@@ -133,13 +133,13 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 		trace.pushReferenceTo(snapshot);
 		testCase.setTrace(trace);
 		
-		TestCaseCreationJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new TestCaseCreationJob<>();
+		ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new ExecutionJob<>();
 		creationJob.setTestCase(testCase);
 		
 		
 		creationJobs.put(descriptor.testCaseId(), creationJob);
 
-		TestCaseWritingJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> writingJob = new TestCaseWritingJob<>();
+		WritingJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> writingJob = new WritingJob<>();
 		writingJob.setTestCase(testCase);
 		
 		writingJobs.put(descriptor.testCaseId(), writingJob);
@@ -151,15 +151,15 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	}
 
 	public void runTestCaseGenerationTasks() {
-		for(Map.Entry<String, TestCaseCreationJob> entry : creationJobs.entrySet()) {
+		for(Map.Entry<String, ExecutionJob> entry : creationJobs.entrySet()) {
 
 			String testCaseId = entry.getKey();
-			TestCaseCreationJob creationJob = entry.getValue();
+			ExecutionJob creationJob = entry.getValue();
 			
 			executionEngine.executeJob(creationJob, () -> {
 				onCreationJobDone(testCaseId);
 				
-				TestCaseWritingJob writingJob = writingJobs.get(testCaseId);
+				WritingJob writingJob = writingJobs.get(testCaseId);
 				
 				executionEngine.executeJob(writingJob, () -> {
 					onWritingJobDone(testCaseId);

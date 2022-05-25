@@ -8,12 +8,12 @@ import ca.ntro.cards.common.test_cases.execution.TestCaseHandler;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.core.initialization.Ntro;
 
-public class TestCaseCreationJob<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class ExecutionJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                                   STUDENT_MODEL extends EXECUTABLE_MODEL,
                                   TEST_CASE extends TestCase>  
 
 
-       extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+       extends Job<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 
 	@Override

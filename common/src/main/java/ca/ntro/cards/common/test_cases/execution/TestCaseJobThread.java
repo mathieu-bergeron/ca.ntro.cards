@@ -1,10 +1,14 @@
 package ca.ntro.cards.common.test_cases.execution;
 
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.Job;
+import ca.ntro.cards.common.test_cases.execution.signals.ExitSignal;
+import ca.ntro.cards.common.test_cases.execution.signals.Signal;
+import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
                             STUDENT_MODEL extends EXECUTABLE_MODEL,
@@ -12,20 +16,12 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 
        extends Thread {
 	
-	private TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> job;
+	
+	private BlockingQueue<Signal> signals = new LinkedBlockingQueue<>();
+	private Job currentJob = null;
+
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	
-	private boolean shouldQuit = false;
-
-	private ReentrantLock nextJob = new ReentrantLock();
-	
-	public TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getJob() {
-		return job;
-	}
-
-	public void setJob(TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> job) {
-		this.job = job;
-	}
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getExecutionEngine() {
 		return executionEngine;
@@ -38,33 +34,63 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void run() {
-		while(!shouldQuit) {
+		while(true) {
 			
-			try {
-				
-				nextJob.lock();
-				
-				//job.run();
-				
-			}catch(Throwable t){
-				
-				//job.failsWith(t);
+			executionEngine.notifyThreadIsIdle(getId());
+			
+			Signal signal = waitForNextSignal();
 
-				shouldQuit = true;
-
-			}finally {
+			if(signal instanceof ExitSignal) {
 				
-				nextJob.unlock();
+				executionEngine.notifyThreadIsTerminated(getId());
+				return;
+				
+			}else if(signal instanceof Job) {
 
+				executionEngine.notifyThreadIsRunning(getId());
+				currentJob = (Job) signal;
+				
+				try {
+
+					currentJob.run();
+
+				}catch(Throwable t) {
+					
+					currentJob.failsWith(t);
+
+				}finally {
+					
+					currentJob = null;
+
+				}
 			}
 		}
 	}
 	
-	public void quit() {
-		shouldQuit = true;
+
+	private Signal waitForNextSignal() {
+		Signal signal = null;
+
+		try {
+
+			signal = signals.take();
+
+		} catch (InterruptedException e) {
+			
+			Ntro.throwException(e);
+
+		}
+
+		return signal;
 	}
 
 	public void addExecutionStep() {
-		job.addExecutionStep();
+		if(currentJob != null) {
+			currentJob.addExecutionStep();
+		}
+	}
+
+	public synchronized void pushSignal(Signal signal) {
+		signals.add(signal);
 	}
 }

@@ -4,10 +4,13 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
+import ca.ntro.cards.common.test_cases.execution.signals.Signal;
 
-public abstract class TestCaseJob<EXECUTABLE_MODEL extends CommonExecutableModel,
+public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
                                   STUDENT_MODEL extends EXECUTABLE_MODEL,
-                                  TEST_CASE extends TestCase>  {
+                                  TEST_CASE extends TestCase>  
+
+       extends Signal {
 	
 	private TEST_CASE testCase;
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
@@ -45,6 +48,9 @@ public abstract class TestCaseJob<EXECUTABLE_MODEL extends CommonExecutableModel
 
 	public void addExecutionStep() {
 		testCase.addExecutionStep();
+	}
+
+	public void failsWith(Throwable t) {
 	}
 
 }

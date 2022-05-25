@@ -11,12 +11,12 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.core.initialization.Ntro;
 
-public class TestCaseWritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                                     STUDENT_MODEL extends EXECUTABLE_MODEL,
                                     TEST_CASE extends TestCase>  
 
 
-       extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+       extends Job<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
     	   
     	   
     private boolean shouldWriteJson = false;

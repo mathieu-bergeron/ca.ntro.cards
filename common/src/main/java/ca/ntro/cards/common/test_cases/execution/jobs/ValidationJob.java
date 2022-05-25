@@ -6,12 +6,12 @@ import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.core.initialization.Ntro;
 
-public class TestCaseValidationJob<EXECUTABLE_MODEL extends CommonExecutableModel,
+public class ValidationJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                                     STUDENT_MODEL extends EXECUTABLE_MODEL,
                                     TEST_CASE extends TestCase>  
 
 
-       extends TestCaseJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+       extends ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 	@Override
 	public void run() {

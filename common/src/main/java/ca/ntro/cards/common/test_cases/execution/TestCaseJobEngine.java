@@ -5,15 +5,19 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import ca.ntro.cards.common.CommonConstants;
@@ -21,8 +25,9 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
-import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseCreationJob;
-import ca.ntro.cards.common.test_cases.execution.jobs.TestCaseJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
+import ca.ntro.cards.common.test_cases.execution.jobs.Job;
+import ca.ntro.cards.common.test_cases.execution.signals.ExitSignal;
 import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -36,7 +41,11 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	
 	private Map<Long, TestCaseJobThread> threadById = new ConcurrentHashMap<>();
 
-	private Queue<TestCaseJob> jobs = new LinkedBlockingQueue<>();
+	private Set<Long> idleThreads = Collections.synchronizedSet(new HashSet<>());
+	private Set<Long> runningThreads = Collections.synchronizedSet(new HashSet<>());
+	private Set<Long> unresponsiveThreads = Collections.synchronizedSet(new HashSet<>());
+
+	private Queue<Job> jobs = new ConcurrentLinkedQueue<>();
 
 	private File dbDir = new File(CommonConstants.TEST_CASES_DIR);
 	
@@ -76,12 +85,13 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		for(int i = 0; i < numberOfThreads; i++) {
 			
 			TestCaseJobThread thread = new TestCaseJobThread();
-			threadById.put(thread.getId(), thread);
+			thread.setExecutionEngine(this);
 
+			threadById.put(thread.getId(), thread);
 		}
 	}
 	
-	public void executeJob(TestCaseJob job, DoneHandler doneHandler) {
+	public void executeJob(Job job, DoneHandler doneHandler) {
 		job.setDoneHandler(doneHandler);
 
 		jobs.add(job);
@@ -143,7 +153,7 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	public void shutdown() {
 		for(TestCaseJobThread thread : threadById.values()) {
-			thread.quit();
+			thread.pushSignal(new ExitSignal());
 		}
 		
 		this.shouldQuit = true;
@@ -152,6 +162,15 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	public void forceShutdown() {
 		System.out.println("forceShutdown");
+	}
+
+	public void notifyThreadIsIdle(long threadId) {
+	}
+
+	public void notifyThreadIsTerminated(long threadId) {
+	}
+
+	public void notifyThreadIsRunning(long threadId) {
 	}
 
 }
