@@ -63,6 +63,11 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 					currentJob = null;
 
 				}
+
+			}else {
+				
+				Ntro.throwException(String.format("[FATAL] unknown signal %s in thread %s", signal, getId()));
+				
 			}
 		}
 	}
