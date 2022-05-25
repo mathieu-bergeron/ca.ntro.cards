@@ -1,6 +1,9 @@
 package ca.ntro.cards.common.test_cases.execution.jobs;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.TestCase;
@@ -16,9 +19,25 @@ public class ReadingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
        extends Job<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
     	   
     private File testCaseFile;
+    private TEST_CASE testCase;
 
 	@Override
 	public void runImpl() {
+		try {
+
+			FileInputStream fileInput = new FileInputStream(testCaseFile);
+			ObjectInputStream objectInput = new ObjectInputStream(fileInput);
+			testCase = (TEST_CASE) objectInput.readObject();
+
+			objectInput.close();
+
+		} catch (IOException | ClassNotFoundException e) {
+			
+			Ntro.throwException(e);
+
+		}
+		
+		System.out.println("loaded testCase: " + testCase);
 	}
 
 	public void registerFile(File testCaseFile) {

@@ -224,7 +224,6 @@ public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecu
 			}
 		};
 		
-		
 		for(File testCaseFile : dbDir.listFiles(filter)) {
 			ReadingJob readingJob = new ReadingJob();
 			readingJob.registerFile(testCaseFile);
