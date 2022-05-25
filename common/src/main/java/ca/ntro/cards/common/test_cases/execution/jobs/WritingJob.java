@@ -24,7 +24,7 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@Override
 	public void run() {
-
+		
 		if(shouldWriteJson) {
 			writeJson();
 		}
@@ -69,6 +69,10 @@ public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 			Ntro.throwException(e);
 
 		}
+	}
+
+	public void registerShouldWriteJson(boolean shouldWriteJson) {
+		this.shouldWriteJson = shouldWriteJson;
 	}
 
 }

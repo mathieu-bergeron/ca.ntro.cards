@@ -46,6 +46,8 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 	
 	private transient DoneHandler onCreationDoneHandler;
 	private transient DoneHandler onWritingDoneHandler;
+	
+	private transient boolean shouldWriteJson = false;
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
 		return executionEngine;
@@ -141,6 +143,7 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 
 		WritingJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> writingJob = new WritingJob<>();
 		writingJob.setTestCase(testCase);
+		writingJob.registerShouldWriteJson(shouldWriteJson);
 		
 		writingJobs.put(descriptor.testCaseId(), writingJob);
 
@@ -198,5 +201,9 @@ public abstract class      TestCasesModel<EXECUTABLE_MODEL extends CommonExecuta
 
 	public void onWritingDone(DoneHandler onWritingDoneHandler) {
 		this.onWritingDoneHandler = onWritingDoneHandler;
+	}
+
+	public void registerShouldWriteJson(boolean shouldWriteJson) {
+		this.shouldWriteJson = shouldWriteJson;
 	}
 }

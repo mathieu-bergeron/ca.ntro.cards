@@ -131,6 +131,8 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		testCasesModel.registerExecutableModelClass(executableModelClass());
 		testCasesModel.registerStudentModelClass(studentModelClass());
 		testCasesModel.registerTestCaseClass(testCaseClass());
+		testCasesModel.registerShouldWriteJson(shouldWriteJson());
+
 		
 		testCasesModel.registerExecutionEngine(executionEngine);
 	}
