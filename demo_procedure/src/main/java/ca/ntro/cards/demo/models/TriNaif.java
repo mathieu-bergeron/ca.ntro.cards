@@ -29,8 +29,8 @@ public class   TriNaif<C extends Comparable<C>>
 	protected int indiceCandidat = -1;
 	protected int indiceProchainVide = 0;
 	
-	protected C[] source;
-	protected C[] cible;
+	protected C[] source = (C[]) new Card[0];
+	protected C[] cible = (C[]) new Card[0];
 
 	@Override
 	public void copyDataFrom(TriNaif other) {
