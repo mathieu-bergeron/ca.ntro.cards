@@ -11,6 +11,7 @@ public class DemoCard2d extends ProcedureCard2d<DemoProcedureObject2d, DemoProce
 		super();
 	}
 
+
 	public DemoCard2d(AbstractCard card) {
 		super(card);
 	}
@@ -30,6 +31,13 @@ public class DemoCard2d extends ProcedureCard2d<DemoProcedureObject2d, DemoProce
 	}
 
 
+
+	@Override
+	protected void flipCard() {
+		super.flipCard();
+		
+		getWorld().registerFlippedCard(this);
+	}
 
 
 }

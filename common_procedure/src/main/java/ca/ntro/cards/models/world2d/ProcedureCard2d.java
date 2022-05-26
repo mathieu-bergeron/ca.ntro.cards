@@ -128,7 +128,8 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		return false;
 	}
 
-
-
+	public boolean isFaceUp() {
+		return faceUp;
+	}
 
 }
