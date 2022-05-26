@@ -17,7 +17,6 @@ import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
-import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -77,7 +76,6 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 	public void registerMessages(MessageRegistrar registrar) {
 		super.registerMessages(registrar);
 
-		registrar.registerMessage(MsgFlipCard.class);
 		registrar.registerMessage(MsgToggleUseFourCardColors.class);
 		registrar.registerMessage(MsgExecutionEnded.class);
 		registrar.registerMessage(MsgExecutionStepBack.class);

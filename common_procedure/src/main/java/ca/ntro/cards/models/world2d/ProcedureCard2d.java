@@ -1,15 +1,11 @@
 package ca.ntro.cards.models.world2d;
 
-import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.models.values.cards.NullCard;
-import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
-import ca.ntro.cards.common.models.world2d.CommonObject2d;
-import ca.ntro.cards.messages.MsgFlipCard;
 import javafx.scene.input.MouseEvent;
 
 @SuppressWarnings("rawtypes")
@@ -25,8 +21,6 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	private double dragOffsetX;
 	private double dragOffsetY;
-
-	private MsgFlipCard msgFlipCard = NtroApp.newMessage(MsgFlipCard.class);
 
 	public AbstractCard getCard() {
 		return card;
@@ -81,11 +75,15 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		}else if(evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
 				&& evtFx.isSecondaryButtonDown()) {
 			
-			msgFlipCard.setCardId(getCard().id());
-			msgFlipCard.send();
+			flipCard();
+
 		}
 
 		return false;
+	}
+
+	private void flipCard() {
+		this.faceUp = !faceUp;
 	}
 
 	protected void onDragStarts() {
