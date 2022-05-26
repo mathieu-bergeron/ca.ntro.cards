@@ -25,4 +25,9 @@ public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableMod
 		dashboardModel.setNumberOfSteps(size);
 	}
 
+	@Override
+	public EXECUTABLE_MODEL firstModel() {
+		return null;
+	}
+
 }

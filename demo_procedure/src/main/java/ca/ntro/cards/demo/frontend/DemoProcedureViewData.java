@@ -17,7 +17,7 @@ public class DemoProcedureViewData extends ProcedureViewData<DemoProcedureObject
 
 	@Override
 	protected ProcedureCard2d newCard2d(AbstractCard card) {
-		return new DemoCard2d();
+		return new DemoCard2d(card);
 	}
 
 	@Override

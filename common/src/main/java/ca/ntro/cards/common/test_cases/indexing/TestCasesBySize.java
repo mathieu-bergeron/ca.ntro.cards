@@ -6,10 +6,10 @@ import java.util.Map;
 
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 
 public class     TestCasesBySize<STUDENT_MODEL extends CommonExecutableModel, 
-                                 TEST_CASE     extends TestCase> 
+                                 TEST_CASE     extends CommonTestCase> 
 
        implements Value, Serializable {
 	

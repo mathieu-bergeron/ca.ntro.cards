@@ -9,9 +9,9 @@ import ca.ntro.cards.demo.backend.tasks.DemoModifyCardsModel;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
+import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
-import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 
@@ -20,7 +20,7 @@ public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
                                 STUDENT_MODEL,
                                 TriNaif, // canvas model
                                 DemoTestCase,
-                                DemoTestCasesModel,
+                                DemoTestCaseDatabase,
                                 DemoProcedureDashboardModel,
                                 DemoProcedureSettingsModel> {
 

@@ -18,4 +18,8 @@ public abstract class   EfficiencyGraphsModel<GRAPHS_MODEL extends EfficiencyGra
                                           OPTIONS,
                                           VIEW_DATA> {
 
+	public void clear() {
+
+	}
+
 }

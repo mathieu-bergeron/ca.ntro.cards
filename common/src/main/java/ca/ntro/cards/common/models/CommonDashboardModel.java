@@ -5,14 +5,18 @@ import java.util.List;
 
 import ca.ntro.app.models.Model;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 
-public class CommonDashboardModel implements Model {
+public abstract class CommonDashboardModel<DASHBOARD_VIEW  extends CommonDashboardView>
+
+       implements Model {
 	
 	private long numberOfSteps = 0;
 	private int currentStep = 0;
 	private int numberOfCards = 0;
 	
+	private String currentTestCase;
+
 	private List<String> testCases = new ArrayList<>();
 	
 
@@ -52,7 +56,7 @@ public class CommonDashboardModel implements Model {
 		this.testCases = testCases;
 	}
 
-	public void displayOn(CommonDashboardView dashboardView) {
+	public void displayOn(DASHBOARD_VIEW dashboardView) {
 		dashboardView.clearTestCases();
 		for(String testCase : testCases) {
 			dashboardView.addTestCase(testCase);
@@ -67,7 +71,7 @@ public class CommonDashboardModel implements Model {
 		numberOfSteps = 0;
 	}
 
-	public void addTestCase(TestCase testCase) {
+	public void addTestCase(CommonTestCase testCase) {
 
 	}
 

@@ -6,13 +6,13 @@ import java.util.Map;
 
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
 public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel, 
-                          TEST_CASE     extends TestCase> 
+                          TEST_CASE     extends CommonTestCase> 
 
        implements Value, Serializable {
 	
@@ -46,6 +46,10 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 			}
 
 		};
+	}
+
+	public TEST_CASE testCaseById(String testCaseId) {
+		return byId.get(testCaseId);
 	}
 
 }

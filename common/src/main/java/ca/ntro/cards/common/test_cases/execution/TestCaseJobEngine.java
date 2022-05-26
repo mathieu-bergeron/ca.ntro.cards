@@ -22,7 +22,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
@@ -32,7 +32,7 @@ import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
                              STUDENT_MODEL extends EXECUTABLE_MODEL,
-                             TEST_CASE extends TestCase>  
+                             TEST_CASE extends CommonTestCase>  
        extends Thread {
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;

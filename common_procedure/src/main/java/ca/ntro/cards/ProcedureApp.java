@@ -8,8 +8,8 @@ import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCaseDatabase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -21,12 +21,14 @@ import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
+import ca.ntro.cards.test_cases.ProcedureTestCase;
+import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
 
 public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 							       STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	                               CANVAS_MODEL     extends ProcedureCardsModel,
-                                   TEST_CASE        extends TestCase,
-                                   TEST_CASES_MODEL extends TestCaseDatabase,
+                                   TEST_CASE        extends ProcedureTestCase,
+                                   TEST_CASES_MODEL extends ProcedureTestCaseDatabase,
                                    DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                    SETTINGS_MODEL   extends ProcedureSettingsModel,
                                                                                                       

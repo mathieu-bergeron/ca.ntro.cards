@@ -24,27 +24,27 @@ import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCaseDatabase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceSizeOnly;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesBySize;
 
-public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                CANVAS_MODEL     extends CommonCanvasModel,
-                                TEST_CASE        extends TestCase,
-                                TEST_CASES_MODEL extends TestCaseDatabase,
-                                DASHBOARD_MODEL  extends CommonDashboardModel,
-                                SETTINGS_MODEL   extends CommonSettingsModel,
+public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel,
+                                STUDENT_MODEL      extends EXECUTABLE_MODEL,
+                                CANVAS_MODEL       extends CommonCanvasModel,
+                                TEST_CASE          extends CommonTestCase,
+                                TEST_CASE_DATABASE extends CommonTestCaseDatabase,
+                                DASHBOARD_MODEL    extends CommonDashboardModel,
+                                SETTINGS_MODEL     extends CommonSettingsModel,
                                                                                                       
                                 BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
                                                               STUDENT_MODEL,
                                                               CANVAS_MODEL,
                                                               TEST_CASE, 
-                                                              TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
+                                                              TEST_CASE_DATABASE, DASHBOARD_MODEL, SETTINGS_MODEL>,
                                    
                                 ROOT_VIEW       extends CommonRootView, 
                                 CARDS_VIEW      extends CommonCanvasView, 
@@ -127,6 +127,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 		backend.setSettingsModelClass(settingsModelClass());
 		
 		backend.initializeTestCaseDatabase();
+		backend.initializeCanvasModel();
 
 		registrar.registerBackend(backend);
 
@@ -136,7 +137,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL extends CommonExecutableModel,
 	protected abstract Class<STUDENT_MODEL> studentModelClass();
 	protected abstract Class<CANVAS_MODEL> canvasModelClass();
 	protected abstract Class<TEST_CASE> testCaseClass();
-	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();
+	protected abstract Class<TEST_CASE_DATABASE> testCasesModelClass();
 	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();
 	protected abstract Class<SETTINGS_MODEL> settingsModelClass();
 

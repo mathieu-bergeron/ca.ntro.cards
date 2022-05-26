@@ -29,21 +29,27 @@ public class   TriNaif<C extends Comparable<C>>
 	protected int indiceCandidat = -1;
 	protected int indiceProchainVide = 0;
 	
-	protected List<C> listeSource = new ArrayList<>();
-	protected List<C> listeCible = new ArrayList<>();
+	protected C[] source;
+	protected C[] cible;
 
 	@Override
-	public void copyDataFrom(TriNaif otherModel) {
-		listeSource.clear();
-		listeSource.addAll(otherModel.listeSource);
-		
-		listeCible.clear();
-		listeCible.addAll(otherModel.listeCible);
-		
-		indicePlusPetit = otherModel.indicePlusPetit;
-		indiceCandidat = otherModel.indiceCandidat;
-		indiceProchainVide = otherModel.indiceProchainVide;
+	public void copyDataFrom(TriNaif other) {
+		int size = other.source.length;
 
+		source = (C[]) new Card[size];
+		cible = (C[]) new Card[size];
+
+		for(int i = 0; i < size; i++) {
+			source[i] = (C) other.source[i];
+		}
+
+		for(int i = 0; i < size; i++) {
+			cible[i] = (C) other.cible[i];
+		}
+		
+		indicePlusPetit = other.indicePlusPetit;
+		indiceCandidat = other.indiceCandidat;
+		indiceProchainVide = other.indiceProchainVide;
 	}
 
 	public int getIndicePlusPetit() {
@@ -70,20 +76,20 @@ public class   TriNaif<C extends Comparable<C>>
 		this.indiceProchainVide = indiceProchainVide;
 	}
 
-	public List<C> getListeSource() {
-		return listeSource;
+	public C[] getSource() {
+		return source;
 	}
 
-	public void setListeSource(List<C> listeSource) {
-		this.listeSource = listeSource;
+	public void setSource(C[] source) {
+		this.source = source;
 	}
 
-	public List<C> getListeCible() {
-		return listeCible;
+	public C[] getCible() {
+		return cible;
 	}
 
-	public void setListeCible(List<C> listeCible) {
-		this.listeCible = listeCible;
+	public void setCible(C[] cible) {
+		this.cible = cible;
 	}
 
 	@Override
@@ -95,31 +101,31 @@ public class   TriNaif<C extends Comparable<C>>
 		List<AbstractCard> topCards = new ArrayList<>();
 		List<AbstractCard> bottomCards = new ArrayList<>();
 
-		for(int i = 0; i < listeSource.size(); i++) {
+		for(int i = 0; i < source.length; i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight * 2;
 			
-			AbstractCard card = (Card) listeSource.get(i);
+			AbstractCard card = (Card) source[i];
 			
 			if(card == null) {
 				card = new NullCard();
 			}
-
+			
 			cardsViewData.addOrUpdateCard(card,
 					                      targetTopLeftX,
 					                      targetTopLeftY);
 
 			bottomCards.add(card);
-			cardsViewData.displayCardFaceDown(card);
+			//cardsViewData.displayCardFaceDown(card);
 		}
 
-		for(int i = 0; i < listeCible.size(); i++) {
+		for(int i = 0; i < cible.length; i++) {
 
 			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
 			double targetTopLeftY = cardHeight / 2;
 			
-			AbstractCard card = (Card) listeCible.get(i);
+			AbstractCard card = (Card) cible[i];
 			
 			if(card == null) {
 				card = new NullCard();
@@ -158,14 +164,17 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		listeSource.clear();
-		for(Card card : sourceList) {
-			listeSource.add((C) card);
+		int size = sourceList.size();
+
+		source = (C[]) new Object[size];
+		cible = (C[]) new Object[size];
+
+		for(int i = 0; i < size; i++) {
+			source[i] = (C) sourceList.get(i);
 		}
-		
-		listeCible.clear();
-		for(Card card : targetList) {
-			listeCible.add((C) card);
+
+		for(int i = 0; i < size; i++) {
+			cible[i] = (C) targetList.get(i);
 		}
 
 		incrementVersion();
@@ -175,45 +184,48 @@ public class   TriNaif<C extends Comparable<C>>
 	public void initializeAsTestCase(TestCaseDescriptor descriptor) {
 		
 		if(descriptor.testCaseId().equals("ex01")) {
-
-			listeSource.add((C) new Card(2, Suit.CLUBS));
-			listeSource.add((C) new Card(5, Suit.CLUBS));
-			listeSource.add((C) new Card(5, Suit.DIAMONDS));
-			listeSource.add((C) new Card(5, Suit.HEARTS));
-			listeSource.add((C) new Card(7, Suit.SPADES));
-			listeSource.add((C) new Card(2, Suit.HEARTS));
+			
+			source = (C[]) new Card[] {new Card(2, Suit.CLUBS), 
+					                   new Card(5, Suit.CLUBS), 
+					                   new Card(5, Suit.DIAMONDS), 
+					                   new Card(5, Suit.HEARTS), 
+					                   new Card(7, Suit.SPADES), 
+					                   new Card(2, Suit.HEARTS)};
 
 		}else {
 			
+			source = (C[]) new Card[descriptor.size()];
+			
 			for(int i = 0; i < descriptor.size(); i++) {
-
-				listeSource.add((C) new Card(2 + Ntro.random().nextInt(8), Suit.random()));
-
+				
+				source[i] = (C) new Card(2 + Ntro.random().nextInt(8), Suit.random());
 			}
 		}
+		
+		cible = (C[]) new Card[source.length];
 
-		for(int i = 0; i < listeSource.size(); i++) {
-			listeCible.add(null);
+		for(int i = 0; i < source.length; i++) {
+			cible[i] = null;
 		}
 	}
 
 	@Override
 	public int testCaseSize() {
-		return listeSource.size();
+		return source.length;
 	}
 	
 	@Override
 	protected Card cardById(String cardId) {
-		Card result = (Card) cardById(cardId, listeSource);
+		Card result = (Card) cardById(cardId, source);
 
 		if(result == null) {
-			result = (Card) cardById(cardId, listeCible);
+			result = (Card) cardById(cardId, cible);
 		}
 
 		return result;
 	}
 	
-	private Card cardById(String cardId, List<C> list) {
+	private Card cardById(String cardId, C[] list) {
 		Card result = null;
 		
 		for(C candidate : list) {
@@ -233,11 +245,11 @@ public class   TriNaif<C extends Comparable<C>>
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				visitList(visitor, listeSource);
-				visitList(visitor, listeCible);
+				visitList(visitor, source);
+				visitList(visitor, cible);
 			}
 
-			private void visitList(Visitor<Card> visitor, List<C> listToVisit) throws Throwable {
+			private void visitList(Visitor<Card> visitor, C[] listToVisit) throws Throwable {
 				for(C card : listToVisit) {
 					visitor.visit((Card) card);
 				}
@@ -247,7 +259,15 @@ public class   TriNaif<C extends Comparable<C>>
 
 	@Override
 	protected void addCardImpl(Card card) {
-		listeSource.add((C) card);
+		Card[] newSource = new Card[source.length+1];
+		
+		for(int i = 0; i < source.length; i++) {
+			newSource[i] = (Card) source[i];
+		}
+
+		newSource[source.length] = card;
+		
+		source = (C[]) newSource;
 	}
 	
 	@Override

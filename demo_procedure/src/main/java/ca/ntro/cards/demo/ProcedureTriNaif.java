@@ -13,9 +13,9 @@ import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
 import ca.ntro.cards.demo.messages.MsgUpdateList;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
+import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
-import ca.ntro.cards.demo.models.DemoTestCasesModel;
 
 public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
@@ -23,7 +23,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
                                      STUDENT_MODEL,
                                      TriNaif,           // canvas model
                                      DemoTestCase,
-                                     DemoTestCasesModel,
+                                     DemoTestCaseDatabase,
                                      DemoProcedureDashboardModel,
                                      DemoProcedureSettingsModel,
                                      DemoProcedureBackend<STUDENT_MODEL>,
@@ -57,8 +57,8 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 	}
 
 	@Override
-	protected Class<DemoTestCasesModel> testCasesModelClass() {
-		return DemoTestCasesModel.class;
+	protected Class<DemoTestCaseDatabase> testCasesModelClass() {
+		return DemoTestCaseDatabase.class;
 	}
 
 

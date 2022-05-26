@@ -1,5 +1,6 @@
 package ca.ntro.cards.common.backend;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.backend.LocalBackendNtro;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.CommonConstants;
@@ -11,8 +12,8 @@ import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
-import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCaseDatabase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.core.initialization.Ntro;
@@ -20,14 +21,14 @@ import ca.ntro.core.initialization.Ntro;
 public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableModel,
                                     STUDENT_MODEL      extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL       extends CommonCanvasModel,
-                                    TEST_CASE          extends TestCase,
-                                    TEST_CASE_DATABASE extends TestCaseDatabase,
+                                    TEST_CASE          extends CommonTestCase,
+                                    TEST_CASE_DATABASE extends CommonTestCaseDatabase,
                                     DASHBOARD_MODEL    extends CommonDashboardModel,
                                     SETTINGS_MODEL     extends CommonSettingsModel>
 
        extends LocalBackendNtro {
 
-	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
+	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> testCaseJobEngine = new TestCaseJobEngine<>();
 	private TEST_CASE_DATABASE testCaseDatabase;
 	
 	private Class<EXECUTABLE_MODEL> executableModelClass;
@@ -98,6 +99,22 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		this.canvasModelClass = canvasModelClass;
 	}
 	
+	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> getTestCaseJobEngine() {
+		return testCaseJobEngine;
+	}
+
+	public void setTestCaseJobEngine(TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> testCaseJobEngine) {
+		this.testCaseJobEngine = testCaseJobEngine;
+	}
+
+	public TEST_CASE_DATABASE getTestCaseDatabase() {
+		return testCaseDatabase;
+	}
+
+	public void setTestCaseDatabase(TEST_CASE_DATABASE testCaseDatabase) {
+		this.testCaseDatabase = testCaseDatabase;
+	}
+
 	public void initializeTestCaseDatabase() {
 
 		testCaseDatabase = Ntro.factory().newInstance(testCaseDatabaseClass);
@@ -106,9 +123,11 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		testCaseDatabase.registerTestCaseClass(testCaseClass);
 		testCaseDatabase.registerShouldWriteJson(false);
 		
-		testCaseDatabase.registerExecutionEngine(executionEngine);
+		testCaseDatabase.registerExecutionEngine(testCaseJobEngine);
 
 	}
+
+	public abstract void initializeCanvasModel();
 
 	@Override
 	public void createTasks(BackendTasks tasks) {
@@ -165,13 +184,13 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 		int numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
 		
-		executionEngine.registerExecutableModelClass(executableModelClass);
-		executionEngine.registerStudentModelClass(studentModelClass);
-		executionEngine.registerTestCaseClass(testCaseClass);
+		testCaseJobEngine.registerExecutableModelClass(executableModelClass);
+		testCaseJobEngine.registerStudentModelClass(studentModelClass);
+		testCaseJobEngine.registerTestCaseClass(testCaseClass);
 
-		executionEngine.initialize(numberOfThreads);
+		testCaseJobEngine.initialize(numberOfThreads);
 		
-		executionEngine.start();
+		testCaseJobEngine.start();
 
 		System.out.println("\n\n[LOADING TEST CASES]");
 		System.out.println(String.format("\n... using %s threads\n\n", numberOfThreads));

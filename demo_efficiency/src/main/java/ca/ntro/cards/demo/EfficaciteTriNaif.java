@@ -13,9 +13,9 @@ import ca.ntro.cards.demo.frontend.views.DemoGraphsView;
 import ca.ntro.cards.demo.models.DemoEfficiencyDashboardModel;
 import ca.ntro.cards.demo.models.DemoEfficiencySettingsModel;
 import ca.ntro.cards.demo.models.DemoGraphsModel;
-import ca.ntro.cards.demo.models.DemoTestCasesModel;
 import ca.ntro.cards.demo.models.TriNaif;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
+import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.efficiency.EfficiencyApp;
 
 public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
@@ -24,7 +24,7 @@ public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
                                       STUDENT_MODEL,
                                       DemoGraphsModel,
                                       DemoTestCase,
-                                      DemoTestCasesModel,
+                                      DemoTestCaseDatabase,
                                       DemoEfficiencyDashboardModel,
                                       DemoEfficiencySettingsModel,
                                       DemoEfficiencyBackend<STUDENT_MODEL>,
@@ -69,8 +69,8 @@ public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends TriNaif>
 	}
 
 	@Override
-	protected Class<DemoTestCasesModel> testCasesModelClass() {
-		return DemoTestCasesModel.class;
+	protected Class<DemoTestCaseDatabase> testCasesModelClass() {
+		return DemoTestCaseDatabase.class;
 	}
 
 	@Override

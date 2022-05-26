@@ -4,7 +4,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.execution.jobs.Job;
 import ca.ntro.cards.common.test_cases.execution.signals.ExitSignal;
 import ca.ntro.cards.common.test_cases.execution.signals.Signal;
@@ -12,7 +12,7 @@ import ca.ntro.core.initialization.Ntro;
 
 public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
                             STUDENT_MODEL extends EXECUTABLE_MODEL,
-                            TEST_CASE extends TestCase>  
+                            TEST_CASE extends CommonTestCase>  
 
        extends Thread {
 	

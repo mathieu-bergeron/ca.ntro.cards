@@ -3,33 +3,48 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
-import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
-import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCaseDatabase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.MsgFlipCard;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
+import ca.ntro.cards.test_cases.ProcedureTestCase;
+import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
-public abstract class ProcedureBackend<EXECUTABLE_MODEL extends ProcedureCardsModel,
-                                       STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                       CANVAS_MODEL     extends ProcedureCardsModel,
-                                       TEST_CASE        extends TestCase,
-                                       TEST_CASES_MODEL extends TestCaseDatabase,
-                                       DASHBOARD_MODEL  extends ProcedureDashboardModel,
-                                       SETTINGS_MODEL   extends ProcedureSettingsModel>
+import ca.ntro.app.NtroApp;
+
+public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCardsModel,
+                                       STUDENT_MODEL      extends EXECUTABLE_MODEL,
+                                       CANVAS_MODEL       extends ProcedureCardsModel,
+                                       TEST_CASE          extends ProcedureTestCase,
+                                       TEST_CASE_DATABASE extends ProcedureTestCaseDatabase,
+                                       DASHBOARD_MODEL    extends ProcedureDashboardModel,
+                                       SETTINGS_MODEL     extends ProcedureSettingsModel>
 
                 extends CommonBackend<EXECUTABLE_MODEL, 
                                       STUDENT_MODEL,
                                       CANVAS_MODEL,
                                       TEST_CASE, 
-                                      TEST_CASES_MODEL, 
+                                      TEST_CASE_DATABASE, 
                                       DASHBOARD_MODEL, 
                                       SETTINGS_MODEL> {
+
+
+    @SuppressWarnings("unchecked")
+	@Override
+	public void initializeCanvasModel() {
+		
+		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
+		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
+
+		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
+
+		dashboardModel.updateCardsModel(getTestCaseDatabase(), canvasModel);
+
+	}
 
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks tasks) {
 		

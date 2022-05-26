@@ -8,12 +8,12 @@ import java.nio.file.Paths;
 
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.test_cases.TestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.core.initialization.Ntro;
 
 public class WritingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
                                     STUDENT_MODEL extends EXECUTABLE_MODEL,
-                                    TEST_CASE extends TestCase>  
+                                    TEST_CASE extends CommonTestCase>  
 
 
        extends Job<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {

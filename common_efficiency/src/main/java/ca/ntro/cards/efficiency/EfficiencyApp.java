@@ -1,8 +1,8 @@
 package ca.ntro.cards.efficiency;
 
 import ca.ntro.cards.common.CommonApp;
-import ca.ntro.cards.common.test_cases.TestCase;
-import ca.ntro.cards.common.test_cases.TestCaseDatabase;
+import ca.ntro.cards.common.test_cases.CommonTestCase;
+import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.efficiency.backend.EfficiencyBackend;
 import ca.ntro.cards.efficiency.frontend.EfficiencyFrontend;
 import ca.ntro.cards.efficiency.frontend.EfficiencyViewData;
@@ -18,8 +18,8 @@ import ca.ntro.cards.models.ProcedureCardsModel;
 public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
                                     STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL     extends EfficiencyGraphsModel,
-                                    TEST_CASE        extends TestCase,
-                                    TEST_CASES_MODEL extends TestCaseDatabase,
+                                    TEST_CASE        extends CommonTestCase,
+                                    TEST_CASES_MODEL extends CommonTestCaseDatabase,
                                     DASHBOARD_MODEL  extends EfficiencyDashboardModel,
                                     SETTINGS_MODEL   extends EfficiencySettingsModel,
                                                                                                       

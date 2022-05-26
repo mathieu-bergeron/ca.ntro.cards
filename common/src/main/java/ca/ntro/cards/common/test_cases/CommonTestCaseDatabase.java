@@ -3,6 +3,7 @@ package ca.ntro.cards.common.test_cases;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.Serializable;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,14 +29,16 @@ import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
-                                             STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                             TEST_CASE        extends TestCase> 
+public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
+                                                  STUDENT_MODEL    extends EXECUTABLE_MODEL,
+                                                  TEST_CASE        extends CommonTestCase> 
 
 
                 implements Value, Serializable {
 	
 	private long version = 0;
+
+	private String currentTestCaseId;
 	
 	private TestCaseById<EXECUTABLE_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
 	private TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory = new TestCasesByCategory<>();
@@ -56,6 +59,7 @@ public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecu
 	private transient DoneHandler onWritingDoneHandler;
 	
 	private transient boolean shouldWriteJson = false;
+	
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
 		return executionEngine;
@@ -111,6 +115,15 @@ public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecu
 
 	public void registerTestCaseClass(Class<TEST_CASE> testCaseClass) {
 		this.testCaseClass = testCaseClass;
+	}
+	
+
+	public String getCurrentTestCaseId() {
+		return currentTestCaseId;
+	}
+
+	public void setCurrentTestCaseId(String currentTestCaseId) {
+		this.currentTestCaseId = currentTestCaseId;
 	}
 
 	public void generateFirstVersionIfNeeded() {
@@ -229,23 +242,45 @@ public abstract class      TestCaseDatabase<EXECUTABLE_MODEL extends CommonExecu
 			readingJob.registerFile(testCaseFile);
 
 			executionEngine.executeJob(readingJob, () -> {
+				
+				addTestCase((TEST_CASE) readingJob.getTestCase());
 
 				MsgNewTestCaseLoaded msgNewTestCaseLoaded = NtroApp.newMessage(MsgNewTestCaseLoaded.class);
 				msgNewTestCaseLoaded.setTestCaseId(readingJob.testCaseId());
 				msgNewTestCaseLoaded.send();
-				
+
 			});
 		}
-
 	}
 
 	public void stepForward() {
 	}
 
-	public CommonCanvasModel currentModel() {
+	public EXECUTABLE_MODEL currentModel() {
 		return null;
 	}
 
 	public void stepBackward() {
+	}
+
+	@SuppressWarnings("unchecked")
+	public void loadTestCase(String testCaseId) {
+		File testCaseFile = Paths.get(CommonConstants.TEST_CASE_DATABASE_DIR, testCaseId + ".bin").toFile();
+
+		ReadingJob readingJob = new ReadingJob();
+		readingJob.registerFile(testCaseFile);
+		
+		readingJob.runImpl();
+
+		addTestCase((TEST_CASE) readingJob.getTestCase());
+	}
+
+	private void addTestCase(TEST_CASE testCase) {
+		testCasesById.addTestCase(testCase);
+		testCasesByCategory.addTestCase(testCase);
+	}
+
+	protected TEST_CASE testCaseById(String testCaseId) {
+		return testCasesById.testCaseById(testCaseId);
 	}
 }
