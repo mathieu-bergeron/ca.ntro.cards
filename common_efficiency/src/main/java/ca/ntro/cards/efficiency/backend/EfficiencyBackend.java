@@ -41,7 +41,7 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
 	}
 
 	@Override
-	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+	protected void addSubTasksToModifyCanvasModel(BackendTasks subTasks) {
 		// TODO Auto-generated method stub
 		
 	}

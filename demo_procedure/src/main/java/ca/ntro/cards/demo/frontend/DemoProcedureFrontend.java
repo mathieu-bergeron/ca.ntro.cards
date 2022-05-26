@@ -16,7 +16,7 @@ import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoSelectionsView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 
-public class DemoProcedureFrontend
+public class DemoProcedureFrontend<STUDENT_MODEL extends TriNaif>
 
        extends ProcedureFrontend<DemoProcedureRootView,
                                 DemoProcedureSettingsView, 
@@ -26,7 +26,7 @@ public class DemoProcedureFrontend
                                 DemoReplayControlsView,
                                 DemoVariablesView,
                                 DemoProcedureViewData, 
-                                TriNaif, 
+                                STUDENT_MODEL, // CanvasModel
                                 DemoProcedureDashboardModel, 
                                 DemoProcedureSettingsModel> {
 

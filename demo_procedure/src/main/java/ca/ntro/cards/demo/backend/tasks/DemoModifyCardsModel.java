@@ -36,12 +36,10 @@ public class DemoModifyCardsModel {
 		    	 
 		    	 System.out.println("DemoModifyCardsModel.updateList");
 		    	 
-		    	 /*
 		    	 STUDENT_MODEL demoModel     = inputs.get(model(cardsModelClass));
 		    	 MsgUpdateList msgUpdateList = inputs.get(message(MsgUpdateList.class));
 		    	 
 		    	 msgUpdateList.applyTo(demoModel);
-		    	 */
 		    	 
 		     });
 	}

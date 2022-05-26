@@ -136,7 +136,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 				                      canvasModelClass,
 				                      subTasks -> {
 				                    	 
-				                    	 addSubTasksToModifyCardsModel(subTasks);
+				                    	 addSubTasksToModifyCanvasModel(subTasks);
 				                    	 
 				                     });
 
@@ -172,7 +172,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	}
 
 	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
-	protected abstract void addSubTasksToModifyCardsModel(BackendTasks subTasks);
+	protected abstract void addSubTasksToModifyCanvasModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
 	

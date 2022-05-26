@@ -27,7 +27,7 @@ public class DemoEfficiencyBackend<STUDENT_MODEL extends TriNaif>
 	}
 
 	@Override
-	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+	protected void addSubTasksToModifyCanvasModel(BackendTasks subTasks) {
 		
 	}
 

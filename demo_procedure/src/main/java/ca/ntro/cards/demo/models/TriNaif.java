@@ -96,8 +96,6 @@ public class   TriNaif<C extends Comparable<C>>
 	@Override
 	protected void updateViewDataImpl(DemoProcedureViewData cardsViewData) {
 		
-		System.out.println("updateViewDataImpl");
-
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
@@ -120,7 +118,7 @@ public class   TriNaif<C extends Comparable<C>>
 					                      targetTopLeftY);
 
 			bottomCards.add(card);
-			cardsViewData.displayCardFaceDown(card);
+			//cardsViewData.displayCardFaceDown(card);
 		}
 
 		for(int i = 0; i < cible.length; i++) {
@@ -279,8 +277,8 @@ public class   TriNaif<C extends Comparable<C>>
 	public void updateCards(List<Card> sourceList, List<Card> targetList) {
 		int size = sourceList.size();
 
-		source = (C[]) new Object[size];
-		cible = (C[]) new Object[size];
+		source = (C[]) new Card[size];
+		cible = (C[]) new Card[size];
 
 		for(int i = 0; i < size; i++) {
 			source[i] = (C) sourceList.get(i);

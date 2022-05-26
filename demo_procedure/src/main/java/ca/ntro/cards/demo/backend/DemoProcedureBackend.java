@@ -16,9 +16,9 @@ import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 
 
-       extends ProcedureBackend<TriNaif, // executable model
+       extends ProcedureBackend<TriNaif,       // executable model
                                 STUDENT_MODEL,
-                                TriNaif, // canvas model
+                                STUDENT_MODEL, // canvas model
                                 DemoTestCase,
                                 DemoTestCaseDatabase,
                                 DemoProcedureDashboardModel,
@@ -28,46 +28,12 @@ public class   DemoProcedureBackend<STUDENT_MODEL extends TriNaif>
 	
 
 	@Override
-	protected void addSubTasksToModifyCardsModel(BackendTasks subTasks) {
+	protected void addSubTasksToModifyCanvasModel(BackendTasks subTasks) {
+		super.addSubTasksToModifyCanvasModel(subTasks);
 
-		 DemoModifyCardsModel.updateList(subTasks, getExecutableModelClass());
-
+		DemoModifyCardsModel.updateList(subTasks, getStudentModelClass());
 	}
 
-	@Override
-	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
-
-	}
-
-	@Override
-	protected void addSubTasksToModifyDashboardModel(BackendTasks subTasks) {
-		super.addSubTasksToModifyDashboardModel(subTasks);
-
-		subTasks.task("updateListDashboard")
-		     .waitsFor(message(MsgUpdateList.class))
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 System.out.println("ModifyDashbaordModel.updateList");
-		    	 
-		    	 
-		     });
-
-	}
-
-	@Override
-	protected void createAdditionalTasks(BackendTasks tasks) {
-		
-	}
-
-	@Override
-	protected void addSubTasksToManageThread(BackendTasks subTasks) {
-		
-	}
-
-	@Override
-	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
-
-	}
 
 
 

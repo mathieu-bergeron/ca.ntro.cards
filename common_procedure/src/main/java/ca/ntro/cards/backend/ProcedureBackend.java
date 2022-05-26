@@ -52,7 +52,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		
 	}
 
-	protected void addSubTasksToModifyCardsModel(BackendTasks tasks) {
+	protected void addSubTasksToModifyCanvasModel(BackendTasks tasks) {
 
 		executionStepBack(tasks);
 
@@ -110,12 +110,12 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		
 	}
 
-	protected void addSubTasksToModifySettingsModel(BackendTasks tasks) {
-		
+	@Override
+	protected void addSubTasksToModifySettingsModel(BackendTasks subTasks) {
 	}
 
-	protected void addSubTasksToManageThread(BackendTasks tasks) {
-		
+	@Override
+	protected void createAdditionalTasks(BackendTasks tasks) {
 	}
 
 }

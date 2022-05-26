@@ -21,7 +21,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
                 extends ProcedureApp<TriNaif,           // executable model
                                      STUDENT_MODEL,
-                                     TriNaif,           // canvas model
+                                     STUDENT_MODEL,     // canvas model
                                      DemoTestCase,
                                      DemoTestCaseDatabase,
                                      DemoProcedureDashboardModel,
@@ -32,7 +32,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
                                      DemoProcedureDashboardView,
                                      DemoProcedureSettingsView,
                                      DemoProcedureViewData,
-                                     DemoProcedureFrontend> {
+                                     DemoProcedureFrontend<STUDENT_MODEL>> {
 
                                     	   
     private String[] args;
@@ -96,8 +96,8 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	protected Class<TriNaif> canvasModelClass() {
-		return (Class<TriNaif>) classeTriNaif();
+	protected Class<STUDENT_MODEL> canvasModelClass() {
+		return (Class<STUDENT_MODEL>) classeTriNaif();
 	}
 
 	@Override
