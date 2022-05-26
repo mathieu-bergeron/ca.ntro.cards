@@ -2,12 +2,17 @@ package ca.ntro.cards.common.models.values.cards;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
+import ca.ntro.cards.common.models.identifyers.IdFactory;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 
 public class NullCard<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPTIONS> {
 	
+	private long id = -1;
+	
 	public NullCard() {
 		super();
+		
+		this.id = IdFactory.nextId();
 	}
 
 	@Override
@@ -24,13 +29,13 @@ public class NullCard<OPTIONS extends CommonDrawingOptions> extends AbstractCard
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void drawFaceUp(World2dGraphicsContext gc, 
-			                  double topLeftX, 
-			                  double topLeftY, 
-			                  double width, 
-			                  double height, 
-			                  int levelOfDetails, 
-			                  OPTIONS options) {
+	public void drawFaceUp(World2dGraphicsContext gc, 
+			               double topLeftX, 
+			               double topLeftY, 
+			               double width, 
+			               double height, 
+			               int levelOfDetails, 
+			               OPTIONS options) {
 
 			gc.setFill(NtroApp.colorFromString("#ffffff"));
 
@@ -79,9 +84,11 @@ public class NullCard<OPTIONS extends CommonDrawingOptions> extends AbstractCard
 	@Override
 	public void format(StringBuilder builder) {
 		builder.append("NullCard");
-		builder.append("  (");
-		super.format(builder);
-		builder.append(")");
+	}
+
+	@Override
+	public String id() {
+		return String.valueOf(id);
 	}
 
 }

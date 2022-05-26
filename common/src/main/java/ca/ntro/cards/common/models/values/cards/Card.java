@@ -6,8 +6,12 @@ import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
+import ca.ntro.core.identifyers.Identifiable;
 
-public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPTIONS> {
+public class   Card<OPTIONS extends CommonDrawingOptions> 
+
+       extends AbstractCard<OPTIONS> {
+
 	
 	private int rank = 2;
 	private Suit suit = Suit.HEARTS;
@@ -36,7 +40,11 @@ public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPT
 		setRank(rank);
 		setSuit(suit);
 	}
-
+	
+	@Override
+	public String id() {
+		return String.valueOf(rank) + "_" + suit.name();
+	}
 
 	@SuppressWarnings("rawtypes")
 	private Color color(OPTIONS options) {
@@ -163,9 +171,6 @@ public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPT
 		builder.append(rank);
 		builder.append(" of ");
 		builder.append(suit);
-		builder.append("  (");
-		super.format(builder);
-		builder.append(")");
 	}
 
 }

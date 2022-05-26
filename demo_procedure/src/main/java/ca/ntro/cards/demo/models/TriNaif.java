@@ -32,25 +32,6 @@ public class   TriNaif<C extends Comparable<C>>
 	protected C[] source = (C[]) new Card[0];
 	protected C[] cible = (C[]) new Card[0];
 
-	@Override
-	public void copyDataFrom(TriNaif other) {
-		int size = other.source.length;
-
-		source = (C[]) new Card[size];
-		cible = (C[]) new Card[size];
-
-		for(int i = 0; i < size; i++) {
-			source[i] = (C) other.source[i];
-		}
-
-		for(int i = 0; i < size; i++) {
-			cible[i] = (C) other.cible[i];
-		}
-		
-		indicePlusPetit = other.indicePlusPetit;
-		indiceCandidat = other.indiceCandidat;
-		indiceProchainVide = other.indiceProchainVide;
-	}
 
 	public int getIndicePlusPetit() {
 		return indicePlusPetit;
@@ -93,6 +74,26 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
+	public void copyDataFrom(TriNaif other) {
+		int size = other.source.length;
+
+		source = (C[]) new Card[size];
+		cible = (C[]) new Card[size];
+
+		for(int i = 0; i < size; i++) {
+			source[i] = (C) other.source[i];
+		}
+
+		for(int i = 0; i < size; i++) {
+			cible[i] = (C) other.cible[i];
+		}
+		
+		indicePlusPetit = other.indicePlusPetit;
+		indiceCandidat = other.indiceCandidat;
+		indiceProchainVide = other.indiceProchainVide;
+	}
+
+	@Override
 	protected void updateViewDataImpl(DemoProcedureViewData cardsViewData) {
 		
 		System.out.println("updateViewDataImpl");
@@ -119,7 +120,7 @@ public class   TriNaif<C extends Comparable<C>>
 					                      targetTopLeftY);
 
 			bottomCards.add(card);
-			//cardsViewData.displayCardFaceDown(card);
+			cardsViewData.displayCardFaceDown(card);
 		}
 
 		for(int i = 0; i < cible.length; i++) {
@@ -165,23 +166,6 @@ public class   TriNaif<C extends Comparable<C>>
 		
 	}
 
-	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		int size = sourceList.size();
-
-		source = (C[]) new Object[size];
-		cible = (C[]) new Object[size];
-
-		for(int i = 0; i < size; i++) {
-			source[i] = (C) sourceList.get(i);
-		}
-
-		for(int i = 0; i < size; i++) {
-			cible[i] = (C) targetList.get(i);
-		}
-
-		incrementVersion();
-	}
-
 	@Override
 	public void initializeAsTestCase(TestCaseDescriptor descriptor) {
 		
@@ -210,6 +194,8 @@ public class   TriNaif<C extends Comparable<C>>
 			cible[i] = null;
 		}
 	}
+
+
 
 	@Override
 	public int testCaseSize() {
@@ -241,6 +227,7 @@ public class   TriNaif<C extends Comparable<C>>
 		
 		return result;
 	}
+
 
 	@Override
 	protected Stream<Card> cards() {
@@ -288,6 +275,23 @@ public class   TriNaif<C extends Comparable<C>>
 			card.format(builder);
 		});
 	}
+
+	public void updateCards(List<Card> sourceList, List<Card> targetList) {
+		int size = sourceList.size();
+
+		source = (C[]) new Object[size];
+		cible = (C[]) new Object[size];
+
+		for(int i = 0; i < size; i++) {
+			source[i] = (C) sourceList.get(i);
+		}
+
+		for(int i = 0; i < size; i++) {
+			cible[i] = (C) targetList.get(i);
+		}
+
+		incrementVersion();
+	}
 	
 
 	@Override
@@ -308,6 +312,5 @@ public class   TriNaif<C extends Comparable<C>>
 
 	public void trier() {
 	}
-
 
 }

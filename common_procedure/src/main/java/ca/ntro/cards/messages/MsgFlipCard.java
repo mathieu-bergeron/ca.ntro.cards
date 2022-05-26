@@ -18,7 +18,6 @@ public class MsgFlipCard extends MessageNtro {
 
 	public void applyTo(ProcedureCardsModel cardsModel) {
 
-		cardsModel.flipCard(cardId);
 
 	}
 

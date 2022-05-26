@@ -19,6 +19,8 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
                 extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> {
 	
+	private boolean faceUp = true;
+	
 	private AbstractCard card;
 
 	private double dragOffsetX;
@@ -95,16 +97,30 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		setTopLeftY(worldY - dragOffsetY);
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public void draw(World2dGraphicsContext gc, OPTIONS options) {
-		card.draw(gc, 
-				  getTopLeftX(), 
-				  getTopLeftY(),
-				  getWidth(),
-				  getHeight(),
-				  levelOfDetails(gc),
-				  options);
+		if(faceUp) {
+
+			card.drawFaceUp(gc, 
+					        getTopLeftX(), 
+					        getTopLeftY(),
+					        getWidth(),
+					        getHeight(),
+					        levelOfDetails(gc),
+					        options);
+			
+		}else {
+
+			card.drawFaceDown(gc, 
+					          getTopLeftX(), 
+					          getTopLeftY(),
+					          getWidth(),
+					          getHeight(),
+					          levelOfDetails(gc),
+					          options);
+			
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -123,6 +139,10 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	public boolean isNullCard() {
 		return card.isNullCard();
+	}
+
+	public void setFaceUp(boolean faceUp) {
+		this.faceUp = faceUp;
 	}
 
 }

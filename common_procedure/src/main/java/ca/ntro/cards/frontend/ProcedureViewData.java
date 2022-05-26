@@ -74,7 +74,7 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 		ProcedureCard2d card2d = (ProcedureCard2d) world2d().objectById(card.id());
 
 		if(card2d != null) {
-			card2d.getCard().setFaceUp(faceUp);
+			card2d.setFaceUp(faceUp);
 		}
 	}
 

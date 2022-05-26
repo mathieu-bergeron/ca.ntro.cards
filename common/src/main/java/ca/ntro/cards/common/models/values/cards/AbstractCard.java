@@ -14,64 +14,9 @@ public abstract class AbstractCard<OPTIONS extends CommonDrawingOptions>
 
        implements Value, Identifiable, Comparable<AbstractCard>, Serializable {
 
-	private long id = -1;
-	private boolean faceUp = true;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public boolean getFaceUp() {
-		return faceUp;
-	}
-
-	public void setFaceUp(boolean facesUp) {
-		this.faceUp = facesUp;
-	}
-
-	@Override
-	public String id() {
-		return String.valueOf(getId());
-	}
-
-	public AbstractCard() {
-		setId(IdFactory.nextId());
-	}
-
-	public void flip() {
-		this.faceUp = !this.faceUp;
-	}
-
-	public boolean hasId(String id) {
-		return String.valueOf(this.id).equals(id);
-	}
 
 	@SuppressWarnings("rawtypes")
-	public void draw(World2dGraphicsContext gc, 
-			         double topLeftX, 
-			         double topLeftY, 
-			         double width, 
-			         double height, 
-			         int levelOfDetails, 
-			         OPTIONS options) {
-		
-		if(faceUp) {
-
-			drawFaceUp(gc, topLeftX, topLeftY, width, height, levelOfDetails, options);
-
-		}else {
-
-			drawFaceDown(gc, topLeftX, topLeftY, width, height, levelOfDetails, options);
-			
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	protected void drawFaceDown(World2dGraphicsContext gc, 
+	public void drawFaceDown(World2dGraphicsContext gc, 
 			                    double topLeftX, 
 			                    double topLeftY, 
 			                    double width, 
@@ -129,7 +74,7 @@ public abstract class AbstractCard<OPTIONS extends CommonDrawingOptions>
 	}
 
 
-	protected abstract void drawFaceUp(World2dGraphicsContext gc, 
+	public abstract void drawFaceUp(World2dGraphicsContext gc, 
 			                           double topLeftX, 
 			                           double topLeftY, 
 			                           double width, 
@@ -139,10 +84,11 @@ public abstract class AbstractCard<OPTIONS extends CommonDrawingOptions>
 
 	public abstract boolean isNullCard();
 
-	public void format(StringBuilder builder) {
-		builder.append("id:" + id);
-		builder.append(", ");
-		builder.append("faceUp: " + faceUp);
+	@Override
+	public boolean hasId(String id) {
+		return String.valueOf(this.id()).equals(id);
 	}
+
+	public abstract void format(StringBuilder builder);
 
 }

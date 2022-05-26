@@ -29,56 +29,18 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL extends ProcedureCard
 
                 implements Model, Watch, Initialize, WriteObjectGraph {
 
-	public void flipCard(String cardId) {
-		Card card = cardById(cardId);
-
-		if(card != null) {
-			card.flip();
-		}
-	}
-
 	protected abstract Card cardById(String cardId);
 	
 	protected abstract Stream<Card> cards();
 	
 	@Override
 	public void initialize() {
-		Set<String> existingIds = new HashSet<>();
-		Set<Card> cardsNeedingId = new HashSet<>();
-		
-		cards().forEach(c -> {
-			if(c == null) {
-				return;
-			}
-
-			if(c.getId() == -1) {
-
-				cardsNeedingId.add(c);
-
-			}else if(existingIds.contains(c.id())) {
-
-				throw new IdNotUniqueException(c.id());
-
-			}else {
-
-				IdFactory.registerId(c.getId());
-				existingIds.add(c.id());
-
-			}
-		});
-		
-		for(Card card : cardsNeedingId) {
-			card.setId(IdFactory.nextId());
-		}
 	}
-
 	
 	public void addCard(Card card) {
 		if(cardById(card.id()) != null) {
 			Ntro.throwException(new IdNotUniqueException(card.id()));
 		}
-		
-		IdFactory.registerId(card.getId());
 
 		addCardImpl(card);
 	}

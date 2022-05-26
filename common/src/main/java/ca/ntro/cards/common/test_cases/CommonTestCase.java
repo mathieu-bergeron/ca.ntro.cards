@@ -8,8 +8,8 @@ import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
 import ca.ntro.core.identifyers.Identifiable;
 import ca.ntro.core.initialization.Ntro;
 
-public class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
-                            STUDENT_MODEL    extends EXECUTABLE_MODEL> 
+public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                     STUDENT_MODEL    extends EXECUTABLE_MODEL> 
 
        implements Value, Identifiable, Serializable {
 	
@@ -93,6 +93,11 @@ public class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
 		snapshot.copyDataFrom(studentModel);
 
 		trace.pushReferenceTo(snapshot);
+	}
+
+	@Override
+	public boolean hasId(String id) {
+		return id().equals(id);
 	}
 
 }
