@@ -21,6 +21,18 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	private double dragOffsetX;
 	private double dragOffsetY;
+	
+	private static final double EPSILON = 0.01;
+	
+	private double targetTopLeftX = -1;
+	private double targetTopLeftY = -1;
+
+	private double distanceToTargetX = 0;
+	private double distanceToTargetY = 0;
+
+	private int directionX = 0; 
+	private int directionY = 0; 
+	
 
 	public AbstractCard getCard() {
 		return card;
@@ -28,6 +40,36 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	public void setCard(AbstractCard card) {
 		this.card = card;
+	}
+
+	public void setTarget(double targetTopLeftX, double targetTopLeftY) {
+		this.targetTopLeftX = targetTopLeftX;
+		this.targetTopLeftY = targetTopLeftY;
+		
+		distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
+		distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
+		
+		directionX = Double.compare(targetTopLeftX, topLeftX());
+		directionY = Double.compare(targetTopLeftY, topLeftY());
+		
+		if(distanceToTargetX <= EPSILON) {
+			reachTargetX(targetTopLeftX);
+		}
+
+		if(distanceToTargetY <= EPSILON) {
+			reachTargetY(targetTopLeftY);
+		}
+	}
+
+	private void reachTargetY(double targetTopLeftY) {
+		setTopLeftY(targetTopLeftY);
+		distanceToTargetY = 0;
+	}
+
+	private void reachTargetX(double targetTopLeftX) {
+		setTopLeftX(targetTopLeftX);
+		distanceToTargetX = 0;
+		directionX = 0;
 	}
 
 	public ProcedureCard2d() {
@@ -86,10 +128,6 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		this.faceUp = !faceUp;
 	}
 
-	protected void onDragStarts() {
-		getWorld().registerDraggedCard(this);
-	}
-
 	public void dragTo(double worldX, double worldY) {
 		setTopLeftX(worldX - dragOffsetX);
 		setTopLeftY(worldY - dragOffsetY);
@@ -141,6 +179,63 @@ public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	public void setFaceUp(boolean faceUp) {
 		this.faceUp = faceUp;
+	}
+
+	private void moveTowardsTargetX(double secondsElapsed) {
+		if(distanceToTargetX > EPSILON) {
+			
+			double decrementX = speed() * secondsElapsed;
+			distanceToTargetX -= decrementX;
+			setTopLeftX(topLeftX() + directionX * decrementX);
+
+		}
+
+		if(distanceToTargetX <= 0
+				&& targetTopLeftX > 0) {
+
+			reachTargetX(targetTopLeftX);
+		}
+	}
+	
+	private double speed() {
+		return 500 + 1000/Math.max(distanceToTargetX, distanceToTargetY);
+
+	}
+
+	private void moveTowardsTargetY(double secondsElapsed) {
+		if(distanceToTargetY > EPSILON) {
+			
+			double decrementY = speed() * secondsElapsed;
+			distanceToTargetY -= decrementY;
+			setTopLeftY(topLeftY() + directionY * decrementY);
+
+		}
+
+		if(distanceToTargetY <= 0
+				&& targetTopLeftY > 0) {
+
+			reachTargetY(targetTopLeftY);
+		}
+	}
+
+	protected void onDragStarts() {
+		getWorld().registerDraggedCard(this);
+
+		targetTopLeftX = -1;
+		targetTopLeftY = -1;
+		distanceToTargetX = 0;
+		distanceToTargetY = 0;
+		directionX = 0;
+		directionY = 0;
+	}
+
+	public void onTimePasses(double secondsElapsed) {
+
+		moveTowardsTargetX(secondsElapsed);
+
+		moveTowardsTargetY(secondsElapsed);
+		
+		super.onTimePasses(secondsElapsed);
 	}
 
 }
