@@ -4,14 +4,14 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.demo.models.DemoEfficiencyDashboardModel;
 import ca.ntro.cards.demo.models.DemoEfficiencySettingsModel;
 import ca.ntro.cards.demo.models.DemoGraphsModel;
-import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.efficiency.backend.EfficiencyBackend;
 
-public class DemoEfficiencyBackend<STUDENT_MODEL extends TriNaif>
+public class DemoEfficiencyBackend<STUDENT_MODEL extends DemoCardsModel>
 
-       extends EfficiencyBackend<TriNaif, 
+       extends EfficiencyBackend<DemoCardsModel, 
                                  STUDENT_MODEL,
                                  DemoGraphsModel, // canvas model
                                  DemoTestCase,

@@ -111,7 +111,15 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 			world2d().addObject2d((OBJECT2D) card2d);
 		}
 		
-		card2d.setTarget(topLeftX, topLeftY);
+		if(card.isNullCard()) {
+			
+			card2d.setTopLeftX(topLeftX);
+			card2d.setTopLeftY(topLeftY);
+			
+		}else {
+			
+			card2d.setTarget(topLeftX, topLeftY);
+		}
 	}
 
 	protected abstract ProcedureCard2d newCard2d(AbstractCard card);

@@ -20,9 +20,9 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public class   TriNaif<C extends Comparable<C>> 
+public class   DemoCardsModel<C extends Comparable<C>> 
 
-       extends ProcedureCardsModel<TriNaif, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
+       extends ProcedureCardsModel<DemoCardsModel, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
                 	
                 	
 	protected int indicePlusPetit = -1;
@@ -74,7 +74,7 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public void copyDataFrom(TriNaif other) {
+	public void copyDataFrom(DemoCardsModel other) {
 		int size = other.source.length;
 
 		source = (C[]) new Card[size];
@@ -91,6 +91,8 @@ public class   TriNaif<C extends Comparable<C>>
 		indicePlusPetit = other.indicePlusPetit;
 		indiceCandidat = other.indiceCandidat;
 		indiceProchainVide = other.indiceProchainVide;
+		
+		incrementVersion();
 	}
 
 	@Override
@@ -118,7 +120,7 @@ public class   TriNaif<C extends Comparable<C>>
 					                      targetTopLeftY);
 
 			bottomCards.add(card);
-			//cardsViewData.displayCardFaceDown(card);
+			cardsViewData.displayCardFaceDown(card);
 		}
 
 		for(int i = 0; i < cible.length; i++) {

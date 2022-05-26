@@ -4,7 +4,7 @@ import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 
-public class DemoProcedureDashboardModel extends ProcedureDashboardModel<DemoProcedureDashboardView, TriNaif, DemoTestCaseDatabase> {
+public class DemoProcedureDashboardModel extends ProcedureDashboardModel<DemoProcedureDashboardView, DemoCardsModel, DemoTestCaseDatabase> {
 
 	@Override
 	protected String defaultTestCaseId() {

@@ -7,8 +7,6 @@ import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
 public class DemoCard2d extends ProcedureCard2d<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 
-
-
 	public DemoCard2d() {
 		super();
 	}

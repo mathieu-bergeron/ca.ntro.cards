@@ -1,13 +1,13 @@
 package ca.ntro.cards.demo;
 
 import ca.ntro.cards.common.GenerateTestCases;
-import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 
-public abstract class DemoGenerateTestCases<STUDENT_MODEL extends TriNaif> 
+public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel> 
 
-       extends        GenerateTestCases<TriNaif, 
+       extends        GenerateTestCases<DemoCardsModel, 
                                         STUDENT_MODEL,
                                         DemoTestCase,
                                         DemoTestCaseDatabase> {
@@ -24,8 +24,8 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends TriNaif>
 	}
 
 	@Override
-	protected Class<TriNaif> executableModelClass() {
-		return TriNaif.class;
+	protected Class<DemoCardsModel> executableModelClass() {
+		return DemoCardsModel.class;
 	}
 
 	@Override

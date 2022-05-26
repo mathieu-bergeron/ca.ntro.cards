@@ -2,7 +2,6 @@ package ca.ntro.cards.models.world2d;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
-import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 
 public class   ProcedureMarker2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
                                  WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
@@ -12,7 +11,6 @@ public class   ProcedureMarker2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WO
 	
 	private String id;
 	
-	
 	public ProcedureMarker2d(String id) {
 		this.id = id;
 	}
@@ -20,11 +18,6 @@ public class   ProcedureMarker2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WO
 	@Override
 	public String id() {
 		return id;
-	}
-
-	@Override
-	protected boolean onMouseEvent(World2dMouseEventFx mouseEvent) {
-		return false;
 	}
 
 	@Override

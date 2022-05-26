@@ -6,13 +6,14 @@ import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import javafx.scene.input.MouseEvent;
 
-public class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                              WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
-                              OPTIONS  extends ProcedureDrawingOptions>
+public abstract class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                       WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                       OPTIONS  extends ProcedureDrawingOptions>
 
        extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS> {
 
-	private ProcedureCard2d<OBJECT2D, WORLD2D, OPTIONS> movingCard = null;
+	private ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> draggedObject2d = null;
+
 	private double anchorX;
 	private double anchorY;
 	private EvtMoveViewport evtMoveViewport = NtroApp.newEvent(EvtMoveViewport.class);
@@ -23,25 +24,25 @@ public class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD
 		double worldX = mouseEvent.worldX();
 		double worldY = mouseEvent.worldY();
 
-		if(movingCard != null 
+		if(draggedObject2d != null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
 				&& evtFx.isPrimaryButtonDown()) {
 
-			movingCard.dragTo(worldX, worldY);
+			draggedObject2d.dragTo(worldX, worldY);
 
-		}else if(movingCard != null 
+		}else if(draggedObject2d != null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
 			
-			forgetDraggedCard();
+			forgetDraggedObject2d();
 
-		}else if(movingCard == null 
+		}else if(draggedObject2d == null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED)
 				&& evtFx.isMiddleButtonDown()) {
 			
 			anchorX = evtFx.getX();
 			anchorY = evtFx.getY();
 
-		}else if(movingCard == null 
+		}else if(draggedObject2d == null 
 				&& evtFx.getEventType().equals(MouseEvent.MOUSE_DRAGGED)
 				&& evtFx.isMiddleButtonDown()) {
 			
@@ -55,11 +56,14 @@ public class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD
 		}
 	}
 
-	protected void forgetDraggedCard() {
-		movingCard = null;
+	protected void forgetDraggedObject2d() {
+		draggedObject2d = null;
+		buildAndSendManualModel();
 	}
 
-	public void registerDraggedCard(ProcedureCard2d<OBJECT2D, WORLD2D, OPTIONS> card2d) {
-		this.movingCard = card2d;
+	public void registerDraggedObject2d(ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> object2d) {
+		this.draggedObject2d = object2d;
 	}
+
+	public abstract void buildAndSendManualModel();
 }

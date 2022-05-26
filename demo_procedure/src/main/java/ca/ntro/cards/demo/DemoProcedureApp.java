@@ -10,16 +10,16 @@ import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
-import ca.ntro.cards.demo.messages.MsgUpdateList;
-import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.demo.messages.MsgManualExecutionStep;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 
-public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
+public abstract class   DemoProcedureApp<STUDENT_MODEL extends DemoCardsModel>
 
-                extends ProcedureApp<TriNaif,           // executable model
+                extends ProcedureApp<DemoCardsModel,           // executable model
                                      STUDENT_MODEL,
                                      STUDENT_MODEL,     // canvas model
                                      DemoTestCase,
@@ -44,8 +44,8 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 	
 
 	@Override
-	protected Class<TriNaif> executableModelClass() {
-		return TriNaif.class;
+	protected Class<DemoCardsModel> executableModelClass() {
+		return DemoCardsModel.class;
 	}
 
 
@@ -91,7 +91,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgUpdateList.class);
+		registrar.registerMessage(MsgManualExecutionStep.class);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

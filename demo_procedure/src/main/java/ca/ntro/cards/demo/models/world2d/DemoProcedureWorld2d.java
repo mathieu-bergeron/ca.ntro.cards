@@ -1,6 +1,5 @@
 package ca.ntro.cards.demo.models.world2d;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,18 +7,19 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.demo.messages.MsgUpdateList;
+import ca.ntro.cards.demo.DemoConstants;
+import ca.ntro.cards.demo.messages.MsgManualExecutionStep;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
+import ca.ntro.core.initialization.Ntro;
 
 public class DemoProcedureWorld2d extends ProcedureWorld2d<DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions> {
 	
-	private MsgUpdateList msgUpdateList = NtroApp.newMessage(MsgUpdateList.class);
+	private MsgManualExecutionStep msgUpdateList = NtroApp.newMessage(MsgManualExecutionStep.class);
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	protected void forgetDraggedCard() {
-		super.forgetDraggedCard();
-		
+	public void buildAndSendManualModel() {
+
 		List<DemoCard2d> topCards2d = new ArrayList<>();
 		List<DemoCard2d> bottomCards2d = new ArrayList<>();
 		
@@ -65,12 +65,32 @@ public class DemoProcedureWorld2d extends ProcedureWorld2d<DemoProcedureObject2d
 			}
 		}
 
+		//double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndicePlusPetit() * cardWidth * 3 / 2;
+		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
+		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
+
+		Object2d marker2d = objectById("smallestElement");
+		int indexSmallest = (int) Math.round((marker2d.topLeftX() - 10 - cardWidth - cardWidth / 2) * 2 / 3 / cardWidth);
 		
-		msgUpdateList.setSourceList(sourceList);
-		msgUpdateList.setTargetList(targetList);
+		DemoCardsModel manualModel = new DemoCardsModel();
+		
+	
+		Card[] source = new Card[sourceList.size()];
+		for(int i = 0; i < sourceList.size(); i++) {
+			source[i] = sourceList.get(i);
+		}
 
+		Card[] target = new Card[targetList.size()];
+		for(int i = 0; i < targetList.size(); i++) {
+			target[i] = targetList.get(i);
+		}
+		
+		manualModel.setSource(source);
+		manualModel.setCible(target);
+		manualModel.setIndicePlusPetit(indexSmallest);
+		
+		msgUpdateList.setManualModel(manualModel);
 		msgUpdateList.send();
-
 	}
 
 

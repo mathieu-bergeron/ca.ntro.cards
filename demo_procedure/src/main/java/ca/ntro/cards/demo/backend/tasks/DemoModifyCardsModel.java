@@ -1,15 +1,15 @@
 package ca.ntro.cards.demo.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-import ca.ntro.cards.demo.messages.MsgUpdateList;
-import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.demo.messages.MsgManualExecutionStep;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 public class DemoModifyCardsModel {
 
-	public static <STUDENT_MODEL extends TriNaif> void loadStudentModel(BackendTasks tasks, 
+	public static <STUDENT_MODEL extends DemoCardsModel> void loadStudentModel(BackendTasks tasks, 
 			                                                                   Class<STUDENT_MODEL> cardsModelClass,
 			                                                                   STUDENT_MODEL studentModel) {
 		tasks.task("loadStudentModel")
@@ -27,20 +27,18 @@ public class DemoModifyCardsModel {
 		     });
 	}
 
-	public static <STUDENT_MODEL extends TriNaif> void updateList(BackendTasks tasks, Class<STUDENT_MODEL> cardsModelClass) {
-		tasks.task("updateList")
+	public static <STUDENT_MODEL extends DemoCardsModel> void updateList(BackendTasks tasks, Class<STUDENT_MODEL> cardsModelClass) {
+		tasks.task("manualExecutionStep")
 
-		     .waitsFor(message(MsgUpdateList.class))
+		     .waitsFor(message(MsgManualExecutionStep.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 System.out.println("DemoModifyCardsModel.updateList");
+		    	 STUDENT_MODEL          demoModel              = inputs.get(model(cardsModelClass));
+		    	 MsgManualExecutionStep msgManualExecutionStep = inputs.get(message(MsgManualExecutionStep.class));
 		    	 
-		    	 STUDENT_MODEL demoModel     = inputs.get(model(cardsModelClass));
-		    	 MsgUpdateList msgUpdateList = inputs.get(message(MsgUpdateList.class));
-		    	 
-		    	 msgUpdateList.applyTo(demoModel);
-		    	 
+		    	 msgManualExecutionStep.applyTo(demoModel);
+
 		     });
 	}
 

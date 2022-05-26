@@ -8,7 +8,7 @@ import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
 import ca.ntro.cards.demo.frontend.views.DemoReplayControlsView;
 import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
-import ca.ntro.cards.demo.models.TriNaif;
+import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
@@ -16,7 +16,7 @@ import ca.ntro.cards.demo.frontend.views.DemoCardsView;
 import ca.ntro.cards.demo.frontend.views.DemoSelectionsView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 
-public class DemoProcedureFrontend<STUDENT_MODEL extends TriNaif>
+public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 
        extends ProcedureFrontend<DemoProcedureRootView,
                                 DemoProcedureSettingsView, 
