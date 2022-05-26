@@ -19,13 +19,12 @@ public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPT
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-
-	public String getSuit() {
-		return suit.name();
+	public Suit getSuit() {
+		return suit;
 	}
 
-	public void setSuit(String suit) {
-		this.suit = Suit.valueOf(suit);
+	public void setSuit(Suit suit) {
+		this.suit = suit;
 	}
 
 	public Card() {
@@ -35,7 +34,7 @@ public class Card<OPTIONS extends CommonDrawingOptions> extends AbstractCard<OPT
 	public Card(int rank, Suit suit) {
 		super();
 		setRank(rank);
-		setSuit(suit.name());
+		setSuit(suit);
 	}
 
 

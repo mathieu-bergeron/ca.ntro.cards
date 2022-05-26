@@ -94,6 +94,8 @@ public class   TriNaif<C extends Comparable<C>>
 
 	@Override
 	protected void updateViewDataImpl(DemoProcedureViewData cardsViewData) {
+		
+		System.out.println("updateViewDataImpl");
 
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

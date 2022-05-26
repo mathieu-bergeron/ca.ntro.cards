@@ -11,10 +11,12 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.test_cases.ProcedureTestCase;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.core.initialization.Ntro;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.NtroApp;
+import ca.ntro.app.models.Watch;
 
 public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCardsModel,
                                        STUDENT_MODEL      extends EXECUTABLE_MODEL,
@@ -39,7 +41,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		
 		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
 		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
-
+		
 		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
 
 		dashboardModel.updateCardsModel(getTestCaseDatabase(), canvasModel);
