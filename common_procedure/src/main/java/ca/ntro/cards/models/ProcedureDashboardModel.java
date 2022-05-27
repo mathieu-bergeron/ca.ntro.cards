@@ -114,7 +114,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		byId.addTestCase(testCaseDescriptor);
 		byCategory.addTestCase(testCaseDescriptor);
 	}
-
+	
 	public void displayOn(SELECTIONS_VIEW selectionsView, ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
 		selectionsView.clearTestCases();
 		byCategory.inOrder().forEach(testCaseDescriptor -> {
