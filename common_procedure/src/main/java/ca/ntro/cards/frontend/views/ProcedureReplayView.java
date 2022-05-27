@@ -5,8 +5,8 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
-import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
+import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
+import ca.ntro.cards.frontend.events.EvtStartExecutionReplay;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
@@ -31,8 +31,8 @@ public abstract class ProcedureReplayView extends ViewFx {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		EvtStartCodeExecution   evtStartCodeExecution   = NtroApp.newEvent(EvtStartCodeExecution.class);
-		EvtStopCodeExecution    evtStopCodeExecution    = NtroApp.newEvent(EvtStopCodeExecution.class);
+		EvtStartExecutionReplay   evtStartCodeExecution   = NtroApp.newEvent(EvtStartExecutionReplay.class);
+		MsgStopExecutionReplay    msgStopCodeExecution    = NtroApp.newMessage(MsgStopExecutionReplay.class);
 		MsgExecutionStepBack    msgExecutionStepBack    = NtroApp.newMessage(MsgExecutionStepBack.class);
 		MsgExecutionStepForward msgExecutionStepForward = NtroApp.newMessage(MsgExecutionStepForward.class);
 		
@@ -44,7 +44,7 @@ public abstract class ProcedureReplayView extends ViewFx {
 
 		pauseButton().setOnAction(evtFx -> {
 
-			evtStopCodeExecution.trigger();
+			msgStopCodeExecution.send();
 
 		});
 

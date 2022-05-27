@@ -23,20 +23,17 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 
                 extends CommonViewData<OBJECT2D, WORLD2D, OPTIONS> {
 
-	private boolean isThreadRunning = false;
-	private double timeSinceLastDashboardUpdate;
-	
-	private boolean isCodeExecuting = false;
-	private double timeSinceLastExecutionStep;
+	private boolean isExecutionReplayInProgress = false;
+	private double timeSinceLastReplayStep;
 	private MsgExecutionStepForward msgExecutionStepForward = NtroApp.newMessage(MsgExecutionStepForward.class);
 
 	public void onTimePasses(double secondsElapsed) {
-		if(isCodeExecuting) {
+		if(isExecutionReplayInProgress) {
 
-			timeSinceLastExecutionStep -= secondsElapsed;
+			timeSinceLastReplayStep -= secondsElapsed;
 			
-			if(timeSinceLastExecutionStep < 0) {
-				timeSinceLastExecutionStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
+			if(timeSinceLastReplayStep < 0) {
+				timeSinceLastReplayStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
 				msgExecutionStepForward.send();
 			}
 		}
@@ -44,13 +41,13 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 		super.onTimePasses(secondsElapsed);
 	}
 
-	public void startCodeExecution() {
-		isCodeExecuting = true;
-		timeSinceLastExecutionStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
+	public void startExecutionReplay() {
+		isExecutionReplayInProgress = true;
+		timeSinceLastReplayStep = CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
 	}
 
-	public void stopCodeExecution() {
-		isCodeExecuting = false;
+	public void stopExecutionReplay() {
+		isExecutionReplayInProgress = false;
 	}
 
 	public void addOrUpdateMarker(String markerId, double topLeftX, double topLeftY) {

@@ -17,6 +17,7 @@ import ca.ntro.cards.common.messages.MsgGenerateTestCase;
 import ca.ntro.cards.common.messages.MsgLockThread;
 import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
+import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
@@ -97,6 +98,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerMessage(MsgRefreshDashboard.class);
 		registrar.registerMessage(MsgGenerateTestCase.class);
 		registrar.registerMessage(MsgNewTestCaseLoaded.class);
+		registrar.registerMessage(MsgStopExecutionReplay.class);
 
 		registerAdditionnalMessages(registrar);
 	}

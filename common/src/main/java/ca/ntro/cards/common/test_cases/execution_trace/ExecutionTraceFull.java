@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ca.ntro.app.NtroApp;
+import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.core.initialization.Ntro;
@@ -15,6 +17,7 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	private List<EXECUTABLE_MODEL> trace = Collections.synchronizedList(new ArrayList<>());
 	private int current = 0;
+	
 
 	public List<EXECUTABLE_MODEL> getTrace() {
 		return trace;
@@ -56,20 +59,33 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private boolean isValidIndex() {
 		return current >= 0 && current < trace.size();
 	}
+
+	private boolean isValidIndex(int index) {
+		return index >= 0 && index < trace.size();
+	}
 	
 	public void stepForward() {
-		current++;
-		
-		if(current >= trace.size()) {
-			current = trace.size() - 1;
+		if(isValidIndex(current + 1)) {
+
+			current++;
+
+		}else {
+
+			MsgStopExecutionReplay msgStopCodeExecution = NtroApp.newMessage(MsgStopExecutionReplay.class);
+			msgStopCodeExecution.send();
 		}
 	}
 
 	public void stepBackward() {
-		current--;
-		
-		if(current < 0) {
-			current = 0;
+		if(isValidIndex(current - 1)) {
+			
+			current--;
+			
+		}else {
+
+			MsgStopExecutionReplay msgStopCodeExecution = NtroApp.newMessage(MsgStopExecutionReplay.class);
+			msgStopCodeExecution.send();
+
 		}
 	}
 

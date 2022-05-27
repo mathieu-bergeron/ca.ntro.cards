@@ -10,8 +10,8 @@ import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
-import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
-import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
+import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
+import ca.ntro.cards.frontend.events.EvtStartExecutionReplay;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
@@ -60,8 +60,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 
 		registrar.registerEvent(MouseEvtOnPreviewCanvas.class);
 
-		registrar.registerEvent(EvtStartCodeExecution.class);
-		registrar.registerEvent(EvtStopCodeExecution.class);
+		registrar.registerEvent(EvtStartExecutionReplay.class);
 	}
 
 	@Override
@@ -93,7 +92,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	private void startCodeExecution(FrontendTasks tasks) {
 		tasks.task("startCodeExecution")
 
-		      .waitsFor(event(EvtStartCodeExecution.class))
+		      .waitsFor(event(EvtStartExecutionReplay.class))
 		      
 		      .thenExecutes(inputs -> {
 		    	  
@@ -101,7 +100,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    	  NtroApp.models().suspendDiskOperations();
 
 		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
-		    	  cardsViewData.startCodeExecution();
+		    	  cardsViewData.startExecutionReplay();
 		      });
 	}
 
@@ -109,7 +108,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	private void stopCodeExecution(FrontendTasks tasks) {
 		tasks.task("stopCodeExecution")
 
-		      .waitsFor(event(EvtStopCodeExecution.class))
+		      .waitsFor(message(MsgStopExecutionReplay.class))
 		      
 		      .thenExecutes(inputs -> {
 
@@ -117,7 +116,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    	  NtroApp.models().resumeDiskOperations();
 		    	  
 		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
-		    	  cardsViewData.stopCodeExecution();
+		    	  cardsViewData.stopExecutionReplay();
 
 		      });
 	}
@@ -131,7 +130,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		      .thenExecutes(inputs -> {
 		    	  
 		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
-		    	  cardsViewData.stopCodeExecution();
+		    	  cardsViewData.stopExecutionReplay();
 
 		      });
 	}

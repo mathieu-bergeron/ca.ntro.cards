@@ -101,7 +101,8 @@ public class   DemoCardsModel<C extends Comparable<C>>
 
 	@Override
 	public void updateViewData(DemoProcedureViewData cardsViewData) {
-		
+		cardsViewData.removeCardsNotIn(cards());
+
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
