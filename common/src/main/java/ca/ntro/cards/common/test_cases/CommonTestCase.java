@@ -3,6 +3,7 @@ package ca.ntro.cards.common.test_cases;
 import java.io.Serializable;
 
 import ca.ntro.app.models.Value;
+import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
@@ -11,7 +12,8 @@ import ca.ntro.core.identifyers.Identifiable;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                     STUDENT_MODEL    extends EXECUTABLE_MODEL> 
+                                     STUDENT_MODEL    extends EXECUTABLE_MODEL,
+                                     DASHBOARD_MODEL  extends CommonDashboardModel> 
 
        implements Value, Identifiable, Serializable {
 	
@@ -22,7 +24,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	private transient STUDENT_MODEL studentModel;
 	private transient Class<EXECUTABLE_MODEL> executableModelClass;
 
-	private ExecutionTraceByMode<EXECUTABLE_MODEL> traces = new ExecutionTraceByMode<>();
+	private ExecutionTraceByMode<EXECUTABLE_MODEL, DASHBOARD_MODEL> traces = new ExecutionTraceByMode<>();
 	private boolean passed;
 
 	public String getCategory() {
@@ -57,11 +59,11 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		this.passed = passed;
 	}
 
-	public ExecutionTraceByMode<EXECUTABLE_MODEL> getTraces() {
+	public ExecutionTraceByMode<EXECUTABLE_MODEL, DASHBOARD_MODEL> getTraces() {
 		return traces;
 	}
 
-	public void setTraces(ExecutionTraceByMode<EXECUTABLE_MODEL> traces) {
+	public void setTraces(ExecutionTraceByMode<EXECUTABLE_MODEL, DASHBOARD_MODEL> traces) {
 		this.traces = traces;
 	}
 
@@ -104,7 +106,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return id().equals(id);
 	}
 
-	protected ExecutionTrace<EXECUTABLE_MODEL> executionTraceByMode(Mode mode) {
+	protected ExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> executionTraceByMode(Mode mode) {
 		return traces.executionTraceByMode(mode);
 	}
 

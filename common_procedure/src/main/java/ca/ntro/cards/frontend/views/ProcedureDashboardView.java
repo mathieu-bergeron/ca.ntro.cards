@@ -29,7 +29,7 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 		}
 	}
 
-	public void installReplayControlsView(ProcedureReplayControlsView replayControlsView) {
+	public void installReplayControlsView(ProcedureReplayView replayControlsView) {
 		if(replayControlsContainer() != null) {
 			replayControlsContainer().getChildren().clear();
 			replayControlsContainer().getChildren().add(replayControlsView.rootNode());

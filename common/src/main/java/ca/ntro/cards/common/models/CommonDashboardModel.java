@@ -76,7 +76,7 @@ public abstract class CommonDashboardModel<DASHBOARD_VIEW  extends CommonDashboa
 	}
 
 	public void addTestCaseId(String testCaseId) {
-		testCases.add(testCaseId);
+		//testCases.add(testCaseId);
 	}
 
 }

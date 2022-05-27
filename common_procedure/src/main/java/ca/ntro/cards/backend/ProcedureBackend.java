@@ -54,44 +54,12 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 	protected void addSubTasksToModifyCanvasModel(BackendTasks tasks) {
 
-		executionStepBack(tasks);
-
-		executionStepForward(tasks);
 
 	}
 
-	private void executionStepForward(BackendTasks tasks) {
-		tasks.task("executionStepForward")
-		
-		     .waitsFor(message(MsgExecutionStepForward.class))
 
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
-		    	 
-		    	 testCaseDatabase().stepForward();
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		     });
-	}
-
-	private void executionStepBack(BackendTasks tasks) {
-		tasks.task("executionStepBack")
-		
-		     .waitsFor(message(MsgExecutionStepBack.class))
-
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
-
-		    	 testCaseDatabase().stepBackward();
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-
-		     });
-	}
 
 	protected void addSubTasksToModifyDashboardModel(BackendTasks tasks) {
-		System.out.println("addSubTasks");
-		
 		tasks.task("addTestCase")
 		
 		     .waitsFor(message(MsgNewTestCaseLoaded.class))
@@ -115,6 +83,55 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 	@Override
 	protected void createAdditionalTasks(BackendTasks tasks) {
+		tasks.taskGroup("AccessTestCaseDatabase")
+
+		     .waitsFor(model(getCanvasModelClass()))
+
+		     .waitsFor(model(getDashboardModelClass()))
+		     
+		     .andContains(subTasks -> {
+
+				executionStepBack(subTasks);
+
+				executionStepForward(subTasks);
+		    	 
+		    	 
+		     });
+	}
+
+	protected abstract void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks);
+
+	private void executionStepBack(BackendTasks tasks) {
+		tasks.task("executionStepBack")
+		
+		     .waitsFor(message(MsgExecutionStepBack.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+
+		    	 testCaseDatabase().stepBackward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+
+		     });
+	}
+
+	private void executionStepForward(BackendTasks tasks) {
+		tasks.task("executionStepForward")
+		
+		     .waitsFor(message(MsgExecutionStepForward.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 testCaseDatabase().stepForward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		     });
 	}
 
 }

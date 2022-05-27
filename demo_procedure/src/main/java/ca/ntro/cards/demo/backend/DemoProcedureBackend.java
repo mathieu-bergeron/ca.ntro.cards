@@ -34,8 +34,8 @@ public class   DemoProcedureBackend<STUDENT_MODEL extends DemoCardsModel>
 		DemoModifyCardsModel.updateList(subTasks, getStudentModelClass());
 	}
 
-
-
-
+	@Override
+	protected void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks) {
+	}
 
 }

@@ -12,7 +12,7 @@ import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public abstract class ProcedureReplayControlsView extends ViewFx {
+public abstract class ProcedureReplayView extends ViewFx {
 
 	protected abstract Label numberOfStepsLabel();
 
@@ -67,21 +67,21 @@ public abstract class ProcedureReplayControlsView extends ViewFx {
 		oneStepButton().setDisable(true);
 	}
 
-	public void displayNumberOfSteps(long numberOfSteps) {
+	public void displayNumberOfSteps(String numberOfSteps) {
 		if(numberOfStepsLabel() != null) {
-			numberOfStepsLabel().setText(String.valueOf(numberOfSteps));
+			numberOfStepsLabel().setText(numberOfSteps);
 		}
 	}
 
-	public void displayCurrentStep(int currentStep) {
+	public void displayCurrentStep(String currentStep) {
 		if(currentStepLabel() != null) {
-			currentStepLabel().setText(String.valueOf(currentStep));
+			currentStepLabel().setText(currentStep);
 		}
 	}
 
-	public void displayNumberOfCards(int numberOfCards) {
+	public void displayNumberOfCards(String numberOfCards) {
 		if(numberOfCardsLabel() != null) {
-			numberOfCardsLabel().setText(String.valueOf(numberOfCards));
+			numberOfCardsLabel().setText(numberOfCards);
 		}
 	}
 

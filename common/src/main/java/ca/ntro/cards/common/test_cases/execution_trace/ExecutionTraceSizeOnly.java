@@ -3,9 +3,10 @@ package ca.ntro.cards.common.test_cases.execution_trace;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 
-public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableModel> 
+public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                    DASHBOARD_MODEL  extends CommonDashboardModel> 
 
-       implements ExecutionTrace<EXECUTABLE_MODEL> {
+       implements ExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
     	   
     	   private int size = 0;
     	   
@@ -40,6 +41,11 @@ public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableMod
 
 	@Override
 	public void stepBackward() {
+	}
+
+	@Override
+	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
+		dashboardModel.setNumberOfSteps(size);
 	}
 
 }

@@ -8,9 +8,10 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.core.initialization.Ntro;
 
-public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel> 
+public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                DASHBOARD_MODEL  extends CommonDashboardModel> 
 
-       implements ExecutionTrace<EXECUTABLE_MODEL> {
+       implements ExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
 
 	private List<EXECUTABLE_MODEL> trace = Collections.synchronizedList(new ArrayList<>());
 	private int current = 0;
@@ -86,5 +87,11 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel>
 	@Override
 	public void copyDataTo(EXECUTABLE_MODEL model) {
 		model.copyDataFrom(trace.get(current));
+	}
+
+	@Override
+	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
+		dashboardModel.setCurrentStep(current+1);
+		dashboardModel.setNumberOfSteps(trace.size());
 	}
 }

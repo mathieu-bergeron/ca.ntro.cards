@@ -18,7 +18,7 @@ import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
-import ca.ntro.cards.frontend.views.ProcedureReplayControlsView;
+import ca.ntro.cards.frontend.views.ProcedureReplayView;
 import ca.ntro.cards.frontend.views.ProcedureVariablesView;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
@@ -34,7 +34,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                                         CARDS_VIEW           extends ProcedureCanvasView, 
                                         DASHBOARD_VIEW       extends ProcedureDashboardView,
                                         SELECTIONS_VIEW      extends ProcedureSelectionsView,
-                                        REPLAY_CONTROLS_VIEW extends ProcedureReplayControlsView,
+                                        REPLAY_CONTROLS_VIEW extends ProcedureReplayView,
                                         VARIABLES_VIEW       extends ProcedureVariablesView,
                                         VIEW_DATA            extends ProcedureViewData,
                                         CARDS_MODEL          extends ProcedureCardsModel,
@@ -69,7 +69,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		super.registerViews(registrar);
 
 		registrar.registerView(selectionsViewClass(), "/selections.xml");
-		registrar.registerView(replayControlsViewClass(), "/replay_controls.xml");
+		registrar.registerView(replayControlsViewClass(), "/replay.xml");
 		registrar.registerView(variablesViewClass(), "/variables.xml");
 	}
 
@@ -153,6 +153,19 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 
 	@Override
 	protected void addSubTasksToDashboard(FrontendTasks tasks) {
+
+		tasks.task("refreshReplayControls")
+		
+			 .waitsFor(modified(getDashboardModelClass()))
+		
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 REPLAY_CONTROLS_VIEW      replayView        = inputs.get(created(replayControlsViewClass()));
+		    	 Modified<DASHBOARD_MODEL> modifiedDashboard = inputs.get(modified(getDashboardModelClass()));
+		    	 
+		    	 modifiedDashboard.currentValue().displayOn(replayView);
+
+		     });
 
 		executionEndedDashboard(tasks);
 

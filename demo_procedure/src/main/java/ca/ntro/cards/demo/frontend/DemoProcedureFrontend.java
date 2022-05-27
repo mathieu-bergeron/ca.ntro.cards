@@ -6,7 +6,7 @@ import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
-import ca.ntro.cards.demo.frontend.views.DemoReplayControlsView;
+import ca.ntro.cards.demo.frontend.views.DemoReplayView;
 import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.frontend.ProcedureFrontend;
@@ -23,7 +23,7 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
                                 DemoCardsView, 
                                 DemoProcedureDashboardView, 
                                 DemoSelectionsView,
-                                DemoReplayControlsView,
+                                DemoReplayView,
                                 DemoVariablesView,
                                 DemoProcedureViewData, 
                                 STUDENT_MODEL, // CanvasModel
@@ -76,11 +76,6 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 	}
 
 	@Override
-	protected void addSubTasksToViewData(FrontendTasks subTasks) {
-
-	}
-
-	@Override
 	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
 
 	}
@@ -90,10 +85,6 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 
 	}
 
-	@Override
-	protected void addSubTasksToDashboard(FrontendTasks subTasks) {
-		
-	}
 
 	@Override
 	protected Class<DemoSelectionsView> selectionsViewClass() {
@@ -101,8 +92,8 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 	}
 
 	@Override
-	protected Class<DemoReplayControlsView> replayControlsViewClass() {
-		return DemoReplayControlsView.class;
+	protected Class<DemoReplayView> replayControlsViewClass() {
+		return DemoReplayView.class;
 	}
 
 	@Override

@@ -6,7 +6,8 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 
-public interface ExecutionTrace <EXECUTABLE_MODEL extends CommonExecutableModel> 
+public interface ExecutionTrace <EXECUTABLE_MODEL extends CommonExecutableModel,
+                                 DASHBOARD_MODEL  extends CommonDashboardModel> 
 
        extends   Value, Serializable {
 
@@ -19,6 +20,9 @@ public interface ExecutionTrace <EXECUTABLE_MODEL extends CommonExecutableModel>
 	void stepBackward();
 
 	EXECUTABLE_MODEL firstModel();
+
 	void copyDataTo(EXECUTABLE_MODEL model);
+
+	void updateDashboardModel(DASHBOARD_MODEL dashboardModel);
 
 }
