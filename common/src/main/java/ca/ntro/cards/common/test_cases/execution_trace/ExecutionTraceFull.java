@@ -74,12 +74,6 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 
 	@Override
-	public void updateDashboard(CommonDashboardModel dashboardModel) {
-		dashboardModel.setNumberOfSteps(trace.size());
-		dashboardModel.setCurrentStep(current);
-	}
-
-	@Override
 	public EXECUTABLE_MODEL firstModel() {
 		return trace.get(0);
 	}

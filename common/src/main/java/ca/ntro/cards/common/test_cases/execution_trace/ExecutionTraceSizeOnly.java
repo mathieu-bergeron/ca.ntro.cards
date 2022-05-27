@@ -22,11 +22,6 @@ public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableMod
 	}
 
 	@Override
-	public void updateDashboard(CommonDashboardModel dashboardModel) {
-		dashboardModel.setNumberOfSteps(size);
-	}
-
-	@Override
 	public EXECUTABLE_MODEL firstModel() {
 		return null;
 	}
