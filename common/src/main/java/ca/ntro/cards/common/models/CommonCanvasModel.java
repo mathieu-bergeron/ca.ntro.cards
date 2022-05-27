@@ -18,13 +18,9 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 
        implements     Model, Initialize {
 
-	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
+	public abstract void updateViewData(VIEW_DATA cardsViewData);
 	
 	public abstract void copyDataFrom(CANVAS_MODEL otherModel);
-
-	public void updateViewData(VIEW_DATA viewData) {
-
-	}
 
 
 }

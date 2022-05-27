@@ -100,7 +100,7 @@ public class   DemoCardsModel<C extends Comparable<C>>
 	}
 
 	@Override
-	protected void updateViewDataImpl(DemoProcedureViewData cardsViewData) {
+	public void updateViewData(DemoProcedureViewData cardsViewData) {
 		
 		double cardWidth = DemoConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = DemoConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

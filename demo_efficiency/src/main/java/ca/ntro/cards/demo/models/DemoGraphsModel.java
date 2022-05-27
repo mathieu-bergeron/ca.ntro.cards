@@ -21,7 +21,7 @@ public class   DemoGraphsModel
 	}
 
 	@Override
-	protected void updateViewDataImpl(DemoEfficiencyViewData cardsViewData) {
+	public void updateViewData(DemoEfficiencyViewData cardsViewData) {
 		// TODO Auto-generated method stub
 		
 	}

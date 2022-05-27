@@ -51,7 +51,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
 		viewData.removeCardsNotIn(cards());
 		
-		updateViewDataImpl(viewData);
+		updateViewData(viewData);
 	}
 	
 	public abstract void displayOn(VARIABLES_VIEW variablesView);
