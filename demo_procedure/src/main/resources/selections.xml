@@ -28,6 +28,11 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoSelectionsView" 
     id="selections-view">
 
+    <VBox
+        fx:id="testCaseContainer"
+        styleClass="container">
+    </VBox>
+
     <Label
         text="%testCase"
         fx:id="testCaseLabel"

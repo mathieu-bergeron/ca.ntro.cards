@@ -6,8 +6,8 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptorNtro;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
 import ca.ntro.core.identifyers.Identifiable;
@@ -18,7 +18,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
                                      EXECUTION_TRACE  extends CommonExecutionTrace,
                                      DASHBOARD_MODEL  extends CommonDashboardModel> 
 
-       implements TestCaseDescriptor {
+       implements AbstractTestCaseDescriptor {
 	
 	private String category;
 	private String testCaseId;
@@ -156,12 +156,15 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return false;
 	}
 
-	public TestCaseDescriptor asTestCaseDescriptor() {
-		TestCaseDescriptorNtro testCaseDescriptor = new TestCaseDescriptorNtro();
+	public AbstractTestCaseDescriptor asTestCaseDescriptor() {
+		CommonTestCaseDescriptor testCaseDescriptor = newTestCaseDescriptor();
 		testCaseDescriptor.setCategory(category);
 		testCaseDescriptor.setInputSize(inputSize());
 		testCaseDescriptor.setTestCaseId(testCaseId);
 
 		return testCaseDescriptor;
 	}
+	
+	protected abstract CommonTestCaseDescriptor newTestCaseDescriptor();
+	
 }

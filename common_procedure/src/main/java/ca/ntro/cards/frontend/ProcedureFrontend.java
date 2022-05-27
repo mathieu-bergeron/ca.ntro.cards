@@ -20,6 +20,7 @@ import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.frontend.views.ProcedureReplayView;
 import ca.ntro.cards.frontend.views.ProcedureVariablesView;
+import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -34,6 +35,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                                         CARDS_VIEW           extends ProcedureCanvasView, 
                                         DASHBOARD_VIEW       extends ProcedureDashboardView,
                                         SELECTIONS_VIEW      extends ProcedureSelectionsView,
+                                        TEST_CASE_FRAGMENT   extends ProcedureTestCaseFragment,
                                         REPLAY_CONTROLS_VIEW extends ProcedureReplayView,
                                         VARIABLES_VIEW       extends ProcedureVariablesView,
                                         VIEW_DATA            extends ProcedureViewData,
@@ -53,6 +55,8 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
     protected Class<CARDS_MODEL> cardsModelClass(){
     	return getCanvasModelClass();
     }
+    
+    protected abstract Class<TEST_CASE_FRAGMENT> testCaseFragmentClass();
 
 	@Override
 	public void registerEvents(EventRegistrar registrar) {
@@ -70,8 +74,8 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		registrar.registerView(selectionsViewClass(), "/selections.xml");
 		registrar.registerView(replayControlsViewClass(), "/replay.xml");
 		registrar.registerView(variablesViewClass(), "/variables.xml");
+		registrar.registerView(testCaseFragmentClass(), "/fragments/test_case.xml");
 	}
-
 
 	@Override
 	protected void addSubTasksToViewData(FrontendTasks tasks) {
@@ -84,9 +88,6 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 
 		startCodeExecution(tasks);
 	}
-	
-	
-	
 	
 
 	private void startCodeExecution(FrontendTasks tasks) {
@@ -163,6 +164,22 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    	 Modified<DASHBOARD_MODEL> modifiedDashboard = inputs.get(modified(getDashboardModelClass()));
 		    	 
 		    	 modifiedDashboard.currentValue().displayOn(replayView);
+
+		     });
+
+		tasks.task("displayTestCases")
+		
+			 .waitsFor(viewLoader(testCaseFragmentClass()))
+
+			 .waitsFor(modified(getDashboardModelClass()))
+		
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 SELECTIONS_VIEW                selectionsView         = inputs.get(created(selectionsViewClass()));
+		    	 ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader = inputs.get(viewLoader(testCaseFragmentClass()));
+		    	 Modified<DASHBOARD_MODEL>      modifiedDashboard      = inputs.get(modified(getDashboardModelClass()));
+		    	 
+		    	 modifiedDashboard.currentValue().displayOn(selectionsView, testCaseFragmentLoader);
 
 		     });
 

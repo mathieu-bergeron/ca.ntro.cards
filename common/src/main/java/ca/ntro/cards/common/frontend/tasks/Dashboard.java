@@ -25,12 +25,15 @@ public class Dashboard {
 
 		     .andContains(subTasks -> {
 
+		    	 /*
 		    	 displayDashboardModel(subTasks,
 		    			              dashboardViewClass,
 		    			              dashboardModelClass);
 
 		    	 executionEnded(subTasks,
 		    			        dashboardViewClass);
+
+				  */
 
 		    	 subTasksLambda.createSubTasks(subTasks);
 

@@ -9,13 +9,13 @@ import java.util.Map;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
 public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel, 
-                          TEST_CASE     extends TestCaseDescriptor> 
+                          TEST_CASE     extends AbstractTestCaseDescriptor> 
 
        implements Value, Serializable {
 	

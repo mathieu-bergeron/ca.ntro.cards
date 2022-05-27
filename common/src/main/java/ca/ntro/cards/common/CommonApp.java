@@ -27,7 +27,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptorNtro;
+import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceSizeOnly;
@@ -85,7 +85,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerValue(Card.class);
 		registrar.registerValue(AbstractCard.class);
 
-		registrar.registerValue(TestCaseDescriptorNtro.class);
+		registrar.registerValue(CommonTestCaseDescriptor.class);
 		registrar.registerValue(TestCaseById.class);
 		registrar.registerValue(TestCasesByCategory.class);
 		registrar.registerValue(TestCasesBySize.class);

@@ -2,7 +2,7 @@ package ca.ntro.cards.common.test_cases.descriptor;
 
 import ca.ntro.cards.common.models.enums.Mode;
 
-public class TestCaseDescriptorNtro implements TestCaseDescriptor {
+public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 	
 	private static long nextId = 0;
 	
@@ -49,12 +49,12 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 		return getInputSize();
 	}
 
-	public TestCaseDescriptorNtro testCaseId(String testCaseId) {
+	public CommonTestCaseDescriptor testCaseId(String testCaseId) {
 		setTestCaseId(testCaseId);
 		return this;
 	}
 
-	public TestCaseDescriptorNtro random(int size) {
+	public CommonTestCaseDescriptor random(int size) {
 		setCategory("random");
 		setInputSize(size);
 		setTestCaseId(String.valueOf(++nextId));
@@ -62,7 +62,7 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 		return this;
 	}
 
-	public TestCaseDescriptorNtro category(String category) {
+	public CommonTestCaseDescriptor category(String category) {
 		setCategory(category);
 
 		return this;

@@ -19,7 +19,7 @@ import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
@@ -135,7 +135,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public abstract void describeTestCasesToGenerate();
 
 	@SuppressWarnings("unchecked")
-	protected void addTestCase(TestCaseDescriptor descriptor) {
+	protected void addTestCase(AbstractTestCaseDescriptor descriptor) {
 
 		STUDENT_MODEL studentModel = Ntro.factory().newInstance(studentModelClass);
 		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass);

@@ -2,7 +2,7 @@ package ca.ntro.cards.common.test_cases.execution.jobs;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.TestCaseHandler;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;

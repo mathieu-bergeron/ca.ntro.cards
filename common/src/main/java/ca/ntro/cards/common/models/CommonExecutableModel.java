@@ -9,7 +9,7 @@ import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.world2d.CommonDrawingOptions;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 
 public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutableModel,
@@ -24,7 +24,7 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 
                implements Watch, WriteObjectGraph, Serializable {
 
-	public abstract void initializeAsTestCase(TestCaseDescriptor descriptor);
+	public abstract void initializeAsTestCase(AbstractTestCaseDescriptor descriptor);
 
 	public abstract int testCaseSize();
 

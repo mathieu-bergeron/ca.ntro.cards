@@ -1,26 +1,31 @@
 package ca.ntro.cards.models;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import ca.ntro.app.frontend.ViewLoader;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.enums.Mode;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureReplayView;
+import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
+import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 
-public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureDashboardView,
-								              CARDS_MODEL extends ProcedureCardsModel, 
+public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends ProcedureDashboardView,
+								              CARDS_MODEL        extends ProcedureCardsModel, 
                                               TEST_CASE_DATABASE extends ProcedureTestCaseDatabase,
-                                              REPLAY_VIEW extends ProcedureReplayView>
+                                              TEST_CASE          extends ProcedureTestCaseDescriptor,
+                                              REPLAY_VIEW        extends ProcedureReplayView,
+                                              SELECTIONS_VIEW    extends ProcedureSelectionsView,
+                                              TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment>
 
-       extends CommonDashboardModel<DASHBOARD_VIEW> {
+       extends CommonDashboardModel<DASHBOARD_VIEW, TEST_CASE> {
     	   
-    private TestCaseById<CARDS_MODEL, TestCaseDescriptor> byId = new TestCaseById<>();
-    private TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> byCategory = new TestCasesByCategory<>();
+    private TestCaseById<CARDS_MODEL, TEST_CASE> byId = new TestCaseById<>();
+    private TestCasesByCategory<CARDS_MODEL, TEST_CASE> byCategory = new TestCasesByCategory<>();
 
 	private Mode currentMode;
 	private String currentTestCaseId = defaultTestCaseId();
@@ -68,19 +73,19 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
 		this.currentOutputSize = currentOutputSize;
 	}
 
-	public TestCaseById<CARDS_MODEL, TestCaseDescriptor> getById() {
+	public TestCaseById<CARDS_MODEL, TEST_CASE> getById() {
 		return byId;
 	}
 
-	public void setById(TestCaseById<CARDS_MODEL, TestCaseDescriptor> byId) {
+	public void setById(TestCaseById<CARDS_MODEL, TEST_CASE> byId) {
 		this.byId = byId;
 	}
 
-	public TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> getByCategory() {
+	public TestCasesByCategory<CARDS_MODEL, TEST_CASE> getByCategory() {
 		return byCategory;
 	}
 
-	public void setByCategory(TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> byCategory) {
+	public void setByCategory(TestCasesByCategory<CARDS_MODEL, TEST_CASE> byCategory) {
 		this.byCategory = byCategory;
 	}
 
@@ -102,17 +107,24 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
 
 	@Override
 	public void displayOn(DASHBOARD_VIEW dashboardView) {
-		dashboardView.clearTestCases();
-		byCategory.inOrder().forEach(testCase -> {
-			dashboardView.addTestCase(testCase.testCaseId());
-		});
 	}
 
-
 	@Override
-	public void addOrUpdateTestCase(TestCaseDescriptor testCaseDescriptor) {
+	public void addOrUpdateTestCase(TEST_CASE testCaseDescriptor) {
 		byId.addTestCase(testCaseDescriptor);
 		byCategory.addTestCase(testCaseDescriptor);
+	}
+
+	public void displayOn(SELECTIONS_VIEW selectionsView, ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
+		selectionsView.clearTestCases();
+		byCategory.inOrder().forEach(testCaseDescriptor -> {
+			
+			TEST_CASE_FRAGMENT testCaseFragment = testCaseFragmentLoader.createView();
+			
+			testCaseDescriptor.displayOn(testCaseFragment);
+
+			selectionsView.addTestCase(testCaseFragment);
+		});
 	}
 
 }

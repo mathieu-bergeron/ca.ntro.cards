@@ -23,7 +23,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.Job;

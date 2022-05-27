@@ -8,6 +8,7 @@ import ca.ntro.cards.demo.frontend.views.DemoProcedureRootView;
 import ca.ntro.cards.demo.frontend.views.DemoProcedureSettingsView;
 import ca.ntro.cards.demo.frontend.views.DemoReplayView;
 import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
+import ca.ntro.cards.demo.frontend.views.fragments.DemoTestCaseFragment;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
@@ -23,6 +24,7 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
                                 DemoCardsView, 
                                 DemoProcedureDashboardView, 
                                 DemoSelectionsView,
+                                DemoTestCaseFragment,
                                 DemoReplayView,
                                 DemoVariablesView,
                                 DemoProcedureViewData, 
@@ -103,6 +105,11 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 
 	@Override
 	protected void addSubTasksToCards(FrontendTasks subTasks) {
+	}
+
+	@Override
+	protected Class<DemoTestCaseFragment> testCaseFragmentClass() {
+		return DemoTestCaseFragment.class;
 	}
 
 

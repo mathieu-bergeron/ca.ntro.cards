@@ -7,7 +7,7 @@ import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.models.values.cards.NullCard;
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.DemoProcedureViewData;
 import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
@@ -172,7 +172,7 @@ public class   DemoCardsModel<C extends Comparable<C>>
 	}
 
 	@Override
-	public void initializeAsTestCase(TestCaseDescriptor descriptor) {
+	public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
 		
 		if(descriptor.testCaseId().equals("ex01")) {
 			

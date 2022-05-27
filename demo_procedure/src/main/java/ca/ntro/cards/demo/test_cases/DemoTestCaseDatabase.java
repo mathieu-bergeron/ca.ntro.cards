@@ -1,6 +1,6 @@
 package ca.ntro.cards.demo.test_cases;
 
-import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
@@ -19,7 +19,7 @@ public class   DemoTestCaseDatabase<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	public void describeTestCasesToGenerate() {
 
-		TestCaseDescriptor descriptor = TestCaseDescriptor.create()
+		AbstractTestCaseDescriptor descriptor = AbstractTestCaseDescriptor.create()
 				                                          .category("examples")
 				                                          .testCaseId("ex01");
 		
@@ -31,7 +31,7 @@ public class   DemoTestCaseDatabase<STUDENT_MODEL extends DemoCardsModel>
 			int size = 10 + Ntro.random().nextInt(2);
 			
 
-			descriptor = TestCaseDescriptor.create()
+			descriptor = AbstractTestCaseDescriptor.create()
 					                       .random(size);
 			
 			addTestCase(descriptor);
