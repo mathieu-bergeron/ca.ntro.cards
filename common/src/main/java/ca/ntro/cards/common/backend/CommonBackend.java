@@ -181,7 +181,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 				                        });
 		
-		/*
 		tasks.task("startExecutionEngine")
 		
 		     .waitsFor(message(MsgStartExecutionEngine.class))
@@ -190,7 +189,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		    	 testCaseJobEngine.start();
 		    	 
 		     });
-		 */
 		
 		 createAdditionalTasks(tasks);
 
@@ -219,7 +217,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 		testCaseJobEngine.initialize(numberOfThreads);
 		
-		testCaseJobEngine.start();
+		//testCaseJobEngine.start();
 
 		System.out.println("\n\n[LOADING TEST CASES]");
 		System.out.println(String.format("\n... using %s threads\n\n", numberOfThreads));
