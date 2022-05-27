@@ -8,6 +8,7 @@ import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
 import ca.ntro.cards.common.backend.tasks.ModifyTestCaseDatabase;
+import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
@@ -18,6 +19,8 @@ import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.core.initialization.Ntro;
+
+import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableModel,
                                     STUDENT_MODEL      extends EXECUTABLE_MODEL,
@@ -178,6 +181,15 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 				                        });
 		
+		tasks.task("startExecutionEngine")
+		
+		     .waitsFor(message(MsgStartExecutionEngine.class))
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 testCaseJobEngine.start();
+		    	 
+		     });
+		
 		 createAdditionalTasks(tasks);
 
 	}
@@ -194,14 +206,18 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	public void execute() {
 
 		int numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
-		
+		/*
+		if(numberOfThreads > 2) {
+			numberOfThreads -= 2;
+		}*/
+
 		testCaseJobEngine.registerExecutableModelClass(executableModelClass);
 		testCaseJobEngine.registerStudentModelClass(studentModelClass);
 		testCaseJobEngine.registerTestCaseClass(testCaseClass);
 
 		testCaseJobEngine.initialize(numberOfThreads);
 		
-		testCaseJobEngine.start();
+		//testCaseJobEngine.start();
 
 		System.out.println("\n\n[LOADING TEST CASES]");
 		System.out.println(String.format("\n... using %s threads\n\n", numberOfThreads));

@@ -8,9 +8,11 @@ import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.ViewLoader;
 import ca.ntro.app.services.Window;
 
@@ -260,6 +262,9 @@ public class Initialization {
 		    	 window.resize(1080, 640);
 		    	 
 		    	 window.show();
+		    	 
+		    	 MsgStartExecutionEngine msgStartExecutionEngine = NtroApp.newMessage(MsgStartExecutionEngine.class);
+		    	 msgStartExecutionEngine.send();
 		     });
 	}
 
