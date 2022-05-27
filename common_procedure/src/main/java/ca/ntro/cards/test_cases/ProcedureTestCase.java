@@ -2,6 +2,7 @@ package ca.ntro.cards.test_cases;
 
 import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
@@ -23,5 +24,7 @@ public class   ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCardsModel,
 	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
 		executionTraceByMode(Mode.MANUAL).updateDashboardModel(dashboardModel);
 	}
+
+
 
 }

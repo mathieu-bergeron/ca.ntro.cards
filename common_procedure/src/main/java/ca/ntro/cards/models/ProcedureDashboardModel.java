@@ -1,7 +1,13 @@
 package ca.ntro.cards.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
+import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureReplayView;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
@@ -12,7 +18,10 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
                                               REPLAY_VIEW extends ProcedureReplayView>
 
        extends CommonDashboardModel<DASHBOARD_VIEW> {
-	
+    	   
+    private TestCaseById<CARDS_MODEL, TestCaseDescriptor> byId = new TestCaseById<>();
+    private TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> byCategory = new TestCasesByCategory<>();
+
 	private Mode currentMode;
 	private String currentTestCaseId = defaultTestCaseId();
 	private int currentStep;
@@ -59,6 +68,22 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
 		this.currentOutputSize = currentOutputSize;
 	}
 
+	public TestCaseById<CARDS_MODEL, TestCaseDescriptor> getById() {
+		return byId;
+	}
+
+	public void setById(TestCaseById<CARDS_MODEL, TestCaseDescriptor> byId) {
+		this.byId = byId;
+	}
+
+	public TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> getByCategory() {
+		return byCategory;
+	}
+
+	public void setByCategory(TestCasesByCategory<CARDS_MODEL, TestCaseDescriptor> byCategory) {
+		this.byCategory = byCategory;
+	}
+
 	protected abstract String defaultTestCaseId();
 
 	public void loadCurrentTestCase(TEST_CASE_DATABASE testCaseDatabase) {
@@ -73,6 +98,21 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
 		replayView.displayNumberOfCards(String.valueOf(currentInputSize));
 		replayView.displayCurrentStep(String.valueOf(currentStep));
 		replayView.displayNumberOfSteps(String.valueOf(currentOutputSize));
+	}
+
+	@Override
+	public void displayOn(DASHBOARD_VIEW dashboardView) {
+		dashboardView.clearTestCases();
+		byCategory.inOrder().forEach(testCase -> {
+			dashboardView.addTestCase(testCase.testCaseId());
+		});
+	}
+
+
+	@Override
+	public void addOrUpdateTestCase(TestCaseDescriptor testCaseDescriptor) {
+		byId.addTestCase(testCaseDescriptor);
+		byCategory.addTestCase(testCaseDescriptor);
 	}
 
 }

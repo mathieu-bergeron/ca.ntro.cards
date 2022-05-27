@@ -15,7 +15,7 @@ import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgGenerateTestCase;
 import ca.ntro.cards.common.messages.MsgLockThread;
-import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
+import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
@@ -27,6 +27,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptorNtro;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceSizeOnly;
@@ -84,6 +85,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerValue(Card.class);
 		registrar.registerValue(AbstractCard.class);
 
+		registrar.registerValue(TestCaseDescriptorNtro.class);
 		registrar.registerValue(TestCaseById.class);
 		registrar.registerValue(TestCasesByCategory.class);
 		registrar.registerValue(TestCasesBySize.class);
@@ -102,7 +104,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerMessage(MsgLockThread.class);
 		registrar.registerMessage(MsgRefreshDashboard.class);
 		registrar.registerMessage(MsgGenerateTestCase.class);
-		registrar.registerMessage(MsgNewTestCaseLoaded.class);
+		registrar.registerMessage(MsgTestCaseUpdate.class);
 		registrar.registerMessage(MsgStopExecutionReplay.class);
 
 		registerAdditionnalMessages(registrar);

@@ -51,7 +51,7 @@ public class Dashboard {
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 CommonDashboardView             dashboardView  = inputs.get(created(dashboardViewClass));
-		    	 Modified<DASHBOARD_MODEL> dashboardModel = inputs.get(modified(dashboardModelClass));
+		    	 Modified<DASHBOARD_MODEL>       dashboardModel = inputs.get(modified(dashboardModelClass));
 		    	 
 		    	 dashboardModel.currentValue().displayOn(dashboardView);
 		     });

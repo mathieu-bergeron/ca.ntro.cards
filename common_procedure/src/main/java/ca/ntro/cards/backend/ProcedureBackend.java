@@ -2,7 +2,7 @@ package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
-import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
+import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
@@ -70,21 +70,17 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 
 	protected void addSubTasksToModifyDashboardModel(BackendTasks tasks) {
-		tasks.task("addTestCase")
+		tasks.task("updateTestCase")
 		
-		     .waitsFor(message(MsgNewTestCaseLoaded.class))
+		     .waitsFor(message(MsgTestCaseUpdate.class))
 		     
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 MsgNewTestCaseLoaded msgNewTestCaseLoaded = inputs.get(message(MsgNewTestCaseLoaded.class));
-		    	 DASHBOARD_MODEL      dashboardModel       = inputs.get(model(getDashboardModelClass()));
+		    	 MsgTestCaseUpdate msgNewTestCaseLoaded = inputs.get(message(MsgTestCaseUpdate.class));
+		    	 DASHBOARD_MODEL   dashboardModel       = inputs.get(model(getDashboardModelClass()));
 		    	 
-		    	 dashboardModel.addTestCaseId(msgNewTestCaseLoaded.getTestCaseId());
-		    	 
-		    	 System.out.println("addTestCase: " + msgNewTestCaseLoaded.getTestCaseId());
-		    	 
+		    	 msgNewTestCaseLoaded.applyTo(dashboardModel);
 		     });
-		
 	}
 
 	@Override

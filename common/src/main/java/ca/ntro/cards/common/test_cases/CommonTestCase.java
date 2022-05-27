@@ -6,6 +6,8 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptorNtro;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
 import ca.ntro.core.identifyers.Identifiable;
@@ -16,11 +18,11 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
                                      EXECUTION_TRACE  extends CommonExecutionTrace,
                                      DASHBOARD_MODEL  extends CommonDashboardModel> 
 
-       implements Value, Identifiable, Serializable {
+       implements TestCaseDescriptor {
 	
 	private String category;
 	private String testCaseId;
-	private long size;
+	private int inputSize;
 	
 	private transient STUDENT_MODEL studentModel;
 	private transient Class<EXECUTABLE_MODEL> executableModelClass;
@@ -45,12 +47,12 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		this.testCaseId = testCaseId;
 	}
 
-	public long getSize() {
-		return size;
+	public int getInputSize() {
+		return inputSize;
 	}
 
-	public void setSize(long size) {
-		this.size = size;
+	public void setInputSize(int size) {
+		this.inputSize = size;
 	}
 
 	public boolean isPassed() {
@@ -90,9 +92,8 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		traces.registerExecutionTraceClass((Class<? extends CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL>>) executionTraceClass);
 	}
 
-	@Override
 	public String id() {
-		return category + "_" + String.valueOf(size) + "_" + testCaseId;
+		return category + "_" + String.valueOf(inputSize) + "_" + testCaseId;
 	}
 
 	public void run() {
@@ -108,7 +109,6 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		traces.pushReference(mode, snapshot);
 	}
 
-	@Override
 	public boolean hasId(String id) {
 		return id().equals(id);
 	}
@@ -125,4 +125,43 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		traces.trace(mode).stepBackward();
 	} 
 
+
+	@Override
+	public String category() {
+		return getCategory();
+	}
+
+	@Override
+	public String testCaseId() {
+		return getTestCaseId();
+	}
+
+	@Override
+	public int inputSize() {
+		return getInputSize();
+	}
+
+	@Override
+	public int numberOfSteps(Mode mode) {
+		return 0;
+	}
+
+	@Override
+	public int currentStep(Mode mode) {
+		return 0;
+	}
+
+	@Override
+	public boolean passed(Mode mode) {
+		return false;
+	}
+
+	public TestCaseDescriptor asTestCaseDescriptor() {
+		TestCaseDescriptorNtro testCaseDescriptor = new TestCaseDescriptorNtro();
+		testCaseDescriptor.setCategory(category);
+		testCaseDescriptor.setInputSize(inputSize());
+		testCaseDescriptor.setTestCaseId(testCaseId);
+
+		return testCaseDescriptor;
+	}
 }

@@ -1,12 +1,14 @@
 package ca.ntro.cards.common.test_cases.descriptor;
 
+import ca.ntro.cards.common.models.enums.Mode;
+
 public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 	
 	private static long nextId = 0;
 	
 	private String category = "_noCategory";
 	private String testCaseId = "_noId";
-	private int size = 0;
+	private int inputSize = 0;
 
 	public String getCategory() {
 		return category;
@@ -24,12 +26,12 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 		this.testCaseId = testCaseId;
 	}
 
-	public int getSize() {
-		return size;
+	public int getInputSize() {
+		return inputSize;
 	}
 
-	public void setSize(int size) {
-		this.size = size;
+	public void setInputSize(int size) {
+		this.inputSize = size;
 	}
 
 	@Override
@@ -43,8 +45,8 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 	}
 
 	@Override
-	public int size() {
-		return getSize();
+	public int inputSize() {
+		return getInputSize();
 	}
 
 	public TestCaseDescriptorNtro testCaseId(String testCaseId) {
@@ -54,7 +56,7 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 
 	public TestCaseDescriptorNtro random(int size) {
 		setCategory("random");
-		setSize(size);
+		setInputSize(size);
 		setTestCaseId(String.valueOf(++nextId));
 
 		return this;
@@ -66,4 +68,18 @@ public class TestCaseDescriptorNtro implements TestCaseDescriptor {
 		return this;
 	}
 
+	@Override
+	public int numberOfSteps(Mode mode) {
+		return 0;
+	}
+
+	@Override
+	public int currentStep(Mode mode) {
+		return 0;
+	}
+
+	@Override
+	public boolean passed(Mode mode) {
+		return false;
+	}
 }

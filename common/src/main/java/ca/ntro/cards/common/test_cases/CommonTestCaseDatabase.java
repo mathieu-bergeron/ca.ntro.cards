@@ -15,7 +15,7 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.CommonConstants;
-import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
+import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
@@ -143,7 +143,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		studentModel.initializeAsTestCase(descriptor);
 
 		testCase.setCategory(descriptor.category());
-		testCase.setSize(studentModel.testCaseSize());
+		testCase.setInputSize(studentModel.testCaseSize());
 		testCase.setTestCaseId(descriptor.testCaseId());
 		testCase.registerStudentModel(studentModel);
 		testCase.registerExecutableModelClass(executableModelClass);
@@ -243,8 +243,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 				
 				addTestCase((TEST_CASE) readingJob.getTestCase());
 
-				MsgNewTestCaseLoaded msgNewTestCaseLoaded = NtroApp.newMessage(MsgNewTestCaseLoaded.class);
-				msgNewTestCaseLoaded.setTestCaseId(readingJob.testCaseId());
+				MsgTestCaseUpdate msgNewTestCaseLoaded = NtroApp.newMessage(MsgTestCaseUpdate.class);
+				msgNewTestCaseLoaded.setTestCaseDescriptor(readingJob.getTestCase().asTestCaseDescriptor());
 				msgNewTestCaseLoaded.send();
 
 			});
