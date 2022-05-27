@@ -97,7 +97,7 @@ public class   DemoCardsModel<C extends Comparable<C>>
 		indiceCandidat = other.indiceCandidat;
 		indiceProchainVide = other.indiceProchainVide;
 		
-		incrementVersion();
+		//incrementVersion();
 	}
 
 	@Override
@@ -295,7 +295,7 @@ public class   DemoCardsModel<C extends Comparable<C>>
 			cible[i] = (C) targetList.get(i);
 		}
 
-		incrementVersion();
+		//incrementVersion();
 	}
 	
 

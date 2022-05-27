@@ -39,11 +39,14 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 	public void initializeCanvasModel() {
 		
 		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
+
 		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
 		
 		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
 
 		dashboardModel.updateCardsModel(getTestCaseDatabase(), canvasModel);
+		
+		NtroApp.models().save(canvasModel);
 
 	}
 
