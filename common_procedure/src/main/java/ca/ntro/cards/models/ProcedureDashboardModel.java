@@ -70,9 +70,9 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW  extends ProcedureD
 	}
 
 	public void displayOn(REPLAY_VIEW replayView) {
-		replayView.displayNumberOfCards(String.valueOf(getNumberOfCards()));
+		replayView.displayNumberOfCards(String.valueOf(currentInputSize));
 		replayView.displayCurrentStep(String.valueOf(currentStep));
-		replayView.displayNumberOfSteps(String.valueOf(getNumberOfSteps()));
+		replayView.displayNumberOfSteps(String.valueOf(currentOutputSize));
 	}
 
 }

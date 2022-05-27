@@ -7,9 +7,6 @@ import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
-import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.common.test_cases.CommonTestCase;
-import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -22,12 +19,15 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.test_cases.ProcedureTestCase;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTraceFull;
 
 public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 							       STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	                               CANVAS_MODEL     extends ProcedureCardsModel,
                                    TEST_CASE        extends ProcedureTestCase,
                                    TEST_CASES_MODEL extends ProcedureTestCaseDatabase,
+                                   EXECUTION_TRACE  extends ProcedureExecutionTrace,
                                    DASHBOARD_MODEL  extends ProcedureDashboardModel,
                                    SETTINGS_MODEL   extends ProcedureSettingsModel,
                                                                                                       
@@ -35,7 +35,10 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
                                                                  STUDENT_MODEL,
                                                                  CANVAS_MODEL,
                                                                  TEST_CASE, 
-                                                                 TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
+                                                                 TEST_CASES_MODEL, 
+                                                                 EXECUTION_TRACE,
+                                                                 DASHBOARD_MODEL, 
+                                                                 SETTINGS_MODEL>,
                                    
                                    ROOT_VIEW       extends ProcedureRootView, 
                                    CANVAS_VIEW     extends ProcedureCanvasView, 
@@ -57,6 +60,7 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
                          CANVAS_MODEL,
                          TEST_CASE,
                          TEST_CASES_MODEL,
+                         EXECUTION_TRACE,
                          DASHBOARD_MODEL,
                          SETTINGS_MODEL,
                          BACKEND,
@@ -81,6 +85,11 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
 
+	}
+
+	@Override
+	protected Class<? extends EXECUTION_TRACE> executionTraceClass() {
+		return (Class<? extends EXECUTION_TRACE>) ProcedureExecutionTraceFull.class;
 	}
 
 	

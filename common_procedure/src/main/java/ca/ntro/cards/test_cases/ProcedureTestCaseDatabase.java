@@ -5,13 +5,18 @@ import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
 public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                                 STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                                 TEST_CASE        extends ProcedureTestCase,
+                                                EXECUTION_TRACE  extends ProcedureExecutionTrace,
                                                 DASHBOARD_MODEL  extends ProcedureDashboardModel> 
 
-       extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
+       extends CommonTestCaseDatabase<EXECUTABLE_MODEL, 
+                                      STUDENT_MODEL, 
+                                      TEST_CASE,
+                                      EXECUTION_TRACE> {
 
 
 	public void updateCardsModel(ProcedureCardsModel cardsModel) {

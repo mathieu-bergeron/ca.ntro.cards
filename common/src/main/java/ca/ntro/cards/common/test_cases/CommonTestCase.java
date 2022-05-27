@@ -6,13 +6,14 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Mode;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
 import ca.ntro.core.identifyers.Identifiable;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
                                      STUDENT_MODEL    extends EXECUTABLE_MODEL,
+                                     EXECUTION_TRACE  extends CommonExecutionTrace,
                                      DASHBOARD_MODEL  extends CommonDashboardModel> 
 
        implements Value, Identifiable, Serializable {
@@ -23,6 +24,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	
 	private transient STUDENT_MODEL studentModel;
 	private transient Class<EXECUTABLE_MODEL> executableModelClass;
+	private transient Class<? extends EXECUTION_TRACE> executionTraceClass;
 
 	private ExecutionTraceByMode<EXECUTABLE_MODEL, DASHBOARD_MODEL> traces = new ExecutionTraceByMode<>();
 	private boolean passed;
@@ -83,6 +85,11 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		this.executableModelClass = executableModelClass;
 	}
 
+	public void registerExecutionTraceClass(Class<? extends EXECUTION_TRACE> executionTraceClass) {
+		this.executionTraceClass = executionTraceClass;
+		traces.registerExecutionTraceClass((Class<? extends CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL>>) executionTraceClass);
+	}
+
 	@Override
 	public String id() {
 		return category + "_" + String.valueOf(size) + "_" + testCaseId;
@@ -106,16 +113,16 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return id().equals(id);
 	}
 
-	protected ExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> executionTraceByMode(Mode mode) {
-		return traces.executionTraceByMode(mode);
+	protected CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> executionTraceByMode(Mode mode) {
+		return traces.trace(mode);
 	}
 
 	public void stepForward(Mode mode) {
-		traces.executionTraceByMode(mode).stepForward();
+		traces.trace(mode).stepForward();
 	}
 
 	public void stepBackward(Mode mode) {
-		traces.executionTraceByMode(mode).stepBackward();
+		traces.trace(mode).stepBackward();
 	} 
 
 }

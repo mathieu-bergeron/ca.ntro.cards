@@ -10,10 +10,10 @@ import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.core.initialization.Ntro;
 
-public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                DASHBOARD_MODEL  extends CommonDashboardModel> 
+public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
+                                               DASHBOARD_MODEL  extends CommonDashboardModel> 
 
-       implements ExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
+       implements CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
 
 	private List<EXECUTABLE_MODEL> trace = Collections.synchronizedList(new ArrayList<>());
 	private int current = 0;
@@ -42,7 +42,7 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void pushCopyOf(EXECUTABLE_MODEL model) {
+	public void pushCloneOf(EXECUTABLE_MODEL model) {
 		trace.add((EXECUTABLE_MODEL) Ntro.reflection().clone(model));
 	}
 	
@@ -87,21 +87,5 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
 			msgStopCodeExecution.send();
 
 		}
-	}
-
-	@Override
-	public EXECUTABLE_MODEL firstModel() {
-		return trace.get(0);
-	}
-
-	@Override
-	public void copyDataTo(EXECUTABLE_MODEL model) {
-		model.copyDataFrom(trace.get(current));
-	}
-
-	@Override
-	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		dashboardModel.setCurrentStep(current+1);
-		dashboardModel.setNumberOfSteps(trace.size());
 	}
 }

@@ -13,13 +13,16 @@ import ca.ntro.cards.efficiency.frontend.views.EfficiencySettingsView;
 import ca.ntro.cards.efficiency.models.EfficiencyDashboardModel;
 import ca.ntro.cards.efficiency.models.EfficiencyGraphsModel;
 import ca.ntro.cards.efficiency.models.EfficiencySettingsModel;
+import ca.ntro.cards.efficiency.test_cases.execution_trace.EfficiencyExecutionTraceSizeOnly;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
 public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
                                     STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                     CANVAS_MODEL     extends EfficiencyGraphsModel,
                                     TEST_CASE        extends CommonTestCase,
                                     TEST_CASES_MODEL extends CommonTestCaseDatabase,
+                                    EXECUTION_TRACE  extends ProcedureExecutionTrace,
                                     DASHBOARD_MODEL  extends EfficiencyDashboardModel,
                                     SETTINGS_MODEL   extends EfficiencySettingsModel,
                                                                                                       
@@ -27,7 +30,10 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
                                                                       STUDENT_MODEL,
                                                                       CANVAS_MODEL, 
                                                                       TEST_CASE, 
-                                                                      TEST_CASES_MODEL, DASHBOARD_MODEL, SETTINGS_MODEL>,
+                                                                      TEST_CASES_MODEL, 
+                                                                      EXECUTION_TRACE,
+                                                                      DASHBOARD_MODEL, 
+                                                                      SETTINGS_MODEL>,
                                    
                                     ROOT_VIEW       extends EfficiencyRootView, 
                                     CARDS_VIEW      extends EfficiencyGraphsView, 
@@ -49,6 +55,7 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
                                  CANVAS_MODEL,
                                  TEST_CASE,
                                  TEST_CASES_MODEL,
+                                 EXECUTION_TRACE,
                                  DASHBOARD_MODEL,
                                  SETTINGS_MODEL,
                                  BACKEND,
@@ -63,6 +70,11 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
 	public void registerArgs(String[] args) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected Class<? extends EXECUTION_TRACE> executionTraceClass() {
+		return (Class<? extends EXECUTION_TRACE>) EfficiencyExecutionTraceSizeOnly.class;
 	}
 
 

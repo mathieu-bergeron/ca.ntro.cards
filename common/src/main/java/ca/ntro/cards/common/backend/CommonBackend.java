@@ -16,6 +16,7 @@ import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableModel,
@@ -23,6 +24,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
                                     CANVAS_MODEL       extends CommonCanvasModel,
                                     TEST_CASE          extends CommonTestCase,
                                     TEST_CASE_DATABASE extends CommonTestCaseDatabase,
+                                    EXECUTION_TRACE    extends CommonExecutionTrace,
                                     DASHBOARD_MODEL    extends CommonDashboardModel,
                                     SETTINGS_MODEL     extends CommonSettingsModel>
 
@@ -38,6 +40,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	private Class<TEST_CASE_DATABASE> testCaseDatabaseClass;
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
+	private Class<? extends EXECUTION_TRACE> executionTraceFullClass;
 	
 	protected TEST_CASE_DATABASE testCaseDatabase() {
 		return testCaseDatabase;
@@ -113,6 +116,14 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 	public void setTestCaseDatabase(TEST_CASE_DATABASE testCaseDatabase) {
 		this.testCaseDatabase = testCaseDatabase;
+	}
+
+	public Class<? extends EXECUTION_TRACE> getExecutionTraceFullClass() {
+		return executionTraceFullClass;
+	}
+
+	public void setExecutionTraceFullClass(Class<? extends EXECUTION_TRACE> executionTraceFullClass) {
+		this.executionTraceFullClass = executionTraceFullClass;
 	}
 
 	public void initializeTestCaseDatabase() {

@@ -4,13 +4,16 @@ import ca.ntro.cards.common.GenerateTestCases;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTraceFull;
 
 public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel> 
 
        extends        GenerateTestCases<DemoCardsModel, 
                                         STUDENT_MODEL,
                                         DemoTestCase,
-                                        DemoTestCaseDatabase> {
+                                        DemoTestCaseDatabase,
+                                        ProcedureExecutionTrace> {
 
 	
 	@Override
@@ -19,7 +22,7 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel
 	}
 
 	@Override
-	protected Class<DemoTestCaseDatabase> testCasesModelClass(){
+	protected Class<DemoTestCaseDatabase> testCaseDatabaseClass(){
 		return DemoTestCaseDatabase.class;
 	}
 
@@ -31,6 +34,11 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel
 	@Override
 	protected boolean shouldWriteJson() {
 		return true;
+	}
+
+	@Override
+	protected Class<? extends ProcedureExecutionTrace> executionTraceClass() {
+		return ProcedureExecutionTraceFull.class;
 	}
 
 }

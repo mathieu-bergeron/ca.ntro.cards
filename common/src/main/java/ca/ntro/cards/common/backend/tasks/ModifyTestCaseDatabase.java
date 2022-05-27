@@ -17,7 +17,7 @@ public class ModifyTestCaseDatabase {
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               TEST_CASE        extends CommonTestCase,
-	               TEST_CASES_MODEL extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>,
+	               TEST_CASES_MODEL extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE, ?>,
 	               DASHBOARD_MODEL  extends CommonDashboardModel> 
 
 	       void createTasks(BackendTasks tasks,
@@ -42,7 +42,7 @@ public class ModifyTestCaseDatabase {
 	public static <EXECUTABLE_MODEL extends CommonExecutableModel,
 	               STUDENT_MODEL    extends EXECUTABLE_MODEL,
 	               TEST_CASE        extends CommonTestCase,
-		           TEST_CASES_MODEL extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE>>
+		           TEST_CASES_MODEL extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE, ?>>
 	
 	        void generateTestCase(BackendTasks tasks,
 	        		              TEST_CASES_MODEL testCasesModel) {

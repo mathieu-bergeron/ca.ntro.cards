@@ -27,8 +27,9 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceSizeOnly;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceSizeOnly;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesBySize;
@@ -38,6 +39,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
                                 CANVAS_MODEL       extends CommonCanvasModel,
                                 TEST_CASE          extends CommonTestCase,
                                 TEST_CASE_DATABASE extends CommonTestCaseDatabase,
+                                EXECUTION_TRACE    extends CommonExecutionTrace,
                                 DASHBOARD_MODEL    extends CommonDashboardModel,
                                 SETTINGS_MODEL     extends CommonSettingsModel,
                                                                                                       
@@ -45,7 +47,10 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
                                                               STUDENT_MODEL,
                                                               CANVAS_MODEL,
                                                               TEST_CASE, 
-                                                              TEST_CASE_DATABASE, DASHBOARD_MODEL, SETTINGS_MODEL>,
+                                                              TEST_CASE_DATABASE, 
+                                                              EXECUTION_TRACE,
+                                                              DASHBOARD_MODEL, 
+                                                              SETTINGS_MODEL>,
                                    
                                 ROOT_VIEW       extends CommonRootView, 
                                 CARDS_VIEW      extends CommonCanvasView, 
@@ -83,8 +88,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerValue(TestCasesByCategory.class);
 		registrar.registerValue(TestCasesBySize.class);
 
-		registrar.registerValue(ExecutionTraceFull.class);
-		registrar.registerValue(ExecutionTraceSizeOnly.class);
+		registrar.registerValue(CommonExecutionTraceFull.class);
+		registrar.registerValue(CommonExecutionTraceSizeOnly.class);
 
 		registerAdditionnalModels(registrar);
 	}
@@ -127,6 +132,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		backend.setTestCasesModelClass(testCasesModelClass());
 		backend.setDashboardModelClass(dashboardModelClass());
 		backend.setSettingsModelClass(settingsModelClass());
+		backend.setExecutionTraceFullClass(executionTraceClass());
 		
 		backend.initializeTestCaseDatabase();
 		backend.initializeCanvasModel();
@@ -142,6 +148,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 	protected abstract Class<TEST_CASE_DATABASE> testCasesModelClass();
 	protected abstract Class<DASHBOARD_MODEL> dashboardModelClass();
 	protected abstract Class<SETTINGS_MODEL> settingsModelClass();
+
+	protected abstract Class<? extends EXECUTION_TRACE> executionTraceClass();
 
 	protected abstract void registerAdditionnalModels(ModelRegistrar registrar);
 	protected abstract void registerAdditionnalMessages(MessageRegistrar registrar);

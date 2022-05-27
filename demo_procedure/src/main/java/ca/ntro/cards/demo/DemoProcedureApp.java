@@ -14,6 +14,7 @@ import ca.ntro.cards.demo.messages.MsgManualExecutionStep;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
+import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTrace;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 
@@ -24,6 +25,7 @@ public abstract class   DemoProcedureApp<STUDENT_MODEL extends DemoCardsModel>
                                      STUDENT_MODEL,     // canvas model
                                      DemoTestCase,
                                      DemoTestCaseDatabase,
+                                     DemoExecutionTrace,
                                      DemoProcedureDashboardModel,
                                      DemoProcedureSettingsModel,
                                      DemoProcedureBackend<STUDENT_MODEL>,

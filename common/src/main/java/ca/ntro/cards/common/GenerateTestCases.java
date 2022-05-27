@@ -12,17 +12,19 @@ import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.core.NtroJdk;
 import ca.ntro.core.initialization.Ntro;
 
-public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                        STUDENT_MODEL extends EXECUTABLE_MODEL,
-                                        TEST_CASE extends CommonTestCase,
-                                        TEST_CASES_MODEL extends CommonTestCaseDatabase> {
+public abstract class GenerateTestCases<EXECUTABLE_MODEL   extends CommonExecutableModel,
+                                        STUDENT_MODEL      extends EXECUTABLE_MODEL,
+                                        TEST_CASE          extends CommonTestCase,
+                                        TEST_CASE_DATABASE extends CommonTestCaseDatabase,
+                                        EXECUTION_TRACE    extends CommonExecutionTrace> {
 
 
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine = new TestCaseJobEngine<>();
-	private TEST_CASES_MODEL testCasesModel = Ntro.factory().newInstance(testCasesModelClass());
+	private TEST_CASE_DATABASE testCaseDatabase = Ntro.factory().newInstance(testCaseDatabaseClass());
 	
 	private int numberOfThreads;
 	
@@ -46,11 +48,11 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		
 		startTime = System.currentTimeMillis();
 		
-		testCasesModel.createTestCaseGenerationTasks();
+		testCaseDatabase.createTestCaseGenerationTasks();
 		
-		testCasesModel.runTestCaseGenerationTasks();
+		testCaseDatabase.runTestCaseGenerationTasks();
 		
-		testCasesModel.onCreationDone(() -> {
+		testCaseDatabase.onCreationDone(() -> {
 
 			endTime = System.currentTimeMillis();
 			
@@ -64,7 +66,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 			
 		});
 
-		testCasesModel.onWritingDone(() -> {
+		testCaseDatabase.onWritingDone(() -> {
 
 			endTime = System.currentTimeMillis();
 			
@@ -93,7 +95,8 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
 	protected abstract Class<STUDENT_MODEL> studentModelClass();
 	protected abstract Class<TEST_CASE> testCaseClass();
-	protected abstract Class<TEST_CASES_MODEL> testCasesModelClass();
+	protected abstract Class<TEST_CASE_DATABASE> testCaseDatabaseClass();
+	protected abstract Class<? extends EXECUTION_TRACE> executionTraceClass();
 	protected abstract boolean shouldWriteJson();
 
 	private void initialize() {
@@ -101,7 +104,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 		
 		initializeExecutionEngine();
 		
-		initializeTestCasesModel();
+		initializeTestCaseDatabase();
 
 	}
 
@@ -119,14 +122,15 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL extends CommonExecutabl
 	}
 
 	@SuppressWarnings("unchecked")
-	private void initializeTestCasesModel() {
+	private void initializeTestCaseDatabase() {
 
-		testCasesModel.registerExecutableModelClass(executableModelClass());
-		testCasesModel.registerStudentModelClass(studentModelClass());
-		testCasesModel.registerTestCaseClass(testCaseClass());
-		testCasesModel.registerShouldWriteJson(shouldWriteJson());
+		testCaseDatabase.registerExecutableModelClass(executableModelClass());
+		testCaseDatabase.registerStudentModelClass(studentModelClass());
+		testCaseDatabase.registerTestCaseClass(testCaseClass());
+		testCaseDatabase.setExecutionTraceClass(executionTraceClass());
+		testCaseDatabase.registerShouldWriteJson(shouldWriteJson());
 
 		
-		testCasesModel.registerExecutionEngine(executionEngine);
+		testCaseDatabase.registerExecutionEngine(executionEngine);
 	}
 }

@@ -10,6 +10,7 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.test_cases.ProcedureTestCase;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 import ca.ntro.core.initialization.Ntro;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
@@ -22,6 +23,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
                                        CANVAS_MODEL       extends ProcedureCardsModel,
                                        TEST_CASE          extends ProcedureTestCase,
                                        TEST_CASE_DATABASE extends ProcedureTestCaseDatabase,
+                                       EXECUTION_TRACE    extends ProcedureExecutionTrace,
                                        DASHBOARD_MODEL    extends ProcedureDashboardModel,
                                        SETTINGS_MODEL     extends ProcedureSettingsModel>
 
@@ -30,6 +32,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
                                       CANVAS_MODEL,
                                       TEST_CASE, 
                                       TEST_CASE_DATABASE, 
+                                      EXECUTION_TRACE,
                                       DASHBOARD_MODEL, 
                                       SETTINGS_MODEL> {
 

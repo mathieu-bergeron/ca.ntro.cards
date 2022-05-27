@@ -25,20 +25,20 @@ import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.jobs.ExecutionJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.ReadingJob;
 import ca.ntro.cards.common.test_cases.execution.jobs.WritingJob;
-import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTraceFull;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
+import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                                   STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                                  TEST_CASE        extends CommonTestCase> 
+                                                  TEST_CASE        extends CommonTestCase,
+                                                  EXECUTION_TRACE  extends CommonExecutionTrace> 
 
 
                 implements Value, Serializable {
 	
-	private long version = 0;
-
 	private String currentTestCaseId = "ex01";
 	
 	private TestCaseById<EXECUTABLE_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
@@ -47,6 +47,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	private Class<EXECUTABLE_MODEL> executableModelClass;
 	private Class<STUDENT_MODEL> studentModelClass;
 	private Class<TEST_CASE> testCaseClass;
+	private Class<? extends EXECUTION_TRACE> executionTraceClass;
 	
 	private transient TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	
@@ -86,12 +87,12 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		return studentModelClass;
 	}
 
-	public long getVersion() {
-		return version;
+	public Class<? extends EXECUTION_TRACE> getExecutionTraceClass() {
+		return executionTraceClass;
 	}
 
-	public void setVersion(long version) {
-		this.version = version;
+	public void setExecutionTraceClass(Class<? extends EXECUTION_TRACE> executionTraceClass) {
+		this.executionTraceClass = executionTraceClass;
 	}
 
 	public TestCaseById<EXECUTABLE_MODEL, TEST_CASE> getTestCasesById() {
@@ -146,6 +147,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		testCase.setTestCaseId(descriptor.testCaseId());
 		testCase.registerStudentModel(studentModel);
 		testCase.registerExecutableModelClass(executableModelClass);
+		testCase.registerExecutionTraceClass(executionTraceClass);
+
 
 		testCase.addExecutionStep(Mode.MANUAL);
 		

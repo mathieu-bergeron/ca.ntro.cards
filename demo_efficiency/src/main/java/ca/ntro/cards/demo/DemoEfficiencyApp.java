@@ -17,14 +17,16 @@ import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
 import ca.ntro.cards.efficiency.EfficiencyApp;
+import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
-public abstract class   EfficaciteTriNaif<STUDENT_MODEL extends DemoCardsModel>
+public abstract class   DemoEfficiencyApp<STUDENT_MODEL extends DemoCardsModel>
 
                 extends EfficiencyApp<DemoCardsModel, 
                                       STUDENT_MODEL,
                                       DemoGraphsModel,
                                       DemoTestCase,
                                       DemoTestCaseDatabase,
+                                      ProcedureExecutionTrace,
                                       DemoEfficiencyDashboardModel,
                                       DemoEfficiencySettingsModel,
                                       DemoEfficiencyBackend<STUDENT_MODEL>,
