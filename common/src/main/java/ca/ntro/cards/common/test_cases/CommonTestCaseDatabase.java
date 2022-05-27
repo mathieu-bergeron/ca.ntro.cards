@@ -18,6 +18,7 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.messages.MsgNewTestCaseLoaded;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
@@ -38,7 +39,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	
 	private long version = 0;
 
-	private String currentTestCaseId;
+	private String currentTestCaseId = "ex01";
 	
 	private TestCaseById<EXECUTABLE_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
 	private TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory = new TestCasesByCategory<>();
@@ -146,15 +147,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		testCase.registerStudentModel(studentModel);
 		testCase.registerExecutableModelClass(executableModelClass);
 
-		ExecutionTraceFull<EXECUTABLE_MODEL> trace = new ExecutionTraceFull<>();
-
-		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
-		//      (i.e. work in projects where the solution class is not accessible)
-		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
-		snapshot.copyDataFrom(studentModel);
-
-		trace.pushReferenceTo(snapshot);
-		testCase.setTrace(trace);
+		testCase.addExecutionStep(Mode.MANUAL);
 		
 		ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new ExecutionJob<>();
 		creationJob.setTestCase(testCase);
@@ -254,13 +247,15 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	}
 
 	public void stepForward() {
+		currentTestCase().stepForward(Mode.MANUAL);
 	}
 
-	public EXECUTABLE_MODEL currentModel() {
-		return null;
+	public TEST_CASE currentTestCase() {
+		return testCaseById((currentTestCaseId));
 	}
 
 	public void stepBackward() {
+		currentTestCase().stepBackward(Mode.MANUAL);
 	}
 
 	@SuppressWarnings("unchecked")

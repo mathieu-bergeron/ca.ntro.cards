@@ -1,7 +1,6 @@
 package ca.ntro.cards.test_cases;
 
-import com.sun.scenario.effect.impl.prism.PrCropPeer;
-
+import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.models.ProcedureCardsModel;
 
@@ -10,9 +9,8 @@ public class   ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCardsModel,
 
        extends CommonTestCase<EXECUTABLE_MODEL, STUDENT_MODEL> {
 
-	public void updateCardsModel(ProcedureCardsModel cardsModel) {
-		ProcedureCardsModel firstModel = getTrace().firstModel();
-		
-		cardsModel.copyDataFrom(firstModel);
-	} 
+	public void updateCardsModel(EXECUTABLE_MODEL cardsModel) {
+		executionTraceByMode(Mode.MANUAL).copyDataTo(cardsModel);
+	}
+
 }

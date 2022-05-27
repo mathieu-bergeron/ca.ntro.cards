@@ -1,4 +1,4 @@
-package ca.ntro.cards.models.enums;
+package ca.ntro.cards.common.models.enums;
 
 public enum Mode {
 	

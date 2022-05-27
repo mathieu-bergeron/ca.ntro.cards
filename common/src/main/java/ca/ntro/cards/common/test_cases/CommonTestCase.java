@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.execution_trace.ExecutionTrace;
+import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
 import ca.ntro.core.identifyers.Identifiable;
 import ca.ntro.core.initialization.Ntro;
 
@@ -20,7 +22,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	private transient STUDENT_MODEL studentModel;
 	private transient Class<EXECUTABLE_MODEL> executableModelClass;
 
-	private ExecutionTrace<EXECUTABLE_MODEL> trace;
+	private ExecutionTraceByMode<EXECUTABLE_MODEL> traces = new ExecutionTraceByMode<>();
 	private boolean passed;
 
 	public String getCategory() {
@@ -55,12 +57,12 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		this.passed = passed;
 	}
 
-	public ExecutionTrace<EXECUTABLE_MODEL> getTrace() {
-		return trace;
+	public ExecutionTraceByMode<EXECUTABLE_MODEL> getTraces() {
+		return traces;
 	}
 
-	public void setTrace(ExecutionTrace<EXECUTABLE_MODEL> trace) {
-		this.trace = trace;
+	public void setTraces(ExecutionTraceByMode<EXECUTABLE_MODEL> traces) {
+		this.traces = traces;
 	}
 
 	public STUDENT_MODEL studentModel() {
@@ -88,16 +90,30 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		studentModel.run();
 	}
 
-	public void addExecutionStep() {
+	public void addExecutionStep(Mode mode) {
+		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
+		//      (i.e. work in projects where the solution class is not accessible)
 		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
 		snapshot.copyDataFrom(studentModel);
-
-		trace.pushReferenceTo(snapshot);
+		
+		traces.pushReference(mode, snapshot);
 	}
 
 	@Override
 	public boolean hasId(String id) {
 		return id().equals(id);
 	}
+
+	protected ExecutionTrace<EXECUTABLE_MODEL> executionTraceByMode(Mode mode) {
+		return traces.executionTraceByMode(mode);
+	}
+
+	public void stepForward(Mode mode) {
+		traces.executionTraceByMode(mode).stepForward();
+	}
+
+	public void stepBackward(Mode mode) {
+		traces.executionTraceByMode(mode).stepBackward();
+	} 
 
 }

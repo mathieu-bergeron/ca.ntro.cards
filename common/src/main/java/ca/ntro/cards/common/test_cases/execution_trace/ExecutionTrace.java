@@ -14,6 +14,11 @@ public interface ExecutionTrace <EXECUTABLE_MODEL extends CommonExecutableModel>
 	void pushCopyOf(EXECUTABLE_MODEL model);
 	void updateDashboard(CommonDashboardModel dashboardModel);
 
+
+	void stepForward();
+	void stepBackward();
+
 	EXECUTABLE_MODEL firstModel();
+	void copyDataTo(EXECUTABLE_MODEL model);
 
 }

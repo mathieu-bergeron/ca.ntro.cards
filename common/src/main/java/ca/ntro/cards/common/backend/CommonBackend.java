@@ -39,7 +39,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	private Class<DASHBOARD_MODEL> dashboardModelClass;
 	private Class<SETTINGS_MODEL> settingsModelClass;
 	
-	protected TEST_CASE_DATABASE testCasesModel() {
+	protected TEST_CASE_DATABASE testCaseDatabase() {
 		return testCaseDatabase;
 	}
 

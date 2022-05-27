@@ -12,9 +12,13 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonE
        extends CommonTestCaseDatabase<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> {
 
 
-	public void updateCardsModel(String currentTestCaseId, ProcedureCardsModel cardsModel) {
-		TEST_CASE testCase = testCaseById(currentTestCaseId);
-		
+	public void updateCardsModel(ProcedureCardsModel cardsModel) {
+		updateCardsModel(getCurrentTestCaseId(), cardsModel);
+	}
+
+	public void updateCardsModel(String testCaseId, ProcedureCardsModel cardsModel) {
+		TEST_CASE testCase = testCaseById(testCaseId);
+
 		testCase.updateCardsModel(cardsModel);
 	}
 

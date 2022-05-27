@@ -3,7 +3,6 @@ package ca.ntro.cards.demo.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;

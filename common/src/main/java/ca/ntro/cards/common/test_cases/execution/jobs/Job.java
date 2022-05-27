@@ -1,6 +1,7 @@
 package ca.ntro.cards.common.test_cases.execution.jobs;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Mode;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
@@ -15,6 +16,8 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private TEST_CASE testCase;
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	private DoneHandler doneHandler;
+	
+	private Mode currentMode = Mode.MANUAL;
 
 	public TEST_CASE getTestCase() {
 		return testCase;
@@ -52,7 +55,7 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public abstract void runImpl();
 
 	public void addExecutionStep() {
-		testCase.addExecutionStep();
+		testCase.addExecutionStep(currentMode);
 	}
 
 	public void failsWith(Throwable t) {

@@ -30,4 +30,16 @@ public class ExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableMod
 		return null;
 	}
 
+	@Override
+	public void copyDataTo(EXECUTABLE_MODEL model) {
+	}
+
+	@Override
+	public void stepForward() {
+	}
+
+	@Override
+	public void stepBackward() {
+	}
+
 }

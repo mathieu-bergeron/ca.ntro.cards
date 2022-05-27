@@ -82,4 +82,9 @@ public class ExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel>
 	public EXECUTABLE_MODEL firstModel() {
 		return trace.get(0);
 	}
+
+	@Override
+	public void copyDataTo(EXECUTABLE_MODEL model) {
+		model.copyDataFrom(trace.get(current));
+	}
 }

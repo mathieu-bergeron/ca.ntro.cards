@@ -67,11 +67,10 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
-		    	 testCasesModel().stepForward();
-		    	 cardsModel.copyDataFrom(testCasesModel().currentModel());
-
+		    	 testCaseDatabase().stepForward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		     });
 	}
 
@@ -82,10 +81,10 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 EXECUTABLE_MODEL cardsModel = inputs.get(model(getExecutableModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
-		    	 testCasesModel().stepBackward();
-		    	 cardsModel.copyDataFrom(testCasesModel().currentModel());
+		    	 testCaseDatabase().stepBackward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
 
 		     });
 	}
