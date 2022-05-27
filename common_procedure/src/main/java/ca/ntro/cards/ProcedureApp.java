@@ -19,17 +19,19 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.test_cases.ProcedureTestCase;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTraceFull;
 
-public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
-							       STUDENT_MODEL    extends EXECUTABLE_MODEL,
-	                               CANVAS_MODEL     extends ProcedureCardsModel,
-                                   TEST_CASE        extends ProcedureTestCase,
-                                   TEST_CASES_MODEL extends ProcedureTestCaseDatabase,
-                                   EXECUTION_TRACE  extends ProcedureExecutionTrace,
-                                   DASHBOARD_MODEL  extends ProcedureDashboardModel,
-                                   SETTINGS_MODEL   extends ProcedureSettingsModel,
+public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsModel,
+							       STUDENT_MODEL        extends EXECUTABLE_MODEL,
+	                               CANVAS_MODEL         extends ProcedureCardsModel,
+                                   TEST_CASE            extends ProcedureTestCase,
+                                   TEST_CASE_DESCRIPTOR extends ProcedureTestCaseDescriptor,
+                                   TEST_CASES_MODEL     extends ProcedureTestCaseDatabase,
+                                   EXECUTION_TRACE      extends ProcedureExecutionTrace,
+                                   DASHBOARD_MODEL      extends ProcedureDashboardModel,
+                                   SETTINGS_MODEL       extends ProcedureSettingsModel,
                                                                                                       
                                    BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
                                                                  STUDENT_MODEL,
@@ -70,10 +72,14 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL extends ProcedureCardsModel,
                          SETTINGS_VIEW,
                          VIEW_DATA,
                          FRONTEND> {
+                                                                	 
+    protected abstract Class<TEST_CASE_DESCRIPTOR> testCaseDescriptorClass();
 
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
 		super.registerModels(registrar);
+		
+		registrar.registerValue(testCaseDescriptorClass());
 	}
 
 	@Override

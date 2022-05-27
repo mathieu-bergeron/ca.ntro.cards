@@ -18,6 +18,7 @@
 
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.Pane ?>
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
 
@@ -25,7 +26,26 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.fragments.DemoTestCaseFragment" 
     id="test-case-fragment">
 
-    <Label text="test"></Label>
+    <Label 
+        fx:id="categoryLabel">
+     </Label>
 
+    <Pane styleClass="hspace-small"/>
+
+    <Label 
+        fx:id="testCaseIdLabel">
+     </Label>
+
+    <Pane styleClass="hspace-small"/>
+
+    <Label 
+        fx:id="inputSizeLabel">
+     </Label>
+
+    <Pane styleClass="hspace-small"/>
+
+    <Label 
+        fx:id="numberOfStepsLabel">
+     </Label>
 
 </HBox>
