@@ -12,7 +12,7 @@ import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public abstract class ReplayControlsView extends ViewFx {
+public abstract class ProcedureReplayControlsView extends ViewFx {
 
 	protected abstract Label numberOfStepsLabel();
 

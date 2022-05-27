@@ -3,9 +3,9 @@ package ca.ntro.cards.demo.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import ca.ntro.cards.frontend.views.SelectionsView;
+import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
 
-public class DemoSelectionsView extends SelectionsView {
+public class DemoSelectionsView extends ProcedureSelectionsView {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

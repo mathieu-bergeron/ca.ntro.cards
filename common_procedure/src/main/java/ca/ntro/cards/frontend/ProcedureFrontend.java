@@ -1,6 +1,9 @@
 package ca.ntro.cards.frontend;
 
+
 import ca.ntro.app.frontend.ViewLoader;
+
+import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
@@ -10,16 +13,17 @@ import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.frontend.events.EvtStartCodeExecution;
 import ca.ntro.cards.frontend.events.EvtStopCodeExecution;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
-import ca.ntro.cards.frontend.views.SelectionsView;
+import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
-import ca.ntro.cards.frontend.views.ReplayControlsView;
-import ca.ntro.cards.frontend.views.VariablesView;
+import ca.ntro.cards.frontend.views.ProcedureReplayControlsView;
+import ca.ntro.cards.frontend.views.ProcedureVariablesView;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
+import ca.ntro.core.reflection.observer.Modified;
 
 import static ca.ntro.app.tasks.frontend.FrontendTasks.*;
 
@@ -29,9 +33,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                                         SETTINGS_VIEW        extends ProcedureSettingsView,
                                         CARDS_VIEW           extends ProcedureCanvasView, 
                                         DASHBOARD_VIEW       extends ProcedureDashboardView,
-                                        SELECTIONS_VIEW      extends SelectionsView,
-                                        REPLAY_CONTROLS_VIEW extends ReplayControlsView,
-                                        VARIABLES_VIEW       extends VariablesView,
+                                        SELECTIONS_VIEW      extends ProcedureSelectionsView,
+                                        REPLAY_CONTROLS_VIEW extends ProcedureReplayControlsView,
+                                        VARIABLES_VIEW       extends ProcedureVariablesView,
                                         VIEW_DATA            extends ProcedureViewData,
                                         CARDS_MODEL          extends ProcedureCardsModel,
                                         DASHBOARD_MODEL      extends ProcedureDashboardModel,
@@ -45,6 +49,10 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                               CARDS_MODEL,
                               DASHBOARD_MODEL,
                               SETTINGS_MODEL> {
+                            	  
+    protected Class<CARDS_MODEL> cardsModelClass(){
+    	return getCanvasModelClass();
+    }
 
 	@Override
 	public void registerEvents(EventRegistrar registrar) {
@@ -225,6 +233,42 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 	protected abstract Class<SELECTIONS_VIEW> selectionsViewClass();
 	protected abstract Class<REPLAY_CONTROLS_VIEW> replayControlsViewClass();
 	protected abstract Class<VARIABLES_VIEW> variablesViewClass();
+	
+	
+	@Override
+	protected void createAdditionnalTasks(FrontendTasks tasks) {
+		
+		tasks.taskGroup("Cards")
+		
+		     .waitsFor("Initialization")
+		     
+		     .andContains(subTasks -> {
+		    	 
+		    	 displayCardsModel(subTasks);
+		    	 
+		    	 addSubTasksToCards(subTasks);
+
+		     });
+	}
+
+	protected abstract void addSubTasksToCards(FrontendTasks subTasks);
+
+	private void displayCardsModel(FrontendTasks tasks) {
+		
+		tasks.task("displayCardsModel")
+		
+		     .waitsFor(modified(cardsModelClass()))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 VARIABLES_VIEW         variablesView      = inputs.get(created(variablesViewClass()));
+		    	 Modified<CARDS_MODEL>  modifiedCardsModel = inputs.get(modified(cardsModelClass()));
+		    	 
+		    	 modifiedCardsModel.currentValue().displayOn(variablesView);
+		     });
+	}
+
+	
 
 	
 }

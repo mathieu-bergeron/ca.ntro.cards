@@ -11,6 +11,7 @@ import ca.ntro.cards.common.models.values.cards.NullCard;
 import ca.ntro.cards.common.test_cases.descriptor.TestCaseDescriptor;
 import ca.ntro.cards.demo.DemoConstants;
 import ca.ntro.cards.demo.frontend.DemoProcedureViewData;
+import ca.ntro.cards.demo.frontend.views.DemoVariablesView;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureDrawingOptions;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureObject2d;
 import ca.ntro.cards.demo.models.world2d.DemoProcedureWorld2d;
@@ -22,7 +23,12 @@ import ca.ntro.core.stream.Visitor;
 
 public class   DemoCardsModel<C extends Comparable<C>> 
 
-       extends ProcedureCardsModel<DemoCardsModel, DemoProcedureObject2d, DemoProcedureWorld2d, DemoProcedureDrawingOptions, DemoProcedureViewData> { 
+       extends ProcedureCardsModel<DemoCardsModel, 
+                                   DemoProcedureObject2d, 
+                                   DemoProcedureWorld2d, 
+                                   DemoProcedureDrawingOptions, 
+                                   DemoProcedureViewData,
+                                   DemoVariablesView> { 
                 	
                 	
 	protected int indicePlusPetit = -1;
@@ -311,6 +317,13 @@ public class   DemoCardsModel<C extends Comparable<C>>
 	}
 
 	public void trier() {
+	}
+
+	@Override
+	public void displayOn(DemoVariablesView variablesView) {
+		variablesView.displayIndexOfSmallest(String.valueOf(indicePlusPetit));
+		variablesView.displayIndexOfCandidate(String.valueOf(indiceCandidat));
+		variablesView.displayIndexOfNextEmpty(String.valueOf(indiceProchainVide));
 	}
 
 }

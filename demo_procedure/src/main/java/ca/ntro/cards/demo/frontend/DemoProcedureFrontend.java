@@ -96,11 +96,6 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 	}
 
 	@Override
-	protected void createAdditionnalTasks(FrontendTasks tasks) {
-		
-	}
-
-	@Override
 	protected Class<DemoSelectionsView> selectionsViewClass() {
 		return DemoSelectionsView.class;
 	}
@@ -113,6 +108,10 @@ public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 	@Override
 	protected Class<DemoVariablesView> variablesViewClass() {
 		return DemoVariablesView.class;
+	}
+
+	@Override
+	protected void addSubTasksToCards(FrontendTasks subTasks) {
 	}
 
 

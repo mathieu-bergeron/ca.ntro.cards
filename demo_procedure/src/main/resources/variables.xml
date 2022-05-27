@@ -25,20 +25,45 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoVariablesView" 
     id="variables-view">
 
-    <Label
-        text="indicePlusPetit   -1"
-        styleClass="text-big">
-    </Label>
+    <HBox>
+        <Label
+            text="%indexOfSmallest"
+            styleClass="text-big">
+        </Label>
+        <HBox styleClass="hspace-small">
+        </HBox>
+        <Label
+            fx:id="indexOfSmallestLabel"
+            styleClass="text-big">
+        </Label>
+    </HBox>
 
-    <Label
-        text="indiceCandidat   -1"
-        styleClass="text-big">
-    </Label>
+    <HBox>
+        <Label
+            text="%indexOfCandidate"
+            styleClass="text-big">
+        </Label>
+        <HBox styleClass="hspace-small">
+        </HBox>
+        <Label
+            fx:id="indexOfCandidateLabel"
+            styleClass="text-big">
+        </Label>
+    </HBox>
 
-    <Label
-        text="indiceProchainVide   -1"
-        styleClass="text-big">
-    </Label>
+    <HBox>
+        <Label
+            text="%indexOfNextEmpty"
+            styleClass="text-big">
+        </Label>
+        <HBox styleClass="hspace-small">
+        </HBox>
+        <Label
+            fx:id="indexOfNextEmptyLabel"
+            styleClass="text-big">
+        </Label>
+    </HBox>
+
 
 
 </VBox>

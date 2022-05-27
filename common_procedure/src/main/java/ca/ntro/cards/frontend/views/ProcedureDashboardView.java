@@ -22,21 +22,21 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 		
 	}
 
-	public void installSelectionsView(SelectionsView selectionsView) {
+	public void installSelectionsView(ProcedureSelectionsView selectionsView) {
 		if(selectionsContainer() != null) {
 			selectionsContainer().getChildren().clear();
 			selectionsContainer().getChildren().add(selectionsView.rootNode());
 		}
 	}
 
-	public void installReplayControlsView(ReplayControlsView replayControlsView) {
+	public void installReplayControlsView(ProcedureReplayControlsView replayControlsView) {
 		if(replayControlsContainer() != null) {
 			replayControlsContainer().getChildren().clear();
 			replayControlsContainer().getChildren().add(replayControlsView.rootNode());
 		}
 	}
 
-	public void installVariablesView(VariablesView variablesView) {
+	public void installVariablesView(ProcedureVariablesView variablesView) {
 		if(variablesContainer() != null) {
 			variablesContainer().getChildren().clear();
 			variablesContainer().getChildren().add(variablesView.rootNode());
@@ -44,11 +44,9 @@ public abstract class ProcedureDashboardView extends CommonDashboardView {
 	}
 
 	public void clearTestCases() {
-		selectionsContainer().getChildren().clear();
 	}
 
 	public void addTestCase(String testCaseId) {
-		selectionsContainer().getChildren().add(new Label(testCaseId));
 	}
 
 

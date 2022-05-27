@@ -5,10 +5,11 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.ViewFx;
 
-public class VariablesView extends ViewFx {
+public class ProcedureSelectionsView extends ViewFx {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 	}
 
 }
