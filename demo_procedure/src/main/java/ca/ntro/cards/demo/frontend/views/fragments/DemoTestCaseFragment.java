@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class DemoTestCaseFragment extends ProcedureTestCaseFragment {
@@ -14,7 +15,7 @@ public class DemoTestCaseFragment extends ProcedureTestCaseFragment {
 	protected Label categoryLabel;
 
 	@FXML
-	protected Label testCaseIdLabel;
+	protected Button testCaseIdButton;
 
 	@FXML
 	protected Label inputSizeLabel;
@@ -26,7 +27,7 @@ public class DemoTestCaseFragment extends ProcedureTestCaseFragment {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("categoryLabel", categoryLabel);
-		Ntro.assertNotNull("testCaseIdLabel", testCaseIdLabel);
+		Ntro.assertNotNull("testCaseIdButton", testCaseIdButton);
 		Ntro.assertNotNull("inputSizeLabel", inputSizeLabel);
 		Ntro.assertNotNull("numberOfStepsLabel", numberOfStepsLabel);
 		
@@ -39,8 +40,8 @@ public class DemoTestCaseFragment extends ProcedureTestCaseFragment {
 	}
 
 	@Override
-	protected Label testCaseIdLabel() {
-		return testCaseIdLabel;
+	protected Button testCaseIdButton() {
+		return testCaseIdButton;
 	}
 
 	@Override

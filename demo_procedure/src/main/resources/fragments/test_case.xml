@@ -32,9 +32,9 @@
 
     <Pane styleClass="hspace-small"/>
 
-    <Label 
-        fx:id="testCaseIdLabel">
-     </Label>
+    <Button 
+        fx:id="testCaseIdButton">
+     </Button>
 
     <Pane styleClass="hspace-small"/>
 

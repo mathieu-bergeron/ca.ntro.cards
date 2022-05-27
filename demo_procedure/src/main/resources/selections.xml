@@ -28,26 +28,17 @@
     fx:controller="ca.ntro.cards.demo.frontend.views.DemoSelectionsView" 
     id="selections-view">
 
-    <VBox
-        fx:id="testCaseContainer"
-        styleClass="container">
-    </VBox>
-
     <Label
         text="%testCase"
         fx:id="testCaseLabel"
         styleClass="text-big">
     </Label>
 
-    <ComboBox>
-    <items>
-        <FXCollections fx:factory="observableArrayList">
-            <String fx:value="ex01" />
-            <String fx:value="ex02" />
-            <String fx:value="random20" />
-    </FXCollections>
-    </items>
-    </ComboBox>
+    <VBox
+        fx:id="testCaseContainer"
+        styleClass="container">
+    </VBox>
+
 
     <Label
         text="%mode"
