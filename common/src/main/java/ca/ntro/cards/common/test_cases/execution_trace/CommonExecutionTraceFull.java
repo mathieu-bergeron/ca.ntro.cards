@@ -88,4 +88,9 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 
 		}
 	}
+
+	@Override
+	public int numberOfSteps() {
+		return trace.size();
+	}
 }

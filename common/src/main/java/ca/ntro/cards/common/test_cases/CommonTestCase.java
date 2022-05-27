@@ -143,7 +143,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 
 	@Override
 	public int numberOfSteps(Mode mode) {
-		return 0;
+		return traces.trace(mode).numberOfSteps();
 	}
 
 	@Override
@@ -161,6 +161,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		testCaseDescriptor.setCategory(category);
 		testCaseDescriptor.setInputSize(inputSize());
 		testCaseDescriptor.setTestCaseId(testCaseId);
+		testCaseDescriptor.setNumberOfSteps(numberOfSteps(Mode.MANUAL));
 
 		return testCaseDescriptor;
 	}

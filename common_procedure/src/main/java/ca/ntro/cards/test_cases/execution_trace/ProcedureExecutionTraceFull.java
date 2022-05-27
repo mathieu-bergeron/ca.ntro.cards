@@ -25,4 +25,5 @@ public class ProcedureExecutionTraceFull<EXECUTABLE_MODEL extends ProcedureCards
 		dashboardModel.setCurrentOutputSize(getTrace().size());
 	}
 
+
 }

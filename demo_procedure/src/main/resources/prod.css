@@ -18,6 +18,11 @@
     -fx-alignment:center;
 }
 
+.test-case-container{
+    -fx-min-height:100;
+    -fx-max-height:100;
+}
+
 .center-right{
     -fx-alignment:center-right;
 }
@@ -28,6 +33,10 @@
 
 .bottom-right{
     -fx-alignment:bottom-right;
+}
+
+.bottom{
+    -fx-alignment:bottom-center;
 }
 
 .hspace-small{

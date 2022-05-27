@@ -9,6 +9,7 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 	private String category = "_noCategory";
 	private String testCaseId = "_noId";
 	private int inputSize = 0;
+	private int numberOfSteps = 0;
 
 	public String getCategory() {
 		return category;
@@ -32,6 +33,14 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 
 	public void setInputSize(int size) {
 		this.inputSize = size;
+	}
+
+	public int getNumberOfSteps() {
+		return numberOfSteps;
+	}
+
+	public void setNumberOfSteps(int numberOfSteps) {
+		this.numberOfSteps = numberOfSteps;
 	}
 
 	@Override
@@ -70,7 +79,7 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 
 	@Override
 	public int numberOfSteps(Mode mode) {
-		return 0;
+		return getNumberOfSteps();
 	}
 
 	@Override

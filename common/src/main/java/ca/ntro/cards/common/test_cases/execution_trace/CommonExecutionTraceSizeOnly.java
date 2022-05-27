@@ -37,4 +37,9 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
 	}
 
+	@Override
+	public int numberOfSteps() {
+		return size;
+	}
+
 }

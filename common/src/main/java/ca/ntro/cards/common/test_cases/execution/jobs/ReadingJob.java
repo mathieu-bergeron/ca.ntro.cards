@@ -52,8 +52,6 @@ public class ReadingJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 			Ntro.throwException(e);
 
 		}
-		
-		System.out.println("loaded testCase: " + testCase);
 	}
 
 	public void registerFile(File testCaseFile) {

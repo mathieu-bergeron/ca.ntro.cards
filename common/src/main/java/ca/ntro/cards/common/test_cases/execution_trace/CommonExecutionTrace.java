@@ -14,11 +14,14 @@ public interface CommonExecutionTrace<EXECUTABLE_MODEL extends CommonExecutableM
 	void pushReferenceTo(EXECUTABLE_MODEL model);
 	void pushCloneOf(EXECUTABLE_MODEL model);
 
+	int numberOfSteps();
+
 	void stepForward();
 	void stepBackward();
 
 	void copyCurrentModelInto(EXECUTABLE_MODEL model);
 
 	void updateDashboardModel(DASHBOARD_MODEL dashboardModel);
+
 
 }
