@@ -97,7 +97,6 @@ public class   DemoCardsModel<C extends Comparable<C>>
 		indiceCandidat = other.indiceCandidat;
 		indiceProchainVide = other.indiceProchainVide;
 		
-		//incrementVersion();
 	}
 
 	@Override
@@ -281,23 +280,6 @@ public class   DemoCardsModel<C extends Comparable<C>>
 		});
 	}
 
-	public void updateCards(List<Card> sourceList, List<Card> targetList) {
-		int size = sourceList.size();
-
-		source = (C[]) new Card[size];
-		cible = (C[]) new Card[size];
-
-		for(int i = 0; i < size; i++) {
-			source[i] = (C) sourceList.get(i);
-		}
-
-		for(int i = 0; i < size; i++) {
-			cible[i] = (C) targetList.get(i);
-		}
-
-		//incrementVersion();
-	}
-	
 
 	@Override
 	public void onBeforeRunning() {

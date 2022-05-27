@@ -18,21 +18,6 @@ public abstract class CommonCanvasModel<CANVAS_MODEL extends CommonCanvasModel,
 
        implements     Model, Initialize {
 
-	private long version;
-
-	public long getVersion() {
-		return version;
-	}
-
-	public void setVersion(long version) {
-		this.version = version;
-	}
-
-	protected void incrementVersion() {
-		version++;
-	}
-
-	
 	protected abstract void updateViewDataImpl(VIEW_DATA cardsViewData);
 	
 	public abstract void copyDataFrom(CANVAS_MODEL otherModel);
