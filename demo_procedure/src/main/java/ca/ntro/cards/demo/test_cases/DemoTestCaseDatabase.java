@@ -20,20 +20,20 @@ public class   DemoTestCaseDatabase<STUDENT_MODEL extends DemoCardsModel>
 	public void describeTestCasesToGenerate() {
 
 		AbstractTestCaseDescriptor descriptor = AbstractTestCaseDescriptor.create()
-				                                          .category("examples")
+				                                          .category("exemples")
 				                                          .testCaseId("ex01");
 		
 		addTestCase(descriptor);
 		
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 100; i++) {
 			
-			int size = 10 + Ntro.random().nextInt(2);
+			int size = 10 + Ntro.random().nextInt(100);
 			
 
 			descriptor = AbstractTestCaseDescriptor.create()
-					                       .random(size);
-			
+												   .random(size);
+
 			addTestCase(descriptor);
 		}
 	}

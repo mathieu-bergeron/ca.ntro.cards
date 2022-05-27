@@ -33,7 +33,7 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel
 
 	@Override
 	protected boolean shouldWriteJson() {
-		return true;
+		return false;
 	}
 
 	@Override

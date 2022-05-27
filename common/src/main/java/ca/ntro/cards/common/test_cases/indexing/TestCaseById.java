@@ -62,7 +62,21 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 			public void forEach_(Visitor<TEST_CASE> visitor) throws Throwable {
 				List<String> ids = new ArrayList<>(byId.keySet());
 				
-				ids.sort((i1,i2) -> i1.compareTo(i2));
+				ids.sort((i1,i2) -> {
+					
+					int result = i1.compareTo(i2);
+					
+					try {
+						
+						Integer i1Int = Integer.parseInt(i1);
+						Integer i2Int = Integer.parseInt(i2);
+						
+						result = i1Int.compareTo(i2Int);
+
+					}finally{}
+					
+					return result;
+				});
 
 				for(String id : ids) {
 					visitor.visit(byId.get(id));
