@@ -187,7 +187,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		executionEngine.start();
 	}
 
-	private void onCreationJobDone(String testCaseId) {
+	private synchronized void onCreationJobDone(String testCaseId) {
 
 		creationJobsDone.add(testCaseId);
 		
@@ -198,7 +198,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		}
 	}
 	
-	private void onWritingJobDone(String testCaseId) {
+	private synchronized void onWritingJobDone(String testCaseId) {
 		writingJobsDone.add(testCaseId);
 		
 		if(writingJobsDone.size() >= writingJobs.size()
