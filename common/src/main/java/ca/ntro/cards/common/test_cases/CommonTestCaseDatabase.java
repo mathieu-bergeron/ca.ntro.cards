@@ -195,6 +195,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 				&& onCreationDoneHandler != null) {
 			
 			onCreationDoneHandler.done();
+			onCreationDoneHandler = null;
 		}
 	}
 	
@@ -205,6 +206,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 				&& onWritingDoneHandler != null) {
 
 			onWritingDoneHandler.done();
+			onWritingDoneHandler = null;
 		}
 	}
 
