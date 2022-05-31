@@ -27,42 +27,30 @@
 
     <HBox>
         <Label
-            text="%indexOfSmallest"
+            text="%fooVar01"
             styleClass="text-big">
         </Label>
         <HBox styleClass="hspace-small">
         </HBox>
         <Label
-            fx:id="indexOfSmallestLabel"
+            fx:id="fooVar01Label"
             styleClass="text-big">
         </Label>
     </HBox>
 
     <HBox>
         <Label
-            text="%indexOfCandidate"
+            text="%fooVar02"
             styleClass="text-big">
         </Label>
         <HBox styleClass="hspace-small">
         </HBox>
         <Label
-            fx:id="indexOfCandidateLabel"
+            fx:id="fooVar02Label"
             styleClass="text-big">
         </Label>
     </HBox>
 
-    <HBox>
-        <Label
-            text="%indexOfNextEmpty"
-            styleClass="text-big">
-        </Label>
-        <HBox styleClass="hspace-small">
-        </HBox>
-        <Label
-            fx:id="indexOfNextEmptyLabel"
-            styleClass="text-big">
-        </Label>
-    </HBox>
 
 
 

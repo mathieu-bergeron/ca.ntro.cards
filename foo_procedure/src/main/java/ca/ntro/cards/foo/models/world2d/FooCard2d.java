@@ -30,14 +30,4 @@ public class FooCard2d extends ProcedureCard2d<FooProcedureObject2d, FooProcedur
 		return FooConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 	}
 
-
-
-	@Override
-	protected void flipCard() {
-		super.flipCard();
-		
-		getWorld().registerFlippedCard(this);
-	}
-
-
 }

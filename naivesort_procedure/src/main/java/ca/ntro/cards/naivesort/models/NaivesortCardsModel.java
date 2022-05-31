@@ -246,19 +246,6 @@ public class   NaivesortCardsModel<C extends Comparable<C>>
 			}
 		};
 	}
-
-	@Override
-	protected void addCardImpl(Card card) {
-		Card[] newSource = new Card[source.length+1];
-		
-		for(int i = 0; i < source.length; i++) {
-			newSource[i] = (Card) source[i];
-		}
-
-		newSource[source.length] = card;
-		
-		source = (C[]) newSource;
-	}
 	
 	@Override
 	public String toString() {

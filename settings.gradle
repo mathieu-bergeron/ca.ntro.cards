@@ -19,10 +19,10 @@ include 'common'
 include 'common_procedure'
 include 'common_efficiency'
 
-include '_foo_procedure'
-include '_foo_efficiency'
-include '_foo_solution'
-project(':_foo_solution').projectDir = file('solutions/_foo_solution')
+include 'foo_procedure'
+include 'foo_efficiency'
+include 'foo_solution'
+project(':foo_solution').projectDir = file('solutions/foo_solution')
 
 include 'demo_procedure'
 include 'demo_efficiency'

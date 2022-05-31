@@ -50,8 +50,6 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL   extends CommonExecuta
 		
 		testCaseDatabase.createTestCaseGenerationTasks();
 		
-		testCaseDatabase.runTestCaseGenerationTasks();
-		
 		testCaseDatabase.onCreationDone(() -> {
 
 			endTime = System.currentTimeMillis();
@@ -77,6 +75,8 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL   extends CommonExecuta
 			quitWhenAllDone();
 			
 		});
+
+		testCaseDatabase.runTestCaseGenerationTasks();
 	}
 
 	private void quitWhenAllDone() {

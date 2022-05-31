@@ -41,17 +41,6 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	@Override
 	public void initialize() {
 	}
-	
-	public void addCard(Card card) {
-		if(cardById(card.id()) != null) {
-			Ntro.throwException(new IdNotUniqueException(card.id()));
-		}
-
-		addCardImpl(card);
-	}
-	
-	protected abstract void addCardImpl(Card card);
-
 
 	public void updateViewData(VIEW_DATA viewData) {
 

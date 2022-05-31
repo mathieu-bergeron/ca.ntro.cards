@@ -176,6 +176,16 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	}
 
 	public void runTestCaseGenerationTasks() {
+		if(creationJobs.isEmpty()) {
+			if(onCreationDoneHandler != null) {
+				onCreationDoneHandler.done();
+			}
+			if(onWritingDoneHandler != null) {
+				onWritingDoneHandler.done();
+			}
+			return;
+		}
+
 		for(Map.Entry<String, ExecutionJob> entry : creationJobs.entrySet()) {
 
 			String testCaseId = entry.getKey();

@@ -49,7 +49,25 @@
 1. Lancer l'application
 
         $ sh gradlew cards_bar:local
-    
+
+## À faire dans un nouveau projet
+
+### Dans `foo_procedure`
+
+1. Remplir et compléter la classe `FooCardsModel`
+    * créer des `Card2d` pour visualiser le modèle
+
+1. Compléter la classe `FooProcedureWorld2d`
+    * intepréter les `Card2d` pour mettre à jour le modèle
+
+1. Compléter la classe `FooTestCaseDatabase`
+    * décrire les cas de tests à générer
+
+1. Renommer `FooProcedureApp`
+
+### Dans `foo_solution`
+
+1. Renommer `MonFooCardsModel`
 
 ## Énoncés de projet
 
