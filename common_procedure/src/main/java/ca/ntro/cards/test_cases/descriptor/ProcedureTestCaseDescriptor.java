@@ -7,10 +7,21 @@ import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 public class ProcedureTestCaseDescriptor<TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment> extends CommonTestCaseDescriptor {
 
 	public void displayOn(TEST_CASE_FRAGMENT testCaseFragment) {
+		testCaseFragment.memorizeTestCaseId(getTestCaseId());
 		testCaseFragment.displayCategory(getCategory());
 		testCaseFragment.displayTestCaseId(getTestCaseId());
 		testCaseFragment.displayInputSize(String.valueOf(getInputSize()));
 		testCaseFragment.displayNumberOfSteps(String.valueOf(numberOfSteps(Mode.MANUAL)));
+		
+		if(loaded(Mode.MANUAL)) {
+
+			testCaseFragment.enableTestCaseSelection();
+
+		}else {
+
+			testCaseFragment.disableTestCaseSelection();
+			
+		}
 
 	}
 

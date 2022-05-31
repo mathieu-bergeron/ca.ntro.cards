@@ -196,5 +196,9 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public void notifyThreadIsRunning(long threadId) {
 	}
 
+	public int numberOfThreads() {
+		return threadById.size();
+	}
+
 
 }

@@ -162,10 +162,17 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		testCaseDescriptor.setInputSize(inputSize());
 		testCaseDescriptor.setTestCaseId(testCaseId);
 		testCaseDescriptor.setNumberOfSteps(numberOfSteps(Mode.MANUAL));
+		testCaseDescriptor.setLoaded(true);
 
 		return testCaseDescriptor;
 	}
 	
 	protected abstract CommonTestCaseDescriptor newTestCaseDescriptor();
+
+
+	@Override
+	public boolean loaded(Mode mode) {
+		return false;
+	}
 	
 }

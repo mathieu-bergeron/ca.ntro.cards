@@ -36,14 +36,11 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonE
 		testCase.updateDashboardModel(dashboardModel);
 	}
 
-	public void copyNewTestCasesTo(DASHBOARD_MODEL dashboardModel) {
+	public void addOrUpdateTestCases(DASHBOARD_MODEL dashboardModel) {
 		testCases().forEach(testCase -> {
 			
-			if(!dashboardModel.containsTestCase(testCase.getTestCaseId())) {
-				
-				dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
+			dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
 
-			}
 		});
 	}
 

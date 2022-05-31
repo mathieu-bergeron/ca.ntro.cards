@@ -186,8 +186,13 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		     .waitsFor(message(MsgStartExecutionEngine.class))
 		     .thenExecutes(inputs -> {
 		    	 
+				 testCaseDatabase.loadFromDbDir();
 		    	 testCaseJobEngine.start();
-		    	 
+
+			     System.out.print("\n\n[LOADING TEST CASES]");
+			     System.out.println(String.format(" using %s threads", testCaseJobEngine.numberOfThreads()));
+			     System.out.flush();
+
 		     });
 		
 		 createAdditionalTasks(tasks);
@@ -200,7 +205,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
 	
 	protected abstract void createAdditionalTasks(BackendTasks tasks);
-
 
 	@Override
 	public void execute() {
@@ -215,16 +219,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		testCaseJobEngine.registerExecutableModelClass(executableModelClass);
 		testCaseJobEngine.registerStudentModelClass(studentModelClass);
 		testCaseJobEngine.registerTestCaseClass(testCaseClass);
-
 		testCaseJobEngine.initialize(numberOfThreads);
-		
-		//testCaseJobEngine.start();
-
-		System.out.print("\n\n[LOADING TEST CASES]");
-		System.out.println(String.format(" using %s threads\n\n", numberOfThreads));
-		System.out.flush();
-
-		testCaseDatabase.loadFromDbDir();
 
 	}
 

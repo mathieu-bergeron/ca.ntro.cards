@@ -18,6 +18,8 @@ public interface AbstractTestCaseDescriptor extends Value, Serializable {
 	int currentStep(Mode mode);
 	
 	boolean passed(Mode mode);
+	
+	boolean loaded(Mode mode);
 
 	public static CommonTestCaseDescriptor create() {
 		CommonTestCaseDescriptor descriptor = new CommonTestCaseDescriptor();

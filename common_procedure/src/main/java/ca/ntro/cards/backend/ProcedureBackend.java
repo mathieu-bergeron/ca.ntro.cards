@@ -44,7 +44,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 	public void initializeCanvasModel() {
 		
 		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
-
+		
+		dashboardModel.reInitialize();
 
 		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
 
@@ -92,7 +93,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		    	 
 		    	 DASHBOARD_MODEL   dashboardModel       = inputs.get(model(getDashboardModelClass()));
 
-		    	 getTestCaseDatabase().copyNewTestCasesTo(dashboardModel);
+		    	 getTestCaseDatabase().addOrUpdateTestCases(dashboardModel);
 
 		     });
 	}

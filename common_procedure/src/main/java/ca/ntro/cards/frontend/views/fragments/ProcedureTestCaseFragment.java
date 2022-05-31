@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public abstract class ProcedureTestCaseFragment extends ViewFx {
+	
+	private String testCaseId;
 
 	protected abstract Label categoryLabel();
 	protected abstract Button testCaseIdButton();
@@ -27,10 +29,8 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 			msgChangeCurrentTestCase.send();
 			
 		});
-		
-		
-
 	}
+
 	public void displayCategory(String category) {
 		categoryLabel().setText(category);
 	}
@@ -45,6 +45,20 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 
 	public void displayNumberOfSteps(String numberOfSteps) {
 		numberOfStepsLabel().setText(numberOfSteps);
+	}
+	public void enableTestCaseSelection() {
+		testCaseIdButton().setDisable(false);
+	}
+	public void disableTestCaseSelection() {
+		testCaseIdButton().setDisable(true);
+	}
+
+	public void memorizeTestCaseId(String testCaseId) {
+		this.testCaseId = testCaseId;
+	}
+	
+	public String testCaseId() {
+		return testCaseId;
 	}
 
 
