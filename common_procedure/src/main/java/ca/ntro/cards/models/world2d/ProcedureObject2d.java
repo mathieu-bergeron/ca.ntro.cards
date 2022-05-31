@@ -14,69 +14,57 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 	private double dragOffsetX;
 	private double dragOffsetY;
 	
-	private static final double DISTANCE_EPSILON = 5;
-	private static final double TIME_EPSILON = 0.001;
+	private static final double EPSILON = 1;
 	
-	private double secondsToReachTarget = 0;
+	private double targetTopLeftX;
+	private double targetTopLeftY;
 	
-	private double targetTopLeftX = -1;
-	private double targetTopLeftY = -1;
+	private int directionX = 0;
+	private int directionY = 0;
 	
-	private double initialSpeedX;
-	private double initialSpeedY;
+	@Override
+	public void initialize() {
+		targetTopLeftX = topLeftX();
+		targetTopLeftY = topLeftY();
+		directionX = 0;
+		directionY = 0;
+		setSpeedX(0);
+		setSpeedY(0);
+	}
 
 	public void setTarget(double targetTopLeftX, double targetTopLeftY) {
 		this.targetTopLeftX = targetTopLeftX;
 		this.targetTopLeftY = targetTopLeftY;
 		
-		secondsToReachTarget = ProcedureConstants.SECONDS_TO_REACH_TARGET;
-
 		double distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
 		double distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
-		
-		initialSpeedX = distanceToTargetX / secondsToReachTarget;
-		initialSpeedY = distanceToTargetY / secondsToReachTarget;
 
-		reachTargetOrAdjustSpeed();
+		directionX = Double.compare(targetTopLeftX, topLeftX());
+		directionY = Double.compare(targetTopLeftY, topLeftY());
+		
+		setSpeedX(distanceToTargetX / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionX);
+		setSpeedY(distanceToTargetY / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionY);
+
+		checkIfTargetReached();
 	}
 
-	private void reachTargetOrAdjustSpeed() {
+	private void checkIfTargetReached() {
 		double distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
 		double distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
+
+		int nextDirectionX = Double.compare(targetTopLeftX, topLeftX());
+		int nextDirectionY = Double.compare(targetTopLeftY, topLeftY());
 		
-		if(distanceToTargetX <= DISTANCE_EPSILON
-				|| secondsToReachTarget <= TIME_EPSILON) {
+		if(distanceToTargetX <= EPSILON
+				|| directionX != nextDirectionX) {
 			
-			reachTargetX(targetTopLeftX);
-
-		}else {
-			
-			double newSpeedX = distanceToTargetX / secondsToReachTarget;
-			if(newSpeedX > initialSpeedX) {
-				initialSpeedX = newSpeedX;
-			}
-
-			double directionX = Double.compare(targetTopLeftX, topLeftX());
-			setSpeedX(initialSpeedX * directionX);
-			
+			reachTargetX();
 		}
 
-		if(distanceToTargetY <= DISTANCE_EPSILON
-				|| secondsToReachTarget <= TIME_EPSILON) {
+		if(distanceToTargetY <= EPSILON
+				|| directionY != nextDirectionY) {
 			
-			reachTargetY(targetTopLeftY);
-		
-		}else {
-			
-
-			double newSpeedY = distanceToTargetY / secondsToReachTarget;
-			if(newSpeedY > initialSpeedY) {
-				initialSpeedY = newSpeedY;
-			}
-
-			double directionY = Double.compare(targetTopLeftY, topLeftY());
-			setSpeedY(initialSpeedY * directionY);
-
+			reachTargetY();
 		}
 	}
 	
@@ -92,14 +80,16 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		this.targetTopLeftY = topLeftY;
 	}
 
-	private void reachTargetY(double targetTopLeftY) {
+	private void reachTargetY() {
 		setTopLeftY(targetTopLeftY);
 		setSpeedY(0);
+		directionY = 0;
 	}
 
-	private void reachTargetX(double targetTopLeftX) {
+	private void reachTargetX() {
 		setTopLeftX(targetTopLeftX);
 		setSpeedX(0);
+		directionX = 0;
 	}
 
 	@Override
@@ -125,13 +115,8 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	public void onTimePasses(double secondsElapsed) {
 		super.onTimePasses(secondsElapsed);
-		
-		secondsToReachTarget -= secondsElapsed;
-		if(secondsToReachTarget <= TIME_EPSILON) {
-			secondsToReachTarget = 0;
-		}
 
-		reachTargetOrAdjustSpeed();
+		checkIfTargetReached();
 	}
 
 	public void dragTo(double worldX, double worldY) {
@@ -141,9 +126,6 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	protected void onDragStarts() {
 		getWorld().registerDraggedObject2d(this);
-		
-		secondsToReachTarget = 0;
-
 	}
 
 
