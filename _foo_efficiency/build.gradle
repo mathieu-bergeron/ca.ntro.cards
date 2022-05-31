@@ -1,0 +1,20 @@
+plugins {
+    id 'localJavaPlugin'
+    id 'localJSweetPlugin'
+    id 'localFxPlugin'
+}
+
+dependencies {
+    ntroDependancies.split(',').each {
+        implementation project(":ntro_${it}")
+    }
+
+    implementation project(':common')
+
+    // TMP: should not be necessary
+    implementation project(':common_procedure')
+
+    implementation project(':common_efficiency')
+
+    implementation project(':foo_procedure')
+}
