@@ -2,6 +2,7 @@ package ca.ntro.cards;
 
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
+import ca.ntro.cards.backend.ProcedureBackend;
 import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
@@ -14,6 +15,7 @@ import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
+import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -23,24 +25,26 @@ import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTraceFull;
 
-public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsModel,
-							       STUDENT_MODEL        extends EXECUTABLE_MODEL,
-	                               CANVAS_MODEL         extends ProcedureCardsModel,
-                                   TEST_CASE            extends ProcedureTestCase,
-                                   TEST_CASE_DESCRIPTOR extends ProcedureTestCaseDescriptor,
-                                   TEST_CASES_MODEL     extends ProcedureTestCaseDatabase,
-                                   EXECUTION_TRACE      extends ProcedureExecutionTrace,
-                                   DASHBOARD_MODEL      extends ProcedureDashboardModel,
-                                   SETTINGS_MODEL       extends ProcedureSettingsModel,
+public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCardsModel,
+							       STUDENT_MODEL           extends EXECUTABLE_MODEL,
+	                               CANVAS_MODEL            extends ProcedureCardsModel,
+                                   TEST_CASE               extends ProcedureTestCase,
+                                   TEST_CASE_DESCRIPTOR    extends ProcedureTestCaseDescriptor,
+                                   TEST_CASES_MODEL        extends ProcedureTestCaseDatabase,
+                                   EXECUTION_TRACE         extends ProcedureExecutionTrace,
+                                   DASHBOARD_MODEL         extends ProcedureDashboardModel,
+                                   SETTINGS_MODEL          extends ProcedureSettingsModel,
+                                   MSG_ACCEPT_MANUAL_MODEL extends ProcedureMsgAcceptManualModel,
                                                                                                       
-                                   BACKEND extends CommonBackend<EXECUTABLE_MODEL, 
-                                                                 STUDENT_MODEL,
-                                                                 CANVAS_MODEL,
-                                                                 TEST_CASE, 
-                                                                 TEST_CASES_MODEL, 
-                                                                 EXECUTION_TRACE,
-                                                                 DASHBOARD_MODEL, 
-                                                                 SETTINGS_MODEL>,
+                                   BACKEND extends ProcedureBackend<EXECUTABLE_MODEL, 
+                                                                    STUDENT_MODEL,
+                                                                    CANVAS_MODEL,
+                                                                    TEST_CASE, 
+                                                                    TEST_CASES_MODEL, 
+                                                                    EXECUTION_TRACE,
+                                                                    DASHBOARD_MODEL, 
+                                                                    SETTINGS_MODEL,
+                                                                    MSG_ACCEPT_MANUAL_MODEL>,
                                    
                                    ROOT_VIEW       extends ProcedureRootView, 
                                    CANVAS_VIEW     extends ProcedureCanvasView, 
@@ -75,6 +79,13 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsMo
                                                                 	 
     protected abstract Class<TEST_CASE_DESCRIPTOR> testCaseDescriptorClass();
 
+    @Override
+	protected void additionnalBackendInitialization(BACKEND backend) {
+    	backend.setMsgAcceptManualModelClass(msgAcceptManualModelClass());
+    }
+
+	protected abstract Class<MSG_ACCEPT_MANUAL_MODEL> msgAcceptManualModelClass();
+
 	@Override
 	public void registerModels(ModelRegistrar registrar) {
 		super.registerModels(registrar);
@@ -90,6 +101,7 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsMo
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
 		registrar.registerMessage(MsgChangeCurrentTestCase.class);
+		registrar.registerMessage(msgAcceptManualModelClass());
 
 	}
 

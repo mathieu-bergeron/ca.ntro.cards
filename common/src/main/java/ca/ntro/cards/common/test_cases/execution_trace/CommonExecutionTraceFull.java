@@ -15,6 +15,8 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 
        implements CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
 
+	private static final long serialVersionUID = 5676175797895217768L;
+
 	private List<EXECUTABLE_MODEL> trace = Collections.synchronizedList(new ArrayList<>());
 	private int current = 0;
 	
@@ -92,5 +94,13 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 	@Override
 	public int numberOfSteps() {
 		return trace.size();
+	}
+
+	@Override
+	public void truncateAfterCurrentStep() {
+		if(isValidIndex(current+1)) {
+			trace = trace.subList(0, current+1);
+			current = trace.size() - 1;
+		}
 	}
 }

@@ -77,5 +77,9 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
 		return (Class<? extends EXECUTION_TRACE>) EfficiencyExecutionTraceSizeOnly.class;
 	}
 
+    @Override
+	protected void additionnalBackendInitialization(BACKEND backend) {
+    }
+
 
 }

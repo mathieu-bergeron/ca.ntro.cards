@@ -5,16 +5,14 @@ import java.util.List;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.world2d.Object2d;
-import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.cards.Card;
-import ca.ntro.cards.freesort.FreesortConstants;
-import ca.ntro.cards.freesort.messages.MsgManualExecutionStep;
+import ca.ntro.cards.freesort.messages.FreesortMsgAcceptManualModel;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
 public class FreesortProcedureWorld2d extends ProcedureWorld2d<FreesortProcedureObject2d, FreesortProcedureWorld2d, FreesortProcedureDrawingOptions> {
 	
-	private MsgManualExecutionStep msgManualModel = NtroApp.newMessage(MsgManualExecutionStep.class);
+	private FreesortMsgAcceptManualModel msgAcceptManualModel = NtroApp.newMessage(FreesortMsgAcceptManualModel.class);
 	
 	@Override
 	public void buildAndSendManualModel() {
@@ -43,9 +41,8 @@ public class FreesortProcedureWorld2d extends ProcedureWorld2d<FreesortProcedure
 
 		manualModel.setCartes(cards);
 		
-		msgManualModel.setManualModel(manualModel);
-		msgManualModel.send();
+		msgAcceptManualModel.setManualModel(manualModel);
+		msgAcceptManualModel.send();
 	}
-
 
 }

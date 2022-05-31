@@ -25,9 +25,19 @@ public class   FooCardsModel<C extends Comparable<C>>
 
     @Override
     public void copyDataFrom(FooCardsModel other) {
-        // TODO
+        // TODO: copier les données telles quelles
 
     }
+
+	@Override
+	public boolean acceptManualModel(FooCardsModel manualModel) {
+		boolean modified = false;
+
+		// TODO: accepter ou rejeter les modifications manuelles
+		//       retourner faux si c'est rejeté
+
+		return modified;
+	}
 
     @Override
     protected void updateViewDataImpl(FooProcedureViewData cardsViewData) {
@@ -48,6 +58,7 @@ public class   FooCardsModel<C extends Comparable<C>>
     @Override
     public int testCaseSize() {
         // TODO: 
+    	return 0;
     }
     
     @Override
@@ -82,5 +93,6 @@ public class   FooCardsModel<C extends Comparable<C>>
     public void displayOn(FooVariablesView variablesView) {
         // TODO: afficher les attributs
     }
+
 
 }

@@ -26,7 +26,7 @@ public class   TriLibre<C extends Comparable<C>>
                                    FreesortProcedureViewData,
                                    FreesortVariablesView> { 
 	
-	private Card[] cartes = new Card[0];
+	protected Card[] cartes = new Card[0];
 
 	public Card[] getCartes() {
 		return cartes;
@@ -43,6 +43,27 @@ public class   TriLibre<C extends Comparable<C>>
 		for(int i = 0; i < cartes.length; i++) {
 			cartes[i] = other.cartes[i];
 		}
+	}
+
+	@Override
+	public boolean acceptManualModel(TriLibre manualModel) {
+		boolean modified = false;
+		
+		if(cartes.length != manualModel.cartes.length) {
+
+			modified = true;
+			copyDataFrom(manualModel);
+
+		}else {
+			for(int i = 0; i < cartes.length; i++) {
+				if(!cartes[i].equals(manualModel.cartes[i])) {
+					modified = true;
+					cartes[i] = manualModel.cartes[i];
+				}
+			}
+		}
+
+		return modified;
 	}
 
 	@Override
@@ -159,5 +180,6 @@ public class   TriLibre<C extends Comparable<C>>
 
 		variablesView.displayFooVar01(String.valueOf(indexOfFirstHearts));
 	}
+
 
 }

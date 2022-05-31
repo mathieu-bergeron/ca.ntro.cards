@@ -8,7 +8,7 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
-public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
+public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends ProcedureCardsModel, 
                                                 STUDENT_MODEL    extends EXECUTABLE_MODEL,
                                                 TEST_CASE        extends ProcedureTestCase,
                                                 EXECUTION_TRACE  extends ProcedureExecutionTrace,
@@ -42,6 +42,12 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonE
 			dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
 
 		});
+	}
+
+	public void pushManualExecutionStep(STUDENT_MODEL cardsModel) {
+		TEST_CASE testCase = currentTestCase();
+
+		testCase.pushManualExecutionStep(cardsModel);
 	}
 
 

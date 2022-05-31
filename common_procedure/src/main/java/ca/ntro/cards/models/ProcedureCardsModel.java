@@ -34,6 +34,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
                 implements Model, Watch, Initialize, WriteObjectGraph {
 
+
 	protected Card cardById(String cardId) {
 		return cards().findFirst(card -> card.hasId(cardId));
 	}
@@ -43,6 +44,8 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	@Override
 	public void initialize() {
 	}
+
+	public abstract boolean acceptManualModel(CARDS_MODEL manualModel);
 
 	public void updateViewData(VIEW_DATA viewData) {
 
@@ -126,4 +129,5 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 			card.format(builder);
 		});
 	}
+
 }

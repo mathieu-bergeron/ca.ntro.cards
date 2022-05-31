@@ -6,6 +6,7 @@ import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
+import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.models.ProcedureSettingsModel;
@@ -17,14 +18,15 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.NtroApp;
 
-public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCardsModel,
-                                       STUDENT_MODEL      extends EXECUTABLE_MODEL,
-                                       CANVAS_MODEL       extends ProcedureCardsModel,
-                                       TEST_CASE          extends ProcedureTestCase,
-                                       TEST_CASE_DATABASE extends ProcedureTestCaseDatabase,
-                                       EXECUTION_TRACE    extends ProcedureExecutionTrace,
-                                       DASHBOARD_MODEL    extends ProcedureDashboardModel,
-                                       SETTINGS_MODEL     extends ProcedureSettingsModel>
+public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends ProcedureCardsModel,
+                                       STUDENT_MODEL           extends EXECUTABLE_MODEL,
+                                       CANVAS_MODEL            extends ProcedureCardsModel,
+                                       TEST_CASE               extends ProcedureTestCase,
+                                       TEST_CASE_DATABASE      extends ProcedureTestCaseDatabase,
+                                       EXECUTION_TRACE         extends ProcedureExecutionTrace,
+                                       DASHBOARD_MODEL         extends ProcedureDashboardModel,
+                                       SETTINGS_MODEL          extends ProcedureSettingsModel,
+                                       MSG_ACCEPT_MANUAL_MODEL extends ProcedureMsgAcceptManualModel>
 
                 extends CommonBackend<EXECUTABLE_MODEL, 
                                       STUDENT_MODEL,
@@ -34,9 +36,18 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
                                       EXECUTION_TRACE,
                                       DASHBOARD_MODEL, 
                                       SETTINGS_MODEL> {
+                                    	  
+    private Class<MSG_ACCEPT_MANUAL_MODEL> msgAcceptManualModelClass;
 
+    public Class<MSG_ACCEPT_MANUAL_MODEL> getMsgAcceptManualModelClass() {
+		return msgAcceptManualModelClass;
+	}
 
-    @SuppressWarnings("unchecked")
+	public void setMsgAcceptManualModelClass(Class<MSG_ACCEPT_MANUAL_MODEL> msgAcceptManualModelClass) {
+		this.msgAcceptManualModelClass = msgAcceptManualModelClass;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public void earlyModelInitialization() {
 		
@@ -97,6 +108,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 				executionStepForward(subTasks);
 				
 				changeCurrentTestCase(subTasks);
+				
+				acceptManualModel(subTasks);
 		    	 
 		     });
 	}
@@ -153,6 +166,23 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		    	 testCaseDatabase().stepForward();
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		     });
+	}
+
+	private void acceptManualModel(BackendTasks tasks) {
+		tasks.task("acceptManualModel")
+		
+		     .waitsFor(message(getMsgAcceptManualModelClass()))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 MSG_ACCEPT_MANUAL_MODEL  msgAcceptManualModel     = inputs.get(message(getMsgAcceptManualModelClass()));
+		    	 DASHBOARD_MODEL          dashboardModel           = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL             cardsModel               = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 msgAcceptManualModel.applyTo(cardsModel, 
+		    			 				      dashboardModel,
+		    			                      testCaseDatabase());
 		     });
 	}
 

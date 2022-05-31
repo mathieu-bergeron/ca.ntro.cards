@@ -12,7 +12,8 @@ public class   Card<OPTIONS extends CommonDrawingOptions>
 
        extends AbstractCard<OPTIONS> {
 
-	
+	private static final long serialVersionUID = -4903322556050614013L;
+
 	private int rank = 2;
 	private Suit suit = Suit.HEARTS;
 
@@ -176,5 +177,18 @@ public class   Card<OPTIONS extends CommonDrawingOptions>
 	public boolean hasSuit(Suit suit) {
 		return this.suit.equals(suit);
 	}
-
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other == this) return true;
+		if(other == null) return false;
+		if(other instanceof Card) {
+			Card otherCard = (Card) other;
+			
+			return this.suit.equals(otherCard.suit)
+					&& this.rank == otherCard.rank;
+		}
+		
+		return false;
+	}
 }

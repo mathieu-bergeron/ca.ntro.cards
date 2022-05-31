@@ -10,7 +10,7 @@ import ca.ntro.cards.freesort.frontend.views.FreesortCardsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureDashboardView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureRootView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureSettingsView;
-import ca.ntro.cards.freesort.messages.MsgManualExecutionStep;
+import ca.ntro.cards.freesort.messages.FreesortMsgAcceptManualModel;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.freesort.models.values.FreesortTestCase;
 import ca.ntro.cards.freesort.test_cases.FreesortTestCaseDatabase;
@@ -31,6 +31,7 @@ public abstract class   ProcedureTriLibre<STUDENT_MODEL extends TriLibre>
                                      FreesortExecutionTrace,
                                      FreesortProcedureDashboardModel,
                                      FreesortProcedureSettingsModel,
+                                     FreesortMsgAcceptManualModel,
                                      FreesortProcedureBackend<STUDENT_MODEL>,
                                      FreesortProcedureRootView,
                                      FreesortCardsView,
@@ -96,7 +97,7 @@ public abstract class   ProcedureTriLibre<STUDENT_MODEL extends TriLibre>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgManualExecutionStep.class);
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

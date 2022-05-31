@@ -42,4 +42,8 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 		return size;
 	}
 
+	@Override
+	public void truncateAfterCurrentStep() {
+	}
+
 }

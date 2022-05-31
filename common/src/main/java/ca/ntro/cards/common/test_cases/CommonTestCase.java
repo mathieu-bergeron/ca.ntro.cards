@@ -19,7 +19,9 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
                                      DASHBOARD_MODEL  extends CommonDashboardModel> 
 
        implements AbstractTestCaseDescriptor {
-	
+
+	private static final long serialVersionUID = -2534868039865563235L;
+
 	private String category;
 	private String testCaseId;
 	private int inputSize;

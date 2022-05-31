@@ -10,12 +10,13 @@ import ca.ntro.cards.foo.frontend.views.FooCardsView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureDashboardView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureRootView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureSettingsView;
-import ca.ntro.cards.foo.messages.MsgManualExecutionStep;
+import ca.ntro.cards.foo.messages.FooMsgAcceptManualModel;
 import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.foo.models.values.FooTestCase;
 import ca.ntro.cards.foo.test_cases.FooTestCaseDatabase;
 import ca.ntro.cards.foo.test_cases.descriptor.FooTestCaseDescriptor;
 import ca.ntro.cards.foo.test_cases.execution_trace.FooExecutionTrace;
+import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.foo.models.FooProcedureDashboardModel;
 import ca.ntro.cards.foo.models.FooProcedureSettingsModel;
@@ -31,6 +32,7 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
                                      FooExecutionTrace,
                                      FooProcedureDashboardModel,
                                      FooProcedureSettingsModel,
+                                     FooMsgAcceptManualModel,
                                      FooProcedureBackend<STUDENT_MODEL>,
                                      FooProcedureRootView,
                                      FooCardsView,
@@ -96,7 +98,7 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgManualExecutionStep.class);
+		registrar.registerMessage(ProcedureMsgAcceptManualModel.class);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -113,6 +115,11 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 	@Override
 	protected Class<FooTestCaseDescriptor> testCaseDescriptorClass() {
 		return FooTestCaseDescriptor.class;
+	}
+
+	@Override
+	protected Class<FooMsgAcceptManualModel> msgAcceptManualModelClass() {
+		return FooMsgAcceptManualModel.class;
 	}
 
 

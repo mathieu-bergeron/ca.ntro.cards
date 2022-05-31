@@ -27,6 +27,10 @@ public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCards
 		executionTraceByMode(Mode.MANUAL).updateDashboardModel(dashboardModel);
 	}
 
-
+	public void pushManualExecutionStep(STUDENT_MODEL model) {
+		executionTraceByMode(Mode.MANUAL).truncateAfterCurrentStep();
+		executionTraceByMode(Mode.MANUAL).pushCloneOf(model);
+		executionTraceByMode(Mode.MANUAL).stepForward();
+	}
 
 }

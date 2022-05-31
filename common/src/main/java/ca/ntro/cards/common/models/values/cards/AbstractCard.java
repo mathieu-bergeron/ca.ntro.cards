@@ -14,6 +14,7 @@ public abstract class AbstractCard<OPTIONS extends CommonDrawingOptions>
 
        implements Value, Identifiable, Comparable<AbstractCard>, Serializable {
 
+	private static final long serialVersionUID = 7116211713513539219L;
 
 	@SuppressWarnings("rawtypes")
 	public void drawFaceDown(World2dGraphicsContext gc, 

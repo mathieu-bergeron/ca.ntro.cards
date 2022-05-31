@@ -132,10 +132,14 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		
 		backend.initializeTestCaseDatabase();
 		backend.earlyModelInitialization();
+		
+		additionnalBackendInitialization(backend);
 
 		registrar.registerBackend(backend);
 
 	}
+
+	protected abstract void additionnalBackendInitialization(BACKEND backend);
 
 	protected abstract Class<EXECUTABLE_MODEL> executableModelClass();
 	protected abstract Class<STUDENT_MODEL> studentModelClass();

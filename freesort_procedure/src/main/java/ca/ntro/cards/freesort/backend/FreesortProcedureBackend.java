@@ -5,8 +5,7 @@ package ca.ntro.cards.freesort.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 import ca.ntro.cards.backend.ProcedureBackend;
-import ca.ntro.cards.freesort.backend.tasks.FreesortModifyCardsModel;
-import ca.ntro.cards.freesort.messages.MsgManualExecutionStep;
+import ca.ntro.cards.freesort.messages.FreesortMsgAcceptManualModel;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.freesort.models.values.FreesortTestCase;
 import ca.ntro.cards.freesort.test_cases.FreesortTestCaseDatabase;
@@ -24,17 +23,11 @@ public class   FreesortProcedureBackend<STUDENT_MODEL extends TriLibre>
                                 FreesortTestCaseDatabase,
                                 FreesortExecutionTrace,
                                 FreesortProcedureDashboardModel,
-                                FreesortProcedureSettingsModel> {
+                                FreesortProcedureSettingsModel,
+                                FreesortMsgAcceptManualModel> {
 
 	
 	
-
-	@Override
-	protected void addSubTasksToModifyCanvasModel(BackendTasks subTasks) {
-		super.addSubTasksToModifyCanvasModel(subTasks);
-
-		FreesortModifyCardsModel.updateList(subTasks, getStudentModelClass());
-	}
 
 	@Override
 	protected void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks) {

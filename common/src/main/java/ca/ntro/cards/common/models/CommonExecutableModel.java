@@ -24,6 +24,8 @@ public abstract class CommonExecutableModel<CARDS_MODEL extends CommonExecutable
 
                implements Watch, WriteObjectGraph, Serializable {
 
+	private static final long serialVersionUID = -6280486621314092815L;
+
 	public abstract void initializeAsTestCase(AbstractTestCaseDescriptor descriptor);
 
 	public abstract int testCaseSize();

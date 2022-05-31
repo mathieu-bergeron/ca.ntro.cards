@@ -100,6 +100,14 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
+	public boolean acceptManualModel(TriNaif manualModel) {
+		// FIXME: reject some updates
+		copyDataFrom(manualModel);
+
+		return true;
+	}
+
+	@Override
 	protected void updateViewDataImpl(NaivesortProcedureViewData cardsViewData) {
 		double cardWidth = NaivesortConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = NaivesortConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
@@ -243,5 +251,6 @@ public class   TriNaif<C extends Comparable<C>>
 		variablesView.displayIndexOfCandidate(String.valueOf(indiceCandidat));
 		variablesView.displayIndexOfNextEmpty(String.valueOf(indiceProchainVide));
 	}
+
 
 }

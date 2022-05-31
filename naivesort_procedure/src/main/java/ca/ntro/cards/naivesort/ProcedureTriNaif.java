@@ -10,7 +10,7 @@ import ca.ntro.cards.naivesort.frontend.views.NaivesortCardsView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureDashboardView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureRootView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureSettingsView;
-import ca.ntro.cards.naivesort.messages.MsgManualExecutionStep;
+import ca.ntro.cards.naivesort.messages.NaivesortMsgAcceptManualModel;
 import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.naivesort.models.values.NaivesortTestCase;
 import ca.ntro.cards.naivesort.test_cases.NaivesortTestCaseDatabase;
@@ -31,6 +31,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
                                      NaivesortExecutionTrace,
                                      NaivesortProcedureDashboardModel,
                                      NaivesortProcedureSettingsModel,
+                                     NaivesortMsgAcceptManualModel,
                                      NaivesortProcedureBackend<STUDENT_MODEL>,
                                      NaivesortProcedureRootView,
                                      NaivesortCardsView,
@@ -96,7 +97,7 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgManualExecutionStep.class);
+
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
