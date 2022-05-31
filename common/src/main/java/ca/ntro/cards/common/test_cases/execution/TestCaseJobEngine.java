@@ -106,8 +106,9 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 		if(dir.exists()) {
 			deleteFiles(dir);
 			dir.delete();
-			dir.mkdir();
 		}
+
+		dir.mkdir();
 	}
 
 	public void resetStorageDirectory() {
