@@ -19,16 +19,6 @@ include 'common'
 include 'common_procedure'
 include 'common_efficiency'
 
-include 'foo_procedure'
-include 'foo_efficiency'
-include 'foo_solution'
-project(':foo_solution').projectDir = file('solutions/foo_solution')
-
-include 'demo_procedure'
-include 'demo_efficiency'
-include 'demo_solution'
-project(':demo_solution').projectDir = file('solutions/demo_solution')
-
 include 'naivesort_procedure'
 include 'naivesort_efficiency'
 include 'naivesort_solution'
