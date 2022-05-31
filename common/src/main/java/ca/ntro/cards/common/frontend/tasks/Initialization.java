@@ -3,6 +3,7 @@ package ca.ntro.cards.common.frontend.tasks;
 import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.SubTasksLambda;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
+import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.frontend.DashboardSubViewsLambda;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
@@ -259,7 +260,8 @@ public class Initialization {
 
 		    	 Window window = inputs.get(window());
 		    	 
-		    	 window.resize(1080, 640);
+		    	 window.resize(CommonConstants.INITIAL_WINDOW_WIDTH, 
+		    			       CommonConstants.INITIAL_WINDOW_HEIGHT);
 		    	 
 		    	 window.show();
 		    	 

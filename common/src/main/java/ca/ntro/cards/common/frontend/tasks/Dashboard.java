@@ -25,47 +25,8 @@ public class Dashboard {
 
 		     .andContains(subTasks -> {
 
-		    	 /*
-		    	 displayDashboardModel(subTasks,
-		    			              dashboardViewClass,
-		    			              dashboardModelClass);
-
-		    	 executionEnded(subTasks,
-		    			        dashboardViewClass);
-
-				  */
-
 		    	 subTasksLambda.createSubTasks(subTasks);
 
 		     });
 	}
-
-	private static <DASHBOARD_VIEW extends CommonDashboardView,
-	                DASHBOARD_MODEL extends CommonDashboardModel> 
-	
-	        void displayDashboardModel(FrontendTasks tasks, 
-			                          Class<DASHBOARD_VIEW> dashboardViewClass, 
-			                          Class<DASHBOARD_MODEL> dashboardModelClass) {
-
-		tasks.task("displayDashboardModel")
-		
-		     .waitsFor(modified(dashboardModelClass))
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 CommonDashboardView             dashboardView  = inputs.get(created(dashboardViewClass));
-		    	 Modified<DASHBOARD_MODEL>       dashboardModel = inputs.get(modified(dashboardModelClass));
-		    	 
-		    	 dashboardModel.currentValue().displayOn(dashboardView);
-		     });
-	}
-
-	private static <DASHBOARD_VIEW extends CommonDashboardView,
-	                DASHBOARD_MODEL extends CommonDashboardModel> 
-	
-	        void executionEnded(FrontendTasks tasks, 
-			                    Class<DASHBOARD_VIEW> dashboardViewClass) {
-
-	}
-
 }

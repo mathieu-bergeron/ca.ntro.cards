@@ -2,6 +2,9 @@ package ca.ntro.cards.common;
 
 public class CommonConstants {
 	
+	public static final int INITIAL_WINDOW_WIDTH = 1080;
+	public static final int INITIAL_WINDOW_HEIGHT = 640;
+	
 	public static final double INITIAL_CARD_WIDTH_MILIMETERS = 50;    // CARD_HEIGHT_MILIMETERS * 2/3
 	public static final double INITIAL_CARD_HEIGHT_MILIMETERS = 75;
 	
