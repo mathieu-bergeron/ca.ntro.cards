@@ -12,9 +12,6 @@ import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
-import ca.ntro.cards.common.messages.MsgExecutionEnded;
-import ca.ntro.cards.common.messages.MsgGenerateTestCase;
-import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
@@ -99,11 +96,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 
 	@Override
 	public void registerMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgExecutionEnded.class);
 		registrar.registerMessage(MsgToggleUseFourCardColors.class);
 		registrar.registerMessage(MsgRefreshDashboard.class);
-		registrar.registerMessage(MsgGenerateTestCase.class);
-		registrar.registerMessage(MsgTestCaseUpdate.class);
 		registrar.registerMessage(MsgStopExecutionReplay.class);
 		registrar.registerMessage(MsgStartExecutionEngine.class);
 

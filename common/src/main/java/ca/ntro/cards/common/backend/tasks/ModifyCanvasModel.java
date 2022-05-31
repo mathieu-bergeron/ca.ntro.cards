@@ -27,20 +27,9 @@ public class ModifyCanvasModel {
 		
 		     .andContains(subTasks -> {
 
-		    	 flipCard(subTasks, canvasModelClass);
-
 		    	 subTasksLambda.createSubTasks(subTasks);
 
 		     });
 	}
 	
-
-
-	private static <CARDS_MODEL extends CommonCanvasModel> 
-
-	        void flipCard(BackendTasks tasks,
-	        		      Class<CARDS_MODEL> cardsModelClass) {
-
-	}
-
 }

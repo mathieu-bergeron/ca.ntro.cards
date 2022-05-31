@@ -9,7 +9,6 @@ import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonFrontend;
-import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.frontend.events.EvtStartExecutionReplay;
 import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
@@ -82,8 +81,6 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 
 		mouseEvtOnPreviewCanvas(tasks);
 
-		executionEnded(tasks);
-
 		stopCodeExecution(tasks);
 
 		startCodeExecution(tasks);
@@ -122,19 +119,6 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		      });
 	}
 
-
-	private void executionEnded(FrontendTasks tasks) {
-		tasks.task("executionEnded")
-
-		      .waitsFor(message(MsgExecutionEnded.class))
-		      
-		      .thenExecutes(inputs -> {
-		    	  
-		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
-		    	  cardsViewData.stopExecutionReplay();
-
-		      });
-	}
 
 
 	private void mouseEvtOnPreviewCanvas(FrontendTasks tasks) {
@@ -184,25 +168,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    			                                    testCaseFragmentLoader);
 
 		     });
-
-		executionEndedDashboard(tasks);
-
 	}
 
 
-	private void executionEndedDashboard(FrontendTasks tasks) {
-		tasks.task("executionEndedDashboard")
-		
-			 .waitsFor(message(MsgExecutionEnded.class))
-		
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 DASHBOARD_VIEW dashboardView  = inputs.get(created(dashboardViewClass()));
-		    	 
-		    	 //dashboardView.disableExecutionButtons();
-
-		     });
-	}
 
 	@Override
 	protected void addDashboardSubViewLoaders(FrontendTasks subTasks) {

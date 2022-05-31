@@ -3,7 +3,6 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
-import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
@@ -13,12 +12,10 @@ import ca.ntro.cards.models.ProcedureSettingsModel;
 import ca.ntro.cards.test_cases.ProcedureTestCase;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
-import ca.ntro.core.initialization.Ntro;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
 import ca.ntro.app.NtroApp;
-import ca.ntro.app.models.Watch;
 
 public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCardsModel,
                                        STUDENT_MODEL      extends EXECUTABLE_MODEL,
@@ -73,17 +70,6 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
 
 	protected void addSubTasksToModifyDashboardModel(BackendTasks tasks) {
-		tasks.task("updateTestCase")
-		
-		     .waitsFor(message(MsgTestCaseUpdate.class))
-		     
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 MsgTestCaseUpdate msgNewTestCaseLoaded = inputs.get(message(MsgTestCaseUpdate.class));
-		    	 DASHBOARD_MODEL   dashboardModel       = inputs.get(model(getDashboardModelClass()));
-		    	 
-		    	 msgNewTestCaseLoaded.applyTo(dashboardModel);
-		     });
 
 		tasks.task("refreshDashboard")
 		

@@ -5,7 +5,6 @@ import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
-import ca.ntro.cards.common.messages.MsgExecutionEnded;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
@@ -88,7 +87,6 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsMo
 		super.registerMessages(registrar);
 
 		registrar.registerMessage(MsgToggleUseFourCardColors.class);
-		registrar.registerMessage(MsgExecutionEnded.class);
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
 		registrar.registerMessage(MsgChangeCurrentTestCase.class);
