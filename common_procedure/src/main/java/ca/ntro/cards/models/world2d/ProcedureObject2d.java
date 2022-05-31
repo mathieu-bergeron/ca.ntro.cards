@@ -15,6 +15,7 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 	private double dragOffsetY;
 	
 	private static final double EPSILON = 1;
+	private static final double INCREASE_SPEED_BELOW = 50;
 	
 	private double targetTopLeftX;
 	private double targetTopLeftY;
@@ -59,12 +60,22 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 				|| directionX != nextDirectionX) {
 			
 			reachTargetX();
+
+		}else if(distanceToTargetX <= INCREASE_SPEED_BELOW) {
+
+			setSpeedX(getSpeedX() * 1.15);
+
 		}
 
 		if(distanceToTargetY <= EPSILON
 				|| directionY != nextDirectionY) {
 			
 			reachTargetY();
+
+		}else if(distanceToTargetX <= INCREASE_SPEED_BELOW) {
+
+			setSpeedX(getSpeedX() * 1.15);
+
 		}
 	}
 	
