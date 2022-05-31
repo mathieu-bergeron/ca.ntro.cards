@@ -38,11 +38,11 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 
     @SuppressWarnings("unchecked")
 	@Override
-	public void initializeCanvasModel() {
+	public void earlyModelInitialization() {
 		
 		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
 		
-		dashboardModel.reInitialize();
+		dashboardModel.initialize();
 
 		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
 
@@ -58,16 +58,10 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 	}
 
 	protected void addSubTasksToModifyTestCasesModel(BackendTasks tasks) {
-		
-		
 	}
 
 	protected void addSubTasksToModifyCanvasModel(BackendTasks tasks) {
-
-
 	}
-
-
 
 	protected void addSubTasksToModifyDashboardModel(BackendTasks tasks) {
 

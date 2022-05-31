@@ -30,17 +30,11 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
                                     SETTINGS_MODEL> {
 
 	@Override
-	public void initializeCanvasModel() {
+	public void earlyModelInitialization() {
 		
 		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
 		
 		canvasModel.clear();
-	}
-
-	@Override
-	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

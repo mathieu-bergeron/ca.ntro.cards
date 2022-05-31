@@ -178,7 +178,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		return byId.testCaseById(testCaseId) != null;
 	}
 
-	public void reInitialize() {
+	public void initialize() {
 		byId.testCases().forEach(testCase -> {
 			testCase.setLoaded(false);
 		});

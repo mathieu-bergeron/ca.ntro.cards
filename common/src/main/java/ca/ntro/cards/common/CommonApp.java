@@ -131,7 +131,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		backend.setExecutionTraceFullClass(executionTraceClass());
 		
 		backend.initializeTestCaseDatabase();
-		backend.initializeCanvasModel();
+		backend.earlyModelInitialization();
 
 		registrar.registerBackend(backend);
 

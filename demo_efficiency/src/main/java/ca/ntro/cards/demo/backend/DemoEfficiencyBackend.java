@@ -24,11 +24,6 @@ public class DemoEfficiencyBackend<STUDENT_MODEL extends DemoCardsModel>
 
 
 	@Override
-	protected void addSubTasksToModifyTestCasesModel(BackendTasks subTasks) {
-		
-	}
-
-	@Override
 	protected void addSubTasksToModifyCanvasModel(BackendTasks subTasks) {
 		
 	}

@@ -7,7 +7,6 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.backend.tasks.ModifyCanvasModel;
 import ca.ntro.cards.common.backend.tasks.ModifyDashboardModel;
 import ca.ntro.cards.common.backend.tasks.ModifySettingsModel;
-import ca.ntro.cards.common.backend.tasks.ModifyTestCaseDatabase;
 import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
@@ -141,7 +140,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 	}
 
-	public abstract void initializeCanvasModel();
+	public abstract void earlyModelInitialization();
 
 	@Override
 	public void createTasks(BackendTasks tasks) {
@@ -153,14 +152,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 				                    	 addSubTasksToModifyCanvasModel(subTasks);
 				                    	 
 				                     });
-
-		ModifyTestCaseDatabase.createTasks(tasks, 
-				                         testCaseDatabase,
-							             subTasks -> {
-										
-										      addSubTasksToModifyTestCasesModel(subTasks);
-
-							             });
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
@@ -199,7 +190,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 	}
 
-	protected abstract void addSubTasksToModifyTestCasesModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyCanvasModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifyDashboardModel(BackendTasks subTasks);
 	protected abstract void addSubTasksToModifySettingsModel(BackendTasks subTasks);
