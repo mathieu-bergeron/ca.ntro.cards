@@ -60,6 +60,7 @@ new_project(){
     cd "$project_dir"
 
     find . -type f -name "$Foo*.java" | while read i; do mv "$i" "$(echo $i | sed s/$Foo/$ProjectName/)"; done
+    find . -type f -name "Mon$Foo*.java" | while read i; do mv "$i" "$(echo $i | sed s/$Foo/$ProjectName/)"; done
 
 }
 

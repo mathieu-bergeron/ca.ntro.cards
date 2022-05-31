@@ -19,13 +19,15 @@ include 'common'
 include 'common_procedure'
 include 'common_efficiency'
 
-include 'demo_common'
 include 'demo_procedure'
 include 'demo_efficiency'
-
 include 'demo_solution'
 project(':demo_solution').projectDir = file('solutions/demo_solution')
 
+include 'naivesort_procedure'
+include 'naivesort_efficiency'
+include 'naivesort_solution'
+project(':naivesort_solution').projectDir = file('solutions/naivesort_solution')
 
 buildscript {
     repositories {
