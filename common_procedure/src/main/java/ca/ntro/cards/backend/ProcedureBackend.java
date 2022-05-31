@@ -4,6 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
+import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
@@ -113,7 +114,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 				executionStepBack(subTasks);
 
 				executionStepForward(subTasks);
-		    	 
+				
+				changeCurrentTestCase(subTasks);
 		    	 
 		     });
 	}
@@ -131,6 +133,26 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
 		    	 testCaseDatabase().stepBackward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+
+		     });
+	}
+
+	private void changeCurrentTestCase(BackendTasks tasks) {
+		tasks.task("changeCurrentTestCase")
+		
+		     .waitsFor(message(MsgChangeCurrentTestCase.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 MsgChangeCurrentTestCase msgChangeCurrentTestCase = inputs.get(message(MsgChangeCurrentTestCase.class));
+		    	 DASHBOARD_MODEL          dashboardModel           = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL             cardsModel               = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 msgChangeCurrentTestCase.applyTo(testCaseDatabase());
+		    	 msgChangeCurrentTestCase.applyTo(dashboardModel);
+
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 

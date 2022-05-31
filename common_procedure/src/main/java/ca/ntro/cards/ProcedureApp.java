@@ -12,6 +12,7 @@ import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
+import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.models.ProcedureCardsModel;
@@ -90,6 +91,7 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL     extends ProcedureCardsMo
 		registrar.registerMessage(MsgExecutionEnded.class);
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
+		registrar.registerMessage(MsgChangeCurrentTestCase.class);
 
 	}
 

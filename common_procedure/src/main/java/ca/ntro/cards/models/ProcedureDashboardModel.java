@@ -115,6 +115,13 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		byCategory.addTestCase(testCaseDescriptor);
 	}
 	
+	public void changeCurrentTestCase(String testCaseId) {
+		this.currentTestCaseId = currentTestCaseId;
+		this.currentStep = byId.testCaseById(testCaseId).currentStep(Mode.MANUAL);
+		this.currentInputSize = byId.testCaseById(testCaseId).inputSize();
+		this.currentOutputSize = byId.testCaseById(testCaseId).numberOfSteps(Mode.MANUAL);
+	}
+	
 	public void displayOn(SELECTIONS_VIEW selectionsView, 
 			              ProcedureDashboardModel previousModel,
 			              ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
