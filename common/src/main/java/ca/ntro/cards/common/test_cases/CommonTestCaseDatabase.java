@@ -247,7 +247,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		};
 		
 		File[] filesToLoad = dbDir.listFiles(filter);
-		int numberOfFilesToLoad = filesToLoad.length;
+		int numberOfFilesToLoad = filesToLoad.length + 1; // + currentTestCaseId.bin
 
 		refreshTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override

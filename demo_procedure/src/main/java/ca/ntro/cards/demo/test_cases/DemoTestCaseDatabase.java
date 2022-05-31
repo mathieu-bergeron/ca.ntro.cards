@@ -26,9 +26,9 @@ public class   DemoTestCaseDatabase<STUDENT_MODEL extends DemoCardsModel>
 		addTestCase(descriptor);
 		
 		
-		for(int i = 0; i < 10; i++) {
+		for(int i = 1; i <= 2; i++) {
 			
-			int size = 3 + Ntro.random().nextInt(20);
+			int size = i*50;
 
 			descriptor = AbstractTestCaseDescriptor.create()
 												   .random(size);
