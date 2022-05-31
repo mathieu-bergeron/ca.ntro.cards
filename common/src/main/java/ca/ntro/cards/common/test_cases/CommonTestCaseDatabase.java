@@ -235,15 +235,16 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public void loadFromDbDir() {
 		MsgRefreshDashboard msgRefreshDashboard = NtroApp.newMessage(MsgRefreshDashboard.class);
 		Timer refreshTimer = new Timer();
+		long startTime = System.currentTimeMillis();
 
 		File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
-				return name.endsWith("bin");
+				return name.endsWith("bin")
+						&& !name.equals(currentTestCaseId + ".bin");
 			}
 		};
-		
 		
 		File[] filesToLoad = dbDir.listFiles(filter);
 		int numberOfFilesToLoad = filesToLoad.length;
@@ -259,8 +260,10 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 					shouldRefreshDashboard = false;
 					refreshTimer.cancel();
 					
-					System.out.println("\n\n[LOADING TEST CASES]\n\n");
-					System.out.println("... done\n");
+					long endTime = System.currentTimeMillis();
+					
+					System.out.print("\n\n[LOADING TEST CASES]");
+					System.out.println(String.format(" done in %.2f seconds\n", ((double)(endTime - startTime)) / 1E3));
 				}
 			}
 		}, 0, CommonConstants.TEST_CASE_LOADING_REFRESH_TIMER_DELAY_MILISECONDS);
@@ -275,11 +278,6 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 				
 				shouldRefreshDashboard = true;
 
-				/*
-				MsgTestCaseUpdate msgNewTestCaseLoaded = NtroApp.newMessage(MsgTestCaseUpdate.class);
-				msgNewTestCaseLoaded.setTestCaseDescriptor(readingJob.getTestCase().asTestCaseDescriptor());
-				msgNewTestCaseLoaded.send();
-				*/
 			});
 		}
 	}
