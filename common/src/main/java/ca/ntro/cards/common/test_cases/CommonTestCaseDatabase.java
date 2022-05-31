@@ -256,17 +256,14 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		};
 		
 		File[] filesToLoad = dbDir.listFiles(filter);
-		int numberOfFilesToLoad = filesToLoad.length + 1; // + currentTestCaseId.bin
+		int numberOfTestCases = filesToLoad.length + 1; // + currentTestCaseId.bin
 
 		refreshTimer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
-				if(shouldRefreshDashboard) {
-					msgRefreshDashboard.send();
-				}
+				msgRefreshDashboard.send();
 				
-				if(numberOfTestCases() >= numberOfFilesToLoad) {
-					shouldRefreshDashboard = false;
+				if(numberOfTestCases() >= numberOfTestCases) {
 					refreshTimer.cancel();
 					
 					long endTime = System.currentTimeMillis();
@@ -328,7 +325,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		return testCasesById.testCases();
 	}
 
-	private int numberOfTestCases() {
+	public int numberOfTestCases() {
 		return testCasesById.size();
 	}
 

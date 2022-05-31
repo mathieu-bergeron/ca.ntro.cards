@@ -138,11 +138,11 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	public void displayOn(SELECTIONS_VIEW selectionsView, 
 			              ProcedureDashboardModel previousModel,
 			              ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
-		
+
 		if(selectionsView.hasEarlierVersion(version)) {
 			
 			selectionsView.memorizeVersion(version);
-
+			
 			byCategory.inOrder().reduceToResult(0, (testCaseIndex, testCaseDescriptor) -> {
 				
 				if(!previousModel.containsTestCase(testCaseDescriptor)) {

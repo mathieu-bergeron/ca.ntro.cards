@@ -61,6 +61,7 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 			@Override
 			public void forEach_(Visitor<TEST_CASE> visitor) throws Throwable {
 				List<String> ids = new ArrayList<>(byId.keySet());
+
 				
 				ids.sort((i1,i2) -> {
 					
@@ -73,7 +74,7 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 						
 						result = i1Int.compareTo(i2Int);
 
-					}finally{}
+					}catch(NumberFormatException e) {}
 					
 					return result;
 				});

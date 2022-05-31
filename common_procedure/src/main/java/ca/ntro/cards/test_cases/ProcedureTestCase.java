@@ -9,10 +9,10 @@ import ca.ntro.cards.models.ProcedureDashboardModel;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
-public class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCardsModel,
-                                STUDENT_MODEL    extends EXECUTABLE_MODEL,
-                                EXECUTION_TRACE  extends ProcedureExecutionTrace,
-                                DASHBOARD_MODEL  extends ProcedureDashboardModel> 
+public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCardsModel,
+                                         STUDENT_MODEL    extends EXECUTABLE_MODEL,
+                                         EXECUTION_TRACE  extends ProcedureExecutionTrace,
+                                         DASHBOARD_MODEL  extends ProcedureDashboardModel> 
 
        extends CommonTestCase<EXECUTABLE_MODEL, 
                               STUDENT_MODEL, 
@@ -27,10 +27,6 @@ public class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCardsModel,
 		executionTraceByMode(Mode.MANUAL).updateDashboardModel(dashboardModel);
 	}
 
-	@Override
-	protected CommonTestCaseDescriptor newTestCaseDescriptor() {
-		return new ProcedureTestCaseDescriptor();
-	}
 
 
 }

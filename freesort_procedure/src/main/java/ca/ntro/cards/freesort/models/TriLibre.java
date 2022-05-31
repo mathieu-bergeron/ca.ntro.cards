@@ -75,12 +75,23 @@ public class   TriLibre<C extends Comparable<C>>
 		if(descriptor.testCaseId().equals("ex01")) {
 			
 			cartes = new Card[] {
-					new Card(2, Suit.HEARTS),
 					new Card(4, Suit.CLUBS),
 					new Card(2, Suit.DIAMONDS),
 					new Card(4, Suit.SPADES),
+					new Card(2, Suit.HEARTS),
 					new Card(5, Suit.DIAMONDS),
 			};
+
+		}else if(descriptor.testCaseId().contentEquals("ex02")) {
+
+			cartes = new Card[] {
+					new Card(9, Suit.CLUBS),
+					new Card(8, Suit.CLUBS),
+					new Card(5, Suit.HEARTS),
+					new Card(3, Suit.SPADES),
+					new Card(5, Suit.SPADES),
+			};
+			
 		}
 
 	}

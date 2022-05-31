@@ -62,6 +62,10 @@ public class TestCasesByCategory<STUDENT_MODEL extends CommonExecutableModel,
 			}
 		};
 	}
+
+	public int numberOfCategories() {
+		return byCategory.size();
+	}
 	
 	
 
