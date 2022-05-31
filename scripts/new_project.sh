@@ -26,7 +26,7 @@ if [ "$1" = "" -o "$2" = "" ]; then
     exit 0
 fi
 
-foo_dir=demo
+foo_dir_prefix=demo
 Foo=Demo
 foo=demo
 
@@ -36,13 +36,11 @@ project_name=$2
 new_project(){
 
     parent_dir=$1
-    project_dir=$2
+    project_name=$2
+    suffix=$3
 
-    echo "$parent_dir"
-    echo "$project_dir"
-
-    exit
-
+    foo_dir=$foo_dir_prefix$suffix
+    project_dir=$project_name$suffix
 
     cd "$parent_dir"
 
@@ -67,11 +65,11 @@ new_project(){
 
 save_dir
 
-new_project "$root_dir" "${project_name}_procedure"
+new_project "$root_dir" "$project_name" "_procedure"
 
-new_project "$root_dir" "${project_name}_efficiency"
+new_project "$root_dir" "$project_name" "_efficiency"
 
-new_project "$root_dir/solutions" "${project_name}_solution"
+new_project "$root_dir/solutions" "$project_name" "_solution"
 
 restore_dir
 
