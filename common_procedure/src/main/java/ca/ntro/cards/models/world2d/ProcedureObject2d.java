@@ -141,9 +141,9 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	protected void onDragStarts() {
 		getWorld().registerDraggedObject2d(this);
+		
+		secondsToReachTarget = 0;
 
-		targetTopLeftX = -1;
-		targetTopLeftY = -1;
 	}
 
 
