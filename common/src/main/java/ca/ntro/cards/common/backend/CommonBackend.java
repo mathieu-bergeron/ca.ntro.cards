@@ -206,10 +206,11 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 	public void execute() {
 
 		int numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
-		/*
 		if(numberOfThreads > 2) {
 			numberOfThreads -= 2;
-		}*/
+		}else if(numberOfThreads == 2) {
+			numberOfThreads = 1;
+		}
 
 		testCaseJobEngine.registerExecutableModelClass(executableModelClass);
 		testCaseJobEngine.registerStudentModelClass(studentModelClass);

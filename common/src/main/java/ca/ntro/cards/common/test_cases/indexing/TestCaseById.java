@@ -85,4 +85,8 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 		};
 	}
 
+	public int size() {
+		return byId.size();
+	}
+
 }

@@ -179,7 +179,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    	 ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader = inputs.get(viewLoader(testCaseFragmentClass()));
 		    	 Modified<DASHBOARD_MODEL>      modifiedDashboard      = inputs.get(modified(getDashboardModelClass()));
 		    	 
-		    	 modifiedDashboard.currentValue().displayOn(selectionsView, testCaseFragmentLoader);
+		    	 modifiedDashboard.currentValue().displayOn(selectionsView, 
+		    			                                    modifiedDashboard.previousValue(),
+		    			                                    testCaseFragmentLoader);
 
 		     });
 

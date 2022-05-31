@@ -5,6 +5,7 @@ import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
+import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
 public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
@@ -33,6 +34,17 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends CommonE
 		TEST_CASE testCase = testCaseById(getCurrentTestCaseId());
 
 		testCase.updateDashboardModel(dashboardModel);
+	}
+
+	public void copyNewTestCasesTo(DASHBOARD_MODEL dashboardModel) {
+		testCases().forEach(testCase -> {
+			
+			if(!dashboardModel.containsTestCase(testCase.getTestCaseId())) {
+				
+				dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
+
+			}
+		});
 	}
 
 

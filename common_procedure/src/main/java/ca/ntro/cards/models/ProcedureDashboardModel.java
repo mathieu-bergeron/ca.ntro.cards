@@ -115,16 +115,40 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		byCategory.addTestCase(testCaseDescriptor);
 	}
 	
-	public void displayOn(SELECTIONS_VIEW selectionsView, ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
-		selectionsView.clearTestCases();
-		byCategory.inOrder().forEach(testCaseDescriptor -> {
+	public void displayOn(SELECTIONS_VIEW selectionsView, 
+			              ProcedureDashboardModel previousModel,
+			              ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
+		
+		if(numberOfTestCases() > previousModel.numberOfTestCases()) {
 			
-			TEST_CASE_FRAGMENT testCaseFragment = testCaseFragmentLoader.createView();
-			
-			testCaseDescriptor.displayOn(testCaseFragment);
+			byCategory.inOrder().reduceToResult(0, (testCaseIndex, testCaseDescriptor) -> {
+				
+				if(!previousModel.containsTestCase(testCaseDescriptor)) {
 
-			selectionsView.addTestCase(testCaseFragment);
-		});
+					TEST_CASE_FRAGMENT testCaseFragment = testCaseFragmentLoader.createView();
+					
+					testCaseDescriptor.displayOn(testCaseFragment);
+
+					selectionsView.insertTestCase(testCaseIndex, testCaseFragment);
+				}
+				
+				return testCaseIndex+1;
+			});
+			
+		}
+		
+	}
+
+	public int numberOfTestCases() {
+		return byId.size();
+	}
+
+	public boolean containsTestCase(TEST_CASE testCaseDescriptor) {
+		return containsTestCase(testCaseDescriptor.getTestCaseId());
+	}
+
+	public boolean containsTestCase(String testCaseId) {
+		return byId.testCaseById(testCaseId) != null;
 	}
 
 }

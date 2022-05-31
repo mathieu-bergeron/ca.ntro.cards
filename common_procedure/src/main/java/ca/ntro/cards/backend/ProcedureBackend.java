@@ -2,6 +2,7 @@ package ca.ntro.cards.backend;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
+import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
@@ -80,6 +81,18 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL   extends ProcedureCards
 		    	 DASHBOARD_MODEL   dashboardModel       = inputs.get(model(getDashboardModelClass()));
 		    	 
 		    	 msgNewTestCaseLoaded.applyTo(dashboardModel);
+		     });
+
+		tasks.task("refreshDashboard")
+		
+		     .waitsFor(message(MsgRefreshDashboard.class))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL   dashboardModel       = inputs.get(model(getDashboardModelClass()));
+
+		    	 getTestCaseDatabase().copyNewTestCasesTo(dashboardModel);
+
 		     });
 	}
 

@@ -20,8 +20,8 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 		testCaseContainer().getChildren().clear();
 	}
 
-	public void addTestCase(TEST_CASE_FRAGMENT testCaseFragment) {
-		testCaseContainer().getChildren().add(testCaseFragment.rootNode());
+	public void insertTestCase(int index, TEST_CASE_FRAGMENT testCaseFragment) {
+		testCaseContainer().getChildren().add(index, testCaseFragment.rootNode());
 	}
 
 }

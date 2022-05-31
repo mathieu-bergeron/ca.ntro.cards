@@ -9,12 +9,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.CommonConstants;
+import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgTestCaseUpdate;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
@@ -30,6 +33,7 @@ import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.core.initialization.Ntro;
+import ca.ntro.core.stream.Stream;
 
 public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends CommonExecutableModel, 
                                                   STUDENT_MODEL    extends EXECUTABLE_MODEL,
@@ -61,6 +65,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	private transient DoneHandler onWritingDoneHandler;
 	
 	private transient boolean shouldWriteJson = false;
+
+	private transient boolean shouldRefreshDashboard = false;
 	
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
@@ -227,6 +233,9 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	}
 
 	public void loadFromDbDir() {
+		MsgRefreshDashboard msgRefreshDashboard = NtroApp.newMessage(MsgRefreshDashboard.class);
+		Timer refreshTimer = new Timer();
+
 		File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
@@ -235,18 +244,42 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 			}
 		};
 		
-		for(File testCaseFile : dbDir.listFiles(filter)) {
+		
+		File[] filesToLoad = dbDir.listFiles(filter);
+		int numberOfFilesToLoad = filesToLoad.length;
+
+		refreshTimer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				if(shouldRefreshDashboard) {
+					msgRefreshDashboard.send();
+				}
+				
+				if(numberOfTestCases() >= numberOfFilesToLoad) {
+					shouldRefreshDashboard = false;
+					refreshTimer.cancel();
+					
+					System.out.println("\n\n[LOADING TEST CASES]\n\n");
+					System.out.println("... done\n");
+				}
+			}
+		}, 0, CommonConstants.TEST_CASE_LOADING_REFRESH_TIMER_DELAY_MILISECONDS);
+		
+		for(File testCaseFile : filesToLoad) {
 			ReadingJob readingJob = new ReadingJob();
 			readingJob.registerFile(testCaseFile);
 
 			executionEngine.executeJob(readingJob, () -> {
 				
 				addTestCase((TEST_CASE) readingJob.getTestCase());
+				
+				shouldRefreshDashboard = true;
 
+				/*
 				MsgTestCaseUpdate msgNewTestCaseLoaded = NtroApp.newMessage(MsgTestCaseUpdate.class);
 				msgNewTestCaseLoaded.setTestCaseDescriptor(readingJob.getTestCase().asTestCaseDescriptor());
 				msgNewTestCaseLoaded.send();
-
+				*/
 			});
 		}
 	}
@@ -283,4 +316,13 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	protected TEST_CASE testCaseById(String testCaseId) {
 		return testCasesById.testCaseById(testCaseId);
 	}
+	
+	public Stream<TEST_CASE> testCases(){
+		return testCasesById.testCases();
+	}
+
+	private int numberOfTestCases() {
+		return testCasesById.size();
+	}
+
 }
