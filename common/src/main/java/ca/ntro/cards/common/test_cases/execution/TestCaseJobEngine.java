@@ -98,18 +98,33 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 	
 	public void resetTestCasesDirectory() {
-
-		if(dbDir.exists()) {
-			deleteFiles(dbDir);
-			dbDir.delete();
+		resetDir(dbDir);
+	}
+	
+	private void resetDir(File dir) {
+		System.out.println("\n\n[DELETING DATA] " + dir.getAbsolutePath());
+		if(dir.exists()) {
+			deleteFiles(dir);
+			dir.delete();
+			dir.mkdir();
 		}
-
-		dbDir.mkdir();
 	}
 
-	private void deleteFiles(File dbDir) {
-		for(File file : dbDir.listFiles()) {
-			file.delete();
+	public void resetStorageDirectory() {
+		File storageDir = new File(CommonConstants.STORAGE_DIR);
+
+		resetDir(storageDir);
+	}
+
+	private void deleteFiles(File dir) {
+
+		for(File file : dir.listFiles()) {
+			if(file.isDirectory()) {
+				deleteFiles(file);
+				file.delete();
+			}else {
+				file.delete();
+			}
 		}
 	}
 
@@ -180,5 +195,6 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 
 	public void notifyThreadIsRunning(long threadId) {
 	}
+
 
 }

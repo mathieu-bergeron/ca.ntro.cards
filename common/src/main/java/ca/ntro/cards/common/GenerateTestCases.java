@@ -37,7 +37,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL   extends CommonExecuta
 		
 		numberOfThreads = Execution.determineNumberOfThreads(CommonConstants.DEFAULT_NUMBER_OF_EXECUTION_THREADS);
 		
-		System.out.println("\n\n[INIT]\n");
+		System.out.println("\n\n[INIT]");
 		System.out.flush();
 
 		initialize();
@@ -119,6 +119,7 @@ public abstract class GenerateTestCases<EXECUTABLE_MODEL   extends CommonExecuta
 		executionEngine.initialize(numberOfThreads);
 		
 		executionEngine.resetTestCasesDirectory();
+		executionEngine.resetStorageDirectory();
 	}
 
 	@SuppressWarnings("unchecked")

@@ -26,6 +26,7 @@ public class CommonConstants {
 	public static final long THREAD_UNRESPONSIVE_TIMEOUT_MILISECONDS = 2000;
 	
 	public static final String TEST_CASE_DATABASE_DIR = "db";
+	public static final String STORAGE_DIR = "_storage";
 	
 	public static final long TEST_CASE_LOADING_REFRESH_TIMER_DELAY_MILISECONDS = 500;
 
