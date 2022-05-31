@@ -33,7 +33,7 @@ public abstract class FreesortGenerateTestCases<STUDENT_MODEL extends TriLibre>
 
 	@Override
 	protected boolean shouldWriteJson() {
-		return false;
+		return true;
 	}
 
 	@Override

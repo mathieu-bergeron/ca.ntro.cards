@@ -13,6 +13,7 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
+               // TODO: renommer
 public class   FooCardsModel<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<FooCardsModel, 
@@ -22,79 +23,64 @@ public class   FooCardsModel<C extends Comparable<C>>
                                    FooProcedureViewData,
                                    FooVariablesView> { 
 
-	@Override
-	public void copyDataFrom(FooCardsModel other) {
+    @Override
+    public void copyDataFrom(FooCardsModel other) {
+        // TODO
 
-	}
+    }
 
-	@Override
-	public void updateViewData(FooProcedureViewData cardsViewData) {
+    @Override
+    protected void updateViewDataImpl(FooProcedureViewData cardsViewData) {
+        // TODO: créer des Carte2d pour afficher les cartes du modèle
+    }
 
-	}
+    @Override
+    public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
+        if(descriptor.testCaseId().equals("ex01")) {
 
-	@Override
-	public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
+            // TODO: créer le case de test ex01
 
-	}
+        }
 
-	@Override
-	public int testCaseSize() {
-		return 0;
-	}
-	
-	@Override
-	protected Card cardById(String cardId) {
-		return null;
-	}
-	
-	@Override
-	protected Stream<Card> cards() {
-		return new StreamNtro<Card>() {
-			@Override
-			public void forEach_(Visitor<Card> visitor) throws Throwable {
+        // TODO: créer les autres cas de test
+    }
 
-			}
-		};
-	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		
-		format(builder);
-		
-		return builder.toString();
+    @Override
+    public int testCaseSize() {
+        // TODO: 
+    }
+    
+    @Override
+    protected Stream<Card> cards() {
+        return new StreamNtro<Card>() {
+            @Override
+            public void forEach_(Visitor<Card> visitor) throws Throwable {
+                // TODO: visiter chaque carte
+            }
+        };
+    }
 
-	}
-	
-	public void format(StringBuilder builder) {
-		cards().forEach(card -> {
-			builder.append(System.lineSeparator());
-			card.format(builder);
-		});
-	}
+    @Override
+    public void onBeforeRunning() {
 
+    }
+    
+    @Override
+    public void run() {
+        studentMain();
+    }
 
-	@Override
-	public void onBeforeRunning() {
+    @Override
+    public void onAfterRunning() {
+    }
 
-	}
-	
-	@Override
-	public void run() {
-		studentMain();
-	}
+    // TODO: renommer
+    public void studentMain() {
+    }
 
-	@Override
-	public void onAfterRunning() {
-	}
-
-	public void studentMain() {
-	}
-
-	@Override
-	public void displayOn(FooVariablesView variablesView) {
-
-	}
+    @Override
+    public void displayOn(FooVariablesView variablesView) {
+        // TODO: afficher les attributs
+    }
 
 }

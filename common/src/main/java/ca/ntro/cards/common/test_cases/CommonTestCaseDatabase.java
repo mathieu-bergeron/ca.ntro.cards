@@ -65,7 +65,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	
 	private transient boolean shouldWriteJson = false;
 
-	private transient boolean shouldRefreshDashboard = false;
+	private transient boolean shouldRefreshDashboard = true;
 	
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {

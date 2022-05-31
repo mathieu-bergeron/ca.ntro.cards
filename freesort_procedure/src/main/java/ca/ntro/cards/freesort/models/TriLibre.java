@@ -46,8 +46,7 @@ public class   TriLibre<C extends Comparable<C>>
 	}
 
 	@Override
-	public void updateViewData(FreesortProcedureViewData cardsViewData) {
-		cardsViewData.removeCardsNotIn(cards());
+	protected void updateViewDataImpl(FreesortProcedureViewData cardsViewData) {
 
 		double cardWidth = FreesortConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = FreesortConstants.INITIAL_CARD_HEIGHT_MILIMETERS;

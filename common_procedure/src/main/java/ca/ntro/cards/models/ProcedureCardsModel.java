@@ -34,7 +34,9 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
                 implements Model, Watch, Initialize, WriteObjectGraph {
 
-	protected abstract Card cardById(String cardId);
+	protected Card cardById(String cardId) {
+		return cards().findFirst(card -> card.hasId(cardId));
+	}
 	
 	protected abstract Stream<Card> cards();
 	
@@ -46,8 +48,10 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
 		viewData.removeCardsNotIn(cards());
 		
-		updateViewData(viewData);
+		updateViewDataImpl(viewData);
 	}
+	
+	protected abstract void updateViewDataImpl(VIEW_DATA viewData);
 	
 	public abstract void displayOn(VARIABLES_VIEW variablesView);
 

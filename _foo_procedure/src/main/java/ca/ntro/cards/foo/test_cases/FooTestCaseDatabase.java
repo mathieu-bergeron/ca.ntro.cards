@@ -17,15 +17,18 @@ public class   FooTestCaseDatabase<STUDENT_MODEL extends FooCardsModel>
                                          FooExecutionTrace,
                                          FooProcedureDashboardModel> {
 
-	@Override
-	public void describeTestCasesToGenerate() {
-		
-		AbstractTestCaseDescriptor descriptor = AbstractTestCaseDescriptor.create()
-				                                          .category("exemples")
-				                                          .testCaseId("ex01");
-		
-		addTestCase(descriptor);
+    @Override
+    public void describeTestCasesToGenerate() {
+        
+        AbstractTestCaseDescriptor descriptor = AbstractTestCaseDescriptor.create()
+                                                          .category("exemples")
+                                                          .testCaseId("ex01");
+        
+        addTestCase(descriptor);
 
-	}
+
+        // TODO: ajouter d'autres descriptions de cas de tests
+
+    }
 
 }

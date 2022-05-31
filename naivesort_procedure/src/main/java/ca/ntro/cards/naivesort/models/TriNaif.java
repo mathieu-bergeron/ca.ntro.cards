@@ -100,9 +100,7 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public void updateViewData(NaivesortProcedureViewData cardsViewData) {
-		cardsViewData.removeCardsNotIn(cards());
-
+	protected void updateViewDataImpl(NaivesortProcedureViewData cardsViewData) {
 		double cardWidth = NaivesortConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = NaivesortConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 		
@@ -202,33 +200,6 @@ public class   TriNaif<C extends Comparable<C>>
 	public int testCaseSize() {
 		return source.length;
 	}
-	
-	@Override
-	protected Card cardById(String cardId) {
-		Card result = (Card) cardById(cardId, source);
-
-		if(result == null) {
-			result = (Card) cardById(cardId, cible);
-		}
-
-		return result;
-	}
-	
-	private Card cardById(String cardId, C[] list) {
-		Card result = null;
-		
-		for(C candidate : list) {
-			if(candidate instanceof Card) {
-				Card candidateCard = (Card) candidate;
-				if(candidateCard.hasId(cardId)) {
-					result = candidateCard;
-				}
-			}
-		}
-		
-		return result;
-	}
-
 
 	@Override
 	protected Stream<Card> cards() {
@@ -246,24 +217,6 @@ public class   TriNaif<C extends Comparable<C>>
 			}
 		};
 	}
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		
-		format(builder);
-		
-		return builder.toString();
-
-	}
-	
-	public void format(StringBuilder builder) {
-		cards().forEach(card -> {
-			builder.append(System.lineSeparator());
-			card.format(builder);
-		});
-	}
-
 
 	@Override
 	public void onBeforeRunning() {

@@ -18,6 +18,8 @@ public class FooProcedureWorld2d extends ProcedureWorld2d<FooProcedureObject2d, 
     
     @Override
     public void buildAndSendManualModel() {
+
+        // TODO: analyser les cartes2d existantes et créer un CardsModel 
         
         FooCardsModel manualModel = new FooCardsModel();
         
