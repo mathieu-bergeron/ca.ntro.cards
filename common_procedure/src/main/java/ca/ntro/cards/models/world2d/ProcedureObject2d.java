@@ -46,24 +46,29 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		setSpeedX(distanceToTargetX / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionX);
 		setSpeedY(distanceToTargetY / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionY);
 
-		checkIfTargetReached();
+		checkIfTargetReached(1);
 	}
 
-	private void checkIfTargetReached() {
+	private void checkIfTargetReached(double speedFactor) {
 		double distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
 		double distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
 
 		int nextDirectionX = Double.compare(targetTopLeftX, topLeftX());
 		int nextDirectionY = Double.compare(targetTopLeftY, topLeftY());
+
+
+		if(distanceToTargetX <= INCREASE_SPEED_BELOW
+				|| distanceToTargetY <= INCREASE_SPEED_BELOW) {
+
+			setSpeedX(getSpeedX() * speedFactor);
+			setSpeedY(getSpeedY() * speedFactor);
+
+		}
 		
 		if(distanceToTargetX <= EPSILON
 				|| directionX != nextDirectionX) {
 			
 			reachTargetX();
-
-		}else if(distanceToTargetX <= INCREASE_SPEED_BELOW) {
-
-			setSpeedX(getSpeedX() * 1.15);
 
 		}
 
@@ -71,10 +76,6 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 				|| directionY != nextDirectionY) {
 			
 			reachTargetY();
-
-		}else if(distanceToTargetX <= INCREASE_SPEED_BELOW) {
-
-			setSpeedX(getSpeedX() * 1.15);
 
 		}
 	}
@@ -127,7 +128,7 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 	public void onTimePasses(double secondsElapsed) {
 		super.onTimePasses(secondsElapsed);
 
-		checkIfTargetReached();
+		checkIfTargetReached(1 + 0.5 * Math.abs(0.5 - secondsElapsed));
 	}
 
 	public void dragTo(double worldX, double worldY) {
