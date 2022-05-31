@@ -2,10 +2,16 @@ package ca.ntro.cards.models;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import ca.ntro.app.models.Model;
 import ca.ntro.app.models.WriteObjectGraph;
 import ca.ntro.app.models.Watch;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.frontend.ProcedureViewData;
@@ -55,7 +61,61 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	}
 	
 	public abstract void displayOn(VARIABLES_VIEW variablesView);
-	
+
+	protected Card[] randomArrayOfUniqueCards(int size) {
+		List<Card> randomList = randomListOfUniqueCards(size);
+
+		Card[] array = new Card[size];
+		
+		for(int i = 0; i < size; i++) {
+			array[i] = randomList.get(i);
+		}
+		
+		return array;
+	}
+
+	protected List<Card> randomListOfUniqueCards(int size) {
+		List<Card> orderedList = orderedListOfRandomCards(size);
+
+		List<Card> randomList = new ArrayList<>();
+		
+		while(!orderedList.isEmpty()) {
+			int choosenCardIndex = Ntro.random().nextInt(orderedList.size());
+			Card choosenCard = orderedList.get(choosenCardIndex);
+			
+			randomList.add(choosenCard);
+			orderedList.remove(choosenCardIndex);
+		}
+		
+		return randomList;
+	}
+
+	protected List<Card> orderedListOfRandomCards(int size) {
+		List<Card> orderedList = new ArrayList<>();
+		
+		Map<Suit, Integer> numberOfCardsBySuit = new HashMap<>();
+		int sum = 0;
+		for(Suit suit : Suit.values()) {
+			int numberOfCardsThisSuit = size / Suit.values().length;
+			numberOfCardsBySuit.put(suit, numberOfCardsThisSuit);
+			sum += numberOfCardsThisSuit;
+		}
+		
+		while(sum < size) {
+			int numberOfCardsOfHearts = numberOfCardsBySuit.get(Suit.HEARTS);
+			sum++;
+			numberOfCardsOfHearts++;
+			numberOfCardsBySuit.put(Suit.HEARTS, numberOfCardsOfHearts);
+		}
+
+		for(Suit suit : Suit.values()) {
+			for(int i = 0; i < numberOfCardsBySuit.get(suit); i++) {
+				orderedList.add(new Card(i+1, suit));
+			}
+		}
+
+		return orderedList;
+	}
 	
 
 }

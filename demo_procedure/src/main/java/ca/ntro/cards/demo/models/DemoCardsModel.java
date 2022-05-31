@@ -185,12 +185,8 @@ public class   DemoCardsModel<C extends Comparable<C>>
 
 		}else {
 			
-			source = (C[]) new Card[descriptor.inputSize()];
-			
-			for(int i = 0; i < descriptor.inputSize(); i++) {
-				
-				source[i] = (C) new Card(2 + Ntro.random().nextInt(8), Suit.random());
-			}
+			source = (C[]) randomArrayOfUniqueCards(descriptor.inputSize());
+
 		}
 		
 		cible = (C[]) new Card[source.length];
