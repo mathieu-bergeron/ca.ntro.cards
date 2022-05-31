@@ -20,17 +20,17 @@ import ca.ntro.cards.demo.frontend.views.DemoProcedureDashboardView;
 public class DemoProcedureFrontend<STUDENT_MODEL extends DemoCardsModel>
 
        extends ProcedureFrontend<DemoProcedureRootView,
-                                DemoProcedureSettingsView, 
-                                DemoCardsView, 
-                                DemoProcedureDashboardView, 
-                                DemoSelectionsView,
-                                DemoTestCaseFragment,
-                                DemoReplayView,
-                                DemoVariablesView,
-                                DemoProcedureViewData, 
-                                STUDENT_MODEL, // CanvasModel
-                                DemoProcedureDashboardModel, 
-                                DemoProcedureSettingsModel> {
+                                 DemoProcedureSettingsView, 
+                                 DemoCardsView, 
+                                 DemoProcedureDashboardView, 
+                                 DemoSelectionsView,
+                                 DemoTestCaseFragment,
+                                 DemoReplayView,
+                                 DemoVariablesView,
+                                 DemoProcedureViewData, 
+                                 STUDENT_MODEL, // CanvasModel
+                                 DemoProcedureDashboardModel, 
+                                 DemoProcedureSettingsModel> {
 
 	@Override
 	protected void registerAdditionnalEvents(EventRegistrar registrar) {

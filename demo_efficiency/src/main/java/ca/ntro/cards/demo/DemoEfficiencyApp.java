@@ -16,6 +16,7 @@ import ca.ntro.cards.demo.models.DemoGraphsModel;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
+import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTrace;
 import ca.ntro.cards.efficiency.EfficiencyApp;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
@@ -26,7 +27,7 @@ public abstract class   DemoEfficiencyApp<STUDENT_MODEL extends DemoCardsModel>
                                       DemoGraphsModel,
                                       DemoTestCase,
                                       DemoTestCaseDatabase,
-                                      ProcedureExecutionTrace,
+                                      DemoExecutionTrace,
                                       DemoEfficiencyDashboardModel,
                                       DemoEfficiencySettingsModel,
                                       DemoEfficiencyBackend<STUDENT_MODEL>,
@@ -94,5 +95,4 @@ public abstract class   DemoEfficiencyApp<STUDENT_MODEL extends DemoCardsModel>
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		
 	}
-
 }

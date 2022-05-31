@@ -14,6 +14,7 @@ import ca.ntro.cards.demo.messages.MsgManualExecutionStep;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
+import ca.ntro.cards.demo.test_cases.descriptor.DemoTestCaseDescriptor;
 import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTrace;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
@@ -25,7 +26,7 @@ public abstract class   DemoProcedureApp<STUDENT_MODEL extends DemoCardsModel>
                                      STUDENT_MODEL,
                                      STUDENT_MODEL,     // canvas model
                                      DemoTestCase,
-                                     ProcedureTestCaseDescriptor,
+                                     DemoTestCaseDescriptor,
                                      DemoTestCaseDatabase,
                                      DemoExecutionTrace,
                                      DemoProcedureDashboardModel,
@@ -110,8 +111,8 @@ public abstract class   DemoProcedureApp<STUDENT_MODEL extends DemoCardsModel>
 	}
 
 	@Override
-	protected Class<ProcedureTestCaseDescriptor> testCaseDescriptorClass() {
-		return ProcedureTestCaseDescriptor.class;
+	protected Class<DemoTestCaseDescriptor> testCaseDescriptorClass() {
+		return DemoTestCaseDescriptor.class;
 	}
 
 

@@ -4,8 +4,8 @@ import ca.ntro.cards.common.GenerateTestCases;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
 import ca.ntro.cards.demo.test_cases.DemoTestCaseDatabase;
-import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
-import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTraceFull;
+import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTrace;
+import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTraceFull;
 
 public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel> 
 
@@ -13,7 +13,7 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel
                                         STUDENT_MODEL,
                                         DemoTestCase,
                                         DemoTestCaseDatabase,
-                                        ProcedureExecutionTrace> {
+                                        DemoExecutionTrace> {
 
 	
 	@Override
@@ -37,8 +37,8 @@ public abstract class DemoGenerateTestCases<STUDENT_MODEL extends DemoCardsModel
 	}
 
 	@Override
-	protected Class<? extends ProcedureExecutionTrace> executionTraceClass() {
-		return ProcedureExecutionTraceFull.class;
+	protected Class<? extends DemoExecutionTrace> executionTraceClass() {
+		return DemoExecutionTraceFull.class;
 	}
 
 }

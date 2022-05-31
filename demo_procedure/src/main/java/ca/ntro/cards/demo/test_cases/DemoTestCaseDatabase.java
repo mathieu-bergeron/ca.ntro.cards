@@ -4,6 +4,7 @@ import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.demo.models.DemoCardsModel;
 import ca.ntro.cards.demo.models.DemoProcedureDashboardModel;
 import ca.ntro.cards.demo.models.values.DemoTestCase;
+import ca.ntro.cards.demo.test_cases.execution_trace.DemoExecutionTrace;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 import ca.ntro.core.initialization.Ntro;
@@ -13,7 +14,7 @@ public class   DemoTestCaseDatabase<STUDENT_MODEL extends DemoCardsModel>
        extends ProcedureTestCaseDatabase<DemoCardsModel, 
                                          STUDENT_MODEL, 
                                          DemoTestCase, 
-                                         ProcedureExecutionTrace,
+                                         DemoExecutionTrace,
                                          DemoProcedureDashboardModel> {
 
 	@Override

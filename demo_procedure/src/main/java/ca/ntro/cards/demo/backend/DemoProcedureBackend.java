@@ -17,9 +17,9 @@ import ca.ntro.cards.demo.models.DemoProcedureSettingsModel;
 public class   DemoProcedureBackend<STUDENT_MODEL extends DemoCardsModel>
 
 
-       extends ProcedureBackend<DemoCardsModel,       // executable model
+       extends ProcedureBackend<DemoCardsModel,       // ExecutableModel
                                 STUDENT_MODEL,
-                                STUDENT_MODEL, // canvas model
+                                STUDENT_MODEL,        // CanvasModel
                                 DemoTestCase,
                                 DemoTestCaseDatabase,
                                 DemoExecutionTrace,
