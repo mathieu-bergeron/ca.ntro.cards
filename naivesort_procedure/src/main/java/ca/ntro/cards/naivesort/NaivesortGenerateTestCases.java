@@ -1,15 +1,15 @@
 package ca.ntro.cards.naivesort;
 
 import ca.ntro.cards.common.GenerateTestCases;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.naivesort.models.values.NaivesortTestCase;
 import ca.ntro.cards.naivesort.test_cases.NaivesortTestCaseDatabase;
 import ca.ntro.cards.naivesort.test_cases.execution_trace.NaivesortExecutionTrace;
 import ca.ntro.cards.naivesort.test_cases.execution_trace.NaivesortExecutionTraceFull;
 
-public abstract class NaivesortGenerateTestCases<STUDENT_MODEL extends NaivesortCardsModel> 
+public abstract class NaivesortGenerateTestCases<STUDENT_MODEL extends TriNaif> 
 
-       extends        GenerateTestCases<NaivesortCardsModel, 
+       extends        GenerateTestCases<TriNaif, 
                                         STUDENT_MODEL,
                                         NaivesortTestCase,
                                         NaivesortTestCaseDatabase,
@@ -27,8 +27,8 @@ public abstract class NaivesortGenerateTestCases<STUDENT_MODEL extends Naivesort
 	}
 
 	@Override
-	protected Class<NaivesortCardsModel> executableModelClass() {
-		return NaivesortCardsModel.class;
+	protected Class<TriNaif> executableModelClass() {
+		return TriNaif.class;
 	}
 
 	@Override

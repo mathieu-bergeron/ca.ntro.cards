@@ -9,7 +9,7 @@ import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureSettingsView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortReplayView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortVariablesView;
 import ca.ntro.cards.naivesort.frontend.views.fragments.NaivesortTestCaseFragment;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureDashboardModel;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureSettingsModel;
@@ -17,7 +17,7 @@ import ca.ntro.cards.naivesort.frontend.views.NaivesortCardsView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortSelectionsView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureDashboardView;
 
-public class NaivesortProcedureFrontend<STUDENT_MODEL extends NaivesortCardsModel>
+public class NaivesortProcedureFrontend<STUDENT_MODEL extends TriNaif>
 
        extends ProcedureFrontend<NaivesortProcedureRootView,
                                  NaivesortProcedureSettingsView, 

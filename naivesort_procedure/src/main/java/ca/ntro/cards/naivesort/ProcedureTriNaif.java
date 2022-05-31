@@ -11,7 +11,7 @@ import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureDashboardView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureRootView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortProcedureSettingsView;
 import ca.ntro.cards.naivesort.messages.MsgManualExecutionStep;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.naivesort.models.values.NaivesortTestCase;
 import ca.ntro.cards.naivesort.test_cases.NaivesortTestCaseDatabase;
 import ca.ntro.cards.naivesort.test_cases.descriptor.NaivesortTestCaseDescriptor;
@@ -20,9 +20,9 @@ import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureDashboardModel;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureSettingsModel;
 
-public abstract class   NaivesortProcedureApp<STUDENT_MODEL extends NaivesortCardsModel>
+public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
-                extends ProcedureApp<NaivesortCardsModel,           // executable model
+                extends ProcedureApp<TriNaif,           // executable model
                                      STUDENT_MODEL,
                                      STUDENT_MODEL,     // canvas model
                                      NaivesortTestCase,
@@ -49,8 +49,8 @@ public abstract class   NaivesortProcedureApp<STUDENT_MODEL extends NaivesortCar
 	
 
 	@Override
-	protected Class<NaivesortCardsModel> executableModelClass() {
-		return NaivesortCardsModel.class;
+	protected Class<TriNaif> executableModelClass() {
+		return TriNaif.class;
 	}
 
 

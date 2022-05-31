@@ -9,7 +9,7 @@ import ca.ntro.cards.naivesort.test_cases.descriptor.NaivesortTestCaseDescriptor
 import ca.ntro.cards.models.ProcedureDashboardModel;
 
 public class NaivesortProcedureDashboardModel extends ProcedureDashboardModel<NaivesortProcedureDashboardView, 
-                                                                         NaivesortCardsModel, 
+                                                                         TriNaif, 
                                                                          NaivesortTestCaseDatabase,
                                                                          NaivesortTestCaseDescriptor,
                                                                          NaivesortReplayView,

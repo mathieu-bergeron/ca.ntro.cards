@@ -13,17 +13,17 @@ import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
 public class FooProcedureWorld2d extends ProcedureWorld2d<FooProcedureObject2d, FooProcedureWorld2d, FooProcedureDrawingOptions> {
-	
-	private MsgManualExecutionStep msgManualModel = NtroApp.newMessage(MsgManualExecutionStep.class);
-	
-	@Override
-	public void buildAndSendManualModel() {
-		
-		FooCardsModel manualModel = new FooCardsModel();
-		
-		msgManualModel.setManualModel(manualModel);
-		msgManualModel.send();
-	}
+    
+    private MsgManualExecutionStep msgManualExecutionStep = NtroApp.newMessage(MsgManualExecutionStep.class);
+    
+    @Override
+    public void buildAndSendManualModel() {
+        
+        FooCardsModel manualModel = new FooCardsModel();
+        
+        msgManualExecutionStep.setManualModel(manualModel);
+        msgManualExecutionStep.send();
+    }
 
 
 }

@@ -19,10 +19,16 @@ include 'common'
 include 'common_procedure'
 include 'common_efficiency'
 
+include 'freesort_procedure'
+include 'freesort_efficiency'
+include 'freesort_solution'
+project(':freesort_solution').projectDir = file('solutions/freesort_solution')
+
 include 'naivesort_procedure'
 include 'naivesort_efficiency'
 include 'naivesort_solution'
 project(':naivesort_solution').projectDir = file('solutions/naivesort_solution')
+
 
 buildscript {
     repositories {

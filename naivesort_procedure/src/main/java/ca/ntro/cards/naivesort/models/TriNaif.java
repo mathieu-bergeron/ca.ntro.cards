@@ -20,9 +20,9 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-public class   NaivesortCardsModel<C extends Comparable<C>> 
+public class   TriNaif<C extends Comparable<C>> 
 
-       extends ProcedureCardsModel<NaivesortCardsModel, 
+       extends ProcedureCardsModel<TriNaif, 
                                    NaivesortProcedureObject2d, 
                                    NaivesortProcedureWorld2d, 
                                    NaivesortProcedureDrawingOptions, 
@@ -79,7 +79,7 @@ public class   NaivesortCardsModel<C extends Comparable<C>>
 	}
 
 	@Override
-	public void copyDataFrom(NaivesortCardsModel other) {
+	public void copyDataFrom(TriNaif other) {
 		int size = other.source.length;
 
 		source = (C[]) new Card[size];

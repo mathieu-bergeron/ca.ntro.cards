@@ -173,4 +173,8 @@ public class   Card<OPTIONS extends CommonDrawingOptions>
 		builder.append(suit);
 	}
 
+	public boolean hasSuit(Suit suit) {
+		return this.suit.equals(suit);
+	}
+
 }

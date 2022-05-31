@@ -105,6 +105,21 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
 		return orderedList;
 	}
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		
+		format(builder);
+		
+		return builder.toString();
+
+	}
+	
+	public void format(StringBuilder builder) {
+		cards().forEach(card -> {
+			builder.append(System.lineSeparator());
+			card.format(builder);
+		});
+	}
 }

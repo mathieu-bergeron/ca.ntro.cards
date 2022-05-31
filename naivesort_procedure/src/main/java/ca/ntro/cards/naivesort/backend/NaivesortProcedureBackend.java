@@ -7,17 +7,17 @@ import static ca.ntro.app.tasks.backend.BackendTasks.*;
 import ca.ntro.cards.backend.ProcedureBackend;
 import ca.ntro.cards.naivesort.backend.tasks.NaivesortModifyCardsModel;
 import ca.ntro.cards.naivesort.messages.MsgManualExecutionStep;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.naivesort.models.values.NaivesortTestCase;
 import ca.ntro.cards.naivesort.test_cases.NaivesortTestCaseDatabase;
 import ca.ntro.cards.naivesort.test_cases.execution_trace.NaivesortExecutionTrace;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureDashboardModel;
 import ca.ntro.cards.naivesort.models.NaivesortProcedureSettingsModel;
 
-public class   NaivesortProcedureBackend<STUDENT_MODEL extends NaivesortCardsModel>
+public class   NaivesortProcedureBackend<STUDENT_MODEL extends TriNaif>
 
 
-       extends ProcedureBackend<NaivesortCardsModel,       // ExecutableModel
+       extends ProcedureBackend<TriNaif,       // ExecutableModel
                                 STUDENT_MODEL,
                                 STUDENT_MODEL,        // CanvasModel
                                 NaivesortTestCase,

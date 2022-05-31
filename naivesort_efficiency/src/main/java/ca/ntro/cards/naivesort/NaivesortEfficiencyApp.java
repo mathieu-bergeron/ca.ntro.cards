@@ -13,16 +13,16 @@ import ca.ntro.cards.naivesort.frontend.views.NaivesortGraphsView;
 import ca.ntro.cards.naivesort.models.NaivesortEfficiencyDashboardModel;
 import ca.ntro.cards.naivesort.models.NaivesortEfficiencySettingsModel;
 import ca.ntro.cards.naivesort.models.NaivesortGraphsModel;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.naivesort.models.values.NaivesortTestCase;
 import ca.ntro.cards.naivesort.test_cases.NaivesortTestCaseDatabase;
 import ca.ntro.cards.naivesort.test_cases.execution_trace.NaivesortExecutionTrace;
 import ca.ntro.cards.efficiency.EfficiencyApp;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
-public abstract class   NaivesortEfficiencyApp<STUDENT_MODEL extends NaivesortCardsModel>
+public abstract class   NaivesortEfficiencyApp<STUDENT_MODEL extends TriNaif>
 
-                extends EfficiencyApp<NaivesortCardsModel, 
+                extends EfficiencyApp<TriNaif, 
                                       STUDENT_MODEL,
                                       NaivesortGraphsModel,
                                       NaivesortTestCase,
@@ -50,8 +50,8 @@ public abstract class   NaivesortEfficiencyApp<STUDENT_MODEL extends NaivesortCa
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected Class<NaivesortCardsModel> executableModelClass() {
-		return NaivesortCardsModel.class;
+	protected Class<TriNaif> executableModelClass() {
+		return TriNaif.class;
 	}
 
 	@Override

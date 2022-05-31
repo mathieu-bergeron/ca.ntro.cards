@@ -9,12 +9,12 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.naivesort.NaivesortConstants;
 import ca.ntro.cards.naivesort.messages.MsgManualExecutionStep;
-import ca.ntro.cards.naivesort.models.NaivesortCardsModel;
+import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
 public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedureObject2d, NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
 	
-	private MsgManualExecutionStep msgUpdateList = NtroApp.newMessage(MsgManualExecutionStep.class);
+	private MsgManualExecutionStep msgManualExecutionStep = NtroApp.newMessage(MsgManualExecutionStep.class);
 	
 	private NaivesortCard2d lastFlippedCard = null;
 	
@@ -85,7 +85,7 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 		Object2d marker2d = objectById("smallestElement");
 		int indexOfSmallest = (int) Math.round((marker2d.topLeftX() - 10 - cardWidth - cardWidth / 2) * 2 / 3 / cardWidth);
 		
-		NaivesortCardsModel manualModel = new NaivesortCardsModel();
+		TriNaif manualModel = new TriNaif();
 		
 	
 		Card[] source = new Card[sourceList.size()];
@@ -103,8 +103,8 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 		manualModel.setIndicePlusPetit(indexOfSmallest);
 		manualModel.setIndiceCandidat(indexOfCandidate);
 		
-		msgUpdateList.setManualModel(manualModel);
-		msgUpdateList.send();
+		msgManualExecutionStep.setManualModel(manualModel);
+		msgManualExecutionStep.send();
 	}
 
 
