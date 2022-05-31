@@ -14,14 +14,28 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 	private double dragOffsetX;
 	private double dragOffsetY;
 	
-	private static final double EPSILON = 0.01;
+	private static final double DISTANCE_EPSILON = 5;
+	private static final double TIME_EPSILON = 0.001;
+	
+	private double secondsToReachTarget = 0;
 	
 	private double targetTopLeftX = -1;
 	private double targetTopLeftY = -1;
+	
+	private double initialSpeedX;
+	private double initialSpeedY;
 
 	public void setTarget(double targetTopLeftX, double targetTopLeftY) {
 		this.targetTopLeftX = targetTopLeftX;
 		this.targetTopLeftY = targetTopLeftY;
+		
+		secondsToReachTarget = ProcedureConstants.SECONDS_TO_REACH_TARGET;
+
+		double distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
+		double distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
+		
+		initialSpeedX = distanceToTargetX / secondsToReachTarget;
+		initialSpeedY = distanceToTargetY / secondsToReachTarget;
 
 		reachTargetOrAdjustSpeed();
 	}
@@ -30,25 +44,38 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 		double distanceToTargetX = Math.abs(targetTopLeftX - topLeftX());
 		double distanceToTargetY = Math.abs(targetTopLeftY - topLeftY());
 		
-		if(distanceToTargetX <= EPSILON) {
-
+		if(distanceToTargetX <= DISTANCE_EPSILON
+				|| secondsToReachTarget <= TIME_EPSILON) {
+			
 			reachTargetX(targetTopLeftX);
 
 		}else {
 			
+			double newSpeedX = distanceToTargetX / secondsToReachTarget;
+			if(newSpeedX > initialSpeedX) {
+				initialSpeedX = newSpeedX;
+			}
+
 			double directionX = Double.compare(targetTopLeftX, topLeftX());
-			setSpeedX(distanceToTargetX / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionX);
+			setSpeedX(initialSpeedX * directionX);
 			
 		}
 
-		if(distanceToTargetY <= EPSILON) {
-
+		if(distanceToTargetY <= DISTANCE_EPSILON
+				|| secondsToReachTarget <= TIME_EPSILON) {
+			
 			reachTargetY(targetTopLeftY);
-
+		
 		}else {
 			
+
+			double newSpeedY = distanceToTargetY / secondsToReachTarget;
+			if(newSpeedY > initialSpeedY) {
+				initialSpeedY = newSpeedY;
+			}
+
 			double directionY = Double.compare(targetTopLeftY, topLeftY());
-			setSpeedY(distanceToTargetY / ProcedureConstants.SECONDS_TO_REACH_TARGET * directionY);
+			setSpeedY(initialSpeedY * directionY);
 
 		}
 	}
@@ -67,10 +94,12 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	private void reachTargetY(double targetTopLeftY) {
 		setTopLeftY(targetTopLeftY);
+		setSpeedY(0);
 	}
 
 	private void reachTargetX(double targetTopLeftX) {
 		setTopLeftX(targetTopLeftX);
+		setSpeedX(0);
 	}
 
 	@Override
@@ -96,6 +125,11 @@ public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJEC
 
 	public void onTimePasses(double secondsElapsed) {
 		super.onTimePasses(secondsElapsed);
+		
+		secondsToReachTarget -= secondsElapsed;
+		if(secondsToReachTarget <= TIME_EPSILON) {
+			secondsToReachTarget = 0;
+		}
 
 		reachTargetOrAdjustSpeed();
 	}
