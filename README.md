@@ -32,6 +32,20 @@
         $ cd solutions
         $ git checkout MOI
 
+## Gérer les dépôts git
+
+1. Faire un pull sur tous les dépôts
+
+        $ sh scripts/pull.sh
+
+1. Faire un commit/push sur tous les dépôts
+
+        $ sh scripts/commit.sh "commentaire"
+
+1. Faire un commit/push automatique sur tous les dépôts
+
+        $ sh scripts/autocommit.sh
+
 ## À faire dans un nouveau projet
 
 ### Exécuter `generer` 
