@@ -1,0 +1,56 @@
+.container{
+    -fx-alignment:center;
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
+}
+
+#dashboard-view {
+    -fx-alignment:bottom-right;
+}
+
+.translucidSpace{
+    -fx-background-color:black;
+    -fx-opacity:0.75;
+}
+
+#menu-container{
+    -fx-background-color:gray;
+    -fx-alignment:center;
+}
+
+.test-case-container{
+    -fx-min-height:100;
+    -fx-max-height:100;
+}
+
+.center-right{
+    -fx-alignment:center-right;
+}
+
+.center{
+    -fx-alignment:center;
+}
+
+.bottom-right{
+    -fx-alignment:bottom-right;
+}
+
+.bottom{
+    -fx-alignment:bottom-center;
+}
+
+.hspace-small{
+    -fx-min-width:20;
+    -fx-max-width:30;
+
+}
+
+.vspace-small{
+    -fx-min-height:20;
+    -fx-max-height:20;
+}
+
+.text-big{
+    -fx-font-size:24;
+
+}

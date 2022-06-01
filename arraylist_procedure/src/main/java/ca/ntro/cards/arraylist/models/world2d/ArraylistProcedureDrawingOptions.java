@@ -1,0 +1,7 @@
+package ca.ntro.cards.arraylist.models.world2d;
+
+import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
+
+public interface ArraylistProcedureDrawingOptions extends ProcedureDrawingOptions {
+
+}

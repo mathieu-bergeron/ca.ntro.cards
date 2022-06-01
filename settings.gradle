@@ -34,6 +34,11 @@ include 'naivesort_efficiency'
 include 'naivesort_solution'
 project(':naivesort_solution').projectDir = file('solutions/naivesort_solution')
 
+include 'arraylist_procedure'
+include 'arraylist_efficiency'
+include 'arraylist_solution'
+project(':arraylist_solution').projectDir = file('solutions/arraylist_solution')
+
 
 buildscript {
     repositories {
