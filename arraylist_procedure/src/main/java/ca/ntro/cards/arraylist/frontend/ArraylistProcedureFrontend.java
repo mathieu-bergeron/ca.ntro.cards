@@ -11,7 +11,7 @@ import ca.ntro.cards.arraylist.frontend.views.ArraylistReplayView;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
 import ca.ntro.cards.arraylist.frontend.views.fragments.ArraylistProcedureMessageFragment;
 import ca.ntro.cards.arraylist.frontend.views.fragments.ArraylistTestCaseFragment;
-import ca.ntro.cards.arraylist.models.ArraylistCardsModel;
+import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.arraylist.models.ArraylistProcedureDashboardModel;
 import ca.ntro.cards.arraylist.models.ArraylistProcedureSettingsModel;
@@ -21,7 +21,7 @@ import ca.ntro.cards.arraylist.frontend.views.ArraylistProcedureMessagesView;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistSelectionsView;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistProcedureDashboardView;
 
-public class ArraylistProcedureFrontend<STUDENT_MODEL extends ArraylistCardsModel>
+public class ArraylistProcedureFrontend<STUDENT_MODEL extends ListeTableau>
 
        extends ProcedureFrontend<ArraylistProcedureRootView,
                                  ArraylistProcedureSettingsView, 

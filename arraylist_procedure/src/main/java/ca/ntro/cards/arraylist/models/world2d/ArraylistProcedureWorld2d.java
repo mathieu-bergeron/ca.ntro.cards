@@ -8,7 +8,7 @@ import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.arraylist.ArraylistConstants;
-import ca.ntro.cards.arraylist.models.ArraylistCardsModel;
+import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
@@ -21,7 +21,7 @@ public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedu
 
         // TODO: analyser les cartes2d existantes et créer un CardsModel 
         
-        ArraylistCardsModel manualModel = new ArraylistCardsModel();
+        ListeTableau manualModel = new ListeTableau();
         
         msgManualExecutionStep.setManualModel(manualModel);
         msgManualExecutionStep.send();

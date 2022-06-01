@@ -14,9 +14,9 @@ import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
                // TODO: renommer
-public class   ArraylistCardsModel<C extends Comparable<C>> 
+public class   ListeTableau<C extends Comparable<C>> 
 
-       extends ProcedureCardsModel<ArraylistCardsModel, 
+       extends ProcedureCardsModel<ListeTableau, 
                                    ArraylistProcedureObject2d, 
                                    ArraylistProcedureWorld2d, 
                                    ArraylistProcedureDrawingOptions, 
@@ -24,13 +24,13 @@ public class   ArraylistCardsModel<C extends Comparable<C>>
                                    ArraylistVariablesView> { 
 
     @Override
-    public void copyDataFrom(ArraylistCardsModel other) {
+    public void copyDataFrom(ListeTableau other) {
         // TODO: copier les données telles quelles
 
     }
 
 	@Override
-	public boolean acceptManualModel(ArraylistCardsModel manualModel) {
+	public boolean acceptManualModel(ListeTableau manualModel) {
 		boolean modified = false;
 
 		// TODO: accepter ou rejeter les modifications manuelles

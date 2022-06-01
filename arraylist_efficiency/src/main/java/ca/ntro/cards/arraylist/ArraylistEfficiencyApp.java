@@ -12,15 +12,15 @@ import ca.ntro.cards.arraylist.frontend.views.fragments.ArraylistEfficiencyMessa
 import ca.ntro.cards.arraylist.models.ArraylistEfficiencyDashboardModel;
 import ca.ntro.cards.arraylist.models.ArraylistEfficiencySettingsModel;
 import ca.ntro.cards.arraylist.models.ArraylistGraphsModel;
-import ca.ntro.cards.arraylist.models.ArraylistCardsModel;
+import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.arraylist.models.values.ArraylistTestCase;
 import ca.ntro.cards.arraylist.test_cases.ArraylistTestCaseDatabase;
 import ca.ntro.cards.arraylist.test_cases.execution_trace.ArraylistExecutionTrace;
 import ca.ntro.cards.efficiency.EfficiencyApp;
 
-public abstract class   ArraylistEfficiencyApp<STUDENT_MODEL extends ArraylistCardsModel>
+public abstract class   ArraylistEfficiencyApp<STUDENT_MODEL extends ListeTableau>
 
-                extends EfficiencyApp<ArraylistCardsModel, 
+                extends EfficiencyApp<ListeTableau, 
                                       STUDENT_MODEL,
                                       ArraylistGraphsModel,
                                       ArraylistTestCase,
@@ -50,8 +50,8 @@ public abstract class   ArraylistEfficiencyApp<STUDENT_MODEL extends ArraylistCa
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected Class<ArraylistCardsModel> executableModelClass() {
-		return ArraylistCardsModel.class;
+	protected Class<ListeTableau> executableModelClass() {
+		return ListeTableau.class;
 	}
 
 	@Override

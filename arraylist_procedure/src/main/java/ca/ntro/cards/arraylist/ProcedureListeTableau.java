@@ -13,7 +13,7 @@ import ca.ntro.cards.arraylist.frontend.views.ArraylistProcedureRootView;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistProcedureSettingsView;
 import ca.ntro.cards.arraylist.frontend.views.fragments.ArraylistProcedureMessageFragment;
 import ca.ntro.cards.arraylist.messages.ArraylistMsgAcceptManualModel;
-import ca.ntro.cards.arraylist.models.ArraylistCardsModel;
+import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.arraylist.models.values.ArraylistTestCase;
 import ca.ntro.cards.arraylist.test_cases.ArraylistTestCaseDatabase;
 import ca.ntro.cards.arraylist.test_cases.descriptor.ArraylistTestCaseDescriptor;
@@ -23,9 +23,9 @@ import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.arraylist.models.ArraylistProcedureDashboardModel;
 import ca.ntro.cards.arraylist.models.ArraylistProcedureSettingsModel;
 
-public abstract class   ArraylistProcedureApp<STUDENT_MODEL extends ArraylistCardsModel>
+public abstract class   ProcedureListeTableau<STUDENT_MODEL extends ListeTableau>
 
-                extends ProcedureApp<ArraylistCardsModel,           // executable model
+                extends ProcedureApp<ListeTableau,           // executable model
                                      STUDENT_MODEL,
                                      STUDENT_MODEL,     // canvas model
                                      ArraylistTestCase,
@@ -55,11 +55,11 @@ public abstract class   ArraylistProcedureApp<STUDENT_MODEL extends ArraylistCar
 	
 
 	@Override
-	protected Class<ArraylistCardsModel> executableModelClass() {
-		return ArraylistCardsModel.class;
+	protected Class<ListeTableau> executableModelClass() {
+		return ListeTableau.class;
 	}
 
-	protected abstract Class<STUDENT_MODEL> classeTriNaif();
+	protected abstract Class<STUDENT_MODEL> classListeTableau();
 
 	@Override
 	protected Class<ArraylistTestCase> testCaseClass() {
@@ -100,12 +100,12 @@ public abstract class   ArraylistProcedureApp<STUDENT_MODEL extends ArraylistCar
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Class<STUDENT_MODEL> canvasModelClass() {
-		return (Class<STUDENT_MODEL>) classeTriNaif();
+		return (Class<STUDENT_MODEL>) classListeTableau();
 	}
 
 	@Override
 	protected Class<STUDENT_MODEL> studentModelClass() {
-		return classeTriNaif();
+		return classListeTableau();
 	}
 
 	@Override

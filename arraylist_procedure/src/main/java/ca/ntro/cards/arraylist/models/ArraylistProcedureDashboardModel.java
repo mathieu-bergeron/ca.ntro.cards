@@ -9,7 +9,7 @@ import ca.ntro.cards.arraylist.test_cases.descriptor.ArraylistTestCaseDescriptor
 import ca.ntro.cards.models.ProcedureDashboardModel;
 
 public class ArraylistProcedureDashboardModel extends ProcedureDashboardModel<ArraylistProcedureDashboardView, 
-                                                                         ArraylistCardsModel, 
+                                                                         ListeTableau, 
                                                                          ArraylistTestCaseDatabase,
                                                                          ArraylistTestCaseDescriptor,
                                                                          ArraylistReplayView,

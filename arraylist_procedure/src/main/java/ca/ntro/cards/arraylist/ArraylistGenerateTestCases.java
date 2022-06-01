@@ -1,15 +1,15 @@
 package ca.ntro.cards.arraylist;
 
 import ca.ntro.cards.common.GenerateTestCases;
-import ca.ntro.cards.arraylist.models.ArraylistCardsModel;
+import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.arraylist.models.values.ArraylistTestCase;
 import ca.ntro.cards.arraylist.test_cases.ArraylistTestCaseDatabase;
 import ca.ntro.cards.arraylist.test_cases.execution_trace.ArraylistExecutionTrace;
 import ca.ntro.cards.arraylist.test_cases.execution_trace.ArraylistExecutionTraceFull;
 
-public abstract class ArraylistGenerateTestCases<STUDENT_MODEL extends ArraylistCardsModel> 
+public abstract class ArraylistGenerateTestCases<STUDENT_MODEL extends ListeTableau> 
 
-       extends        GenerateTestCases<ArraylistCardsModel, 
+       extends        GenerateTestCases<ListeTableau, 
                                         STUDENT_MODEL,
                                         ArraylistTestCase,
                                         ArraylistTestCaseDatabase,
@@ -27,8 +27,8 @@ public abstract class ArraylistGenerateTestCases<STUDENT_MODEL extends Arraylist
 	}
 
 	@Override
-	protected Class<ArraylistCardsModel> executableModelClass() {
-		return ArraylistCardsModel.class;
+	protected Class<ListeTableau> executableModelClass() {
+		return ListeTableau.class;
 	}
 
 	@Override

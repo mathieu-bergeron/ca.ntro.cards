@@ -53,13 +53,13 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 		this.args = args;
 	}
 	
-
 	@Override
 	protected Class<FooCardsModel> executableModelClass() {
 		return FooCardsModel.class;
 	}
 
-	protected abstract Class<STUDENT_MODEL> classeTriNaif();
+	// TODO: renommer
+	protected abstract Class<STUDENT_MODEL> studentClass();
 
 	@Override
 	protected Class<FooTestCase> testCaseClass() {
@@ -100,12 +100,12 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected Class<STUDENT_MODEL> canvasModelClass() {
-		return (Class<STUDENT_MODEL>) classeTriNaif();
+		return (Class<STUDENT_MODEL>) studentClass();
 	}
 
 	@Override
 	protected Class<STUDENT_MODEL> studentModelClass() {
-		return classeTriNaif();
+		return studentClass();
 	}
 
 	@Override

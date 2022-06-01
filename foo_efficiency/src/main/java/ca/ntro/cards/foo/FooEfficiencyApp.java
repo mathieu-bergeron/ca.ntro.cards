@@ -56,10 +56,11 @@ public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
 
 	@Override
 	protected Class<STUDENT_MODEL> studentModelClass() {
-		return classeTriNaif();
+		return studentClass();
 	}
 	
-	protected abstract Class<STUDENT_MODEL> classeTriNaif();
+	// TODO: renommer
+	protected abstract Class<STUDENT_MODEL> studentClass();
 
 	@Override
 	protected Class<FooGraphsModel> canvasModelClass() {
