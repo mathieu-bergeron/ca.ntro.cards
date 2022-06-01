@@ -24,39 +24,20 @@
 
             Clonage dans 'ntro'...
 
-## Créer un nouveau projet
+            Clonage dans 'solutions'...
 
-1. Le dépôt contient le répertoire `_foo` avec un projet bidon
+1. Basculer sur la branche `MOI`
 
-1. Pour créer p.ex. le projet `Bar`, faire
-
-        $ sh scripts/new_project.sh Bar bar
-
-1. Devrait créer le répertoire `cards_bar` avec le nouveau projet
-
-1. Ouvrir `settings.gradle` et ajouter
-
-        include 'cards_bar'
-
-1. Créer le projet Eclipse
-
-        $ sh gradlew cards_bar:build
-        $ sh gradlew cards_bar:eclipse
-
-
-1. Ouvrir le projet en Eclipse
-
-1. Lancer l'application
-
-        $ sh gradlew cards_bar:local
 
 ## À faire dans un nouveau projet
 
-### Exécuter `generer` au moins une fois
+### Exécuter `generer` 
+
+1. Exécuter au moins une fois au début
 
         $ sh gradlew foo_solution:generer
 
-Plus à chaque fois qu'on change les cas de tests
+1. Ré-exécuter à chaque fois qu'on ajoute/change un cas de test
 
 ### Dans `foo_procedure`
 
@@ -86,9 +67,7 @@ Plus à chaque fois qu'on change les cas de tests
 
 1. Renommer `MonFooCardsModel`
 
-## Énoncés de projet
-
-### Projets de familiarisation
+## Projets de familiarisation
 
 1. Ajouter un attribut au modèle TriLibre
     * attribut: boolean trie
@@ -105,7 +84,33 @@ Plus à chaque fois qu'on change les cas de tests
     * améliorer l'apparence p.ex. des variables
     * afficher des cartes dans la vue des variales, etc.
 
-### Projets rémunérés
+## Projets rémunérés
 
 1. Adrien: fusionsort
 1. Marlond: arraylist
+
+## Créer un nouveau projet
+
+1. Le dépôt contient le répertoire `_foo` avec un projet bidon
+
+1. Pour créer p.ex. le projet `Bar`, faire
+
+        $ sh scripts/new_project.sh Bar bar
+
+1. Devrait créer le répertoire `cards_bar` avec le nouveau projet
+
+1. Ouvrir `settings.gradle` et ajouter
+
+        include 'cards_bar'
+
+1. Créer le projet Eclipse
+
+        $ sh gradlew cards_bar:build
+        $ sh gradlew cards_bar:eclipse
+
+
+1. Ouvrir le projet en Eclipse
+
+1. Lancer l'application
+
+        $ sh gradlew cards_bar:local
