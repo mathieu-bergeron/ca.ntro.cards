@@ -28,6 +28,9 @@
 
 1. Basculer sur la branche `MOI`
 
+        $ git checkout MOI
+        $ cd solutions
+        $ git checkout MOI
 
 ## À faire dans un nouveau projet
 
