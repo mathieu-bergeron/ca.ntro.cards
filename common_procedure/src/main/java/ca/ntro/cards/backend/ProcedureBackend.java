@@ -114,7 +114,9 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		     });
 	}
 
-	protected abstract void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks);
+	protected void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks) {
+		
+	}
 
 	private void executionStepBack(BackendTasks tasks) {
 		tasks.task("executionStepBack")
@@ -185,5 +187,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    			                      testCaseDatabase());
 		     });
 	}
+
+
 
 }

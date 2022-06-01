@@ -1,5 +1,6 @@
 package ca.ntro.cards.foo.frontend;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
@@ -14,6 +15,7 @@ import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.foo.models.FooProcedureDashboardModel;
 import ca.ntro.cards.foo.models.FooProcedureSettingsModel;
+import ca.ntro.cards.common.messages.MsgMessageToUser;
 import ca.ntro.cards.foo.frontend.views.FooCardsView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooSelectionsView;
@@ -36,10 +38,6 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
                                  FooProcedureDashboardModel, 
                                  FooProcedureSettingsModel> {
 
-	@Override
-	protected void registerAdditionnalEvents(EventRegistrar registrar) {
-		
-	}
 
 	@Override
 	protected boolean isProd() {
@@ -66,30 +64,12 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
 		return FooProcedureDashboardView.class;
 	}
 
-	@Override
-	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
-		
-	}
 
 	@Override
 	protected Class<FooProcedureViewData> viewDataClass() {
 		return FooProcedureViewData.class;
 	}
 
-	@Override
-	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
-
-	}
-
-	@Override
-	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
-
-	}
-
-	@Override
-	protected void addSubTasksToSettings(FrontendTasks subTasks) {
-
-	}
 
 
 	@Override
@@ -107,9 +87,6 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
 		return FooVariablesView.class;
 	}
 
-	@Override
-	protected void addSubTasksToCards(FrontendTasks subTasks) {
-	}
 
 	@Override
 	protected Class<FooTestCaseFragment> testCaseFragmentClass() {
@@ -124,6 +101,15 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
 	@Override
 	protected Class<FooProcedureMessageFragment> messageFragmentClass() {
 		return FooProcedureMessageFragment.class;
+	}
+
+	@Override
+	public void execute() {
+		super.execute();
+		
+		MsgMessageToUser msgMessageToUser = NtroApp.newMessage(MsgMessageToUser.class);
+		msgMessageToUser.setMessage("[INFO] Procedure app started");
+		msgMessageToUser.send();
 	}
 
 

@@ -257,7 +257,9 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		     });
 	}
 
-	protected abstract void addSubTasksToCards(FrontendTasks subTasks);
+	protected void addSubTasksToCards(FrontendTasks subTasks) {
+		
+	}
 
 	private void displayCardsModel(FrontendTasks tasks) {
 		
@@ -274,7 +276,34 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		     });
 	}
 
-	
+	@Override
+	protected void addSubTasksToMessages(FrontendTasks subTasks) {
+	}
+
+	@Override
+	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
+
+	}
+
+	@Override
+	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
+
+	}
+
+	@Override
+	protected void addSubTasksToSettings(FrontendTasks subTasks) {
+
+	}
+
+	@Override
+	protected void registerAdditionnalEvents(EventRegistrar registrar) {
+		
+	}
 
 	
 }

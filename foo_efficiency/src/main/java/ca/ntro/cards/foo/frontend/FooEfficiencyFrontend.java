@@ -1,9 +1,5 @@
 package ca.ntro.cards.foo.frontend;
 
-import ca.ntro.app.frontend.ViewRegistrarFx;
-import ca.ntro.app.frontend.events.EventRegistrar;
-import ca.ntro.app.tasks.SimpleTaskCreator;
-import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyDashboardView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyRootView;
@@ -13,6 +9,8 @@ import ca.ntro.cards.foo.frontend.views.fragments.FooEfficiencyMessageFragment;
 import ca.ntro.cards.foo.models.FooEfficiencyDashboardModel;
 import ca.ntro.cards.foo.models.FooEfficiencySettingsModel;
 import ca.ntro.cards.foo.models.FooGraphsModel;
+import ca.ntro.app.NtroApp;
+import ca.ntro.cards.common.messages.MsgMessageToUser;
 import ca.ntro.cards.efficiency.frontend.EfficiencyFrontend;
 
 public class FooEfficiencyFrontend 
@@ -27,12 +25,6 @@ public class FooEfficiencyFrontend
                                   FooGraphsModel, 
                                   FooEfficiencyDashboardModel, 
                                   FooEfficiencySettingsModel> {
-
-	@Override
-	protected void registerAdditionnalEvents(EventRegistrar registrar) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	protected boolean isProd() {
@@ -59,46 +51,12 @@ public class FooEfficiencyFrontend
 		return FooEfficiencyDashboardView.class;
 	}
 
-	@Override
-	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
-		
-	}
 
 	@Override
 	protected Class<FooEfficiencyViewData> viewDataClass() {
 		return FooEfficiencyViewData.class;
 	}
 
-	@Override
-	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
-		
-	}
-
-	@Override
-	protected void addSubTasksToViewData(FrontendTasks subTasks) {
-		
-	}
-
-
-	@Override
-	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
-		
-	}
-
-	@Override
-	protected void addSubTasksToSettings(FrontendTasks subTasks) {
-		
-	}
-
-	@Override
-	protected void addSubTasksToDashboard(FrontendTasks subTasks) {
-		
-	}
-
-	@Override
-	protected void createAdditionnalTasks(FrontendTasks tasks) {
-		
-	}
 
 	@Override
 	protected Class<FooEfficiencyMessagesView> messagesViewClass() {
@@ -110,6 +68,13 @@ public class FooEfficiencyFrontend
 		return FooEfficiencyMessageFragment.class;
 	}
 
-
+	@Override
+	public void execute() {
+		super.execute();
+		
+		MsgMessageToUser msgMessageToUser = NtroApp.newMessage(MsgMessageToUser.class);
+		msgMessageToUser.setMessage("[INFO] Efficiency app started");
+		msgMessageToUser.send();
+	}
 
 }

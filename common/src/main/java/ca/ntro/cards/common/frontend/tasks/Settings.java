@@ -21,7 +21,7 @@ public class Settings {
 	    		            Class<SETTINGS_MODEL> settingsModelClass,
 	    		            SubTasksLambda<FrontendTasks> subTasksLambda) {
 
-		tasks.taskGroup("Menu")
+		tasks.taskGroup("Settings")
 		
 		     .waitsFor("Initialization")
 

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.common.frontend.events.EvtHideMessages;
+import ca.ntro.cards.common.frontend.views.fragments.CommonMessageFragment;
 import ca.ntro.core.stream.Stream;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,6 +33,10 @@ public abstract class CommonMessagesView extends ViewFx {
 				});
 			});
 		}
+	}
+
+	public void addMessage(CommonMessageFragment messageFragment) {
+		messagesContainer().getChildren().add(messageFragment.rootNode());
 	}
 
 }

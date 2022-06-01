@@ -59,7 +59,6 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 		return FooCardsModel.class;
 	}
 
-
 	protected abstract Class<STUDENT_MODEL> classeTriNaif();
 
 	@Override
@@ -96,14 +95,7 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 	}
 
 
-	@Override
-	protected void registerAdditionnalModels(ModelRegistrar registrar) {
-	}
 
-	@Override
-	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(ProcedureMsgAcceptManualModel.class);
-	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

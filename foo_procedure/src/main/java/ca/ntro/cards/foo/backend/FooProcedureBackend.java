@@ -30,8 +30,5 @@ public class   FooProcedureBackend<STUDENT_MODEL extends FooCardsModel>
 	
 	
 
-	@Override
-	protected void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks) {
-	}
 
 }

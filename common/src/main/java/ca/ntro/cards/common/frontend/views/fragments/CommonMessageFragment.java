@@ -14,4 +14,8 @@ public abstract class CommonMessageFragment extends ViewFx {
 	public void initialize(URL location, ResourceBundle resources) {
 	}
 
+	public void displayMessage(String message) {
+		messageLabel().setText(message);
+	}
+
 }

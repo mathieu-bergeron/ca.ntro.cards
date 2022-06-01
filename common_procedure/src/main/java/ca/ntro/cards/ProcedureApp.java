@@ -119,6 +119,12 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
 	}
 
 	
+	@Override
+	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
+	}
 
+	@Override
+	protected void registerAdditionnalModels(ModelRegistrar registrar) {
+	}
 
 }

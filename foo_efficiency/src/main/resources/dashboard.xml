@@ -53,6 +53,11 @@
     <VBox styleClass="bottom-right">
 
         <Button
+            text="🗨"
+            fx:id="messageButton">
+        </Button>
+
+        <Button
             text="☰"
             fx:id="menuButton">
         </Button>

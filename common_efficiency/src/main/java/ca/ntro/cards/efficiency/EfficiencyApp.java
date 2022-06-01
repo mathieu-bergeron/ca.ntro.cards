@@ -1,5 +1,7 @@
 package ca.ntro.cards.efficiency;
 
+import ca.ntro.app.messages.MessageRegistrar;
+import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
@@ -88,6 +90,16 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
     @Override
 	protected void additionnalBackendInitialization(BACKEND backend) {
     }
+
+	@Override
+	protected void registerAdditionnalModels(ModelRegistrar registrar) {
+		
+	}
+
+	@Override
+	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
+		
+	}
 
 
 }

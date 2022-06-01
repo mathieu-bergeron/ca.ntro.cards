@@ -14,6 +14,7 @@ import ca.ntro.cards.common.frontend.views.CommonMessagesView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.frontend.views.fragments.CommonMessageFragment;
+import ca.ntro.cards.common.messages.MsgMessageToUser;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
@@ -106,6 +107,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		registrar.registerMessage(MsgRefreshDashboard.class);
 		registrar.registerMessage(MsgStopExecutionReplay.class);
 		registrar.registerMessage(MsgStartExecutionEngine.class);
+		registrar.registerMessage(MsgMessageToUser.class);
 
 		registerAdditionnalMessages(registrar);
 	}

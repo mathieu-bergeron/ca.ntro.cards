@@ -1,5 +1,7 @@
 package ca.ntro.cards.efficiency.frontend;
 
+import ca.ntro.app.frontend.ViewRegistrarFx;
+import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.common.frontend.CommonFrontend;
@@ -37,6 +39,52 @@ public abstract class EfficiencyFrontend<ROOT_VIEW       extends EfficiencyRootV
 
 	@Override
 	protected void addDashboardSubViewLoaders(FrontendTasks subTasks) {
+	}
+
+	@Override
+	protected void addSubTasksToInitialization(FrontendTasks subTasks) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToViewData(FrontendTasks subTasks) {
+		
+	}
+
+
+	@Override
+	protected void addSubTasksToNavigation(FrontendTasks subTasks) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToSettings(FrontendTasks subTasks) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToDashboard(FrontendTasks subTasks) {
+		
+	}
+
+	@Override
+	protected void addSubTasksToMessages(FrontendTasks subTasks) {
+
+	}
+
+	@Override
+	protected void createAdditionnalTasks(FrontendTasks tasks) {
+		
+	}
+
+	@Override
+	protected void registerAdditionnalEvents(EventRegistrar registrar) {
+
+	}
+
+	@Override
+	protected void registerAdditionnalViews(ViewRegistrarFx registrar) {
+		
 	}
 
 	@Override

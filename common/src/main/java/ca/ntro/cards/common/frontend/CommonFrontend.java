@@ -17,6 +17,7 @@ import ca.ntro.cards.common.frontend.events.MouseEvtOnMainCanvas;
 import ca.ntro.cards.common.frontend.tasks.ViewData;
 import ca.ntro.cards.common.frontend.tasks.Dashboard;
 import ca.ntro.cards.common.frontend.tasks.Initialization;
+import ca.ntro.cards.common.frontend.tasks.Messages;
 import ca.ntro.cards.common.frontend.tasks.Navigation;
 import ca.ntro.cards.common.frontend.tasks.Settings;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
@@ -185,6 +186,15 @@ public abstract class CommonFrontend<ROOT_VIEW        extends CommonRootView,
 				            	 addSubTasksToSettings(subTasks);
 				            	 
 				             });
+
+		Messages.createTasks(tasks, 
+				             messagesViewClass(), 
+				             messageFragmentClass(),
+				             subTasks -> {
+				            	 
+				            	 addSubTasksToMessages(subTasks);
+				            	 
+				             });
 		
 		createAdditionnalTasks(tasks);
 
@@ -201,6 +211,8 @@ public abstract class CommonFrontend<ROOT_VIEW        extends CommonRootView,
 	protected abstract void addSubTasksToNavigation(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToSettings(FrontendTasks subTasks);
+
+	protected abstract void addSubTasksToMessages(FrontendTasks subTasks);
 
 	protected abstract void addSubTasksToDashboard(FrontendTasks subTasks);
 

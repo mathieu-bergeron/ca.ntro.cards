@@ -1,8 +1,5 @@
 package ca.ntro.cards.foo;
 
-
-import ca.ntro.app.messages.MessageRegistrar;
-import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.foo.backend.FooEfficiencyBackend;
 import ca.ntro.cards.foo.frontend.FooEfficiencyFrontend;
 import ca.ntro.cards.foo.frontend.FooEfficiencyViewData;
@@ -20,7 +17,6 @@ import ca.ntro.cards.foo.models.values.FooTestCase;
 import ca.ntro.cards.foo.test_cases.FooTestCaseDatabase;
 import ca.ntro.cards.foo.test_cases.execution_trace.FooExecutionTrace;
 import ca.ntro.cards.efficiency.EfficiencyApp;
-import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
 public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
 
@@ -88,15 +84,5 @@ public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
 	@Override
 	protected Class<FooEfficiencySettingsModel> settingsModelClass() {
 		return FooEfficiencySettingsModel.class;
-	}
-
-	@Override
-	protected void registerAdditionnalModels(ModelRegistrar registrar) {
-		
-	}
-
-	@Override
-	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		
 	}
 }
