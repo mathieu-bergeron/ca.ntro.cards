@@ -52,16 +52,33 @@
 
 ## À faire dans un nouveau projet
 
+### Exécuter `generer` au moins une fois
+
+        $ sh gradlew foo_solution:generer
+
+Plus à chaque fois qu'on change les cas de tests
+
 ### Dans `foo_procedure`
 
+1. Remplir et compléter la classe `FooTestCaseDatabase`
+    * méthode `describeTestCasesToGenerate`
+        * pour décrire les cas de tests à générer
+
 1. Remplir et compléter la classe `FooCardsModel`
-    * créer des `Card2d` pour visualiser le modèle
+    * remplir les méthodes utilitaires
+    * remplir l'analyse du modèle à l'écran
+        * `acceptManualModel`
+    * afficher le modèle
+        * `updateViewDataImpl`
+    * créer des cas des tests
+        * `initializeAsTestCases`
+
+1. Dans `FooGenerateTestCases`
+    * `shouldWriteJson` pour écrire les cas de tests en Json
 
 1. Compléter la classe `FooProcedureWorld2d`
     * intepréter les `Card2d` pour mettre à jour le modèle
-
-1. Compléter la classe `FooTestCaseDatabase`
-    * décrire les cas de tests à générer
+    * `buildAndSendManualModel`
 
 1. Renommer `FooProcedureApp`
 
