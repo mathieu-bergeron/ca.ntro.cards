@@ -1,4 +1,4 @@
-# Projet *Paquet de structures*
+# Projet *Code les cartes*
 
 ## Installation
 
