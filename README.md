@@ -100,20 +100,28 @@
 
         $ sh scripts/new_project.sh Bar bar
 
-1. Devrait créer le répertoire `cards_bar` avec le nouveau projet
+1. Devrait créer les répertoires suivants
+
+        bar_procedure
+        bar_efficiency
+        solutions/bar_solution
 
 1. Ouvrir `settings.gradle` et ajouter
 
-        include 'cards_bar'
+        include 'bar_procedure'
+        include 'bar_efficiency'
+        include 'bar_solution'
+        project(':bar_solution').projectDir = file('solutions/bar_solution')
 
 1. Créer le projet Eclipse
 
-        $ sh gradlew cards_bar:build
-        $ sh gradlew cards_bar:eclipse
+        $ sh gradlew build 
+        $ sh gradlew eclipse
 
 
 1. Ouvrir le projet en Eclipse
 
 1. Lancer l'application
 
-        $ sh gradlew cards_bar:local
+        $ sh gradlew bar_solution:generer
+        $ sh gradlew bar_solution:procedure
