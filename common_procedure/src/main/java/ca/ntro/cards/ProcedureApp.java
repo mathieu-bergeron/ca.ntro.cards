@@ -10,8 +10,10 @@ import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
+import ca.ntro.cards.frontend.views.ProcedureMessagesView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
+import ca.ntro.cards.frontend.views.fragments.ProcedureMessageFragment;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
@@ -46,16 +48,20 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
                                                                     SETTINGS_MODEL,
                                                                     MSG_ACCEPT_MANUAL_MODEL>,
                                    
-                                   ROOT_VIEW       extends ProcedureRootView, 
-                                   CANVAS_VIEW     extends ProcedureCanvasView, 
-                                   DASHBOARD_VIEW  extends ProcedureDashboardView,
-                                   SETTINGS_VIEW   extends ProcedureSettingsView,
-                                   VIEW_DATA       extends ProcedureViewData,
+                                   ROOT_VIEW        extends ProcedureRootView, 
+                                   CANVAS_VIEW      extends ProcedureCanvasView, 
+                                   DASHBOARD_VIEW   extends ProcedureDashboardView,
+                                   SETTINGS_VIEW    extends ProcedureSettingsView,
+                                   MESSAGES_VIEW    extends ProcedureMessagesView,
+                                   MESSAGE_FRAGMENT extends ProcedureMessageFragment,
+                                   VIEW_DATA        extends ProcedureViewData,
                                      
                                    FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                    SETTINGS_VIEW, 
                                                                    CANVAS_VIEW, 
                                                                    DASHBOARD_VIEW, 
+                                                                   MESSAGES_VIEW,
+                                                                   MESSAGE_FRAGMENT,
                                                                    VIEW_DATA,
                                                                    CANVAS_MODEL,
                                                                    DASHBOARD_MODEL,
@@ -74,6 +80,8 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
                          CANVAS_VIEW,
                          DASHBOARD_VIEW,
                          SETTINGS_VIEW,
+                         MESSAGES_VIEW,
+                         MESSAGE_FRAGMENT,
                          VIEW_DATA,
                          FRONTEND> {
                                                                 	 

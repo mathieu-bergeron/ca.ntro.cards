@@ -20,6 +20,9 @@ public class FooProcedureDashboardView extends ProcedureDashboardView {
 	private Button menuButton;
 
 	@FXML
+	private Button messageButton;
+
+	@FXML
 	private VBox selectionsContainer;
 
 	@FXML
@@ -32,6 +35,7 @@ public class FooProcedureDashboardView extends ProcedureDashboardView {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		Ntro.assertNotNull("messageButton", messageButton);
 		Ntro.assertNotNull("menuButton", menuButton);
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
 		Ntro.assertNotNull("selectionsContainer", selectionsContainer);
@@ -65,6 +69,11 @@ public class FooProcedureDashboardView extends ProcedureDashboardView {
 	@Override
 	protected Pane variablesContainer() {
 		return variablesContainer;
+	}
+
+	@Override
+	protected Button messageButton() {
+		return messageButton;
 	}
 
 

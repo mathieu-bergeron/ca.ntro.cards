@@ -16,6 +16,8 @@
 # limitations under the License.
 #
 
+export GRADLE_OPTS="-Dfile.encoding=utf-8" 
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X

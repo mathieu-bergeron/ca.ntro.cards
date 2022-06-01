@@ -7,9 +7,11 @@ import ca.ntro.cards.foo.backend.FooEfficiencyBackend;
 import ca.ntro.cards.foo.frontend.FooEfficiencyFrontend;
 import ca.ntro.cards.foo.frontend.FooEfficiencyViewData;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyDashboardView;
+import ca.ntro.cards.foo.frontend.views.FooEfficiencyMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyRootView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencySettingsView;
 import ca.ntro.cards.foo.frontend.views.FooGraphsView;
+import ca.ntro.cards.foo.frontend.views.fragments.FooEfficiencyMessageFragment;
 import ca.ntro.cards.foo.models.FooEfficiencyDashboardModel;
 import ca.ntro.cards.foo.models.FooEfficiencySettingsModel;
 import ca.ntro.cards.foo.models.FooGraphsModel;
@@ -35,6 +37,8 @@ public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
                                       FooGraphsView,
                                       FooEfficiencyDashboardView,
                                       FooEfficiencySettingsView,
+                                      FooEfficiencyMessagesView,
+                                      FooEfficiencyMessageFragment,
                                       FooEfficiencyViewData,
                                       FooEfficiencyFrontend> {
 

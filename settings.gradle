@@ -19,12 +19,10 @@ include 'common'
 include 'common_procedure'
 include 'common_efficiency'
 
-/*
 include 'foo_procedure'
 include 'foo_efficiency'
 include 'foo_solution'
 project(':foo_solution').projectDir = file('solutions/foo_solution')
-*/
 
 include 'freesort_procedure'
 include 'freesort_efficiency'

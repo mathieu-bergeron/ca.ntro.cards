@@ -8,7 +8,8 @@ import ca.ntro.app.views.ViewFx;
 public abstract class CommonRootView extends ViewFx {
 	
 	private CommonSettingsView menuView;
-	private CommonCanvasView gameView;
+	private CommonCanvasView canvasView;
+	private CommonMessagesView messagesView;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -19,14 +20,16 @@ public abstract class CommonRootView extends ViewFx {
 	}
 	
 	public void registerCanvasView(CommonCanvasView canvasView) {
-		this.gameView = canvasView;
+		this.canvasView = canvasView;
 	}
 	
 	public void installSubViews() {
-		rootNode().getChildren().add(gameView.rootNode());
+		rootNode().getChildren().add(canvasView.rootNode());
 		rootNode().getChildren().add(menuView.rootNode());
+		rootNode().getChildren().add(messagesView.rootNode());
 
 		hideMenu();
+		hideMessages();
 	}
 
 	public void showMenu() {
@@ -35,6 +38,18 @@ public abstract class CommonRootView extends ViewFx {
 
 	public void hideMenu() {
 		menuView.rootNode().setVisible(false);
+	}
+
+	public void showMessages() {
+		messagesView.rootNode().setVisible(true);
+	}
+
+	public void hideMessages() {
+		messagesView.rootNode().setVisible(false);
+	}
+
+	public void registerMessagesView(CommonMessagesView messagesView) {
+		this.messagesView = messagesView;
 	}
 
 }

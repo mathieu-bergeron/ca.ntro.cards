@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.common.frontend.events.EvtShowMenu;
+import ca.ntro.cards.common.frontend.events.EvtShowMessages;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -15,6 +16,8 @@ public abstract class CommonDashboardView extends ViewFx {
 	protected abstract Label fpsLabel();
 
 	protected abstract Button menuButton();
+
+	protected abstract Button messageButton();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -27,6 +30,16 @@ public abstract class CommonDashboardView extends ViewFx {
 				evtShowMenu.trigger();
 			});
 		}
+		
+		EvtShowMessages evtShowMessages = NtroApp.newEvent(EvtShowMessages.class);
+		
+		if(messageButton() != null) {
+			messageButton().setFocusTraversable(false);
+			
+			messageButton().setOnAction(evtFx -> {
+				evtShowMessages.trigger();
+			});
+		}
 	}
 
 	public void displayFps(String fps) {
@@ -34,13 +47,4 @@ public abstract class CommonDashboardView extends ViewFx {
 			fpsLabel().setText(fps);
 		}
 	}
-
-	public void clearTestCases() {
-	}
-
-	public void addTestCase(String testCase) {
-	}
-
-
-
 }

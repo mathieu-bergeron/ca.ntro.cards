@@ -17,11 +17,15 @@ public class FreesortEfficiencyDashboardView extends EfficiencyDashboardView {
 	@FXML
 	private Button menuButton;
 
+	@FXML
+	private Button messageButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
 		Ntro.assertNotNull("menuButton", menuButton);
+		Ntro.assertNotNull("messageButton", messageButton);
 		
 		super.initialize(location, resources);
 		
@@ -35,6 +39,11 @@ public class FreesortEfficiencyDashboardView extends EfficiencyDashboardView {
 	@Override
 	protected Button menuButton() {
 		return menuButton;
+	}
+
+	@Override
+	protected Button messageButton() {
+		return messageButton;
 	}
 }
 

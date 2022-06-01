@@ -7,9 +7,11 @@ import ca.ntro.cards.naivesort.backend.NaivesortEfficiencyBackend;
 import ca.ntro.cards.naivesort.frontend.NaivesortEfficiencyFrontend;
 import ca.ntro.cards.naivesort.frontend.NaivesortEfficiencyViewData;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortEfficiencyDashboardView;
+import ca.ntro.cards.naivesort.frontend.views.NaivesortEfficiencyMessagesView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortEfficiencyRootView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortEfficiencySettingsView;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortGraphsView;
+import ca.ntro.cards.naivesort.frontend.views.fragments.NaivesortEfficiencyMessageFragment;
 import ca.ntro.cards.naivesort.models.NaivesortEfficiencyDashboardModel;
 import ca.ntro.cards.naivesort.models.NaivesortEfficiencySettingsModel;
 import ca.ntro.cards.naivesort.models.NaivesortGraphsModel;
@@ -35,6 +37,8 @@ public abstract class   NaivesortEfficiencyApp<STUDENT_MODEL extends TriNaif>
                                       NaivesortGraphsView,
                                       NaivesortEfficiencyDashboardView,
                                       NaivesortEfficiencySettingsView,
+                                      NaivesortEfficiencyMessagesView,
+                                      NaivesortEfficiencyMessageFragment,
                                       NaivesortEfficiencyViewData,
                                       NaivesortEfficiencyFrontend> {
 

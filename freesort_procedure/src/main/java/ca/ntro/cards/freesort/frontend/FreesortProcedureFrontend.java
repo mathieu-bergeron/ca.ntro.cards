@@ -8,6 +8,7 @@ import ca.ntro.cards.freesort.frontend.views.FreesortProcedureRootView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureSettingsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortReplayView;
 import ca.ntro.cards.freesort.frontend.views.FreesortVariablesView;
+import ca.ntro.cards.freesort.frontend.views.fragments.FreesortProcedureMessageFragment;
 import ca.ntro.cards.freesort.frontend.views.fragments.FreesortTestCaseFragment;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.frontend.ProcedureFrontend;
@@ -16,6 +17,7 @@ import ca.ntro.cards.freesort.models.FreesortProcedureSettingsModel;
 import ca.ntro.cards.freesort.frontend.views.FreesortCardsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortSelectionsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureDashboardView;
+import ca.ntro.cards.freesort.frontend.views.FreesortProcedureMessagesView;
 
 public class FreesortProcedureFrontend<STUDENT_MODEL extends TriLibre>
 
@@ -27,6 +29,8 @@ public class FreesortProcedureFrontend<STUDENT_MODEL extends TriLibre>
                                  FreesortTestCaseFragment,
                                  FreesortReplayView,
                                  FreesortVariablesView,
+                                 FreesortProcedureMessagesView,
+                                 FreesortProcedureMessageFragment,
                                  FreesortProcedureViewData, 
                                  STUDENT_MODEL, // CanvasModel
                                  FreesortProcedureDashboardModel, 
@@ -110,6 +114,16 @@ public class FreesortProcedureFrontend<STUDENT_MODEL extends TriLibre>
 	@Override
 	protected Class<FreesortTestCaseFragment> testCaseFragmentClass() {
 		return FreesortTestCaseFragment.class;
+	}
+
+	@Override
+	protected Class<FreesortProcedureMessagesView> messagesViewClass() {
+		return FreesortProcedureMessagesView.class;
+	}
+
+	@Override
+	protected Class<FreesortProcedureMessageFragment> messageFragmentClass() {
+		return FreesortProcedureMessageFragment.class;
 	}
 
 

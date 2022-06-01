@@ -15,10 +15,12 @@ import ca.ntro.cards.frontend.events.MouseEvtOnPreviewCanvas;
 import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
+import ca.ntro.cards.frontend.views.ProcedureMessagesView;
 import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.frontend.views.ProcedureReplayView;
 import ca.ntro.cards.frontend.views.ProcedureVariablesView;
+import ca.ntro.cards.frontend.views.fragments.ProcedureMessageFragment;
 import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
@@ -37,6 +39,8 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                                         TEST_CASE_FRAGMENT   extends ProcedureTestCaseFragment,
                                         REPLAY_CONTROLS_VIEW extends ProcedureReplayView,
                                         VARIABLES_VIEW       extends ProcedureVariablesView,
+                                        MESSAGES_VIEW        extends ProcedureMessagesView,
+                                        MESSAGE_FRAGMENT     extends ProcedureMessageFragment,
                                         VIEW_DATA            extends ProcedureViewData,
                                         CARDS_MODEL          extends ProcedureCardsModel,
                                         DASHBOARD_MODEL      extends ProcedureDashboardModel,
@@ -46,6 +50,8 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
                               SETTINGS_VIEW,
                               CARDS_VIEW,
                               DASHBOARD_VIEW,
+                              MESSAGES_VIEW,
+                              MESSAGE_FRAGMENT,
                               VIEW_DATA,
                               CARDS_MODEL,
                               DASHBOARD_MODEL,

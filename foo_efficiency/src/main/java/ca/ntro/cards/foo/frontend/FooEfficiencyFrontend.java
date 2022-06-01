@@ -5,9 +5,11 @@ import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
 import ca.ntro.app.tasks.frontend.FrontendTasks;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyDashboardView;
+import ca.ntro.cards.foo.frontend.views.FooEfficiencyMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencyRootView;
 import ca.ntro.cards.foo.frontend.views.FooEfficiencySettingsView;
 import ca.ntro.cards.foo.frontend.views.FooGraphsView;
+import ca.ntro.cards.foo.frontend.views.fragments.FooEfficiencyMessageFragment;
 import ca.ntro.cards.foo.models.FooEfficiencyDashboardModel;
 import ca.ntro.cards.foo.models.FooEfficiencySettingsModel;
 import ca.ntro.cards.foo.models.FooGraphsModel;
@@ -19,6 +21,8 @@ public class FooEfficiencyFrontend
                                   FooEfficiencySettingsView, 
                                   FooGraphsView, 
                                   FooEfficiencyDashboardView, 
+                                  FooEfficiencyMessagesView,
+                                  FooEfficiencyMessageFragment,
                                   FooEfficiencyViewData, 
                                   FooGraphsModel, 
                                   FooEfficiencyDashboardModel, 
@@ -94,6 +98,16 @@ public class FooEfficiencyFrontend
 	@Override
 	protected void createAdditionnalTasks(FrontendTasks tasks) {
 		
+	}
+
+	@Override
+	protected Class<FooEfficiencyMessagesView> messagesViewClass() {
+		return FooEfficiencyMessagesView.class;
+	}
+
+	@Override
+	protected Class<FooEfficiencyMessageFragment> messageFragmentClass() {
+		return FooEfficiencyMessageFragment.class;
 	}
 
 

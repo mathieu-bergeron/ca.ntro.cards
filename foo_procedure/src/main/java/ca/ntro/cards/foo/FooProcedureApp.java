@@ -7,9 +7,11 @@ import ca.ntro.cards.foo.backend.FooProcedureBackend;
 import ca.ntro.cards.foo.frontend.FooProcedureFrontend;
 import ca.ntro.cards.foo.frontend.FooProcedureViewData;
 import ca.ntro.cards.foo.frontend.views.FooCardsView;
+import ca.ntro.cards.foo.frontend.views.FooProcedureMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureDashboardView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureRootView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureSettingsView;
+import ca.ntro.cards.foo.frontend.views.fragments.FooProcedureMessageFragment;
 import ca.ntro.cards.foo.messages.FooMsgAcceptManualModel;
 import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.foo.models.values.FooTestCase;
@@ -38,6 +40,8 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
                                      FooCardsView,
                                      FooProcedureDashboardView,
                                      FooProcedureSettingsView,
+                                     FooProcedureMessagesView,
+                                     FooProcedureMessageFragment,
                                      FooProcedureViewData,
                                      FooProcedureFrontend<STUDENT_MODEL>> {
 

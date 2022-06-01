@@ -18,48 +18,16 @@
 
 <?import javafx.scene.layout.VBox ?>
 <?import javafx.scene.layout.HBox ?>
+<?import javafx.scene.layout.Pane ?>
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
-    fx:controller="ca.ntro.cards.foo.frontend.views.FooProcedureDashboardView" 
-    styleClass="container"
-    id="dashboard-view">
+    fx:controller="ca.ntro.cards.foo.frontend.views.fragments.FooEfficiencyMessageFragment" 
+    id="message-fragment">
 
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="selectionsContainer">
-    </VBox>
-
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="replayControlsContainer">
-    </VBox>
-
-    <VBox 
-        HBox.hgrow="ALWAYS"
-        styleClass="container"
-        fx:id="variablesContainer">
-    </VBox>
-
-    <VBox styleClass="bottom-right">
-
-        <Button
-            text="🗨"
-            fx:id="messageButton">
-        </Button>
-
-        <Button
-            text="☰"
-            fx:id="menuButton">
-        </Button>
-
-        <Label
-            fx:id="fpsLabel">
-        </Label>
-
-    </VBox>
+    <Label 
+        fx:id="messageLabel">
+     </Label>
 
 </HBox>

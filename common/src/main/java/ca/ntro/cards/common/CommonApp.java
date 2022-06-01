@@ -10,8 +10,10 @@ import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.frontend.views.CommonMessagesView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.frontend.views.fragments.CommonMessageFragment;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
@@ -50,16 +52,20 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
                                                               DASHBOARD_MODEL, 
                                                               SETTINGS_MODEL>,
                                    
-                                ROOT_VIEW       extends CommonRootView, 
-                                CARDS_VIEW      extends CommonCanvasView, 
-                                DASHBOARD_VIEW  extends CommonDashboardView,
-                                SETTINGS_VIEW   extends CommonSettingsView,
-                                VIEW_DATA       extends CommonViewData,
+                                ROOT_VIEW        extends CommonRootView, 
+                                CARDS_VIEW       extends CommonCanvasView, 
+                                DASHBOARD_VIEW   extends CommonDashboardView,
+                                SETTINGS_VIEW    extends CommonSettingsView,
+                                MESSAGES_VIEW    extends CommonMessagesView,
+                                MESSAGE_FRAGMENT extends CommonMessageFragment,
+                                VIEW_DATA        extends CommonViewData,
                                      
                                 FRONTEND extends CommonFrontend<ROOT_VIEW, 
                                                                 SETTINGS_VIEW, 
                                                                 CARDS_VIEW, 
                                                                 DASHBOARD_VIEW, 
+                                                                MESSAGES_VIEW,
+                                                                MESSAGE_FRAGMENT,
                                                                 VIEW_DATA,
                                                                 CANVAS_MODEL,
                                                                 DASHBOARD_MODEL,

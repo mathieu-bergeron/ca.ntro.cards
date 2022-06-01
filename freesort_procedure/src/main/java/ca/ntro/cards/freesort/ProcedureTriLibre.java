@@ -8,8 +8,10 @@ import ca.ntro.cards.freesort.frontend.FreesortProcedureFrontend;
 import ca.ntro.cards.freesort.frontend.FreesortProcedureViewData;
 import ca.ntro.cards.freesort.frontend.views.FreesortCardsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureDashboardView;
+import ca.ntro.cards.freesort.frontend.views.FreesortProcedureMessagesView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureRootView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureSettingsView;
+import ca.ntro.cards.freesort.frontend.views.fragments.FreesortProcedureMessageFragment;
 import ca.ntro.cards.freesort.messages.FreesortMsgAcceptManualModel;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.freesort.models.values.FreesortTestCase;
@@ -37,6 +39,8 @@ public abstract class   ProcedureTriLibre<STUDENT_MODEL extends TriLibre>
                                      FreesortCardsView,
                                      FreesortProcedureDashboardView,
                                      FreesortProcedureSettingsView,
+                                     FreesortProcedureMessagesView,
+                                     FreesortProcedureMessageFragment,
                                      FreesortProcedureViewData,
                                      FreesortProcedureFrontend<STUDENT_MODEL>> {
 

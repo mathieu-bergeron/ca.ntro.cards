@@ -7,6 +7,7 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.frontend.DashboardSubViewsLambda;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
 import ca.ntro.cards.common.frontend.views.CommonDashboardView;
+import ca.ntro.cards.common.frontend.views.CommonMessagesView;
 import ca.ntro.cards.common.frontend.views.CommonRootView;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
 import ca.ntro.cards.common.messages.MsgStartExecutionEngine;
@@ -22,12 +23,14 @@ public class Initialization {
 	public static <ROOT_VIEW      extends CommonRootView, 
 	               CANVAS_VIEW    extends CommonCanvasView,
 	               SETTINGS_VIEW  extends CommonSettingsView,
+	               MESSAGES_VIEW  extends CommonMessagesView,
 	               DASHBOARD_VIEW extends CommonDashboardView> 
 	
 	void createTasks(FrontendTasks tasks,
 			         Class<ROOT_VIEW> rootViewClass,
 			         Class<CANVAS_VIEW> cardsViewClass,
 			         Class<SETTINGS_VIEW> settingsViewClass,
+			         Class<MESSAGES_VIEW> messagesViewClass,
 			         Class<DASHBOARD_VIEW> dashboardViewClass,
 			         SubTasksLambda<FrontendTasks> addDashboardSubViewLoadersLabmda,
 			         DashboardSubViewsLambda dashboadSubViewsLamba,
@@ -48,6 +51,9 @@ public class Initialization {
 		    	 createSettingsView(subTasks,
 		    			            settingsViewClass);
 
+		    	 createMessagesView(subTasks,
+		    			            messagesViewClass);
+
 		    	 createDashboardView(subTasks,
 		    			             dashboardViewClass);
 		    	 
@@ -61,9 +67,13 @@ public class Initialization {
 		    	 registerSettingsView(subTasks,
 		    			              rootViewClass,
 		    			              settingsViewClass);
+
+		    	 registerMessagesView(subTasks,
+		    			              rootViewClass,
+		    			              messagesViewClass);
 		    	 
 		    	 installRootSubViews(subTasks,
-		    			         rootViewClass);
+		    			             rootViewClass);
 		    	 
 		    	 installDashboardView(subTasks,
 		    			              cardsViewClass,
@@ -123,6 +133,22 @@ public class Initialization {
 		    	 ViewLoader<SETTINGS_VIEW> settingsViewLoader = inputs.get(viewLoader(settingsViewClass));
 		    	 
 		    	 return settingsViewLoader.createView();
+		     });
+		
+	}
+
+	private static <MESSAGES_VIEW extends CommonMessagesView> void createMessagesView(FrontendTasks tasks,
+			                                                                          Class<MESSAGES_VIEW> messagesViewClass) {
+
+		tasks.task(create(messagesViewClass))
+		
+		     .waitsFor(viewLoader(messagesViewClass))
+		     
+		     .thenExecutesAndReturnsValue(inputs -> {
+		    	 
+		    	 ViewLoader<MESSAGES_VIEW> messagesViewLoader = inputs.get(viewLoader(messagesViewClass));
+		    	 
+		    	 return messagesViewLoader.createView();
 		     });
 		
 	}
@@ -198,6 +224,28 @@ public class Initialization {
 		    	 SETTINGS_VIEW settingsView = inputs.get(created(settingsViewClass));
 
 		    	 rootView.registerSettingsView(settingsView);
+		     });
+	}
+
+	private static <ROOT_VIEW     extends CommonRootView,
+	                MESSAGES_VIEW extends CommonMessagesView> 
+
+	        void registerMessagesView(FrontendTasks tasks,
+	        		                  Class<ROOT_VIEW> rootViewClass,
+	        		                  Class<MESSAGES_VIEW> messagesViewClass) {
+
+		tasks.task("registerMessagesView")
+		
+		     .waitsFor("installRootView")
+
+		     .waitsFor(created(messagesViewClass))
+		     
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 ROOT_VIEW     rootView     = inputs.get(created(rootViewClass));
+		    	 MESSAGES_VIEW messagesView = inputs.get(created(messagesViewClass));
+
+		    	 rootView.registerMessagesView(messagesView);
 		     });
 	}
 

@@ -7,9 +7,11 @@ import ca.ntro.cards.freesort.backend.FreesortEfficiencyBackend;
 import ca.ntro.cards.freesort.frontend.FreesortEfficiencyFrontend;
 import ca.ntro.cards.freesort.frontend.FreesortEfficiencyViewData;
 import ca.ntro.cards.freesort.frontend.views.FreesortEfficiencyDashboardView;
+import ca.ntro.cards.freesort.frontend.views.FreesortEfficiencyMessagesView;
 import ca.ntro.cards.freesort.frontend.views.FreesortEfficiencyRootView;
 import ca.ntro.cards.freesort.frontend.views.FreesortEfficiencySettingsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortGraphsView;
+import ca.ntro.cards.freesort.frontend.views.fragments.FreesortEfficiencyMessageFragment;
 import ca.ntro.cards.freesort.models.FreesortEfficiencyDashboardModel;
 import ca.ntro.cards.freesort.models.FreesortEfficiencySettingsModel;
 import ca.ntro.cards.freesort.models.FreesortGraphsModel;
@@ -35,6 +37,8 @@ public abstract class   FreesortEfficiencyApp<STUDENT_MODEL extends TriLibre>
                                       FreesortGraphsView,
                                       FreesortEfficiencyDashboardView,
                                       FreesortEfficiencySettingsView,
+                                      FreesortEfficiencyMessagesView,
+                                      FreesortEfficiencyMessageFragment,
                                       FreesortEfficiencyViewData,
                                       FreesortEfficiencyFrontend> {
 

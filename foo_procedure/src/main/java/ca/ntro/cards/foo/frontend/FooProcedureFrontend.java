@@ -8,12 +8,14 @@ import ca.ntro.cards.foo.frontend.views.FooProcedureRootView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureSettingsView;
 import ca.ntro.cards.foo.frontend.views.FooReplayView;
 import ca.ntro.cards.foo.frontend.views.FooVariablesView;
+import ca.ntro.cards.foo.frontend.views.fragments.FooProcedureMessageFragment;
 import ca.ntro.cards.foo.frontend.views.fragments.FooTestCaseFragment;
 import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.foo.models.FooProcedureDashboardModel;
 import ca.ntro.cards.foo.models.FooProcedureSettingsModel;
 import ca.ntro.cards.foo.frontend.views.FooCardsView;
+import ca.ntro.cards.foo.frontend.views.FooProcedureMessagesView;
 import ca.ntro.cards.foo.frontend.views.FooSelectionsView;
 import ca.ntro.cards.foo.frontend.views.FooProcedureDashboardView;
 
@@ -27,6 +29,8 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
                                  FooTestCaseFragment,
                                  FooReplayView,
                                  FooVariablesView,
+                                 FooProcedureMessagesView,
+                                 FooProcedureMessageFragment,
                                  FooProcedureViewData, 
                                  STUDENT_MODEL, // CanvasModel
                                  FooProcedureDashboardModel, 
@@ -112,6 +116,15 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
 		return FooTestCaseFragment.class;
 	}
 
+	@Override
+	protected Class<FooProcedureMessagesView> messagesViewClass() {
+		return FooProcedureMessagesView.class;
+	}
+
+	@Override
+	protected Class<FooProcedureMessageFragment> messageFragmentClass() {
+		return FooProcedureMessageFragment.class;
+	}
 
 
 }

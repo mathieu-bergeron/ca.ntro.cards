@@ -26,7 +26,7 @@ if [ "$1" = "" -o "$2" = "" ]; then
     exit 0
 fi
 
-foo_dir_prefix=_foo
+foo_dir_prefix=foo
 Foo=Foo
 foo=foo
 

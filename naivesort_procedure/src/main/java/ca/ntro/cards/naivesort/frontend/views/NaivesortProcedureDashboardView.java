@@ -20,6 +20,9 @@ public class NaivesortProcedureDashboardView extends ProcedureDashboardView {
 	private Button menuButton;
 
 	@FXML
+	private Button messageButton;
+
+	@FXML
 	private VBox selectionsContainer;
 
 	@FXML
@@ -33,6 +36,7 @@ public class NaivesortProcedureDashboardView extends ProcedureDashboardView {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("menuButton", menuButton);
+		Ntro.assertNotNull("messageButton", messageButton);
 		Ntro.assertNotNull("fpsLabel", fpsLabel);
 		Ntro.assertNotNull("selectionsContainer", selectionsContainer);
 		Ntro.assertNotNull("replayControlsContainer", replayControlsContainer);
@@ -65,6 +69,11 @@ public class NaivesortProcedureDashboardView extends ProcedureDashboardView {
 	@Override
 	protected Pane variablesContainer() {
 		return variablesContainer;
+	}
+
+	@Override
+	protected Button messageButton() {
+		return messageButton;
 	}
 
 
