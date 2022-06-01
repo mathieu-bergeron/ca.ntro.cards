@@ -1,8 +1,14 @@
 package ca.ntro.cards.arraylist.models;
 
 
+import ca.ntro.cards.common.commands.Command;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
@@ -22,8 +28,39 @@ public class   ListeTableau<C extends Comparable<C>>
                                    ArraylistProcedureDrawingOptions, 
                                    ArraylistProcedureViewData,
                                    ArraylistVariablesView> { 
+	
+	private Queue<Command> commands = new LinkedList<>();
+	
+	protected C[] grandTableau = (C[]) new Card[0];
 
-    @Override
+	protected int indicePremierElement;
+	protected int indiceDernierElement;
+
+    public C[] getGrandTableau() {
+		return grandTableau;
+	}
+
+	public void setGrandTableau(C[] grandTableau) {
+		this.grandTableau = grandTableau;
+	}
+
+	public int getIndicePremierElement() {
+		return indicePremierElement;
+	}
+
+	public void setIndicePremierElement(int indicePremierElement) {
+		this.indicePremierElement = indicePremierElement;
+	}
+
+	public int getIndiceDernierElement() {
+		return indiceDernierElement;
+	}
+
+	public void setIndiceDernierElement(int indiceDernierElement) {
+		this.indiceDernierElement = indiceDernierElement;
+	}
+
+	@Override
     public void copyDataFrom(ListeTableau other) {
         // TODO: copier les données telles quelles
 
@@ -78,15 +115,17 @@ public class   ListeTableau<C extends Comparable<C>>
     
     @Override
     public void run() {
-        studentMain();
+    	while(!commands.isEmpty()) {
+    		Command command = commands.remove();
+			executerLaCommande(command);
+    	}
     }
 
     @Override
     public void onAfterRunning() {
     }
 
-    // TODO: renommer
-    public void studentMain() {
+    public void executerLaCommande(Command commande) {
     }
 
     @Override
