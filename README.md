@@ -88,57 +88,24 @@ Plus à chaque fois qu'on change les cas de tests
 
 ## Énoncés de projet
 
-### Projet `cards_freesort` (ADRIEN)
+### Projets de familiarisation
 
-1. Trier les cartes librement
-1. Afficher selon le cas:
-    * Trié, bravo!
-    * Pas encore trié. Rappel ♥ < ♦ < ♣ < ♠
+1. Ajouter un attribut au modèle TriLibre
+    * attribut: boolean trie
+    * afficher la valeur de l'attribut (donc afficher true quand c'est trié)
 
-### Projet `cards_naivesort`
-
-1. Le jeu "force" l'utilisateur à trier une carte à la fois
-1. Deux rangées: liste source ET liste triée
-1. Les cartes sont face contre table et on peut en tourner seulemetn deux à la fois
-    * une carte marquée d'une flèche (la carte la plus petite)
-    * la carte courante (en cours d'évaluation dans une boucle)
-
-### Common et Playground
-
-1. Affichage des cartes 
-    * afficher des figures de carte arbitraire comme 145 coeur ou 13378 pique.
-    * rassembler les cartes en paquet (si on a plusieurs cartes au même endroit, afficher un paquet)
-1. Animations des cartes 
-    * animation pour retourner la carte
-    * animation pour étaler un paquer
+1. Compléter naivesort
+    * déplacer la prochaine petite carte dans la liste cible au bon endroit
+    * sinon, refuser le déplacement et laisser la carte où elle est
 
 
-### List
+1. Petits objectifs supplémentaires de familiaristion
+    * ajouter la vitesse aux options
+    * afficher les indices
+    * améliorer l'apparence p.ex. des variables
+    * afficher des cartes dans la vue des variales, etc.
 
-#### Jeu 1: rassembler les cartes par figure
+### Projets rémunérés
 
-1. Objectif
-    * tous les 2 ensemble, tous les 3 ensembles, etc.
-
-##### Méthode 1: quadratique
-
-1. Choisir la première carte du paquet
-    * s'il existe une pile avec cette figure, déposer la carte sur cette pile
-    * sinon
-        * chercher tout le paquet pour une carte avec la même figure
-        * déposer la paire sur une nouvelle pile
-1. Répéter
-
-##### Méthode 2: linéaire 
-
-1. Choisir la première carte du paquet
-    * s'il existe une pile avec cette figure, déposer la carte sur cette pile
-    * sinon créer une nouvelle pile
-1. Répéter
-
-
-### Map
-
-#### Jeu 1: créer un arbre équilibré
-
-#### Jeu 2: recherche binaire
+1. Adrien: fusionsort
+1. Marlond: arraylist
