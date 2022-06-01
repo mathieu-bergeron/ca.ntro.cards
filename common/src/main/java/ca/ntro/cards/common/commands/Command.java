@@ -1,6 +1,10 @@
 package ca.ntro.cards.common.commands;
 
-public abstract class Command<C extends Comparable<C>> {
+import java.io.Serializable;
+
+import ca.ntro.app.models.Value;
+
+public abstract class Command<C extends Comparable<C>> implements Value, Serializable {
 	
 	public abstract boolean isClear();
 	public abstract boolean isDelete();

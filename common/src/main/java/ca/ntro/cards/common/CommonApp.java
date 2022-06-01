@@ -6,6 +6,11 @@ import ca.ntro.app.frontend.FrontendRegistrarFx;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.common.backend.CommonBackend;
+import ca.ntro.cards.common.commands.AddCommand;
+import ca.ntro.cards.common.commands.ClearCommand;
+import ca.ntro.cards.common.commands.DeleteCommand;
+import ca.ntro.cards.common.commands.GetCommand;
+import ca.ntro.cards.common.commands.InsertCommand;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.frontend.CommonViewData;
 import ca.ntro.cards.common.frontend.views.CommonCanvasView;
@@ -96,6 +101,12 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 
 		registrar.registerValue(CommonExecutionTraceFull.class);
 		registrar.registerValue(CommonExecutionTraceSizeOnly.class);
+		
+		registrar.registerValue(AddCommand.class);
+		registrar.registerValue(ClearCommand.class);
+		registrar.registerValue(DeleteCommand.class);
+		registrar.registerValue(GetCommand.class);
+		registrar.registerValue(InsertCommand.class);
 
 		registerAdditionnalModels(registrar);
 	}

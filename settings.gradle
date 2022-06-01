@@ -39,6 +39,11 @@ include 'arraylist_efficiency'
 include 'arraylist_solution'
 project(':arraylist_solution').projectDir = file('solutions/arraylist_solution')
 
+include 'fusionsort_procedure'
+include 'fusionsort_efficiency'
+include 'fusionsort_solution'
+project(':fusionsort_solution').projectDir = file('solutions/fusionsort_solution')
+
 
 buildscript {
     repositories {
