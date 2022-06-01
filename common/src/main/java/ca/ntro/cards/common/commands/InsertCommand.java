@@ -1,6 +1,6 @@
 package ca.ntro.cards.common.commands;
 
-public class InsertCommand extends KeyValueCommand {
+public class InsertCommand<C extends Comparable<C>> extends KeyValueCommand<C> {
 
 	@Override
 	public boolean isClear() {
@@ -28,7 +28,7 @@ public class InsertCommand extends KeyValueCommand {
 	}
 
 	@Override
-	public AddCommand add() {
+	public AddCommand<C> add() {
 		throw new RuntimeException("[FATAL] command is not an AddCommand");
 	}
 
@@ -43,12 +43,12 @@ public class InsertCommand extends KeyValueCommand {
 	}
 
 	@Override
-	public GetCommand get() {
+	public GetCommand<C> get() {
 		throw new RuntimeException("[FATAL] command is not a GetCommand");
 	}
 
 	@Override
-	public InsertCommand insert() {
+	public InsertCommand<C> insert() {
 		return this;
 	}
 

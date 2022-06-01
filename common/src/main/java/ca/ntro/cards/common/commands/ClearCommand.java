@@ -29,7 +29,7 @@ public class ClearCommand extends Command {
 
 
 	@Override
-	public AddCommand add() {
+	public AddCommand<?> add() {
 		throw new RuntimeException("[FATAL] command is not an AddCommand");
 	}
 
@@ -44,12 +44,12 @@ public class ClearCommand extends Command {
 	}
 
 	@Override
-	public GetCommand get() {
+	public GetCommand<?> get() {
 		throw new RuntimeException("[FATAL] command is not a GetCommand");
 	}
 
 	@Override
-	public InsertCommand insert() {
+	public InsertCommand<?> insert() {
 		throw new RuntimeException("[FATAL] command is not an InsertCommand");
 	}
 

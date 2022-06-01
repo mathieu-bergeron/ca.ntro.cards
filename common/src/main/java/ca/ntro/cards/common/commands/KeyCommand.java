@@ -12,11 +12,11 @@ public abstract class KeyCommand extends Command {
 		this.key = key;
 	}
 	
-	public int getIndex() {
+	public int index() {
 		return Integer.valueOf(key);
 	}
 
-	public void setIndex(int index) {
+	public void registerIndex(int index) {
 		this.key = String.valueOf(index);
 	}
 

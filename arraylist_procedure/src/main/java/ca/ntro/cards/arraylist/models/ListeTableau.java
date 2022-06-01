@@ -1,13 +1,14 @@
 package ca.ntro.cards.arraylist.models;
 
 
+import ca.ntro.cards.common.commands.AddCommand;
 import ca.ntro.cards.common.commands.Command;
+import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
@@ -19,7 +20,6 @@ import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
 
-               // TODO: renommer
 public class   ListeTableau<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<ListeTableau, 
@@ -29,12 +29,15 @@ public class   ListeTableau<C extends Comparable<C>>
                                    ArraylistProcedureViewData,
                                    ArraylistVariablesView> { 
 	
-	private Queue<Command> commands = new LinkedList<>();
+	private List<Command<C>> commands = new ArrayList<>();
 	
-	protected C[] grandTableau = (C[]) new Card[0];
+	private C lastGet = null;
+	
+	protected C[] grandTableau = (C[]) new Card[1];
+	protected C[] nouveauGrandTableau = null;
 
-	protected int indicePremierElement;
-	protected int indiceDernierElement;
+	protected int indicePremierElement = 0;
+	protected int indiceDernierElement = 0;
 
     public C[] getGrandTableau() {
 		return grandTableau;
@@ -58,6 +61,22 @@ public class   ListeTableau<C extends Comparable<C>>
 
 	public void setIndiceDernierElement(int indiceDernierElement) {
 		this.indiceDernierElement = indiceDernierElement;
+	}
+
+	public List<Command<C>> getCommands() {
+		return commands;
+	}
+
+	public void setCommands(List<Command<C>> commands) {
+		this.commands = commands;
+	}
+
+	public C getLastGet() {
+		return lastGet;
+	}
+
+	public void setLastGet(C lastGet) {
+		this.lastGet = lastGet;
 	}
 
 	@Override
@@ -84,8 +103,13 @@ public class   ListeTableau<C extends Comparable<C>>
     @Override
     public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
         if(descriptor.testCaseId().equals("ex01")) {
+        	
+        	commands.add(new AddCommand(new Card(1, Suit.HEARTS)));
+        	commands.add(new AddCommand(new Card(3, Suit.CLUBS)));
+        	commands.add(new AddCommand(new Card(6, Suit.SPADES)));
+        	commands.add(new AddCommand(new Card(4, Suit.DIAMONDS)));
+        	commands.add(new AddCommand(new Card(9, Suit.HEARTS)));
 
-            // TODO: créer le case de test ex01
 
         }
 
@@ -95,7 +119,7 @@ public class   ListeTableau<C extends Comparable<C>>
     @Override
     public int testCaseSize() {
         // TODO: 
-    	return 0;
+    	return commands.size();
     }
     
     @Override
@@ -103,29 +127,65 @@ public class   ListeTableau<C extends Comparable<C>>
         return new StreamNtro<Card>() {
             @Override
             public void forEach_(Visitor<Card> visitor) throws Throwable {
-                // TODO: visiter chaque carte
+            	if(grandTableau != null) {
+					for(C card : grandTableau) {
+						visitor.visit((Card) card); 
+					}
+            	}
+
+            	if(nouveauGrandTableau != null) {
+					for(C card : nouveauGrandTableau) {
+						visitor.visit((Card) card); 
+					}
+            	}
             }
         };
     }
 
-    @Override
-    public void onBeforeRunning() {
-
-    }
     
     @Override
     public void run() {
     	while(!commands.isEmpty()) {
-    		Command command = commands.remove();
-			executerLaCommande(command);
+    		Command<C> command = commands.get(0);
+    		commands = commands.subList(1, commands.size());
+
+    		if(command.isAdd()) {
+
+    			ajouter(command.add().getValue());
+
+    		}else if(command.isGet()) {
+    			
+    			lastGet = obtenir(command.get().index());
+    			
+    		}else if(command.isDelete()) {
+    			
+    			retirer(command.delete().index());
+    			
+    		}else if(command.isInsert()) {
+    			
+    			inserer(command.insert().index(), command.insert().getValue());
+
+    		}
     	}
+    	
     }
 
-    @Override
-    public void onAfterRunning() {
+
+    public void ajouter(C valeur) {
     }
 
-    public void executerLaCommande(Command commande) {
+    public C obtenir(int index) {
+    	return null;
+    }
+
+    public void retirer(int index) {
+    }
+
+    public void inserer(int index, C valeur) {
+    }
+    
+    protected C[] creerGrandTableau(int size) {
+    	return (C[]) new Card[size];
     }
 
     @Override

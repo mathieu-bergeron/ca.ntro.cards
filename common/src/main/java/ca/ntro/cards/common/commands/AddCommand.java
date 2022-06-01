@@ -1,6 +1,12 @@
 package ca.ntro.cards.common.commands;
 
-public class AddCommand extends KeyValueCommand {
+import ca.ntro.cards.common.models.values.cards.Card;
+
+public class AddCommand<C extends Comparable<C>> extends ValueCommand<C> {
+
+	public AddCommand(Card card) {
+		super(card);
+	}
 
 	@Override
 	public boolean isClear() {
@@ -28,7 +34,7 @@ public class AddCommand extends KeyValueCommand {
 	}
 
 	@Override
-	public AddCommand add() {
+	public AddCommand<C> add() {
 		return this;
 	}
 
@@ -43,12 +49,12 @@ public class AddCommand extends KeyValueCommand {
 	}
 
 	@Override
-	public GetCommand get() {
+	public GetCommand<C> get() {
 		throw new RuntimeException("[FATAL] command is not a GetCommand");
 	}
 
 	@Override
-	public InsertCommand insert() {
+	public InsertCommand<C >insert() {
 		throw new RuntimeException("[FATAL] command is not an InsertCommand");
 	}
 

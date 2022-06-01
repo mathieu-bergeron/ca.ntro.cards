@@ -71,18 +71,11 @@ public class   FooCardsModel<C extends Comparable<C>>
         };
     }
 
-    @Override
-    public void onBeforeRunning() {
 
-    }
-    
     @Override
     public void run() {
+    	// TODO: adapter au besoin
         studentMain();
-    }
-
-    @Override
-    public void onAfterRunning() {
     }
 
     // TODO: renommer

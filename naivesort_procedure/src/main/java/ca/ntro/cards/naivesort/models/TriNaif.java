@@ -227,19 +227,8 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public void onBeforeRunning() {
-		indicePlusPetit = 0;
-		indiceCandidat = 0;
-		indiceProchainVide = 0;
-	}
-	
-	@Override
 	public void run() {
 		trier();
-	}
-
-	@Override
-	public void onAfterRunning() {
 	}
 
 	public void trier() {

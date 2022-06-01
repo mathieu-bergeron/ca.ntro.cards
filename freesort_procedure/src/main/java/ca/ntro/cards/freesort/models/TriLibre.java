@@ -147,21 +147,10 @@ public class   TriLibre<C extends Comparable<C>>
 			}
 		};
 	}
-	
 
-
-	@Override
-	public void onBeforeRunning() {
-
-	}
-	
 	@Override
 	public void run() {
 		triLibre();
-	}
-
-	@Override
-	public void onAfterRunning() {
 	}
 
 	public void triLibre() {
