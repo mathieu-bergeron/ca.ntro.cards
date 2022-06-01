@@ -94,9 +94,9 @@
 
 ## Créer un nouveau projet
 
-1. Le dépôt contient le répertoire `_foo` avec un projet bidon
+1. Le dépôt contient des répertoires `foo_*` avec des projets bidons
 
-1. Pour créer p.ex. le projet `Bar`, faire
+1. Pour créer p.ex. les projets `bar_*`, faire
 
         $ sh scripts/new_project.sh Bar bar
 
