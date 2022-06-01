@@ -120,5 +120,9 @@ public abstract class   ProcedureTriLibre<STUDENT_MODEL extends TriLibre>
 		return FreesortTestCaseDescriptor.class;
 	}
 
+	@Override
+	protected Class<FreesortMsgAcceptManualModel> msgAcceptManualModelClass() {
+		return FreesortMsgAcceptManualModel.class;
+	}
 
 }

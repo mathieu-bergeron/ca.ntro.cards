@@ -120,5 +120,8 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 		return NaivesortTestCaseDescriptor.class;
 	}
 
-
+	@Override
+	protected Class<NaivesortMsgAcceptManualModel> msgAcceptManualModelClass() {
+		return NaivesortMsgAcceptManualModel.class;
+	}
 }
