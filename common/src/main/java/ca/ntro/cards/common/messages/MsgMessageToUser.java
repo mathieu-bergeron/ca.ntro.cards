@@ -7,14 +7,14 @@ import ca.ntro.cards.common.frontend.views.fragments.CommonMessageFragment;
 
 public class MsgMessageToUser extends MessageNtro {
 	
-	private String message;
+	private String resourceKey;
 
-	public String getMessage() {
-		return message;
+	public String getResourceKey() {
+		return resourceKey;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setResourceKey(String resourceKey) {
+		this.resourceKey = resourceKey;
 	}
 
 	public void displayOn(CommonMessagesView messageView , 
@@ -22,7 +22,7 @@ public class MsgMessageToUser extends MessageNtro {
 		
 		CommonMessageFragment messageFragment = viewLoaderMessageFragment.createView();
 		
-		messageFragment.displayMessage(message);
+		messageFragment.displayMessageForResourceKey(resourceKey);
 		
 		messageView.addMessage(messageFragment);
 

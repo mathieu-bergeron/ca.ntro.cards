@@ -106,9 +106,9 @@ public class FooProcedureFrontend<STUDENT_MODEL extends FooCardsModel>
 	@Override
 	public void execute() {
 		super.execute();
-		
+
 		MsgMessageToUser msgMessageToUser = NtroApp.newMessage(MsgMessageToUser.class);
-		msgMessageToUser.setMessage("[INFO] Procedure app started");
+		msgMessageToUser.setResourceKey("welcome");
 		msgMessageToUser.send();
 	}
 

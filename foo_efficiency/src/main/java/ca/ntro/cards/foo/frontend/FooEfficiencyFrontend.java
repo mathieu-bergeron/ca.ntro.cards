@@ -73,7 +73,7 @@ public class FooEfficiencyFrontend
 		super.execute();
 		
 		MsgMessageToUser msgMessageToUser = NtroApp.newMessage(MsgMessageToUser.class);
-		msgMessageToUser.setMessage("[INFO] Efficiency app started");
+		msgMessageToUser.setResourceKey("welcome");
 		msgMessageToUser.send();
 	}
 

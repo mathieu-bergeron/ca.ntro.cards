@@ -9,13 +9,16 @@ import javafx.scene.control.Label;
 public abstract class CommonMessageFragment extends ViewFx {
 	
 	protected abstract Label messageLabel();
+	
+	private ResourceBundle resources;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.resources = resources;
 	}
 
-	public void displayMessage(String message) {
-		messageLabel().setText(message);
+	public void displayMessageForResourceKey(String resourceKey) {
+		messageLabel().setText(resources.getString(resourceKey));
 	}
 
 }

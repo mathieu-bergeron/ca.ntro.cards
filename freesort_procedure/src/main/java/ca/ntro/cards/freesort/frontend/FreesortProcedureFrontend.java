@@ -1,5 +1,6 @@
 package ca.ntro.cards.freesort.frontend;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.ViewRegistrarFx;
 import ca.ntro.app.frontend.events.EventRegistrar;
 import ca.ntro.app.tasks.SimpleTaskCreator;
@@ -14,6 +15,7 @@ import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.frontend.ProcedureFrontend;
 import ca.ntro.cards.freesort.models.FreesortProcedureDashboardModel;
 import ca.ntro.cards.freesort.models.FreesortProcedureSettingsModel;
+import ca.ntro.cards.common.messages.MsgMessageToUser;
 import ca.ntro.cards.freesort.frontend.views.FreesortCardsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortSelectionsView;
 import ca.ntro.cards.freesort.frontend.views.FreesortProcedureDashboardView;
@@ -124,6 +126,15 @@ public class FreesortProcedureFrontend<STUDENT_MODEL extends TriLibre>
 	@Override
 	protected Class<FreesortProcedureMessageFragment> messageFragmentClass() {
 		return FreesortProcedureMessageFragment.class;
+	}
+
+	@Override
+	public void execute() {
+		super.execute();
+
+		MsgMessageToUser msgMessageToUser = NtroApp.newMessage(MsgMessageToUser.class);
+		msgMessageToUser.setResourceKey("welcome");
+		msgMessageToUser.send();
 	}
 
 
