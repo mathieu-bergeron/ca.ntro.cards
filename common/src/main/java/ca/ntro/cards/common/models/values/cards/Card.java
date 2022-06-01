@@ -191,4 +191,9 @@ public class   Card<OPTIONS extends CommonDrawingOptions>
 		
 		return false;
 	}
+	
+	public Card clone() {
+		Card clone = new Card(rank, suit);
+		return clone;
+	}
 }

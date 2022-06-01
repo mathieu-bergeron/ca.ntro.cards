@@ -10,6 +10,7 @@ import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureDrawingOptions
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureObject2d;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -64,6 +65,8 @@ public class   TriFusion<C extends Comparable<C>>
     public void copyDataFrom(TriFusion other) {
 		tableau = (C[]) new Card[other.tableau.length];
 		for(int i = 0; i < tableau.length; i++) {
+			//Card card = (Card) other.tableau[i];
+			//Card clone = card.clone();
 			tableau[i] = (C) other.tableau[i];
 		}
 		
