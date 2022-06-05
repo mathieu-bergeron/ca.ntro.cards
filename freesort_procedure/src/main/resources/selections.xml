@@ -29,6 +29,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.freesort.frontend.views.FreesortSelectionsView" 
     id="selections-view">
+<!-- ce fichier xml existe pour créer la vue de la section à droite, du zoom. Il y a les deux fonctionnalités (Cas de test et mode)-->
 
     <HBox styleClass="bottom">
 

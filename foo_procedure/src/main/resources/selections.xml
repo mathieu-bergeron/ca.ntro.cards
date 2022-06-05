@@ -25,7 +25,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.collections.FXCollections ?>
 <?import java.lang.String?>
-
+<!-- ce fichier xml existe pour créer la vue de la section à droite, du zoom. Il y a les deux fonctionnalités (Cas de test et mode)-->
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.foo.frontend.views.FooSelectionsView" 
     id="selections-view">

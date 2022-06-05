@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.HBox ?>
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
-
+<!-- Représente fooVar, c'est ici qu'on devra dire si oui ou non le tableau est triée-->
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.foo.frontend.views.FooVariablesView" 
     id="variables-view">
@@ -49,6 +49,12 @@
             fx:id="fooVar02Label"
             styleClass="text-big">
         </Label>
+		<!--
+			<Label
+            fx:id="StateTrieLabel"
+            styleClass="text-big">
+        	</Label>
+		 -->
     </HBox>
 
 

@@ -27,6 +27,8 @@ public class   TriLibre<C extends Comparable<C>>
                                    FreesortVariablesView> { 
 	
 	protected Card[] cartes = new Card[0];
+	
+	private boolean trie=false;
 
 	public Card[] getCartes() {
 		return cartes;
@@ -34,6 +36,15 @@ public class   TriLibre<C extends Comparable<C>>
 
 	public void setCartes(Card[] cartes) {
 		this.cartes = cartes;
+	}
+	
+
+	public boolean isTrie() {
+		return trie;
+	}
+
+	public void setTrie(boolean trie) {
+		this.trie = trie;
 	}
 
 	@Override
@@ -102,6 +113,7 @@ public class   TriLibre<C extends Comparable<C>>
 					new Card(2, Suit.HEARTS),
 					new Card(5, Suit.DIAMONDS),
 			};
+			trie=false;
 
 		}else if(descriptor.testCaseId().contentEquals("ex02")) {
 
@@ -112,7 +124,7 @@ public class   TriLibre<C extends Comparable<C>>
 					new Card(3, Suit.SPADES),
 					new Card(5, Suit.SPADES),
 			};
-			
+			trie=false;
 		}
 
 	}
@@ -168,6 +180,50 @@ public class   TriLibre<C extends Comparable<C>>
 		}
 
 		variablesView.displayFooVar01(String.valueOf(indexOfFirstHearts));
+	
+		//On peut changer la valeur trie si oui ou non l'ordre des cartes est valide
+		 Card[] cartesTriees = new Card[cartes.length];
+		 int posMin;
+		for(int i = 0; i < cartes.length; ++i) {
+			posMin=i;
+			for(int j = i+1; i < cartes.length; ++j) {
+				if(cartes[posMin].getSuit()==cartes[j].getSuit()) {
+					if(cartes[j].getRank()<cartes[posMin].getRank()) {
+						posMin=j;
+					}
+					
+				  }else {
+					  if(cartes[posMin].getSuit()!=cartes[j].getSuit()) {
+							if(cartes[posMin].getSuit()==Suit.HEARTS) {
+								
+							}
+							if(cartes[posMin].getSuit()!=Suit.HEARTS && cartes[j].getSuit()==Suit.HEARTS) {
+								posMin=j;
+							}
+							if(cartes[posMin].getSuit()==Suit.DIAMONDS && cartes[j].getSuit()==Suit.HEARTS) {
+								posMin=j;
+							}
+							if(cartes[posMin].getSuit()==Suit.CLUBS && (cartes[j].getSuit()==Suit.HEARTS ||cartes[j].getSuit()==Suit.DIAMONDS)) {
+								posMin=j;
+							}
+							if(cartes[posMin].getSuit()==Suit.SPADES && cartes[j].getSuit()!=Suit.SPADES) {
+								posMin=j;
+							}
+					  }
+				  }
+			}
+			if(posMin!=i) {
+				cartesTriees[i]=cartes[posMin];
+			}
+		}
+		cartesTriees.toString();
+		if(cartesTriees.toString()==cartes.toString()) {
+			trie=true;
+		}else {
+			trie=false;
+		}
+		variablesView.displayFooVar02(String.valueOf(trie));
+		
 	}
 
 

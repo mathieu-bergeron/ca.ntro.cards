@@ -28,5 +28,9 @@ public class FreesortVariablesView extends ProcedureVariablesView {
 	public void displayFooVar01(String fooVar01) {
 		freesortVar01Label.setText(fooVar01);
 	}
+	//méthode ajouter, Elle sera utile pour dire si les cartes sont triées ou non
+	public void displayFooVar02(String fooVar02) {
+		freesortVar02Label.setText(fooVar02);
+	}
 
 }
