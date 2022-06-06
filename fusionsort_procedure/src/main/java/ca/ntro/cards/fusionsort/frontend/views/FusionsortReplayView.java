@@ -84,4 +84,14 @@ public class FusionsortReplayView extends ProcedureReplayView {
 		return currentStepLabel;
 	}
 
+	@Override
+	protected Button rewindButton() {
+		return null;
+	}
+
+	@Override
+	protected Button fastForwardButton() {
+		return null;
+	}
+
 }

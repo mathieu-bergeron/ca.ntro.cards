@@ -15,6 +15,8 @@ import ca.ntro.cards.frontend.views.ProcedureRootView;
 import ca.ntro.cards.frontend.views.ProcedureSettingsView;
 import ca.ntro.cards.frontend.views.fragments.ProcedureMessageFragment;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
+import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
@@ -106,8 +108,12 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
 		super.registerMessages(registrar);
 
 		registrar.registerMessage(MsgToggleUseFourCardColors.class);
+
+		registrar.registerMessage(MsgExecutionRewindToFirstStep.class);
 		registrar.registerMessage(MsgExecutionStepBack.class);
 		registrar.registerMessage(MsgExecutionStepForward.class);
+		registrar.registerMessage(MsgExecutionFastForwardToLastStep.class);
+
 		registrar.registerMessage(MsgChangeCurrentTestCase.class);
 		registrar.registerMessage(msgAcceptManualModelClass());
 

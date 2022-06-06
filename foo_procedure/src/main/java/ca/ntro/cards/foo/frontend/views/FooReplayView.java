@@ -33,6 +33,12 @@ public class FooReplayView extends ProcedureReplayView {
 	@FXML
 	private Button backStepButton;
 
+	@FXML
+	private Button rewindButton;
+
+	@FXML
+	private Button fastForwardButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -43,6 +49,8 @@ public class FooReplayView extends ProcedureReplayView {
 		Ntro.assertNotNull("pauseButton", pauseButton);
 		Ntro.assertNotNull("oneStepButton", oneStepButton);
 		Ntro.assertNotNull("backStepButton", backStepButton);
+		Ntro.assertNotNull("rewindButton", rewindButton);
+		Ntro.assertNotNull("fastForwardButton", fastForwardButton);
 		
 		
 		
@@ -82,6 +90,16 @@ public class FooReplayView extends ProcedureReplayView {
 	@Override
 	protected Label currentStepLabel() {
 		return currentStepLabel;
+	}
+
+	@Override
+	protected Button rewindButton() {
+		return rewindButton;
+	}
+
+	@Override
+	protected Button fastForwardButton() {
+		return fastForwardButton;
 	}
 
 }

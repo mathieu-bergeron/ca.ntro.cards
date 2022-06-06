@@ -4,6 +4,8 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
+import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
@@ -103,9 +105,13 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		     
 		     .andContains(subTasks -> {
 
+				executionRewind(subTasks);
+
 				executionStepBack(subTasks);
 
 				executionStepForward(subTasks);
+
+				executionFastForward(subTasks);
 				
 				changeCurrentTestCase(subTasks);
 				
@@ -116,6 +122,22 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 
 	protected void addSubTasksToAccessTestCaseDatabase(BackendTasks subTasks) {
 		
+	}
+
+	private void executionRewind(BackendTasks tasks) {
+		tasks.task("executionRewind")
+		
+		     .waitsFor(message(MsgExecutionRewindToFirstStep.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 testCaseDatabase().rewindToFirstStep();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		     });
 	}
 
 	private void executionStepBack(BackendTasks tasks) {
@@ -132,6 +154,38 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 
+		     });
+	}
+
+	private void executionStepForward(BackendTasks tasks) {
+		tasks.task("executionStepForward")
+		
+		     .waitsFor(message(MsgExecutionStepForward.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 testCaseDatabase().stepForward();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		     });
+	}
+
+	private void executionFastForward(BackendTasks tasks) {
+		tasks.task("executionFastForward")
+		
+		     .waitsFor(message(MsgExecutionFastForwardToLastStep.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+		    	 
+		    	 testCaseDatabase().fastForwardToLastStep();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 		     });
 	}
 
@@ -155,21 +209,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		     });
 	}
 
-	private void executionStepForward(BackendTasks tasks) {
-		tasks.task("executionStepForward")
-		
-		     .waitsFor(message(MsgExecutionStepForward.class))
 
-		     .thenExecutes(inputs -> {
-		    	 
-		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
-		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
-		    	 
-		    	 testCaseDatabase().stepForward();
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
-		     });
-	}
 
 	private void acceptManualModel(BackendTasks tasks) {
 		tasks.task("acceptManualModel")
