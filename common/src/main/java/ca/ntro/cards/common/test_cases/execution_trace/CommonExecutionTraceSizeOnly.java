@@ -46,4 +46,12 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 	public void truncateAfterCurrentStep() {
 	}
 
+	@Override
+	public void rewindToFirstStep() {
+	}
+
+	@Override
+	public void fastForwardToLastStep() {
+	}
+
 }
