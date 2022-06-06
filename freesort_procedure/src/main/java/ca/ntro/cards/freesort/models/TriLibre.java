@@ -39,7 +39,7 @@ public class   TriLibre<C extends Comparable<C>>
 	}
 	
 
-	public boolean isTrie() {
+	public boolean getTrie() {
 		return trie;
 	}
 
@@ -50,7 +50,8 @@ public class   TriLibre<C extends Comparable<C>>
 	@Override
 	public void copyDataFrom(TriLibre other) {
 		cartes = new Card[other.cartes.length];
-		
+		//On prend la valeur de trie 
+		trie=other.getTrie();
 		for(int i = 0; i < cartes.length; i++) {
 			cartes[i] = other.cartes[i];
 		}
@@ -73,22 +74,26 @@ public class   TriLibre<C extends Comparable<C>>
 				}
 			}
 		}
-		isTargetSorted();
+		trie=isTargetSorted();
 		return modified;
 	}
-	private void isTargetSorted() {
+	private boolean isTargetSorted() {
+		//Cette méthode est utile pour savoir si les cartes sont triées ou non
+		boolean sorted=false;
 		int nbTri=0;
 		for(int i = 0; i < cartes.length; ++i) {
-
+				if(i<cartes.length-1) {
 				if(cartes[i].compareTo(cartes[i+1])< 0) {
 						nbTri++;
 				  }
+				}
 			}
-		if(nbTri==cartes.length) {
-			trie=true;
+		if(nbTri==cartes.length-1) {
+			sorted=true;
 		}else {
-			trie=false;
+			sorted=false;
 		}
+		return sorted;
 		
 	}
 
