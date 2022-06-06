@@ -29,7 +29,7 @@ public class   TriLibre<C extends Comparable<C>>
 	protected Card[] cartes = new Card[0];
 	
 	private boolean trie=false;
-
+	
 	public Card[] getCartes() {
 		return cartes;
 	}
@@ -39,7 +39,7 @@ public class   TriLibre<C extends Comparable<C>>
 	}
 	
 
-	public boolean isTrie() {
+	public boolean getTrie() {
 		return trie;
 	}
 
@@ -78,13 +78,13 @@ public class   TriLibre<C extends Comparable<C>>
 	}
 	private void isTargetSorted() {
 		int nbTri=0;
-		for(int i = 0; i < cartes.length; ++i) {
+		for(int i = 0; i < cartes.length -1; ++i) {
 
 				if(cartes[i].compareTo(cartes[i+1])< 0) {
 						nbTri++;
 				  }
 			}
-		if(nbTri==cartes.length) {
+		if(nbTri==cartes.length-1) {
 			trie=true;
 		}else {
 			trie=false;
