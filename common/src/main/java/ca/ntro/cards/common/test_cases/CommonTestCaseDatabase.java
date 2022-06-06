@@ -288,6 +288,10 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		}
 	}
 
+	public void rewindToFirstStep() {
+		currentTestCase().rewindToFirstStep(Mode.MANUAL);
+	}
+
 	public void stepForward() {
 		currentTestCase().stepForward(Mode.MANUAL);
 	}
@@ -298,6 +302,10 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 
 	public void stepBackward() {
 		currentTestCase().stepBackward(Mode.MANUAL);
+	}
+
+	public void fastForwardToLastStep() {
+		currentTestCase().fastForwardToLastStep(Mode.MANUAL);
 	}
 
 	@SuppressWarnings("unchecked")

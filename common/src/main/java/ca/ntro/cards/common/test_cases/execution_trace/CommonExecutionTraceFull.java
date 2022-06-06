@@ -103,4 +103,14 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 			current = trace.size() - 1;
 		}
 	}
+
+	@Override
+	public void rewindToFirstStep() {
+		current = 0;
+	}
+
+	@Override
+	public void fastForwardToLastStep() {
+		current = trace.size() - 1;
+	}
 }

@@ -176,5 +176,13 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	public boolean loaded(Mode mode) {
 		return false;
 	}
+
+	public void rewindToFirstStep(Mode mode) {
+		executionTraceByMode(mode).rewindToFirstStep();
+	}
+
+	public void fastForwardToLastStep(Mode mode) {
+		executionTraceByMode(mode).fastForwardToLastStep();
+	}
 	
 }
