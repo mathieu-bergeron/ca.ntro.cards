@@ -73,8 +73,23 @@ public class   TriLibre<C extends Comparable<C>>
 				}
 			}
 		}
-
+		isTargetSorted();
 		return modified;
+	}
+	private void isTargetSorted() {
+		int nbTri=0;
+		for(int i = 0; i < cartes.length; ++i) {
+
+				if(cartes[i].compareTo(cartes[i+1])< 0) {
+						nbTri++;
+				  }
+			}
+		if(nbTri==cartes.length) {
+			trie=true;
+		}else {
+			trie=false;
+		}
+		
 	}
 
 	@Override
@@ -182,46 +197,6 @@ public class   TriLibre<C extends Comparable<C>>
 		variablesView.displayFooVar01(String.valueOf(indexOfFirstHearts));
 	
 		//On peut changer la valeur trie si oui ou non l'ordre des cartes est valide
-		 Card[] cartesTriees = new Card[cartes.length];
-		 int posMin;
-		for(int i = 0; i < cartes.length; ++i) {
-			posMin=i;
-			for(int j = i+1; i < cartes.length; ++j) {
-				if(cartes[posMin].getSuit()==cartes[j].getSuit()) {
-					if(cartes[j].getRank()<cartes[posMin].getRank()) {
-						posMin=j;
-					}
-					
-				  }else {
-					  if(cartes[posMin].getSuit()!=cartes[j].getSuit()) {
-							if(cartes[posMin].getSuit()==Suit.HEARTS) {
-								
-							}
-							if(cartes[posMin].getSuit()!=Suit.HEARTS && cartes[j].getSuit()==Suit.HEARTS) {
-								posMin=j;
-							}
-							if(cartes[posMin].getSuit()==Suit.DIAMONDS && cartes[j].getSuit()==Suit.HEARTS) {
-								posMin=j;
-							}
-							if(cartes[posMin].getSuit()==Suit.CLUBS && (cartes[j].getSuit()==Suit.HEARTS ||cartes[j].getSuit()==Suit.DIAMONDS)) {
-								posMin=j;
-							}
-							if(cartes[posMin].getSuit()==Suit.SPADES && cartes[j].getSuit()!=Suit.SPADES) {
-								posMin=j;
-							}
-					  }
-				  }
-			}
-			if(posMin!=i) {
-				cartesTriees[i]=cartes[posMin];
-			}
-		}
-		cartesTriees.toString();
-		if(cartesTriees.toString()==cartes.toString()) {
-			trie=true;
-		}else {
-			trie=false;
-		}
 		variablesView.displayFooVar02(String.valueOf(trie));
 		
 	}
