@@ -26,7 +26,7 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 		
 		manualButton().setOnAction(evtFx -> {
 			
-			msgChangeCurrentTestCase.setTestCaseId(manualButton().getText());
+			msgChangeCurrentTestCase.setTestCaseId(testCaseId);
 			msgChangeCurrentTestCase.send();
 			
 		});
