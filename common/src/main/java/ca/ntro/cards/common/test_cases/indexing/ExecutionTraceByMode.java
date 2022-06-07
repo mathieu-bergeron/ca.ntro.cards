@@ -8,6 +8,7 @@ import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.enums.Attempt;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
@@ -66,14 +67,21 @@ public class ExecutionTraceByMode<EXECUTABLE_MODEL extends CommonExecutableModel
 		};
 	}
 
-	public void addAttempDescriptors(CommonTestCaseDescriptor testCaseDescriptor) {
-		for(Map.Entry<String, CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL>> entry : traceByMode.entrySet()) {
+	public void addAttemptDescriptors(CommonTestCaseDescriptor testCaseDescriptor) {
+		for(String attemptName : traceByMode.keySet()) {
+			Attempt attempt = Attempt.valueOf(attemptName);
 
-			Attempt attempt = Attempt.valueOf(entry.getKey());
-			CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> trace = entry.getValue();
-			
-			testCaseDescriptor.addAttemptDescriptor(attempt, trace.asAttemptDescriptor());
+			testCaseDescriptor.addAttemptDescriptor(attempt, attemptDescriptor(testCaseDescriptor, attempt));
 		}
+	}
+
+	public AbstractAttemptDescriptor attemptDescriptor(CommonTestCaseDescriptor testCaseDescriptor, Attempt attempt) {
+
+		CommonAttemptDescriptor attemptDescriptor = (CommonAttemptDescriptor) traceByMode.get(attempt.name()).asAttemptDescriptor();
+		attemptDescriptor.setParentTestCase(testCaseDescriptor);
+		attemptDescriptor.setAttempt(attempt);
+
+		return attemptDescriptor;
 	}
 
 }

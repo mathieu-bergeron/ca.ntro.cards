@@ -81,7 +81,7 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	private void displayIsCurrentAttempt(Button button, AbstractAttemptDescriptor attempt) {
 		if(attempt.isCurrentAttempt()) {
 
-			button.setStyle("-fx-background-color: blue");
+			button.setStyle("-fx-background-color: lightblue");
 
 		}else {
 

@@ -29,7 +29,7 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
 
 	public void addOrUpdateTestCases(DASHBOARD_MODEL dashboardModel) {
 		testCases().forEach(testCase -> {
-			
+
 			dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
 
 		});

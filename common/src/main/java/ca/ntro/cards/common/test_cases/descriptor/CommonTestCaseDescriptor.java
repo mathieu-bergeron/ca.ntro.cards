@@ -22,7 +22,7 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 	private Map<String, ATTEMPT> attempts = new HashMap<>();
 	private ATTEMPT currentAttempt;
 	
-	private CurrentTestCaseHolder currentTestCaseHolder; 
+	private CurrentAttemptHolder parentModel; 
 
 	public String getCategory() {
 		return category;
@@ -66,6 +66,14 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 		return getTestCaseId();
 	}
 
+	public CurrentAttemptHolder getParentModel() {
+		return parentModel;
+	}
+
+	public void setParentModel(CurrentAttemptHolder parentModel) {
+		this.parentModel = parentModel;
+	}
+
 	@Override
 	public int inputSize() {
 		return getInputSize();
@@ -90,18 +98,12 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 		return this;
 	}
 
-	@Override
 	public ATTEMPT attempt(Attempt attempt) {
 		return attempts.get(attempt.name());
 	}
 
-	public boolean isCurrentAttempt(CommonAttemptDescriptor attempt) {
-		return currentAttempt == attempt;
-	}
-
-	@Override
-	public boolean isCurrentTestCase() {
-		return currentTestCaseHolder.isCurrentTestCase(this);
+	public boolean isCurrentAttempt(Attempt attempt) {
+		return parentModel.isCurrentAttempt(getTestCaseId(), attempt);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -111,9 +113,9 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 
 	public void setLoaded(boolean isLoaded) {
 		for(ATTEMPT attempt : attempts.values()) {
-			
 			((CommonAttemptDescriptor) attempt).setIsLoaded(isLoaded);
 		}
 	}
+
 
 }

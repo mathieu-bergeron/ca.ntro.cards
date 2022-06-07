@@ -7,6 +7,7 @@ import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CurrentAttemptHolder;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -25,7 +26,9 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
                                               SELECTIONS_VIEW    extends ProcedureSelectionsView,
                                               TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment>
 
-       extends CommonDashboardModel<DASHBOARD_VIEW, TEST_CASE, TEST_CASE_DATABASE> {
+       extends CommonDashboardModel<DASHBOARD_VIEW, TEST_CASE, TEST_CASE_DATABASE> 
+
+       implements CurrentAttemptHolder {
     	   
     	   
     private long version = 0;
@@ -80,6 +83,8 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 
 	public void loadCurrentTestCase(TEST_CASE_DATABASE testCaseDatabase) {
 		TEST_CASE descriptor = (TEST_CASE) testCaseDatabase.loadTestCase(currentTestCaseId);
+		
+		descriptor.setParentModel(this);
 
 		addOrUpdateTestCase(descriptor);
 	}
@@ -103,6 +108,9 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 
 	@Override
 	public void addOrUpdateTestCase(TEST_CASE testCaseDescriptor) {
+		
+		testCaseDescriptor.setParentModel(this);
+
 		byId.addTestCase(testCaseDescriptor);
 		byCategory.addTestCase(testCaseDescriptor);
 		
@@ -203,6 +211,11 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	@Override
 	public void loadDbFromDir(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.loadFromDbDir(currentTestCaseId);
+	}
+
+	@Override
+	public boolean isCurrentAttempt(String testCaseId, Attempt attempt) {
+		return currentTestCaseId.equals(testCaseId) && currentAttempt.equals(attempt);
 	}
 
 }

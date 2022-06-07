@@ -1,15 +1,34 @@
 package ca.ntro.cards.common.test_cases.descriptor;
 
+import ca.ntro.cards.common.models.enums.Attempt;
+
 public class CommonAttemptDescriptor implements AbstractAttemptDescriptor {
 
 	private static final long serialVersionUID = -1330131719442951296L;
 
+	private Attempt attempt;
 	private int numberOfSteps;
 	private int currentStep;
 	private boolean isASolution;
 	private boolean isLoaded;
 	
 	private CommonTestCaseDescriptor parentTestCase;
+
+	public Attempt getAttempt() {
+		return attempt;
+	}
+
+	public void setAttempt(Attempt attempt) {
+		this.attempt = attempt;
+	}
+
+	public CommonTestCaseDescriptor getParentTestCase() {
+		return parentTestCase;
+	}
+
+	public void setParentTestCase(CommonTestCaseDescriptor parentTestCase) {
+		this.parentTestCase = parentTestCase;
+	}
 
 	public int getNumberOfSteps() {
 		return numberOfSteps;
@@ -56,7 +75,7 @@ public class CommonAttemptDescriptor implements AbstractAttemptDescriptor {
 
 	@Override
 	public boolean isCurrentAttempt() {
-		return parentTestCase.isCurrentAttempt(this);
+		return parentTestCase.isCurrentAttempt(attempt);
 	}
 
 	@Override

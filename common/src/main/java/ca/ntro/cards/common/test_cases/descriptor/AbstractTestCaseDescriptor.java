@@ -13,10 +13,6 @@ public interface AbstractTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescr
 
 	int inputSize();
 
-	boolean isCurrentTestCase();
-	
-	ATTEMPT attempt(Attempt attempt);
-
 	public static CommonTestCaseDescriptor create() {
 		CommonTestCaseDescriptor descriptor = new CommonTestCaseDescriptor();
 		return descriptor;

@@ -6,6 +6,7 @@ import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CurrentAttemptHolder;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
 import ca.ntro.core.initialization.Ntro;
@@ -29,7 +30,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 
 	private ExecutionTraceByMode<EXECUTABLE_MODEL, DASHBOARD_MODEL> traces = new ExecutionTraceByMode<>();
 	private boolean passed;
-
+	
 	public String getCategory() {
 		return category;
 	}
@@ -146,7 +147,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		testCaseDescriptor.setInputSize(inputSize());
 		testCaseDescriptor.setTestCaseId(testCaseId);
 
-		traces.addAttempDescriptors(testCaseDescriptor);
+		traces.addAttemptDescriptors(testCaseDescriptor);
 
 		return testCaseDescriptor;
 	}
@@ -161,15 +162,4 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	public void fastForwardToLastStep(Attempt mode) {
 		executionTraceByMode(mode).fastForwardToLastStep();
 	}
-
-	@Override
-	public boolean isCurrentTestCase() {
-		return false;
-	}
-
-	@Override
-	public AbstractAttemptDescriptor attempt(Attempt attempt) {
-		return null;
-	}
-	
 }
