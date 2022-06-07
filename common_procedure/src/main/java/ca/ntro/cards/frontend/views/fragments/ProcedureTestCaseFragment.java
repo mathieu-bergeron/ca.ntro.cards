@@ -19,6 +19,9 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	protected abstract Button codeButton();
 	protected abstract Button solutionButton();
 	
+	private String solutionText;
+	private String errorText;
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -30,6 +33,9 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 			msgChangeCurrentTestCase.send();
 			
 		});
+		
+		this.solutionText = resources.getString("solutionText");
+		this.errorText = resources.getString("errorText");
 	}
 
 	public void displayTestCaseId(String testCaseId) {
@@ -40,16 +46,34 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 		inputSizeLabel().setText(inputSize);
 	}
 
-	public void displaySolution(String numberOfSteps) {
+	public void displaySolution(boolean isCurrentMode, String numberOfSteps) {
+
 		solutionButton().setText(numberOfSteps);
+
 	}
 
-	public void displayManual(String label) {
-		solutionButton().setText(label);
+	public void displayManual(boolean isCurrentMode, boolean isSolution) {
+
+		displayIsSolution(manualButton(), isSolution);
+
 	}
 
-	public void displayCode(String label) {
-		codeButton().setText(label);
+	public void displayCode(boolean isCurrentMode, boolean isSolution) {
+
+		displayIsSolution(codeButton(), isSolution);
+
+	}
+
+	private void displayIsSolution(Button button, boolean isSolution) {
+		if(isSolution) {
+
+			button.setText(solutionText);
+
+		}else {
+
+			button.setText(errorText);
+		}
+
 	}
 
 	public void enableTestCaseSelection() {

@@ -3,7 +3,9 @@ package ca.ntro.cards.common.test_cases.descriptor;
 import ca.ntro.cards.common.models.enums.Mode;
 
 public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
-	
+
+	private static final long serialVersionUID = -6757195432385501062L;
+
 	private static long nextId = 0;
 	
 	private String category = "_noCategory";
