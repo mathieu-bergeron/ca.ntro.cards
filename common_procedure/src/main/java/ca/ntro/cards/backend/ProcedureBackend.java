@@ -133,8 +133,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
-		    	 
-		    	 testCaseDatabase().rewindToFirstStep();
+
+		    	 dashboardModel.rewindToFirstStep(testCaseDatabase());
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 		     });
@@ -150,7 +150,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
-		    	 testCaseDatabase().stepBackward();
+		    	 dashboardModel.stepBackward(testCaseDatabase());
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 
@@ -167,7 +167,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
-		    	 testCaseDatabase().stepForward();
+		    	 dashboardModel.stepForward(testCaseDatabase());
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 		     });
@@ -183,7 +183,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
-		    	 testCaseDatabase().fastForwardToLastStep();
+		    	 dashboardModel.fastFowardToLastStep(testCaseDatabase());
 		    	 testCaseDatabase().updateCardsModel(cardsModel);
 		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
 		     });

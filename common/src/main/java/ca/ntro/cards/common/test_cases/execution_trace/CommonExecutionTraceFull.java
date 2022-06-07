@@ -8,6 +8,8 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -112,5 +114,17 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 	@Override
 	public void fastForwardToLastStep() {
 		current = trace.size() - 1;
+	}
+
+	@Override
+	public AbstractAttemptDescriptor asAttemptDescriptor() {
+		CommonAttemptDescriptor attempt = new CommonAttemptDescriptor();
+		
+		attempt.setCurrentStep(current);
+		attempt.setIsASolution(false);
+		attempt.setIsLoaded(true);
+		attempt.setNumberOfSteps(trace.size());
+
+		return attempt;
 	}
 }

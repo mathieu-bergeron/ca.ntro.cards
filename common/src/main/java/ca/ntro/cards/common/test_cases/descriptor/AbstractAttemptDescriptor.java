@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 import ca.ntro.app.models.Value;
 
-public interface AbstractTestCaseAttemptDescriptor extends Value, Serializable {
+public interface AbstractAttemptDescriptor extends Value, Serializable {
 
 	int numberOfSteps();
 
 	int currentStep();
 	
-	boolean isCurrent();
-	
+	boolean isCurrentAttempt();
+
 	boolean isASolution();
 	
 	boolean isLoaded();

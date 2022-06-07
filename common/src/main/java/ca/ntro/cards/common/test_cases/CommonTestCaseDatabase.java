@@ -20,7 +20,7 @@ import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution.TestCaseJobEngine;
 import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
@@ -42,8 +42,6 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 
                 implements Value, Serializable {
 	
-	private String currentTestCaseId = "ex01";
-	
 	private TestCaseById<EXECUTABLE_MODEL, TEST_CASE> testCasesById = new TestCaseById<>();
 	private TestCasesByCategory<EXECUTABLE_MODEL, TEST_CASE> testCasesByCategory = new TestCasesByCategory<>();
 
@@ -64,9 +62,6 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	private transient DoneHandler onWritingDoneHandler;
 	
 	private transient boolean shouldWriteJson = false;
-
-	private transient boolean shouldRefreshDashboard = true;
-	
 
 	public TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine() {
 		return executionEngine;
@@ -124,15 +119,6 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		this.testCaseClass = testCaseClass;
 	}
 	
-
-	public String getCurrentTestCaseId() {
-		return currentTestCaseId;
-	}
-
-	public void setCurrentTestCaseId(String currentTestCaseId) {
-		this.currentTestCaseId = currentTestCaseId;
-	}
-
 	public void generateFirstVersionIfNeeded() {
 
 	}
@@ -155,7 +141,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		testCase.registerExecutionTraceClass(executionTraceClass);
 
 
-		testCase.addExecutionStep(Mode.MANUAL);
+		testCase.addExecutionStep(Attempt.MANUAL);
 		
 		ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new ExecutionJob<>();
 		creationJob.setTestCase(testCase);
@@ -241,7 +227,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		this.shouldWriteJson = shouldWriteJson;
 	}
 
-	public void loadFromDbDir() {
+	public void loadFromDbDir(String initialTestCaseId) {
 		MsgRefreshDashboard msgRefreshDashboard = NtroApp.newMessage(MsgRefreshDashboard.class);
 		Timer refreshTimer = new Timer();
 		long startTime = System.currentTimeMillis();
@@ -251,7 +237,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith("bin")
-						&& !name.equals(currentTestCaseId + ".bin");
+						&& !name.equals(initialTestCaseId + ".bin");
 			}
 		};
 		
@@ -281,31 +267,25 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 			executionEngine.executeJob(readingJob, () -> {
 				
 				addTestCase((TEST_CASE) readingJob.getTestCase());
-				
-				shouldRefreshDashboard = true;
 
 			});
 		}
 	}
 
-	public void rewindToFirstStep() {
-		currentTestCase().rewindToFirstStep(Mode.MANUAL);
+	public void rewindToFirstStep(String testCaseId, Attempt attempt) {
+		testCaseById(testCaseId).rewindToFirstStep(attempt);
 	}
 
-	public void stepForward() {
-		currentTestCase().stepForward(Mode.MANUAL);
+	public void stepForward(String testCaseId, Attempt attempt) {
+		testCaseById(testCaseId).stepForward(attempt);
 	}
 
-	public TEST_CASE currentTestCase() {
-		return testCaseById((currentTestCaseId));
+	public void stepBackward(String testCaseId, Attempt attempt) {
+		testCaseById(testCaseId).stepBackward(attempt);
 	}
 
-	public void stepBackward() {
-		currentTestCase().stepBackward(Mode.MANUAL);
-	}
-
-	public void fastForwardToLastStep() {
-		currentTestCase().fastForwardToLastStep(Mode.MANUAL);
+	public void fastForwardToLastStep(String testCaseId, Attempt attempt) {
+		testCaseById(testCaseId).fastForwardToLastStep(attempt);
 	}
 
 	@SuppressWarnings("unchecked")

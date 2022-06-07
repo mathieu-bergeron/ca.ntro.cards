@@ -5,7 +5,9 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.test_cases.descriptor.ProcedureAttemptDescriptor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -46,32 +48,45 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 		inputSizeLabel().setText(inputSize);
 	}
 
-	public void displaySolution(boolean isCurrentMode, String numberOfSteps) {
+	public void displaySolution(AbstractAttemptDescriptor attempt) {
+		solutionButton().setText(String.valueOf(attempt.numberOfSteps()));
+		displayIsCurrentAttempt(solutionButton(), attempt);
+	}
 
-		solutionButton().setText(numberOfSteps);
+	public void displayManual(AbstractAttemptDescriptor attempt) {
+
+		displayIsASolution(manualButton(), attempt);
 
 	}
 
-	public void displayManual(boolean isCurrentMode, boolean isSolution) {
+	public void displayCode(AbstractAttemptDescriptor attempt) {
 
-		displayIsSolution(manualButton(), isSolution);
-
-	}
-
-	public void displayCode(boolean isCurrentMode, boolean isSolution) {
-
-		displayIsSolution(codeButton(), isSolution);
+		displayIsASolution(codeButton(), attempt);
+		displayIsCurrentAttempt(codeButton(), attempt);
 
 	}
 
-	private void displayIsSolution(Button button, boolean isSolution) {
-		if(isSolution) {
+	private void displayIsASolution(Button button, AbstractAttemptDescriptor attempt) {
+		if(attempt.isASolution()) {
 
 			button.setText(solutionText);
 
 		}else {
 
 			button.setText(errorText);
+		}
+
+	}
+
+	private void displayIsCurrentAttempt(Button button, AbstractAttemptDescriptor attempt) {
+		if(attempt.isCurrentAttempt()) {
+
+			button.setStyle("-fx-background-color: blue");
+
+		}else {
+
+			button.setStyle("-fx-background-color: gray");
+
 		}
 
 	}

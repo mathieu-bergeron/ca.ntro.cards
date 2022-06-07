@@ -5,6 +5,8 @@ import java.io.Serializable;
 import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 
 public interface CommonExecutionTrace<EXECUTABLE_MODEL extends CommonExecutableModel,
                                       DASHBOARD_MODEL  extends CommonDashboardModel> 
@@ -13,7 +15,7 @@ public interface CommonExecutionTrace<EXECUTABLE_MODEL extends CommonExecutableM
 
 	void pushReferenceTo(EXECUTABLE_MODEL model);
 	void pushCloneOf(EXECUTABLE_MODEL model);
-
+	
 	int numberOfSteps();
 
 	void stepForward();
@@ -25,6 +27,8 @@ public interface CommonExecutionTrace<EXECUTABLE_MODEL extends CommonExecutableM
 	void truncateAfterCurrentStep();
 	void rewindToFirstStep();
 	void fastForwardToLastStep();
+
+	AbstractAttemptDescriptor asAttemptDescriptor();
 
 
 }

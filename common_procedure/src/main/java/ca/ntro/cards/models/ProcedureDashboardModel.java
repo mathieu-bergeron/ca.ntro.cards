@@ -3,8 +3,10 @@ package ca.ntro.cards.models;
 
 import ca.ntro.app.frontend.ViewLoader;
 import ca.ntro.cards.common.models.CommonDashboardModel;
-import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.models.enums.Attempt;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
+import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.indexing.TestCaseById;
 import ca.ntro.cards.common.test_cases.indexing.TestCasesByCategory;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -12,6 +14,7 @@ import ca.ntro.cards.frontend.views.ProcedureReplayView;
 import ca.ntro.cards.frontend.views.ProcedureSelectionsView;
 import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import ca.ntro.cards.test_cases.ProcedureTestCaseDatabase;
+import ca.ntro.cards.test_cases.descriptor.ProcedureAttemptDescriptor;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 
 public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends ProcedureDashboardView,
@@ -30,11 +33,8 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
     private TestCaseById<CARDS_MODEL, TEST_CASE> byId = new TestCaseById<>();
     private TestCasesByCategory<CARDS_MODEL, TEST_CASE> byCategory = new TestCasesByCategory<>();
 
-	private Mode currentMode;
+	private Attempt currentAttempt;
 	private String currentTestCaseId = defaultTestCaseId();
-	private int currentStep;
-	private int currentInputSize;
-	private int currentOutputSize;
 
 	public String getCurrentTestCaseId() {
 		return currentTestCaseId;
@@ -44,36 +44,12 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		this.currentTestCaseId = currentTestCaseId;
 	}
 
-	public Mode getCurrentMode() {
-		return currentMode;
+	public Attempt getCurrentMode() {
+		return currentAttempt;
 	}
 
-	public void setCurrentMode(Mode currentMode) {
-		this.currentMode = currentMode;
-	}
-
-	public int getCurrentStep() {
-		return currentStep;
-	}
-
-	public void setCurrentStep(int currentStep) {
-		this.currentStep = currentStep;
-	}
-
-	public int getCurrentInputSize() {
-		return currentInputSize;
-	}
-
-	public void setCurrentInputSize(int currentInputSize) {
-		this.currentInputSize = currentInputSize;
-	}
-
-	public int getCurrentOutputSize() {
-		return currentOutputSize;
-	}
-
-	public void setCurrentOutputSize(int currentOutputSize) {
-		this.currentOutputSize = currentOutputSize;
+	public void setCurrentMode(Attempt currentMode) {
+		this.currentAttempt = currentMode;
 	}
 
 	public TestCaseById<CARDS_MODEL, TEST_CASE> getById() {
@@ -111,9 +87,12 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	}
 
 	public void displayOn(REPLAY_VIEW replayView) {
-		replayView.displayNumberOfCards(String.valueOf(currentInputSize));
-		replayView.displayCurrentStep(String.valueOf(currentStep));
-		replayView.displayNumberOfSteps(String.valueOf(currentOutputSize));
+		TEST_CASE testCase = byId.testCaseById(currentTestCaseId);
+		ProcedureAttemptDescriptor attempt = (ProcedureAttemptDescriptor) testCase.getAttempt(currentAttempt);
+
+		replayView.displayNumberOfCards(String.valueOf(testCase.inputSize()));
+		replayView.displayCurrentStep(String.valueOf(attempt.currentStep()));
+		replayView.displayNumberOfSteps(String.valueOf(attempt.numberOfSteps()));
 	}
 
 	@Override
@@ -130,9 +109,10 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	
 	public void changeCurrentTestCase(String testCaseId) {
 		this.currentTestCaseId = currentTestCaseId;
-		this.currentStep = byId.testCaseById(testCaseId).currentStep(Mode.MANUAL);
-		this.currentInputSize = byId.testCaseById(testCaseId).inputSize();
-		this.currentOutputSize = byId.testCaseById(testCaseId).numberOfSteps(Mode.MANUAL);
+	}
+
+	public void changeCurrentAtempt(Attempt attempt) {
+		this.currentAttempt = attempt;
 	}
 	
 	public void displayOn(SELECTIONS_VIEW selectionsView, 
@@ -182,8 +162,25 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		byId.testCases().forEach(testCase -> {
 			testCase.setLoaded(false);
 		});
-		
+
 		version = 0;
+	}
+
+	public void stepBackward(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.stepBackward(currentTestCaseId, currentAttempt);
+	}
+
+
+	public void stepForward(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.stepForward(currentTestCaseId, currentAttempt);
+	}
+
+	public void rewindToFirstStep(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.rewindToFirstStep(currentTestCaseId, currentAttempt);
+	}
+
+	public void fastFowardToLastStep(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.fastForwardToLastStep(currentTestCaseId, currentAttempt);
 	}
 
 }

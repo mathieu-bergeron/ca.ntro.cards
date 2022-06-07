@@ -20,10 +20,6 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
                                       EXECUTION_TRACE> {
 
 
-	public void updateCardsModel(ProcedureCardsModel cardsModel) {
-		updateCardsModel(getCurrentTestCaseId(), cardsModel);
-	}
-
 	public void updateCardsModel(String testCaseId, ProcedureCardsModel cardsModel) {
 		TEST_CASE testCase = testCaseById(testCaseId);
 
@@ -31,7 +27,7 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
 	}
 
 	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		TEST_CASE testCase = testCaseById(getCurrentTestCaseId());
+		TEST_CASE testCase = testCaseById(dashboardModel.getCurrentTestCaseId());
 
 		testCase.updateDashboardModel(dashboardModel);
 	}
@@ -44,8 +40,8 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
 		});
 	}
 
-	public void pushManualExecutionStep(STUDENT_MODEL cardsModel) {
-		TEST_CASE testCase = currentTestCase();
+	public void pushManualExecutionStep(String testCaseId, STUDENT_MODEL cardsModel) {
+		TEST_CASE testCase = testCaseById(testCaseId);
 
 		testCase.pushManualExecutionStep(cardsModel);
 	}

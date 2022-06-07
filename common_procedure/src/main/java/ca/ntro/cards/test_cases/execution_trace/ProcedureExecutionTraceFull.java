@@ -1,5 +1,6 @@
 package ca.ntro.cards.test_cases.execution_trace;
 
+import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTraceFull;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
@@ -24,6 +25,7 @@ public class ProcedureExecutionTraceFull<EXECUTABLE_MODEL extends ProcedureCards
 		dashboardModel.setCurrentStep(getCurrent()+1);
 		dashboardModel.setCurrentOutputSize(getTrace().size());
 	}
+
 
 
 

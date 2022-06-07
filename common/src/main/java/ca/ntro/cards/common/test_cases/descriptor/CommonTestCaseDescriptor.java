@@ -1,18 +1,28 @@
 package ca.ntro.cards.common.test_cases.descriptor;
 
-import ca.ntro.cards.common.models.enums.Mode;
+import java.util.HashMap;
+import java.util.Map;
 
-public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
+import ca.ntro.cards.common.models.enums.Attempt;
+
+public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor> implements AbstractTestCaseDescriptor<ATTEMPT> {
 
 	private static final long serialVersionUID = -6757195432385501062L;
 
 	private static long nextId = 0;
+	private static String nextId() {
+		nextId++;
+		return String.format("%02d", nextId);
+	}
+
+	private String category;
+	private String testCaseId;
+	private int inputSize;
+
+	private Map<String, ATTEMPT> attempts = new HashMap<>();
+	private ATTEMPT currentAttempt;
 	
-	private String category = "_noCategory";
-	private String testCaseId = "_noId";
-	private int inputSize = 0;
-	private int numberOfSteps = 0;
-	private boolean loaded = false;
+	private CurrentTestCaseHolder currentTestCaseHolder; 
 
 	public String getCategory() {
 		return category;
@@ -38,22 +48,6 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 		this.inputSize = size;
 	}
 
-	public int getNumberOfSteps() {
-		return numberOfSteps;
-	}
-
-	public void setNumberOfSteps(int numberOfSteps) {
-		this.numberOfSteps = numberOfSteps;
-	}
-
-	public boolean getLoaded() {
-		return loaded;
-	}
-
-	public void setLoaded(boolean loaded) {
-		this.loaded = loaded;
-	}
-
 	@Override
 	public String category() {
 		return getCategory();
@@ -77,7 +71,7 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 	public CommonTestCaseDescriptor random(int size) {
 		setCategory("random");
 		setInputSize(size);
-		setTestCaseId(String.valueOf(++nextId));
+		setTestCaseId(nextId());
 
 		return this;
 	}
@@ -89,22 +83,29 @@ public class CommonTestCaseDescriptor implements AbstractTestCaseDescriptor {
 	}
 
 	@Override
-	public int numberOfSteps(Mode mode) {
-		return getNumberOfSteps();
+	public ATTEMPT getAttempt(Attempt attempt) {
+		return attempts.get(attempt.name());
+	}
+
+	public boolean isCurrentAttempt(CommonAttemptDescriptor attempt) {
+		return currentAttempt == attempt;
 	}
 
 	@Override
-	public int currentStep(Mode mode) {
-		return 0;
+	public boolean isCurrentTestCase() {
+		return currentTestCaseHolder.isCurrentTestCase(this);
 	}
 
-	@Override
-	public boolean passed(Mode mode) {
-		return false;
+	@SuppressWarnings("unchecked")
+	public void addAttemptDescriptor(Attempt attempt, AbstractAttemptDescriptor descriptor) {
+		attempts.put(attempt.name(), (ATTEMPT) descriptor);
 	}
 
-	@Override
-	public boolean loaded(Mode mode) {
-		return getLoaded();
+	public void setLoaded(boolean isLoaded) {
+		for(ATTEMPT attempt : attempts.values()) {
+			
+			((CommonAttemptDescriptor) attempt).setIsLoaded(isLoaded);
+		}
 	}
+
 }

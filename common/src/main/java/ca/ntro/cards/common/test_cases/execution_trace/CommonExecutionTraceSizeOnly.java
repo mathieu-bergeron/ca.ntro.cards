@@ -2,9 +2,10 @@ package ca.ntro.cards.common.test_cases.execution_trace;
 
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 
 public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                    DASHBOARD_MODEL  extends CommonDashboardModel> 
+                                          DASHBOARD_MODEL  extends CommonDashboardModel> 
 
        implements CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> {
     	   
@@ -52,6 +53,11 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 
 	@Override
 	public void fastForwardToLastStep() {
+	}
+
+	@Override
+	public CommonAttemptDescriptor asAttemptDescriptor() {
+		return null;
 	}
 
 }

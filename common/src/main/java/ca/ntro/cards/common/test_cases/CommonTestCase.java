@@ -1,16 +1,13 @@
 package ca.ntro.cards.common.test_cases;
 
-import java.io.Serializable;
-
-import ca.ntro.app.models.Value;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
-import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.models.enums.Attempt;
+import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.execution_trace.CommonExecutionTrace;
 import ca.ntro.cards.common.test_cases.indexing.ExecutionTraceByMode;
-import ca.ntro.core.identifyers.Identifiable;
 import ca.ntro.core.initialization.Ntro;
 
 public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -102,7 +99,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		studentModel.run();
 	}
 
-	public void addExecutionStep(Mode mode) {
+	public void addExecutionStep(Attempt mode) {
 		// XXX: push a EXECUTABLE_MODEL. This data can act as solutions
 		//      (i.e. work in projects where the solution class is not accessible)
 		EXECUTABLE_MODEL snapshot = Ntro.factory().newInstance(executableModelClass);
@@ -115,15 +112,15 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return id().equals(id);
 	}
 
-	protected CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> executionTraceByMode(Mode mode) {
+	protected CommonExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> executionTraceByMode(Attempt mode) {
 		return traces.trace(mode);
 	}
 
-	public void stepForward(Mode mode) {
+	public void stepForward(Attempt mode) {
 		traces.trace(mode).stepForward();
 	}
 
-	public void stepBackward(Mode mode) {
+	public void stepBackward(Attempt mode) {
 		traces.trace(mode).stepBackward();
 	} 
 
@@ -143,28 +140,13 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return getInputSize();
 	}
 
-	@Override
-	public int numberOfSteps(Mode mode) {
-		return traces.trace(mode).numberOfSteps();
-	}
-
-	@Override
-	public int currentStep(Mode mode) {
-		return 0;
-	}
-
-	@Override
-	public boolean passed(Mode mode) {
-		return false;
-	}
-
 	public AbstractTestCaseDescriptor asTestCaseDescriptor() {
 		CommonTestCaseDescriptor testCaseDescriptor = newTestCaseDescriptor();
 		testCaseDescriptor.setCategory(category);
 		testCaseDescriptor.setInputSize(inputSize());
 		testCaseDescriptor.setTestCaseId(testCaseId);
-		testCaseDescriptor.setNumberOfSteps(numberOfSteps(Mode.MANUAL));
-		testCaseDescriptor.setLoaded(true);
+
+		traces.addAttempDescriptors(testCaseDescriptor);
 
 		return testCaseDescriptor;
 	}
@@ -172,17 +154,22 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	protected abstract CommonTestCaseDescriptor newTestCaseDescriptor();
 
 
-	@Override
-	public boolean loaded(Mode mode) {
-		return false;
-	}
-
-	public void rewindToFirstStep(Mode mode) {
+	public void rewindToFirstStep(Attempt mode) {
 		executionTraceByMode(mode).rewindToFirstStep();
 	}
 
-	public void fastForwardToLastStep(Mode mode) {
+	public void fastForwardToLastStep(Attempt mode) {
 		executionTraceByMode(mode).fastForwardToLastStep();
+	}
+
+	@Override
+	public boolean isCurrentTestCase() {
+		return false;
+	}
+
+	@Override
+	public AbstractAttemptDescriptor getAttempt(Attempt attempt) {
+		return null;
 	}
 	
 }

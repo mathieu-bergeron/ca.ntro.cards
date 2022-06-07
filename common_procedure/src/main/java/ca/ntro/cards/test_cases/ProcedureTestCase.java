@@ -1,6 +1,6 @@
 package ca.ntro.cards.test_cases;
 
-import ca.ntro.cards.common.models.enums.Mode;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
@@ -20,17 +20,17 @@ public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCards
                               DASHBOARD_MODEL> {
 
 	public void updateCardsModel(EXECUTABLE_MODEL cardsModel) {
-		executionTraceByMode(Mode.MANUAL).copyCurrentModelInto(cardsModel);
+		executionTraceByMode(Attempt.MANUAL).copyCurrentModelInto(cardsModel);
 	}
 
 	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		executionTraceByMode(Mode.MANUAL).updateDashboardModel(dashboardModel);
+		executionTraceByMode(Attempt.MANUAL).updateDashboardModel(dashboardModel);
 	}
 
 	public void pushManualExecutionStep(STUDENT_MODEL model) {
-		executionTraceByMode(Mode.MANUAL).truncateAfterCurrentStep();
-		executionTraceByMode(Mode.MANUAL).pushCloneOf(model);
-		executionTraceByMode(Mode.MANUAL).stepForward();
+		executionTraceByMode(Attempt.MANUAL).truncateAfterCurrentStep();
+		executionTraceByMode(Attempt.MANUAL).pushCloneOf(model);
+		executionTraceByMode(Attempt.MANUAL).stepForward();
 	}
 
 }
