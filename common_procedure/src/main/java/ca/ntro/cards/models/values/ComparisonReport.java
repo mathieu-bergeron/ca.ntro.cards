@@ -12,7 +12,9 @@ public interface ComparisonReport extends Value, Serializable {
 	Stream<ErrorReport> errors();
 
 	static ComparisonReport emptyReport() {
-		return null;
+		ComparisonReportNtro report = new ComparisonReportNtro();
+
+		return report;
 	}
 
 
