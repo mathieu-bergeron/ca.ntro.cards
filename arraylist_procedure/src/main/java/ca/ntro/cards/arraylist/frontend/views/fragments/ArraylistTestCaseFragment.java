@@ -12,36 +12,35 @@ import javafx.scene.control.Label;
 public class ArraylistTestCaseFragment extends ProcedureTestCaseFragment {
 
 	@FXML
-	protected Label categoryLabel;
-
-	@FXML
-	protected Button testCaseIdButton;
+	protected Label testCaseIdLabel;
 
 	@FXML
 	protected Label inputSizeLabel;
 
 	@FXML
-	protected Label numberOfStepsLabel;
-	
+	protected Button manualButton;
+
+	@FXML
+	protected Button codeButton;
+
+	@FXML
+	protected Button solutionButton;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		Ntro.assertNotNull("categoryLabel", categoryLabel);
-		Ntro.assertNotNull("testCaseIdButton", testCaseIdButton);
+		Ntro.assertNotNull("testCaseIdLabel", testCaseIdLabel);
 		Ntro.assertNotNull("inputSizeLabel", inputSizeLabel);
-		Ntro.assertNotNull("numberOfStepsLabel", numberOfStepsLabel);
+		Ntro.assertNotNull("manualButton", manualButton);
+		Ntro.assertNotNull("codeButton", codeButton);
+		Ntro.assertNotNull("solutionButton", solutionButton);
 		
 		super.initialize(location, resources);
 	}
 
 	@Override
-	protected Label categoryLabel() {
-		return categoryLabel;
-	}
-
-	@Override
-	protected Button testCaseIdButton() {
-		return testCaseIdButton;
+	protected Label testCaseIdLabel() {
+		return testCaseIdLabel;
 	}
 
 	@Override
@@ -50,8 +49,18 @@ public class ArraylistTestCaseFragment extends ProcedureTestCaseFragment {
 	}
 
 	@Override
-	protected Label numberOfStepsLabel() {
-		return numberOfStepsLabel;
+	protected Button manualButton() {
+		return manualButton;
+	}
+
+	@Override
+	protected Button codeButton() {
+		return codeButton;
+	}
+
+	@Override
+	protected Button solutionButton() {
+		return solutionButton;
 	}
 
 }

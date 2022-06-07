@@ -8,10 +8,9 @@ public class ProcedureTestCaseDescriptor<TEST_CASE_FRAGMENT extends ProcedureTes
 
 	public void displayOn(TEST_CASE_FRAGMENT testCaseFragment) {
 		testCaseFragment.memorizeTestCaseId(getTestCaseId());
-		testCaseFragment.displayCategory(getCategory());
 		testCaseFragment.displayTestCaseId(getTestCaseId());
 		testCaseFragment.displayInputSize(String.valueOf(getInputSize()));
-		testCaseFragment.displayNumberOfSteps(String.valueOf(numberOfSteps(Mode.MANUAL)));
+		testCaseFragment.displaySolution(String.valueOf(numberOfSteps(Mode.MANUAL)));
 		
 		if(loaded(Mode.MANUAL)) {
 

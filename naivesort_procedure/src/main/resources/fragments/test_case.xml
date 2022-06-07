@@ -27,14 +27,8 @@
     id="test-case-fragment">
 
     <Label 
-        fx:id="categoryLabel">
+        fx:id="testCaseIdLabel">
      </Label>
-
-    <Pane styleClass="hspace-small"/>
-
-    <Button 
-        fx:id="testCaseIdButton">
-     </Button>
 
     <Pane styleClass="hspace-small"/>
 
@@ -44,8 +38,20 @@
 
     <Pane styleClass="hspace-small"/>
 
-    <Label 
-        fx:id="numberOfStepsLabel">
-     </Label>
+    <Button 
+        fx:id="manualButton">
+     </Button>
+
+    <Pane styleClass="hspace-small"/>
+
+    <Button 
+        fx:id="codeButton">
+     </Button>
+
+    <Pane styleClass="hspace-small"/>
+
+    <Button 
+        fx:id="solutionButton">
+     </Button>
 
 </HBox>

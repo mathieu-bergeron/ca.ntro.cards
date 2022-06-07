@@ -13,44 +13,55 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	
 	private String testCaseId;
 
-	protected abstract Label categoryLabel();
-	protected abstract Button testCaseIdButton();
+	protected abstract Label testCaseIdLabel();
 	protected abstract Label inputSizeLabel();
-	protected abstract Label numberOfStepsLabel();
+	protected abstract Button manualButton();
+	protected abstract Button codeButton();
+	protected abstract Button solutionButton();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		MsgChangeCurrentTestCase msgChangeCurrentTestCase = NtroApp.newMessage(MsgChangeCurrentTestCase.class);
 		
-		testCaseIdButton().setOnAction(evtFx -> {
+		manualButton().setOnAction(evtFx -> {
 			
-			msgChangeCurrentTestCase.setTestCaseId(testCaseIdButton().getText());
+			msgChangeCurrentTestCase.setTestCaseId(manualButton().getText());
 			msgChangeCurrentTestCase.send();
 			
 		});
 	}
 
-	public void displayCategory(String category) {
-		categoryLabel().setText(category);
-	}
-
 	public void displayTestCaseId(String testCaseId) {
-		testCaseIdButton().setText(testCaseId);
+		testCaseIdLabel().setText(testCaseId);
 	}
 
 	public void displayInputSize(String inputSize) {
 		inputSizeLabel().setText(inputSize);
 	}
 
-	public void displayNumberOfSteps(String numberOfSteps) {
-		numberOfStepsLabel().setText(numberOfSteps);
+	public void displaySolution(String numberOfSteps) {
+		solutionButton().setText(numberOfSteps);
 	}
+
+	public void displayManual(String label) {
+		solutionButton().setText(label);
+	}
+
+	public void displayCode(String label) {
+		codeButton().setText(label);
+	}
+
 	public void enableTestCaseSelection() {
-		testCaseIdButton().setDisable(false);
+		manualButton().setDisable(false);
+		codeButton().setDisable(false);
+		solutionButton().setDisable(false);
 	}
+
 	public void disableTestCaseSelection() {
-		testCaseIdButton().setDisable(true);
+		manualButton().setDisable(true);
+		codeButton().setDisable(true);
+		solutionButton().setDisable(true);
 	}
 
 	public void memorizeTestCaseId(String testCaseId) {
