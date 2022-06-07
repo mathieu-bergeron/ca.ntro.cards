@@ -46,6 +46,8 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	}
 
 	public abstract boolean acceptManualModel(CARDS_MODEL manualModel);
+	
+	public abstract boolean isSameSolutionAs(CARDS_MODEL solutionModel);
 
 	public void updateViewData(VIEW_DATA viewData) {
 
@@ -57,6 +59,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	protected abstract void updateViewDataImpl(VIEW_DATA viewData);
 	
 	public abstract void displayOn(VARIABLES_VIEW variablesView);
+	
 
 	protected Card[] randomArrayOfUniqueCards(int size) {
 		List<Card> randomList = randomListOfUniqueCards(size);

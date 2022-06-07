@@ -39,6 +39,18 @@ public class   FooCardsModel<C extends Comparable<C>>
 		return modified;
 	}
 
+	@Override
+	public boolean isSameSolutionAs(FooCardsModel solutionModel) {
+		boolean isSameSolution = false;
+		
+		// TODO: tester si le modèle courant est la même solution
+		//       que le solutionModel
+		//       p.ex. tester qu'il s'agit des mêmes cartes dans le même ordre
+		//       (mais sans tester si tous les attributs sont égaux)
+
+		return isSameSolution;
+	}
+
     @Override
     protected void updateViewDataImpl(FooProcedureViewData cardsViewData) {
         // TODO: créer des Carte2d pour afficher les cartes du modèle
@@ -86,6 +98,7 @@ public class   FooCardsModel<C extends Comparable<C>>
     public void displayOn(FooVariablesView variablesView) {
         // TODO: afficher les attributs
     }
+
 
 
 }
