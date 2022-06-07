@@ -9,6 +9,7 @@ import ca.ntro.cards.foo.models.world2d.FooProcedureDrawingOptions;
 import ca.ntro.cards.foo.models.world2d.FooProcedureObject2d;
 import ca.ntro.cards.foo.models.world2d.FooProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -40,16 +41,17 @@ public class   FooCardsModel<C extends Comparable<C>>
 	}
 
 	@Override
-	public boolean isSameSolutionAs(FooCardsModel solutionModel) {
-		boolean isSameSolution = false;
+	public ComparisonReport compareToSolution(FooCardsModel solution) {
 		
-		// TODO: tester si le modèle courant est la même solution
-		//       que le solutionModel
-		//       p.ex. tester qu'il s'agit des mêmes cartes dans le même ordre
-		//       (mais sans tester si tous les attributs sont égaux)
+		ComparisonReport report = ComparisonReport.emptyReport();
+		
+		// TODO: compare to a solution and report every error
+		//       the testcase is passed if there is no error
+		//       to report
 
-		return isSameSolution;
+		return report;
 	}
+
 
     @Override
     protected void updateViewDataImpl(FooProcedureViewData cardsViewData) {
@@ -98,6 +100,7 @@ public class   FooCardsModel<C extends Comparable<C>>
     public void displayOn(FooVariablesView variablesView) {
         // TODO: afficher les attributs
     }
+
 
 
 

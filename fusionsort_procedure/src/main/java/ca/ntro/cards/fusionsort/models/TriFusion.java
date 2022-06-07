@@ -10,6 +10,7 @@ import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureDrawingOptions
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureObject2d;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
@@ -91,6 +92,12 @@ public class   TriFusion<C extends Comparable<C>>
 		return modified;
 	}
 
+	@Override
+	public ComparisonReport compareToSolution(TriFusion solution) {
+		ComparisonReport report = ComparisonReport.emptyReport();
+		return report;
+	}
+
     @Override
     protected void updateViewDataImpl(FusionsortProcedureViewData cardsViewData) {
         // TODO: créer des Carte2d pour afficher les cartes du modèle
@@ -145,6 +152,7 @@ public class   TriFusion<C extends Comparable<C>>
     public void displayOn(FusionsortVariablesView variablesView) {
         // TODO: afficher les attributs
     }
+
 
 
 }

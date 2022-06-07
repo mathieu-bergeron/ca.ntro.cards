@@ -16,6 +16,7 @@ import ca.ntro.cards.common.models.identifyers.IdNotUniqueException;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureVariablesView;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.cards.models.world2d.ProcedureDrawingOptions;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
@@ -47,7 +48,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 
 	public abstract boolean acceptManualModel(CARDS_MODEL manualModel);
 	
-	public abstract boolean isSameSolutionAs(CARDS_MODEL solutionModel);
+	public abstract ComparisonReport compareToSolution(CARDS_MODEL solution);
 
 	public void updateViewData(VIEW_DATA viewData) {
 

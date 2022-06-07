@@ -15,6 +15,7 @@ import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureDrawingOptions;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureObject2d;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.core.initialization.Ntro;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
@@ -105,6 +106,12 @@ public class   TriNaif<C extends Comparable<C>>
 		copyDataFrom(manualModel);
 
 		return true;
+	}
+
+	@Override
+	public ComparisonReport compareToSolution(TriNaif solution) {
+		ComparisonReport report = ComparisonReport.emptyReport();
+		return report;
 	}
 
 	@Override
@@ -240,6 +247,7 @@ public class   TriNaif<C extends Comparable<C>>
 		variablesView.displayIndexOfCandidate(String.valueOf(indiceCandidat));
 		variablesView.displayIndexOfNextEmpty(String.valueOf(indiceProchainVide));
 	}
+
 
 
 }

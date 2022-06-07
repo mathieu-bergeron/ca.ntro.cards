@@ -16,6 +16,7 @@ import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureObject2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -93,6 +94,12 @@ public class   ListeTableau<C extends Comparable<C>>
 		//       retourner faux si c'est rejeté
 
 		return modified;
+	}
+
+	@Override
+	public ComparisonReport compareToSolution(ListeTableau solution) {
+		ComparisonReport report = ComparisonReport.emptyReport();
+		return report;
 	}
 
     @Override
@@ -192,6 +199,7 @@ public class   ListeTableau<C extends Comparable<C>>
     public void displayOn(ArraylistVariablesView variablesView) {
         // TODO: afficher les attributs
     }
+
 
 
 }
