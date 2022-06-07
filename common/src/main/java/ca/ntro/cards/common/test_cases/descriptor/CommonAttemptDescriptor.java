@@ -1,7 +1,9 @@
 package ca.ntro.cards.common.test_cases.descriptor;
 
 public class CommonAttemptDescriptor implements AbstractAttemptDescriptor {
-	
+
+	private static final long serialVersionUID = -1330131719442951296L;
+
 	private int numberOfSteps;
 	private int currentStep;
 	private boolean isASolution;

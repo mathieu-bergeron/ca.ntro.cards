@@ -136,6 +136,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
 		    	 dashboardModel.rewindToFirstStep(testCaseDatabase());
+
 		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
@@ -151,6 +152,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
 		    	 dashboardModel.stepBackward(testCaseDatabase());
+
 		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
@@ -181,6 +183,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
 		    	 dashboardModel.fastFowardToLastStep(testCaseDatabase());
+
 		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
@@ -197,6 +200,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL             cardsModel               = inputs.get(model(getCanvasModelClass()));
 		    	 
 		    	 msgChangeCurrentTestCase.applyTo(dashboardModel);
+
 		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}

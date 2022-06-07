@@ -93,7 +93,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		AbstractAttemptDescriptor attempt = testCase.attempt(currentAttempt);
 
 		replayView.displayNumberOfCards(String.valueOf(testCase.inputSize()));
-		replayView.displayCurrentStep(String.valueOf(attempt.currentStep()));
+		replayView.displayCurrentStep(String.valueOf(attempt.currentStep() + 1));
 		replayView.displayNumberOfSteps(String.valueOf(attempt.numberOfSteps()));
 	}
 
@@ -170,23 +170,32 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 
 	public void stepBackward(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.stepBackward(currentTestCaseId, currentAttempt);
+		
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
-
 
 	public void stepForward(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.stepForward(currentTestCaseId, currentAttempt);
+
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
 
 	public void rewindToFirstStep(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.rewindToFirstStep(currentTestCaseId, currentAttempt);
+
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
 
 	public void fastFowardToLastStep(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.fastForwardToLastStep(currentTestCaseId, currentAttempt);
+
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
 
 	public void pushManualExecutionStep(TEST_CASE_DATABASE testCaseDatabase, CARDS_MODEL cardsModel) {
 		testCaseDatabase.pushManualExecutionStep(currentTestCaseId, cardsModel);
+
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
 
 

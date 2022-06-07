@@ -35,6 +35,12 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
 		});
 	}
 
+	public void addOrUpdateTestCase(String testCaseId, DASHBOARD_MODEL dashboardModel) {
+		TEST_CASE testCase = testCaseById(testCaseId);
+
+		dashboardModel.addOrUpdateTestCase((ProcedureTestCaseDescriptor) testCase.asTestCaseDescriptor());
+	}
+
 	public void pushManualExecutionStep(String testCaseId, STUDENT_MODEL cardsModel) {
 		TEST_CASE testCase = testCaseById(testCaseId);
 
