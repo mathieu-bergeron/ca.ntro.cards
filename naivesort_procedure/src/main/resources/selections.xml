@@ -35,8 +35,7 @@
         <VBox styleClass="bottom">
 
             <Label
-                text="%testCase"
-                fx:id="testCaseLabel"
+                text="%testCaseId"
                 styleClass="text-big">
             </Label>
 
@@ -44,26 +43,49 @@
 
         <Pane HBox.hgrow="ALWAYS" />
 
-        <VBox>
+        <VBox styleClass="bottom">
 
             <Label
-                text="%mode"
-                fx:id="modeLabel"
+                text="%testCaseSize"
                 styleClass="text-big">
             </Label>
 
+        </VBox>
 
-            <ComboBox>
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="manuel" />
-                    <String fx:value="mon code" />
-                    <String fx:value="solution" />
-            </FXCollections>
-            </items>
-            </ComboBox>
+        <Pane HBox.hgrow="ALWAYS" />
+
+        <VBox styleClass="bottom">
+
+            <Label
+                text="%testCaseOnScreen"
+                styleClass="text-big">
+            </Label>
 
         </VBox>
+
+        <Pane HBox.hgrow="ALWAYS" />
+
+        <VBox styleClass="bottom">
+
+            <Label
+                text="%testCaseInTheCode"
+                styleClass="text-big">
+            </Label>
+
+        </VBox>
+
+        <Pane HBox.hgrow="ALWAYS" />
+
+        <VBox styleClass="bottom">
+
+            <Label
+                text="%testCaseSolution"
+                styleClass="text-big">
+            </Label>
+
+        </VBox>
+
+
     </HBox>
 
     <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" styleClass="test-case-container">
@@ -72,6 +94,29 @@
             styleClass="container">
         </VBox>
     </ScrollPane>
+
+    <HBox styleClass="bottom-right">
+
+        <VBox>
+
+            <Label
+                text="%categories"
+                fx:id="categoriesLabel"
+                styleClass="text-big">
+            </Label>
+
+
+            <ComboBox>
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="exemples" />
+                    <String fx:value="aléatoire" />
+            </FXCollections>
+            </items>
+            </ComboBox>
+
+        </VBox>
+    </HBox>
 
 
 
