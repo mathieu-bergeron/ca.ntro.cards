@@ -138,13 +138,14 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 				}else {
 					
 					TEST_CASE_FRAGMENT existingFragment = (TEST_CASE_FRAGMENT) selectionsView.testCaseFragment(testCaseDescriptor.testCaseId());
-					
+
 					testCaseDescriptor.displayOn(existingFragment);
 					
 				}
 				
 				return testCaseIndex+1;
-			});
+
+			}).throwException();
 		}
 	}
 

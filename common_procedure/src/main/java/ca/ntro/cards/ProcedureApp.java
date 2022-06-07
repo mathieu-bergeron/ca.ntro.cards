@@ -8,6 +8,7 @@ import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.enums.Attempt;
+import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -102,6 +103,7 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
 		super.registerModels(registrar);
 		
 		registrar.registerValue(testCaseDescriptorClass());
+		registrar.registerValue(CommonAttemptDescriptor.class);
 	}
 
 	@Override
