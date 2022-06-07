@@ -118,5 +118,9 @@ public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 		return FusionsortMsgAcceptManualModel.class;
 	}
 
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 
 }

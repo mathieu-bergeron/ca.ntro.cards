@@ -1,6 +1,7 @@
 package ca.ntro.cards.test_cases;
 
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.models.ProcedureCardsModel;
@@ -20,16 +21,10 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
                                       EXECUTION_TRACE> {
 
 
-	public void updateCardsModel(String testCaseId, ProcedureCardsModel cardsModel) {
+	public void updateCardsModel(String testCaseId, Attempt attempt, ProcedureCardsModel cardsModel) {
 		TEST_CASE testCase = testCaseById(testCaseId);
 
-		testCase.updateCardsModel(cardsModel);
-	}
-
-	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		TEST_CASE testCase = testCaseById(dashboardModel.getCurrentTestCaseId());
-
-		testCase.updateDashboardModel(dashboardModel);
+		testCase.updateCardsModel(attempt, cardsModel);
 	}
 
 	public void addOrUpdateTestCases(DASHBOARD_MODEL dashboardModel) {
@@ -45,6 +40,7 @@ public abstract class ProcedureTestCaseDatabase<EXECUTABLE_MODEL extends Procedu
 
 		testCase.pushManualExecutionStep(cardsModel);
 	}
+
 
 
 }

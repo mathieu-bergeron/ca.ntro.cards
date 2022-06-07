@@ -86,4 +86,9 @@ public abstract class   FusionsortEfficiencyApp<STUDENT_MODEL extends TriFusion>
 	protected Class<FusionsortEfficiencySettingsModel> settingsModelClass() {
 		return FusionsortEfficiencySettingsModel.class;
 	}
+
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 }

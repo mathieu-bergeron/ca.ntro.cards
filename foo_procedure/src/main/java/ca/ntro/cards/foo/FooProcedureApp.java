@@ -118,5 +118,9 @@ public abstract class   FooProcedureApp<STUDENT_MODEL extends FooCardsModel>
 		return FooMsgAcceptManualModel.class;
 	}
 
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 
 }

@@ -16,6 +16,7 @@ import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.foo.models.values.FooTestCase;
 import ca.ntro.cards.foo.test_cases.FooTestCaseDatabase;
 import ca.ntro.cards.foo.test_cases.execution_trace.FooExecutionTrace;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.efficiency.EfficiencyApp;
 
 public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
@@ -85,5 +86,15 @@ public abstract class   FooEfficiencyApp<STUDENT_MODEL extends FooCardsModel>
 	@Override
 	protected Class<FooEfficiencySettingsModel> settingsModelClass() {
 		return FooEfficiencySettingsModel.class;
+	}
+
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
+
+	@Override
+	protected Attempt initialAttempt() {
+		return Attempt.SOLUTION;
 	}
 }

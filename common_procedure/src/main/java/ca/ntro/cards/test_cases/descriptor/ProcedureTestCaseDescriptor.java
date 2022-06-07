@@ -12,9 +12,9 @@ public class ProcedureTestCaseDescriptor<TEST_CASE_FRAGMENT extends ProcedureTes
 		testCaseFragment.displayTestCaseId(getTestCaseId());
 		testCaseFragment.displayInputSize(String.valueOf(getInputSize()));
 		
-		testCaseFragment.displayManual(getAttempt(Attempt.MANUAL));
-		testCaseFragment.displayCode(getAttempt(Attempt.CODE));
-		testCaseFragment.displaySolution(getAttempt(Attempt.SOLUTION));
+		testCaseFragment.displayManual(attempt(Attempt.MANUAL));
+		testCaseFragment.displayCode(attempt(Attempt.CODE));
+		testCaseFragment.displaySolution(attempt(Attempt.SOLUTION));
 
 	}
 

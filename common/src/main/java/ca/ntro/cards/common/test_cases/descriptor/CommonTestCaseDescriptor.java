@@ -48,6 +48,14 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 		this.inputSize = size;
 	}
 
+	public Map<String, ATTEMPT> getAttempts() {
+		return attempts;
+	}
+
+	public void setAttempts(Map<String, ATTEMPT> attempts) {
+		this.attempts = attempts;
+	}
+
 	@Override
 	public String category() {
 		return getCategory();
@@ -83,7 +91,7 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 	}
 
 	@Override
-	public ATTEMPT getAttempt(Attempt attempt) {
+	public ATTEMPT attempt(Attempt attempt) {
 		return attempts.get(attempt.name());
 	}
 

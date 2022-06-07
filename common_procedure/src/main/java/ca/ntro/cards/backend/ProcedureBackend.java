@@ -3,6 +3,7 @@ package ca.ntro.cards.backend;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
 import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
 import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
@@ -51,16 +52,16 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void earlyModelInitialization() {
+	public void earlyModelInitialization(String initialTestCaseId, Attempt initialAttempt) {
 		
 		DASHBOARD_MODEL dashboardModel = NtroApp.models().load(getDashboardModelClass());
 		
 		dashboardModel.initialize();
+		dashboardModel.setCurrentTestCaseId(initialTestCaseId);
+		dashboardModel.setCurrentMode(initialAttempt);
 
 		dashboardModel.loadCurrentTestCase(getTestCaseDatabase());
-
-		getTestCaseDatabase().updateDashboardModel(dashboardModel);
-
+		
 		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
 
 		dashboardModel.updateCardsModel(getTestCaseDatabase(), canvasModel);
@@ -135,8 +136,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
 		    	 dashboardModel.rewindToFirstStep(testCaseDatabase());
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
 
@@ -151,9 +151,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
 		    	 dashboardModel.stepBackward(testCaseDatabase());
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
-
+		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
 
@@ -168,8 +166,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
 		    	 dashboardModel.stepForward(testCaseDatabase());
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
 
@@ -184,8 +181,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 		    	 
 		    	 dashboardModel.fastFowardToLastStep(testCaseDatabase());
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
 
@@ -200,12 +196,8 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		    	 DASHBOARD_MODEL          dashboardModel           = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL             cardsModel               = inputs.get(model(getCanvasModelClass()));
 		    	 
-		    	 msgChangeCurrentTestCase.applyTo(testCaseDatabase());
 		    	 msgChangeCurrentTestCase.applyTo(dashboardModel);
-
-		    	 testCaseDatabase().updateCardsModel(cardsModel);
-		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
-
+		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
 		     });
 	}
 

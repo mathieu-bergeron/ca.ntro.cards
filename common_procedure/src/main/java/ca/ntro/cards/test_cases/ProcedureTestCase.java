@@ -19,12 +19,8 @@ public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCards
                               EXECUTION_TRACE,
                               DASHBOARD_MODEL> {
 
-	public void updateCardsModel(EXECUTABLE_MODEL cardsModel) {
-		executionTraceByMode(Attempt.MANUAL).copyCurrentModelInto(cardsModel);
-	}
-
-	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		executionTraceByMode(Attempt.MANUAL).updateDashboardModel(dashboardModel);
+	public void updateCardsModel(Attempt attempt, EXECUTABLE_MODEL cardsModel) {
+		executionTraceByMode(attempt).copyCurrentModelInto(cardsModel);
 	}
 
 	public void pushManualExecutionStep(STUDENT_MODEL model) {

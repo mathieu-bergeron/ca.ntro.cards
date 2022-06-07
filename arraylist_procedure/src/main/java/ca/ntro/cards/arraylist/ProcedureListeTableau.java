@@ -118,5 +118,9 @@ public abstract class   ProcedureListeTableau<STUDENT_MODEL extends ListeTableau
 		return ArraylistMsgAcceptManualModel.class;
 	}
 
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 
 }

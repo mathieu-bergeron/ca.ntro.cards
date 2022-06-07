@@ -12,6 +12,7 @@ import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.common.test_cases.execution.Execution;
@@ -140,7 +141,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 	}
 
-	public abstract void earlyModelInitialization();
+	public abstract void earlyModelInitialization(String initialTestCaseId, Attempt initialAttempt);
 
 	@Override
 	public void createTasks(BackendTasks tasks) {
@@ -155,7 +156,7 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 		ModifyDashboardModel.createTasks(tasks,
 				                         dashboardModelClass,
-
+				                         testCaseDatabase,
 				                          subTasks -> {
 
 				                        	addSubTasksToModifyDashboardModel(subTasks);
@@ -172,19 +173,6 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 
 				                        });
 		
-		tasks.task("startExecutionEngine")
-		
-		     .waitsFor(message(MsgStartExecutionEngine.class))
-		     .thenExecutes(inputs -> {
-		    	 
-				 testCaseDatabase.loadFromDbDir();
-		    	 testCaseJobEngine.start();
-
-			     System.out.print("\n\n[LOADING TEST CASES]");
-			     System.out.println(String.format(" using %s threads", testCaseJobEngine.numberOfThreads()));
-			     System.out.flush();
-
-		     });
 		
 		 createAdditionalTasks(tasks);
 

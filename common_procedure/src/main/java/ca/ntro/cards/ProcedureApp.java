@@ -7,6 +7,7 @@ import ca.ntro.cards.common.CommonApp;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.frontend.CommonFrontend;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.cards.frontend.views.ProcedureDashboardView;
@@ -131,6 +132,11 @@ public abstract class ProcedureApp<EXECUTABLE_MODEL        extends ProcedureCard
 
 	@Override
 	protected void registerAdditionnalModels(ModelRegistrar registrar) {
+	}
+
+	@Override
+	protected Attempt initialAttempt() {
+		return Attempt.SOLUTION;
 	}
 
 }

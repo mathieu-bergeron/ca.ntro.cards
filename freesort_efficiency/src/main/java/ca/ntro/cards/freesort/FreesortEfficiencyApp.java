@@ -99,4 +99,9 @@ public abstract class   FreesortEfficiencyApp<STUDENT_MODEL extends TriLibre>
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		
 	}
+
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 }

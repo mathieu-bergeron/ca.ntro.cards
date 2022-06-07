@@ -15,7 +15,7 @@ public interface AbstractTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescr
 
 	boolean isCurrentTestCase();
 	
-	ATTEMPT getAttempt(Attempt attempt);
+	ATTEMPT attempt(Attempt attempt);
 
 	public static CommonTestCaseDescriptor create() {
 		CommonTestCaseDescriptor descriptor = new CommonTestCaseDescriptor();

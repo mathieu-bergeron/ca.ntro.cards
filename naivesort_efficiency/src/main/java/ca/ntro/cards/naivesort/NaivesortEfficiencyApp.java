@@ -99,4 +99,9 @@ public abstract class   NaivesortEfficiencyApp<STUDENT_MODEL extends TriNaif>
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
 		
 	}
+
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 }

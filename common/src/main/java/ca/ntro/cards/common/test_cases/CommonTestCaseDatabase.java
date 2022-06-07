@@ -49,7 +49,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	private Class<STUDENT_MODEL> studentModelClass;
 	private Class<TEST_CASE> testCaseClass;
 	private Class<? extends EXECUTION_TRACE> executionTraceClass;
-	
+
 	private transient TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	
 	private transient Map<String, ExecutionJob> creationJobs = new ConcurrentHashMap<>();
@@ -140,8 +140,9 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		testCase.registerExecutableModelClass(executableModelClass);
 		testCase.registerExecutionTraceClass(executionTraceClass);
 
-
 		testCase.addExecutionStep(Attempt.MANUAL);
+		testCase.addExecutionStep(Attempt.CODE);
+		testCase.addExecutionStep(Attempt.SOLUTION);
 		
 		ExecutionJob<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> creationJob = new ExecutionJob<>();
 		creationJob.setTestCase(testCase);
@@ -227,17 +228,21 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		this.shouldWriteJson = shouldWriteJson;
 	}
 
-	public void loadFromDbDir(String initialTestCaseId) {
+	public void loadFromDbDir(String currentTestCaseId) {
 		MsgRefreshDashboard msgRefreshDashboard = NtroApp.newMessage(MsgRefreshDashboard.class);
 		Timer refreshTimer = new Timer();
 		long startTime = System.currentTimeMillis();
+
+		System.out.print("\n\n[LOADING TEST CASES]");
+		System.out.println(String.format(" using %s threads", executionEngine.numberOfThreads()));
+		System.out.flush();
 
 		File dbDir = new File(CommonConstants.TEST_CASE_DATABASE_DIR);
 		FilenameFilter filter = new FilenameFilter() {
 			@Override
 			public boolean accept(File dir, String name) {
 				return name.endsWith("bin")
-						&& !name.equals(initialTestCaseId + ".bin");
+						&& !name.equals(currentTestCaseId + ".bin");
 			}
 		};
 		
@@ -289,7 +294,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	}
 
 	@SuppressWarnings("unchecked")
-	public void loadTestCase(String testCaseId) {
+	public AbstractTestCaseDescriptor loadTestCase(String testCaseId) {
 		File testCaseFile = Paths.get(CommonConstants.TEST_CASE_DATABASE_DIR, testCaseId + ".bin").toFile();
 
 		ReadingJob readingJob = new ReadingJob();
@@ -298,6 +303,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		readingJob.runImpl();
 
 		addTestCase((TEST_CASE) readingJob.getTestCase());
+		
+		return readingJob.getTestCase().asTestCaseDescriptor();
 	}
 
 	private void addTestCase(TEST_CASE testCase) {
@@ -316,5 +323,11 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public int numberOfTestCases() {
 		return testCasesById.size();
 	}
+
+	public void startEngine() {
+		executionEngine.start();
+	}
+
+
 
 }

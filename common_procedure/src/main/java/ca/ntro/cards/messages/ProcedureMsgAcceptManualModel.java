@@ -30,8 +30,7 @@ public class ProcedureMsgAcceptManualModel<CARDS_MODEL        extends ProcedureC
 		boolean modified = cardsModel.acceptManualModel(manualModel);
 		
 		if(modified) {
-			testCaseDatabase.pushManualExecutionStep(cardsModel);
-			testCaseDatabase.updateDashboardModel(dashboardModel);
+			dashboardModel.pushManualExecutionStep(testCaseDatabase, cardsModel);
 		}
 	}
 }

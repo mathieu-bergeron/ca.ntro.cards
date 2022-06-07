@@ -20,12 +20,6 @@ public class ProcedureExecutionTraceFull<EXECUTABLE_MODEL extends ProcedureCards
 		model.copyDataFrom(currentModel());
 	}
 
-	@Override
-	public void updateDashboardModel(DASHBOARD_MODEL dashboardModel) {
-		dashboardModel.setCurrentStep(getCurrent()+1);
-		dashboardModel.setCurrentOutputSize(getTrace().size());
-	}
-
 
 
 

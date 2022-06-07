@@ -168,7 +168,7 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	}
 
 	@Override
-	public AbstractAttemptDescriptor getAttempt(Attempt attempt) {
+	public AbstractAttemptDescriptor attempt(Attempt attempt) {
 		return null;
 	}
 	

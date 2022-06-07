@@ -8,8 +8,8 @@ import ca.ntro.cards.common.test_cases.execution.handlers.DoneHandler;
 import ca.ntro.cards.common.test_cases.execution.signals.Signal;
 
 public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
-                                  STUDENT_MODEL extends EXECUTABLE_MODEL,
-                                  TEST_CASE extends CommonTestCase>  
+                          STUDENT_MODEL extends EXECUTABLE_MODEL,
+                          TEST_CASE extends CommonTestCase>  
 
        extends Signal {
 	
@@ -17,7 +17,7 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	private DoneHandler doneHandler;
 	
-	private Attempt currentMode = Attempt.MANUAL;
+	private Attempt currentMode = Attempt.SOLUTION;
 
 	public TEST_CASE getTestCase() {
 		return testCase;

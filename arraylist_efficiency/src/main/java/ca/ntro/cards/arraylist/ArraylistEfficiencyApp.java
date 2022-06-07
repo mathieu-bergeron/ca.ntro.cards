@@ -85,4 +85,9 @@ public abstract class   ArraylistEfficiencyApp<STUDENT_MODEL extends ListeTablea
 	protected Class<ArraylistEfficiencySettingsModel> settingsModelClass() {
 		return ArraylistEfficiencySettingsModel.class;
 	}
+
+	@Override
+	protected String initialTestCaseId() {
+		return "ex01";
+	}
 }

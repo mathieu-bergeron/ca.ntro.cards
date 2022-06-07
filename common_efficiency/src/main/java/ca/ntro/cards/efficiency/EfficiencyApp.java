@@ -3,6 +3,7 @@ package ca.ntro.cards.efficiency;
 import ca.ntro.app.messages.MessageRegistrar;
 import ca.ntro.app.models.ModelRegistrar;
 import ca.ntro.cards.common.CommonApp;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.efficiency.backend.EfficiencyBackend;
@@ -101,5 +102,9 @@ public abstract class EfficiencyApp<EXECUTABLE_MODEL extends ProcedureCardsModel
 		
 	}
 
+	@Override
+	protected Attempt initialAttempt() {
+		return Attempt.SOLUTION;
+	}
 
 }

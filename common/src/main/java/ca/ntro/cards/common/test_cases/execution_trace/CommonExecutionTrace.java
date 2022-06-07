@@ -23,7 +23,6 @@ public interface CommonExecutionTrace<EXECUTABLE_MODEL extends CommonExecutableM
 
 	void copyCurrentModelInto(EXECUTABLE_MODEL model);
 
-	void updateDashboardModel(DASHBOARD_MODEL dashboardModel);
 	void truncateAfterCurrentStep();
 	void rewindToFirstStep();
 	void fastForwardToLastStep();

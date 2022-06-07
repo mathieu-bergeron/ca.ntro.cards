@@ -3,6 +3,7 @@ package ca.ntro.cards.efficiency.backend;
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
 import ca.ntro.cards.common.test_cases.CommonTestCaseDatabase;
 import ca.ntro.cards.efficiency.models.EfficiencyDashboardModel;
@@ -30,7 +31,7 @@ public abstract class EfficiencyBackend <EXECUTABLE_MODEL extends ProcedureCards
                                     SETTINGS_MODEL> {
 
 	@Override
-	public void earlyModelInitialization() {
+	public void earlyModelInitialization(String initialTestCaseId, Attempt initialAttempt) {
 		
 		CANVAS_MODEL canvasModel = NtroApp.models().load(getCanvasModelClass());
 		

@@ -28,6 +28,7 @@ import ca.ntro.cards.common.models.CommonCanvasModel;
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
 import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.CommonTestCase;
@@ -150,7 +151,7 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 		backend.setExecutionTraceFullClass(executionTraceClass());
 		
 		backend.initializeTestCaseDatabase();
-		backend.earlyModelInitialization();
+		backend.earlyModelInitialization(initialTestCaseId(), initialAttempt());
 		
 		additionnalBackendInitialization(backend);
 
@@ -175,5 +176,8 @@ public abstract class CommonApp<EXECUTABLE_MODEL   extends CommonExecutableModel
 
 	protected abstract FRONTEND createFrontend();
 	protected abstract BACKEND createBackend();
+	
+	protected abstract String initialTestCaseId();
+	protected abstract Attempt initialAttempt();
 
 }

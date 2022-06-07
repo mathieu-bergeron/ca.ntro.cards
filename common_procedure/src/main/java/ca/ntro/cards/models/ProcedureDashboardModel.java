@@ -25,7 +25,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
                                               SELECTIONS_VIEW    extends ProcedureSelectionsView,
                                               TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment>
 
-       extends CommonDashboardModel<DASHBOARD_VIEW, TEST_CASE> {
+       extends CommonDashboardModel<DASHBOARD_VIEW, TEST_CASE, TEST_CASE_DATABASE> {
     	   
     	   
     private long version = 0;
@@ -33,7 +33,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
     private TestCaseById<CARDS_MODEL, TEST_CASE> byId = new TestCaseById<>();
     private TestCasesByCategory<CARDS_MODEL, TEST_CASE> byCategory = new TestCasesByCategory<>();
 
-	private Attempt currentAttempt;
+	private Attempt currentAttempt = Attempt.SOLUTION;
 	private String currentTestCaseId = defaultTestCaseId();
 
 	public String getCurrentTestCaseId() {
@@ -79,16 +79,18 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	protected abstract String defaultTestCaseId();
 
 	public void loadCurrentTestCase(TEST_CASE_DATABASE testCaseDatabase) {
-		testCaseDatabase.loadTestCase(currentTestCaseId);
+		TEST_CASE descriptor = (TEST_CASE) testCaseDatabase.loadTestCase(currentTestCaseId);
+
+		addOrUpdateTestCase(descriptor);
 	}
 
 	public void updateCardsModel(TEST_CASE_DATABASE testCaseDatabase, CARDS_MODEL cardsModel) {
-		testCaseDatabase.updateCardsModel(currentTestCaseId, cardsModel);
+		testCaseDatabase.updateCardsModel(currentTestCaseId, currentAttempt, cardsModel);
 	}
 
 	public void displayOn(REPLAY_VIEW replayView) {
 		TEST_CASE testCase = byId.testCaseById(currentTestCaseId);
-		ProcedureAttemptDescriptor attempt = (ProcedureAttemptDescriptor) testCase.getAttempt(currentAttempt);
+		AbstractAttemptDescriptor attempt = testCase.attempt(currentAttempt);
 
 		replayView.displayNumberOfCards(String.valueOf(testCase.inputSize()));
 		replayView.displayCurrentStep(String.valueOf(attempt.currentStep()));
@@ -108,7 +110,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	}
 	
 	public void changeCurrentTestCase(String testCaseId) {
-		this.currentTestCaseId = currentTestCaseId;
+		this.currentTestCaseId = testCaseId;
 	}
 
 	public void changeCurrentAtempt(Attempt attempt) {
@@ -181,6 +183,16 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 
 	public void fastFowardToLastStep(TEST_CASE_DATABASE testCaseDatabase) {
 		testCaseDatabase.fastForwardToLastStep(currentTestCaseId, currentAttempt);
+	}
+
+	public void pushManualExecutionStep(TEST_CASE_DATABASE testCaseDatabase, CARDS_MODEL cardsModel) {
+		testCaseDatabase.pushManualExecutionStep(currentTestCaseId, cardsModel);
+	}
+
+
+	@Override
+	public void loadDbFromDir(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.loadFromDbDir(currentTestCaseId);
 	}
 
 }
