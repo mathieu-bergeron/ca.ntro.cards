@@ -109,6 +109,10 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		traces.pushReference(mode, snapshot);
 	}
 
+	public void copyTracesFrom(AbstractTestCaseDescriptor testCase) {
+		throw new RuntimeException("TODO");
+	}
+
 	public boolean hasId(String id) {
 		return id().equals(id);
 	}
@@ -162,4 +166,5 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 	public void fastForwardToLastStep(Attempt mode) {
 		executionTraceByMode(mode).fastForwardToLastStep();
 	}
+
 }

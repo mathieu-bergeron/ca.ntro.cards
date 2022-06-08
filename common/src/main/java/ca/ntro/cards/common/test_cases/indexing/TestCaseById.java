@@ -35,19 +35,24 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 
 	}
 
-	public void addOrUpdateTestCase(TEST_CASE testCase) {
+	public TEST_CASE addOrUpdateTestCase(TEST_CASE testCase) {
 		
-		TEST_CASE existingTestCase = byId.get(testCase.testCaseId());
+		TEST_CASE storedTestCase = byId.get(testCase.testCaseId());
 		
-		if(existingTestCase != null) {
+		if(storedTestCase != null) {
 
-			existingTestCase.copyTracesFrom(testCase);
+			// FIXME
+			//storedTestCase.copyTracesFrom(testCase);
+			addTestCase(testCase);
 
 		}else {
 
+			storedTestCase = testCase;
 			addTestCase(testCase);
 
 		}
+		
+		return storedTestCase;
 	}
 	
 	public Stream<TEST_CASE> testCases(){

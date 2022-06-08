@@ -117,5 +117,8 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 		}
 	}
 
+	public void copyTracesFrom(AbstractTestCaseDescriptor testCase) {
+	}
+
 
 }

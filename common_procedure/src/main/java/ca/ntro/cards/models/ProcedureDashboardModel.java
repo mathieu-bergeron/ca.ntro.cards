@@ -111,8 +111,8 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		
 		testCaseDescriptor.setParentModel(this);
 
-		byId.addTestCase(testCaseDescriptor);
-		byCategory.addTestCase(testCaseDescriptor);
+		TEST_CASE storedTestCase = byId.addOrUpdateTestCase(testCaseDescriptor);
+		byCategory.addTestCase(storedTestCase);
 		
 		version++;
 	}
