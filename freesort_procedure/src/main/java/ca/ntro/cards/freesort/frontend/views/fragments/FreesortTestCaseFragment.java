@@ -8,6 +8,7 @@ import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 public class FreesortTestCaseFragment extends ProcedureTestCaseFragment {
 	
@@ -63,6 +64,36 @@ public class FreesortTestCaseFragment extends ProcedureTestCaseFragment {
 	@Override
 	protected Button solutionButton() {
 		return solutionButton;
+	}
+
+	@Override
+	protected Pane idContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane sizeContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane manualContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane codeContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane solutionContainer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

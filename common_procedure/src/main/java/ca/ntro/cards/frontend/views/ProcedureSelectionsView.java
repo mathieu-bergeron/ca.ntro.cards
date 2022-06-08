@@ -10,6 +10,16 @@ import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
 import javafx.scene.layout.Pane;
 
 public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment> extends ViewFx {
+
+	protected abstract Pane idContainer();
+
+	protected abstract Pane sizeContainer();
+
+	protected abstract Pane manualContainer();
+
+	protected abstract Pane codeContainer();
+
+	protected abstract Pane solutionContainer();
 	
 	protected abstract Pane testCaseContainer();
 	

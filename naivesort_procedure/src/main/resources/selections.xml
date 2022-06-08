@@ -30,65 +30,77 @@
     fx:controller="ca.ntro.cards.naivesort.frontend.views.NaivesortSelectionsView" 
     id="selections-view">
 
-    <HBox styleClass="bottom">
+    <HBox VBox.vgrow="ALWAYS" styleClass="bottom">
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS" 
+              fx:id="idContainer"
+              styleClass="bottom-left">
 
             <Label
                 text="%testCaseId"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane  style="hspace-tiny" />
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="sizeContainer"
+              styleClass="bottom-left">
 
             <Label
                 text="%testCaseSize"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane  style="hspace-tiny" />
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="manualContainer"
+              styleClass="bottom-left">
 
             <Label
                 text="%testCaseOnScreen"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane  style="hspace-tiny" />
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="codeContainer"
+              styleClass="bottom-left">
 
             <Label
                 text="%testCaseInTheCode"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane  style="hspace-tiny" />
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="solutionContainer"
+              styleClass="bottom-left">
 
             <Label
                 text="%testCaseSolution"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
 
     </HBox>
 
-    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" styleClass="test-case-container">
+    <ScrollPane HBox.hgrow="ALWAYS" 
+                fitToWidth="true" 
+                styleClass="test-case-container">
         <VBox
             fx:id="testCaseContainer"
             styleClass="container">

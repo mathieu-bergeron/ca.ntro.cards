@@ -26,4 +26,34 @@ public class ArraylistSelectionsView extends ProcedureSelectionsView<ArraylistTe
 	protected Pane testCaseContainer() {
 		return testCaseContainer;
 	}
+
+	@Override
+	protected Pane idContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane sizeContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane manualContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane codeContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Pane solutionContainer() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

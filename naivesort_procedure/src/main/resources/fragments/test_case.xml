@@ -26,32 +26,64 @@
     fx:controller="ca.ntro.cards.naivesort.frontend.views.fragments.NaivesortTestCaseFragment" 
     id="test-case-fragment">
 
-    <Label 
-        fx:id="testCaseIdLabel">
-     </Label>
+    <HBox HBox.hgrow="ALWAYS" 
+          fx:id="idContainer"
+          styleClass="bottom-left">
 
-    <Pane styleClass="hspace-small"/>
+        <Label 
+            fx:id="testCaseIdLabel">
+         </Label>
 
-    <Label 
-        fx:id="inputSizeLabel">
-     </Label>
+     </HBox>
 
-    <Pane styleClass="hspace-small"/>
+    <Pane style="hspace-tiny" />
 
-    <Button 
-        fx:id="manualButton">
-     </Button>
+    <HBox HBox.hgrow="ALWAYS" 
+          fx:id="sizeContainer"
+          styleClass="bottom-left">
 
-    <Pane styleClass="hspace-small"/>
+        <Label 
+            fx:id="inputSizeLabel">
+         </Label>
 
-    <Button 
-        fx:id="codeButton">
-     </Button>
+     </HBox>
 
-    <Pane styleClass="hspace-small"/>
+    <Pane style="hspace-tiny" />
 
-    <Button 
-        fx:id="solutionButton">
-     </Button>
+    <HBox HBox.hgrow="ALWAYS" 
+          fx:id="manualContainer"
+          styleClass="bottom-left">
+
+        <Button 
+            fx:id="manualButton">
+         </Button>
+
+     </HBox>
+
+    <Pane style="hspace-tiny" />
+
+    <HBox HBox.hgrow="ALWAYS" 
+          fx:id="codeContainer"
+          styleClass="bottom-left">
+
+        <Button 
+            fx:id="codeButton">
+         </Button>
+
+     </HBox>
+
+    <Pane style="hspace-tiny" />
+
+    <HBox HBox.hgrow="ALWAYS" 
+          fx:id="solutionContainer"
+          styleClass="bottom-left">
+
+        <Button 
+            fx:id="solutionButton">
+         </Button>
+
+
+     </HBox>
+
 
 </HBox>

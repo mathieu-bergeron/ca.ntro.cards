@@ -39,6 +39,16 @@
     -fx-alignment:bottom-center;
 }
 
+.bottom-left{
+    -fx-alignment:bottom-left;
+}
+
+.hspace-tiny{
+    -fx-min-width:5;
+    -fx-max-width:10;
+}
+
+
 .hspace-small{
     -fx-min-width:20;
     -fx-max-width:30;
