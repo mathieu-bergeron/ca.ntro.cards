@@ -13,9 +13,12 @@ public interface AbstractTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescr
 
 	int inputSize();
 
+	void copyTracesFrom(AbstractTestCaseDescriptor testCase);
+
 	public static CommonTestCaseDescriptor create() {
 		CommonTestCaseDescriptor descriptor = new CommonTestCaseDescriptor();
 		return descriptor;
 	}
+
 
 }

@@ -34,6 +34,21 @@ public class TestCaseById<STUDENT_MODEL extends CommonExecutableModel,
 		byId.put(testCase.testCaseId(), testCase);
 
 	}
+
+	public void addOrUpdateTestCase(TEST_CASE testCase) {
+		
+		TEST_CASE existingTestCase = byId.get(testCase.testCaseId());
+		
+		if(existingTestCase != null) {
+
+			existingTestCase.copyTracesFrom(testCase);
+
+		}else {
+
+			addTestCase(testCase);
+
+		}
+	}
 	
 	public Stream<TEST_CASE> testCases(){
 		return new StreamNtro<TEST_CASE>() {
