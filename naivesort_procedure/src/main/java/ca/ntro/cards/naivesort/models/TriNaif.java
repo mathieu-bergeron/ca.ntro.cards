@@ -77,7 +77,6 @@ public class   TriNaif<C extends Comparable<C>>
 	public void setCible(C[] cible) {
 		this.cible = cible;
 	}
-
 	@Override
 	public void copyDataFrom(TriNaif other) {
 		int size = other.source.length;
@@ -103,8 +102,16 @@ public class   TriNaif<C extends Comparable<C>>
 	public boolean acceptManualModel(TriNaif manualModel) {
 		// FIXME: reject some updates
 		copyDataFrom(manualModel);
-
 		return true;
+	}
+	private void insertInCible() {
+		if(indiceCandidat>=0&&indicePlusPetit>=0) {
+			if(source[indiceCandidat].compareTo(source[indicePlusPetit])<0) {
+				indicePlusPetit=indiceCandidat;
+				//cible[indiceProchainVide]=source[indicePlusPetit];
+				indiceProchainVide++;
+			}
+		}
 	}
 
 	@Override
@@ -144,7 +151,7 @@ public class   TriNaif<C extends Comparable<C>>
 			if(card == null) {
 				card = new NullCard();
 			}
-
+			
 			cardsViewData.addOrUpdateCard(card,
 					                      targetTopLeftX,
 					                      targetTopLeftY);

@@ -55,7 +55,15 @@
                 </ToggleButton>
 
             </HBox>
+			<HBox>
+                <Label text="%twoTimeSpeedLabel">
+                </Label>
 
+                <ToggleButton
+                    fx:id="twoTimeSpeedToggleButton">
+                </ToggleButton>
+
+            </HBox>
             <Button
                 fx:id="quitButton"
                 text="%quit">

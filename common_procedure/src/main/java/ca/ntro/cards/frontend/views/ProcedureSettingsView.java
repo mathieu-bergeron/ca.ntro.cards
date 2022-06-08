@@ -11,12 +11,13 @@ import javafx.scene.control.ToggleButton;
 public abstract class ProcedureSettingsView extends CommonSettingsView {
 
 	protected abstract ToggleButton useFourCardColorsToggleButton();
-
+	protected abstract ToggleButton useTwoTimeSpeedToggleButton();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		super.initialize(location, resources);
 
 		initializeUseFourCardColorsToggleButton();
+		initializeUseTwoTimeSpeedToggleButton();
 	}
 
 	private void initializeUseFourCardColorsToggleButton() {
@@ -29,7 +30,10 @@ public abstract class ProcedureSettingsView extends CommonSettingsView {
 			});
 		}
 	}
+	private void initializeUseTwoTimeSpeedToggleButton() {
+		ToggleButton button = useTwoTimeSpeedToggleButton();
 
+	}
 	public void displayUseFourCardColors(boolean useFourCardColors) {
 		ToggleButton button = useFourCardColorsToggleButton();
 		if(button != null) {
