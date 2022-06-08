@@ -4,7 +4,7 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.common.models.enums.Attempt;
-import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.messages.MsgChangeTestCaseAttempt;
 import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
 import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
@@ -191,17 +191,18 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 	private void changeCurrentTestCase(BackendTasks tasks) {
 		tasks.task("changeCurrentTestCase")
 		
-		     .waitsFor(message(MsgChangeCurrentTestCase.class))
+		     .waitsFor(message(MsgChangeTestCaseAttempt.class))
 
 		     .thenExecutes(inputs -> {
 		    	 
-		    	 MsgChangeCurrentTestCase msgChangeCurrentTestCase = inputs.get(message(MsgChangeCurrentTestCase.class));
+		    	 MsgChangeTestCaseAttempt msgChangeCurrentTestCase = inputs.get(message(MsgChangeTestCaseAttempt.class));
 		    	 DASHBOARD_MODEL          dashboardModel           = inputs.get(model(getDashboardModelClass()));
 		    	 CANVAS_MODEL             cardsModel               = inputs.get(model(getCanvasModelClass()));
 		    	 
 		    	 msgChangeCurrentTestCase.applyTo(dashboardModel);
 
 		    	 dashboardModel.updateCardsModel(testCaseDatabase(), cardsModel);
+		    	 dashboardModel.updateCurrentTestCase(testCaseDatabase());
 		     });
 	}
 

@@ -5,8 +5,9 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
-import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.messages.MsgChangeTestCaseAttempt;
 import ca.ntro.cards.test_cases.descriptor.ProcedureAttemptDescriptor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,11 +28,28 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		MsgChangeCurrentTestCase msgChangeCurrentTestCase = NtroApp.newMessage(MsgChangeCurrentTestCase.class);
+		MsgChangeTestCaseAttempt msgChangeCurrentTestCase = NtroApp.newMessage(MsgChangeTestCaseAttempt.class);
 		
 		manualButton().setOnAction(evtFx -> {
 			
 			msgChangeCurrentTestCase.setTestCaseId(testCaseId);
+			msgChangeCurrentTestCase.setAttempt(Attempt.MANUAL);
+			msgChangeCurrentTestCase.send();
+			
+		});
+
+		codeButton().setOnAction(evtFx -> {
+			
+			msgChangeCurrentTestCase.setTestCaseId(testCaseId);
+			msgChangeCurrentTestCase.setAttempt(Attempt.CODE);
+			msgChangeCurrentTestCase.send();
+			
+		});
+
+		solutionButton().setOnAction(evtFx -> {
+			
+			msgChangeCurrentTestCase.setTestCaseId(testCaseId);
+			msgChangeCurrentTestCase.setAttempt(Attempt.SOLUTION);
 			msgChangeCurrentTestCase.send();
 			
 		});
@@ -56,6 +74,7 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	public void displayManual(AbstractAttemptDescriptor attempt) {
 
 		displayIsASolution(manualButton(), attempt);
+		displayIsCurrentAttempt(manualButton(), attempt);
 
 	}
 

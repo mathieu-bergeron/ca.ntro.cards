@@ -117,14 +117,11 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 		version++;
 	}
 	
-	public void changeCurrentTestCase(String testCaseId) {
+	public void changeTestCaseAttempt(String testCaseId, Attempt attempt) {
 		this.currentTestCaseId = testCaseId;
-	}
-
-	public void changeCurrentAtempt(Attempt attempt) {
 		this.currentAttempt = attempt;
 	}
-	
+
 	public void displayOn(SELECTIONS_VIEW selectionsView, 
 			              ProcedureDashboardModel previousModel,
 			              ViewLoader<TEST_CASE_FRAGMENT> testCaseFragmentLoader) {
@@ -206,6 +203,11 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 
 		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
 	}
+
+	public void updateCurrentTestCase(TEST_CASE_DATABASE testCaseDatabase) {
+		testCaseDatabase.addOrUpdateTestCase(currentTestCaseId, this);
+	}
+	
 
 
 	@Override
