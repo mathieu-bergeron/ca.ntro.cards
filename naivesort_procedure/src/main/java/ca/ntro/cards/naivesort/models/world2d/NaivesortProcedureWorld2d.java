@@ -39,36 +39,6 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 	public void registerFlippedCard(NaivesortCard2d card2d) {
 		this.lastFlippedCard = card2d;
 	}
-	
-	private List<NaivesortCard2d> collectCardsExceptDraggedCard(){
-		List<NaivesortCard2d> cards = new ArrayList<>();
-
-		for(Object2d object2d : getObjects()) {
-			if(object2d instanceof NaivesortCard2d
-					&& object2d != draggedCard) {
-				cards.add((NaivesortCard2d) object2d);
-			}
-		}
-		
-		return cards;
-	}
-
-	private void splitTopBottomCards(List<NaivesortCard2d> cards, 
-			                         List<NaivesortCard2d> topCards2d, 
-			                         List<NaivesortCard2d> bottomCards2d) {
-
-		for(NaivesortCard2d card : cards) {
-
-			if(card.topLeftY() < CommonConstants.INITIAL_CARD_HEIGHT_MILIMETERS) {
-				
-				topCards2d.add(card);
-
-			}else {
-
-				bottomCards2d.add(card);
-			}
-		}
-	}
 
 	@Override
 	public void buildAndSendManualModel() {
@@ -142,6 +112,36 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 
 		msgAcceptManualModel.setManualModel(manualModel);
 		msgAcceptManualModel.send();
+	}
+
+	private List<NaivesortCard2d> collectCardsExceptDraggedCard(){
+		List<NaivesortCard2d> cards = new ArrayList<>();
+
+		for(Object2d object2d : getObjects()) {
+			if(object2d instanceof NaivesortCard2d
+					&& object2d != draggedCard) {
+				cards.add((NaivesortCard2d) object2d);
+			}
+		}
+		
+		return cards;
+	}
+
+	private void splitTopBottomCards(List<NaivesortCard2d> cards, 
+			                         List<NaivesortCard2d> topCards2d, 
+			                         List<NaivesortCard2d> bottomCards2d) {
+
+		for(NaivesortCard2d card : cards) {
+
+			if(card.topLeftY() < CommonConstants.INITIAL_CARD_HEIGHT_MILIMETERS) {
+				
+				topCards2d.add(card);
+
+			}else {
+
+				bottomCards2d.add(card);
+			}
+		}
 	}
 
 	private void addNullCardAtDraggedCardOriginalLocation(List<NaivesortCard2d> cards) {
