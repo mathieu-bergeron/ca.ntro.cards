@@ -27,10 +27,11 @@ public class ProcedureMsgAcceptManualModel<CARDS_MODEL        extends ProcedureC
 			            DASHBOARD_MODEL dashboardModel, 
 			            TEST_CASE_DATABASE testCaseDatabase) {
 
-		boolean modified = cardsModel.acceptManualModel(manualModel);
-		
-		if(modified) {
+		if(cardsModel.isValidNextStep(manualModel)) {
+
+			cardsModel.copyDataFrom(manualModel);
 			dashboardModel.pushManualExecutionStep(testCaseDatabase, cardsModel);
+			dashboardModel.updateCurrentTestCase(testCaseDatabase);
 		}
 	}
 }

@@ -83,7 +83,7 @@ public class   TriFusion<C extends Comparable<C>>
     }
 
 	@Override
-	public boolean acceptManualModel(TriFusion manualModel) {
+	public boolean isValidNextStep(TriFusion manualModel) {
 		boolean modified = false;
 
 		// TODO: accepter ou rejeter les modifications manuelles

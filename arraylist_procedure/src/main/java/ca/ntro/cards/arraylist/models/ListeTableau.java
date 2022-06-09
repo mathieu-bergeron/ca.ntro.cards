@@ -87,7 +87,7 @@ public class   ListeTableau<C extends Comparable<C>>
     }
 
 	@Override
-	public boolean acceptManualModel(ListeTableau manualModel) {
+	public boolean isValidNextStep(ListeTableau manualModel) {
 		boolean modified = false;
 
 		// TODO: accepter ou rejeter les modifications manuelles

@@ -101,7 +101,7 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public boolean acceptManualModel(TriNaif manualModel) {
+	public boolean isValidNextStep(TriNaif manualModel) {
 		// FIXME: reject some updates
 		copyDataFrom(manualModel);
 

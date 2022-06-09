@@ -47,7 +47,7 @@ public class   TriLibre<C extends Comparable<C>>
 	}
 
 	@Override
-	public boolean acceptManualModel(TriLibre manualModel) {
+	public boolean isValidNextStep(TriLibre manualModel) {
 		boolean modified = false;
 		
 		if(cartes.length != manualModel.cartes.length) {

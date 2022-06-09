@@ -46,7 +46,7 @@ public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureC
 	public void initialize() {
 	}
 
-	public abstract boolean acceptManualModel(CARDS_MODEL manualModel);
+	public abstract boolean isValidNextStep(CARDS_MODEL nextStep);
 	
 	public abstract ComparisonReport compareToSolution(CARDS_MODEL solution);
 

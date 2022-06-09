@@ -31,7 +31,7 @@ public class   FooCardsModel<C extends Comparable<C>>
     }
 
 	@Override
-	public boolean acceptManualModel(FooCardsModel manualModel) {
+	public boolean isValidNextStep(FooCardsModel manualModel) {
 		boolean modified = false;
 
 		// TODO: accepter ou rejeter les modifications manuelles
