@@ -81,16 +81,14 @@ public class   TriNaif<C extends Comparable<C>>
 
 	@Override
 	public void copyDataFrom(TriNaif other) {
-		int size = other.source.length;
+		source = (C[]) new Card[other.source.length];
+		cible = (C[]) new Card[other.cible.length];
 
-		source = (C[]) new Card[size];
-		cible = (C[]) new Card[size];
-
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < other.source.length; i++) {
 			source[i] = (C) other.source[i];
 		}
 
-		for(int i = 0; i < size; i++) {
+		for(int i = 0; i < other.cible.length; i++) {
 			cible[i] = (C) other.cible[i];
 		}
 		
@@ -101,11 +99,25 @@ public class   TriNaif<C extends Comparable<C>>
 	}
 
 	@Override
-	public boolean isValidNextStep(TriNaif manualModel) {
-		// FIXME: reject some updates
-		copyDataFrom(manualModel);
+	public boolean isValidNextStep(TriNaif nextModel) {
+		boolean isValid = true;
+		
+		int lastNonEmpty = -1;
+		for(int i = 0; i < nextModel.cible.length; i++) {
+			if(nextModel.cible[i] != null) {
+				lastNonEmpty = i;
+			}
+		}
 
-		return true;
+		if(nextModel.indiceProchainVide != lastNonEmpty + 1) {
+			isValid = false;
+		}
+		
+		if(nextModel.indiceProchainVide - indiceProchainVide > 1) {
+			isValid = false;
+		}
+		
+		return isValid;
 	}
 
 	@Override
@@ -156,6 +168,15 @@ public class   TriNaif<C extends Comparable<C>>
 					                      targetTopLeftX,
 					                      targetTopLeftY);
 			topCards.add(card);
+			
+			if(i <= getIndiceProchainVide()) {
+
+				cardsViewData.displayCardFaceUp(card);
+
+			}else {
+
+				cardsViewData.displayCardFaceDown(card);
+			}
 		}
 
 		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndicePlusPetit() * cardWidth * 3 / 2;
@@ -173,15 +194,6 @@ public class   TriNaif<C extends Comparable<C>>
 			AbstractCard candidateCard = bottomCards.get(getIndiceCandidat());
 			cardsViewData.displayCardFaceUp(candidateCard);
 		}
-
-		if(getIndiceProchainVide() >= 0 && getIndiceProchainVide() < topCards.size()) {
-			for(int i = getIndiceProchainVide() + 1; i < topCards.size(); i++) {
-				AbstractCard futureCard = topCards.get(i);
-				cardsViewData.displayCardFaceDown(futureCard);
-			}
-
-		}
-		
 	}
 
 	@Override
