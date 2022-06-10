@@ -43,7 +43,7 @@
 
         </HBox>
 
-        <Pane  style="hspace-tiny" />
+        <Pane  styleClass="hspace-tiny" />
 
         <HBox HBox.hgrow="ALWAYS"  
               fx:id="sizeContainer"
@@ -56,7 +56,7 @@
 
         </HBox>
 
-        <Pane  style="hspace-tiny" />
+        <Pane  styleClass="hspace-tiny" />
 
         <HBox HBox.hgrow="ALWAYS"  
               fx:id="manualContainer"

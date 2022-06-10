@@ -33,6 +33,7 @@ public class NaivesortSelectionsView extends ProcedureSelectionsView<NaivesortTe
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("testCaseContainer", testCaseContainer);
+
 		Ntro.assertNotNull("idContainer", idContainer);
 		Ntro.assertNotNull("sizeContainer", sizeContainer);
 		Ntro.assertNotNull("manualContainer", manualContainer);

@@ -38,29 +38,6 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if(idContainer() != null) {
-			idContainer().layoutXProperty().addListener(new ChangeListener<Number>() {
-				@Override
-				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-					idLeftX = newValue.doubleValue();
-				}
-			});
-		}
-
-		if(sizeContainer() != null) {
-			sizeContainer().layoutXProperty().addListener(new ChangeListener<Number>() {
-				@Override
-				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-					System.out.println("sizeLeftX: " + newValue.doubleValue());
-					/*
-					for(Node child : testCaseContainer().getChildren()) {
-						child.setTranslateX(newValue.doubleValue());
-						//child.setLayoutX(newValue.doubleValue());
-					}
-					*/
-				}
-			});
-		}
 
 	}
 
@@ -73,23 +50,27 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 		testCaseContainer().getChildren().add(index, testCaseFragment.rootNode());
 
 		if(idContainer() != null) {
-			testCaseFragment.idNode().translateXProperty().bind(idContainer().layoutXProperty());
+			testCaseFragment.idContainer().translateXProperty().bind(idContainer().layoutXProperty());
+			testCaseFragment.idContainer().minWidthProperty().bind(idContainer().widthProperty());
+			testCaseFragment.idContainer().maxWidthProperty().bind(idContainer().widthProperty());
 		}
 		
 		if(sizeContainer() != null) {
-			testCaseFragment.sizeNode().translateXProperty().bind(sizeContainer().layoutXProperty());
+			testCaseFragment.sizeContainer().translateXProperty().bind(sizeContainer().layoutXProperty());
+			testCaseFragment.sizeContainer().minWidthProperty().bind(sizeContainer().widthProperty());
+			testCaseFragment.sizeContainer().maxWidthProperty().bind(sizeContainer().widthProperty());
 		}
 
 		if(manualContainer() != null) {
-			testCaseFragment.manualNode().translateXProperty().bind(manualContainer().layoutXProperty());
+			testCaseFragment.manualContainer().translateXProperty().bind(manualContainer().layoutXProperty());
 		}
 
 		if(codeContainer() != null) {
-			testCaseFragment.codeNode().translateXProperty().bind(codeContainer().layoutXProperty());
+			testCaseFragment.codeContainer().translateXProperty().bind(codeContainer().layoutXProperty());
 		}
 
 		if(solutionContainer() != null) {
-			testCaseFragment.solutionNode().translateXProperty().bind(solutionContainer().layoutXProperty());
+			testCaseFragment.solutionContainer().translateXProperty().bind(solutionContainer().layoutXProperty());
 		}
 		
 		

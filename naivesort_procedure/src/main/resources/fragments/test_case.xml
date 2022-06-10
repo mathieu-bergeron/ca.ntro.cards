@@ -27,32 +27,41 @@
     VBox.vgrow="ALWAYS"
     id="test-case-fragment">
 
-    <Pane VBox.vgrow="ALWAYS" style="vspace-tiny" />
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-tiny" />
 
     <Pane>
 
-        <Label 
-            fx:id="testCaseIdLabel">
-         </Label>
+        <HBox fx:id="idContainer" styleClass="center-left">
+            <Label 
+                fx:id="testCaseIdLabel">
+             </Label>
+        </HBox>
 
-        <Label 
-            fx:id="inputSizeLabel">
-         </Label>
+        <HBox fx:id="sizeContainer" styleClass="center-left">
+            <Label 
+                fx:id="inputSizeLabel">
+             </Label>
+         </HBox>
 
-        <Button 
-            fx:id="manualButton">
-         </Button>
+        <HBox fx:id="manualContainer" styleClass="center-left">
+            <Button 
+                fx:id="manualButton">
+             </Button>
+        </HBox>
 
-        <Button 
-            fx:id="codeButton">
-         </Button>
+        <HBox fx:id="codeContainer" styleClass="center-left">
+            <Button 
+                fx:id="codeButton">
+             </Button>
+        </HBox>
 
-        <Button 
-            fx:id="solutionButton">
-         </Button>
-
+        <HBox fx:id="solutionContainer" styleClass="center-left">
+            <Button 
+                fx:id="solutionButton">
+             </Button>
+        </HBox>
     </Pane>
 
-    <Pane VBox.vgrow="ALWAYS" style="vspace-tiny" />
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-tiny" />
 
 </VBox>

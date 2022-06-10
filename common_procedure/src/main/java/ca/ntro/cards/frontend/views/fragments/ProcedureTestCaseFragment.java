@@ -11,6 +11,8 @@ import ca.ntro.cards.messages.MsgChangeTestCaseAttempt;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public abstract class ProcedureTestCaseFragment extends ViewFx {
 	
@@ -21,6 +23,12 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	protected abstract Button manualButton();
 	protected abstract Button codeButton();
 	protected abstract Button solutionButton();
+	
+	public abstract Pane idContainer();
+	public abstract Pane sizeContainer();
+	public abstract Pane manualContainer();
+	public abstract Pane codeContainer();
+	public abstract Pane solutionContainer();
 	
 	private String solutionText;
 	private String errorText;
@@ -129,26 +137,5 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	public String testCaseId() {
 		return testCaseId;
 	}
-
-	public Node idNode() {
-		return testCaseIdLabel();
-	}
-
-	public Node sizeNode() {
-		return inputSizeLabel();
-	}
-
-	public Node manualNode() {
-		return manualButton();
-	}
-
-	public Node codeNode() {
-		return codeButton();
-	}
-
-	public Node solutionNode() {
-		return solutionButton();
-	}
-
 
 }
