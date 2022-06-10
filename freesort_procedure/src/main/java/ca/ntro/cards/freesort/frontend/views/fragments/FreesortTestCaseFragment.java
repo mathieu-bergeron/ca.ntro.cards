@@ -27,6 +27,22 @@ public class FreesortTestCaseFragment extends ProcedureTestCaseFragment {
 	@FXML
 	protected Button solutionButton;
 
+	@FXML 
+	private Pane idContainer;
+
+	@FXML 
+	private Pane sizeContainer;
+
+	@FXML 
+	private Pane manualContainer;
+
+	@FXML 
+	private Pane codeContainer;
+
+	@FXML 
+	private Pane solutionContainer;
+
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -36,6 +52,12 @@ public class FreesortTestCaseFragment extends ProcedureTestCaseFragment {
 		Ntro.assertNotNull("manualButton", manualButton);
 		Ntro.assertNotNull("codeButton", codeButton);
 		Ntro.assertNotNull("solutionButton", solutionButton);
+
+		Ntro.assertNotNull("idContainer", idContainer);
+		Ntro.assertNotNull("sizeContainer", sizeContainer);
+		Ntro.assertNotNull("manualContainer", manualContainer);
+		Ntro.assertNotNull("codeContainer", codeContainer);
+		Ntro.assertNotNull("solutionContainer", solutionContainer);
 		
 		
 		super.initialize(location, resources);
@@ -64,6 +86,31 @@ public class FreesortTestCaseFragment extends ProcedureTestCaseFragment {
 	@Override
 	protected Button solutionButton() {
 		return solutionButton;
+	}
+
+	@Override
+	public Pane idContainer() {
+		return idContainer;
+	}
+
+	@Override
+	public Pane sizeContainer() {
+		return sizeContainer;
+	}
+
+	@Override
+	public Pane manualContainer() {
+		return manualContainer;
+	}
+
+	@Override
+	public Pane codeContainer() {
+		return codeContainer;
+	}
+
+	@Override
+	public Pane solutionContainer() {
+		return solutionContainer;
 	}
 
 	
