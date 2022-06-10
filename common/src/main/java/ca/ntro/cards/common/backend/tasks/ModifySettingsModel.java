@@ -1,9 +1,10 @@
 package ca.ntro.cards.common.backend.tasks;
 
 import ca.ntro.app.tasks.backend.BackendTasks;
-
+import ca.ntro.cards.common.messages.MsgSpeedUp;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import ca.ntro.cards.common.models.CommonSettingsModel;
+import ca.ntro.cards.common.CommonConstants;
 
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 
@@ -26,7 +27,9 @@ public class ModifySettingsModel {
 		    	 toggleUseFourCardColors(subTasks, settingsModelClass);
 		    	 
 		    	 subTasksLambda.createSubTasks(subTasks);
-
+		    	 
+		    	 initializeUseTwoTimeSpeedToggleButton(subTasks, settingsModelClass);
+		    	 
 		     });
 	}
 
@@ -42,9 +45,26 @@ public class ModifySettingsModel {
 		     .thenExecutes(inputs -> {
 		    	 
 		    	 CommonSettingsModel settingsModel = inputs.get(model(settingsModelClass));
-
+		    	 
 		    	 settingsModel.toggleUseFourCardColors();
 
 		     });
 	}
+	
+	private static <SETTINGS_MODEL extends CommonSettingsModel> 
+
+    void initializeUseTwoTimeSpeedToggleButton(BackendTasks tasks,
+            Class<SETTINGS_MODEL> settingsModelClass) {
+		
+		tasks.task("initializeUseTwoTimeSpeedToggleButton")
+		
+			.waitsFor(message(MsgSpeedUp.class))
+			
+			.thenExecutes(inputs ->{
+				double oldSpeed=CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS;
+				CommonConstants.SECONDS_BETWEEN_EXECUTION_STEPS=(int)(oldSpeed/2);
+			});
+			
+	}
+	
 }

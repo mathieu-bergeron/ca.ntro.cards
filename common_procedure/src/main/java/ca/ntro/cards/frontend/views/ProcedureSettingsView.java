@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.NtroApp;
 import ca.ntro.cards.common.frontend.views.CommonSettingsView;
+import ca.ntro.cards.common.messages.MsgSpeedUp;
 import ca.ntro.cards.common.messages.MsgToggleUseFourCardColors;
 import javafx.scene.control.ToggleButton;
 
@@ -31,8 +32,14 @@ public abstract class ProcedureSettingsView extends CommonSettingsView {
 		}
 	}
 	private void initializeUseTwoTimeSpeedToggleButton() {
+		MsgSpeedUp msgSpeedUp= NtroApp.newMessage(MsgSpeedUp.class);
+		
 		ToggleButton button = useTwoTimeSpeedToggleButton();
-
+		if(button != null) {
+			button.setOnAction(evtFx -> {
+				msgSpeedUp.send();
+			});
+		}
 	}
 	public void displayUseFourCardColors(boolean useFourCardColors) {
 		ToggleButton button = useFourCardColorsToggleButton();

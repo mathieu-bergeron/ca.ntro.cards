@@ -47,7 +47,7 @@ public class NaivesortProcedureSettingsView extends ProcedureSettingsView {
 		Ntro.assertNotNull("quitButton", quitButton);
 		Ntro.assertNotNull("useFourCardColorsToggleButton", useFourCardColorsToggleButton);
 		Ntro.assertNotNull("twoTimeSpeedToggleButton", twoTimeSpeedToggleButton);
-		System.out.println(twoTimeSpeedToggleButton.isSelected()==true);
+		//System.out.println(twoTimeSpeedToggleButton.isSelected()==true);
 		super.initialize(location, resources);
 	}
 
@@ -73,9 +73,10 @@ public class NaivesortProcedureSettingsView extends ProcedureSettingsView {
 	protected ToggleButton useFourCardColorsToggleButton() {
 		return useFourCardColorsToggleButton;
 	}
-	
-	protected ToggleButton UseTwoTimeSpeedToggleButton() {
-		//Cette méthode sera très utile pour changer la vitesse
+
+	@Override
+	protected ToggleButton useTwoTimeSpeedToggleButton() {
+		// TODO Auto-generated method stub
 		return twoTimeSpeedToggleButton;
 	}
 
