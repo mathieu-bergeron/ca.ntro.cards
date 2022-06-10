@@ -81,7 +81,7 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 
 	public void displayManual(AbstractAttemptDescriptor attempt) {
 
-		displayIsASolution(manualButton(), attempt);
+		manualButton().setText("¤");
 		displayIsCurrentAttempt(manualButton(), attempt);
 
 	}
@@ -94,13 +94,18 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	}
 
 	private void displayIsASolution(Button button, AbstractAttemptDescriptor attempt) {
-		if(attempt.isASolution()) {
+		if(attempt.isLoaded() && attempt.isASolution()) {
 
 			button.setText(solutionText);
 
-		}else {
+		}else if(attempt.isLoaded() && !attempt.isASolution()){
 
 			button.setText(errorText);
+
+		}else {
+
+			button.setText("¤");
+			
 		}
 
 	}

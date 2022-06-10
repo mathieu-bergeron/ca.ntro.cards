@@ -23,9 +23,11 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 	private int current = 0;
 	
 	private transient boolean isSolution = false;
+	private transient boolean isLoaded = false;
 	
 	protected void registerIsSolution(boolean isSolution) {
 		this.isSolution = isSolution;
+		this.isLoaded = true;
 	}
 
 	public List<EXECUTABLE_MODEL> getTrace() {
@@ -127,7 +129,7 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 		
 		attempt.setCurrentStep(current);
 		attempt.setIsASolution(isSolution);
-		attempt.setIsLoaded(true);
+		attempt.setIsLoaded(isLoaded);
 		attempt.setNumberOfSteps(trace.size());
 
 		return attempt;
