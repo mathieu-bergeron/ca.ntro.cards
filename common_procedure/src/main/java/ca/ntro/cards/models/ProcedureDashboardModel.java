@@ -172,7 +172,7 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 			testCase.setIsSolution(false);
 		});
 
-		//version = 0;
+		version = 0;
 	}
 
 	public void stepBackward(TEST_CASE_DATABASE testCaseDatabase) {
