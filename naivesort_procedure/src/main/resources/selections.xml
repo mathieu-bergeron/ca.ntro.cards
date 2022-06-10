@@ -28,9 +28,13 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.naivesort.frontend.views.NaivesortSelectionsView" 
+    styleClass="top"
+    VBox.vgrow="ALWAYS"
     id="selections-view">
 
-    <HBox VBox.vgrow="ALWAYS" styleClass="bottom">
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-small" />
+
+    <HBox styleClass="bottom">
 
         <HBox HBox.hgrow="ALWAYS" 
               fx:id="idContainer"
@@ -69,7 +73,7 @@
 
         </HBox>
 
-        <Pane  style="hspace-tiny" />
+        <Pane  styleClass="hspace-tiny" />
 
         <HBox HBox.hgrow="ALWAYS"  
               fx:id="codeContainer"
@@ -82,7 +86,7 @@
 
         </HBox>
 
-        <Pane  style="hspace-tiny" />
+        <Pane  styleClass="hspace-tiny" />
 
         <HBox HBox.hgrow="ALWAYS"  
               fx:id="solutionContainer"
@@ -94,18 +98,21 @@
             </Label>
 
         </HBox>
-
-
     </HBox>
 
-    <ScrollPane HBox.hgrow="ALWAYS" 
-                fitToWidth="true" 
-                styleClass="test-case-container">
-        <VBox
-            fx:id="testCaseContainer"
-            styleClass="container">
-        </VBox>
-    </ScrollPane>
+    <VBox VBox.vgrow="ALWAYS">
+        <ScrollPane VBox.vgrow="ALWAYS" 
+                    fitToWidth="true" 
+                    styleClass="test-case-container">
+            <VBox
+                VBox.vgrow="ALWAYS"
+                fx:id="testCaseContainer"
+                styleClass="container">
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+    <!--
 
     <HBox styleClass="bottom-right">
 
@@ -129,6 +136,8 @@
 
         </VBox>
     </HBox>
+
+    -->
 
 
 

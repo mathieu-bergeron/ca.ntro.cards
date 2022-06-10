@@ -47,7 +47,8 @@
         <StackPane
             fx:id="dashboardContainer"
             HBox.hgrow="ALWAYS"
-            styleClass="container">
+            styleClass="container"
+            id="dashboard-container">
         </StackPane>
 
     </HBox>

@@ -28,7 +28,7 @@
 
     <VBox 
         HBox.hgrow="ALWAYS"
-        styleClass="container"
+        styleClass="container, top"
         fx:id="selectionsContainer">
     </VBox>
 

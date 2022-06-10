@@ -8,6 +8,11 @@
     -fx-alignment:bottom-right;
 }
 
+#dashboard-container {
+    -fx-min-height:200;
+    -fx-max-height:200;
+}
+
 .translucidSpace{
     -fx-background-color:black;
     -fx-opacity:0.75;
@@ -19,18 +24,15 @@
 }
 
 .test-case-container{
-    -fx-min-height:100;
-    -fx-max-height:100;
 }
 
-.center-right{
+.right{
     -fx-alignment:center-right;
 }
 
-.center-left{
+.left{
     -fx-alignment:center-left;
 }
-
 
 .center{
     -fx-alignment:center;
@@ -47,6 +49,21 @@
 .bottom-left{
     -fx-alignment:bottom-left;
 }
+
+.top-left{
+    -fx-alignment:top-left;
+}
+
+.top{
+    -fx-alignment:top-center;
+}
+
+.top-right{
+    -fx-alignment:top-right;
+}
+
+
+
 
 
 .hspace-tiny{

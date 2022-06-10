@@ -31,31 +31,31 @@
 
     <Pane>
 
-        <HBox fx:id="idContainer" styleClass="center-left">
+        <HBox fx:id="idContainer" styleClass="left">
             <Label 
                 fx:id="testCaseIdLabel">
              </Label>
         </HBox>
 
-        <HBox fx:id="sizeContainer" styleClass="center-left">
+        <HBox fx:id="sizeContainer" styleClass="left">
             <Label 
                 fx:id="inputSizeLabel">
              </Label>
          </HBox>
 
-        <HBox fx:id="manualContainer" styleClass="center-left">
+        <HBox fx:id="manualContainer" styleClass="left">
             <Button 
                 fx:id="manualButton">
              </Button>
         </HBox>
 
-        <HBox fx:id="codeContainer" styleClass="center-left">
+        <HBox fx:id="codeContainer" styleClass="left">
             <Button 
                 fx:id="codeButton">
              </Button>
         </HBox>
 
-        <HBox fx:id="solutionContainer" styleClass="center-left">
+        <HBox fx:id="solutionContainer" styleClass="left">
             <Button 
                 fx:id="solutionButton">
              </Button>

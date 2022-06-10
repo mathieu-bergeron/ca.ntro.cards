@@ -27,9 +27,9 @@ public class   NaivesortTestCaseDatabase<STUDENT_MODEL extends TriNaif>
 		addTestCase(descriptor);
 		
 		
-		for(int i = 1; i <= 2; i++) {
+		for(int i = 1; i <= 5; i++) {
 			
-			int size = i*50;
+			int size = i*30;
 
 			descriptor = AbstractTestCaseDescriptor.create()
 												   .random(size);
