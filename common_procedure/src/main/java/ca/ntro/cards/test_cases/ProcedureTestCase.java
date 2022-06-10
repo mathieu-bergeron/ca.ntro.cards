@@ -6,6 +6,7 @@ import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.common.test_cases.descriptor.CommonTestCaseDescriptor;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.ProcedureDashboardModel;
+import ca.ntro.cards.models.values.ComparisonReport;
 import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.test_cases.execution_trace.ProcedureExecutionTrace;
 
@@ -27,6 +28,15 @@ public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCards
 		executionTraceByMode(Attempt.MANUAL).truncateAfterCurrentStep();
 		executionTraceByMode(Attempt.MANUAL).pushCloneOf(model);
 		executionTraceByMode(Attempt.MANUAL).stepForward();
+	}
+
+	@Override
+	public void checkSolution() {
+		ComparisonReport report = ((ProcedureExecutionTrace) executionTraceByMode(Attempt.CODE)).compareToSolution((ProcedureExecutionTrace) executionTraceByMode(Attempt.SOLUTION));
+
+		setPassed(report.isSolution());
+
+		System.out.println("Checked: " + report.isSolution());
 	}
 
 }

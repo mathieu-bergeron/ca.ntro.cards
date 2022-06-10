@@ -24,7 +24,7 @@ public class   FusionsortTestCaseDatabase<STUDENT_MODEL extends TriFusion>
                                                           .category("exemples")
                                                           .testCaseId("ex01");
         
-        addTestCase(descriptor);
+        addTestCaseDescriptor(descriptor);
 
 
         // TODO: ajouter d'autres descriptions de cas de tests

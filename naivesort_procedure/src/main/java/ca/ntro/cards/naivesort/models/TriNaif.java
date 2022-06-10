@@ -123,6 +123,17 @@ public class   TriNaif<C extends Comparable<C>>
 	@Override
 	public ComparisonReport compareToSolution(TriNaif solution) {
 		ComparisonReport report = ComparisonReport.emptyReport();
+		
+		if(cible.length != solution.cible.length) {
+			report.addError("Pas la bonne taille pour cible (devrait être " + solution.cible.length + ")");
+		}
+		
+		for(int i = 0; i < cible.length; i++) {
+			if(!cible[i].equals(solution.cible[i])) {
+				report.addError("Pas la bonne carte " + i + " " + cible[i] + " devrait être " + solution.cible.length);
+			}
+		}
+
 		return report;
 	}
 

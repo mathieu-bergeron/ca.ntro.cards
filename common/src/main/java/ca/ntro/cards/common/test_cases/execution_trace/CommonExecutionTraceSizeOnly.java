@@ -2,6 +2,7 @@ package ca.ntro.cards.common.test_cases.execution_trace;
 
 import ca.ntro.cards.common.models.CommonDashboardModel;
 import ca.ntro.cards.common.models.CommonExecutableModel;
+import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.CommonAttemptDescriptor;
 
 public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecutableModel,
@@ -24,6 +25,10 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 
 	@Override
 	public void copyCurrentModelInto(EXECUTABLE_MODEL model) {
+	}
+
+	@Override
+	public void copyInitialModelInto(EXECUTABLE_MODEL target) {
 	}
 
 	@Override
@@ -55,5 +60,6 @@ public class CommonExecutionTraceSizeOnly<EXECUTABLE_MODEL extends CommonExecuta
 	public CommonAttemptDescriptor asAttemptDescriptor() {
 		return null;
 	}
+
 
 }

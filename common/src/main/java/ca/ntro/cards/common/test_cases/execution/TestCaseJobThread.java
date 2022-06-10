@@ -51,6 +51,7 @@ public class TestCaseJobThread<EXECUTABLE_MODEL extends CommonExecutableModel,
 				}catch(Throwable t) {
 					
 					currentJob.failsWith(t);
+					t.printStackTrace();
 
 				}finally {
 					

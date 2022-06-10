@@ -138,6 +138,8 @@ public abstract class CommonBackend<EXECUTABLE_MODEL   extends CommonExecutableM
 		testCaseDatabase.registerShouldWriteJson(false);
 		
 		testCaseDatabase.registerExecutionEngine(testCaseJobEngine);
+		
+		Execution.registerExecutionEngine(testCaseJobEngine);
 
 	}
 

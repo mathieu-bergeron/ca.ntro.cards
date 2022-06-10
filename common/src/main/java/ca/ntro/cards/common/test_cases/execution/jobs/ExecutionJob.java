@@ -21,5 +21,4 @@ public class ExecutionJob<EXECUTABLE_MODEL extends CommonExecutableModel,
 		getTestCase().run();
 	}
 
-
 }

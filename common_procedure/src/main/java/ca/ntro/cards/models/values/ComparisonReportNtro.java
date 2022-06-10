@@ -30,4 +30,9 @@ public class ComparisonReportNtro implements ComparisonReport {
 		};
 	}
 
+	@Override
+	public void addError(String message) {
+		errors.add(new ErrorReportNtro(message));
+	}
+
 }

@@ -126,7 +126,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public abstract void describeTestCasesToGenerate();
 
 	@SuppressWarnings("unchecked")
-	protected void addTestCase(AbstractTestCaseDescriptor descriptor) {
+	protected void addTestCaseDescriptor(AbstractTestCaseDescriptor descriptor) {
 
 		STUDENT_MODEL studentModel = Ntro.factory().newInstance(studentModelClass);
 		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass);
@@ -270,16 +270,22 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 			readingJob.registerFile(testCaseFile);
 
 			executionEngine.executeJob(readingJob, () -> {
+
+				TEST_CASE testCase = (TEST_CASE) readingJob.getTestCase();
+
+				testCase.registerExecutableModelClass(executableModelClass);
+				testCase.initializeStudentModel(studentModelClass);
 				
-				addTestCase((TEST_CASE) readingJob.getTestCase());
+				addTestCase(testCase);
 				
 				ExecutionJob executionJob = new ExecutionJob();
 				executionJob.setAttempt(Attempt.CODE);
 				executionJob.setTestCase(readingJob.getTestCase());
-				
+
 				executionEngine.executeJob(executionJob, () -> {
-					
-					
+					System.out.println("Executed: " + testCase.testCaseId());
+					testCase.checkSolution();
+					msgRefreshDashboard.send();
 				});
 			});
 		}
@@ -309,18 +315,23 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		readingJob.registerFile(testCaseFile);
 		
 		readingJob.runImpl();
+		
+		TEST_CASE testCase = (TEST_CASE) readingJob.getTestCase();
+		
+		testCase.registerExecutableModelClass(executableModelClass);
+		testCase.initializeStudentModel(studentModelClass);
 
-		addTestCase((TEST_CASE) readingJob.getTestCase());
-
+		addTestCase(testCase);
+		
 		ExecutionJob executionJob = new ExecutionJob();
 		executionJob.setAttempt(Attempt.CODE);
-		executionJob.setTestCase(readingJob.getTestCase());
-		
+		executionJob.setTestCase(testCase);
+
 		executionEngine.executeJob(executionJob, () -> {
-					
-					
+			System.out.println("Executed: " + testCase.testCaseId());
+			testCase.checkSolution();
 		});
-		
+
 		return readingJob.getTestCase().asTestCaseDescriptor();
 	}
 
@@ -344,7 +355,5 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public void startEngine() {
 		executionEngine.start();
 	}
-
-
 
 }

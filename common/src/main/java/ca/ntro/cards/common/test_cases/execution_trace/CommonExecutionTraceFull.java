@@ -127,4 +127,15 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 
 		return attempt;
 	}
+
+	@Override
+	public void copyInitialModelInto(EXECUTABLE_MODEL target) {
+		EXECUTABLE_MODEL initialModel = trace.get(0);
+		target.copyDataFrom(initialModel);
+	}
+
+	protected EXECUTABLE_MODEL lastModel() {
+		return trace.get(trace.size()-1);
+	}
+
 }

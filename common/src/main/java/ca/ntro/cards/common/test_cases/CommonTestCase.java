@@ -83,6 +83,14 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 		return executableModelClass;
 	}
 
+	public void initializeStudentModel(Class<STUDENT_MODEL> studentModelClass) {
+
+		studentModel = Ntro.factory().newInstance(studentModelClass);
+
+		traces.trace(Attempt.SOLUTION).copyInitialModelInto(studentModel);
+
+	}
+
 	public void registerExecutableModelClass(Class<EXECUTABLE_MODEL> executableModelClass) {
 		this.executableModelClass = executableModelClass;
 	}
@@ -165,6 +173,9 @@ public abstract class CommonTestCase<EXECUTABLE_MODEL extends CommonExecutableMo
 
 	public void fastForwardToLastStep(Attempt mode) {
 		executionTraceByMode(mode).fastForwardToLastStep();
+	}
+
+	public void checkSolution() {
 	}
 
 }

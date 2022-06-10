@@ -11,11 +11,14 @@ public interface ComparisonReport extends Value, Serializable {
 	
 	Stream<ErrorReport> errors();
 
+	void addError(String message);
+
 	static ComparisonReport emptyReport() {
 		ComparisonReportNtro report = new ComparisonReportNtro();
 
 		return report;
 	}
+
 
 
 }
