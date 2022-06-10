@@ -7,6 +7,9 @@ import java.util.ResourceBundle;
 
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.frontend.views.fragments.ProcedureTestCaseFragment;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends ProcedureTestCaseFragment> extends ViewFx {
@@ -26,9 +29,38 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 	private Map<String, TEST_CASE_FRAGMENT> testCaseFragmentById = new HashMap<>();
 	
 	private long version = -1;
+	
+	private double idLeftX = -1;
+	private double sizeLeftX = -1;
+	private double manualLeftX = -1;
+	private double codeLeftX = -1;
+	private double solutionLeftX = -1;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		if(idContainer() != null) {
+			idContainer().layoutXProperty().addListener(new ChangeListener<Number>() {
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+					idLeftX = newValue.doubleValue();
+				}
+			});
+		}
+
+		if(sizeContainer() != null) {
+			sizeContainer().layoutXProperty().addListener(new ChangeListener<Number>() {
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+					System.out.println("sizeLeftX: " + newValue.doubleValue());
+					/*
+					for(Node child : testCaseContainer().getChildren()) {
+						child.setTranslateX(newValue.doubleValue());
+						//child.setLayoutX(newValue.doubleValue());
+					}
+					*/
+				}
+			});
+		}
 
 	}
 
@@ -39,6 +71,30 @@ public abstract class ProcedureSelectionsView<TEST_CASE_FRAGMENT extends Procedu
 	public void insertTestCase(int index, TEST_CASE_FRAGMENT testCaseFragment) {
 		testCaseFragmentById.put(testCaseFragment.testCaseId(), testCaseFragment);
 		testCaseContainer().getChildren().add(index, testCaseFragment.rootNode());
+
+		if(idContainer() != null) {
+			testCaseFragment.idNode().translateXProperty().bind(idContainer().layoutXProperty());
+		}
+		
+		if(sizeContainer() != null) {
+			testCaseFragment.sizeNode().translateXProperty().bind(sizeContainer().layoutXProperty());
+		}
+
+		if(manualContainer() != null) {
+			testCaseFragment.manualNode().translateXProperty().bind(manualContainer().layoutXProperty());
+		}
+
+		if(codeContainer() != null) {
+			testCaseFragment.codeNode().translateXProperty().bind(codeContainer().layoutXProperty());
+		}
+
+		if(solutionContainer() != null) {
+			testCaseFragment.solutionNode().translateXProperty().bind(solutionContainer().layoutXProperty());
+		}
+		
+		
+		
+		
 	}
 	
 	public TEST_CASE_FRAGMENT testCaseFragment(String testCaseId) {

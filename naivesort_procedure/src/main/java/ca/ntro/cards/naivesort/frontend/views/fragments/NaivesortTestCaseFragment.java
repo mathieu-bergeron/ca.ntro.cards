@@ -13,21 +13,6 @@ import javafx.scene.layout.Pane;
 public class NaivesortTestCaseFragment extends ProcedureTestCaseFragment {
 
 	@FXML
-	protected Pane idContainer;
-
-	@FXML
-	protected Pane sizeContainer;
-
-	@FXML
-	protected Pane manualContainer;
-
-	@FXML
-	protected Pane codeContainer;
-
-	@FXML
-	protected Pane solutionContainer;
-			
-	@FXML
 	protected Label testCaseIdLabel;
 
 	@FXML
@@ -45,13 +30,6 @@ public class NaivesortTestCaseFragment extends ProcedureTestCaseFragment {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		Ntro.assertNotNull("idContainer", idContainer);
-		Ntro.assertNotNull("sizeContainer", sizeContainer);
-		Ntro.assertNotNull("manualContainer", manualContainer);
-		Ntro.assertNotNull("codeContainer", codeContainer);
-		Ntro.assertNotNull("solutionContainer", solutionContainer);
-
 		Ntro.assertNotNull("testCaseIdLabel", testCaseIdLabel);
 		Ntro.assertNotNull("inputSizeLabel", inputSizeLabel);
 		Ntro.assertNotNull("manualButton", manualButton);
@@ -85,36 +63,6 @@ public class NaivesortTestCaseFragment extends ProcedureTestCaseFragment {
 	@Override
 	protected Button solutionButton() {
 		return solutionButton;
-	}
-
-	@Override
-	protected Pane idContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane sizeContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane manualContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane codeContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane solutionContainer() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

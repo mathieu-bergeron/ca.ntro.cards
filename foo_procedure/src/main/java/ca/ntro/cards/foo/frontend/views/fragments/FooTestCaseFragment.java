@@ -66,34 +66,4 @@ public class FooTestCaseFragment extends ProcedureTestCaseFragment {
 		return solutionButton;
 	}
 
-	@Override
-	protected Pane idContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane sizeContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane manualContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane codeContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Pane solutionContainer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

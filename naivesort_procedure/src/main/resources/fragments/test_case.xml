@@ -22,68 +22,37 @@
 <?import javafx.scene.control.Label ?>
 <?import javafx.scene.control.Button ?>
 
-<HBox xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.naivesort.frontend.views.fragments.NaivesortTestCaseFragment" 
+    VBox.vgrow="ALWAYS"
     id="test-case-fragment">
 
-    <HBox HBox.hgrow="ALWAYS" 
-          fx:id="idContainer"
-          styleClass="bottom-left">
+    <Pane VBox.vgrow="ALWAYS" style="vspace-tiny" />
+
+    <Pane>
 
         <Label 
             fx:id="testCaseIdLabel">
          </Label>
 
-     </HBox>
-
-    <Pane style="hspace-tiny" />
-
-    <HBox HBox.hgrow="ALWAYS" 
-          fx:id="sizeContainer"
-          styleClass="bottom-left">
-
         <Label 
             fx:id="inputSizeLabel">
          </Label>
-
-     </HBox>
-
-    <Pane style="hspace-tiny" />
-
-    <HBox HBox.hgrow="ALWAYS" 
-          fx:id="manualContainer"
-          styleClass="bottom-left">
 
         <Button 
             fx:id="manualButton">
          </Button>
 
-     </HBox>
-
-    <Pane style="hspace-tiny" />
-
-    <HBox HBox.hgrow="ALWAYS" 
-          fx:id="codeContainer"
-          styleClass="bottom-left">
-
         <Button 
             fx:id="codeButton">
          </Button>
-
-     </HBox>
-
-    <Pane style="hspace-tiny" />
-
-    <HBox HBox.hgrow="ALWAYS" 
-          fx:id="solutionContainer"
-          styleClass="bottom-left">
 
         <Button 
             fx:id="solutionButton">
          </Button>
 
+    </Pane>
 
-     </HBox>
+    <Pane VBox.vgrow="ALWAYS" style="vspace-tiny" />
 
-
-</HBox>
+</VBox>

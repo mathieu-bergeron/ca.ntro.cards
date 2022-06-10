@@ -13,11 +13,31 @@ public class NaivesortSelectionsView extends ProcedureSelectionsView<NaivesortTe
 	
 	@FXML
 	private Pane testCaseContainer;
+	
+	@FXML 
+	private Pane idContainer;
+
+	@FXML 
+	private Pane sizeContainer;
+
+	@FXML 
+	private Pane manualContainer;
+
+	@FXML 
+	private Pane codeContainer;
+
+	@FXML 
+	private Pane solutionContainer;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Ntro.assertNotNull("testCaseContainer", testCaseContainer);
+		Ntro.assertNotNull("idContainer", idContainer);
+		Ntro.assertNotNull("sizeContainer", sizeContainer);
+		Ntro.assertNotNull("manualContainer", manualContainer);
+		Ntro.assertNotNull("codeContainer", codeContainer);
+		Ntro.assertNotNull("solutionContainer", solutionContainer);
 		
 		super.initialize(location, resources);
 	}
@@ -29,31 +49,26 @@ public class NaivesortSelectionsView extends ProcedureSelectionsView<NaivesortTe
 
 	@Override
 	protected Pane idContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return idContainer;
 	}
 
 	@Override
 	protected Pane sizeContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return sizeContainer;
 	}
 
 	@Override
 	protected Pane manualContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return manualContainer;
 	}
 
 	@Override
 	protected Pane codeContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return codeContainer;
 	}
 
 	@Override
 	protected Pane solutionContainer() {
-		// TODO Auto-generated method stub
-		return null;
+		return solutionContainer;
 	}
 }

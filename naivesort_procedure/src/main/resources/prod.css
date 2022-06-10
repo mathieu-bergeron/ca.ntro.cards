@@ -55,6 +55,11 @@
 
 }
 
+.vspace-tiny{
+    -fx-min-height:5;
+    -fx-max-height:10;
+}
+
 .vspace-small{
     -fx-min-height:20;
     -fx-max-height:20;

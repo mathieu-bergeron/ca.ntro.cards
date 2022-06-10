@@ -8,19 +8,13 @@ import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.common.models.enums.Attempt;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractAttemptDescriptor;
 import ca.ntro.cards.messages.MsgChangeTestCaseAttempt;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 
 public abstract class ProcedureTestCaseFragment extends ViewFx {
 	
 	private String testCaseId;
-
-	protected abstract Pane idContainer();
-	protected abstract Pane sizeContainer();
-	protected abstract Pane manualContainer();
-	protected abstract Pane codeContainer();
-	protected abstract Pane solutionContainer();
 
 	protected abstract Label testCaseIdLabel();
 	protected abstract Label inputSizeLabel();
@@ -134,6 +128,26 @@ public abstract class ProcedureTestCaseFragment extends ViewFx {
 	
 	public String testCaseId() {
 		return testCaseId;
+	}
+
+	public Node idNode() {
+		return testCaseIdLabel();
+	}
+
+	public Node sizeNode() {
+		return inputSizeLabel();
+	}
+
+	public Node manualNode() {
+		return manualButton();
+	}
+
+	public Node codeNode() {
+		return codeButton();
+	}
+
+	public Node solutionNode() {
+		return solutionButton();
 	}
 
 
