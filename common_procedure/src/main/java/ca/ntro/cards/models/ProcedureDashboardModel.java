@@ -169,9 +169,10 @@ public abstract class ProcedureDashboardModel<DASHBOARD_VIEW     extends Procedu
 	public void initialize() {
 		byId.testCases().forEach(testCase -> {
 			testCase.setLoaded(false);
+			testCase.setIsSolution(false);
 		});
 
-		version = 0;
+		//version = 0;
 	}
 
 	public void stepBackward(TEST_CASE_DATABASE testCaseDatabase) {

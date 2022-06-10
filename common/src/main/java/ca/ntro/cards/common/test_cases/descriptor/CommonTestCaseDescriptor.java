@@ -117,6 +117,12 @@ public class CommonTestCaseDescriptor<ATTEMPT extends AbstractAttemptDescriptor>
 		}
 	}
 
+	public void setIsSolution(boolean isSolution) {
+		for(ATTEMPT attempt : attempts.values()) {
+			((CommonAttemptDescriptor) attempt).setIsASolution(isSolution);
+		}
+	}
+
 	public void copyTracesFrom(AbstractTestCaseDescriptor testCase) {
 	}
 
