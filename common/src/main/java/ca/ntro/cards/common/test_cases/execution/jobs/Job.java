@@ -17,7 +17,7 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 	private TestCaseJobEngine<EXECUTABLE_MODEL, STUDENT_MODEL, TEST_CASE> executionEngine;
 	private DoneHandler doneHandler;
 	
-	private Attempt currentMode = Attempt.SOLUTION;
+	private Attempt attempt = Attempt.SOLUTION;
 
 	public TEST_CASE getTestCase() {
 		return testCase;
@@ -43,6 +43,14 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 		this.doneHandler = doneHandler;
 	}
 
+	public Attempt getAttempt() {
+		return attempt;
+	}
+
+	public void setAttempt(Attempt attempt) {
+		this.attempt = attempt;
+	}
+
 	protected String id() {
 		return getTestCase().getTestCaseId();
 	}
@@ -55,7 +63,7 @@ public abstract class Job<EXECUTABLE_MODEL extends CommonExecutableModel,
 	public abstract void runImpl();
 
 	public void addExecutionStep() {
-		testCase.addExecutionStep(currentMode);
+		testCase.addExecutionStep(attempt);
 	}
 
 	public void failsWith(Throwable t) {

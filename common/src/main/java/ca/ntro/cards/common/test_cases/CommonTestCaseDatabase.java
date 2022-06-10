@@ -259,7 +259,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 					
 					long endTime = System.currentTimeMillis();
 					
-					System.out.print("\n\n[LOADING TEST CASES]");
+					System.out.print("\n\n[TEST CASES LOADED]");
 					System.out.println(String.format(" done in %.2f seconds\n", ((double)(endTime - startTime)) / 1E3));
 				}
 			}
@@ -272,7 +272,15 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 			executionEngine.executeJob(readingJob, () -> {
 				
 				addTestCase((TEST_CASE) readingJob.getTestCase());
-
+				
+				ExecutionJob executionJob = new ExecutionJob();
+				executionJob.setAttempt(Attempt.CODE);
+				executionJob.setTestCase(readingJob.getTestCase());
+				
+				executionEngine.executeJob(executionJob, () -> {
+					
+					
+				});
 			});
 		}
 	}
@@ -303,6 +311,15 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		readingJob.runImpl();
 
 		addTestCase((TEST_CASE) readingJob.getTestCase());
+
+		ExecutionJob executionJob = new ExecutionJob();
+		executionJob.setAttempt(Attempt.CODE);
+		executionJob.setTestCase(readingJob.getTestCase());
+		
+		executionEngine.executeJob(executionJob, () -> {
+					
+					
+		});
 		
 		return readingJob.getTestCase().asTestCaseDescriptor();
 	}

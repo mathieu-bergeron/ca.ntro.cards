@@ -92,6 +92,7 @@ public class TestCaseJobEngine<EXECUTABLE_MODEL extends CommonExecutableModel,
 	}
 	
 	public void executeJob(Job job, DoneHandler doneHandler) {
+		job.setExecutionEngine(this);
 		job.setDoneHandler(doneHandler);
 
 		jobs.add(job);
