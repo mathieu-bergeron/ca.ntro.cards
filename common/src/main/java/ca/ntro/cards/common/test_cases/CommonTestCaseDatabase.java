@@ -283,7 +283,6 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 				executionJob.setTestCase(readingJob.getTestCase());
 
 				executionEngine.executeJob(executionJob, () -> {
-					System.out.println("Executed: " + testCase.testCaseId());
 					testCase.checkSolution();
 					msgRefreshDashboard.send();
 				});
@@ -309,6 +308,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 
 	@SuppressWarnings("unchecked")
 	public AbstractTestCaseDescriptor loadTestCase(String testCaseId) {
+		MsgRefreshDashboard msgRefreshDashboard = NtroApp.newMessage(MsgRefreshDashboard.class);
+
 		File testCaseFile = Paths.get(CommonConstants.TEST_CASE_DATABASE_DIR, testCaseId + ".bin").toFile();
 
 		ReadingJob readingJob = new ReadingJob();
@@ -328,8 +329,8 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 		executionJob.setTestCase(testCase);
 
 		executionEngine.executeJob(executionJob, () -> {
-			System.out.println("Executed: " + testCase.testCaseId());
 			testCase.checkSolution();
+			msgRefreshDashboard.send();
 		});
 
 		return readingJob.getTestCase().asTestCaseDescriptor();

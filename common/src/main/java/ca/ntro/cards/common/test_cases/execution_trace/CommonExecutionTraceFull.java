@@ -22,6 +22,11 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 	private List<EXECUTABLE_MODEL> trace = Collections.synchronizedList(new ArrayList<>());
 	private int current = 0;
 	
+	private transient boolean isSolution = false;
+	
+	protected void registerIsSolution(boolean isSolution) {
+		this.isSolution = isSolution;
+	}
 
 	public List<EXECUTABLE_MODEL> getTrace() {
 		return trace;
@@ -121,7 +126,7 @@ public abstract class CommonExecutionTraceFull<EXECUTABLE_MODEL extends CommonEx
 		CommonAttemptDescriptor attempt = new CommonAttemptDescriptor();
 		
 		attempt.setCurrentStep(current);
-		attempt.setIsASolution(false);
+		attempt.setIsASolution(isSolution);
 		attempt.setIsLoaded(true);
 		attempt.setNumberOfSteps(trace.size());
 

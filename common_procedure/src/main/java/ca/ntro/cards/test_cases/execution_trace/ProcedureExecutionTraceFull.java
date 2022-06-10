@@ -23,7 +23,11 @@ public class ProcedureExecutionTraceFull<EXECUTABLE_MODEL extends ProcedureCards
 
 	@Override
 	public ComparisonReport compareToSolution(ProcedureExecutionTrace<EXECUTABLE_MODEL, DASHBOARD_MODEL> solutionTrace) {
-		return solutionTrace.evaluateCandidateSolution(lastModel());
+		ComparisonReport report =  solutionTrace.evaluateCandidateSolution(lastModel());
+		
+		registerIsSolution(report.isSolution());
+		
+		return report;
 	}
 
 	@Override

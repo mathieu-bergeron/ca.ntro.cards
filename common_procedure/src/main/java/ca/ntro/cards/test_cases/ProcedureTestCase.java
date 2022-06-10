@@ -35,8 +35,6 @@ public abstract class  ProcedureTestCase<EXECUTABLE_MODEL extends ProcedureCards
 		ComparisonReport report = ((ProcedureExecutionTrace) executionTraceByMode(Attempt.CODE)).compareToSolution((ProcedureExecutionTrace) executionTraceByMode(Attempt.SOLUTION));
 
 		setPassed(report.isSolution());
-
-		System.out.println("Checked: " + report.isSolution());
 	}
 
 }
