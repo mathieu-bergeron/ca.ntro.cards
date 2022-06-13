@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 
 public class ArraylistCardsView extends ProcedureCanvasView {
 
+
 	@FXML
 	private VBox cardsViewContainer;
 

@@ -4,12 +4,14 @@ import ca.ntro.cards.common.commands.AddCommand;
 import ca.ntro.cards.common.commands.Command;
 import ca.ntro.cards.common.commands.DeleteCommand;
 import ca.ntro.cards.common.models.enums.Suit;
+import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
+import ca.ntro.cards.common.models.values.cards.NullCard;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ntro.cards.arraylist.ArraylistConstants;
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
@@ -25,6 +27,23 @@ public class ListeTableau<C extends Comparable<C>>
 		extends
 		ProcedureCardsModel<ListeTableau, ArraylistProcedureObject2d, ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions, ArraylistProcedureViewData, ArraylistVariablesView> {
 
+	// Copyright (C) (2022) (Marlond Augustin) (202043906@cmontmorency.qc.ca)
+			//
+			// This file is part of Ntro
+			//
+			// This is free software: you can redistribute it and/or modify
+			// it under the terms of the GNU Affero General Public License as published by
+			// the Free Software Foundation, either version 3 of the License, or
+			// (at your option) any later version.
+			//
+			// This is distributed in the hope that it will be useful,
+			// but WITHOUT ANY WARRANTY; without even the implied warranty of
+			// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+			// GNU Affero General Public License for more details.
+			//
+			// You should have received a copy of the GNU Affero General Public License
+			// along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
+	
 	private List<Command<C>> commands = new ArrayList<>();
 
 	private C lastGet = null;
@@ -78,13 +97,21 @@ public class ListeTableau<C extends Comparable<C>>
 	@Override
 	public void copyDataFrom(ListeTableau other) {
 		// TODO: copier les données telles quelles
-
+		commands=other.getCommands();
+		lastGet=(C) other.getLastGet();
+		grandTableau=(C[]) other.getGrandTableau();
+		indicePremierElement=other.getIndicePremierElement();
+		indiceDernierElement=other.getIndiceDernierElement();
+	
 	}
 
 	@Override
 	public boolean acceptManualModel(ListeTableau manualModel) {
 		boolean modified = false;
-
+		if(manualModel.getGrandTableau().length!=grandTableau.length) {
+			modified=true;
+			copyDataFrom(manualModel);
+		}
 		// TODO: accepter ou rejeter les modifications manuelles
 		// retourner faux si c'est rejeté
 
@@ -93,8 +120,26 @@ public class ListeTableau<C extends Comparable<C>>
 
 	@Override
 	protected void updateViewDataImpl(ArraylistProcedureViewData cardsViewData) {
-		// TODO: créer des Carte2d pour afficher les cartes du modèle
-	}
+		double cardWidth =ArraylistConstants.INITIAL_CARD_WIDTH_MILIMETERS;
+		double cardHeight = ArraylistConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
+
+		for(int i = 0; i < grandTableau.length; i++) {
+
+			double targetTopLeftX = cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2;
+			double targetTopLeftY = cardHeight * 2;
+			
+			AbstractCard card = (Card) grandTableau[i];
+			
+			if(card == null) {
+				card = new NullCard();
+			}
+			
+			cardsViewData.addOrUpdateCard(card,
+					                      targetTopLeftX,
+					                      targetTopLeftY);
+
+			cardsViewData.displayCardFaceUp(card);
+		}	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -117,9 +162,11 @@ public class ListeTableau<C extends Comparable<C>>
 
 		else if (descriptor.testCaseId().equals("ex02")) {
 
-			grandTableau = (C[]) new Card[] { null, null, new Card(6, Suit.DIAMONDS), new Card(2, Suit.CLUBS),
-					new Card(4, Suit.HEARTS), new Card(7, Suit.HEARTS), new Card(3, Suit.DIAMONDS),
-					new Card(1, Suit.SPADES), null, null };
+			grandTableau = (C[]) new Card[] { null, null,
+					new Card(6, Suit.DIAMONDS), new Card(2, Suit.CLUBS),
+					new Card(4, Suit.HEARTS), new Card(7, Suit.HEARTS), 
+					new Card(3, Suit.DIAMONDS),	new Card(1, Suit.SPADES),
+					null, null };
 
 			indicePremierElement = 2;
 			indiceDernierElement = 7;
@@ -182,6 +229,31 @@ public class ListeTableau<C extends Comparable<C>>
 		}
 
 	}
+	private String getStringCommandCourante() {
+		String commandeCourantes="Bonjour";
+			while (!commands.isEmpty()) {
+				Command<C> command = getCurrentCommand();
+				System.out.println(command);
+				if (command.isAdd()) {
+
+					commandeCourantes="ajouter";
+
+				} else if (command.isGet()) {
+
+					commandeCourantes="obtenir";
+
+				} else if (command.isDelete()) {
+
+					commandeCourantes="Effacer";
+
+				} else if (command.isInsert()) {
+
+					commandeCourantes="est ajouter";
+
+				}
+			}
+			return commandeCourantes;
+	}
 	private Command<C> getCurrentCommand() {
 		Command<C> command = commands.get(0);
 		return command;
@@ -210,6 +282,19 @@ public class ListeTableau<C extends Comparable<C>>
 	@Override
 	public void displayOn(ArraylistVariablesView variablesView) {
 		// TODO: afficher les attributs
+		int indexOfFirstHearts = 0;
+		for(int i = 0; i < grandTableau.length; i++) {
+			if(i<grandTableau.length-1) {
+				if(grandTableau[i].compareTo(grandTableau[i+1])<0) {
+					indexOfFirstHearts = i;
+				}
+			}
+		}
+		variablesView.displayFooVar01(String.valueOf(getStringCommandCourante()));
+		variablesView.displayFooVar02(String.valueOf(indexOfFirstHearts));
+		variablesView.displayFooVar03(String.valueOf(indiceDernierElement));
+
+	
 	}
 
 }
