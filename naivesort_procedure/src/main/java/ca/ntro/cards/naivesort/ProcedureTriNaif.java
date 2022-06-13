@@ -102,7 +102,6 @@ public abstract class   ProcedureTriNaif<STUDENT_MODEL extends TriNaif>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-		registrar.registerMessage(MsgSpeedUp.class);
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

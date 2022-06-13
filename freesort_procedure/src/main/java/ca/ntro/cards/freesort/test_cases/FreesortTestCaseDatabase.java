@@ -24,13 +24,13 @@ public class   FreesortTestCaseDatabase<STUDENT_MODEL extends TriLibre>
 				                                          .category("exemples")
 				                                          .testCaseId("ex01");
 		
-		addTestCase(descriptor);
+		addTestCaseDescriptor(descriptor);
 
 		descriptor = AbstractTestCaseDescriptor.create()
 				                               .category("exemples")
 				                               .testCaseId("ex02");
 		
-		addTestCase(descriptor);
+		addTestCaseDescriptor(descriptor);
 
 	}
 
