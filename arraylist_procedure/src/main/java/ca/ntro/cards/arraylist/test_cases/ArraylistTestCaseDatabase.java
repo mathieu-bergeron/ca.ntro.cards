@@ -26,6 +26,12 @@ public class   ArraylistTestCaseDatabase<STUDENT_MODEL extends ListeTableau>
         
         addTestCaseDescriptor(descriptor);
 
+        descriptor = AbstractTestCaseDescriptor.create()
+                                                          .category("exemples")
+                                                          .testCaseId("ex02");
+
+        addTestCaseDescriptor(descriptor);
+
 
         // TODO: ajouter d'autres descriptions de cas de tests
 

@@ -4,6 +4,7 @@ public abstract class KeyCommand extends Command {
 	
 	private String key;
 
+
 	public String getKey() {
 		return key;
 	}
@@ -20,4 +21,10 @@ public abstract class KeyCommand extends Command {
 		this.key = String.valueOf(index);
 	}
 
+	public KeyCommand() {
+	}
+
+	public KeyCommand(String key) {
+		setKey(key);
+	}
 }

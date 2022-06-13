@@ -3,6 +3,7 @@ package ca.ntro.cards.arraylist.models;
 
 import ca.ntro.cards.common.commands.AddCommand;
 import ca.ntro.cards.common.commands.Command;
+import ca.ntro.cards.common.commands.DeleteCommand;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
@@ -111,12 +112,40 @@ public class   ListeTableau<C extends Comparable<C>>
     public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
         if(descriptor.testCaseId().equals("ex01")) {
         	
-        	commands.add(new AddCommand(new Card(1, Suit.HEARTS)));
-        	commands.add(new AddCommand(new Card(3, Suit.CLUBS)));
-        	commands.add(new AddCommand(new Card(6, Suit.SPADES)));
-        	commands.add(new AddCommand(new Card(4, Suit.DIAMONDS)));
-        	commands.add(new AddCommand(new Card(9, Suit.HEARTS)));
+        	grandTableau = (C[]) new Card[]{null, 
+        						           null,
+        								   new Card(1, Suit.HEARTS),
+        								   new Card(3, Suit.CLUBS),
+        								   new Card(5, Suit.SPADES),
+        								   new Card(8, Suit.DIAMONDS),
+        								   new Card(2, Suit.DIAMONDS),
+        								   null,
+        								   null};
+        	
+        	indicePremierElement = 2;
+        	indiceDernierElement = 6;
+        	
+        	commands.add(new DeleteCommand(4));
 
+        }
+
+        else if(descriptor.testCaseId().equals("ex02")) {
+        	
+        	grandTableau = (C[]) new Card[]{null, 
+        						           null,
+        								   new Card(6, Suit.DIAMONDS),
+        								   new Card(2, Suit.CLUBS),
+        								   new Card(4, Suit.HEARTS),
+        								   new Card(7, Suit.HEARTS),
+        								   new Card(3, Suit.DIAMONDS),
+        								   new Card(1, Suit.SPADES),
+        								   null,
+        								   null};
+        	
+        	indicePremierElement = 2;
+        	indiceDernierElement = 7;
+        	
+        	commands.add(new DeleteCommand(1));
 
         }
 

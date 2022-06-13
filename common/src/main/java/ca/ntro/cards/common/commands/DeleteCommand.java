@@ -2,6 +2,11 @@ package ca.ntro.cards.common.commands;
 
 public class DeleteCommand extends KeyCommand {
 
+	public DeleteCommand(int index) {
+		super();
+		registerIndex(index);
+	}
+
 	@Override
 	public boolean isClear() {
 		return false;
