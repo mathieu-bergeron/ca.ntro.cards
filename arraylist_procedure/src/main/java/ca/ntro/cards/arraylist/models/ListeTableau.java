@@ -94,12 +94,17 @@ public class ListeTableau<C extends Comparable<C>>
 		this.lastGet = lastGet;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public void copyDataFrom(ListeTableau other) {
+	public void copyDataFrom(@SuppressWarnings("rawtypes") ListeTableau other) {
 		// TODO: copier les données telles quelles
-		commands=other.getCommands();
+		int sizeGrandTableau=other.getGrandTableau().length;
+		commands=new ArrayList(other.getCommands());
 		lastGet=(C) other.getLastGet();
-		grandTableau=(C[]) other.getGrandTableau();
+		grandTableau=  (C[]) new Card[sizeGrandTableau];
+		for(int i = 0; i < sizeGrandTableau; i++) {
+			grandTableau[i] = (C) other.grandTableau[i];
+		}
 		indicePremierElement=other.getIndicePremierElement();
 		indiceDernierElement=other.getIndiceDernierElement();
 	
@@ -230,10 +235,9 @@ public class ListeTableau<C extends Comparable<C>>
 
 	}
 	private String getStringCommandCourante() {
-		String commandeCourantes="Bonjour";
+		String commandeCourantes="";
 			while (!commands.isEmpty()) {
 				Command<C> command = getCurrentCommand();
-				System.out.println(command);
 				if (command.isAdd()) {
 
 					commandeCourantes="ajouter";
@@ -285,12 +289,15 @@ public class ListeTableau<C extends Comparable<C>>
 		int indexOfFirstHearts = 0;
 		for(int i = 0; i < grandTableau.length; i++) {
 			if(i<grandTableau.length-1) {
-				if(grandTableau[i].compareTo(grandTableau[i+1])<0) {
-					indexOfFirstHearts = i;
+				if(grandTableau[i]!=null&&grandTableau[i+1]!=null) {
+					if(grandTableau[i].compareTo(grandTableau[i+1])<0) {
+						indexOfFirstHearts = i;
+					}
 				}
+				
 			}
 		}
-		variablesView.displayFooVar01(String.valueOf(getStringCommandCourante()));
+		variablesView.displayFooVar01(String.valueOf("Enlever "));
 		variablesView.displayFooVar02(String.valueOf(indexOfFirstHearts));
 		variablesView.displayFooVar03(String.valueOf(indiceDernierElement));
 
