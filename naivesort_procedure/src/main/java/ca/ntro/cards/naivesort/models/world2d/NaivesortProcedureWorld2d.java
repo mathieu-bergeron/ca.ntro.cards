@@ -70,12 +70,13 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 				}
 			}
 		}
-		
+		int indexOfNextVoid=0;
 		for(NaivesortCard2d card2d : topCards2d) {
 			if(card2d.isNullCard()) {
 				targetList.add(null);
 			}else {
 				targetList.add((Card) card2d.getCard());
+				indexOfNextVoid++;
 			}
 		}
 
@@ -103,6 +104,7 @@ public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedu
 		manualModel.setCible(target);
 		manualModel.setIndicePlusPetit(indexOfSmallest);
 		manualModel.setIndiceCandidat(indexOfCandidate);
+		manualModel.setIndiceProchainVide(indexOfNextVoid);
 
 		msgAcceptManualModel.setManualModel(manualModel);
 		msgAcceptManualModel.send();

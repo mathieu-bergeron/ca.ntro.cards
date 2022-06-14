@@ -70,4 +70,10 @@ public class ArraylistProcedureSettingsView extends ProcedureSettingsView {
 		return useFourCardColorsToggleButton;
 	}
 
+	@Override
+	protected ToggleButton useTwoTimeSpeedToggleButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

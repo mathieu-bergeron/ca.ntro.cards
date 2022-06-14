@@ -24,17 +24,17 @@ public class   NaivesortTestCaseDatabase<STUDENT_MODEL extends TriNaif>
 				                                          .category("exemples")
 				                                          .testCaseId("ex01");
 		
-		addTestCase(descriptor);
+		addTestCaseDescriptor(descriptor);
 		
 		
-		for(int i = 1; i <= 2; i++) {
+		for(int i = 1; i <= 10; i++) {
 			
-			int size = i*50;
+			int size = i;
 
 			descriptor = AbstractTestCaseDescriptor.create()
 												   .random(size);
 
-			addTestCase(descriptor);
+			addTestCaseDescriptor(descriptor);
 		}
 	}
 

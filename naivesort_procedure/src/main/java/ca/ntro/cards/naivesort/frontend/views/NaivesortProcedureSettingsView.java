@@ -33,6 +33,9 @@ public class NaivesortProcedureSettingsView extends ProcedureSettingsView {
 
 	@FXML
 	private ToggleButton useFourCardColorsToggleButton;
+	
+	@FXML
+	private ToggleButton twoTimeSpeedToggleButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -43,7 +46,8 @@ public class NaivesortProcedureSettingsView extends ProcedureSettingsView {
 		Ntro.assertNotNull("bottomSpace", bottomSpace);
 		Ntro.assertNotNull("quitButton", quitButton);
 		Ntro.assertNotNull("useFourCardColorsToggleButton", useFourCardColorsToggleButton);
-		
+		Ntro.assertNotNull("twoTimeSpeedToggleButton", twoTimeSpeedToggleButton);
+		//System.out.println(twoTimeSpeedToggleButton.isSelected()==true);
 		super.initialize(location, resources);
 	}
 
@@ -68,6 +72,12 @@ public class NaivesortProcedureSettingsView extends ProcedureSettingsView {
 	@Override
 	protected ToggleButton useFourCardColorsToggleButton() {
 		return useFourCardColorsToggleButton;
+	}
+
+	@Override
+	protected ToggleButton useTwoTimeSpeedToggleButton() {
+		// TODO Auto-generated method stub
+		return twoTimeSpeedToggleButton;
 	}
 
 }

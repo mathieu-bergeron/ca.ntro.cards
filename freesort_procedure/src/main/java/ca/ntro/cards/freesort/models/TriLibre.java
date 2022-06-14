@@ -25,11 +25,27 @@ public class   TriLibre<C extends Comparable<C>>
                                    FreesortProcedureDrawingOptions, 
                                    FreesortProcedureViewData,
                                    FreesortVariablesView> { 
+	// Copyright (C) (2022) (Marlond Augustin) (202043906@cmontmorency.qc.ca)
+		//
+		// This file is part of Ntro
+		//
+		// This is free software: you can redistribute it and/or modify
+		// it under the terms of the GNU Affero General Public License as published by
+		// the Free Software Foundation, either version 3 of the License, or
+		// (at your option) any later version.
+		//
+		// This is distributed in the hope that it will be useful,
+		// but WITHOUT ANY WARRANTY; without even the implied warranty of
+		// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		// GNU Affero General Public License for more details.
+		//
+		// You should have received a copy of the GNU Affero General Public License
+		// along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 	
 	protected Card[] cartes = new Card[0];
 	
 	private boolean trie=false;
-	
+
 	public Card[] getCartes() {
 		return cartes;
 	}
@@ -50,7 +66,8 @@ public class   TriLibre<C extends Comparable<C>>
 	@Override
 	public void copyDataFrom(TriLibre other) {
 		cartes = new Card[other.cartes.length];
-		
+		//On prend la valeur de trie 
+		trie=other.getTrie();
 		for(int i = 0; i < cartes.length; i++) {
 			cartes[i] = other.cartes[i];
 		}
@@ -73,22 +90,26 @@ public class   TriLibre<C extends Comparable<C>>
 				}
 			}
 		}
-		isTargetSorted();
+		trie=isTargetSorted();
 		return modified;
 	}
-	private void isTargetSorted() {
+	private boolean isTargetSorted() {
+		//Cette méthode est utile pour savoir si les cartes sont triées ou non
+		boolean sorted=false;
 		int nbTri=0;
-		for(int i = 0; i < cartes.length -1; ++i) {
-
+		for(int i = 0; i < cartes.length; ++i) {
+				if(i<cartes.length-1) {
 				if(cartes[i].compareTo(cartes[i+1])< 0) {
 						nbTri++;
 				  }
+				}
 			}
 		if(nbTri==cartes.length-1) {
-			trie=true;
+			sorted=true;
 		}else {
-			trie=false;
+			sorted=false;
 		}
+		return sorted;
 		
 	}
 

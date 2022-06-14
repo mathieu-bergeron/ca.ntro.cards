@@ -140,7 +140,7 @@ public abstract class      CommonTestCaseDatabase<EXECUTABLE_MODEL extends Commo
 	public abstract void describeTestCasesToGenerate();
 
 	@SuppressWarnings("unchecked")
-	protected void addTestCase(AbstractTestCaseDescriptor descriptor) {
+	protected void addTestCaseDescriptor(AbstractTestCaseDescriptor descriptor) {
 
 		STUDENT_MODEL studentModel = Ntro.factory().newInstance(studentModelClass);
 		TEST_CASE testCase = Ntro.factory().newInstance(testCaseClass);

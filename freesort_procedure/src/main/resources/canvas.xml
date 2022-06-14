@@ -20,6 +20,8 @@
 <?import javafx.scene.layout.HBox ?>
 <?import javafx.scene.layout.StackPane ?>
 <?import javafx.scene.control.Button ?>
+<?import javafx.scene.image.ImageView ?>
+<?import javafx.scene.image.Image ?>
 
 <?import ca.ntro.cards.freesort.frontend.views.controls.FreesortPreviewCanvas ?>
 <?import ca.ntro.cards.freesort.frontend.views.controls.FreesortMainCanvas ?>
@@ -29,7 +31,6 @@
     fx:id="cardsViewContainer"
     styleClass="container"
     id="cards-view">
-
     <FreesortMainCanvas
         fx:id="mainCanvas"
         VBox.vgrow="ALWAYS"
@@ -37,12 +38,18 @@
     </FreesortMainCanvas>
 
     <HBox>
+		<ImageView>
+			<image>
+				<Image url="@recycle.jpg" />
+			</image>
+		</ImageView>
 
         <FreesortPreviewCanvas
             fx:id="previewCanvas"
             VBox.vgrow="ALWAYS"
             styleClass="container">
         </FreesortPreviewCanvas>
+		
 
         <StackPane
             fx:id="dashboardContainer"

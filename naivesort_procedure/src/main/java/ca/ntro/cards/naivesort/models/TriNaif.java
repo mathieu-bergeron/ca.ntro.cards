@@ -77,7 +77,6 @@ public class   TriNaif<C extends Comparable<C>>
 	public void setCible(C[] cible) {
 		this.cible = cible;
 	}
-
 	@Override
 	public void copyDataFrom(TriNaif other) {
 		int size = other.source.length;
@@ -102,9 +101,46 @@ public class   TriNaif<C extends Comparable<C>>
 	@Override
 	public boolean acceptManualModel(TriNaif manualModel) {
 		// FIXME: reject some updates
-		copyDataFrom(manualModel);
+		if(manualModel.cible.length==manualModel.source.length) {
+			copyDataFrom(manualModel);
+			//System.out.println("Longueur cible+: "+ manualModel.cible.length);
 
+		}else {
+			insertInCible(manualModel);
+		}
 		return true;
+	}
+	private void insertInCible(TriNaif manualModel) {
+		int placementNbMinimum=0;
+		if(indiceCandidat>=0&&indicePlusPetit>=0) {
+			for(int i = 0; i < source.length; ++i) {
+				if(i<source.length-1) {
+					if(source[i]!=null && source[i+1]!=null) {
+					if(source[i].compareTo(source[i+1])< 0) {
+						placementNbMinimum=i;
+					  }
+					if (source[i].compareTo(source[i+1])> 0){
+						placementNbMinimum=i+1;
+					  }
+					}
+					if(source[i]!=null && source[i+1]==null) {
+						
+					}
+					if(source[i]==null && source[i+1]!=null&&i==0) {
+						placementNbMinimum=i+1;
+					}
+				}
+				}
+			System.out.println("emplacement min: "+ placementNbMinimum);
+			if(source[indiceCandidat].compareTo(source[placementNbMinimum])==0) {
+					cible[indiceProchainVide]=source[indiceCandidat];
+					source[indiceCandidat]=null;
+					indiceProchainVide=manualModel.indiceProchainVide;
+					indicePlusPetit=-1;
+			}
+			}
+			
+		
 	}
 
 	@Override
@@ -144,7 +180,7 @@ public class   TriNaif<C extends Comparable<C>>
 			if(card == null) {
 				card = new NullCard();
 			}
-
+			
 			cardsViewData.addOrUpdateCard(card,
 					                      targetTopLeftX,
 					                      targetTopLeftY);
