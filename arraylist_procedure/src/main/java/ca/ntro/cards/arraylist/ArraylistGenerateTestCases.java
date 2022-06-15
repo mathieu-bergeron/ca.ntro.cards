@@ -33,7 +33,7 @@ public abstract class ArraylistGenerateTestCases<STUDENT_MODEL extends ListeTabl
 
 	@Override
 	protected boolean shouldWriteJson() {
-		return false;
+		return true;
 	}
 
 	@Override

@@ -14,10 +14,12 @@ import java.util.List;
 import ca.ntro.cards.arraylist.ArraylistConstants;
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
+import ca.ntro.cards.arraylist.models.world2d.ArraylistCard2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureObject2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
+import ca.ntro.cards.models.world2d.ProcedureObject2d;
 import ca.ntro.core.stream.Stream;
 import ca.ntro.core.stream.StreamNtro;
 import ca.ntro.core.stream.Visitor;
@@ -53,6 +55,7 @@ public class ListeTableau<C extends Comparable<C>>
 
 	protected int indicePremierElement = 0;
 	protected int indiceDernierElement = 0;
+	
 
 	public C[] getGrandTableau() {
 		return grandTableau;
@@ -112,11 +115,28 @@ public class ListeTableau<C extends Comparable<C>>
 
 	@Override
 	public boolean acceptManualModel(ListeTableau manualModel) {
+		//retourne vrai si manualModel est une prochaine étape de l'exécution valide
+		//retourne faux si ce n'est pas une prochaine étape valide de l'exécution
 		boolean modified = false;
 		if(manualModel.getGrandTableau().length!=grandTableau.length) {
 			modified=true;
 			copyDataFrom(manualModel);
 		}
+		/*créer une méthode qui trouve s'il y a une carte qui n'est pas null dans le this et qui 
+		 * devient nul avec le manualModel. Il faut vérifier si l'indice de la carte correspond  avec
+		 * le testUnitaire. Sinon on le rejette.
+		*/
+		if(Math.abs(this.indicePremierElement-manualModel.indicePremierElement)>1) {
+			modified = false;
+		}
+		if(Math.abs(this.indiceDernierElement-manualModel.indiceDernierElement)>1) {
+			modified = false;
+		}
+		/*Cas compliqué
+		 * this=valeur courante/étape courante de l'exécution,
+		 *ManualModel est la prochaine étape de l'exécution
+		 *On veut accepter en comparant this à manual model et on vérifie si la transition est valide
+		 */
 		// TODO: accepter ou rejeter les modifications manuelles
 		// retourner faux si c'est rejetÃ©
 
@@ -236,7 +256,6 @@ public class ListeTableau<C extends Comparable<C>>
 	}
 	private String getStringCommandCourante() {
 		String commandeCourantes="";
-			while (!commands.isEmpty()) {
 				Command<C> command = getCurrentCommand();
 				if (command.isAdd()) {
 
@@ -255,7 +274,7 @@ public class ListeTableau<C extends Comparable<C>>
 					commandeCourantes="est ajouter";
 
 				}
-			}
+			
 			return commandeCourantes;
 	}
 	private Command<C> getCurrentCommand() {
@@ -297,7 +316,7 @@ public class ListeTableau<C extends Comparable<C>>
 				
 			}
 		}
-		variablesView.displayFooVar01(String.valueOf("Enlever "));
+		variablesView.displayFooVar01(String.valueOf( "enlever"));
 		variablesView.displayFooVar02(String.valueOf(indexOfFirstHearts));
 		variablesView.displayFooVar03(String.valueOf(indiceDernierElement));
 

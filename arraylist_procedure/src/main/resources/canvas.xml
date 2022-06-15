@@ -35,7 +35,6 @@
         VBox.vgrow="ALWAYS"
         styleClass="container">
     </ArraylistMainCanvas>
-
     <HBox>
 
         <ArraylistPreviewCanvas
