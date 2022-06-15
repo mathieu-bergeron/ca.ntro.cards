@@ -8,4 +8,9 @@ public class ArraylistMarker2d extends ProcedureMarker2d<ArraylistProcedureObjec
 		super(id);
 	}
 
+	public ArraylistMarker2d(String markerId, String couleur) {
+		// TODO Auto-generated constructor stub
+		super(markerId);
+	}
+
 }

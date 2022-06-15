@@ -78,4 +78,9 @@ public class ArraylistCardsView extends ProcedureCanvasView {
 		return ArraylistConstants.INITIAL_PREVIEW_CANVAS_SCREEN_HEIGHT;
 	}
 
+	public void displayRecycleBin() {
+		// TODO Auto-generated method stub
+		mainCanvas.displayRecycleBin();
+	}
+
 }

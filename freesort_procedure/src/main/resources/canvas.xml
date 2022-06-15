@@ -38,11 +38,6 @@
     </FreesortMainCanvas>
 
     <HBox>
-		<ImageView>
-			<image>
-				<Image url="@recycle.jpg" />
-			</image>
-		</ImageView>
 
         <FreesortPreviewCanvas
             fx:id="previewCanvas"
