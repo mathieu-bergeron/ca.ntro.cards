@@ -22,10 +22,11 @@ public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedu
         // TODO: analyser les cartes2d existantes et créer un CardsModel 
         
         ListeTableau manualModel = new ListeTableau();
+
         
+        /*
         List<ArraylistCard2d> cards = collectCardsExceptDraggedCard();
 
-        /*
         if(draggedCard!=null) {
             addNullCardAtDraggedCardOriginalLocation();
         }

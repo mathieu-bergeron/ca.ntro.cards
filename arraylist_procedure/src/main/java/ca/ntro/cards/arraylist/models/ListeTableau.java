@@ -5,12 +5,15 @@ import ca.ntro.cards.common.commands.AddCommand;
 import ca.ntro.cards.common.commands.Command;
 import ca.ntro.cards.common.commands.DeleteCommand;
 import ca.ntro.cards.common.models.enums.Suit;
+import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
+import ca.ntro.cards.common.models.values.cards.NullCard;
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.ntro.cards.arraylist.ArraylistConstants;
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
@@ -122,11 +125,6 @@ public class   ListeTableau<C extends Comparable<C>>
     }
 
     @Override
-    protected void updateViewDataImpl(ArraylistProcedureViewData cardsViewData) {
-        // TODO: créer des Carte2d pour afficher les cartes du modèle
-    }
-
-    @Override
     public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
         if(descriptor.testCaseId().equals("ex01")) {
             
@@ -175,19 +173,10 @@ public class   ListeTableau<C extends Comparable<C>>
         // TODO: 
         return commands.size();
     }
-    
-    @Override
-    protected Stream<Card> cards() {
-        return new StreamNtro<Card>() {
-            @Override
-            public void forEach_(Visitor<Card> visitor) throws Throwable {
-                if(grandTableau != null) {
-                    for(C card : grandTableau) {
-                        visitor.visit((Card) card); 
-=======
+
     protected void updateViewDataImpl(ArraylistProcedureViewData cardsViewData) {
-        double cardWidth =ArraylistConstants.INITIAL_CARD_WIDTH_MILIMETERS;
-        double cardHeight = ArraylistConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
+        double cardWidth = ArraylistConstants.INITIAL_CARD_WIDTH_MILIMETERS;
+        double cardHeight =  ArraylistConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 
         for(int i = 0; i < grandTableau.length; i++) {
 
@@ -221,48 +210,6 @@ public class   ListeTableau<C extends Comparable<C>>
     
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    @Override
-    public void initializeAsTestCase(AbstractTestCaseDescriptor descriptor) {
-        if (descriptor.testCaseId().equals("ex01")) {
-
-            grandTableau = (C[]) new Card[] { 
-                    null, null,
-                    new Card(1, Suit.HEARTS), new Card(3, Suit.CLUBS),
-                    new Card(5, Suit.SPADES), new Card(8, Suit.DIAMONDS),
-                    new Card(2, Suit.DIAMONDS),
-                    null, null };
-
-            indicePremierElement = 2;
-            indiceDernierElement = 6;
-
-            commands.add(new DeleteCommand(4));
-
-        }
-
-        else if (descriptor.testCaseId().equals("ex02")) {
-
-            grandTableau = (C[]) new Card[] { null, null,
-                    new Card(6, Suit.DIAMONDS), new Card(2, Suit.CLUBS),
-                    new Card(4, Suit.HEARTS), new Card(7, Suit.HEARTS), 
-                    new Card(3, Suit.DIAMONDS), new Card(1, Suit.SPADES),
-                    null, null };
-
-            indicePremierElement = 2;
-            indiceDernierElement = 7;
-
-            commands.add(new DeleteCommand(1));
-
-        }
-    }
-
-    @Override
-    public int testCaseSize() {
-        // TODO:
-        //return commands.size();
-        return grandTableau.length;
-    }
-
     @Override
     protected Stream<Card> cards() {
         return new StreamNtro<Card>() {
@@ -271,7 +218,6 @@ public class   ListeTableau<C extends Comparable<C>>
                 if (grandTableau != null) {
                     for (C card : grandTableau) {
                         visitor.visit((Card) card);
->>>>>>> d53e96c... ajout) couleur pour le Marker2d
                     }
                 }
 
