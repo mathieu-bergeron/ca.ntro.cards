@@ -1,6 +1,7 @@
 package ca.ntro.cards.freesort.models;
 
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.cards.common.models.enums.Suit;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.common.models.values.cards.Card;
@@ -27,6 +28,15 @@ public class   TriLibre<C extends Comparable<C>>
                                    FreesortVariablesView> { 
 	
 	protected Card[] cartes = new Card[0];
+	protected boolean trie = false;
+	
+	public boolean getTrie() {
+		return trie;
+	}
+
+	public void setTrie(boolean trie) {
+		this.trie = trie;
+	}
 
 	public Card[] getCartes() {
 		return cartes;
@@ -43,27 +53,28 @@ public class   TriLibre<C extends Comparable<C>>
 		for(int i = 0; i < cartes.length; i++) {
 			cartes[i] = other.cartes[i];
 		}
+		
+		trie = other.trie;
 	}
 
 	@Override
 	public boolean acceptManualModel(TriLibre manualModel) {
-		boolean modified = false;
+		boolean accepted = false;
 		
 		if(cartes.length != manualModel.cartes.length) {
 
-			modified = true;
-			copyDataFrom(manualModel);
+			accepted = true;
 
 		}else {
 			for(int i = 0; i < cartes.length; i++) {
 				if(!cartes[i].equals(manualModel.cartes[i])) {
-					modified = true;
-					cartes[i] = manualModel.cartes[i];
+					accepted = true;
+					break;
 				}
 			}
 		}
 
-		return modified;
+		return accepted;
 	}
 
 	@Override
@@ -88,7 +99,10 @@ public class   TriLibre<C extends Comparable<C>>
 					                      targetTopLeftY);
 
 			cardsViewData.displayCardFaceUp(card);
+
 		}
+		
+		trie = areCardsSorted(cartes); // AJOUTER
 	}
 
 	@Override
@@ -103,7 +117,7 @@ public class   TriLibre<C extends Comparable<C>>
 					new Card(5, Suit.DIAMONDS),
 			};
 
-		}else if(descriptor.testCaseId().contentEquals("ex02")) {
+		} else if(descriptor.testCaseId().contentEquals("ex02")) {
 
 			cartes = new Card[] {
 					new Card(9, Suit.CLUBS),
@@ -111,6 +125,28 @@ public class   TriLibre<C extends Comparable<C>>
 					new Card(5, Suit.HEARTS),
 					new Card(3, Suit.SPADES),
 					new Card(5, Suit.SPADES),
+			};
+			
+		} else if(descriptor.testCaseId().contentEquals("ex03")) {
+
+			cartes = new Card[] {
+					new Card(3, Suit.DIAMONDS)
+			};
+			
+		} else if(descriptor.testCaseId().contentEquals("ex04")) {
+
+			cartes = new Card[] {
+					new Card(9, Suit.CLUBS),
+					new Card(3, Suit.SPADES),
+					new Card(10, Suit.DIAMONDS),
+					new Card(3, Suit.CLUBS),
+					new Card(9, Suit.HEARTS),
+					new Card(1, Suit.SPADES),
+					new Card(8, Suit.CLUBS),
+					new Card(5, Suit.HEARTS),
+					new Card(4, Suit.HEARTS),
+					new Card(7, Suit.SPADES),
+					new Card(2, Suit.DIAMONDS),
 			};
 			
 		}
@@ -168,7 +204,25 @@ public class   TriLibre<C extends Comparable<C>>
 		}
 
 		variablesView.displayFooVar01(String.valueOf(indexOfFirstHearts));
+		variablesView.displayTrie(String.valueOf(trie)); // AJOUTER
 	}
-
+	
+	public boolean areCardsSorted(Card[] cards) { // AJOUTER
+		boolean sorted = false;
+		
+		if (cards.length != 0) {
+			sorted = true;
+			if (cards.length > 1) {
+				for (int i = 1; i < cards.length; i++) {		
+					if(cards[i-1].compareTo(cards[i]) > 0) {
+						 sorted = false;
+						 break;
+					}
+				}
+			}
+		}
+		
+		return sorted;
+	}
 
 }

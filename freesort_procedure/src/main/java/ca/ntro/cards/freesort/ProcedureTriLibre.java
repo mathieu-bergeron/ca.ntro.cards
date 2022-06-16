@@ -101,7 +101,6 @@ public abstract class   ProcedureTriLibre<STUDENT_MODEL extends TriLibre>
 
 	@Override
 	protected void registerAdditionnalMessages(MessageRegistrar registrar) {
-
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })

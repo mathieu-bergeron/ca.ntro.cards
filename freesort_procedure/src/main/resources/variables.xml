@@ -51,6 +51,19 @@
         </Label>
     </HBox>
 
+	<HBox>
+        <Label
+            text="%freesortVar03"
+            styleClass="text-big">
+        </Label>
+        <HBox styleClass="hspace-small">
+        </HBox>
+        <Label
+            fx:id="freesortVar03Label"
+            styleClass="text-big">
+        </Label>
+    </HBox>
+
 
 
 

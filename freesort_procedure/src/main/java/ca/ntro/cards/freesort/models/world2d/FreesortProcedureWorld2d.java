@@ -39,10 +39,14 @@ public class FreesortProcedureWorld2d extends ProcedureWorld2d<FreesortProcedure
 			cards[i] = (Card) cards2d.get(i).getCard();
 		}
 
+		boolean trie = manualModel.areCardsSorted(cards); // AJOUTER
 		manualModel.setCartes(cards);
+		manualModel.setTrie(trie); // AJOUTER
 		
 		msgAcceptManualModel.setManualModel(manualModel);
 		msgAcceptManualModel.send();
 	}
+	
+	
 
 }
