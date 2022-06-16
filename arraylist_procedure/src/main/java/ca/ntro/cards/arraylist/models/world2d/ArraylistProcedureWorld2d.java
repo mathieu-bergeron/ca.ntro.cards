@@ -23,6 +23,14 @@ public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedu
         
         ListeTableau manualModel = new ListeTableau();
         
+        List<ArraylistCard2d> cards = collectCardsExceptDraggedCard();
+
+        /*
+        if(draggedCard!=null) {
+            addNullCardAtDraggedCardOriginalLocation();
+        }
+        */
+        
         msgManualExecutionStep.setManualModel(manualModel);
         msgManualExecutionStep.send();
     }
