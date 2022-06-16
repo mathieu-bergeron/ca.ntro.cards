@@ -46,7 +46,7 @@ public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedu
         
         List<ArraylistCard2d> cards =collectCardsExceptDraggedCard();
         if(draggedCard!=null) {
-        	addNullCardAtDraggedCardOriginalLocation();
+        	//addNullCardAtDraggedCardOriginalLocation();
         }
         
         msgManualExecutionStep.setManualModel(manualModel);

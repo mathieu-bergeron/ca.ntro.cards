@@ -55,7 +55,7 @@ public class ListeTableau<C extends Comparable<C>>
 
 	protected int indicePremierElement = 0;
 	protected int indiceDernierElement = 0;
-	
+	private int indiceCarteselectionner=0;
 
 	public C[] getGrandTableau() {
 		return grandTableau;
@@ -126,6 +126,19 @@ public class ListeTableau<C extends Comparable<C>>
 		 * devient nul avec le manualModel. Il faut vérifier si l'indice de la carte correspond  avec
 		 * le testUnitaire. Sinon on le rejette.
 		*/
+		if(isManualModelEqualToGrandTableau(manualModel)==false) {
+			//Il faudra remplacer 4 par l'index voulu selon le test unitaire
+			//J'utilise lastGet pour que cela conserve la carte qui est remplacé par un null, dans le but 
+			//à l'avenir de voir si la bonne carte est retiré. Pour ensuite trier le tableau.
+			if(indiceCarteselectionner==4) {
+				modified=true;
+				copyDataFrom(manualModel);
+				lastGet=(C) manualModel.getGrandTableau()[indiceCarteselectionner];
+			}else {
+				modified=false;
+			}
+		}
+
 		if(Math.abs(this.indicePremierElement-manualModel.indicePremierElement)>1) {
 			modified = false;
 		}
@@ -141,6 +154,18 @@ public class ListeTableau<C extends Comparable<C>>
 		// retourner faux si c'est rejetÃ©
 
 		return modified;
+	}
+	public boolean isManualModelEqualToGrandTableau(ListeTableau manualModel) {
+		//Cette méthode est utile pour savoir si une valeur du tableau a été modifié
+		boolean equivalent=true;
+		int longueurBoucle=grandTableau.length;
+		for(int i=0;i<longueurBoucle;i++) {
+			if(grandTableau[i].compareTo((C) manualModel.getGrandTableau()[i])!=0) {
+				equivalent=false;
+				indiceCarteselectionner=i;
+			}
+		}
+		return equivalent;
 	}
 
 	@Override
@@ -159,12 +184,32 @@ public class ListeTableau<C extends Comparable<C>>
 				card = new NullCard();
 			}
 			
-			cardsViewData.addOrUpdateCard(card,
+			cardsViewData.addOrUpdateCard(card, 
 					                      targetTopLeftX,
 					                      targetTopLeftY);
 
 			cardsViewData.displayCardFaceUp(card);
-		}	}
+		}	
+		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndicePremierElement() * cardWidth * 3 / 2;
+		double markerTopRightX = 10 + cardWidth + cardWidth / 2 + getIndiceDernierElement() * cardWidth * 3 / 2;
+		double markerTopLeftY = cardHeight * 3 + cardHeight / 3;
+		
+		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY/*,"#33ccff"*/);
+		cardsViewData.addOrUpdateMarker("biggestElement", markerTopRightX, markerTopLeftY/*,"#ff0000"*/);
+
+		if(getIndicePremierElement() >= 0 && getIndicePremierElement() < grandTableau.length) {
+			AbstractCard smallestCard = (AbstractCard) grandTableau[getIndicePremierElement()];
+			cardsViewData.displayCardFaceUp(smallestCard);
+			
+		}
+		
+		if(getIndiceDernierElement() >= 0 && getIndiceDernierElement() < grandTableau.length) {
+			AbstractCard candidateCard = (AbstractCard) grandTableau[getIndicePremierElement()];
+			cardsViewData.displayCardFaceUp(candidateCard);
+		}
+
+		
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

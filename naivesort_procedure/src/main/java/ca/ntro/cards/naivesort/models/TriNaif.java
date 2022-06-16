@@ -191,7 +191,6 @@ public class   TriNaif<C extends Comparable<C>>
 		double markerTopLeftY = cardHeight * 3 + cardHeight / 3;
 		
 		cardsViewData.addOrUpdateMarker("smallestElement", markerTopLeftX, markerTopLeftY);
-		
 		if(getIndicePlusPetit() >= 0 && getIndicePlusPetit() < bottomCards.size()) {
 			AbstractCard smallestCard = bottomCards.get(getIndicePlusPetit());
 			cardsViewData.displayCardFaceUp(smallestCard);
