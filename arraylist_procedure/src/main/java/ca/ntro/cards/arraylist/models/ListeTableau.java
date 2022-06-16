@@ -115,15 +115,15 @@ public class ListeTableau<C extends Comparable<C>>
 
 	@Override
 	public boolean acceptManualModel(ListeTableau manualModel) {
-		//retourne vrai si manualModel est une prochaine étape de l'exécution valide
-		//retourne faux si ce n'est pas une prochaine étape valide de l'exécution
+		//retourne vrai si manualModel est une prochaine ï¿½tape de l'exï¿½cution valide
+		//retourne faux si ce n'est pas une prochaine ï¿½tape valide de l'exï¿½cution
 		boolean modified = false;
 		if(manualModel.getGrandTableau().length!=grandTableau.length) {
 			modified=true;
 			copyDataFrom(manualModel);
 		}
-		/*créer une méthode qui trouve s'il y a une carte qui n'est pas null dans le this et qui 
-		 * devient nul avec le manualModel. Il faut vérifier si l'indice de la carte correspond  avec
+		/*crï¿½er une mï¿½thode qui trouve s'il y a une carte qui n'est pas null dans le this et qui 
+		 * devient nul avec le manualModel. Il faut vï¿½rifier si l'indice de la carte correspond  avec
 		 * le testUnitaire. Sinon on le rejette.
 		*/
 		if(Math.abs(this.indicePremierElement-manualModel.indicePremierElement)>1) {
@@ -132,10 +132,10 @@ public class ListeTableau<C extends Comparable<C>>
 		if(Math.abs(this.indiceDernierElement-manualModel.indiceDernierElement)>1) {
 			modified = false;
 		}
-		/*Cas compliqué
-		 * this=valeur courante/étape courante de l'exécution,
-		 *ManualModel est la prochaine étape de l'exécution
-		 *On veut accepter en comparant this à manual model et on vérifie si la transition est valide
+		/*Cas compliquï¿½
+		 * this=valeur courante/ï¿½tape courante de l'exï¿½cution,
+		 *ManualModel est la prochaine ï¿½tape de l'exï¿½cution
+		 *On veut accepter en comparant this ï¿½ manual model et on vï¿½rifie si la transition est valide
 		 */
 		// TODO: accepter ou rejeter les modifications manuelles
 		// retourner faux si c'est rejetÃ©
@@ -164,7 +164,21 @@ public class ListeTableau<C extends Comparable<C>>
 					                      targetTopLeftY);
 
 			cardsViewData.displayCardFaceUp(card);
-		}	}
+		}	
+
+		double markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndicePremierElement() * cardWidth * 3 / 2;
+		double markerTopLeftY = cardHeight * 3 + cardHeight / 3;
+		
+		cardsViewData.addOrUpdateMarker("indexOfFirstElement", "red", markerTopLeftX, markerTopLeftY);
+
+		markerTopLeftX = 10 + cardWidth + cardWidth / 2 + getIndiceDernierElement() * cardWidth * 3 / 2;
+		markerTopLeftY = cardHeight * 3 + cardHeight / 3;
+		
+		cardsViewData.addOrUpdateMarker("indexOfLastElement", "blue", markerTopLeftX, markerTopLeftY);
+		
+		
+	
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override

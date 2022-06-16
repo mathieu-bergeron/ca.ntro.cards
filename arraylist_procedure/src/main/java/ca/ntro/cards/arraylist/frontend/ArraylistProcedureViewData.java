@@ -6,7 +6,6 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistCardsView;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistCard2d;
-import ca.ntro.cards.arraylist.models.world2d.ArraylistMarker2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureObject2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureWorld2d;
@@ -24,19 +23,6 @@ public class ArraylistProcedureViewData extends ProcedureViewData<ArraylistProce
 	@Override
 	protected ProcedureCard2d newCard2d(AbstractCard card) {
 		return new ArraylistCard2d(card);
-	}
-	public void addOrUpdateMarker(String markerId, double topLeftX, double topLeftY,String couleur) {
-		
-		ProcedureMarker2d<ArraylistProcedureObject2d, ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions> marker2d = null;
-
-		if(world2d().objectById(markerId)==null) {
-			marker2d = new ArraylistMarker2d(markerId,couleur);
-			world2d().addObject2d(marker2d);
-		}
-		
-		marker2d.setTopLeftX(topLeftX);
-		marker2d.setTopLeftY(topLeftY);
-		
 	}
 
 	@Override

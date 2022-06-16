@@ -50,20 +50,29 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 		isExecutionReplayInProgress = false;
 	}
 
-	public void addOrUpdateMarker(String markerId, double topLeftX, double topLeftY) {
+	public void addOrUpdateMarker(String markerId, 
+			                      String color, 
+			                      double topLeftX, 
+			                      double topLeftY) {
 		
 		ProcedureMarker2d<OBJECT2D, WORLD2D, OPTIONS> marker2d = null;
 
 		marker2d = (ProcedureMarker2d) world2d().objectById(markerId);
 
 		if(marker2d == null) {
-			marker2d = new ProcedureMarker2d(markerId);
+			marker2d = new ProcedureMarker2d(markerId, color);
 			world2d().addObject2d((OBJECT2D) marker2d);
 		}
 		
 		marker2d.setTopLeftX(topLeftX);
 		marker2d.setTopLeftY(topLeftY);
-		
+	}
+
+	public void addOrUpdateMarker(String markerId, 
+			                      double topLeftX, 
+			                      double topLeftY) {
+
+		addOrUpdateMarker(markerId, "#03cffc", topLeftX, topLeftY);
 	}
 
 	public void setCardFaceUp(AbstractCard card, boolean faceUp) {
