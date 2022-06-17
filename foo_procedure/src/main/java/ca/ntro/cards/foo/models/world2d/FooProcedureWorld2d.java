@@ -8,6 +8,7 @@ import ca.ntro.app.world2d.Object2d;
 import ca.ntro.cards.common.CommonConstants;
 import ca.ntro.cards.common.models.values.cards.Card;
 import ca.ntro.cards.foo.FooConstants;
+import ca.ntro.cards.foo.messages.FooMsgAcceptManualModel;
 import ca.ntro.cards.foo.models.FooCardsModel;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;
@@ -15,7 +16,7 @@ import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
 public class FooProcedureWorld2d extends ProcedureWorld2d<FooProcedureWorld2d, FooProcedureDrawingOptions> {
     
-    private ProcedureMsgAcceptManualModel msgManualExecutionStep = NtroApp.newMessage(ProcedureMsgAcceptManualModel.class);
+    private FooMsgAcceptManualModel msgManualExecutionStep = NtroApp.newMessage(FooMsgAcceptManualModel.class);
     
     @Override
     public void buildAndSendManualModel() {
