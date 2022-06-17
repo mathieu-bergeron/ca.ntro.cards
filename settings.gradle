@@ -24,6 +24,11 @@ include 'foo_efficiency'
 include 'foo_solution'
 project(':foo_solution').projectDir = file('solutions/foo_solution')
 
+include 'intro_procedure'
+include 'intro_efficiency'
+include 'intro_solution'
+project(':intro_solution').projectDir = file('solutions/intro_solution')
+
 include 'freesort_procedure'
 include 'freesort_efficiency'
 include 'freesort_solution'
