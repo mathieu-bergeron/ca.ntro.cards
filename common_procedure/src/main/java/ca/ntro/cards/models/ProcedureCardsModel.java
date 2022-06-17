@@ -25,13 +25,12 @@ import ca.ntro.core.reflection.object_graph.Initialize;
 import ca.ntro.core.stream.Stream;
 
 public abstract class      ProcedureCardsModel<CARDS_MODEL    extends ProcedureCardsModel,
-                                               OBJECT2D       extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                               WORLD2D        extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+                                               WORLD2D        extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                                OPTIONS        extends ProcedureDrawingOptions,
-                                               VIEW_DATA      extends ProcedureViewData<OBJECT2D, WORLD2D, OPTIONS>,
+                                               VIEW_DATA      extends ProcedureViewData<WORLD2D, OPTIONS>,
                                                VARIABLES_VIEW extends ProcedureVariablesView>
 
-                extends    CommonExecutableModel<CARDS_MODEL, OBJECT2D, WORLD2D, OPTIONS, VIEW_DATA>
+                extends    CommonExecutableModel<CARDS_MODEL, ProcedureObject2d<WORLD2D, OPTIONS>, WORLD2D, OPTIONS, VIEW_DATA>
 
                 implements Model, Watch, Initialize, WriteObjectGraph {
 

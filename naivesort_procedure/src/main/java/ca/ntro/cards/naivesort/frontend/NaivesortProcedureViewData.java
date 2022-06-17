@@ -3,12 +3,11 @@ package ca.ntro.cards.naivesort.frontend;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortCard2d;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureDrawingOptions;
-import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureObject2d;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureWorld2d;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class NaivesortProcedureViewData extends ProcedureViewData<NaivesortProcedureObject2d, NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
+public class NaivesortProcedureViewData extends ProcedureViewData<NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
 
 	@Override
 	protected NaivesortProcedureWorld2d newWorld2d() {

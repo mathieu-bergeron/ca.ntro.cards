@@ -9,11 +9,10 @@ import ca.ntro.cards.common.models.values.cards.NullCard;
 import javafx.scene.input.MouseEvent;
 
 @SuppressWarnings("rawtypes")
-public abstract class   ProcedureCard2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                        WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+public abstract class   ProcedureCard2d<WORLD2D  extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                         OPTIONS  extends ProcedureDrawingOptions>
 
-                extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> {
+                extends ProcedureObject2d<WORLD2D, OPTIONS> {
 	
 	private boolean faceUp = true;
 	

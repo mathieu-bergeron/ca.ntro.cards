@@ -17,7 +17,6 @@ import ca.ntro.cards.arraylist.ArraylistConstants;
 import ca.ntro.cards.arraylist.frontend.ArraylistProcedureViewData;
 import ca.ntro.cards.arraylist.frontend.views.ArraylistVariablesView;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureDrawingOptions;
-import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureObject2d;
 import ca.ntro.cards.arraylist.models.world2d.ArraylistProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.values.ComparisonReport;
@@ -28,7 +27,6 @@ import ca.ntro.core.stream.Visitor;
 public class   ListeTableau<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<ListeTableau, 
-                                   ArraylistProcedureObject2d, 
                                    ArraylistProcedureWorld2d, 
                                    ArraylistProcedureDrawingOptions, 
                                    ArraylistProcedureViewData,

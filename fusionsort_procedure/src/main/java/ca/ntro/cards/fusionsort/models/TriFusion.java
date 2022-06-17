@@ -7,7 +7,6 @@ import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.fusionsort.frontend.FusionsortProcedureViewData;
 import ca.ntro.cards.fusionsort.frontend.views.FusionsortVariablesView;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureDrawingOptions;
-import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureObject2d;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.values.ComparisonReport;
@@ -20,7 +19,6 @@ import ca.ntro.core.stream.Visitor;
 public class   TriFusion<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<TriFusion, 
-                                   FusionsortProcedureObject2d, 
                                    FusionsortProcedureWorld2d, 
                                    FusionsortProcedureDrawingOptions, 
                                    FusionsortProcedureViewData,

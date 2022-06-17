@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.freesort.FreesortConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class FreesortCard2d extends ProcedureCard2d<FreesortProcedureObject2d, FreesortProcedureWorld2d, FreesortProcedureDrawingOptions> {
+public class FreesortCard2d extends ProcedureCard2d<FreesortProcedureWorld2d, FreesortProcedureDrawingOptions> {
 
 	public FreesortCard2d() {
 		super();

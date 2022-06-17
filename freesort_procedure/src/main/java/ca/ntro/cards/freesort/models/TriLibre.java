@@ -10,7 +10,6 @@ import ca.ntro.cards.freesort.FreesortConstants;
 import ca.ntro.cards.freesort.frontend.FreesortProcedureViewData;
 import ca.ntro.cards.freesort.frontend.views.FreesortVariablesView;
 import ca.ntro.cards.freesort.models.world2d.FreesortProcedureDrawingOptions;
-import ca.ntro.cards.freesort.models.world2d.FreesortProcedureObject2d;
 import ca.ntro.cards.freesort.models.world2d.FreesortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.values.ComparisonReport;
@@ -21,7 +20,6 @@ import ca.ntro.core.stream.Visitor;
 public class   TriLibre<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<TriLibre, 
-                                   FreesortProcedureObject2d, 
                                    FreesortProcedureWorld2d, 
                                    FreesortProcedureDrawingOptions, 
                                    FreesortProcedureViewData,

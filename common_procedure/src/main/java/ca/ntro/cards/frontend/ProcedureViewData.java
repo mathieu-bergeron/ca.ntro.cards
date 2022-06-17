@@ -17,11 +17,10 @@ import ca.ntro.cards.models.world2d.ProcedureObject2d;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 import ca.ntro.core.stream.Stream;
 
-public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                          WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+public abstract class   ProcedureViewData<WORLD2D  extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                           OPTIONS  extends ProcedureDrawingOptions>
 
-                extends CommonViewData<OBJECT2D, WORLD2D, OPTIONS> {
+                extends CommonViewData<ProcedureObject2d<WORLD2D, OPTIONS>, WORLD2D, OPTIONS> {
 
 	private boolean isExecutionReplayInProgress = false;
 	private double timeSinceLastReplayStep;
@@ -55,13 +54,13 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 			                      double topLeftX, 
 			                      double topLeftY) {
 		
-		ProcedureMarker2d<OBJECT2D, WORLD2D, OPTIONS> marker2d = null;
+		ProcedureMarker2d<WORLD2D, OPTIONS> marker2d = null;
 
 		marker2d = (ProcedureMarker2d) world2d().objectById(markerId);
 
 		if(marker2d == null) {
 			marker2d = new ProcedureMarker2d(markerId, color);
-			world2d().addObject2d((OBJECT2D) marker2d);
+			world2d().addObject2d(marker2d);
 		}
 		
 		marker2d.setTopLeftX(topLeftX);
@@ -114,7 +113,7 @@ public abstract class   ProcedureViewData<OBJECT2D extends ProcedureObject2d<OBJ
 		
 		if(card2d == null) {
 			card2d = newCard2d(card);
-			world2d().addObject2d((OBJECT2D) card2d);
+			world2d().addObject2d(card2d);
 		}
 		
 		if(card.isNullCard()) {

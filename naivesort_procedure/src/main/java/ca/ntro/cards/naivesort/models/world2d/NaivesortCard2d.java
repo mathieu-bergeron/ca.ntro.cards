@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.naivesort.NaivesortConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class NaivesortCard2d extends ProcedureCard2d<NaivesortProcedureObject2d, NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
+public class NaivesortCard2d extends ProcedureCard2d<NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
 
 	public NaivesortCard2d() {
 		super();

@@ -4,11 +4,10 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.app.frontend.views.elements.Color;
 
-public class   ProcedureMarker2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                 WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+public class   ProcedureMarker2d<WORLD2D  extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                  OPTIONS  extends ProcedureDrawingOptions>
 
-       extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> {
+       extends ProcedureObject2d<WORLD2D, OPTIONS> {
 	
 	private String id;
 	private String color;

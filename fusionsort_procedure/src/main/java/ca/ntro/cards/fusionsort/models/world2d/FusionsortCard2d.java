@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.fusionsort.FusionsortConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class FusionsortCard2d extends ProcedureCard2d<FusionsortProcedureObject2d, FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions> {
+public class FusionsortCard2d extends ProcedureCard2d<FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions> {
 
 	public FusionsortCard2d() {
 		super();

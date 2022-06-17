@@ -6,7 +6,6 @@ import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
 import ca.ntro.cards.foo.frontend.FooProcedureViewData;
 import ca.ntro.cards.foo.frontend.views.FooVariablesView;
 import ca.ntro.cards.foo.models.world2d.FooProcedureDrawingOptions;
-import ca.ntro.cards.foo.models.world2d.FooProcedureObject2d;
 import ca.ntro.cards.foo.models.world2d.FooProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.values.ComparisonReport;
@@ -18,7 +17,6 @@ import ca.ntro.core.stream.Visitor;
 public class   FooCardsModel<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<FooCardsModel, 
-                                   FooProcedureObject2d, 
                                    FooProcedureWorld2d, 
                                    FooProcedureDrawingOptions, 
                                    FooProcedureViewData,

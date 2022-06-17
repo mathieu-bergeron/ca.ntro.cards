@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.foo.FooConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class FooCard2d extends ProcedureCard2d<FooProcedureObject2d, FooProcedureWorld2d, FooProcedureDrawingOptions> {
+public class FooCard2d extends ProcedureCard2d<FooProcedureWorld2d, FooProcedureDrawingOptions> {
 
 	public FooCard2d() {
 		super();

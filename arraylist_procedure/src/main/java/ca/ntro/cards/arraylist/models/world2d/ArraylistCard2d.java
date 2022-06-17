@@ -5,7 +5,7 @@ import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.arraylist.ArraylistConstants;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
 
-public class ArraylistCard2d extends ProcedureCard2d<ArraylistProcedureObject2d, ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions> {
+public class ArraylistCard2d extends ProcedureCard2d<ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions> {
 
 	public ArraylistCard2d() {
 		super();

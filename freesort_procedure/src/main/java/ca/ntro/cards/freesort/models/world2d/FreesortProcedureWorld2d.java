@@ -10,7 +10,7 @@ import ca.ntro.cards.freesort.messages.FreesortMsgAcceptManualModel;
 import ca.ntro.cards.freesort.models.TriLibre;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class FreesortProcedureWorld2d extends ProcedureWorld2d<FreesortProcedureObject2d, FreesortProcedureWorld2d, FreesortProcedureDrawingOptions> {
+public class FreesortProcedureWorld2d extends ProcedureWorld2d<FreesortProcedureWorld2d, FreesortProcedureDrawingOptions> {
 	
 	private FreesortMsgAcceptManualModel msgAcceptManualModel = NtroApp.newMessage(FreesortMsgAcceptManualModel.class);
 	

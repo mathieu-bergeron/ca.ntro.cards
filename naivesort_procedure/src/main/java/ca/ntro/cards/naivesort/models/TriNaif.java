@@ -12,7 +12,6 @@ import ca.ntro.cards.naivesort.NaivesortConstants;
 import ca.ntro.cards.naivesort.frontend.NaivesortProcedureViewData;
 import ca.ntro.cards.naivesort.frontend.views.NaivesortVariablesView;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureDrawingOptions;
-import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureObject2d;
 import ca.ntro.cards.naivesort.models.world2d.NaivesortProcedureWorld2d;
 import ca.ntro.cards.models.ProcedureCardsModel;
 import ca.ntro.cards.models.values.ComparisonReport;
@@ -24,7 +23,6 @@ import ca.ntro.core.stream.Visitor;
 public class   TriNaif<C extends Comparable<C>> 
 
        extends ProcedureCardsModel<TriNaif, 
-                                   NaivesortProcedureObject2d, 
                                    NaivesortProcedureWorld2d, 
                                    NaivesortProcedureDrawingOptions, 
                                    NaivesortProcedureViewData,

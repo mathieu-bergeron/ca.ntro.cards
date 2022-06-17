@@ -6,13 +6,12 @@ import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.common.models.world2d.CommonWorld2d;
 import javafx.scene.input.MouseEvent;
 
-public abstract class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                       WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+public abstract class ProcedureWorld2d<WORLD2D  extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                        OPTIONS  extends ProcedureDrawingOptions>
 
-       extends CommonWorld2d<OBJECT2D, WORLD2D, OPTIONS> {
+       extends CommonWorld2d<ProcedureObject2d<WORLD2D,OPTIONS>, WORLD2D, OPTIONS> {
 
-	private ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> draggedObject2d = null;
+	private ProcedureObject2d<WORLD2D, OPTIONS> draggedObject2d = null;
 
 	private double anchorX;
 	private double anchorY;
@@ -61,7 +60,7 @@ public abstract class ProcedureWorld2d<OBJECT2D extends ProcedureObject2d<OBJECT
 		buildAndSendManualModel();
 	}
 
-	public void registerDraggedObject2d(ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS> object2d) {
+	public void registerDraggedObject2d(ProcedureObject2d<WORLD2D, OPTIONS> object2d) {
 		this.draggedObject2d = object2d;
 	}
 

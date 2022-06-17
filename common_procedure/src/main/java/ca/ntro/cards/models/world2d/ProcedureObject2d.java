@@ -5,11 +5,10 @@ import ca.ntro.cards.ProcedureConstants;
 import ca.ntro.cards.common.models.world2d.CommonObject2d;
 import javafx.scene.input.MouseEvent;
 
-public abstract class ProcedureObject2d<OBJECT2D extends ProcedureObject2d<OBJECT2D, WORLD2D, OPTIONS>,
-                                        WORLD2D  extends ProcedureWorld2d<OBJECT2D, WORLD2D, OPTIONS>,
+public abstract class ProcedureObject2d<WORLD2D  extends ProcedureWorld2d<WORLD2D, OPTIONS>,
                                         OPTIONS  extends ProcedureDrawingOptions>
 
-       extends        CommonObject2d<OBJECT2D, WORLD2D, OPTIONS> {
+       extends        CommonObject2d<ProcedureObject2d<WORLD2D, OPTIONS>, WORLD2D, OPTIONS> {
 
 	private double dragOffsetX;
 	private double dragOffsetY;

@@ -12,7 +12,7 @@ import ca.ntro.cards.arraylist.models.ListeTableau;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedureObject2d, ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions> {
+public class ArraylistProcedureWorld2d extends ProcedureWorld2d<ArraylistProcedureWorld2d, ArraylistProcedureDrawingOptions> {
     
     private ProcedureMsgAcceptManualModel msgManualExecutionStep = NtroApp.newMessage(ProcedureMsgAcceptManualModel.class);
     

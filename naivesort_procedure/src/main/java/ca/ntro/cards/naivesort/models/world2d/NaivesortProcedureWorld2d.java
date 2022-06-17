@@ -15,7 +15,7 @@ import ca.ntro.cards.naivesort.models.TriNaif;
 import ca.ntro.cards.models.world2d.ProcedureObject2d;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedureObject2d, NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
+public class NaivesortProcedureWorld2d extends ProcedureWorld2d<NaivesortProcedureWorld2d, NaivesortProcedureDrawingOptions> {
 	
 	private NaivesortMsgAcceptManualModel msgAcceptManualModel = NtroApp.newMessage(NaivesortMsgAcceptManualModel.class);
 	

@@ -12,7 +12,7 @@ import ca.ntro.cards.fusionsort.models.TriFusion;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
-public class FusionsortProcedureWorld2d extends ProcedureWorld2d<FusionsortProcedureObject2d, FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions> {
+public class FusionsortProcedureWorld2d extends ProcedureWorld2d<FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions> {
     
     private ProcedureMsgAcceptManualModel msgManualExecutionStep = NtroApp.newMessage(ProcedureMsgAcceptManualModel.class);
     
