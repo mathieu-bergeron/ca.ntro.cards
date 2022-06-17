@@ -28,27 +28,99 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.intro.frontend.views.IntroSelectionsView" 
+    styleClass="top"
+    VBox.vgrow="ALWAYS"
     id="selections-view">
+
+    <Pane VBox.vgrow="ALWAYS" styleClass="vspace-small" />
 
     <HBox styleClass="bottom">
 
-        <VBox styleClass="bottom">
+        <HBox HBox.hgrow="ALWAYS" 
+              fx:id="idContainer"
+              styleClass="bottom-left">
 
             <Label
-                text="%testCase"
-                fx:id="testCaseLabel"
+                text="%testCaseId"
                 styleClass="text-big">
             </Label>
 
-        </VBox>
+        </HBox>
 
-        <Pane HBox.hgrow="ALWAYS" />
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="sizeContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseSize"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="manualContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseOnScreen"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="codeContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseInTheCode"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+
+        <Pane  styleClass="hspace-tiny" />
+
+        <HBox HBox.hgrow="ALWAYS"  
+              fx:id="solutionContainer"
+              styleClass="bottom-left">
+
+            <Label
+                text="%testCaseSolution"
+                styleClass="text-big">
+            </Label>
+
+        </HBox>
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS">
+        <ScrollPane VBox.vgrow="ALWAYS" 
+                    fitToWidth="true" 
+                    styleClass="test-case-container">
+            <VBox
+                VBox.vgrow="ALWAYS"
+                fx:id="testCaseContainer"
+                styleClass="container">
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+    <!--
+
+    <HBox styleClass="bottom-right">
 
         <VBox>
 
             <Label
-                text="%mode"
-                fx:id="modeLabel"
+                text="%categories"
+                fx:id="categoriesLabel"
                 styleClass="text-big">
             </Label>
 
@@ -56,9 +128,8 @@
             <ComboBox>
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="manuel" />
-                    <String fx:value="mon code" />
-                    <String fx:value="solution" />
+                    <String fx:value="exemples" />
+                    <String fx:value="aléatoire" />
             </FXCollections>
             </items>
             </ComboBox>
@@ -66,13 +137,10 @@
         </VBox>
     </HBox>
 
-    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" styleClass="test-case-container">
-        <VBox
-            fx:id="testCaseContainer"
-            styleClass="container">
-        </VBox>
-    </ScrollPane>
+    -->
 
 
 
-</VBox>
+
+
+	</VBox>

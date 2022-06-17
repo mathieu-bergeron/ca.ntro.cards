@@ -24,11 +24,11 @@
 <HBox xmlns:fx="http://javafx.com/fxml"
     fx:controller="ca.ntro.cards.intro.frontend.views.IntroProcedureDashboardView" 
     styleClass="container"
-    id="dashboard-view">
+	id="dashboard-view">
 
     <VBox 
         HBox.hgrow="ALWAYS"
-        styleClass="container"
+        styleClass="container, top"
         fx:id="selectionsContainer">
     </VBox>
 
@@ -61,5 +61,4 @@
         </Label>
 
     </VBox>
-
 </HBox>
