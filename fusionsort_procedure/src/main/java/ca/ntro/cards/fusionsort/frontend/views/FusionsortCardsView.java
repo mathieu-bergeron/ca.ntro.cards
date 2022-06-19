@@ -3,14 +3,18 @@ package ca.ntro.cards.fusionsort.frontend.views;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.controls.canvas.World2dCanvasFx;
 import ca.ntro.app.views.controls.canvas.World2dResizableCanvasFx;
 import ca.ntro.cards.fusionsort.FusionsortConstants;
 import ca.ntro.cards.fusionsort.frontend.views.controls.FusionsortPreviewCanvas;
 import ca.ntro.cards.fusionsort.frontend.views.controls.FusionsortMainCanvas;
+import ca.ntro.cards.common.frontend.events.EvtMoveViewport;
 import ca.ntro.cards.frontend.views.ProcedureCanvasView;
 import ca.ntro.core.initialization.Ntro;
 import javafx.fxml.FXML;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,6 +42,7 @@ public class FusionsortCardsView extends ProcedureCanvasView {
 		Ntro.assertNotNull("dashboardContainer", dashboardContainer);
 
 		super.initialize(location, resources);
+
 	}
 
 	@SuppressWarnings("rawtypes")

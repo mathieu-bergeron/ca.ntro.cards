@@ -1,3 +1,5 @@
+// Copyright (C) (2022) (Adrien Josephine-Olivier) (2066267@cmontmorency.qc.ca)
+
 package ca.ntro.cards.fusionsort.test_cases;
 
 import ca.ntro.cards.common.test_cases.descriptor.AbstractTestCaseDescriptor;
@@ -25,9 +27,18 @@ public class   FusionsortTestCaseDatabase<STUDENT_MODEL extends TriFusion>
                                                           .testCaseId("ex01");
         
         addTestCase(descriptor);
+        
+        AbstractTestCaseDescriptor descriptor2 = AbstractTestCaseDescriptor.create()
+											              .category("exemples")
+											              .testCaseId("ex02");
 
+        addTestCase(descriptor2);
 
-        // TODO: ajouter d'autres descriptions de cas de tests
+        AbstractTestCaseDescriptor descriptor3 = AbstractTestCaseDescriptor.create()
+														  .category("exemples")
+														  .testCaseId("ex03");
+
+		addTestCase(descriptor3);
 
     }
 
