@@ -1,3 +1,5 @@
+// Copyright (C) (2022) (Adrien Josephine-Olivier) (2066267@cmontmorency.qc.ca)
+
 package ca.ntro.cards.frontend;
 
 import java.util.HashSet;

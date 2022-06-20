@@ -1,10 +1,9 @@
 package ca.ntro.cards.fusionsort.backend;
 
-
-
 import ca.ntro.app.tasks.backend.BackendTasks;
 import static ca.ntro.app.tasks.backend.BackendTasks.*;
 import ca.ntro.cards.backend.ProcedureBackend;
+import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.fusionsort.messages.FusionsortMsgAcceptManualModel;
 import ca.ntro.cards.fusionsort.models.TriFusion;
 import ca.ntro.cards.fusionsort.models.values.FusionsortTestCase;
@@ -26,8 +25,6 @@ public class   FusionsortProcedureBackend<STUDENT_MODEL extends TriFusion>
                                 FusionsortProcedureDashboardModel,
                                 FusionsortProcedureSettingsModel,
                                 FusionsortMsgAcceptManualModel> {
-
-	
 	
 
 

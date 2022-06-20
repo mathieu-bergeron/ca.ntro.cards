@@ -1,3 +1,5 @@
+// Copyright (C) (2022) (Adrien Josephine-Olivier) (2066267@cmontmorency.qc.ca)
+
 package ca.ntro.cards.fusionsort;
 
 import ca.ntro.app.messages.MessageRegistrar;
@@ -15,6 +17,7 @@ import ca.ntro.cards.fusionsort.frontend.views.fragments.FusionsortProcedureMess
 import ca.ntro.cards.fusionsort.messages.FusionsortMsgAcceptManualModel;
 import ca.ntro.cards.fusionsort.models.TriFusion;
 import ca.ntro.cards.fusionsort.models.values.FusionsortTestCase;
+import ca.ntro.cards.fusionsort.models.world2d.FusionsortSeparator2d;
 import ca.ntro.cards.fusionsort.test_cases.FusionsortTestCaseDatabase;
 import ca.ntro.cards.fusionsort.test_cases.descriptor.FusionsortTestCaseDescriptor;
 import ca.ntro.cards.fusionsort.test_cases.execution_trace.FusionsortExecutionTrace;
@@ -116,6 +119,11 @@ public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 	@Override
 	protected Class<FusionsortMsgAcceptManualModel> msgAcceptManualModelClass() {
 		return FusionsortMsgAcceptManualModel.class;
+	}
+	
+	@Override
+	protected void registerAdditionnalModels(ModelRegistrar registrar) {
+		registrar.registerValue(FusionsortSeparator2d.class);
 	}
 
 

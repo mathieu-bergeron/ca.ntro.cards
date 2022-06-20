@@ -44,15 +44,7 @@ public class TriFusion<C extends Comparable<C>>
 	public C[] tableau = (C[]) new Card[0];
 	private int lvl = 1;
 	private String side = "null"; // left or right or null // A ENLEVER??
-	private boolean tmp = true;
-
-	public boolean getTmp() {
-		return tmp;
-	}
-
-	public void setTmp(boolean tmp) {
-		this.tmp = tmp;
-	}
+	private int separatorIndex = -1;
 
 	public TriFusion<C> getGauche() {
 		return gauche;
@@ -86,6 +78,14 @@ public class TriFusion<C extends Comparable<C>>
 		this.side = side;
 	}
 
+	public int getSeparatorIndex() {
+		return separatorIndex;
+	}
+
+	public void setSeparatorIndex(int separatorIndex) {
+		this.separatorIndex = separatorIndex;
+	}
+
 	public C[] getTableau() {
 		return tableau;
 	}
@@ -112,6 +112,7 @@ public class TriFusion<C extends Comparable<C>>
 		}
 		lvl = other.lvl;
 		side = other.side;
+		separatorIndex = other.separatorIndex;
 
 		if (other.gauche != null) {
 			gauche = new TriFusion<>();
@@ -132,6 +133,15 @@ public class TriFusion<C extends Comparable<C>>
 
 			accepted = true;
 
+			if (tableau.length == manualModel.tableau.length) {
+				for (int i = 0; i < tableau.length; i++) {
+					if (!tableau[i].equals(manualModel.tableau[i])) {
+						accepted = false;
+						break;
+					}
+				}
+			}
+
 		}
 
 		return accepted;
@@ -139,27 +149,29 @@ public class TriFusion<C extends Comparable<C>>
 
 	private boolean tableauValid() {
 		boolean valid = true;
-		
+
 		if (gauche != null && droite != null) {
-			
-			if (tableau.length != gauche.tableau.length + droite.tableau.length) {
+
+			int leftSize = (int) Math.ceil(tableau.length / 2.0);
+			int rightSize = tableau.length - leftSize;
+			if (leftSize != gauche.tableau.length || rightSize != droite.tableau.length) {
+				valid = false;
+			} else if (separatorIndex != -1 && separatorIndex != leftSize) {
 				valid = false;
 			} else {
 				valid = gauche.tableauValid() && droite.tableauValid();
 			}
-			
+
 		} else if (gauche == null ^ droite == null) {
 			valid = false;
 		}
-		
+
 		return valid;
 	}
-	
+
 	@Override
 	protected void updateViewDataImpl(FusionsortProcedureViewData cardsViewData) {
 
-		addLevel();
-		
 		updateViewData(cardsViewData, 0);
 
 	}
@@ -170,13 +182,25 @@ public class TriFusion<C extends Comparable<C>>
 
 		// Avancement des cartes par rapport au debut du canvas
 		double worldWidth = FusionsortConstants.INITIAL_WORLD_WIDTH / Math.pow(2, lvl - 1);
-		double cardsTotalWidth = (cardWidth + cardWidth / 2) * tableau.length + cardWidth;
+		double cardsTotalWidth = cardWidth + (cardWidth + cardWidth / 2) * tableau.length + FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + cardWidth/2;
 		double initialLeftSpace = minWidth + (worldWidth - cardsTotalWidth) / 2;
 
+		double avance = 0;
 		for (int i = 0; i < tableau.length; i++) {
 
-			double targetTopLeftX = initialLeftSpace + (cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2);
+			double targetTopLeftX = avance + initialLeftSpace + (cardWidth + cardWidth / 2 + i * cardWidth * 3 / 2);
 			double targetTopLeftY = (cardHeight * lvl) + ((cardHeight / 2) * (lvl - 1)) - (cardHeight / 2);
+
+			if (separatorIndex == i) {
+				
+				
+				String id = String.valueOf(lvl) + ";" + String.valueOf(targetTopLeftX);
+				
+				cardsViewData.addOrUpdateSeparator(id, targetTopLeftX, targetTopLeftY);
+				
+				targetTopLeftX += FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + (cardHeight / 2);
+				avance = FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + (cardHeight / 2);
+			}
 
 			AbstractCard card = (Card) tableau[i];
 
@@ -194,7 +218,7 @@ public class TriFusion<C extends Comparable<C>>
 			gauche.updateViewData(cardsViewData, minWidth);
 		}
 		if (droite != null) {
-			droite.updateViewData(cardsViewData, minWidth + worldWidth / 2);
+			droite.updateViewData(cardsViewData, minWidth + worldWidth / 2 + FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + cardWidth/2);
 		}
 	}
 
@@ -207,18 +231,18 @@ public class TriFusion<C extends Comparable<C>>
 
 		} else if (descriptor.testCaseId().equals("ex02")) {
 
-			tableau = (C[]) new Card[] { new Card(2, Suit.SPADES), new Card(3, Suit.HEARTS), new Card(7, Suit.DIAMONDS) };
+			tableau = (C[]) new Card[] { new Card(2, Suit.SPADES), new Card(3, Suit.HEARTS),
+					new Card(7, Suit.DIAMONDS) };
 
 		} else if (descriptor.testCaseId().equals("ex03")) {
 
 			tableau = (C[]) new Card[] { new Card(3, Suit.CLUBS), new Card(9, Suit.SPADES), new Card(3, Suit.DIAMONDS),
 					new Card(4, Suit.DIAMONDS), new Card(8, Suit.SPADES), new Card(1, Suit.HEARTS),
 					new Card(7, Suit.HEARTS), new Card(7, Suit.CLUBS), new Card(2, Suit.SPADES),
-					new Card(6, Suit.DIAMONDS)};
+					new Card(6, Suit.DIAMONDS) };
 
 		}
 
-		// TODO: créer les autres cas de test
 	}
 
 	@Override
@@ -231,7 +255,6 @@ public class TriFusion<C extends Comparable<C>>
 		return new StreamNtro<Card>() {
 			@Override
 			public void forEach_(Visitor<Card> visitor) throws Throwable {
-				// TODO: visiter chaque carte
 				visitList(visitor, tableau);
 			}
 
@@ -279,12 +302,10 @@ public class TriFusion<C extends Comparable<C>>
 		return nbLvl;
 	}
 
-	private void addLevel() {
-		if (tmp && tableau.length >= 2) {
+	public void addLevel() {
+		if (tableau.length >= 2) {
 
-			tmp = false;
-			
-			int leftSize = (int) Math.ceil(tableau.length / 2.0);
+			int leftSize = separatorIndex;
 			C[] leftCards = (C[]) new Card[leftSize];
 			C[] rightCards = (C[]) new Card[tableau.length - leftSize];
 
@@ -302,7 +323,7 @@ public class TriFusion<C extends Comparable<C>>
 				gauche.setTableau(leftCards);
 				gauche.setSide("left");
 				gauche.setLvl(lvl + 1);
-				gauche.addLevel(); // a enlever
+				
 			}
 
 			if (droite == null) {
@@ -311,7 +332,7 @@ public class TriFusion<C extends Comparable<C>>
 				droite.setTableau(rightCards);
 				droite.setSide("right");
 				droite.setLvl(lvl + 1);
-				droite.addLevel(); // a enlever
+				
 			}
 		}
 	}
