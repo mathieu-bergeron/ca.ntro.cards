@@ -177,6 +177,7 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		     .waitsFor(message(getMsgAcceptManualModelClass()))
 
 		     .thenExecutes(inputs -> {
+
 		    	 
 		    	 MSG_ACCEPT_MANUAL_MODEL  msgAcceptManualModel     = inputs.get(message(getMsgAcceptManualModelClass()));
 		    	 DASHBOARD_MODEL          dashboardModel           = inputs.get(model(getDashboardModelClass()));

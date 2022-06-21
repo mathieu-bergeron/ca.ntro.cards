@@ -9,21 +9,21 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class FreesortVariablesView extends ProcedureVariablesView {
-	// Copyright (C) (2022) (Marlond Augustin) (202043906@cmontmorency.qc.ca)
+	// Copyright (C) (2022) (Marlond Augustin) (marlondjra@gmail.com)
 	//
 	// This file is part of Ntro
 	//
 	// This is free software: you can redistribute it and/or modify
-	// it under the terms of the GNU Affero General Public License as published by
+	// it under the terms of the GNU GPL3 General Public License as published by
 	// the Free Software Foundation, either version 3 of the License, or
 	// (at your option) any later version.
 	//
 	// This is distributed in the hope that it will be useful,
 	// but WITHOUT ANY WARRANTY; without even the implied warranty of
 	// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	// GNU Affero General Public License for more details.
+	// GNU GPL3 General Public License for more details.
 	//
-	// You should have received a copy of the GNU Affero General Public License
+	// You should have received a copy of the GNU GPL3 General Public License
 	// along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 	@FXML
 	private Label freesortVar01Label;
@@ -43,7 +43,7 @@ public class FreesortVariablesView extends ProcedureVariablesView {
 	public void displayFooVar01(String fooVar01) {
 		freesortVar01Label.setText(fooVar01);
 	}
-	//méthode ajouter, Elle sera utile pour dire si les cartes sont triées ou non
+	//mï¿½thode ajouter, Elle sera utile pour dire si les cartes sont triï¿½es ou non
 	public void displayFooVar02(String fooVar02) {
 		freesortVar02Label.setText(fooVar02);
 	}

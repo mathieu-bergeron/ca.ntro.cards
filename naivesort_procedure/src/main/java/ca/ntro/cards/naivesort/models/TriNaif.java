@@ -198,11 +198,13 @@ public class   TriNaif<C extends Comparable<C>>
 		}
 		
 		if(getIndiceCandidat() >= 0 && getIndiceCandidat() < bottomCards.size()) {
+			
 			AbstractCard candidateCard = bottomCards.get(getIndiceCandidat());
 			cardsViewData.displayCardFaceUp(candidateCard);
 		}
 
 		if(getIndiceProchainVide() >= 0 && getIndiceProchainVide() < topCards.size()) {
+			
 			for(int i = getIndiceProchainVide() + 1; i < topCards.size(); i++) {
 				AbstractCard futureCard = topCards.get(i);
 				cardsViewData.displayCardFaceDown(futureCard);

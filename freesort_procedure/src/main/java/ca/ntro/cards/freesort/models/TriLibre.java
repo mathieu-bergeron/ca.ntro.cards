@@ -25,21 +25,21 @@ public class   TriLibre<C extends Comparable<C>>
                                    FreesortProcedureDrawingOptions, 
                                    FreesortProcedureViewData,
                                    FreesortVariablesView> { 
-	// Copyright (C) (2022) (Marlond Augustin) (202043906@cmontmorency.qc.ca)
+	// Copyright (C) (2022) (Marlond Augustin) (marlondjra@gmail.com)
 		//
 		// This file is part of Ntro
 		//
 		// This is free software: you can redistribute it and/or modify
-		// it under the terms of the GNU Affero General Public License as published by
+		// it under the terms of the GNU GPL3 General Public License as published by
 		// the Free Software Foundation, either version 3 of the License, or
 		// (at your option) any later version.
 		//
 		// This is distributed in the hope that it will be useful,
 		// but WITHOUT ANY WARRANTY; without even the implied warranty of
 		// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		// GNU Affero General Public License for more details.
+		// GNU GPL3 General Public License for more details.
 		//
-		// You should have received a copy of the GNU Affero General Public License
+		// You should have received a copy of the GNU GPL3 General Public License
 		// along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 	
 	protected Card[] cartes = new Card[0];
@@ -94,7 +94,7 @@ public class   TriLibre<C extends Comparable<C>>
 		return modified;
 	}
 	private boolean isTargetSorted() {
-		//Cette méthode est utile pour savoir si les cartes sont triées ou non
+		//Cette mï¿½thode est utile pour savoir si les cartes sont triï¿½es ou non
 		boolean sorted=false;
 		int nbTri=0;
 		for(int i = 0; i < cartes.length; ++i) {

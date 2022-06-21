@@ -9,8 +9,8 @@ public class ArraylistMainCanvas extends ProcedureMainCanvas {
 		// TODO Auto-generated method stub
 		drawOnViewport(gc -> {
 			gc.setFill(NtroApp.colorFromString("3399ff"));
-			gc.fillText("Recycle", 200, 200);
 			gc.fillRect(0,0, 100, 100);
+			gc.strokeText("Recycle", 25, 50);
 		});
 	}
 
