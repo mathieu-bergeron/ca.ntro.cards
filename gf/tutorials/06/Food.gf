@@ -5,16 +5,20 @@ abstract Food = {
         startcat = Comment;
 
     cat
+
         Comment ; Item ; Kind ; Quality ;
 
     fun
-        With: Kind -> Kind -> Kind;
-        Pron : Item -> Item;
         Pred: Item -> Quality -> Comment;
-        This, That: Kind -> Item;
+
+        This, That, These, Those: Kind -> Item;
+
         Mod: Quality -> Kind -> Kind;
-        Wine,Cheese,Fish: Kind;
+
+        Wine, Cheese, Pizza, Fish: Kind;
+
         Very : Quality -> Quality;
+
         Fresh, Warm, Italian, Expensive, Delicious, Boring: Quality;
 
 
