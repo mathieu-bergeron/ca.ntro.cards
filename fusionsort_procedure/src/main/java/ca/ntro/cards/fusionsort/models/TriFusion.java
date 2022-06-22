@@ -39,8 +39,8 @@ public class TriFusion<C extends Comparable<C>>
 		extends
 		ProcedureCardsModel<TriFusion, FusionsortProcedureObject2d, FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions, FusionsortProcedureViewData, FusionsortVariablesView> {
 
-	public TriFusion<C> gauche;
-	public TriFusion<C> droite;
+	public TriFusion<C> gauche = null;
+	public TriFusion<C> droite = null;
 	public C[] tableau = (C[]) new Card[0];
 	private int lvl = 1;
 	private int separatorIndex = -1;
@@ -119,34 +119,98 @@ public class TriFusion<C extends Comparable<C>>
 	public boolean acceptManualModel(TriFusion manualModel) {
 		boolean accepted = false;
 
-		if (manualModel.tableauValid()) {
+		if (hasValidArraySizes(manualModel) && hasValidSeparators(manualModel)) {
 
-			accepted = true;
+			accepted = areCardsPlacedCorrectly(manualModel);
 
 		}
 
 		return accepted;
 	}
 
-	private boolean tableauValid() {
+	private boolean hasValidArraySizes(TriFusion manualModel) {
 		boolean valid = true;
 
-		if (gauche != null && droite != null) {
-			int leftSize = (int) Math.ceil(tableau.length / 2.0);
-			int rightSize = tableau.length - leftSize;
-			if (leftSize != gauche.tableau.length || rightSize != droite.tableau.length) {
+		if (tableau.length != manualModel.tableau.length) {
+			valid = false;
+		} else if (manualModel.gauche != null && manualModel.droite != null) {
+			int leftSize = (int) Math.ceil(manualModel.tableau.length / 2.0);
+			int rightSize = manualModel.tableau.length - leftSize;
+			if (leftSize != manualModel.gauche.tableau.length || rightSize != manualModel.droite.tableau.length) {
 				valid = false;
-			} else if (separatorIndex != -1 && separatorIndex != leftSize) {
-				valid = false;
-			} else {
-				valid = gauche.tableauValid() && droite.tableauValid();
+			} else if (gauche != null && droite != null) {
+				valid = gauche.hasValidArraySizes(manualModel.gauche) && droite.hasValidArraySizes(manualModel.droite);
 			}
 
-		} else if (gauche == null ^ droite == null) {
+		} else if (manualModel.gauche == null ^ manualModel.droite == null) {
 			valid = false;
 		}
 
 		return valid;
+	}
+
+	private boolean hasValidSeparators(TriFusion manualModel) {
+		boolean valid = true;
+
+		int leftSize = (int) Math.ceil(tableau.length / 2.0);
+
+		if (separatorIndex != -1 && separatorIndex != leftSize) {
+			valid = false;
+		} else if (tableau.length == 1 && separatorIndex != -1) {
+			valid = false;
+		} else if (manualModel.separatorIndex != -1 && separatorIndex != manualModel.separatorIndex) {
+
+			for (C c : (C[]) manualModel.tableau) {
+				if (c == null) {
+					valid = false;
+					break;
+				}
+			}
+		} else {
+			if (gauche != null && droite != null) {
+				valid = gauche.hasValidSeparators(manualModel.gauche) && droite.hasValidSeparators(manualModel.droite);
+			}
+		}
+
+		return valid;
+	}
+
+	private boolean areCardsPlacedCorrectly(TriFusion manualModel) {
+		boolean correct = true;
+
+		if (cardNbInTableau() == manualModel.cardNbInTableau()) {
+			for (int i = 0; i < tableau.length; i++) {
+				if (tableau[i] != null && manualModel.tableau[i] != null) {
+					if (!tableau[i].equals(manualModel.tableau[i])) {
+						correct = false;
+						break;
+					}
+				}
+			}
+		}
+
+		if (correct && gauche != null && droite != null) {
+
+			if (cardNbInTableau() < manualModel.cardNbInTableau()) { // carte a ete ajoute
+				if (gauche.cardNbInTableau() > manualModel.gauche.cardNbInTableau()
+						|| droite.cardNbInTableau() > manualModel.droite.cardNbInTableau()) {
+
+					Card smallestCard = smallestCardFromGaucheAndDroite();
+					Card lastCard = manualModel.lastCardFromTableau();
+
+					if (smallestCard != null && lastCard != null) {
+						correct = smallestCard.compareTo(lastCard) == 0;
+					}
+
+				}
+
+			} else {
+				correct = gauche.areCardsPlacedCorrectly(manualModel.gauche)
+						&& droite.areCardsPlacedCorrectly(manualModel.droite);
+			}
+		}
+
+		return correct;
 	}
 
 	@Override
@@ -160,7 +224,6 @@ public class TriFusion<C extends Comparable<C>>
 		double cardWidth = FusionsortConstants.INITIAL_CARD_WIDTH_MILIMETERS;
 		double cardHeight = FusionsortConstants.INITIAL_CARD_HEIGHT_MILIMETERS;
 
-		// Avancement des cartes par rapport au debut du canvas
 		double worldWidth = FusionsortConstants.INITIAL_WORLD_WIDTH / Math.pow(2, lvl - 1);
 		double cardsTotalWidth = cardWidth + (cardWidth + cardWidth / 2) * tableau.length
 				+ FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + cardWidth / 2;
@@ -195,11 +258,21 @@ public class TriFusion<C extends Comparable<C>>
 		}
 
 		if (gauche != null) {
-			gauche.updateViewData(cardsViewData, minWidth);
+			if (separatorIndex != -1) {
+				gauche.updateViewData(cardsViewData, minWidth);
+			} else {
+				gauche = null;
+			}
+
 		}
 		if (droite != null) {
-			droite.updateViewData(cardsViewData,
-					minWidth + worldWidth / 2 + FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + cardWidth / 2);
+			if (separatorIndex != -1) {
+				droite.updateViewData(cardsViewData, minWidth + worldWidth / 2
+						+ FusionsortConstants.INITIAL_SEPARATOR_WIDTH_MILIMETERS + cardWidth / 2);
+			} else {
+				droite = null;
+			}
+
 		}
 	}
 
@@ -278,16 +351,34 @@ public class TriFusion<C extends Comparable<C>>
 		return sorted;
 	}
 
+	public boolean areCardsArrangedCorrectly() {
+		boolean arranged = true;
+
+		int cardNb = cardNbInTableau();
+
+		for (int i = 1; i < cardNb; i++) {
+			if (tableau[i - 1] != null && tableau[i] != null) {
+				if (tableau[i - 1].compareTo(tableau[i]) > 0) {
+					arranged = false;
+					break;
+				}
+			} else {
+				arranged = false;
+				break;
+			}
+		}
+
+		return arranged;
+	}
+
 	protected C[] nouveauTableau(int size) {
 		return (C[]) new Card[size];
 	}
 
 	@Override
 	public void displayOn(FusionsortVariablesView variablesView) {
-		// TODO: afficher les attributs
 
-		variablesView.displayFooVar01(String.valueOf(areCardsSorted()));
-		variablesView.displayFooVar02("2");
+		variablesView.displaySorted(String.valueOf(areCardsSorted()));
 	}
 
 	public int nbLevel() {
@@ -306,6 +397,82 @@ public class TriFusion<C extends Comparable<C>>
 		}
 
 		return nbLvl;
+	}
+
+	private int cardNbInTableau() {
+		int cardNb = 0;
+
+		for (C c : tableau) {
+			if (c != null) {
+				cardNb++;
+			}
+		}
+
+		return cardNb;
+	}
+
+	private Card smallestCardFromGaucheAndDroite() {
+		Card smallestCard = null;
+
+		if (gauche != null && droite != null) {
+			Card smallestCardLeft = gauche.smallestCardFromTableau();
+			Card smallestCardRight = droite.smallestCardFromTableau();
+
+			if (smallestCardLeft == null) {
+				smallestCard = smallestCardRight;
+			} else if (smallestCardRight == null) {
+				smallestCard = smallestCardLeft;
+			} else {
+				if (smallestCardLeft.compareTo(smallestCardRight) < 0) {
+					smallestCard = smallestCardLeft;
+				} else {
+					smallestCard = smallestCardRight;
+				}
+			}
+
+		}
+
+		return smallestCard;
+	}
+
+	private Card smallestCardFromTableau() {
+		Card smallestCard = null;
+
+		if (tableau.length == 1 && tableau[0] != null) {
+			smallestCard = (Card) tableau[0];
+		} else if (tableau.length >= 2) {
+
+			if (tableau[0] != null) {
+				smallestCard = (Card) tableau[0];
+			}
+
+			for (int i = 1; i < tableau.length; i++) {
+
+				if (smallestCard == null) {
+					if (tableau[i] != null) {
+						smallestCard = (Card) tableau[i];
+					}
+				} else if (tableau[i] != null) {
+					if (smallestCard.compareTo((Card) tableau[i]) > 0) {
+						smallestCard = (Card) tableau[i];
+					}
+				}
+			}
+		}
+		return smallestCard;
+	}
+
+	private Card lastCardFromTableau() {
+		Card lastCard = null;
+
+		for (int i = tableau.length - 1; i >= 0; i--) {
+			if (tableau[i] != null) {
+				lastCard = (Card) tableau[i];
+				break;
+			}
+		}
+
+		return lastCard;
 	}
 
 }

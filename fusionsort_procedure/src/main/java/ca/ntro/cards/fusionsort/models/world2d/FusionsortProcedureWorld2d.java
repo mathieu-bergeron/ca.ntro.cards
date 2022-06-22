@@ -13,6 +13,7 @@ import ca.ntro.cards.fusionsort.messages.FusionsortMsgAcceptManualModel;
 import ca.ntro.cards.fusionsort.models.TriFusion;
 import ca.ntro.cards.models.world2d.ProcedureWorld2d;
 
+
 public class FusionsortProcedureWorld2d extends
 		ProcedureWorld2d<FusionsortProcedureObject2d, FusionsortProcedureWorld2d, FusionsortProcedureDrawingOptions> {
 
@@ -21,6 +22,7 @@ public class FusionsortProcedureWorld2d extends
 
 	@Override
 	public void buildAndSendManualModel() {
+
 		double minWidth = 0;
 		double maxWidth = FusionsortConstants.INITIAL_WORLD_WIDTH * 1.5;
 
@@ -135,6 +137,7 @@ public class FusionsortProcedureWorld2d extends
 
 							if (divergenceLeftRight >= 1) {
 
+								// ADD NULL CARD TO DROITE
 								if (rightSize == 0) {
 									TriFusion newRight = new TriFusion();
 									newRight.setLvl(newLvl);
@@ -143,11 +146,13 @@ public class FusionsortProcedureWorld2d extends
 								}
 								List<Card> cardsRight = cardsArrayToList((Card[]) triFusion.droite.tableau);
 								addNullCardToEnd(cardsRight);
+								cardsRight = rearrangedCards(cardsRight);
 								Card[] newCards = cardsListToArray(cardsRight);
 								triFusion.droite.setTableau(newCards);
 
 							} else {
 
+								// ADD NULL CARD TO GAUCHE
 								if (leftSize == 0) {
 									TriFusion newLeft = new TriFusion();
 									newLeft.setLvl(newLvl);
@@ -155,19 +160,24 @@ public class FusionsortProcedureWorld2d extends
 								}
 								List<Card> cardsLeft = cardsArrayToList((Card[]) triFusion.gauche.tableau);
 								addNullCardToEnd(cardsLeft);
+								cardsLeft = rearrangedCards(cardsLeft);
 								Card[] newCards = cardsListToArray(cardsLeft);
 								triFusion.gauche.setTableau(newCards);
 
 							}
 
+							// WITHDRAW NULL CARD FROM TABLEAU
 							cardsList = withdrawNullCardFrom(cardsList);
+							cardsList = rearrangedCards(cardsList);
 
 						} else if (divergenceTopBottom == -2) {
 
 							if (divergenceLeftRight >= 1) {
 
+								// ADD NULL CARD TO TABLEAU
 								addNullCardTo(cardsList, separatorIndex, true);
 
+								// WITHDRAW NULL CARD FROM GAUCHE
 								Card[] cards = (Card[]) triFusion.gauche.tableau;
 								List<Card> newCards = withdrawNullCardFrom(cards);
 								newCards = rearrangedCards(newCards);
@@ -176,8 +186,10 @@ public class FusionsortProcedureWorld2d extends
 
 							} else {
 
+								// ADD NULL CARD TO TABLEAU
 								addNullCardTo(cardsList, separatorIndex, false);
 
+								// WITHDRAW NULL CARD FROM DROITE
 								Card[] cards = (Card[]) triFusion.droite.tableau;
 								List<Card> newCards = withdrawNullCardFrom(cards);
 								newCards = rearrangedCards(newCards);

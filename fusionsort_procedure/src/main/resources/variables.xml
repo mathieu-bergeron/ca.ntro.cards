@@ -33,7 +33,7 @@
         <HBox styleClass="hspace-small">
         </HBox>
         <Label
-            fx:id="fusionsortVar01Label"
+            fx:id="sortedLabel"
             styleClass="text-big">
         </Label>
     </HBox>

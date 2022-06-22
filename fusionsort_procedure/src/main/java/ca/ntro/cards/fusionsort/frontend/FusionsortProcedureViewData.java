@@ -66,10 +66,10 @@ public class FusionsortProcedureViewData extends
 	public void dispatchMouseEvent(World2dMouseEventFx world2dMouseEventFx) {
 		super.dispatchMouseEvent(world2dMouseEventFx);
 
+		
 		if (controlKeyState.equals("pressed")) {
 			MouseEvent evtFx = world2dMouseEventFx.rawMouseEvent();
 			if (evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED) && evtFx.isPrimaryButtonDown()) {
-
 				String id = "tmp";
 				addOrUpdateSeparator(id, world2dMouseEventFx.worldX(), world2dMouseEventFx.worldY());
 				world2d().buildAndSendManualModel();

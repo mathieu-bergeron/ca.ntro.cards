@@ -49,7 +49,7 @@ public class FusionsortCardsView extends ProcedureCanvasView {
 	protected void installEvtSaveControlKeyState() {
 		EvtSaveControlKeyState evtSaveControlKeyState = NtroApp.newEvent(EvtSaveControlKeyState.class);
 
-		mainCanvas().setOnKeyPressed(evtFx -> {
+		cardsViewContainer.setOnKeyPressed(evtFx -> {
 
 			if (evtFx.getCode().equals(KeyCode.CONTROL)) {
 
@@ -59,7 +59,7 @@ public class FusionsortCardsView extends ProcedureCanvasView {
 
 		});
 
-		mainCanvas().setOnKeyReleased(evtFx -> {
+		cardsViewContainer.setOnKeyReleased(evtFx -> {
 
 			if (evtFx.getCode().equals(KeyCode.CONTROL)) {
 

@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 public class FusionsortVariablesView extends ProcedureVariablesView {
 
 	@FXML
-	private Label fusionsortVar01Label;
+	private Label sortedLabel;
 
 	@FXML
 	private Label fusionsortVar02Label;
@@ -21,14 +21,14 @@ public class FusionsortVariablesView extends ProcedureVariablesView {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		Ntro.assertNotNull("fusionsortVar01Label", fusionsortVar01Label);
+		Ntro.assertNotNull("sortedLabel", sortedLabel);
 		Ntro.assertNotNull("fusionsortVar02Label", fusionsortVar02Label);
 
 		super.initialize(location, resources);
 	}
 
-	public void displayFooVar01(String fooVar01) {
-		fusionsortVar01Label.setText(fooVar01);
+	public void displaySorted(String sorted) {
+		sortedLabel.setText(sorted);
 	}
 
 	public void displayFooVar02(String fooVar02) {
