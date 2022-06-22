@@ -1,10 +1,17 @@
 concrete FoodFra of Food = {
     lincat
+
         Comment, Item, Kind, Quality = Str;
+
     lin
+
+        {- oups, le pronom est plus compliqué en français -}
+        Pron r = "il";
+
         Pred item quality = item ++ "est" ++ quality;
         This kind = "ce" ++ kind;
         That kind = "ce" ++ kind;
+
 
 
         {- ordre inverse d'en anglais -}
@@ -18,7 +25,7 @@ concrete FoodFra of Food = {
         Warm = "tiède";
         Italian = "italien";
         Expensive = "dispendieux";
-        Delicious = "délicieux";
+        Delicious = "délicieux" | "goûteux" | "exquis" ;
         Boring = "ennuyant";
 
 }

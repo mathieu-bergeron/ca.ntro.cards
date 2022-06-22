@@ -13,6 +13,7 @@ concrete FoodEng of Food = {
 
         -}
 
+        Pron r = "it";
         Pred item quality = item ++ "is" ++ quality;
         This kind = "this" ++ kind;
         That kind = "that" ++ kind;
@@ -25,7 +26,7 @@ concrete FoodEng of Food = {
         Warm = "warm";
         Italian = "Italian";
         Expensive = "exepensive";
-        Delicious = "delicious";
+        Delicious = "delicious" | "exquisite" | "tasty" ;
         Boring = "boring";
 
 

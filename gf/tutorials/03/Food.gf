@@ -8,6 +8,7 @@ abstract Food = {
         Comment ; Item ; Kind ; Quality ;
 
     fun
+        Pron : Item -> Item;
         Pred: Item -> Quality -> Comment;
         This, That: Kind -> Item;
         Mod: Quality -> Kind -> Kind;
