@@ -23,11 +23,15 @@ public class Test {
         	
 		try {
 			
-			System.out.println("\nCatégorie: " + gr.getStartCat() + "\n\n");
+			String debutPhrase = "cette pizza italienne est";
+			String debutMot = "t";
+			
+			System.out.println("\nCatégorie: " + gr.getStartCat());
+			System.out.println("\nDébut de la phrase: " + debutPhrase + " "  +  debutMot + "\n\n");
 
-			Iterable<TokenProb> complete = fre.complete(gr.getStartCat(),               // catégorie, dans ce cas-ci la catégorie de départ de la grammaire
-					                                    "cette pizza italienne est",    // la phrase jusqu'à date
-					                                    "t");                           // le début du prochain mot
+			Iterable<TokenProb> complete = fre.complete(gr.getStartCat(),     // catégorie, dans ce cas-ci la catégorie de départ de la grammaire
+					                                    debutPhrase,          // la phrase jusqu'à date
+					                                    debutMot);            // le début du prochain mot
 
 			for(TokenProb tokenProb : complete) {
 				System.out.println(tokenProb.getToken() + "       " + tokenProb.getProb());
