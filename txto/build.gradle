@@ -1,0 +1,14 @@
+plugins {
+    id 'localJavaPlugin'
+}
+
+dependencies {
+    implementation files('jpgf.jar')
+}
+
+task(txto, dependsOn: 'classes', type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    jvmArgs('-Dfile.encoding=UTF-8')
+    main = "org.txto.test.Test"
+
+}

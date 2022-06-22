@@ -16,6 +16,8 @@
 # limitations under the License.
 #
 
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+
 export GRADLE_OPTS="-Dfile.encoding=utf-8" 
 
 ##############################################################################
