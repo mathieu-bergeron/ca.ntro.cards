@@ -2,7 +2,6 @@
 
 package ca.ntro.cards.fusionsort.frontend;
 
-import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.controls.canvas.World2dMouseEventFx;
 import ca.ntro.cards.common.models.values.cards.AbstractCard;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortCard2d;
@@ -12,8 +11,6 @@ import ca.ntro.cards.fusionsort.models.world2d.FusionsortProcedureWorld2d;
 import ca.ntro.cards.fusionsort.models.world2d.FusionsortSeparator2d;
 import ca.ntro.cards.frontend.ProcedureViewData;
 import ca.ntro.cards.models.world2d.ProcedureCard2d;
-import ca.ntro.cards.models.world2d.ProcedureMarker2d;
-import javafx.event.EventType;
 import javafx.scene.input.MouseEvent;
 
 public class FusionsortProcedureViewData extends
@@ -72,11 +69,11 @@ public class FusionsortProcedureViewData extends
 		if (controlKeyState.equals("pressed")) {
 			MouseEvent evtFx = world2dMouseEventFx.rawMouseEvent();
 			if (evtFx.getEventType().equals(MouseEvent.MOUSE_PRESSED) && evtFx.isPrimaryButtonDown()) {
-				
+
 				String id = "tmp";
 				addOrUpdateSeparator(id, world2dMouseEventFx.worldX(), world2dMouseEventFx.worldY());
 				world2d().buildAndSendManualModel();
-				
+
 			}
 
 		}

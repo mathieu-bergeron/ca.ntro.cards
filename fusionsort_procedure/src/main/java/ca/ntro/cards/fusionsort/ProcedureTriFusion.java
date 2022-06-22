@@ -26,36 +26,19 @@ import ca.ntro.cards.test_cases.descriptor.ProcedureTestCaseDescriptor;
 import ca.ntro.cards.fusionsort.models.FusionsortProcedureDashboardModel;
 import ca.ntro.cards.fusionsort.models.FusionsortProcedureSettingsModel;
 
-public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
+public abstract class ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 
-                extends ProcedureApp<TriFusion,           // executable model
-                                     STUDENT_MODEL,
-                                     STUDENT_MODEL,     // canvas model
-                                     FusionsortTestCase,
-                                     FusionsortTestCaseDescriptor,
-                                     FusionsortTestCaseDatabase,
-                                     FusionsortExecutionTrace,
-                                     FusionsortProcedureDashboardModel,
-                                     FusionsortProcedureSettingsModel,
-                                     FusionsortMsgAcceptManualModel,
-                                     FusionsortProcedureBackend<STUDENT_MODEL>,
-                                     FusionsortProcedureRootView,
-                                     FusionsortCardsView,
-                                     FusionsortProcedureDashboardView,
-                                     FusionsortProcedureSettingsView,
-                                     FusionsortProcedureMessagesView,
-                                     FusionsortProcedureMessageFragment,
-                                     FusionsortProcedureViewData,
-                                     FusionsortProcedureFrontend<STUDENT_MODEL>> {
+		extends ProcedureApp<TriFusion, // executable model
+				STUDENT_MODEL, STUDENT_MODEL, // canvas model
+				FusionsortTestCase, FusionsortTestCaseDescriptor, FusionsortTestCaseDatabase, FusionsortExecutionTrace, FusionsortProcedureDashboardModel, FusionsortProcedureSettingsModel, FusionsortMsgAcceptManualModel, FusionsortProcedureBackend<STUDENT_MODEL>, FusionsortProcedureRootView, FusionsortCardsView, FusionsortProcedureDashboardView, FusionsortProcedureSettingsView, FusionsortProcedureMessagesView, FusionsortProcedureMessageFragment, FusionsortProcedureViewData, FusionsortProcedureFrontend<STUDENT_MODEL>> {
 
-                                    	   
-    private String[] args;
+	private String[] args;
 
 	@Override
 	public void registerArgs(String[] args) {
 		this.args = args;
 	}
-	
+
 	@Override
 	protected Class<TriFusion> executableModelClass() {
 		return TriFusion.class;
@@ -74,12 +57,10 @@ public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 		return FusionsortTestCaseDatabase.class;
 	}
 
-
 	@Override
 	protected Class<FusionsortProcedureDashboardModel> dashboardModelClass() {
 		return FusionsortProcedureDashboardModel.class;
 	}
-
 
 	@Override
 	protected Class<FusionsortProcedureSettingsModel> settingsModelClass() {
@@ -91,14 +72,10 @@ public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 		return new FusionsortProcedureFrontend();
 	}
 
-
 	@Override
 	protected FusionsortProcedureBackend createBackend() {
 		return new FusionsortProcedureBackend();
 	}
-
-
-
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -120,11 +97,10 @@ public abstract class   ProcedureTriFusion<STUDENT_MODEL extends TriFusion>
 	protected Class<FusionsortMsgAcceptManualModel> msgAcceptManualModelClass() {
 		return FusionsortMsgAcceptManualModel.class;
 	}
-	
+
 	@Override
 	protected void registerAdditionnalModels(ModelRegistrar registrar) {
 		registrar.registerValue(FusionsortSeparator2d.class);
 	}
-
 
 }

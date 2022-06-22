@@ -2,18 +2,17 @@
 
 package ca.ntro.cards.fusionsort.models.world2d;
 
-import ca.ntro.app.NtroApp;
 import ca.ntro.app.frontend.views.controls.canvas.World2dGraphicsContext;
 import ca.ntro.cards.fusionsort.FusionsortConstants;
 
 public class FusionsortSeparator2d extends FusionsortProcedureObject2d {
 
 	private String id;
-	
+
 	public FusionsortSeparator2d(String id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String id() {
 		return id;
@@ -27,7 +26,7 @@ public class FusionsortSeparator2d extends FusionsortProcedureObject2d {
 
 	@Override
 	public void draw(World2dGraphicsContext gc, FusionsortProcedureDrawingOptions options) {
-		
+
 	}
 
 }

@@ -119,7 +119,7 @@ public abstract class ProcedureFrontend<ROOT_VIEW            extends ProcedureRo
 		    	  // FIXME: should be in the backend
 		    	  NtroApp.models().resumeDiskOperations();
 		    	  
-		    	  VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
+					VIEW_DATA cardsViewData = inputs.get(created(viewDataClass()));
 		    	  cardsViewData.stopExecutionReplay();
 
 		      });
