@@ -22,6 +22,11 @@ $ sudo ldconfig
 $ javac Test.java
 $ java Test
 
+# Projet Java
+
+1. ajouter -Djava.library.path=/usr/local/lib  aux arguments de la JVM
+1. ajouter LD_LIBRARY_PATH=/usr/local/lib aux variables d'environnement
+
 
 
 
