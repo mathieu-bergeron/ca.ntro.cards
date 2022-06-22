@@ -61,9 +61,9 @@ concrete FoodFra of Food = {
 
         Pred item quality = { s = item.s ++ copula ! item.n ++ quality.s ! item.g ! item.n };
 
-        This kind = det Sg "ce" "cette" kind ;
+        This kind = det Sg "ce" "cette" kind ;          -- explicit parameter kind
         That = This ;
-        These kind = det Pl "ces" "ces" kind ;
+        These  = det Pl "ces" "ces"  ;                  -- currying, this returns a function taking Kind -> Item
         Those = These ;
 
         Mod quality kind = { s = quality.s ! kind.g; g = kind.g } ;
