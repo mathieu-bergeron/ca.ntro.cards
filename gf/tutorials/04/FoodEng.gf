@@ -3,7 +3,7 @@ concrete FoodEng of Food = {
     lincat
 
         -- les catégories concrètes
-        Comment, Item, Kind, Quality = Str;
+        Comment, Item, Kind, Quality, ComplexKind = Str;
 
     lin
 
@@ -18,10 +18,13 @@ concrete FoodEng of Food = {
         Pred item quality = item ++ "is" ++ quality;
         This kind = "this" ++ kind;
         That kind = "that" ++ kind;
+        ThisComplex complexKind = "this" ++ complexKind;
+        ThatComplex complexKind = "that" ++ complexKind;
         Mod quality kind = quality ++ kind;
         Wine = "wine";
         Cheese = "cheese";
         Fish = "fish";
+        FishCheese = "fish with cheese";
         Very quality = "very" ++ quality;
         Fresh = "fresh";
         Warm = "warm";

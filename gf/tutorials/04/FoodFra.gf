@@ -1,7 +1,7 @@
 concrete FoodFra of Food = {
     lincat
 
-        Comment, Item, Kind, Quality = Str;
+        Comment, Item, Kind, Quality, ComplexKind = Str;
 
     lin
 
@@ -22,6 +22,7 @@ concrete FoodFra of Food = {
         Wine = "vin";
         Cheese = "fromage";
         Fish = "poisson";
+        FishCheese = "poisson au fromage";
         Very quality = "très" ++ quality;
         Fresh = "frais";
         Warm = "tiède";
