@@ -66,7 +66,13 @@ concrete FoodFra of Food = {
         These  = det Pl "ces" "ces"  ;                  -- currying, this returns a function taking Kind -> Item
         Those = These ;
 
-        Mod quality kind = { s = quality.s ! kind.g; g = kind.g } ;
+        Mod quality kind = 
+            { s = table {
+                        Sg => kind.s ! Sg ++ quality.s ! kind.g ! Sg ;
+                        Pl => kind.s ! Pl ++ quality.s ! kind.g ! Pl 
+                    }; 
+
+              g = kind.g } ;
 
         Wine = regNoun Masc "vin";
         Cheese = regNoun Masc "fromage";
@@ -75,7 +81,7 @@ concrete FoodFra of Food = {
 
         Very quality = prepend "très" quality;
 
-        Fresh = regAdj "frais" "fraîche";
+        Fresh = adj "frais" "frais" "fraîche" "fraîches";
         Warm = regAdj "tiède" "tiède";
         Italian = regAdj "italien" "italienne";
         Expensive = adj "dispendieux" "dispendieux" "dispendieuse" "dispendieuses";
