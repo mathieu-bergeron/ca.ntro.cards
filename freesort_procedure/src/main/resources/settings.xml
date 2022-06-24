@@ -28,25 +28,17 @@
     styleClass="container"
     id="settings-view">
 
-    <VBox 
-        fx:id="leftSpace"
-        HBox.hgrow="ALWAYS"
-        styleClass="translucidSpace">
-    </VBox>
+  
+            <Pane 
+            fx:id="topSpace"         
+            styleClass="hspace-small"/>
 
-    <VBox HBox.hgrow="ALWAYS">
+	<VBox HBox.hgrow="ALWAYS" styleClass="center">
 
-        <Pane 
-            fx:id="topSpace"
-            VBox.vgrow="ALWAYS"
-            styleClass="translucidSpace"/>
 
-        <VBox
-            fx:id="menuContainer"
-            id="menu-container"
-            VBox.vgrow="ALWAYS">
+            <HBox styleClass="center">
+ 
 
-            <HBox>
                 <Label text="%useFourCardColors">
                 </Label>
 
@@ -56,24 +48,25 @@
 
             </HBox>
 
-            <Button
+ <HBox styleClass="vspace-small">
+        </HBox>
+
+            <Button  
                 fx:id="quitButton"
                 text="%quit">
             </Button>
 
-        </VBox>
+ <HBox styleClass="vspace-small">
+  </HBox>
+            <Button  
+                fx:id="quitSettingButton"
+                text="%quitSetting">
+            </Button>
+	</VBox>
+           <Pane 
+            fx:id="topSpace"
+            styleClass="hspace-small"/>
 
-        <Pane 
-            fx:id="bottomSpace"
-            VBox.vgrow="ALWAYS"
-            styleClass="translucidSpace"/>
-
-    </VBox>
-
-    <VBox 
-        fx:id="rightSpace"
-        HBox.hgrow="ALWAYS"
-        styleClass="translucidSpace">
-    </VBox>
+ 
 
 </HBox>

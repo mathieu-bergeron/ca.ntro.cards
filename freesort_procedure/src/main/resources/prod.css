@@ -1,3 +1,15 @@
+#root-view{
+	-fx-alignment:top-center;
+}
+
+#settings-view{
+	-fx-max-height:200;
+	
+}
+#messages-view{
+	-fx-max-height:200;
+	
+}
 .container{
     -fx-alignment:center;
     -fx-border-width: 0.5;
@@ -13,8 +25,12 @@
     -fx-opacity:0.75;
 }
 
-#menu-container{
-    -fx-background-color:gray;
+ 
+
+
+#messages-container{  
+     -fx-min-height:30;
+    -fx-max-height:30;
     -fx-alignment:center;
 }
 

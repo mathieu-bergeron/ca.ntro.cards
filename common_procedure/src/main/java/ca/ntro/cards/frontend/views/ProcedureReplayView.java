@@ -7,6 +7,8 @@ import ca.ntro.app.NtroApp;
 import ca.ntro.app.views.ViewFx;
 import ca.ntro.cards.common.messages.MsgStopExecutionReplay;
 import ca.ntro.cards.frontend.events.EvtStartExecutionReplay;
+import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
+import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import javafx.scene.control.Button;
@@ -27,6 +29,12 @@ public abstract class ProcedureReplayView extends ViewFx {
 	protected abstract Button oneStepButton();
 
 	protected abstract Button backStepButton();
+	
+	//ajouter
+	protected abstract Button rewindButton();
+	
+	//ajouter
+	protected abstract Button fastForwardButton();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +43,11 @@ public abstract class ProcedureReplayView extends ViewFx {
 		MsgStopExecutionReplay    msgStopCodeExecution    = NtroApp.newMessage(MsgStopExecutionReplay.class);
 		MsgExecutionStepBack    msgExecutionStepBack    = NtroApp.newMessage(MsgExecutionStepBack.class);
 		MsgExecutionStepForward msgExecutionStepForward = NtroApp.newMessage(MsgExecutionStepForward.class);
+		//ajouter
+		MsgExecutionRewindToFirstStep msgExecutionRewindToFirstStep = NtroApp.newMessage(MsgExecutionRewindToFirstStep.class);
+		
+		//ajouter
+		MsgExecutionFastForwardToLastStep msgExecutionFastForwardToLastStep = NtroApp.newMessage(MsgExecutionFastForwardToLastStep.class);
 		
 		playButton().setOnAction(evtFx -> {
 
@@ -59,12 +72,28 @@ public abstract class ProcedureReplayView extends ViewFx {
 			msgExecutionStepBack.send();
 			
 		});
+		//ajouter
+		rewindButton().setOnAction(evtFx -> {
+			
+			msgExecutionRewindToFirstStep.send();
+			
+		});
+		
+		//ajouter
+		fastForwardButton().setOnAction(evtFx -> {
+					
+			msgExecutionFastForwardToLastStep.send();
+					
+		});
+		
 	}
 
 	public void disableExecutionButtons() {
 		playButton().setDisable(true);
 		pauseButton().setDisable(true);
 		oneStepButton().setDisable(true);
+		rewindButton().setDisable(true);
+		fastForwardButton().setDisable(true);
 	}
 
 	public void displayNumberOfSteps(String numberOfSteps) {
@@ -85,6 +114,6 @@ public abstract class ProcedureReplayView extends ViewFx {
 		}
 	}
 
-
+ 
 
 }

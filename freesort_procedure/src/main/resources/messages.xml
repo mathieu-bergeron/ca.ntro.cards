@@ -28,37 +28,32 @@
     styleClass="container"
     id="messages-view">
 
-    <VBox 
-        fx:id="leftSpace"
-        HBox.hgrow="ALWAYS"
-        styleClass="translucidSpace">
-    </VBox>
+     
+ <Pane 
+            fx:id="topSpace"         
+            styleClass="hspace-small"/>
 
-    <VBox HBox.hgrow="ALWAYS">
+    <VBox HBox.hgrow="ALWAYS"  styleClass="center">
 
-        <Pane 
-            fx:id="topSpace"
-            VBox.vgrow="ALWAYS"
-            styleClass="translucidSpace"/>
-
-        <VBox
+      
+ <HBox  styleClass="center" 
+         
             fx:id="messagesContainer"
             id="messages-container"
             VBox.vgrow="ALWAYS">
 
-        </VBox>
-
-        <Pane 
-            fx:id="bottomSpace"
-            VBox.vgrow="ALWAYS"
-            styleClass="translucidSpace"/>
-
+       
+   </HBox>
+      
+ <Button  
+                fx:id="quitMessageButton"
+                text="%quitMessage">
+            </Button>
+ 
     </VBox>
 
-    <VBox 
-        fx:id="rightSpace"
-        HBox.hgrow="ALWAYS"
-        styleClass="translucidSpace">
-    </VBox>
+      <Pane 
+            fx:id="topSpace"
+            styleClass="hspace-small"/>
 
 </HBox>

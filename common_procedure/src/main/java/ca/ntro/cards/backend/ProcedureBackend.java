@@ -4,6 +4,8 @@ import ca.ntro.app.tasks.backend.BackendTasks;
 import ca.ntro.cards.common.backend.CommonBackend;
 import ca.ntro.cards.common.messages.MsgRefreshDashboard;
 import ca.ntro.cards.messages.MsgChangeCurrentTestCase;
+import ca.ntro.cards.messages.MsgExecutionFastForwardToLastStep;
+import ca.ntro.cards.messages.MsgExecutionRewindToFirstStep;
 import ca.ntro.cards.messages.MsgExecutionStepBack;
 import ca.ntro.cards.messages.MsgExecutionStepForward;
 import ca.ntro.cards.messages.ProcedureMsgAcceptManualModel;
@@ -110,6 +112,10 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 				changeCurrentTestCase(subTasks);
 				
 				acceptManualModel(subTasks);
+				
+				executionRewindToFirstStep(subTasks);
+				
+				executionFastForwardToLastStep(subTasks);
 		    	 
 		     });
 	}
@@ -188,6 +194,37 @@ public abstract class ProcedureBackend<EXECUTABLE_MODEL        extends Procedure
 		     });
 	}
 
+	private void executionRewindToFirstStep(BackendTasks tasks) {
+		tasks.task("executionRewindToFirstStep")
+		
+		     .waitsFor(message(MsgExecutionRewindToFirstStep.class))
 
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
 
+		    	 testCaseDatabase().rewindToFirstStep();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+
+		     });
+	}
+	
+	private void executionFastForwardToLastStep(BackendTasks tasks) {
+		tasks.task("executionFastForwardToLastStep")
+		
+		     .waitsFor(message(MsgExecutionFastForwardToLastStep.class))
+
+		     .thenExecutes(inputs -> {
+		    	 
+		    	 DASHBOARD_MODEL dashboardModel = inputs.get(model(getDashboardModelClass()));
+		    	 CANVAS_MODEL cardsModel = inputs.get(model(getCanvasModelClass()));
+
+		    	 testCaseDatabase().fastForwardToLastStep();
+		    	 testCaseDatabase().updateCardsModel(cardsModel);
+		    	 testCaseDatabase().updateDashboardModel(dashboardModel);
+
+		     });
+	}	
 }

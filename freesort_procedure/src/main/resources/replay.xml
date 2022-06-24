@@ -27,6 +27,17 @@
 
     <HBox styleClass="center">
 
+<!-- ajouter-->
+
+        <Button
+            text="%rewind"
+            fx:id="rewindButton">
+        </Button>
+
+       <!-- ajouter-->
+        <HBox styleClass="hspace-small">
+        </HBox>
+
         <Button
             text="%backStep"
             fx:id="backStepButton">
@@ -55,6 +66,19 @@
             text="%oneStep"
             fx:id="oneStepButton">
         </Button>
+
+ <!-- ajouter-->
+        <HBox styleClass="hspace-small">
+        </HBox>
+
+
+ <!-- ajouter-->
+
+       <Button
+            text="%fastForward"
+            fx:id="fastForwardButton">
+        </Button>
+
 
     </HBox>
 

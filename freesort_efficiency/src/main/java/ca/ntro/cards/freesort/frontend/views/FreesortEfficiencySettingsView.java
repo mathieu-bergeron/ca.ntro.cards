@@ -12,7 +12,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
-
+//Copyright (C) (2022) (Zein El Abdin Hazimeh) (2037668@cmontmorency.qc.ca)
+//
+//This file is part of Ntro
+//
+//This is free software: you can redistribute it and/or modify
+//it under the terms of the GNU GPL3 General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+//
+//This is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//GNU GPL3 General Public License for more details.
+//
+//You should have received a copy of the GNU GPL3 General Public License
+//along with aquiletour.  If not, see <https://www.gnu.org/licenses/>
 public class FreesortEfficiencySettingsView extends EfficiencySettingsView {
 
 	@FXML
@@ -29,6 +44,9 @@ public class FreesortEfficiencySettingsView extends EfficiencySettingsView {
 
 	@FXML
 	private Button quitButton;
+	
+	@FXML
+	private Button quitSettingButton;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -38,6 +56,7 @@ public class FreesortEfficiencySettingsView extends EfficiencySettingsView {
 		Ntro.assertNotNull("topSpace", topSpace);
 		Ntro.assertNotNull("bottomSpace", bottomSpace);
 		Ntro.assertNotNull("quitButton", quitButton);
+		Ntro.assertNotNull("quitSettingButton", quitSettingButton);
 		
 		super.initialize(location, resources);
 	}
@@ -58,6 +77,12 @@ public class FreesortEfficiencySettingsView extends EfficiencySettingsView {
 	@Override
 	protected Button quitButton() {
 		return quitButton;
+	}
+
+	@Override
+	protected Button quitSettingButton() {
+		 
+		return quitSettingButton;
 	}
 
 }
